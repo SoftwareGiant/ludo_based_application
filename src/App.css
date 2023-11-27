@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Nunito+Sans:opsz,wght@6..12,800&family=Oooh+Baby&display=swap");
+
+*,
+#root {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.mob {
+  margin-top: 0;
+  text-align: center;
+  background: #fead3a;
+  position: absolute;
+  max-width: 390px;
+}
+
+.font-nunito {
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.font-oooh {
+  font-family: "Oooh Baby", cursive;
+}
+
+.font-inter {
+  font-family: "Inter", sans-serif;
+}
+
+.txt {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
+}
+
+.hr {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  column-gap: 1rem;
+  width: 360px;
+}
+.hr::after,
+.hr::before {
+  content: "";
+  height: 2px;
+  background: rgba(0, 0, 0, 0.3);
+  display: block;
+}
