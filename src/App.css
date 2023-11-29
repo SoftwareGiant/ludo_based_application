@@ -6,13 +6,6 @@
   margin: 0;
   box-sizing: border-box;
 }
-.mob {
-  margin-top: 0;
-  text-align: center;
-  background: #fead3a;
-  position: absolute;
-  max-width: 390px;
-}
 
 .font-nunito {
   font-family: "Nunito Sans", sans-serif;
@@ -26,7 +19,7 @@
   font-family: "Inter", sans-serif;
 }
 
-.txt {
+.bg-gradient {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
 }
 
