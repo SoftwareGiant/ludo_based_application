@@ -4,49 +4,105 @@ import "../../App.css";
 import BackgroundImg from "../../assets/background.jpg";
 import CountryIcon from "../../assets/country.svg";
 import DropIcon from "../../assets/dropicon.svg";
+import LudoIcon from "../../assets/ludo-indian-monument-touch.svg";
 
 const SignUpDesktop = () => {
   return (
     <div>
-      <div className="md:w-[720px] md:h-[720px] flex float-right">
-        <img src={BackgroundImg} alt="background/img" />
+      {/* background image section starts */}
+      <div className="md:max-w-[40%] md:h-[720px] lg:h-[100vh] flex md:float-right">
+        <img src={BackgroundImg} alt="background/img" className="" />
       </div>
-      <div className="md:bg-[#0F002B] md:w-[543px] md:h-[720px] flex flex-col">
-        <div className="justify-center items-center mt-[88px] ">
-          <h3 className="text-center text-white text-6xl font-nunito uppercase font-extrabold p-3">
+      {/* background image section ends */}
+      {/* login content sections starts */}
+      <div className="md:bg-[#0F002B] md:min-w-[60%] lg:h-[100vh] md:h-[720px] flex flex-col md:float-left">
+        {/* main and sub heading starts */}
+        <div className="justify-center items-center md:mt-[88px] bg-gradient md:bg-none flex flex-col md:w-full  -mt-[6.95rem]">
+          <h3 className="text-center md:text-white  text-5xl font-['Nunito_Sans'] uppercase font-extrabold p-3 w-[337px] text-[#0f002b]">
             Ludo King
           </h3>
-          <h5 className="font-oooh text-4xl font-bold text-center text-white">
+          <h5 className="font-oooh text-4xl font-bold text-center md:text-white">
             Punch Line
           </h5>
         </div>
-        <div className="inline-flex md:h-[48px]md:w-[177px] md:px-[13.714px] md:py-[8.571px] justify-center items-center gap-2 md:gap-[8.571px] md:rounded-[8.571px] md:bg-[#FEAD3A] absolute top-[-1.92rem] left-[150px] mt-[270px]">
-          <p className="text-center text-[13px] font-bold leading-normal font-inter -mx-[4.5rem]  text-blue-950 md:text-black hr">
-            Log in or sign up
-          </p>
-        </div>
-        <div className="flex w-[325px] h-[56px] px-[16px] py-[10px] justify-center items-center gap-[10px] border-4  mx-auto mt-32 md:bg-white rounded-[10px]">
-          <div>
-            <img src={CountryIcon} />
+        {/* main and sub heading ends */}
+        {/* content section start  */}
+        <div className="flex flex-col gap-16 w-full items-start mt-[12px] md:mt-[76px]">
+          {/* signup tags starts  */}
+          <div className="relative flex flex-row justify-center w-full md:items-start">
+            <div
+              id="Line"
+              className="border-solid border-black/30 md:border-white/30 w-full h-px absolute top-6 left-0 border-t border-b-0 border-x-0"
+            />
+            <div className="text-center text-lg font-['Inter'] font-medium text-[#0f002b] md:bg-[#fead3a] relative flex flex-row justify-center pt-3 w-1/2 h-12 items-start rounded-lg bg-white">
+              Log in or sign up
+            </div>
           </div>
-          <div>
-            <img src={DropIcon} />
+          {/* signup tags ends  */}
+          {/* number and continue-btn section  */}
+          <div className="flex flex-col ml-1 gap-6 w-full items-start">
+            <div
+              id="EnterPhoneNumber1"
+              className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] items-center mx-auto bg-white flex flex-row gap-4 justify-center pt-3 px-4 rounded-lg w-[325px] h-[56px] py-[10px]"
+            >
+              <div className="flex flex-row gap-2 w-16 items-start">
+                <img
+                  src={CountryIcon}
+                  alt="Twemojiflagindia"
+                  id="Twemojiflagindia"
+                  className="w-8"
+                />
+                <img
+                  src={DropIcon}
+                  alt="Gridiconsdropdown"
+                  id="Gridiconsdropdown"
+                  className="mt-1 w-5"
+                />
+              </div>
+              <div className="text-xl font-['Inter'] font-medium text-[rgba(15,_0,_43,_0.3)] mt-1">
+                Enter Phone Number
+              </div>
+            </div>
+            <div
+              id="ContinueAndLoading"
+              className="text-center items-center text-xl mx-auto font-['Inter'] h-[56px] w-[325px] px-[16px] text-[20px] font-bold md:py-[0px] gap-[10px]  md:text-[#0f002b] shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] md:bg-white flex flex-row justify-center pt-4 rounded-lg text-white bg-[#0f002b] p-4"
+            >
+              Continue
+            </div>
           </div>
-          <div>
-            <input type="number" placeholder="Enter Phone Number" />
+          {/* number and continue-btn section  */}
+        </div>
+        {/* content section end */}
+        {/* terms and condition */}
+        <div className="inline-flex p-1 h-6 mt-[8rem] md:mt-[6rem] justify-center gap-2 text-[12px] font-[Inter] font-[500] leading-normal text-center  flex-row  mx-auto items-center">
+          <img
+            src={LudoIcon}
+            alt="Ludoindianmonumenttouch"
+            className="mt-1 w-2"
+          />
+          <div className="text-center text-xs font-['Inter'] font-medium md:text-white">
+            Terms of Service
+          </div>
+          <img
+            src={LudoIcon}
+            alt="Ludoindianmonumenttouch1"
+            className="mt-1 w-2"
+          />
+          <div className="text-center text-xs font-['Inter'] font-medium md:text-white">
+            Privacy Policy
+          </div>
+          <img
+            src={LudoIcon}
+            alt="Ludoindianmonumenttouch2"
+            className="mt-1 w-2"
+          />
+          <div className="text-center text-xs font-['Inter'] font-medium md:text-white">
+            Content Policies
           </div>
         </div>
-        <div className="inline-flex h-[56px] w-[325px] px-[16px] md:py-[0px] gap-[10px] items-center justify-center rounded-[10px] bg-[#0f002b] md:bg-[#FFF] mt-10 ml-[109px]">
-          <button className="text-black text-center font-inter text-[20px] font-bold leading-normal ">
-            Continue
-          </button>
-        </div>
-        <div className="inline-flex p-1 justify-center items-center gap-2 text-[12px] font-inter font-[500] leading-normal text-center mt-20 md:text-white">
-          <li className="list-none">Terms of Service</li>
-          <li>Privacy Policy</li>
-          <li>Content Policies</li>
-        </div>
+        {/* terms and condition */}
       </div>
+      {/* login content sections ends */}
     </div>
   );
 };
