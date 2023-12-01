@@ -20,7 +20,7 @@
 }
 
 .bg-gradient {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
 }
 
 .hr {
@@ -36,4 +36,8 @@
   height: 2px;
   background: rgba(0, 0, 0, 0.3);
   display: block;
+}
+
+.bg-background {
+  background: url("./assets/background.jpg");
 }
