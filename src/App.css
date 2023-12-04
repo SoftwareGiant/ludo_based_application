@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Nunito+Sans:opsz,wght@6..12,800&family=Oooh+Baby&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600;800&family=Nunito+Sans:opsz,wght@6..12,800&family=Oooh+Baby&display=swap");
 
 *,
 #root {
@@ -40,4 +40,8 @@
 
 .bg-background {
   background: url("./assets/background.jpg");
+}
+
+.bg-profile {
+  background: url("./assets/profile/Frame_profile.png");
 }
