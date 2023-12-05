@@ -9,6 +9,7 @@ import LiveBattle from "../../assets/new_game/livebattle.svg";
 import DropIcon from "../../assets/new_game/dropdown.svg";
 import ElpAct from "../../assets/new_game/EllipseActive.svg";
 import Elp from "../../assets/new_game/Ellipse.svg";
+import Prfl from "../../assets/new_game/ludo-indian.png";
 
 const ResponGame = () => {
   return (
@@ -18,9 +19,9 @@ const ResponGame = () => {
         className="overflow-hidden bg-[#fead3a] relative flex flex-col w-full h-[100%] items-start"
       >
         <img
-          src="https://file.rendit.io/n/TxEvf0Lnt1mR2DBDKpIE.png"
+          src={Prfl}
           alt="Ludoindianmonumenttouch"
-          className="w-24 h-24 origin-top-left rotate-[-45deg] absolute top-40 left-[-41px]"
+          className="w-[100px] h-[100px] rotate-[-45deg] rounded-[50px] origin-top-left absolute top-12 left-[-70px]"
         />
         <img
           src="https://file.rendit.io/n/1gRglTJ3LUZXxtvFZvLO.png"

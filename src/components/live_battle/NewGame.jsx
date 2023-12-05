@@ -183,7 +183,7 @@ const NewGame = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-1 p-1 w-10 h-10 items-center rounded-[32px]">
+                    <div className="shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-1 p-1 w-10 h-10 flex-shrink-0 flex-nowrap  items-center rounded-[32px]">
                       <img
                         src={LiveBattle}
                         alt="Arcticonsbattleforwesnoth"
