@@ -19,6 +19,9 @@ import RequestMatch from "./components/listedgame/RequestMatch";
 import RequestCounter from "./components/listedgame/RequestCounter";
 import MatchStart from "./components/listedgame/MatchStart";
 import NewGameMob from "./components/live_battle/NewGameMob";
+import NewProfile2 from "./components/profile/NewProfile2";
+import EditBasic from "./components/profile/EditBasic";
+import EditEmail from "./components/profile/EditEmail";
 
 function App() {
   return (
@@ -41,8 +44,11 @@ function App() {
       {/* <RequestCounter /> */}
       {/* <MatchStart /> */}
       {/* <NewProfile /> */}
-      <NewProfileMob />
+      {/* <NewProfileMob /> */}
       {/* <NewProfileResp /> */}
+      <NewProfile2 />
+      {/* <EditBasic /> */}
+      {/* <EditEmail /> */}
     </div>
   );
 }
