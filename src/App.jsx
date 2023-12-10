@@ -19,6 +19,20 @@ import RequestMatch from "./components/listedgame/RequestMatch";
 import RequestCounter from "./components/listedgame/RequestCounter";
 import MatchStart from "./components/listedgame/MatchStart";
 import NewGameMob from "./components/live_battle/NewGameMob";
+import UploadProfile from "./components/profile/UploadProfile";
+import NewProfilePic from "./components/profile/NewProfilePic";
+import NewProfileEmailAdded2 from "./components/profile/NewProfileEmailAdded2";
+import NewProfile2 from "./components/profile/NewProfile2";
+import MyWalletPc from "./components/wallet/MyWalletPc";
+import MyWalletmobile from "./components/wallet/MyWalletmobile";
+import DepositeCash1 from "./components/wallet/DepositeCash1";
+import DepositeCah2 from "./components/wallet/DepositeCah2";
+import ReferalsBalanceWithDraw from "./components/wallet/ReferalsBalanceWithDraw";
+import GameHistory from "./components/game_history/GameHistory";
+import TransactioHistoryMob from "./components/transaction_history/TransactioHistoryMob";
+import ReferrEarn from "./components/refer_and_earn/ReferrEarn";
+import Support from "./components/support/Support";
+import Notification from "./components/notification/Notification";
 
 function App() {
   return (
@@ -43,6 +57,20 @@ function App() {
       {/* <NewProfile /> */}
       {/* <NewProfileMob /> */}
       {/* <NewProfileResp /> */}
+      {/* <NewProfile2/> */}
+      {/* <UploadProfile/> */}
+      {/* <NewProfilePic/> */}
+      {/* <NewProfileEmailAdded2/> */}
+      {/* <MyWalletPc /> */}
+      {/* <MyWalletmobile /> */}
+      {/* <DepositeCash1 /> */}
+      {/* <DepositeCah2 /> */}
+      {/* <ReferalsBalanceWithDraw /> */}
+      {/* <GameHistory /> */}
+      {/* <TransactioHistoryMob /> */}
+      {/* <ReferrEarn /> */}
+      <Notification />
+      {/* <Support /> */}
     </div>
   );
 }
