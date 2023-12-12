@@ -69,8 +69,8 @@ function App() {
       {/* <GameHistory /> */}
       {/* <TransactioHistoryMob /> */}
       {/* <ReferrEarn /> */}
-      <Notification />
-      {/* <Support /> */}
+      {/* <Notification /> */}
+      <Support />
     </div>
   );
 }
