@@ -3,12 +3,19 @@ import "../../app.css";
 
 import HamBurger from "../../assets/profile/hamburger.svg";
 import Profile from "../../assets/profile/Frame_profile.png";
+import Attachment from "../../assets/support/Attachment.svg";
+import Emoji from "../../assets/support/Emoji.svg";
+import Menu from "../../assets/support/menu.svg";
+import Seen from "../../assets/support/Seen.svg";
+import Send from "../../assets/support/Send.svg";
+import Customer from "../../assets/support/support.png";
+
 const Support = () => {
   return (
     <div>
       <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)]" />
       {/* Hamburger section */}
-      <div className="bg-[#fead3a] flex flex-row justify-between w-full h-12 items-start pt-2 px-5">
+      <div className="bg-[#fead3a] flex flex-row justify-between w-[390px] h-12 items-start pt-2 px-5">
         <div className="flex flex-row gap-3 w-2/5 items-start">
           <img
             src={HamBurger}
@@ -31,27 +38,27 @@ const Support = () => {
           className="mt-1 w-8 h-8 border rounded-[100px]"
         />
       </div>
-      {/* Hamburger section */}
-      <div className="border-solid bg-[#fead3a] flex flex-row justify-between w-full h-16 items-start pt-3 px-5 border-b border-black/30">
-        <div className="flex flex-row mt-px gap-2 w-1/2 items-start">
+      {/* Hamburger section ends */}
+      <div className="border-solid bg-[#fead3a] flex flex-row justify-between w-[390px] h-16 items-start pt-3 px-5 border-b border-black/30">
+        <div className="inline-flex gap-[6px] w-[201px] h-[40px] items-center py-1 px-[9px] ">
           <img
-            src="https://file.rendit.io/n/qoooOZzhrTYs9KJQ32wb.png"
+            src={Customer}
             alt="Frame1"
-            className="w-8 border"
+            className="w-8 h-8 border border-solid border-white rounded-[100px]"
           />
-          <div className="text-center font-['Inter'] font-medium text-[#0f002b] mt-2">
+          <div className="text-center font-['Inter'] font-medium text-base text-[#0f002b] leading-normal">
             Customer Service
           </div>
         </div>
         <img
-          src="https://file.rendit.io/n/2cotPIATYVtGNFPVfUIT.svg"
+          src={Menu}
           alt="Charmmenukebab"
           id="Charmmenukebab"
-          className="mt-2 w-5"
+          className="mt-2 w-5 h-5"
         />
       </div>
-
-      <div id="NewRootRoot" className="flex flex-row w-full items-start">
+      {/* Chat Section */}
+      <div id="NewRootRoot" className="flex flex-row w-[390px] items-start">
         <div
           id="AppContent"
           className="overflow-hidden bg-[#0f002b] flex flex-row w-full items-start"
@@ -72,7 +79,7 @@ const Support = () => {
                   09:23
                 </div>
                 <img
-                  src="https://file.rendit.io/n/wXZuMDcYZm2hG9HgXSXD.svg"
+                  src={Seen}
                   alt="ActionVerifiedUser icon"
                   id="Component1"
                   className="w-4"
@@ -94,7 +101,7 @@ const Support = () => {
                   09:23
                 </div>
                 <img
-                  src="https://file.rendit.io/n/wXZuMDcYZm2hG9HgXSXD.svg"
+                  src={Seen}
                   alt="ActionVerifiedUser icon"
                   id="Component2"
                   className="w-4"
@@ -118,36 +125,32 @@ const Support = () => {
                   <div className="text-xs font-['Inter'] text-white">09:23</div>
                 </div>
               </div>
+              {/* Message Type Box */}
               <div
                 id="TypeAMessage1"
-                className="bg-white flex flex-row justify-center pt-4 gap-24 w-full h-12 items-start rounded-lg"
+                className="bg-white flex flex-row justify-center py-[17px] px-[18px] gap-[16px] w-[349px] h-14 items-center rounded-[10px]"
               >
-                <div className="flex flex-row gap-4 w-1/2 items-start">
-                  <img
-                    src="https://file.rendit.io/n/BmGhOtzNPbE8GudXdRjs.svg"
-                    alt="Emoji"
-                    id="Emoji"
-                    className="w-5"
-                  />
-                  <div className="opacity-40 font-['Inter'] font-medium text-[#0f002b] mt-px">
-                    Type a message
-                  </div>
-                </div>
-                <div className="flex flex-row mt-px gap-4 w-12 items-start">
-                  <img
-                    src="https://file.rendit.io/n/qLqNAopscF9psJvmbOHY.svg"
-                    alt="Attachment"
-                    id="Attachment"
-                    className="w-5"
-                  />
-                  <img
-                    src="https://file.rendit.io/n/35fBMBzFHFVemyw7NdOS.svg"
-                    alt="Send"
-                    id="Send"
-                    className="w-5"
-                  />
-                </div>
+                <img
+                  src={Emoji}
+                  alt="Emoji"
+                  id="Emoji"
+                  className="w-[22px] h-[22px]"
+                />
+                <input
+                  type="text"
+                  placeholder="Type a message"
+                  className="opacity-40 font-['Inter'] font-medium text-[#0f002b] text-base w-[203px]"
+                />
+
+                <img
+                  src={Attachment}
+                  alt="Attachment"
+                  id="Attachment"
+                  className="w-5 h-5"
+                />
+                <img src={Send} alt="Send" id="Send" className="w-5 h-5" />
               </div>
+              {/* Message Type Box Ends*/}
             </div>
           </div>
         </div>
