@@ -33,6 +33,7 @@ import TransactioHistoryMob from "./components/transaction_history/TransactioHis
 import ReferrEarn from "./components/refer_and_earn/ReferrEarn";
 import Support from "./components/support/Support";
 import Notification from "./components/notification/Notification";
+import ReferrEarnPc from "./components/refer_and_earn/ReferrEarnPc";
 
 function App() {
   return (
@@ -59,7 +60,7 @@ function App() {
       {/* <NewProfileResp /> */}
       {/* <NewProfile2/> */}
       {/* <UploadProfile/> */}
-      {/* <NewProfilePic/> */}
+      {/* <NewProfilePic /> */}
       {/* <NewProfileEmailAdded2/> */}
       {/* <MyWalletPc /> */}
       {/* <MyWalletmobile /> */}
@@ -70,7 +71,8 @@ function App() {
       {/* <TransactioHistoryMob /> */}
       {/* <ReferrEarn /> */}
       {/* <Notification /> */}
-      <Support />
+      {/* <Support /> */}
+      <ReferrEarnPc />
     </div>
   );
 }
