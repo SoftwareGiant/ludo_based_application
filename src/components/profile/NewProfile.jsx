@@ -129,7 +129,7 @@ const NewProfile = () => {
             </div>
           </div>
         </div>
-        {/* menue bar section */}
+        {/* menue bar section ends */}
         {/* Profile section */}
         <div className="flex flex-col mt-16 gap-24 w-1/3 h-[100vh] items-start">
           <div className="flex flex-col gap-8 w-full items-start">
@@ -198,7 +198,7 @@ const NewProfile = () => {
             </div>
           </div>
         </div>
-        {/* Profile section */}
+        {/* Profile section ends */}
         {/* battle section */}
         <div className="bg-[#ffb653] flex flex-col gap-16 w-2/5 h-[100vh] items-start pt-6 pb-20">
           <div className="flex flex-col gap-10 w-full items-start">
@@ -388,7 +388,7 @@ const NewProfile = () => {
             </div>
           </div>
         </div>
-        {/* battle section */}
+        {/* battle section ends */}
       </div>
     </div>
   );
