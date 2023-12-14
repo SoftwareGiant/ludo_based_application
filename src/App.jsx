@@ -32,6 +32,7 @@ import GameHistory from "./components/game_history/GameHistory";
 import TransactioHistoryMob from "./components/transaction_history/TransactioHistoryMob";
 import ReferrEarn from "./components/refer_and_earn/ReferrEarn";
 import Support from "./components/support/Support";
+import SupportPc from "./components/support/SupportPc";
 import Notification from "./components/notification/Notification";
 import ReferrEarnPc from "./components/refer_and_earn/ReferrEarnPc";
 
@@ -72,7 +73,8 @@ function App() {
       {/* <ReferrEarn /> */}
       {/* <Notification /> */}
       {/* <Support /> */}
-      <ReferrEarnPc />
+      <SupportPc />
+      {/* <ReferrEarnPc /> */}
     </div>
   );
 }
