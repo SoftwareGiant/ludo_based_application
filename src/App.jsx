@@ -1,13 +1,22 @@
 import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SignUpDesktop from "./components/app_start/SignUpDesktop";
+import NewGame from "./components/live_battle/NewGame";
+import NewProfile from "./components/profile/NewProfile";
+import GameHistoryPc from "./components/game_history/GameHistoryPc";
+import TransactionHistoryPc from "./components/transaction_history/TransactioHistoryPc";
+import NotificationPc from "./components/notification/NotificationPc";
+import MyWalletMain from "./components/wallet/MyWalletMain";
+import ListedGamePc from "./components/listedgame/ListedGamePc";
+import ReferrEarnPc from "./components/refer_and_earn/ReferrEarnPc";
+import SupportPc from "./components/support/SupportPc";
+// need some work
 import Info from "./components/continue/Info";
 import FilterLiveBattle from "./components/live_battle/FilterLiveBattle";
 import LiveBattle from "./components/live_battle/LiveBattle";
 import LiveBattle2 from "./components/live_battle/LiveBattle2";
 import OpenChallengeReq from "./components/live_battle/OpenChallengeReq";
-import NewGame from "./components/live_battle/NewGame";
 import ResponGame from "./components/live_battle/ResponGame";
-import NewProfile from "./components/profile/NewProfile";
 import NewProfileMob from "./components/profile/NewProfileMob";
 import NewProfileResp from "./components/profile/NewProfileResp";
 import GameCash from "./components/listedgame/GameCash";
@@ -33,13 +42,43 @@ import TransactioHistoryMob from "./components/transaction_history/TransactioHis
 import ReferrEarn from "./components/refer_and_earn/ReferrEarn";
 import Support from "./components/support/Support";
 import Notification from "./components/notification/Notification";
-import ReferrEarnPc from "./components/refer_and_earn/ReferrEarnPc";
+import AddCashPc from "./components/wallet/AddCashPc";
+import WithDrawPc from "./components/wallet/WithDrawPc";
+import ReferalBalancePc from "./components/wallet/ReferalBalancePc";
+import Instance2Pc from "./components/listedgame/Instance2Pc";
+import ChatWithUserPc from "./components/listedgame/ChatWithUserPc";
+import ItsAMatch from "./components/listedgame/ItsAMatch";
+import RequestCounterPc from "./components/listedgame/RequestCounterPc";
+import ProfileImagePC from "./components/profile/ProfileImagePC";
+import OtpPc from "./components/app_start/OtpPc";
+import SignUpSucess from "./components/app_start/SignUpSucess";
+import AppTour from "./components/app_start/AppTour";
 
 function App() {
   return (
-    <div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<SignUpDesktop />} />
+          <Route path="/" element={<NewGame />} />
+          <Route path="/profile" element={<NewProfile />} />
+          <Route path="/wincash" element={<ListedGamePc />} />
+          <Route path="/mywallet" element={<MyWalletMain />} />
+          <Route path="/gamehistory" element={<GameHistoryPc />} />
+          <Route
+            path="/transactionhistory"
+            element={<TransactionHistoryPc />}
+          />
+          <Route path="/referr&earn" element={<ReferrEarnPc />} />
+          <Route path="/notification" element={<NotificationPc />} />
+          <Route path="/support" element={<SupportPc />} />
+        </Routes>
+      </BrowserRouter>
       {/* <Info /> */}
       {/* <SignUpDesktop /> */}
+      {/* <OtpPc /> */}
+      {/* <SignUpSucess /> */}
+      {/* <AppTour /> */}
       {/* <NewGame /> */}
       {/* <ResponGame /> */}
       {/* <NewGameMob /> */}
@@ -56,6 +95,7 @@ function App() {
       {/* <RequestCounter /> */}
       {/* <MatchStart /> */}
       {/* <NewProfile /> */}
+      {/* <ProfileImagePC /> */}
       {/* <NewProfileMob /> */}
       {/* <NewProfileResp /> */}
       {/* <NewProfile2/> */}
@@ -63,6 +103,15 @@ function App() {
       {/* <NewProfilePic /> */}
       {/* <NewProfileEmailAdded2/> */}
       {/* <MyWalletPc /> */}
+      {/* <MyWalletMain /> */}
+      {/* <AddCashPc /> */}
+      {/* <WithDrawPc /> */}
+      {/* <ReferalBalancePc /> */}
+      {/* <ListedGamePc /> */}
+      {/* <Instance2Pc /> */}
+      {/* <ChatWithUserPc /> */}
+      {/* <ItsAMatch /> */}
+      {/* <RequestCounterPc /> */}
       {/* <MyWalletmobile /> */}
       {/* <DepositeCash1 /> */}
       {/* <DepositeCah2 /> */}
@@ -72,8 +121,11 @@ function App() {
       {/* <ReferrEarn /> */}
       {/* <Notification /> */}
       {/* <Support /> */}
-      <ReferrEarnPc />
-    </div>
+      {/* <ReferrEarnPc /> */}
+      {/* <GameHistoryPc /> */}
+      {/* <TransactionHistoryPc /> */}
+      {/* <NotificationPc /> */}
+    </>
   );
 }
 
