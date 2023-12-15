@@ -25,7 +25,10 @@ import Menu from "../../assets/support/menu.svg";
 import Seen from "../../assets/support/Seen.svg";
 import Send from "../../assets/support/Send.svg";
 import Customer from "../../assets/support/support.png";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
+=======
+>>>>>>> c274020b241305256019315e675397a330fe75ee
 
 const ReferrEarnPc = () => {
   return (
@@ -53,10 +56,14 @@ const ReferrEarnPc = () => {
           {/* logo and main text */}
           {/* menue section starts */}
           <div className="md:flex md:flex-col md:justify-center md:mx-auto md:gap-2 w-0 h-0 md:w-[160px] md:h-4/5 items-center ">
+<<<<<<< HEAD
             <Link
               to="/"
               className="border-solid items-center border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 md:w-full md:h-[34px] pt-1 px-3 border rounded-lg"
             >
+=======
+            <div className="border-solid items-center border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 md:w-full md:h-[34px] pt-1 px-3 border rounded-lg">
+>>>>>>> c274020b241305256019315e675397a330fe75ee
               <img
                 src={AddGame}
                 alt="ContentAdd icon"
@@ -66,11 +73,16 @@ const ReferrEarnPc = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold text-[#0f002b]">
                 New game
               </div>
+<<<<<<< HEAD
             </Link>
             <Link
               to="/profile"
               className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
             >
+=======
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
+>>>>>>> c274020b241305256019315e675397a330fe75ee
               <img
                 src={Profile}
                 alt="SocialPersonOutline icon"
@@ -79,20 +91,30 @@ const ReferrEarnPc = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Profile
               </div>
+<<<<<<< HEAD
             </Link>
             <Link
               to="/wincash"
               className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
             >
+=======
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
+>>>>>>> c274020b241305256019315e675397a330fe75ee
               <img src={WinCash} alt="Twemojimoneymouthface" className="w-5" />
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Win Cash
               </div>
+<<<<<<< HEAD
             </Link>
             <Link
               to="/mywallet"
               className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
             >
+=======
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
+>>>>>>> c274020b241305256019315e675397a330fe75ee
               <img
                 src={Wallet}
                 alt="Phwalletlight"
@@ -102,11 +124,16 @@ const ReferrEarnPc = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 My Wallet
               </div>
+<<<<<<< HEAD
             </Link>
             <Link
               to="/gamehistory"
               className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
             >
+=======
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
+>>>>>>> c274020b241305256019315e675397a330fe75ee
               <img
                 src={GameHistory}
                 alt="ActionHistory icon"
@@ -116,11 +143,16 @@ const ReferrEarnPc = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Game History
               </div>
+<<<<<<< HEAD
             </Link>
             <Link
               to="/transactionhistory"
               className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex- gap-2 w-full h-8 items-end py-[7px] px-3 border rounded-lg"
             >
+=======
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex- gap-2 w-full h-8 items-end py-[7px] px-3 border rounded-lg">
+>>>>>>> c274020b241305256019315e675397a330fe75ee
               <img
                 src={Profile}
                 alt="SocialPersonOutline icon"
@@ -129,11 +161,16 @@ const ReferrEarnPc = () => {
               <div className="text-[11px] font-['Nunito_Sans'] font-bold">
                 Transaction History
               </div>
+<<<<<<< HEAD
             </Link>
             <Link
               to="/referr&earn"
               className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
             >
+=======
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
+>>>>>>> c274020b241305256019315e675397a330fe75ee
               <img
                 src={ReferEarn}
                 alt="Gameiconsreceivemoney"
@@ -142,11 +179,16 @@ const ReferrEarnPc = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Refer and Earn
               </div>
+<<<<<<< HEAD
             </Link>
             <Link
               to="/notification"
               className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
             >
+=======
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#ffcc4d] flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
+>>>>>>> c274020b241305256019315e675397a330fe75ee
               <img
                 src={Notification}
                 alt="Iconamoonnotificationlight"
@@ -155,16 +197,25 @@ const ReferrEarnPc = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Notification
               </div>
+<<<<<<< HEAD
             </Link>
             <Link
               to="/support"
               className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#ffcc4d] flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
             >
+=======
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
+>>>>>>> c274020b241305256019315e675397a330fe75ee
               <img src={Support} alt="Supportagent" className="w-5" />
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Support
               </div>
+<<<<<<< HEAD
             </Link>
+=======
+            </div>
+>>>>>>> c274020b241305256019315e675397a330fe75ee
           </div>
         </div>
         {/* menue section ends */}
