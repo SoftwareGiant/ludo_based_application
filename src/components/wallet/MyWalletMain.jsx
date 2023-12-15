@@ -17,9 +17,17 @@ import Wp from "../../assets/new_game/wp.svg";
 import Twtr from "../../assets/new_game/twtr.svg";
 import Filter from "../../assets/new_game/filter.svg";
 import Info from "../../assets/referr/info.svg";
+import HamBurger from "../../assets/profile/hamburger.svg";
+import Profile_Frame from "../../assets/profile/Frame_profile.png";
+import Attachment from "../../assets/support/Attachment.svg";
+import Emoji from "../../assets/support/Emoji.svg";
+import Menu from "../../assets/support/menu.svg";
+import Seen from "../../assets/support/Seen.svg";
+import Send from "../../assets/support/Send.svg";
+import Customer from "../../assets/support/support.png";
 import { Link } from "react-router-dom";
 
-const ReferrEarnPc = () => {
+const MyWalletMain = () => {
   return (
     <div>
       <div
@@ -83,7 +91,7 @@ const ReferrEarnPc = () => {
             </Link>
             <Link
               to="/mywallet"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
+              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#ffcc4d] flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
             >
               <img
                 src={Wallet}
@@ -124,7 +132,7 @@ const ReferrEarnPc = () => {
             </Link>
             <Link
               to="/referr&earn"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#ffcc4d] flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
+              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
             >
               <img
                 src={ReferEarn}
@@ -161,82 +169,107 @@ const ReferrEarnPc = () => {
         </div>
         {/* menue section ends */}
         {/* Profile section */}
-        <div className="bg-[#0f002b] flex flex-col justify-between pb-16 md:w-[485px] md:h-[720px] items-start absolute left-[200px]">
-          <div className="bg-[#0f002b] inline-flex gap-[266px] w-[485px] h-[60px] items-center md:py-4 md:pr-7 md:pl-[21px]">
-            <div
-              id="ReferAndEarn1"
-              className="text-center text-xl font-['Inter'] text-white mt-px"
-            >
-              Refer and <span className="font-bold">Earn</span>
+        <div className="bg-[#fead3a] flex flex-col pb-4 gap-6 w-[485px] h-[720px] absolute left-[200px] items-start">
+          <div className="flex flex-col gap-2 w-full items-start">
+            <div className="bg-[#fead3a] flex flex-row justify-between w-full h-16 items-start pt-4 px-6">
+              <div
+                id="MyWallet1"
+                className="text-center text-xl font-['Inter'] text-[#0f002b] mt-px"
+              >
+                My <span className="font-bold">Wallet</span>
+              </div>
+              <img
+                src="https://file.rendit.io/n/fqXezBjhnGPv4ho43Evl.svg"
+                alt="ActionInfoOutline icon"
+                id="Icoutlineinfo"
+                className="w-6"
+              />
             </div>
-            <img
-              src={Info}
-              alt="Icoutlineinfo"
-              id="Icoutlineinfo"
-              className="w-6"
-            />
+            <div className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col ml-20 pb-4 gap-4 w-2/3 items-start rounded-lg">
+              <div className="border-solid border-b border-white/30 bg-[#0f002b] flex flex-col gap-2 w-full h-32 items-start py-3 rounded-tl-lg rounded-tr-lg">
+                <div className="flex flex-row justify-between w-full items-start">
+                  <div className="font-['Nunito_Sans'] text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center pt-2 w-2/5 h-8 items-start rounded-lg">
+                    Deposit Cash
+                  </div>
+                  <img
+                    src="https://file.rendit.io/n/nFtGY1rEKMp6zdABHE4X.svg"
+                    alt="Mdihistory"
+                    id="Mdihistory"
+                    className="mt-1 w-5"
+                  />
+                </div>
+                <div className="text-xs font-['Nunito_Sans'] font-semibold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center ml-3 pt-2 w-5/6 items-start rounded-lg">
+                  Can be used to play Tournaments & Battles. Cannot be withdrawn
+                  to Paytm or Bank.
+                </div>
+              </div>
+              <div className="flex flex-row ml-4 gap-24 w-5/6 items-start">
+                <div className="bg-white flex flex-row justify-center pt-1 gap-1 w-20 items-start">
+                  <div className="text-xl font-['Inter'] text-[#0f002b] mb-1">
+                    ₹
+                  </div>
+                  <div className="text-xl font-['Inter'] font-bold text-[#0f002b]">
+                    501
+                  </div>
+                </div>
+                <div className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-px pt-2 gap-1 w-2/5 h-8 items-start rounded-lg">
+                  <img
+                    src="https://file.rendit.io/n/CxRGWIem3K2eO2Hqh8wk.svg"
+                    alt="Materialsymbolsadd"
+                    id="Materialsymbolsadd"
+                    className="w-4"
+                  />
+                  <div className="text-sm font-['Inter'] text-white">
+                    add cash
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          {/* Copy board */}
-          <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] bg-white md:inline-flex mx-[166px] gap-2 md:w-[153px] md:h-10 items-center md:py-0 md:px-4 rounded-[10px] flex-shrink-0 md:absolute md:top-48">
-            <div className="bg-white flex justify-center w-8 h-8 items-center p-[6px]">
-              <img
-                src={Copy}
-                alt="Solarcopylinear"
-                id="Solarcopylinear"
-                className="w-5"
-              />
+          <div className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col ml-20 pb-4 gap-4 w-2/3 items-start rounded-lg">
+            <div className="border-solid border-b border-white/30 bg-[#0f002b] flex flex-col gap-2 w-full h-32 items-start py-3 rounded-tl-lg rounded-tr-lg">
+              <div className="flex flex-row justify-between w-full items-start">
+                <div className="font-['Nunito_Sans'] text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center pt-2 w-2/5 h-8 items-start rounded-lg">
+                  Winning Cash
+                </div>
+                <img
+                  src="https://file.rendit.io/n/nFtGY1rEKMp6zdABHE4X.svg"
+                  alt="Mdihistory1"
+                  id="Mdihistory1"
+                  className="mt-1 w-5"
+                />
+              </div>
+              <div className="text-xs font-['Nunito_Sans'] font-semibold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center ml-3 pt-2 w-5/6 items-start rounded-lg">
+                Can be used to play Tournaments & Battles. Withdrawn to Paytm or
+                Bank.
+              </div>
             </div>
-            <div className="font-['Inter'] font-bold text-[#0f002b] w-full text-base ">
-              753478
-            </div>
-          </div>
-          {/* Copy board ends */}
-          <div className="inline-flex md:p-[10px] gap-[10px] justify-center items-center md:w-[397px] md:h-[58px] md:mx-[44px] text-white text-justify font-['Inter'] text-base font-normal absolute md:top-[292px] ">
-            This is your referral link. Refer your friends and earn 1%
-            commission on their winning amount.
-          </div>
-          {/* social media */}
-          <div className="inline-flex items-center justify-center h-[52.8px] w-[292.72px] md:mx-24 px-[21.12px] gap-[10px] flex-shrink-0 shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-white rounded-[13.2px]">
-            <div className="flex w-[42.24px] h-[42.24px] justify-center items-center p-[3.4px] ">
-              <img
-                src={Wp}
-                alt="Logoswhatsappicon"
-                id="Logoswhatsappicon"
-                className="w-[35px]"
-              />
-            </div>
-            <div className="flex w-[42.24px] h-[42.24px] justify-center items-center py-[5px] px-[4.6px] ">
-              <img
-                src={Fb}
-                alt="Logosfacebook"
-                id="Logosfacebook"
-                className=" w-8"
-              />
-            </div>
-            <div className="flex w-[42.24px] h-[42.24px] justify-center items-center py-2 px-[7.6px]">
-              <img
-                src={Twtr}
-                alt="Ritwitterxfill"
-                id="Ritwitterxfill"
-                className="w-8"
-              />
-            </div>
-            <div className="flex w-[42.24px] h-[42.24px] justify-center items-center p-[7.92px]">
-              <img
-                src={Copy}
-                alt="ActionLabelOutline icon"
-                id="Solarcopylinear1"
-                className="w-8"
-              />
-            </div>
-            <div className="flex w-[42.24px] h-[42.24px] justify-center items-center py-[4.72px] px-[5.55px] ">
-              <img src={Share} alt="Mdishare" id="Mdishare" className="w-8" />
+            <div className="flex flex-row ml-4 gap-20 w-5/6 items-start">
+              <div className="bg-white flex flex-row justify-center pt-1 gap-1 w-24 items-start">
+                <div className="text-xl font-['Inter'] text-[#0f002b] mb-1">
+                  ₹
+                </div>
+                <div className="text-xl font-['Inter'] font-bold text-[#0f002b]">
+                  1001
+                </div>
+              </div>
+              <div className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-px pt-2 gap-1 w-2/5 h-8 items-start rounded-lg">
+                <img
+                  src="https://file.rendit.io/n/v5ncFaNFqX20s3YFjnb0.svg"
+                  alt="Cilbank"
+                  id="Cilbank"
+                  className="w-4"
+                />
+                <div className="text-sm font-['Inter'] text-white">
+                  withdraw
+                </div>
+              </div>
             </div>
           </div>
         </div>
         {/* Profile section ends */}
         {/* battle section */}
-        <div className="bg-[#fead3a] flex flex-col md:w-[400px] md:h-[691px] md:absolute md:left-[675px] pb-8 gap-8 rounded-[20px]">
+        <div className="bg-[#0F002B] flex flex-col md:w-[400px] md:h-[691px] md:absolute md:left-[685px] pb-8 gap-8 rounded-[20px]">
           <div className="flex flex-col gap-4 w-full items-start">
             <div className="border-solid flex flex-col gap-6 w-full h-[332px] items-start pl-4 py-4 border-b border-black/30">
               <div
@@ -484,4 +517,4 @@ const ReferrEarnPc = () => {
   );
 };
 
-export default ReferrEarnPc;
+export default MyWalletMain;

@@ -14,6 +14,7 @@ import Filter from "../../assets/new_game/filter.svg";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import Edit from "../../assets/profile/edit.svg";
 import LogOut from "../../assets/profile/logout.svg";
+import { Link } from "react-router-dom";
 
 const NewProfile = () => {
   return (
@@ -38,7 +39,10 @@ const NewProfile = () => {
             </div>
           </div>
           <div className="flex flex-col justify-center mx-auto gap-2 w-4/5 items-center">
-            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg">
+            <Link
+              to="/"
+              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg"
+            >
               <img
                 src={AddGame}
                 alt="ContentAdd icon"
@@ -48,8 +52,11 @@ const NewProfile = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold text-[#0f002b]">
                 New game
               </div>
-            </div>
-            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#ffcc4d] flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg">
+            </Link>
+            <Link
+              to="/profile"
+              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#ffcc4d] flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg"
+            >
               <img
                 src={Profile}
                 alt="SocialPersonOutline icon"
@@ -58,14 +65,20 @@ const NewProfile = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Profile
               </div>
-            </div>
-            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg">
+            </Link>
+            <Link
+              to="/wincash"
+              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg"
+            >
               <img src={WinCash} alt="Twemojimoneymouthface" className="w-5" />
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Win Cash
               </div>
-            </div>
-            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg">
+            </Link>
+            <Link
+              to="/mywallet"
+              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg"
+            >
               <img
                 src={Wallet}
                 alt="Phwalletlight"
@@ -75,8 +88,11 @@ const NewProfile = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 My Wallet
               </div>
-            </div>
-            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg">
+            </Link>
+            <Link
+              to="/gamehistory"
+              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg"
+            >
               <img
                 src={GameHistory}
                 alt="ActionHistory icon"
@@ -86,8 +102,11 @@ const NewProfile = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Game History
               </div>
-            </div>
-            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg">
+            </Link>
+            <Link
+              to="/transactionhistory"
+              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg"
+            >
               <img
                 src={Profile}
                 alt="SocialPersonOutline icon"
@@ -96,8 +115,11 @@ const NewProfile = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Transaction History
               </div>
-            </div>
-            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg">
+            </Link>
+            <Link
+              to="/referr&earn"
+              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg"
+            >
               <img
                 src={ReferEarn}
                 alt="Gameiconsreceivemoney"
@@ -106,8 +128,11 @@ const NewProfile = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Refer and Earn
               </div>
-            </div>
-            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg">
+            </Link>
+            <Link
+              to="/notification"
+              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg"
+            >
               <img
                 src={Notification}
                 alt="Iconamoonnotificationlight"
@@ -116,8 +141,11 @@ const NewProfile = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Notification
               </div>
-            </div>
-            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg">
+            </Link>
+            <Link
+              to="/support"
+              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg"
+            >
               <img
                 src={Support}
                 alt="Materialsymbolssupportagent"
@@ -126,7 +154,7 @@ const NewProfile = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Support
               </div>
-            </div>
+            </Link>
           </div>
         </div>
         {/* menue bar section ends */}

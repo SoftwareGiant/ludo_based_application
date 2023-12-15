@@ -17,6 +17,14 @@ import Wp from "../../assets/new_game/wp.svg";
 import Twtr from "../../assets/new_game/twtr.svg";
 import Filter from "../../assets/new_game/filter.svg";
 import Info from "../../assets/referr/info.svg";
+import HamBurger from "../../assets/profile/hamburger.svg";
+import Profile_Frame from "../../assets/profile/Frame_profile.png";
+import Attachment from "../../assets/support/Attachment.svg";
+import Emoji from "../../assets/support/Emoji.svg";
+import Menu from "../../assets/support/menu.svg";
+import Seen from "../../assets/support/Seen.svg";
+import Send from "../../assets/support/Send.svg";
+import Customer from "../../assets/support/support.png";
 import { Link } from "react-router-dom";
 
 const ReferrEarnPc = () => {
@@ -124,7 +132,7 @@ const ReferrEarnPc = () => {
             </Link>
             <Link
               to="/referr&earn"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#ffcc4d] flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
+              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
             >
               <img
                 src={ReferEarn}
@@ -150,7 +158,7 @@ const ReferrEarnPc = () => {
             </Link>
             <Link
               to="/support"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
+              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#ffcc4d] flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
             >
               <img src={Support} alt="Supportagent" className="w-5" />
               <div className="text-xs font-['Nunito_Sans'] font-bold">
@@ -161,82 +169,116 @@ const ReferrEarnPc = () => {
         </div>
         {/* menue section ends */}
         {/* Profile section */}
-        <div className="bg-[#0f002b] flex flex-col justify-between pb-16 md:w-[485px] md:h-[720px] items-start absolute left-[200px]">
-          <div className="bg-[#0f002b] inline-flex gap-[266px] w-[485px] h-[60px] items-center md:py-4 md:pr-7 md:pl-[21px]">
+        <div className="bg-[#fead3a] flex flex-col pb-6 gap-4 items-start justify-between md:w-[485px] md:h-[720px] absolute left-[200px]">
+          <div className="flex flex-col w-full items-start">
+            <div className="bg-[#fead3a] flex flex-row justify-between w-full h-16 items-start pt-4 px-5">
+              <div className="text-center text-xl font-['Inter'] text-[#0f002b] mt-px">
+                notification
+              </div>
+              <img
+                src={Info}
+                alt="ActionInfoOutline icon"
+                id="Icoutlineinfo"
+                className="w-6"
+              />
+            </div>
+            <div className="relative flex flex-row w-full items-start">
+              <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] w-1/2 h-16 bg-white absolute top-8 left-40 flex flex-col justify-center pl-6 gap-1 items-start rounded-tl-[20px] rounded-br-[20px] rounded-bl-[20px]">
+                <div className="font-['Inter'] font-medium text-[#0f002b]">
+                  My issue is not listed.
+                </div>
+                <div className="flex flex-row ml-32 w-12 items-start">
+                  <div className="text-xs font-['Inter'] text-[#0f002b] mt-0">
+                    09:23
+                  </div>
+                  <img
+                    src={Seen}
+                    alt="ActionVerifiedUser icon"
+                    id="Component1"
+                    className="w-4"
+                  />
+                </div>
+              </div>
+              <div className="border-solid bg-[#fead3a] relative inline-flex justify-between mb-8 w-full h-16 items-start pt-3 pl-6 pr-5 border-b border-black/30">
+                <div className="flex flex-row mt-px gap-2 w-2/5 items-start">
+                  <img src={Customer} alt="Frame29" className="w-8 border" />
+                  <div className="text-center font-['Inter'] font-medium text-[#0f002b] mt-2">
+                    Customer Service
+                  </div>
+                </div>
+                <img
+                  src={Menu}
+                  alt="Charmmenukebab"
+                  id="Charmmenukebab"
+                  className="mt-2 w-5"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-col justify-center ml-20 gap-2 w-1/2 items-start px-6 py-2 rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px]">
+            <div className="font-['Inter'] font-medium text-white w-full">
+              No Problem! You can always chat with me I'm here to assist you!
+            </div>
+            <div className="text-xs font-['Inter'] text-white">09:23</div>
+          </div>
+          <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-center ml-40 pl-6 gap-1 w-1/2 h-20 items-start rounded-tl-[20px] rounded-br-[20px] rounded-bl-[20px]">
+            <div className="font-['Inter'] font-medium text-[#0f002b] w-5/6">
+              Last transaction details.
+            </div>
+            <div className="flex flex-row ml-32 w-12 items-start">
+              <div className="text-xs font-['Inter'] text-[#0f002b] mt-0">
+                09:23
+              </div>
+              <img
+                src={Seen}
+                alt="ActionVerifiedUser icon"
+                id="Component2"
+                className="w-4"
+              />
+            </div>
+          </div>
+          <div className="flex flex-col ml-16 gap-2 w-3/4 items-start">
+            <div className="flex flex-col ml-5 gap-2 w-2/3 items-start">
+              <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-col justify-center gap-2 w-full items-start px-6 py-2 rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px]">
+                <div className="font-['Inter'] font-medium text-white w-full">
+                  Your last transaction dated 22.10.2023 time 21:14 details are
+                  here.
+                </div>
+                <div className="text-xs font-['Inter'] text-white">09:23</div>
+              </div>
+              <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-col justify-center gap-2 w-full items-start px-6 py-2 rounded-[20px]">
+                <div className="font-['Inter'] font-medium text-white w-full">
+                  Withdrew ₹500 from your Ludo King account to your bank account
+                  ending with <span className="font-bold">7658</span>
+                </div>
+                <div className="text-xs font-['Inter'] text-white">09:23</div>
+              </div>
+            </div>
             <div
-              id="ReferAndEarn1"
-              className="text-center text-xl font-['Inter'] text-white mt-px"
+              id="TypeAMessage1"
+              className="bg-white flex flex-row justify-center pt-4 gap-24 w-full h-12 items-start rounded-lg"
             >
-              Refer and <span className="font-bold">Earn</span>
-            </div>
-            <img
-              src={Info}
-              alt="Icoutlineinfo"
-              id="Icoutlineinfo"
-              className="w-6"
-            />
-          </div>
-          {/* Copy board */}
-          <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] bg-white md:inline-flex mx-[166px] gap-2 md:w-[153px] md:h-10 items-center md:py-0 md:px-4 rounded-[10px] flex-shrink-0 md:absolute md:top-48">
-            <div className="bg-white flex justify-center w-8 h-8 items-center p-[6px]">
-              <img
-                src={Copy}
-                alt="Solarcopylinear"
-                id="Solarcopylinear"
-                className="w-5"
-              />
-            </div>
-            <div className="font-['Inter'] font-bold text-[#0f002b] w-full text-base ">
-              753478
-            </div>
-          </div>
-          {/* Copy board ends */}
-          <div className="inline-flex md:p-[10px] gap-[10px] justify-center items-center md:w-[397px] md:h-[58px] md:mx-[44px] text-white text-justify font-['Inter'] text-base font-normal absolute md:top-[292px] ">
-            This is your referral link. Refer your friends and earn 1%
-            commission on their winning amount.
-          </div>
-          {/* social media */}
-          <div className="inline-flex items-center justify-center h-[52.8px] w-[292.72px] md:mx-24 px-[21.12px] gap-[10px] flex-shrink-0 shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-white rounded-[13.2px]">
-            <div className="flex w-[42.24px] h-[42.24px] justify-center items-center p-[3.4px] ">
-              <img
-                src={Wp}
-                alt="Logoswhatsappicon"
-                id="Logoswhatsappicon"
-                className="w-[35px]"
-              />
-            </div>
-            <div className="flex w-[42.24px] h-[42.24px] justify-center items-center py-[5px] px-[4.6px] ">
-              <img
-                src={Fb}
-                alt="Logosfacebook"
-                id="Logosfacebook"
-                className=" w-8"
-              />
-            </div>
-            <div className="flex w-[42.24px] h-[42.24px] justify-center items-center py-2 px-[7.6px]">
-              <img
-                src={Twtr}
-                alt="Ritwitterxfill"
-                id="Ritwitterxfill"
-                className="w-8"
-              />
-            </div>
-            <div className="flex w-[42.24px] h-[42.24px] justify-center items-center p-[7.92px]">
-              <img
-                src={Copy}
-                alt="ActionLabelOutline icon"
-                id="Solarcopylinear1"
-                className="w-8"
-              />
-            </div>
-            <div className="flex w-[42.24px] h-[42.24px] justify-center items-center py-[4.72px] px-[5.55px] ">
-              <img src={Share} alt="Mdishare" id="Mdishare" className="w-8" />
+              <div className="flex flex-row gap-4 w-1/2 items-start">
+                <img src={Emoji} alt="Emoji" id="Emoji" className="w-5" />
+                <div className="opacity-40 font-['Inter'] font-medium text-[#0f002b] mt-px">
+                  Type a message
+                </div>
+              </div>
+              <div className="flex flex-row mt-px gap-4 w-12 items-start">
+                <img
+                  src={Attachment}
+                  alt="Attachment"
+                  id="Attachment"
+                  className="w-5"
+                />
+                <img src={Send} alt="Send" id="Send" className="w-5" />
+              </div>
             </div>
           </div>
         </div>
         {/* Profile section ends */}
         {/* battle section */}
-        <div className="bg-[#fead3a] flex flex-col md:w-[400px] md:h-[691px] md:absolute md:left-[675px] pb-8 gap-8 rounded-[20px]">
+        <div className="bg-[#0F002B] flex flex-col md:w-[400px] md:h-[691px] md:absolute md:left-[685px] pb-8 gap-8 rounded-[20px]">
           <div className="flex flex-col gap-4 w-full items-start">
             <div className="border-solid flex flex-col gap-6 w-full h-[332px] items-start pl-4 py-4 border-b border-black/30">
               <div

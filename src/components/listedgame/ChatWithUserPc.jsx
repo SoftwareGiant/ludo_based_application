@@ -17,9 +17,16 @@ import Wp from "../../assets/new_game/wp.svg";
 import Twtr from "../../assets/new_game/twtr.svg";
 import Filter from "../../assets/new_game/filter.svg";
 import Info from "../../assets/referr/info.svg";
-import { Link } from "react-router-dom";
+import HamBurger from "../../assets/profile/hamburger.svg";
+import Profile_Frame from "../../assets/profile/Frame_profile.png";
+import Attachment from "../../assets/support/Attachment.svg";
+import Emoji from "../../assets/support/Emoji.svg";
+import Menu from "../../assets/support/menu.svg";
+import Seen from "../../assets/support/Seen.svg";
+import Send from "../../assets/support/Send.svg";
+import Customer from "../../assets/support/support.png";
 
-const ReferrEarnPc = () => {
+const ChatWithUserPc = () => {
   return (
     <div>
       <div
@@ -45,10 +52,7 @@ const ReferrEarnPc = () => {
           {/* logo and main text */}
           {/* menue section starts */}
           <div className="md:flex md:flex-col md:justify-center md:mx-auto md:gap-2 w-0 h-0 md:w-[160px] md:h-4/5 items-center ">
-            <Link
-              to="/"
-              className="border-solid items-center border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 md:w-full md:h-[34px] pt-1 px-3 border rounded-lg"
-            >
+            <div className="border-solid items-center border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 md:w-full md:h-[34px] pt-1 px-3 border rounded-lg">
               <img
                 src={AddGame}
                 alt="ContentAdd icon"
@@ -58,11 +62,8 @@ const ReferrEarnPc = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold text-[#0f002b]">
                 New game
               </div>
-            </Link>
-            <Link
-              to="/profile"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
-            >
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
               <img
                 src={Profile}
                 alt="SocialPersonOutline icon"
@@ -71,20 +72,14 @@ const ReferrEarnPc = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Profile
               </div>
-            </Link>
-            <Link
-              to="/wincash"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
-            >
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
               <img src={WinCash} alt="Twemojimoneymouthface" className="w-5" />
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Win Cash
               </div>
-            </Link>
-            <Link
-              to="/mywallet"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
-            >
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
               <img
                 src={Wallet}
                 alt="Phwalletlight"
@@ -94,11 +89,8 @@ const ReferrEarnPc = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 My Wallet
               </div>
-            </Link>
-            <Link
-              to="/gamehistory"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
-            >
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
               <img
                 src={GameHistory}
                 alt="ActionHistory icon"
@@ -108,11 +100,8 @@ const ReferrEarnPc = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Game History
               </div>
-            </Link>
-            <Link
-              to="/transactionhistory"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex- gap-2 w-full h-8 items-end py-[7px] px-3 border rounded-lg"
-            >
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex- gap-2 w-full h-8 items-end py-[7px] px-3 border rounded-lg">
               <img
                 src={Profile}
                 alt="SocialPersonOutline icon"
@@ -121,11 +110,8 @@ const ReferrEarnPc = () => {
               <div className="text-[11px] font-['Nunito_Sans'] font-bold">
                 Transaction History
               </div>
-            </Link>
-            <Link
-              to="/referr&earn"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#ffcc4d] flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
-            >
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
               <img
                 src={ReferEarn}
                 alt="Gameiconsreceivemoney"
@@ -134,11 +120,8 @@ const ReferrEarnPc = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Refer and Earn
               </div>
-            </Link>
-            <Link
-              to="/notification"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
-            >
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#ffcc4d] flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
               <img
                 src={Notification}
                 alt="Iconamoonnotificationlight"
@@ -147,96 +130,109 @@ const ReferrEarnPc = () => {
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Notification
               </div>
-            </Link>
-            <Link
-              to="/support"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
-            >
+            </div>
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
               <img src={Support} alt="Supportagent" className="w-5" />
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Support
               </div>
-            </Link>
+            </div>
           </div>
         </div>
         {/* menue section ends */}
         {/* Profile section */}
-        <div className="bg-[#0f002b] flex flex-col justify-between pb-16 md:w-[485px] md:h-[720px] items-start absolute left-[200px]">
-          <div className="bg-[#0f002b] inline-flex gap-[266px] w-[485px] h-[60px] items-center md:py-4 md:pr-7 md:pl-[21px]">
-            <div
-              id="ReferAndEarn1"
-              className="text-center text-xl font-['Inter'] text-white mt-px"
-            >
-              Refer and <span className="font-bold">Earn</span>
+        <div className="bg-[#fead3a] flex flex-col pb-4 gap-6 w-[485px] h-[720px] absolute left-[200px] items-start">
+          <div className="flex flex-col gap-4 w-full items-start">
+            <div className="flex flex-col gap-2 w-full items-start">
+              <div className="flex flex-col w-full items-start">
+                <div className="bg-[#fead3a] flex flex-row justify-between w-full h-16 items-start pt-4 px-5">
+                  <div className="text-center text-xl text-[#0f002b] mt-px">
+                    notification
+                  </div>
+                  <img
+                    src="https://file.rendit.io/n/xaH3JN9DiYPwdDqekkB3.svg"
+                    alt="ActionInfoOutline icon"
+                    id="Icoutlineinfo"
+                    className="w-6"
+                  />
+                </div>
+                <div className="bg-[#fead3a] flex flex-col pt-px w-full items-start">
+                  <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center ml-[372px] pt-2 gap-1 w-1/5 h-8 items-start rounded-lg">
+                    <img
+                      src="https://file.rendit.io/n/hVuTbiu91oRnusia3RO6.svg"
+                      alt="Fluentmailreadregular"
+                      className="w-4"
+                    />
+                    <div className="text-xs font-semibold text-[#0f002b]">
+                      feedback
+                    </div>
+                  </div>
+                  <div
+                    id="Line"
+                    className="border-solid w-full h-px border-t border-black/30"
+                  />
+                </div>
+              </div>
+              <div className="text-center font-medium text-white border-solid border-[rgba(15,_0,_43,_0.2)] bg-[rgba(15,_0,_43,_0.2)] flex flex-row justify-center ml-[206px] pt-1 w-16 h-8 items-start border rounded-lg">
+                Friday
+              </div>
             </div>
-            <img
-              src={Info}
-              alt="Icoutlineinfo"
-              id="Icoutlineinfo"
-              className="w-6"
-            />
+            <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-col justify-center pl-6 gap-2 w-1/2 h-16 items-start mb-px ml-20 rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px]">
+              <div className="font-medium text-white">Hi</div>
+              <div className="text-xs text-white">09:23</div>
+            </div>
+            <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-center ml-40 pl-6 gap-1 w-1/2 h-16 font-['Inter'] items-start rounded-tl-[20px] rounded-br-[20px] rounded-bl-[20px]">
+              <div
+                id="ThisIsAMessageByUser"
+                className="font-medium text-[#0f002b]"
+              >
+                Hello 👋
+              </div>
+              <div className="flex flex-row ml-32 w-12 items-start">
+                <div className="text-xs text-[#0f002b] mt-0">09:23</div>
+                <img
+                  src="https://file.rendit.io/n/W62TmttfjtO7709X96Yh.svg"
+                  alt="ActionVerifiedUser icon"
+                  id="Component"
+                  className="w-4"
+                />
+              </div>
+            </div>
           </div>
-          {/* Copy board */}
-          <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] bg-white md:inline-flex mx-[166px] gap-2 md:w-[153px] md:h-10 items-center md:py-0 md:px-4 rounded-[10px] flex-shrink-0 md:absolute md:top-48">
-            <div className="bg-white flex justify-center w-8 h-8 items-center p-[6px]">
+          <div
+            id="TypeAMessage1"
+            className="bg-white flex flex-row justify-center ml-16 pt-4 gap-24 w-3/4 h-12 items-start rounded-lg"
+          >
+            <div className="flex flex-row gap-4 w-1/2 items-start">
               <img
-                src={Copy}
-                alt="Solarcopylinear"
-                id="Solarcopylinear"
+                src="https://file.rendit.io/n/aXGTlHYYkimk9HRIA15k.svg"
+                alt="Emoji"
+                id="Emoji"
                 className="w-5"
               />
+              <div className="opacity-40 font-medium text-[#0f002b] mt-px">
+                Type a message
+              </div>
             </div>
-            <div className="font-['Inter'] font-bold text-[#0f002b] w-full text-base ">
-              753478
-            </div>
-          </div>
-          {/* Copy board ends */}
-          <div className="inline-flex md:p-[10px] gap-[10px] justify-center items-center md:w-[397px] md:h-[58px] md:mx-[44px] text-white text-justify font-['Inter'] text-base font-normal absolute md:top-[292px] ">
-            This is your referral link. Refer your friends and earn 1%
-            commission on their winning amount.
-          </div>
-          {/* social media */}
-          <div className="inline-flex items-center justify-center h-[52.8px] w-[292.72px] md:mx-24 px-[21.12px] gap-[10px] flex-shrink-0 shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-white rounded-[13.2px]">
-            <div className="flex w-[42.24px] h-[42.24px] justify-center items-center p-[3.4px] ">
+            <div className="flex flex-row mt-px gap-4 w-12 items-start">
               <img
-                src={Wp}
-                alt="Logoswhatsappicon"
-                id="Logoswhatsappicon"
-                className="w-[35px]"
+                src="https://file.rendit.io/n/4O0XpGwpisRtWpwRjwPK.svg"
+                alt="Attachment"
+                id="Attachment"
+                className="w-5"
               />
-            </div>
-            <div className="flex w-[42.24px] h-[42.24px] justify-center items-center py-[5px] px-[4.6px] ">
               <img
-                src={Fb}
-                alt="Logosfacebook"
-                id="Logosfacebook"
-                className=" w-8"
+                src="https://file.rendit.io/n/RZycssPvHc5Wv7cQAkwD.svg"
+                alt="Send"
+                id="Send"
+                className="w-5"
               />
-            </div>
-            <div className="flex w-[42.24px] h-[42.24px] justify-center items-center py-2 px-[7.6px]">
-              <img
-                src={Twtr}
-                alt="Ritwitterxfill"
-                id="Ritwitterxfill"
-                className="w-8"
-              />
-            </div>
-            <div className="flex w-[42.24px] h-[42.24px] justify-center items-center p-[7.92px]">
-              <img
-                src={Copy}
-                alt="ActionLabelOutline icon"
-                id="Solarcopylinear1"
-                className="w-8"
-              />
-            </div>
-            <div className="flex w-[42.24px] h-[42.24px] justify-center items-center py-[4.72px] px-[5.55px] ">
-              <img src={Share} alt="Mdishare" id="Mdishare" className="w-8" />
             </div>
           </div>
         </div>
         {/* Profile section ends */}
         {/* battle section */}
-        <div className="bg-[#fead3a] flex flex-col md:w-[400px] md:h-[691px] md:absolute md:left-[675px] pb-8 gap-8 rounded-[20px]">
+        <div className="bg-[#0F002B] flex flex-col md:w-[400px] md:h-[691px] md:absolute md:left-[685px] pb-8 gap-8 rounded-[20px]">
           <div className="flex flex-col gap-4 w-full items-start">
             <div className="border-solid flex flex-col gap-6 w-full h-[332px] items-start pl-4 py-4 border-b border-black/30">
               <div
@@ -484,4 +480,4 @@ const ReferrEarnPc = () => {
   );
 };
 
-export default ReferrEarnPc;
+export default ChatWithUserPc;
