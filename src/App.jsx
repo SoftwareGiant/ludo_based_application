@@ -41,7 +41,6 @@ import GameHistory from "./components/game_history/GameHistory";
 import TransactioHistoryMob from "./components/transaction_history/TransactioHistoryMob";
 import ReferrEarn from "./components/refer_and_earn/ReferrEarn";
 import Support from "./components/support/Support";
-import SupportPc from "./components/support/SupportPc";
 import Notification from "./components/notification/Notification";
 import AddCashPc from "./components/wallet/AddCashPc";
 import WithDrawPc from "./components/wallet/WithDrawPc";
@@ -54,6 +53,7 @@ import ProfileImagePC from "./components/profile/ProfileImagePC";
 import OtpPc from "./components/app_start/OtpPc";
 import SignUpSucess from "./components/app_start/SignUpSucess";
 import AppTour from "./components/app_start/AppTour";
+import NotiFicationResp from "./components/notification/NotiFicationResp";
 
 function App() {
   return (
@@ -71,7 +71,7 @@ function App() {
             element={<TransactionHistoryPc />}
           />
           <Route path="/referr&earn" element={<ReferrEarnPc />} />
-          <Route path="/notification" element={<NotificationPc />} />
+          <Route path="/notification" element={<NotiFicationResp />} />
           <Route path="/support" element={<SupportPc />} />
         </Routes>
       </BrowserRouter>
@@ -122,17 +122,13 @@ function App() {
       {/* <ReferrEarn /> */}
       {/* <Notification /> */}
       {/* <Support /> */}
-<<<<<<< HEAD
       {/* <ReferrEarnPc /> */}
       {/* <GameHistoryPc /> */}
       {/* <TransactionHistoryPc /> */}
       {/* <NotificationPc /> */}
-    </>
-=======
-      <SupportPc />
+      {/* <SupportPc /> */}
       {/* <ReferrEarnPc /> */}
-    </div>
->>>>>>> c274020b241305256019315e675397a330fe75ee
+    </>
   );
 }
 

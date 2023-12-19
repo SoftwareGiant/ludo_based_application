@@ -58,7 +58,7 @@ const Notification = () => {
                   className="border-solid w-full h-px border-t border-black/30"
                 />
               </div>
-              <div className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col ml-8 pb-3 gap-3 w-5/6 items-start rounded-lg">
+              <div className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col ml-8 pb-3 gap-3 w-5/6 items-start rounded-lg md:ml-20 md:w-2/3">
                 <div className="border-solid border-b border-white/30 bg-[#0f002b] flex flex-col gap-3 w-full h-32 items-start pl-3 py-3 rounded-tl-lg rounded-tr-lg">
                   <div className="text-xs font-['Nunito_Sans'] font-bold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center pt-1 w-24 h-6 items-start rounded-lg">
                     49 hours ago
