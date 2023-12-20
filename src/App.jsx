@@ -39,8 +39,8 @@ import DepositeCah2 from "./components/wallet/DepositeCah2";
 import ReferalsBalanceWithDraw from "./components/wallet/ReferalsBalanceWithDraw";
 import GameHistory from "./components/game_history/GameHistory";
 import TransactioHistoryMob from "./components/transaction_history/TransactioHistoryMob";
-import ReferrEarn from "./components/refer_and_earn/ReferrEarn";
-import Support from "./components/support/Support";
+import ReferrEarn from "./components/refer_and_earn/ReferrEarnMob";
+import Support from "./components/support/SupportMob";
 import Notification from "./components/notification/Notification";
 import AddCashPc from "./components/wallet/AddCashPc";
 import WithDrawPc from "./components/wallet/WithDrawPc";
@@ -53,12 +53,12 @@ import ProfileImagePC from "./components/profile/ProfileImagePC";
 import OtpPc from "./components/app_start/OtpPc";
 import SignUpSucess from "./components/app_start/SignUpSucess";
 import AppTour from "./components/app_start/AppTour";
-import NotiFicationResp from "./components/notification/NotiFicationResp";
+import ReferrEarnMob from "./components/refer_and_earn/ReferrEarnMob";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Routes>
           <Route path="/login" element={<SignUpDesktop />} />
           <Route path="/" element={<NewGame />} />
@@ -71,10 +71,10 @@ function App() {
             element={<TransactionHistoryPc />}
           />
           <Route path="/referr&earn" element={<ReferrEarnPc />} />
-          <Route path="/notification" element={<NotiFicationResp />} />
+          <Route path="/notification" element={<NotificationPc />} />
           <Route path="/support" element={<SupportPc />} />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
       {/* <Info /> */}
       {/* <SignUpDesktop /> */}
       {/* <OtpPc /> */}
@@ -118,16 +118,17 @@ function App() {
       {/* <DepositeCah2 /> */}
       {/* <ReferalsBalanceWithDraw /> */}
       {/* <GameHistory /> */}
-      {/* <TransactioHistoryMob /> */}
-      {/* <ReferrEarn /> */}
-      {/* <Notification /> */}
-      {/* <Support /> */}
       {/* <ReferrEarnPc /> */}
       {/* <GameHistoryPc /> */}
       {/* <TransactionHistoryPc /> */}
       {/* <NotificationPc /> */}
       {/* <SupportPc /> */}
       {/* <ReferrEarnPc /> */}
+      {/* ============================== */}
+      {/* <Notification /> */}
+      {/* <Support /> */}
+      {/* <ReferrEarnMob /> */}
+      <TransactioHistoryMob />
     </>
   );
 }
