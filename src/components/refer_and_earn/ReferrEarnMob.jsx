@@ -2,20 +2,30 @@ import React, { useState } from "react";
 import "../../app.css";
 
 import HamBurger from "../../assets/profile/hamburger.svg";
-import FrameProfile from "../../assets/profile/Frame_profile.png";
 import Back from "../../assets/profile/ep_back.svg";
-import Favorite from "../../assets/new_game/fav.svg";
-import BellIcon from "../../assets/new_game/notification.svg";
-
+import FrameProfile from "../../assets/profile/Frame_profile.png";
 import AddGame from "../../assets/new_game/addgame.svg";
-import Profile from "../../assets/new_game/profile.svg";
 import WinCash from "../../assets/new_game/wincash.svg";
 import Wallet from "../../assets/new_game/wallet.svg";
 import GameHistory from "../../assets/new_game/history.svg";
 import ReferEarn from "../../assets/new_game/refer&earn.svg";
+import Notification from "../../assets/new_game/notification.svg";
 import Support from "../../assets/new_game/support.svg";
+import BellIcon from "../../assets/new_game/notification.svg";
+import Favorite from "../../assets/new_game/fav.svg";
+import LiveBattle from "../../assets/new_game/livebattle.svg";
+import Copy from "../../assets/new_game/copy.svg";
+import Share from "../../assets/new_game/share.svg";
+import Fb from "../../assets/new_game/fb.svg";
+import Wp from "../../assets/new_game/wp.svg";
+import Twtr from "../../assets/new_game/twtr.svg";
+import Search from "../../assets/new_game/search.svg";
+import Filter from "../../assets/new_game/filter.svg";
+import LowToHigh from "../../assets/new_game/lowtohigh.svg";
+import HighToLow from "../../assets/new_game/hightolow.svg";
 
-const TransactioHistoryMob = () => {
+import Profile from "../../assets/new_game/profile.svg";
+const ReferrEarnMob = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -24,7 +34,7 @@ const TransactioHistoryMob = () => {
     <>
       {isOpen ? (
         <div>
-          <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)]" />
+          <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)] md:h-0 md:w-0" />
           {/* Hamburger section */}
           <div className="bg-[#fead3a] flex flex-row justify-between w-[390px] h-12 items-start pt-2 px-5">
             <div className="flex flex-row gap-3 w-2/5 items-start">
@@ -51,76 +61,67 @@ const TransactioHistoryMob = () => {
             />
           </div>
           {/* Hamburger section */}
-          <div
-            id="AppContentRoot"
-            className="overflow-hidden bg-[#0f002b] flex flex-row w-[390px] items-start"
-          >
+          <div className="overflow-hidden bg-[#0f002b] flex flex-col justify-between pb-24 w-[390px] h-[762px] items-start">
             <div
               id="Ellipse"
-              className="bg-[#fead3a] flex flex-col justify-end gap-10 w-[256.41%] h-[1000px] items-start mt-[-323px] mb-20 mx-[-305px] pl-[339px] py-[209px] rounded-[50%]"
+              className="bg-[#fead3a] flex flex-col justify-end gap-12 w-[256.41%] h-[1000px] items-start mt-[-705px] mx-[-305px] pl-[364px] py-12 rounded-[50%]"
             >
-              <div className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col w-1/2 items-start rounded-lg">
-                <div className="border-solid border-b border-white/30 bg-[#0f002b] flex flex-col justify-end pt-3 gap-6 w-full items-start rounded-tl-lg rounded-tr-lg">
-                  <div className="flex flex-col ml-3 gap-5 w-5/6 items-start">
-                    <div className="text-xs font-['Nunito_Sans'] font-bold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center pt-1 w-20 h-6 items-start rounded-lg">
-                      5 min ago
-                    </div>
-                    <div className="text-xs font-['Nunito_Sans'] font-semibold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row w-full items-start pt-2 px-3 rounded-lg">
-                      Your money will appear in your bank account
-                      <br />
-                      ending with <span className="font-bold">7635</span>
-                    </div>
-                  </div>
-                  <div
-                    id="Line"
-                    className="border-solid border-t-4 border-white w-full h-1"
+              <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] bg-white inline-flex ml-16 gap-[10px] w-auto h-10 items-center justify-center py-0 px-4 rounded-[10px]">
+                <div className="bg-white flex  w-8 h-8 items-center justify-center p-[6px]">
+                  <img
+                    src={Copy}
+                    alt="Solarcopylinear"
+                    id="Solarcopylinear"
+                    className="w-5"
                   />
                 </div>
-                <div className="border-solid border-t-4 border-[#008000] flex flex-row justify-center pt-3 gap-2 w-full h-16 items-start">
-                  <div className="bg-white flex flex-row justify-center pt-1 gap-1 w-1/3 items-start">
-                    <div className="text-xl font-['Inter'] text-[#0f002b] mb-1">
-                      ₹
-                    </div>
-                    <div className="text-xl font-['Inter'] font-bold text-[#0f002b]">
-                      1000
-                    </div>
-                  </div>
-                  <div className="text-sm font-['Inter'] font-bold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-px pt-2 w-3/5 h-8 items-start rounded-lg">
-                    Withdrawal Successful
-                  </div>
+                <div className="font-['Inter'] font-bold text-[#0f002b] flex-1 text-base">
+                  753478
                 </div>
               </div>
-              <div className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col w-1/2 items-start rounded-lg">
-                <div className="border-solid border-b border-white/30 bg-[#0f002b] flex flex-col justify-end pt-3 gap-5 w-full items-start rounded-tl-lg rounded-tr-lg">
-                  <div className="flex flex-col ml-3 gap-3 w-5/6 items-start">
-                    <div className="text-xs font-['Nunito_Sans'] font-bold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center pt-1 w-20 h-6 items-start rounded-lg">
-                      2 days ago
-                    </div>
-                    <div className="text-xs font-['Nunito_Sans'] font-semibold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center pt-2 w-full items-start rounded-lg">
-                      Your money was added to your Ludo King account. An email
-                      was sent to your registered email.
-                    </div>
-                  </div>
-                  <div
-                    id="Line1"
-                    className="border-solid border-t-4 border-white w-full h-1"
-                  />
-                </div>
-                <div className="border-solid border-t-4 border-[#008000] flex flex-row justify-center pt-3 gap-10 w-full h-16 items-start">
-                  <div className="bg-white flex flex-row justify-center pt-1 gap-1 w-24 items-start">
-                    <div className="text-xl font-['Inter'] text-[#0f002b] mb-1">
-                      ₹
-                    </div>
-                    <div className="text-xl font-['Inter'] font-bold text-[#0f002b]">
-                      500
-                    </div>
-                  </div>
-                  <div className="text-sm font-['Inter'] font-bold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-px pt-2 w-1/2 h-8 items-start rounded-lg">
-                    Deposit Successful
-                  </div>
-                </div>
+              <div className="text-justify font-['Inter'] font-bold text-[#0f002b] w-2/5">
+                This is your referral link. Refer your friends and earn 1%
+                commission on their winning amount.
               </div>
             </div>
+            <div className="inline-flex items-center justify-center h-[52.8px] w-[292.72px] mx-12 md:mx-24 px-[21.12px] gap-[10px] flex-shrink-0 shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-white rounded-[13.2px]">
+              <div className="flex w-[42.24px] h-[42.24px] justify-center items-center p-[3.4px] ">
+                <img
+                  src={Wp}
+                  alt="Logoswhatsappicon"
+                  id="Logoswhatsappicon"
+                  className="w-[35px]"
+                />
+              </div>
+              <div className="flex w-[42.24px] h-[42.24px] justify-center items-center py-[5px] px-[4.6px] ">
+                <img
+                  src={Fb}
+                  alt="Logosfacebook"
+                  id="Logosfacebook"
+                  className=" w-8"
+                />
+              </div>
+              <div className="flex w-[42.24px] h-[42.24px] justify-center items-center py-2 px-[7.6px]">
+                <img
+                  src={Twtr}
+                  alt="Ritwitterxfill"
+                  id="Ritwitterxfill"
+                  className="w-8"
+                />
+              </div>
+              <div className="flex w-[42.24px] h-[42.24px] justify-center items-center p-[7.92px]">
+                <img
+                  src={Copy}
+                  alt="ActionLabelOutline icon"
+                  id="Solarcopylinear1"
+                  className="w-8"
+                />
+              </div>
+              <div className="flex w-[42.24px] h-[42.24px] justify-center items-center py-[4.72px] px-[5.55px] ">
+                <img src={Share} alt="Mdishare" id="Mdishare" className="w-8" />
+              </div>
+            </div>
+            {/* Social media */}
           </div>
         </div>
       ) : (
@@ -274,4 +275,4 @@ const TransactioHistoryMob = () => {
   );
 };
 
-export default TransactioHistoryMob;
+export default ReferrEarnMob;
