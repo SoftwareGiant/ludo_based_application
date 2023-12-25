@@ -37,7 +37,7 @@ import MyWalletmobile from "./components/wallet/MyWalletmobile";
 import DepositeCash1 from "./components/wallet/DepositeCash1";
 import DepositeCah2 from "./components/wallet/DepositeCah2";
 import ReferalsBalanceWithDraw from "./components/wallet/ReferalsBalanceWithDraw";
-import GameHistory from "./components/game_history/GameHistory";
+import GameHistoryMob from "./components/game_history/GameHistoryMob";
 import TransactioHistoryMob from "./components/transaction_history/TransactioHistoryMob";
 import ReferrEarn from "./components/refer_and_earn/ReferrEarnMob";
 import Support from "./components/support/SupportMob";
@@ -87,7 +87,7 @@ function App() {
       {/* <LiveBattle2 /> */}
       {/* <FilterLiveBattle /> */}
       {/* <OpenChallengeReq /> */}
-      {/* <GameCash /> */}
+      <GameCash />
       {/* <CardClickInstance /> */}
       {/* <CardClickInstance2 /> */}
       {/* <CardClickInstance3 /> */}
@@ -98,7 +98,6 @@ function App() {
       {/* <NewProfile /> */}
       {/* <ProfileImagePC /> */}
       {/* <NewProfileMob /> */}
-      {/* <NewProfileResp /> */}
       {/* <NewProfile2/> */}
       {/* <UploadProfile/> */}
       {/* <NewProfilePic /> */}
@@ -113,11 +112,9 @@ function App() {
       {/* <ChatWithUserPc /> */}
       {/* <ItsAMatch /> */}
       {/* <RequestCounterPc /> */}
-      {/* <MyWalletmobile /> */}
       {/* <DepositeCash1 /> */}
       {/* <DepositeCah2 /> */}
       {/* <ReferalsBalanceWithDraw /> */}
-      {/* <GameHistory /> */}
       {/* <ReferrEarnPc /> */}
       {/* <GameHistoryPc /> */}
       {/* <TransactionHistoryPc /> */}
@@ -125,10 +122,13 @@ function App() {
       {/* <SupportPc /> */}
       {/* <ReferrEarnPc /> */}
       {/* ============================== */}
+      {/* <NewProfileResp /> */}
+      {/* <MyWalletmobile /> */}
+      {/* <GameHistoryMob /> */}
       {/* <Notification /> */}
       {/* <Support /> */}
       {/* <ReferrEarnMob /> */}
-      <TransactioHistoryMob />
+      {/* <TransactioHistoryMob /> */}
     </>
   );
 }
