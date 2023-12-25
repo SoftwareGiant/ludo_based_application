@@ -24,9 +24,9 @@ const GameCash = () => {
     <>
       {isOpen ? (
         <div>
-          <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)]" />
+          <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)] lg:w-0 lg:h-0" />
           {/* Hamburger section */}
-          <div className="bg-[#fead3a] flex flex-row justify-between w-[390px] h-12 items-start pt-2 px-5">
+          <div className="bg-[#fead3a] flex flex-row justify-between w-[390px] h-12 items-start pt-2 px-5 lg:hidden">
             <div className="flex flex-row gap-3 w-2/5 items-start">
               <img
                 src={HamBurger}
@@ -53,7 +53,7 @@ const GameCash = () => {
           {/* Hamburger section */}
           <div
             id="AppContent"
-            className="overflow-hidden bg-[#0f002b] flex flex-col gap-10 w-[390px] font-['Inter'] items-start"
+            className="overflow-hidden bg-[#0f002b] flex flex-col gap-10 w-[390px] font-['Inter'] items-start lg:hidden"
           >
             <div
               id="Ellipse"
@@ -194,10 +194,10 @@ const GameCash = () => {
         </div>
       ) : (
         <div>
-          <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)]" />
+          <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)] lg:w-0 lg:h-0" />
           <div
             id="MenuRoot"
-            className="bg-[#fead3a] flex flex-col gap-6 w-[390px] font-['Nunito_Sans'] items-start pt-3 pb-12 px-5"
+            className="bg-[#fead3a] flex flex-col gap-6 w-[390px] font-['Nunito_Sans'] items-start pt-3 pb-12 px-5 lg:hidden"
           >
             <div className="flex flex-col gap-3 w-5/6 items-start">
               <div className="flex flex-col gap-1 w-full items-start">

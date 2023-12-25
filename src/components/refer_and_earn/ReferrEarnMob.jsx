@@ -9,20 +9,15 @@ import WinCash from "../../assets/new_game/wincash.svg";
 import Wallet from "../../assets/new_game/wallet.svg";
 import GameHistory from "../../assets/new_game/history.svg";
 import ReferEarn from "../../assets/new_game/refer&earn.svg";
-import Notification from "../../assets/new_game/notification.svg";
 import Support from "../../assets/new_game/support.svg";
 import BellIcon from "../../assets/new_game/notification.svg";
 import Favorite from "../../assets/new_game/fav.svg";
-import LiveBattle from "../../assets/new_game/livebattle.svg";
+
 import Copy from "../../assets/new_game/copy.svg";
 import Share from "../../assets/new_game/share.svg";
 import Fb from "../../assets/new_game/fb.svg";
 import Wp from "../../assets/new_game/wp.svg";
 import Twtr from "../../assets/new_game/twtr.svg";
-import Search from "../../assets/new_game/search.svg";
-import Filter from "../../assets/new_game/filter.svg";
-import LowToHigh from "../../assets/new_game/lowtohigh.svg";
-import HighToLow from "../../assets/new_game/hightolow.svg";
 
 import Profile from "../../assets/new_game/profile.svg";
 const ReferrEarnMob = () => {
@@ -36,7 +31,7 @@ const ReferrEarnMob = () => {
         <div>
           <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)] md:h-0 md:w-0" />
           {/* Hamburger section */}
-          <div className="bg-[#fead3a] flex flex-row justify-between w-[390px] h-12 items-start pt-2 px-5">
+          <div className="bg-[#fead3a] flex flex-row justify-between w-[390px] h-12 items-start pt-2 px-5 lg:hidden md:hidden">
             <div className="flex flex-row gap-3 w-2/5 items-start">
               <img
                 src={HamBurger}
@@ -61,7 +56,7 @@ const ReferrEarnMob = () => {
             />
           </div>
           {/* Hamburger section */}
-          <div className="overflow-hidden bg-[#0f002b] flex flex-col justify-between pb-24 w-[390px] h-[762px] items-start">
+          <div className="overflow-hidden bg-[#0f002b] flex flex-col justify-between pb-24 w-[390px] h-[762px] items-start lg:hidden md:hidden">
             <div
               id="Ellipse"
               className="bg-[#fead3a] flex flex-col justify-end gap-12 w-[256.41%] h-[1000px] items-start mt-[-705px] mx-[-305px] pl-[364px] py-12 rounded-[50%]"

@@ -7,7 +7,7 @@ import LogOutMob from "../../assets/profile/respon_logout.svg";
 
 const NewProfileMob = () => {
   return (
-    <div>
+    <>
       <div
         id="NewProfileRoot"
         className="bg-[rgba(254,_173,_58,_0.2)] relative flex flex-row w-full items-start"
@@ -171,7 +171,7 @@ const NewProfileMob = () => {
           className="bg-[#fead3a] relative mb-[812px] w-full h-8"
         />
       </div>
-    </div>
+    </>
   );
 };
 

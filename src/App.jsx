@@ -54,18 +54,20 @@ import OtpPc from "./components/app_start/OtpPc";
 import SignUpSucess from "./components/app_start/SignUpSucess";
 import AppTour from "./components/app_start/AppTour";
 import ReferrEarnMob from "./components/refer_and_earn/ReferrEarnMob";
+import SupportMob from "./components/support/SupportMob";
+import GameHistoryComponent from "./components/game_history/GameHistoryComponent";
 
 function App() {
   return (
     <>
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/login" element={<SignUpDesktop />} />
           <Route path="/" element={<NewGame />} />
           <Route path="/profile" element={<NewProfile />} />
           <Route path="/wincash" element={<ListedGamePc />} />
           <Route path="/mywallet" element={<MyWalletMain />} />
-          <Route path="/gamehistory" element={<GameHistoryPc />} />
+          <Route path="/gamehistory" element={<GameHistoryComponent />} />
           <Route
             path="/transactionhistory"
             element={<TransactionHistoryPc />}
@@ -74,7 +76,7 @@ function App() {
           <Route path="/notification" element={<NotificationPc />} />
           <Route path="/support" element={<SupportPc />} />
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
       {/* <Info /> */}
       {/* <SignUpDesktop /> */}
       {/* <OtpPc /> */}
@@ -87,7 +89,6 @@ function App() {
       {/* <LiveBattle2 /> */}
       {/* <FilterLiveBattle /> */}
       {/* <OpenChallengeReq /> */}
-      <GameCash />
       {/* <CardClickInstance /> */}
       {/* <CardClickInstance2 /> */}
       {/* <CardClickInstance3 /> */}
@@ -129,6 +130,8 @@ function App() {
       {/* <Support /> */}
       {/* <ReferrEarnMob /> */}
       {/* <TransactioHistoryMob /> */}
+      {/* <GameCash /> */}
+      {/* <SupportMob /> */}
     </>
   );
 }

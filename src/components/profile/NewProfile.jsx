@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 
 const NewProfile = () => {
   return (
-    <div>
+    <>
       <div
         id="ProfileRoot"
         className="bg-[#0f002b] flex flex-row justify-between w-full h-[100vh] items-start"
@@ -96,7 +96,7 @@ const NewProfile = () => {
               <img
                 src={GameHistory}
                 alt="ActionHistory icon"
-                id="Mdihistory"
+                id="lgihistory"
                 className="w-5"
               />
               <div className="text-xs font-['Nunito_Sans'] font-bold">
@@ -228,7 +228,7 @@ const NewProfile = () => {
         </div>
         {/* Profile section ends */}
         {/* battle section */}
-        <div className="bg-[#ffb653] flex flex-col gap-16 w-2/5 h-[100vh] items-start pt-6 pb-20">
+        <div className="bg-[#ffb653] lg:flex lg:flex-col gap-16 w-2/5 h-[100vh] items-start pt-6 pb-20 hidden">
           <div className="flex flex-col gap-10 w-full items-start">
             <div className="flex flex-col gap-8 w-full items-start">
               <div
@@ -239,7 +239,7 @@ const NewProfile = () => {
               </div>
               <div className="flex flex-col justify-between gap-8 w-full items-start">
                 <div className="grid grid-cols-2 gap-3 mx-auto">
-                  <div className="flex w-[176px] h-[89px] p-[2.438px] flex-col justify-center items-center flex-shrink-0 rounded-md shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#FCA837] ">
+                  <div className="flex w-[176px] h-[89px] p-[2.438px] flex-col justify-center items-center flex-shrink-0 rounded-lg shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#FCA837] ">
                     <div className="flex w-[100%] h-[28.0411px] items-center self-stretch pt-[7.925px] pr-[25.76px] pb-[8.11px] pl-[9.144px] rounded-t-[6.096px] rounded-b-none text-black">
                       <p className="text-white font-[Inter] text-[9.753px] font-normal">
                         open challenge
@@ -264,7 +264,7 @@ const NewProfile = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex w-[176px] h-[89px] p-[2.438px] flex-col justify-center items-center flex-shrink-0 rounded-md shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#FCA837] ">
+                  <div className="flex w-[176px] h-[89px] p-[2.438px] flex-col justify-center items-center flex-shrink-0 rounded-lg shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#FCA837] ">
                     <div className="flex w-[100%] h-[28.0411px] items-center self-stretch pt-[7.925px] pr-[25.76px] pb-[8.11px] pl-[9.144px] rounded-t-[6.096px] rounded-b-none text-black">
                       <p className="text-white font-[Inter] text-[9.753px] font-normal">
                         open challenge
@@ -289,7 +289,7 @@ const NewProfile = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex w-[176px] h-[89px] p-[2.438px] flex-col justify-center items-center flex-shrink-0 rounded-md shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#FCA837] ">
+                  <div className="flex w-[176px] h-[89px] p-[2.438px] flex-col justify-center items-center flex-shrink-0 rounded-lg shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#FCA837] ">
                     <div className="flex w-[100%] h-[28.0411px] items-center self-stretch pt-[7.925px] pr-[25.76px] pb-[8.11px] pl-[9.144px] rounded-t-[6.096px] rounded-b-none text-black">
                       <p className="text-white font-[Inter] text-[9.753px] font-normal">
                         open challenge
@@ -314,7 +314,7 @@ const NewProfile = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex w-[176px] h-[89px] p-[2.438px] flex-col justify-center items-center flex-shrink-0 rounded-md shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#FCA837] ">
+                  <div className="flex w-[176px] h-[89px] p-[2.438px] flex-col justify-center items-center flex-shrink-0 rounded-lg shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#FCA837] ">
                     <div className="flex w-[100%] h-[28.0411px] items-center self-stretch pt-[7.925px] pr-[25.76px] pb-[8.11px] pl-[9.144px] rounded-t-[6.096px] rounded-b-none text-black">
                       <p className="text-white font-[Inter] text-[9.753px] font-normal">
                         open challenge
@@ -418,7 +418,7 @@ const NewProfile = () => {
         </div>
         {/* battle section ends */}
       </div>
-    </div>
+    </>
   );
 };
 

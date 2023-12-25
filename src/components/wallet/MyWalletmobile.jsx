@@ -24,9 +24,9 @@ const MyWalletmobile = () => {
     <>
       {isOpen ? (
         <div>
-          <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)]" />
+          <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)] lg:w-0 lg:h-0" />
           {/* Hamburger section */}
-          <div className="bg-[#fead3a] flex flex-row justify-between w-full h-12 items-start pt-2 px-5">
+          <div className="bg-[#fead3a] flex flex-row justify-between w-full h-12 items-start pt-2 px-5 lg:hidden md:hidden">
             <div className="flex flex-row gap-3 w-2/5 items-start">
               <img
                 src={HamBurger}
@@ -53,7 +53,7 @@ const MyWalletmobile = () => {
           {/* Hamburger section */}
           <div
             id="AppContentRoot"
-            className="overflow-hidden bg-[#0f002b] flex flex-row w-full items-start"
+            className="overflow-hidden bg-[#0f002b] flex flex-row w-full items-start lg:hidden md:hidden"
           >
             <div
               id="Ellipse"
@@ -144,10 +144,10 @@ const MyWalletmobile = () => {
         </div>
       ) : (
         <div>
-          <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)]" />
+          <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)] lg:w-0 lg:h-0" />
           <div
             id="MenuRoot"
-            className="bg-[#fead3a] flex flex-col gap-6 w-[390px] font-['Nunito_Sans'] items-start pt-3 pb-12 px-5"
+            className="bg-[#fead3a] flex flex-col gap-6 w-[390px] font-['Nunito_Sans'] items-start pt-3 pb-12 px-5 lg:hidden "
           >
             <div className="flex flex-col gap-3 w-5/6 items-start">
               <div className="flex flex-col gap-1 w-full items-start">

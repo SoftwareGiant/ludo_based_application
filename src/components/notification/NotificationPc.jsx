@@ -31,10 +31,10 @@ const NotificationPc = () => {
     <div>
       <div
         id="NewGameRoot"
-        className="md:bg-[#0f002b] flex gap-8 md:w-[1085px] md:h-[720px] md:items-center"
+        className="lg:bg-[#0f002b] flex gap-8 lg:w-[1085px] lg:h-[720px] lg:items-center"
       >
         {/* left-side bar starts */}
-        <div className="bg-white flex flex-col pb-16 gap-6 md:w-[200px] md:h-[720px]  items-start">
+        <div className="bg-white flex flex-col pb-16 gap-6 lg:w-[200px] lg:h-[720px]  items-start">
           {/* logo and main text */}
           <div className="flex flex-col w-full items-start">
             <div className="relative flex flex-row justify-center w-full items-start">
@@ -51,10 +51,10 @@ const NotificationPc = () => {
           </div>
           {/* logo and main text */}
           {/* menue section starts */}
-          <div className="md:flex md:flex-col md:justify-center md:mx-auto md:gap-2 w-0 h-0 md:w-[160px] md:h-4/5 items-center ">
+          <div className="lg:flex lg:flex-col lg:justify-center lg:mx-auto lg:gap-2 w-0 h-0 lg:w-[160px] lg:h-4/5 items-center ">
             <Link
               to="/"
-              className="border-solid items-center border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 md:w-full md:h-[34px] pt-1 px-3 border rounded-lg"
+              className="border-solid items-center border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 lg:w-full lg:h-[34px] pt-1 px-3 border rounded-lg"
             >
               <img
                 src={AddGame}
@@ -109,7 +109,7 @@ const NotificationPc = () => {
               <img
                 src={GameHistory}
                 alt="ActionHistory icon"
-                id="Mdihistory"
+                id="lgihistory"
                 className="w-5"
               />
               <div className="text-xs font-['Nunito_Sans'] font-bold">
@@ -250,7 +250,7 @@ const NotificationPc = () => {
         </div>
         {/* Profile section ends */}
         {/* battle section */}
-        <div className="bg-[#0F002B] flex flex-col md:w-[400px] md:h-[691px] md:absolute md:left-[685px] pb-8 gap-8 rounded-[20px]">
+        <div className="bg-[#0F002B] lg:flex lg:flex-col lg:w-[400px] lg:h-[691px] lg:absolute lg:left-[685px] pb-8 gap-8 rounded-[20px] hidden">
           <div className="flex flex-col gap-4 w-full items-start">
             <div className="border-solid flex flex-col gap-6 w-full h-[332px] items-start pl-4 py-4 border-b border-black/30">
               <div
@@ -259,7 +259,7 @@ const NotificationPc = () => {
               >
                 live <span className="font-bold">battle 🔥</span>
               </div>
-              <div className="md:mx-[-15px]">
+              <div className="lg:mx-[-15px]">
                 {/* 1st part */}
                 <div className="flex flex-row mx-[10px] p-2 gap-3 w-[380px] h-[118.89px] items-start">
                   <div className="flex flex-col w-[176px] items-center justify-center p-[2.428px] border border-solid border-[rgba(15,_0,_43,_0.2)] shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] bg-white rounded-[6.096px]">
