@@ -17,8 +17,8 @@ import HamBurger from "../../assets/profile/hamburger.svg";
 const NewGameMob = () => {
   return (
     <div>
-      <div id="NotificationspaceRoot" className="bg-[#fead3a] w-full h-8" />
-      <div className="bg-[#fead3a] flex justify-between w-full h-[51px] items-start px-4">
+      <div id="NotificationspaceRoot" className="bg-[#fead3a] w-[390px] h-8" />
+      <div className="bg-[#fead3a] flex justify-between w-[390px] h-[51px] items-start px-4">
         <div className="flex flex-row gap-3 w-2/5 items-start mt-3">
           <img
             src={HamBurger}
@@ -41,7 +41,7 @@ const NewGameMob = () => {
           className="w-[30px] h-[30px] mt-[9.5px] rounded-[100px] border border-solid border-white "
         />
       </div>
-      <div className="overflow-hidden bg-[#0f002b] relative flex flex-col pb-24 gap-8 w-full items-start">
+      <div className="overflow-hidden bg-[#0f002b] relative flex flex-col pb-24 gap-8 w-[390px] items-start">
         <div className="relative flex flex-row justify-center w-[256.41%] items-start mt-[-705px] mx-[-305px]">
           <div
             id="Ellipse"
@@ -103,93 +103,76 @@ const NewGameMob = () => {
             </div>
           </div>
           <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] w-1/3 h-[484px] bg-white absolute top-[878px] left-[333px] flex flex-col justify-end pt-5 gap-6 items-start rounded-lg">
-            <div
-              id="LiveBattle1"
-              className="text-center text-xl font-['Inter'] text-[#0f002b] ml-6"
-            >
+            <div className="text-center text-xl font-['Inter'] text-[#0f002b] ml-6 absolute top-5">
               live <span className="font-bold">battle</span>
             </div>
-            <div className="border-solid border-[rgba(15,_0,_43,_0.2)] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-end ml-5 gap-3 w-5/6 items-start pt-4 pb-1 px-1 border rounded-lg">
-              <div className="flex flex-col ml-4 gap-1 w-4/5 items-start">
-                <div className="font-['Inter'] text-[#0f002b]">
-                  open challenge<span> </span>
-                  <div>from </div>
-                  <span className="font-bold">ravan3p</span>
+            <div className="inline-flex flex-col justify-center w-[290px] h-[168px] items-center p-1 mt-6 mx-auto border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
+              <div className="font-['Inter'] text-[#0f002b] text-base leading-normal">
+                <div className="italic font-normal">
+                  open challenge from
+                  <span className="font-extrabold pl-1">ravan3p</span>
                 </div>
-                <div
-                  id="MinutesAgo1"
-                  className="font-['Inter'] font-bold text-[#0f002b]"
-                >
-                  · <span>2 minutes ago</span>
-                </div>
+                <div className="italic font-semibold ">· 2 minutes ago</div>
               </div>
-              <div className="shadow-[inset_0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#fead3a] flex flex-row gap-16 w-full h-24 items-start pt-5 pl-5 pr-8 rounded-br-lg rounded-bl-lg">
-                <div className="flex flex-col gap-3 w-1/2 items-start">
-                  <div className="flex flex-row gap-4 w-full items-start">
-                    <div className="font-['Inter'] text-white">Entry fee</div>
-                    <div className="font-['Inter'] font-bold text-white">
-                      ₹40
-                    </div>
+              <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-[6.096px] rounded-bl-[6.096px] relative flex flex-row pt-[15px] pr-[32px] pb-[16px] pl-[16px] gap-16 w-[282px] h-[92px] items-center justify-between mt-4">
+                <div className="flex flex-row gap-[15px] w-[130px] h-[29px] absolute top-2 py-[5px] px-[6px] items-start justify-between">
+                  <div className="text-4 font-['Inter'] text-white font-normal">
+                    Entry fee
                   </div>
-                  <div className="flex flex-row gap-12 w-full items-start">
-                    <div className="font-['Inter'] text-white">Prize</div>
-                    <div className="font-['Inter'] font-bold text-white">
-                      ₹80
-                    </div>
+                  <div className="text-4 font-['Inter'] text-white font-extrabold">
+                    ₹40
                   </div>
                 </div>
-                <div className="shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-1 pt-3 w-10 h-10 items-start rounded-[32px]">
+                <div className="flex flex-row gap-[15px] w-[128px] h-[29px] mt-2 py-[5px] px-[6px] items-start justify-between">
+                  <div className="text-4 font-['Inter'] text-white font-normal">
+                    Prize
+                  </div>
+                  <div className="text-4 font-['Inter'] text-white font-extrabold">
+                    ₹80
+                  </div>
+                </div>
+                <div className=" flex w-[25.5px] h-[25.5px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
                   <img
-                    src="https://file.rendit.io/n/zIITWIzghbbX71GCRugo.svg"
+                    src={LiveBattle}
                     alt="Arcticonsbattleforwesnoth"
-                    className="w-5"
+                    className="w-4"
                   />
                 </div>
               </div>
             </div>
-            <div className="relative flex flex-row w-full items-start">
-              <div className="border-solid border-[rgba(15,_0,_43,_0.2)] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] w-5/6 h-40 bg-white absolute top-0 left-5 flex flex-col justify-end gap-3 items-start pt-4 pb-1 px-1 border rounded-lg">
-                <div className="flex flex-col ml-4 gap-1 w-5/6 items-start">
-                  <div className="font-['Inter'] text-[#0f002b]">
-                    open challenge<span> </span>
-                    <div>from </div>
-                    <span className="font-bold">kansh23i</span>
+            <div className="inline-flex flex-col justify-center w-[290px] h-[168px] items-center p-1 mb-[4rem] mx-auto border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
+              <div className="font-['Inter'] text-[#0f002b] text-base leading-normal">
+                <div className="italic font-normal">
+                  open challenge from
+                  <span className="font-extrabold pl-1">ravan3p</span>
+                </div>
+                <div className="italic font-semibold ">· 2 minutes ago</div>
+              </div>
+              <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-[6.096px] rounded-bl-[6.096px] relative flex flex-row pt-[15px] pr-[32px] pb-[16px] pl-[16px] gap-16 w-[282px] h-[92px] items-center justify-between mt-4">
+                <div className="flex flex-row gap-[15px] w-[130px] h-[29px] absolute top-2 py-[5px] px-[6px] items-start justify-between">
+                  <div className="text-4 font-['Inter'] text-white font-normal">
+                    Entry fee
                   </div>
-                  <div
-                    id="MinutesAgo3"
-                    className="font-['Inter'] font-bold text-[#0f002b]"
-                  >
-                    · <span>2 minutes ago</span>
+                  <div className="text-4 font-['Inter'] text-white font-extrabold">
+                    ₹40
                   </div>
                 </div>
-                <div className="shadow-[inset_0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#fead3a] flex flex-row gap-16 w-full h-24 items-start pt-5 pl-5 pr-8 rounded-br-lg rounded-bl-lg">
-                  <div className="flex flex-col gap-3 w-1/2 items-start">
-                    <div className="flex flex-row gap-4 w-full items-start">
-                      <div className="font-['Inter'] text-white">Entry fee</div>
-                      <div className="font-['Inter'] font-bold text-white">
-                        ₹40
-                      </div>
-                    </div>
-                    <div className="flex flex-row gap-12 w-full items-start">
-                      <div className="font-['Inter'] text-white">Prize</div>
-                      <div className="font-['Inter'] font-bold text-white">
-                        ₹80
-                      </div>
-                    </div>
+                <div className="flex flex-row gap-[15px] w-[128px] h-[29px] mt-2 py-[5px] px-[6px] items-start justify-between">
+                  <div className="text-4 font-['Inter'] text-white font-normal">
+                    Prize
                   </div>
-                  <div className="shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-1 pt-3 w-10 h-10 items-start rounded-[32px]">
-                    <img
-                      src="https://file.rendit.io/n/zIITWIzghbbX71GCRugo.svg"
-                      alt="Arcticonsbattleforwesnoth1"
-                      className="w-5"
-                    />
+                  <div className="text-4 font-['Inter'] text-white font-extrabold">
+                    ₹80
                   </div>
+                </div>
+                <div className=" flex w-[25.5px] h-[25.5px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
+                  <img
+                    src={LiveBattle}
+                    alt="Arcticonsbattleforwesnoth"
+                    className="w-4"
+                  />
                 </div>
               </div>
-              <div
-                id="Gradientnewgame"
-                className="bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0)_0%,#ffffff_100%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat relative mt-8 w-full h-[181px]"
-              />
             </div>
           </div>
           <div className="shadow-[0px_0px_4px_1px_rgba(0,_0,_0,_0.25)] bg-white relative flex flex-row justify-center mt-[1332px] pt-2 w-12 h-12 items-start rounded-[24px]">

@@ -24,13 +24,13 @@ import { Link } from "react-router-dom";
 
 const NewGame = () => {
   return (
-    <div>
+    <>
       <div
         id="NewGameRoot"
         className="bg-[#0f002b] flex flex-row gap-8 w-full items-center"
       >
         {/* left-side bar starts */}
-        <div className="bg-white flex flex-col pb-16 gap-6 md:w-1/5 md:h-[720px]  items-start">
+        <div className="bg-white flex flex-col pb-16 gap-6 lg:w-1/5 lg:h-[720px]  items-start">
           {/* logo and main text */}
           <div className="flex flex-col w-full items-start">
             <div className="relative flex flex-row justify-center w-full items-start">
@@ -47,7 +47,7 @@ const NewGame = () => {
           </div>
           {/* logo and main text */}
           {/* menue section starts */}
-          <div className="flex flex-col justify-center ml-5 gap-2 w-0 h-0 md:w-4/5 md:h-4/5 items-center">
+          <div className="flex flex-col justify-center ml-5 gap-2 w-0 h-0 lg:w-4/5 lg:h-4/5 items-center">
             <Link
               to="/"
               className="border-solid items-center border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#ffcc4d] flex flex-row gap-2 w-full h-8 pt-1 px-3 border rounded-lg"
@@ -105,7 +105,7 @@ const NewGame = () => {
               <img
                 src={GameHistory}
                 alt="ActionHistory icon"
-                id="Mdihistory"
+                id="lgihistory"
                 className="w-5"
               />
               <div className="text-xs font-['Nunito_Sans'] font-bold">
@@ -188,15 +188,15 @@ const NewGame = () => {
               <div className="relative flex flex-row justify-between mb-[-21px] w-full items-start pt-6 pl-16 pr-20">
                 {/* fees content */}
                 <div className="shadow-[0px_0px_2px_1px_rgba(0,_0,_0,_0.25)] bg-[#fca837] relative flex flex-col justify-end mt-px gap-3 w-2/5 items-start pt-4 pb-1 px-1 rounded-lg">
-                  <div className="font-['Inter'] text-white ml-4 md:text-[16px]">
+                  <div className="font-['Inter'] text-white ml-4 lg:text-[16px]">
                     open challenge from
                     <span className="font-bold pl-1 text-[#0f002b]">
                       ravan3p
                     </span>
                   </div>
                   <div className="shadow-[inset_0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#c58134] flex flex-row gap-14 w-full items-start pt-4 pr-8 pb-4 pl-4 rounded-br-lg rounded-bl-lg">
-                    <div className="flex flex-col flex-wrap gap-3 md:w-auto items-center">
-                      <div className="flex flex-row gap-4 w-full items-start md:text-[16px]">
+                    <div className="flex flex-col flex-wrap gap-3 lg:w-auto items-center">
+                      <div className="flex flex-row gap-4 w-full items-start lg:text-[16px]">
                         <div className="font-['Inter'] text-white">
                           Entry fee
                         </div>
@@ -204,7 +204,7 @@ const NewGame = () => {
                           ₹40
                         </div>
                       </div>
-                      <div className="flex flex-row gap-12 w-full items-start md:text-[16px]">
+                      <div className="flex flex-row gap-12 w-full items-start lg:text-[16px]">
                         <div className="font-['Inter'] text-white ">Prize</div>
                         <div className="font-['Inter'] font-bold text-[#0f002b]">
                           ₹80
@@ -221,7 +221,7 @@ const NewGame = () => {
                   </div>
                 </div>
                 <div className="shadow-[0px_0px_2px_1px_rgba(0,_0,_0,_0.25)] w-1/3 h-[146px] bg-[#fca837] absolute top-[60%] left-16 flex flex-col justify-center gap-3 items-center pt-4 pb-1 px-1 rounded-lg">
-                  <div className="font-['Inter'] text-white ml-4 md:text-[16px]">
+                  <div className="font-['Inter'] text-white ml-4 lg:text-[16px]">
                     open challenge from
                     <span className="font-bold pl-1 text-[#0f002b]">
                       kansh23i
@@ -229,8 +229,8 @@ const NewGame = () => {
                   </div>
                   <div className="shadow-[inset_0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#c58134] flex flex-row gap-16 w-full h-24 items-center  pt-4 pr-8 pb-4 pl-4 rounded-br-lg rounded-bl-lg">
                     <div className="flex flex-col gap-3 w-3/5 items-start">
-                      <div className="flex flex-row gap-4 md:w-auto items-start">
-                        <div className="font-['Inter'] text-white md:text-[16px]">
+                      <div className="flex flex-row gap-4 lg:w-auto items-start">
+                        <div className="font-['Inter'] text-white lg:text-[16px]">
                           Entry fee
                         </div>
                         <div className="font-['Inter'] font-bold text-[#0f002b]">
@@ -259,7 +259,7 @@ const NewGame = () => {
                   className="w-full h-44 bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0)_0%,#ffffff_100%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat absolute top-[193px] left-0 flex flex-row justify-end items-start pt-12 px-20"
                 >
                   <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-4 w-2/5  items-center p-3 px-5 rounded-lg">
-                    <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-white flex flex-row md:w-8 md:h-8 items-center pt-1 px-1 rounded-2xl">
+                    <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-white flex flex-row lg:w-8 lg:h-8 items-center pt-1 px-1 rounded-2xl">
                       <img
                         src={HighToLow}
                         alt="EditorFormatLineSpacing icon"
@@ -327,8 +327,8 @@ const NewGame = () => {
                     <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-white flex flex-row w-8 h-8 items-center p-1 rounded-2xl">
                       <img
                         src={LowToHigh}
-                        alt="Mdisortascending"
-                        id="Mdisortascending"
+                        alt="lgisortascending"
+                        id="lgisortascending"
                         className="w-5"
                       />
                     </div>
@@ -381,8 +381,8 @@ const NewGame = () => {
                   <div className="bg-white flex flex-row mb-1 w-8 h-8 items-start pt-1 px-1">
                     <img
                       src={Share}
-                      alt="Mdishare"
-                      id="Mdishare"
+                      alt="lgishare"
+                      id="lgishare"
                       className="w-5"
                     />
                   </div>
@@ -431,7 +431,7 @@ const NewGame = () => {
         </div>
         {/* right side contents ends */}
       </div>
-    </div>
+    </>
   );
 };
 
