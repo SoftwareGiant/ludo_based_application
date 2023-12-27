@@ -125,10 +125,10 @@ const TransactioHistoryMob = () => {
         </div>
       ) : (
         <div>
-          <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)]" />
+          <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)] lg:w-0 lg:h-0" />
           <div
             id="MenuRoot"
-            className="bg-[#fead3a] flex flex-col gap-6 w-[390px] font-['Nunito_Sans'] items-start pt-3 pb-12 px-5"
+            className="bg-[#fead3a] flex flex-col gap-6 w-[390px] font-['Nunito_Sans'] items-start pt-3 pb-12 px-5 lg:hidden"
           >
             <div className="flex flex-col gap-3 w-5/6 items-start">
               <div className="flex flex-col gap-1 w-full items-start">

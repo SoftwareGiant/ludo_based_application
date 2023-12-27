@@ -3,13 +3,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SignUpDesktop from "./components/app_start/SignUpDesktop";
 import NewGame from "./components/live_battle/NewGame";
 import NewProfile from "./components/profile/NewProfile";
-import GameHistoryPc from "./components/game_history/GameHistoryPc";
+import GameHistoryComponent from "./components/game_history/GameHistoryComponent";
 import TransactionHistoryPc from "./components/transaction_history/TransactioHistoryPc";
 import NotificationPc from "./components/notification/NotificationPc";
 import MyWalletMain from "./components/wallet/MyWalletMain";
 import ListedGamePc from "./components/listedgame/ListedGamePc";
 import ReferrEarnPc from "./components/refer_and_earn/ReferrEarnPc";
 import SupportPc from "./components/support/SupportPc";
+import AddCashPc from "./components/wallet/AddCashPc";
 // need some work
 import Info from "./components/continue/Info";
 import FilterLiveBattle from "./components/live_battle/FilterLiveBattle";
@@ -32,7 +33,6 @@ import UploadProfile from "./components/profile/UploadProfile";
 import NewProfilePic from "./components/profile/NewProfilePic";
 import NewProfileEmailAdded2 from "./components/profile/NewProfileEmailAdded2";
 import NewProfile2 from "./components/profile/NewProfile2";
-import MyWalletPc from "./components/wallet/MyWalletPc";
 import MyWalletmobile from "./components/wallet/MyWalletmobile";
 import DepositeCash1 from "./components/wallet/DepositeCash1";
 import DepositeCah2 from "./components/wallet/DepositeCah2";
@@ -42,7 +42,6 @@ import TransactioHistoryMob from "./components/transaction_history/TransactioHis
 import ReferrEarn from "./components/refer_and_earn/ReferrEarnMob";
 import Support from "./components/support/SupportMob";
 import Notification from "./components/notification/Notification";
-import AddCashPc from "./components/wallet/AddCashPc";
 import WithDrawPc from "./components/wallet/WithDrawPc";
 import ReferalBalancePc from "./components/wallet/ReferalBalancePc";
 import Instance2Pc from "./components/listedgame/Instance2Pc";
@@ -55,7 +54,6 @@ import SignUpSucess from "./components/app_start/SignUpSucess";
 import AppTour from "./components/app_start/AppTour";
 import ReferrEarnMob from "./components/refer_and_earn/ReferrEarnMob";
 import SupportMob from "./components/support/SupportMob";
-import GameHistoryComponent from "./components/game_history/GameHistoryComponent";
 
 function App() {
   return (
@@ -67,6 +65,7 @@ function App() {
           <Route path="/profile" element={<NewProfile />} />
           <Route path="/wincash" element={<ListedGamePc />} />
           <Route path="/mywallet" element={<MyWalletMain />} />
+          <Route path="/deposite" element={<AddCashPc />} />
           <Route path="/gamehistory" element={<GameHistoryComponent />} />
           <Route
             path="/transactionhistory"
@@ -103,7 +102,6 @@ function App() {
       {/* <UploadProfile/> */}
       {/* <NewProfilePic /> */}
       {/* <NewProfileEmailAdded2/> */}
-      {/* <MyWalletPc /> */}
       {/* <MyWalletMain /> */}
       {/* <AddCashPc /> */}
       {/* <WithDrawPc /> */}
@@ -113,8 +111,6 @@ function App() {
       {/* <ChatWithUserPc /> */}
       {/* <ItsAMatch /> */}
       {/* <RequestCounterPc /> */}
-      {/* <DepositeCash1 /> */}
-      {/* <DepositeCah2 /> */}
       {/* <ReferalsBalanceWithDraw /> */}
       {/* <ReferrEarnPc /> */}
       {/* <GameHistoryPc /> */}

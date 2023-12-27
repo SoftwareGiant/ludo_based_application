@@ -16,13 +16,14 @@ import Back from "../../assets/profile/ep_back.svg";
 import Favorite from "../../assets/new_game/fav.svg";
 import BellIcon from "../../assets/new_game/notification.svg";
 import Filter from "../../assets/new_game/filter.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MyWalletMain = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
+  const navigate = useNavigate();
   return (
     <>
       {isOpen ? (
@@ -474,7 +475,10 @@ const MyWalletMain = () => {
                     501
                   </div>
                 </div>
-                <div className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-px pt-2 gap-1 w-2/5 h-8 items-start rounded-lg">
+                <div
+                  onClick={() => navigate("/deposite")}
+                  className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-px pt-2 gap-1 w-2/5 h-8 items-start rounded-lg"
+                >
                   <img
                     src="https://file.rendit.io/n/CxRGWIem3K2eO2Hqh8wk.svg"
                     alt="Materialsymbolsadd"
