@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../../app.css";
 
 import AddGame from "../../assets/new_game/addgame.svg";
@@ -16,10 +17,13 @@ import Back from "../../assets/profile/ep_back.svg";
 import Favorite from "../../assets/new_game/fav.svg";
 import BellIcon from "../../assets/new_game/notification.svg";
 import Filter from "../../assets/new_game/filter.svg";
-import { Link, useNavigate } from "react-router-dom";
+import Bank from "../../assets/wallet/bank.svg";
+import Time from "../../assets/wallet/time.svg";
+import AddCash from "../../assets/wallet/addCash.svg";
+import Info from "../../assets/wallet/info.svg";
 
 const MyWalletMain = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
@@ -57,7 +61,7 @@ const MyWalletMain = () => {
           {/* Hamburger section */}
           <div
             id="AppContentRoot"
-            className="overflow-hidden bg-[#0f002b] flex flex-row w-[390px] items-start  lg:hidden"
+            className="overflow-hidden bg-[#0f002b] flex flex-row w-[390px] items-start lg:hidden"
           >
             <div
               id="Ellipse"
@@ -70,13 +74,13 @@ const MyWalletMain = () => {
                       Deposit Cash
                     </div>
                     <img
-                      src="https://file.rendit.io/n/RDuw8K5vzxhuuZxm4g37.svg"
+                      src={Time}
                       alt="lgihistory"
                       id="lgihistory"
-                      className="mt-1 w-5"
+                      className="mr-5 w-5 h-5 mt-2"
                     />
                   </div>
-                  <div className="text-xs font-['Nunito_Sans'] font-semibold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center ml-3 pt-2 w-5/6 items-start rounded-lg">
+                  <div className="text-xs font-['Nunito_Sans'] font-semibold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center ml-[1.75rem] pt-2 w-5/6 items-start rounded-lg">
                     Can be used to play Tournaments & Battles. Cannot be
                     withdrawn to Paytm or Bank.
                   </div>
@@ -90,9 +94,12 @@ const MyWalletMain = () => {
                       501
                     </div>
                   </div>
-                  <div className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-px pt-2 gap-1 w-2/5 h-8 items-start rounded-lg">
+                  <div
+                    onClick={() => navigate("/deposite")}
+                    className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-px pt-2 gap-1 w-2/5 h-8 items-start rounded-lg"
+                  >
                     <img
-                      src="https://file.rendit.io/n/aXqglJgeUL7b1B2p4F6W.svg"
+                      src={AddCash}
                       alt="Materialsymbolsadd"
                       id="Materialsymbolsadd"
                       className="w-4"
@@ -110,13 +117,13 @@ const MyWalletMain = () => {
                       Winning Cash
                     </div>
                     <img
-                      src="https://file.rendit.io/n/RDuw8K5vzxhuuZxm4g37.svg"
+                      src={Time}
                       alt="lgihistory1"
                       id="lgihistory1"
-                      className="mt-1 w-5"
+                      className="mr-5 w-5 h-5 mt-2"
                     />
                   </div>
-                  <div className="text-xs font-['Nunito_Sans'] font-semibold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center ml-3 pt-2 w-5/6 items-start rounded-lg">
+                  <div className="text-xs font-['Nunito_Sans'] font-semibold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center ml-[1.75rem] pt-2 w-5/6 items-start rounded-lg">
                     Can be used to play Tournaments & Battles. Withdrawn to
                     Paytm or Bank.
                   </div>
@@ -130,9 +137,12 @@ const MyWalletMain = () => {
                       1001
                     </div>
                   </div>
-                  <div className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-px pt-2 gap-1 w-2/5 h-8 items-start rounded-lg">
+                  <div
+                    onClick={() => navigate("/withdraw")}
+                    className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-px pt-2 gap-1 w-2/5 h-8 items-start rounded-lg"
+                  >
                     <img
-                      src="https://file.rendit.io/n/cxK5VOzRVA6iHpwg4lAk.svg"
+                      src={Bank}
                       alt="Cilbank"
                       id="Cilbank"
                       className="w-4"
@@ -442,7 +452,7 @@ const MyWalletMain = () => {
                 My <span className="font-bold">Wallet</span>
               </div>
               <img
-                src="https://file.rendit.io/n/fqXezBjhnGPv4ho43Evl.svg"
+                src={Info}
                 alt="ActionInfoOutline icon"
                 id="Icoutlineinfo"
                 className="w-6"
@@ -455,13 +465,13 @@ const MyWalletMain = () => {
                     Deposit Cash
                   </div>
                   <img
-                    src="https://file.rendit.io/n/nFtGY1rEKMp6zdABHE4X.svg"
+                    src={Time}
                     alt="lgihistory"
                     id="lgihistory"
-                    className="mt-1 w-5"
+                    className="mr-5 w-5 h-5 mt-2"
                   />
                 </div>
-                <div className="text-xs font-['Nunito_Sans'] font-semibold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center ml-3 pt-2 w-5/6 items-start rounded-lg">
+                <div className="text-xs font-['Nunito_Sans'] font-semibold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center ml-[1.75rem] pt-2 w-5/6 items-start rounded-lg">
                   Can be used to play Tournaments & Battles. Cannot be withdrawn
                   to Paytm or Bank.
                 </div>
@@ -477,10 +487,10 @@ const MyWalletMain = () => {
                 </div>
                 <div
                   onClick={() => navigate("/deposite")}
-                  className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-px pt-2 gap-1 w-2/5 h-8 items-start rounded-lg"
+                  className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center py-[6.77px] px-[3px] gap-[4.235px] w-[108px] h-8 items-start rounded-lg"
                 >
                   <img
-                    src="https://file.rendit.io/n/CxRGWIem3K2eO2Hqh8wk.svg"
+                    src={AddCash}
                     alt="Materialsymbolsadd"
                     id="Materialsymbolsadd"
                     className="w-4"
@@ -499,13 +509,13 @@ const MyWalletMain = () => {
                   Winning Cash
                 </div>
                 <img
-                  src="https://file.rendit.io/n/nFtGY1rEKMp6zdABHE4X.svg"
+                  src={Time}
                   alt="lgihistory1"
                   id="lgihistory1"
-                  className="mt-1 w-5"
+                  className="mr-5 w-5 h-5 mt-2"
                 />
               </div>
-              <div className="text-xs font-['Nunito_Sans'] font-semibold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center ml-3 pt-2 w-5/6 items-start rounded-lg">
+              <div className="text-xs font-['Nunito_Sans'] font-semibold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center ml-[1.75rem] pt-2 w-5/6 items-start rounded-lg">
                 Can be used to play Tournaments & Battles. Withdrawn to Paytm or
                 Bank.
               </div>
@@ -519,13 +529,11 @@ const MyWalletMain = () => {
                   1001
                 </div>
               </div>
-              <div className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-px pt-2 gap-1 w-2/5 h-8 items-start rounded-lg">
-                <img
-                  src="https://file.rendit.io/n/v5ncFaNFqX20s3YFjnb0.svg"
-                  alt="Cilbank"
-                  id="Cilbank"
-                  className="w-4"
-                />
+              <div
+                onClick={() => navigate("/withdraw")}
+                className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center py-[6.77px] px-[3px] gap-[4.235px] w-[108px] h-8 items-start rounded-lg"
+              >
+                <img src={Bank} alt="Cilbank" id="Cilbank" className="w-4" />
                 <div className="text-sm font-['Inter'] text-white">
                   withdraw
                 </div>

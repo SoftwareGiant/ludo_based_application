@@ -33,9 +33,6 @@ import UploadProfile from "./components/profile/UploadProfile";
 import NewProfilePic from "./components/profile/NewProfilePic";
 import NewProfileEmailAdded2 from "./components/profile/NewProfileEmailAdded2";
 import NewProfile2 from "./components/profile/NewProfile2";
-import MyWalletmobile from "./components/wallet/MyWalletmobile";
-import DepositeCash1 from "./components/wallet/DepositeCash1";
-import DepositeCah2 from "./components/wallet/DepositeCah2";
 import ReferalsBalanceWithDraw from "./components/wallet/ReferalsBalanceWithDraw";
 import GameHistoryMob from "./components/game_history/GameHistoryMob";
 import TransactioHistoryMob from "./components/transaction_history/TransactioHistoryMob";
@@ -66,6 +63,8 @@ function App() {
           <Route path="/wincash" element={<ListedGamePc />} />
           <Route path="/mywallet" element={<MyWalletMain />} />
           <Route path="/deposite" element={<AddCashPc />} />
+          <Route path="/withdraw" element={<WithDrawPc />} />
+          <Route path="/reedem" element={<ReferalBalancePc />} />
           <Route path="/gamehistory" element={<GameHistoryComponent />} />
           <Route
             path="/transactionhistory"

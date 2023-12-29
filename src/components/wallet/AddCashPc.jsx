@@ -16,11 +16,16 @@ import FrameProfile from "../../assets/profile/Frame_profile.png";
 import Back from "../../assets/profile/ep_back.svg";
 import Favorite from "../../assets/new_game/fav.svg";
 import BellIcon from "../../assets/new_game/notification.svg";
+import EpBack from "../../assets/wallet/ep_back.svg";
+import HoverBack from "../../assets/wallet/hoverback.svg";
+import Info from "../../assets/wallet/info.svg";
+import { useNavigate } from "react-router-dom";
 const AddCashPc = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
+  const navigate = useNavigate();
   return (
     <>
       {isOpen ? (
@@ -63,17 +68,18 @@ const AddCashPc = () => {
               <div className="flex flex-row justify-between w-1/2 items-start">
                 <div className="flex flex-row gap-5 w-1/2 items-start">
                   <img
-                    src="https://file.rendit.io/n/WzbT5ee9Vc34Gi4C6aun.svg"
+                    src={EpBack}
                     alt="HardwareKeyboardBackspace icon"
                     id="Epback"
                     className="w-6"
+                    onClick={() => navigate("/mywallet")}
                   />
                   <div className="text-center text-xl font-['Inter'] text-[#0f002b] mt-px">
                     Deposit Cash
                   </div>
                 </div>
                 <img
-                  src="https://file.rendit.io/n/Yk01qZMJ0e8TSCsZCWVx.svg"
+                  src={Info}
                   alt="ActionInfoOutline icon"
                   id="Icoutlineinfo"
                   className="w-6"
@@ -410,7 +416,7 @@ const AddCashPc = () => {
                 Win Cash
               </div>
             </div>
-            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#ffcc4d] flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
               <img
                 src={Wallet}
                 alt="Phwalletlight"
@@ -452,7 +458,7 @@ const AddCashPc = () => {
                 Refer and Earn
               </div>
             </div>
-            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#ffcc4d] flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
+            <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg">
               <img
                 src={Notification}
                 alt="Iconamoonnotificationlight"
@@ -479,13 +485,14 @@ const AddCashPc = () => {
                 <div className="flex flex-row gap-5 w-1/3 items-start">
                   <div
                     id="BackwardAndForward"
-                    className="shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row w-8 items-start pt-1 px-1 rounded-lg"
+                    className="shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row w-8 items-start pt-1 px-1 rounded-[18px]"
                   >
                     <img
-                      src="https://file.rendit.io/n/m9v2KbcRUof2AfHKQFaX.svg"
+                      src={HoverBack}
                       alt="Ionchevronback"
                       id="Ionchevronback"
                       className="mb-1 w-6"
+                      onClick={() => navigate("/mywallet")}
                     />
                   </div>
                   <div
@@ -496,7 +503,7 @@ const AddCashPc = () => {
                   </div>
                 </div>
                 <img
-                  src="https://file.rendit.io/n/8nZrkAaqy2tyyAf9aw0X.svg"
+                  src={Info}
                   alt="ActionInfoOutline icon"
                   id="Icoutlineinfo"
                   className="mt-1 w-6"
