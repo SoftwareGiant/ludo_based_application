@@ -11,6 +11,8 @@ import ListedGamePc from "./components/listedgame/ListedGamePc";
 import ReferrEarnPc from "./components/refer_and_earn/ReferrEarnPc";
 import SupportPc from "./components/support/SupportPc";
 import AddCashPc from "./components/wallet/AddCashPc";
+import WithDrawPc from "./components/wallet/WithDrawPc";
+import ReferalBalancePc from "./components/wallet/ReferalBalancePc";
 // need some work
 import Info from "./components/continue/Info";
 import FilterLiveBattle from "./components/live_battle/FilterLiveBattle";
@@ -39,8 +41,6 @@ import TransactioHistoryMob from "./components/transaction_history/TransactioHis
 import ReferrEarn from "./components/refer_and_earn/ReferrEarnMob";
 import Support from "./components/support/SupportMob";
 import Notification from "./components/notification/Notification";
-import WithDrawPc from "./components/wallet/WithDrawPc";
-import ReferalBalancePc from "./components/wallet/ReferalBalancePc";
 import Instance2Pc from "./components/listedgame/Instance2Pc";
 import ChatWithUserPc from "./components/listedgame/ChatWithUserPc";
 import ItsAMatch from "./components/listedgame/ItsAMatch";
@@ -51,6 +51,8 @@ import SignUpSucess from "./components/app_start/SignUpSucess";
 import AppTour from "./components/app_start/AppTour";
 import ReferrEarnMob from "./components/refer_and_earn/ReferrEarnMob";
 import SupportMob from "./components/support/SupportMob";
+import Login from "./components/admin_and_S.admin/admin/Login";
+import SAdminLogin from "./components/admin_and_S.admin/superadmin/SAdminLogin";
 
 function App() {
   return (
@@ -73,6 +75,8 @@ function App() {
           <Route path="/referr&earn" element={<ReferrEarnPc />} />
           <Route path="/notification" element={<NotificationPc />} />
           <Route path="/support" element={<SupportPc />} />
+          <Route path="/admin" element={<Login />} />
+          <Route path="/superadmin" element={<SAdminLogin />} />
         </Routes>
       </BrowserRouter>
       {/* <Info /> */}
