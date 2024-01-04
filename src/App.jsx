@@ -13,6 +13,9 @@ import SupportPc from "./components/support/SupportPc";
 import AddCashPc from "./components/wallet/AddCashPc";
 import WithDrawPc from "./components/wallet/WithDrawPc";
 import ReferalBalancePc from "./components/wallet/ReferalBalancePc";
+import Login from "./components/admin_and_S.admin/admin/Login";
+import SAdminLogin from "./components/admin_and_S.admin/superadmin/SAdminLogin";
+import NewOnboard from "./components/admin_and_S.admin/admin/NewOnboard";
 // need some work
 import Info from "./components/continue/Info";
 import FilterLiveBattle from "./components/live_battle/FilterLiveBattle";
@@ -51,14 +54,15 @@ import SignUpSucess from "./components/app_start/SignUpSucess";
 import AppTour from "./components/app_start/AppTour";
 import ReferrEarnMob from "./components/refer_and_earn/ReferrEarnMob";
 import SupportMob from "./components/support/SupportMob";
-import Login from "./components/admin_and_S.admin/admin/Login";
-import SAdminLogin from "./components/admin_and_S.admin/superadmin/SAdminLogin";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/admin" element={<Login />} />
+          <Route path="/superadmin" element={<SAdminLogin />} />
+          <Route path="/onboard" element={<NewOnboard />} />
           <Route path="/login" element={<SignUpDesktop />} />
           <Route path="/" element={<NewGame />} />
           <Route path="/profile" element={<NewProfile />} />
@@ -75,8 +79,6 @@ function App() {
           <Route path="/referr&earn" element={<ReferrEarnPc />} />
           <Route path="/notification" element={<NotificationPc />} />
           <Route path="/support" element={<SupportPc />} />
-          <Route path="/admin" element={<Login />} />
-          <Route path="/superadmin" element={<SAdminLogin />} />
         </Routes>
       </BrowserRouter>
       {/* <Info /> */}
