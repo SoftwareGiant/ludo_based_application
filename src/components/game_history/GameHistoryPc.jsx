@@ -18,6 +18,7 @@ import Back from "../../assets/profile/ep_back.svg";
 import Favorite from "../../assets/new_game/fav.svg";
 import BellIcon from "../../assets/new_game/notification.svg";
 import { Link } from "react-router-dom";
+import Sidebar from "../MainLayout/Sidebar";
 const GameHistoryPc = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleNavbar = () => {
@@ -338,13 +339,14 @@ const GameHistoryPc = () => {
         </div>
       )}
       <div
-        id="NewGameRoot"
-        className="lg:bg-[#0f002b] lg:flex gap-8 lg:w-[1085px] lg:h-[720px] lg:items-center hidden"
+        id="GameHistory"
+        className="lg:bg-[#0f002b] lg:flex  md:w-full md:h-[100vh]  lg:items-center hidden"
       >
+        <Sidebar isClick5={true} />
         {/* left-side bar starts */}
-        <div className="bg-white flex flex-col pb-16 gap-6 lg:w-[200px] lg:h-[720px]  items-start">
+        {/* <div className="bg-white flex flex-col pb-16 gap-6 lg:w-[200px] lg:h-[720px]  items-start"> */}
           {/* logo and main text */}
-          <div className="flex flex-col w-full items-start">
+          {/* <div className="flex flex-col w-full items-start">
             <div className="relative flex flex-row justify-center w-full items-start">
               <div className="w-full h-48 bg-background bg-cover bg-50%_50% bg-blend-normal bg-no-repeat absolute top-0 left-0 flex flex-row items-center">
                 <div className="bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0)_0%,#ffffff_100%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat mt-40 w-full h-10" />
@@ -356,10 +358,10 @@ const GameHistoryPc = () => {
             <div className="text-center text-xl font-['Oooh_Baby'] mx-auto">
               punch line
             </div>
-          </div>
+          </div> */}
           {/* logo and main text */}
           {/* menue section starts */}
-          <div className="lg:flex lg:flex-col lg:justify-center lg:mx-auto lg:gap-2 w-0 h-0 lg:w-[160px] lg:h-4/5 items-center ">
+          {/* <div className="lg:flex lg:flex-col lg:justify-center lg:mx-auto lg:gap-2 w-0 h-0 lg:w-[160px] lg:h-4/5 items-center ">
             <Link
               to="/"
               className="border-solid items-center border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 lg:w-full lg:h-[34px] pt-1 px-3 border rounded-lg"
@@ -472,11 +474,13 @@ const GameHistoryPc = () => {
                 Support
               </div>
             </Link>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
         {/* menue section ends */}
         {/* Profile section */}
-        <div className="bg-[#fead3a] flex flex-col pb-4 gap-6 w-[485px] h-[720px] absolute left-[200px] items-start">
+
+        <div className="flex  w-full">
+        <div className="bg-[#fead3a] w-1/2 flex flex-col pb-4 gap-6  h-full min-h-screen  left-[200px] items-start ">
           <div className="flex flex-col gap-2 w-full items-start">
             <div className="bg-[#fead3a] flex flex-row justify-between w-full h-16 items-start pt-4 px-5">
               <div
@@ -613,7 +617,7 @@ const GameHistoryPc = () => {
 
         {/* Profile section ends */}
         {/* battle section */}
-        <div className="bg-[#0F002B] lg:flex lg:flex-col lg:w-[400px] lg:h-[691px] lg:absolute lg:left-[685px] pb-8 gap-8 rounded-[20px] hidden ">
+        <div className="bg-[#0F002B] w-1/2 lg:flex flex-col lg:w-[400px] lg:h-full lg:min-h-screen  pb-8 gap-8 rounded-[20px] hidden m-auto">
           <div className="flex flex-col gap-4 w-full items-start">
             <div className="border-solid flex flex-col gap-6 w-full h-[332px] items-start pl-4 py-4 border-b border-black/30">
               <div
@@ -853,7 +857,9 @@ const GameHistoryPc = () => {
               />
             </div>
           </div>
-        </div>
+        </div> 
+          </div>        
+     
 
         {/* battle section ends */}
       </div>

@@ -54,6 +54,7 @@ import SignUpSucess from "./components/app_start/SignUpSucess";
 import AppTour from "./components/app_start/AppTour";
 import ReferrEarnMob from "./components/refer_and_earn/ReferrEarnMob";
 import SupportMob from "./components/support/SupportMob";
+import { useMediaQuery } from "react-responsive";
 
 function App() {
   return (
@@ -64,7 +65,12 @@ function App() {
           <Route path="/superadmin" element={<SAdminLogin />} />
           <Route path="/onboard" element={<NewOnboard />} />
           <Route path="/login" element={<SignUpDesktop />} />
-          <Route path="/" element={<NewGame />} />
+          <Route
+            path="/"
+            element={
+              useMediaQuery({ minWidth: 768 }) ? <NewGame /> : <NewGameMob />
+            }
+          />
           <Route path="/profile" element={<NewProfile />} />
           <Route path="/wincash" element={<ListedGamePc />} />
           <Route path="/mywallet" element={<MyWalletMain />} />
@@ -79,6 +85,7 @@ function App() {
           <Route path="/referr&earn" element={<ReferrEarnPc />} />
           <Route path="/notification" element={<NotificationPc />} />
           <Route path="/support" element={<SupportPc />} />
+          <Route path="/apptour" element={<AppTour />} />
         </Routes>
       </BrowserRouter>
       {/* <Info /> */}
@@ -133,6 +140,13 @@ function App() {
       {/* <TransactioHistoryMob /> */}
       {/* <GameCash /> */}
       {/* <SupportMob /> */}
+      {/* <Route path="/success" element= {<SignUpSucess/>}/>
+          <Route path="/apptour" element= {<AppTour/>}/>
+          <Route path="/otppc" element= {<OtpPc/>}/>
+          <Route path="/info" element= {<Info/>}/>
+          <Route path="/cardclick" element= {<CardClickInstance/>}/>
+          <Route path="/cardclick2" element= {<CardClickInstance2/>}/>
+          <Route path="/chatwithpc" element= {<ChatWithUserPc/>}/> */}
     </>
   );
 }

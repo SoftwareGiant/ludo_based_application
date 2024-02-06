@@ -1,6 +1,5 @@
 import React from "react";
 import "../../App.css";
-
 import Copy from "../../assets/new_game/copy.svg";
 import Share from "../../assets/new_game/share.svg";
 import Fb from "../../assets/new_game/fb.svg";
