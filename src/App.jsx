@@ -55,6 +55,8 @@ import AppTour from "./components/app_start/AppTour";
 import ReferrEarnMob from "./components/refer_and_earn/ReferrEarnMob";
 import SupportMob from "./components/support/SupportMob";
 import { useMediaQuery } from "react-responsive";
+import MainLayout from "./components/MainLayout/MainLayout";
+import MyButton from "./components/MainLayout/MyButton";
 
 function App() {
   return (
@@ -65,14 +67,32 @@ function App() {
           <Route path="/superadmin" element={<SAdminLogin />} />
           <Route path="/onboard" element={<NewOnboard />} />
           <Route path="/login" element={<SignUpDesktop />} />
-          <Route
+          {/* <Route
             path="/"
             element={
               useMediaQuery({ minWidth: 768 }) ? <NewGame /> : <NewGameMob />
             }
-          />
+          /> */}
+            {/* <Route path="/" element={<NewGameMob />} />
           <Route path="/profile" element={<NewProfile />} />
           <Route path="/wincash" element={<ListedGamePc />} />
+          <Route path="/mywallet" element={<MyWalletMain />} />
+          <Route path="/deposite" element={<AddCashPc />} />
+          <Route path="/withdraw" element={<WithDrawPc />} />
+          <Route path="/reedem" element={<ReferalBalancePc />} />
+          <Route path="/gamehistory" element={<GameHistoryComponent />} />
+          <Route
+            path="/transactionhistory"
+            element={<TransactionHistoryPc />}
+          />
+          <Route path="/referr&earn" element={<ReferrEarnPc />} />
+          <Route path="/notification" element={<NotificationPc />} />
+          <Route path="/support" element={<SupportPc />} />
+          <Route path="/apptour" element={<AppTour />} /> */}
+      
+          <Route path="/" element={<NewGameMob />} />
+          <Route path="/profile" element={<NewProfileMob />} />
+          <Route path="/wincash" element={<ListedGamePc/>} />
           <Route path="/mywallet" element={<MyWalletMain />} />
           <Route path="/deposite" element={<AddCashPc />} />
           <Route path="/withdraw" element={<WithDrawPc />} />

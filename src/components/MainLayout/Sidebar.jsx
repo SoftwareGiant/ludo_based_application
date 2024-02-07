@@ -32,7 +32,7 @@ const Sidebar = ({
   isClick9,
 }) => {
   return (
-    <div className="bg-white flex flex-col pb-16 gap-6  h-[100vh] w-[270px]  items-start">
+    <div className="bg-white flex-col pb-16 gap-6  h-[100vh] w-[270px]  items-start sm:flex hidden">
       <div className="flex flex-col w-full items-start">
         <div className="relative flex flex-row justify-center w-full items-start">
           <div className="w-full h-48 bg-background bg-cover bg-50%_50% bg-blend-normal bg-no-repeat absolute top-0 left-0 flex flex-row items-start">

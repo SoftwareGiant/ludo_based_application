@@ -6,15 +6,15 @@ import TopbarMobile from "./TopbarMobile";
 const MainLayout = () => {
   return (
     <div>
-      <div>
+      {/* <div className="hidden sm:hidden">
         <TopbarMobile />
-      </div>
+      </div> */}
       <div className="flex ">
         <Sidebar />
-        <main className="main-content">
-          {/* <Outlet />  */}
+       
+          <Outlet /> 
           {/* Renders matched route content here */}
-        </main>
+       
       </div>
     </div>
   );
