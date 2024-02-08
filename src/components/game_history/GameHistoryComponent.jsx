@@ -10,11 +10,11 @@ const GameHistoryComponent = () => {
 
   if (screenWidth <= mobBreakpoint) {
     return <GameHistoryMob />;
-  } else if (screenWidth <= pcBreakpoint) {
-    return <GameHistoryPc />;
-  } else {
+  }
+ else {
     return <GameHistoryPc />;
   }
+  
 };
 
 export default GameHistoryComponent;

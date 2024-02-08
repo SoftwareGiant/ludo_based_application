@@ -30,6 +30,7 @@ import Favorite from "../../assets/new_game/fav.svg";
 import BellIcon from "../../assets/new_game/notification.svg";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { Link } from "react-router-dom";
+import Sidebar from "../MainLayout/Sidebar";
 
 const SupportPc = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -341,144 +342,15 @@ const SupportPc = () => {
         </div>
       )}
       <div
-        id="NewGameRoot"
-        className="lg:bg-[#0f002b] lg:flex lg:gap-8 lg:w-[1085px] lg:h-[720px] lg:items-center"
+        id="support"
+        className="lg:bg-[#0f002b] lg:flex  md:w-full md:h-[100vh]  lg:items-center hidden"
       >
-        {/* left-side bar starts */}
-        <div className="bg-white lg:flex flex-col pb-16 gap-6 lg:w-[200px] lg:h-[720px] items-start hidden">
-          {/* logo and main text */}
-          <div className="lg:flex lg:flex-col lg:w-full items-start hidden">
-            <div className="relative flex flex-row justify-center w-full items-start">
-              <div className="w-full h-48 bg-background bg-cover bg-50%_50% bg-blend-normal bg-no-repeat absolute top-0 left-0 flex flex-row items-center">
-                <div className="bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0)_0%,#ffffff_100%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat mt-40 w-full h-10" />
-              </div>
-              <div className="text-center text-3xl font-['Nunito_Sans'] font-bold text-[#0e002b] relative mt-48">
-                LUDO KING
-              </div>
-            </div>
-            <div className="text-center text-xl font-['Oooh_Baby'] mx-auto">
-              punch line
-            </div>
-          </div>
-          {/* logo and main text */}
-          {/* menue section starts */}
-          <div className="lg:flex lg:flex-col lg:justify-center lg:mx-auto lg:gap-2 w-0 h-0 lg:w-[160px] lg:h-4/5 items-center hidden ">
-            <Link
-              to="/"
-              className="border-solid items-center border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 lg:w-full lg:h-[34px] pt-1 px-3 border rounded-lg"
-            >
-              <img
-                src={AddGame}
-                alt="ContentAdd icon"
-                id="Materialsymbolsadd"
-                className="w-5"
-              />
-              <div className="text-xs font-['Nunito_Sans'] font-bold text-[#0f002b]">
-                New game
-              </div>
-            </Link>
-            <Link
-              to="/profile"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
-            >
-              <img
-                src={Profile}
-                alt="SocialPersonOutline icon"
-                className="w-5"
-              />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                Profile
-              </div>
-            </Link>
-            <Link
-              to="/wincash"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
-            >
-              <img src={WinCash} alt="Twemojimoneymouthface" className="w-5" />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                Win Cash
-              </div>
-            </Link>
-            <Link
-              to="/mywallet"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
-            >
-              <img
-                src={Wallet}
-                alt="Phwalletlight"
-                id="Phwalletlight"
-                className="w-5"
-              />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                My Wallet
-              </div>
-            </Link>
-            <Link
-              to="/gamehistory"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
-            >
-              <img
-                src={GameHistory}
-                alt="ActionHistory icon"
-                id="lgihistory"
-                className="w-5"
-              />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                Game History
-              </div>
-            </Link>
-            <Link
-              to="/transactionhistory"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex- gap-2 w-full h-8 items-end py-[7px] px-3 border rounded-lg"
-            >
-              <img
-                src={Profile}
-                alt="SocialPersonOutline icon"
-                className="w-5"
-              />
-              <div className="text-[11px] font-['Nunito_Sans'] font-bold">
-                Transaction History
-              </div>
-            </Link>
-            <Link
-              to="/referr&earn"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
-            >
-              <img
-                src={ReferEarn}
-                alt="Gameiconsreceivemoney"
-                className="w-5"
-              />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                Refer and Earn
-              </div>
-            </Link>
-            <Link
-              to="/notification"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
-            >
-              <img
-                src={Notification}
-                alt="Iconamoonnotificationlight"
-                className="w-5"
-              />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                Notification
-              </div>
-            </Link>
-            <Link
-              to="/support"
-              className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#ffcc4d] flex flex-row gap-2 w-full h-8 items-center pt-1 px-3 border rounded-lg"
-            >
-              <img src={Support} alt="Supportagent" className="w-5" />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                Support
-              </div>
-            </Link>
-          </div>
+         <Sidebar isClick9={true}/>
+      
           {/* menue section ends */}
           {/* Profile section */}
-          <div className="bg-[#fead3a] lg:flex flex-col pb-6 gap-4 items-start justify-between lg:w-[485px] lg:h-[720px] absolute lg:left-[200px] left-0 hidden">
+          <div className="flex  w-full">
+          <div className="bg-[#fead3a] w-1/2 flex flex-col pb-4 gap-6  h-full min-h-screen  left-[200px] items-start ">
             <div className="flex flex-col w-full items-start">
               <div className="bg-[#fead3a] flex flex-row justify-between w-full h-16 items-start pt-4 px-5">
                 <div className="text-center text-xl font-['Inter'] text-[#0f002b] mt-px">
@@ -587,7 +459,7 @@ const SupportPc = () => {
           </div>
           {/* Profile section ends */}
           {/* battle section */}
-          <div className="bg-[#0F002B] lg:flex lg:flex-col lg:w-[400px] lg:h-[691px] lg:absolute lg:left-[685px] pb-8 gap-8 rounded-[20px] hidden">
+          <div className="bg-[#0F002B] w-1/2 lg:flex flex-col lg:w-[400px] lg:h-full lg:min-h-screen  pb-8 gap-8 rounded-[20px] hidden m-auto">
             <div className="flex flex-col gap-4 w-full items-start">
               <div className="border-solid flex flex-col gap-6 w-full h-[332px] items-start pl-4 py-4 border-b border-black/30">
                 <div
@@ -830,10 +702,11 @@ const SupportPc = () => {
               </div>
             </div>
           </div>
+          </div>
+         
 
           {/* battle section ends */}
         </div>
-      </div>
     </>
   );
 };

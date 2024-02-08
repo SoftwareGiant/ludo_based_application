@@ -26,6 +26,7 @@ import Favorite from "../../assets/new_game/fav.svg";
 import BellIcon from "../../assets/new_game/notification.svg";
 
 import { Link } from "react-router-dom";
+import Sidebar from "../MainLayout/Sidebar";
 
 const NewProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -319,10 +320,10 @@ const NewProfile = () => {
       )}
       <div
         id="ProfileRoot"
-        className="bg-[#0f002b] lg:flex flex-row justify-between w-full h-[100vh] items-start hidden"
+        className="lg:bg-[#0f002b] lg:flex  md:w-full md:h-[100vh]  lg:items-center hidden"
       >
         {/* menue bar section */}
-        <div className="bg-white flex flex-col pb-16 gap-6 w-1/5 h-[100vh] items-start">
+        {/* <div className="bg-white flex flex-col pb-16 gap-6 w-1/5 h-[100vh] items-start">
           <div className="flex flex-col w-full items-start">
             <div className="relative flex flex-row justify-center w-full items-start">
               <div className="w-full h-48 bg-background bg-cover bg-50%_50% bg-blend-normal bg-no-repeat absolute top-0 left-0 flex flex-row items-start">
@@ -454,10 +455,12 @@ const NewProfile = () => {
               </div>
             </Link>
           </div>
-        </div>
+        </div> */}
+        <Sidebar isClick2={true}/>
         {/* menue bar section ends */}
         {/* Profile section */}
-        <div className="flex flex-col mt-16 gap-24 w-1/3 h-[100vh] items-start">
+        <div className="flex  w-full">
+        <div className=" bg-[#0F002B] w-1/2 flex flex-col pb-4 gap-6  h-full min-h-screen  left-[200px] items-start ">
           <div className="flex flex-col gap-8 w-full items-start">
             {/* Profile Logo */}
             <div className="flex flex-col ml-16 gap-6 w-3/5 items-start">
@@ -526,7 +529,7 @@ const NewProfile = () => {
         </div>
         {/* Profile section ends */}
         {/* battle section */}
-        <div className="bg-[#ffb653] lg:flex lg:flex-col gap-16 w-2/5 h-[100vh] items-start pt-6 pb-20 hidden">
+        <div className="bg-[#fead3a] w-1/2 lg:flex flex-col lg:w-[400px] lg:h-full lg:min-h-screen  pb-8 gap-8 rounded-[20px] hidden m-auto">
           <div className="flex flex-col gap-10 w-full items-start">
             <div className="flex flex-col gap-8 w-full items-start">
               <div
@@ -715,6 +718,7 @@ const NewProfile = () => {
           </div>
         </div>
         {/* battle section ends */}
+        </div>
       </div>
     </>
   );

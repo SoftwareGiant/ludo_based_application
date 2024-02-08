@@ -54,6 +54,10 @@ import SignUpSucess from "./components/app_start/SignUpSucess";
 import AppTour from "./components/app_start/AppTour";
 import ReferrEarnMob from "./components/refer_and_earn/ReferrEarnMob";
 import SupportMob from "./components/support/SupportMob";
+import { useMediaQuery } from "react-responsive";
+import MainLayout from "./components/MainLayout/MainLayout";
+import MyButton from "./components/MainLayout/MyButton";
+import GameHistoryPc from "./components/game_history/GameHistoryPc";
 
 function App() {
   return (
@@ -64,7 +68,13 @@ function App() {
           <Route path="/superadmin" element={<SAdminLogin />} />
           <Route path="/onboard" element={<NewOnboard />} />
           <Route path="/login" element={<SignUpDesktop />} />
-          <Route path="/" element={<NewGame />} />
+          {/* <Route
+            path="/"
+            element={
+              useMediaQuery({ minWidth: 768 }) ? <NewGame /> : <NewGameMob />
+            }
+          /> */}
+            {/* <Route path="/" element={<NewGameMob />} />
           <Route path="/profile" element={<NewProfile />} />
           <Route path="/wincash" element={<ListedGamePc />} />
           <Route path="/mywallet" element={<MyWalletMain />} />
@@ -79,21 +89,24 @@ function App() {
           <Route path="/referr&earn" element={<ReferrEarnPc />} />
           <Route path="/notification" element={<NotificationPc />} />
           <Route path="/support" element={<SupportPc />} />
-          <Route path="/supportmobile" element={<SupportMob />} />
-
-          // just for checking process
-
-          // go through listed game section
-          // in gamehistory you can see the way mobile and pc are managed.
-          <Route path="/success" element= {<SignUpSucess/>}/>
-          <Route path="/apptour" element= {<AppTour/>}/>
-          <Route path="/otppc" element= {<OtpPc/>}/>
-          <Route path="/info" element= {<Info/>}/>
-          <Route path="/cardclick" element= {<CardClickInstance/>}/>
-          <Route path="/cardclick2" element= {<CardClickInstance2/>}/>
-          <Route path="/chatwithpc" element= {<ChatWithUserPc/>}/>
-
-
+          <Route path="/apptour" element={<AppTour />} /> */}
+      
+          <Route path="/" element={<NewGameMob />} />
+          <Route path="/profile" element={<NewProfileMob />} />
+          <Route path="/wincash" element={<ListedGamePc/>} />
+          <Route path="/mywallet" element={<MyWalletMain />} />
+          <Route path="/deposite" element={<AddCashPc />} />
+          <Route path="/withdraw" element={<WithDrawPc />} />
+          <Route path="/reedem" element={<ReferalBalancePc />} />
+          <Route path="/gamehistory" element={<GameHistoryPc />} />
+          <Route
+            path="/transactionhistory"
+            element={<TransactionHistoryPc />}
+          />
+          <Route path="/referr&earn" element={<ReferrEarnMob />} />
+          <Route path="/notification" element={<NotificationPc />} />
+          <Route path="/support" element={<SupportMob />} />
+          <Route path="/apptour" element={<AppTour />} />
         </Routes>
       </BrowserRouter>
       {/* <Info /> */}
@@ -148,6 +161,13 @@ function App() {
       {/* <TransactioHistoryMob /> */}
       {/* <GameCash /> */}
       {/* <SupportMob /> */}
+      {/* <Route path="/success" element= {<SignUpSucess/>}/>
+          <Route path="/apptour" element= {<AppTour/>}/>
+          <Route path="/otppc" element= {<OtpPc/>}/>
+          <Route path="/info" element= {<Info/>}/>
+          <Route path="/cardclick" element= {<CardClickInstance/>}/>
+          <Route path="/cardclick2" element= {<CardClickInstance2/>}/>
+          <Route path="/chatwithpc" element= {<ChatWithUserPc/>}/> */}
     </>
   );
 }

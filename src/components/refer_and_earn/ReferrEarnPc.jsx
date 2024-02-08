@@ -23,6 +23,7 @@ import BellIcon from "../../assets/new_game/notification.svg";
 import Favorite from "../../assets/new_game/fav.svg";
 import HamBurger from "../../assets/profile/hamburger.svg";
 import { Link } from "react-router-dom";
+import Sidebar from "../MainLayout/Sidebar";
 
 const ReferrEarnPc = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -270,13 +271,14 @@ const ReferrEarnPc = () => {
           </div>
         </div>
       )}
-      <div
-        id="NewGameRoot"
-        className="lg:bg-[#0f002b] lg:flex gap-8 lg:w-[1085px] lg:h-[720px] lg:items-center hidden"
+         <div
+        id="Mywallet"
+        className="lg:bg-[#0f002b] lg:flex  md:w-full md:h-[100vh]  lg:items-center hidden"
       >
+        <Sidebar isClick7={true}/>
         {/* left-side bar starts */}
-        <div className="bg-white flex flex-col pb-16 gap-6 lg:w-[200px] lg:h-[720px]  items-start">
-          {/* logo and main text */}
+        {/* <div className="bg-white flex flex-col pb-16 gap-6 lg:w-[200px] lg:h-[720px]  items-start">
+        
           <div className="flex flex-col w-full items-start">
             <div className="relative flex flex-row justify-center w-full items-start">
               <div className="w-full h-48 bg-background bg-cover bg-50%_50% bg-blend-normal bg-no-repeat absolute top-0 left-0 flex flex-row items-center">
@@ -290,8 +292,7 @@ const ReferrEarnPc = () => {
               punch line
             </div>
           </div>
-          {/* logo and main text */}
-          {/* menue section starts */}
+       
           <div className="lg:flex lg:flex-col lg:justify-center lg:mx-auto lg:gap-2 w-0 h-0 lg:w-[160px] lg:h-4/5 items-center ">
             <Link
               to="/"
@@ -406,10 +407,12 @@ const ReferrEarnPc = () => {
               </div>
             </Link>
           </div>
-        </div>
+        </div> */}
         {/* menue section ends */}
         {/* Profile section */}
-        <div className="bg-[#0f002b] flex flex-col justify-between pb-16 lg:w-[485px] h-[720px] items-start absolute left-[200px]">
+
+        <div className="flex w-full">
+        <div className="bg-[#fead3a] w-1/2 flex flex-col pb-4 gap-6  h-full min-h-screen  left-[200px] items-start ">
           <div className="bg-[#0f002b] inline-flex gap-[266px] w-[485px] h-[60px] items-center lg:py-4 lg:pr-7 lg:pl-[21px]">
             <div
               id="ReferAndEarn1"
@@ -484,7 +487,7 @@ const ReferrEarnPc = () => {
         </div>
         {/* Profile section ends */}
         {/* battle section */}
-        <div className="bg-[#fead3a] lg:flex flex-col lg:w-[400px] lg:h-[691px] lg:absolute lg:left-[675px] pb-8 gap-8 rounded-[20px] hidden">
+        <div className="bg-[#0F002B] w-1/2 lg:flex flex-col lg:w-[400px] lg:h-full lg:min-h-screen  pb-8 gap-8 rounded-[20px] hidden m-auto">
           <div className="flex flex-col gap-4 w-full items-start">
             <div className="border-solid flex flex-col gap-6 w-full h-[332px] items-start pl-4 py-4 border-b border-black/30">
               <div
@@ -725,6 +728,8 @@ const ReferrEarnPc = () => {
             </div>
           </div>
         </div>
+        </div>
+       
 
         {/* battle section ends */}
       </div>
