@@ -57,6 +57,7 @@ import SupportMob from "./components/support/SupportMob";
 import { useMediaQuery } from "react-responsive";
 import MainLayout from "./components/MainLayout/MainLayout";
 import MyButton from "./components/MainLayout/MyButton";
+import GameHistoryPc from "./components/game_history/GameHistoryPc";
 
 function App() {
   return (
@@ -97,14 +98,14 @@ function App() {
           <Route path="/deposite" element={<AddCashPc />} />
           <Route path="/withdraw" element={<WithDrawPc />} />
           <Route path="/reedem" element={<ReferalBalancePc />} />
-          <Route path="/gamehistory" element={<GameHistoryComponent />} />
+          <Route path="/gamehistory" element={<GameHistoryPc />} />
           <Route
             path="/transactionhistory"
             element={<TransactionHistoryPc />}
           />
-          <Route path="/referr&earn" element={<ReferrEarnPc />} />
+          <Route path="/referr&earn" element={<ReferrEarnMob />} />
           <Route path="/notification" element={<NotificationPc />} />
-          <Route path="/support" element={<SupportPc />} />
+          <Route path="/support" element={<SupportMob />} />
           <Route path="/apptour" element={<AppTour />} />
         </Routes>
       </BrowserRouter>

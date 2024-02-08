@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../app.css";
-
+import ProfileEditbtn from "../../assets/profile/editbutton.svg";
 import HamBurger from "../../assets/profile/hamburger.svg";
 import Edit from "../../assets/profile/edit.svg";
 import ProfileEdit from "../../assets/profile/profile_edit.svg";
@@ -19,6 +19,8 @@ import Wallet from "../../assets/new_game/wallet.svg";
 import GameHistory from "../../assets/new_game/history.svg";
 import ReferEarn from "../../assets/new_game/refer&earn.svg";
 import Support from "../../assets/new_game/support.svg";
+import { SidebarMob } from "../MainLayout/SidebarMob";
+import { Switch } from "@material-tailwind/react";
 
 const NewProfileMob = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,291 +28,104 @@ const NewProfileMob = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <>
-      {isOpen ? (
-        <div>
-          <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)]" />
-          {/* Hamburger section */}
-          <div className="bg-[#fead3a] flex flex-row justify-between w-[390px] h-12 items-start pt-2 px-5">
-            <div className="flex flex-row gap-3 w-2/5 items-start">
-              <img
-                src={HamBurger}
-                alt="Materialsymbolsmenu"
-                id="Materialsymbolsmenu"
-                className="mt-1 w-6"
-                onClick={toggleNavbar}
-              />
-              <div className="relative flex flex-row justify-center w-24 items-start">
-                <div className="text-center text-base font-['Nunito_Sans'] font-bold text-[#0f002b] absolute top-0 left-0 h-5 w-24">
-                  LUDO KING
-                </div>
-                <div className="text-center text-base font-['Oooh_Baby'] text-[#0f002b] relative mt-4">
-                  punch line
-                </div>
-              </div>
+    <div className="max-w-[480px] w-full min-h-screen h-full">
+      <div
+        id="NotificationspaceRoot"
+        className="bg-[#fead3a]  h-8 overflow-hidden"
+      />
+      <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
+        <div className="flex flex-row gap-3 items-start mt-3">
+          <SidebarMob />
+          <div className="flex flex-col text-[#0f002b] ">
+            <div className="  text-base font-['Nunito_Sans'] font-extrabold ">
+              LUDO KING
             </div>
-            <div className="inline-flex py-[7px] px-3 justify-center items-center gap-2 border-solid border border-[rgba(15,_0,_43,_0.3)] bg-[rgba(15,_0,_43,_0.3)] rounded-[18px]">
-              <img
-                src={LogOutMob}
-                alt="Frame1"
-                className=" w-[20px] h-[20px] "
-              />
-            </div>
-          </div>
-          {/* Hamburger section ends */}
-          <div className="overflow-hidden bg-[#0f002b] flex flex-col pb-2 gap-5 w-[390px] h-[100vh] items-start">
-            <div
-              id="Ellipse"
-              className="bg-[#fead3a] flex flex-row justify-center pt-16 w-[256.41%] h-[1000px] items-start mt-[-705px] mx-[-305px] rounded-[50%]"
-            >
-              <div className="bg-profile bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-row justify-end mt-[666px] w-1/5 h-48 items-start px-2 border">
-                <div className="bg-white flex flex-row justify-center mt-0 pt-4 w-12 h-12 items-start rounded-[25.000001907348633px]">
-                  <img
-                    src={ProfileEdit}
-                    alt="Materialsymbolseditoutline"
-                    className="w-5"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col gap-3 w-full font-['Nunito_Sans'] items-start">
-              <div className="flex flex-col ml-24 w-1/2 items-start">
-                <div className="flex flex-row gap-1 w-full items-start">
-                  <div className="text-center text-3xl font-bold text-white">
-                    Ludo Player
-                  </div>
-                  <img
-                    src={Verify}
-                    alt="Iconparkoutlinesuccess"
-                    className="mt-2 w-6"
-                  />
-                </div>
-                <div className="text-center text-xl text-white ml-10">
-                  @ludoplayer
-                </div>
-              </div>
-              <div className="bg-[#0f002b] flex flex-col justify-center gap-10 w-full items-start pt-5 pb-6 px-8">
-                <div className="flex flex-row gap-24 w-full items-start">
-                  <div className="flex flex-col justify-between w-2/5 h-24 items-start">
-                    <div className="text-xl font-bold text-white">
-                      Basic Details
-                    </div>
-                    <div id="PhoneNo" className="text-sm text-white ml-4">
-                      Phone no.
-                      {"     "}:
-                    </div>
-                    <div id="UserID" className="text-sm text-white ml-4">
-                      User ID
-                      {"         "}:
-                    </div>
-                  </div>
-                  <div className="flex flex-col mt-1 gap-5 w-1/3 items-start">
-                    <img
-                      src={Edit}
-                      alt="Materialsymbolseditoutline1"
-                      className="ml-20 w-5"
-                    />
-                    <div className="flex flex-col gap-4 w-24 h-16 font-['Nunito_Sans'] items-start">
-                      <div className="text-sm text-white">5348757512</div>
-                      <div className="text-sm text-white ml-6">0042356</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col justify-between gap-6 w-5/6 items-start">
-                  <div className="flex flex-row gap-10 w-full items-start">
-                    <div className="flex flex-col mb-px gap-6 w-3/4 h-16 items-start">
-                      <div className="text-xl font-bold text-white">
-                        Notification Preference
-                      </div>
-                      <div id="Email" className="text-sm text-white ml-4">
-                        Email
-                        {"             "}:
-                      </div>
-                    </div>
-                    <img
-                      src={ToggleOff}
-                      alt="ToggleSwitch"
-                      id="ToggleSwitch"
-                      className="mt-12 w-8"
-                    />
-                  </div>
-                  <div className="flex flex-row justify-between ml-4 w-full items-start">
-                    <div id="Push" className="text-sm text-white mt-px">
-                      Push
-                      {"              "}:
-                    </div>
-                    <img
-                      src={ToggleOn}
-                      alt="ToggleSwitch1"
-                      id="ToggleSwitch1"
-                      className="w-8"
-                    />
-                  </div>
-                  <div className="flex flex-row justify-between ml-4 w-full font-['Nunito_Sans'] items-start">
-                    <div id="PhoneNo1" className="text-sm text-white mt-px">
-                      Phone No.
-                      {"     "}:
-                    </div>
-                    <img
-                      src={ToggleOff}
-                      alt="ToggleSwitch2"
-                      id="ToggleSwitch2"
-                      className="w-8"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div>
-          <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)]" />
-          <div
-            id="MenuRoot"
-            className="bg-[#fead3a] flex flex-col gap-6 w-[390px] h-[100vh] font-['Nunito_Sans'] items-start pt-3 pb-12 px-5"
-          >
-            <div className="flex flex-col gap-3 w-5/6 items-start">
-              <div className="flex flex-col gap-1 w-full items-start">
-                <img
-                  src={Back}
-                  alt="HardwareKeyboardBackspace icon"
-                  id="Epback"
-                  className="w-6"
-                  onClick={toggleNavbar}
-                />
-                <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_6px_6px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row ml-12 gap-3 w-4/5 h-12 font-['Nunito_Sans'] items-start pt-2 px-4 border rounded-lg">
-                  <img
-                    src={AddGame}
-                    alt="Materialsymbolsadd"
-                    id="Materialsymbolsadd"
-                    className="w-8"
-                  />
-                  <div className="text-base font-bold text-[#0f002b]">
-                    New game
-                  </div>
-                </div>
-              </div>
-              <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_6px_6px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row ml-12 gap-3 w-4/5 h-12 items-start pt-2 px-4 border rounded-lg">
-                <img
-                  src={Profile}
-                  alt="SocialPersonOutline icon"
-                  className="w-8"
-                />
-                <div className="text-base font-bold text-[#0f002b]">
-                  Profile
-                </div>
-              </div>
-              <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_6px_6px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row ml-12 gap-3 w-4/5 h-12 items-start pt-2 px-4 border rounded-lg">
-                <img
-                  src={WinCash}
-                  alt="Twemojimoneymouthface"
-                  className="w-8"
-                />
-                <div className="text-base font-bold text-[#0f002b]">
-                  Win Cash
-                </div>
-              </div>
-              <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_6px_6px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row ml-12 gap-3 w-4/5 h-12 font-['Nunito_Sans'] items-start pt-2 px-4 border rounded-lg">
-                <img
-                  src={Wallet}
-                  alt="Phwalletlight"
-                  id="Phwalletlight"
-                  className="w-8"
-                />
-                <div className="text-base font-bold text-[#0f002b]">
-                  My Wallet
-                </div>
-              </div>
-              <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_6px_6px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row ml-12 gap-3 w-4/5 h-12 font-['Nunito_Sans'] items-start pt-2 px-4 border rounded-lg">
-                <img
-                  src={GameHistory}
-                  alt="ActionYoutubeSearchedFor icon"
-                  id="Mdihistory"
-                  className="w-8"
-                />
-                <div className="text-base font-bold text-[#0f002b]">
-                  Game History
-                </div>
-              </div>
-              <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_6px_6px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row ml-12 gap-3 w-4/5 h-12 font-['Nunito_Sans'] items-start pt-2 px-4 border rounded-lg">
-                <img
-                  src={Profile}
-                  alt="SocialPersonOutline icon"
-                  className="w-8"
-                />
-                <div className="text-base font-bold text-[#0f002b]">
-                  Transaction History
-                </div>
-              </div>
-              <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_6px_6px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row ml-12 gap-3 w-4/5 h-12 font-['Nunito_Sans'] items-start pt-2 px-4 border rounded-lg">
-                <img
-                  src={ReferEarn}
-                  alt="Gameiconsreceivemoney"
-                  className="w-8"
-                />
-                <div className="text-base font-bold text-[#0f002b]">
-                  Refer and Earn
-                </div>
-              </div>
-              <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_6px_6px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row ml-12 gap-3 w-4/5 h-12 font-['Nunito_Sans'] items-start pt-2 px-4 border rounded-lg">
-                <img
-                  src={BellIcon}
-                  alt="SocialNotificationsNone icon"
-                  className="w-8"
-                />
-                <div className="text-base font-bold text-[#0f002b]">
-                  Notification
-                </div>
-              </div>
-              <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_6px_6px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row ml-12 gap-3 w-4/5 h-12 font-['Nunito_Sans'] items-start pt-2 px-4 border rounded-lg">
-                <img
-                  src={Support}
-                  alt="NotificationSupportAgent icon"
-                  className="w-8"
-                />
-                <div className="text-base font-bold text-[#0f002b]">
-                  Support
-                </div>
-              </div>
-              <div className="border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_6px_6px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row ml-12 gap-3 w-4/5 h-12 font-['Nunito_Sans'] items-start pt-2 px-4 border rounded-lg">
-                <img
-                  src={Favorite}
-                  alt="Phstarlight"
-                  id="Phstarlight"
-                  className="w-8"
-                />
-                <div className="text-base font-bold text-[#0f002b]">
-                  Favourite
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col ml-5 gap-2 w-[390px] font-['Oooh_Baby'] items-start">
-              <div className="text-center text-2xl font-['Nunito_Sans'] font-bold text-[#0f002b] absolute top-[685px] left-[5.75rem] h-[41px] w-[166px]">
-                LUDO KING
-              </div>
-              <div className="text-center text-xl text-[#0f002b] relative mt-8 left-[5.75rem]">
-                punch line
-              </div>
 
-              <div className="flex flex-row justify-between font-['Inter'] items-start w-[319px] h-[23px] ">
-                <div className="text-center text-xs font-medium">
-                  Terms of Service
+            <div className="text-center text-base font-['Oooh_Baby'] font-normal  -mt-2">
+              punch line
+            </div>
+          </div>
+        </div>
+        <div className="flex  h-9 my-1 px-3 justify-center items-center border-solid border border-[rgba(15,_0,_43,_0.3)] bg-[rgba(15,_0,_43,_0.3)] rounded-2xl">
+          <img src={LogOutMob} alt="Frame1" className=" w-[20px] h-[20px]" />
+        </div>
+      </div>
+
+      <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative">
+        <div className="bg-[#fead3a] h-80 w-[650px] rounded-[50%]   -top-20 absolute -left-24" />
+
+        <div className="w-full relative mt-6">
+          <div className="w-48 m-auto relative">
+            <img
+              className="w-48 rounded-full"
+              src="https://images.unsplash.com/photo-1529524987368-af489318987c?q=80&w=582&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            />
+            <img
+              className="absolute top-0 right-0"
+              alt="editbtn"
+              src={ProfileEditbtn}
+            />
+          </div>
+        </div>
+
+        <div className="mt-10 flex flex-col gap-3 w-full font-['Nunito_Sans'] items-start relative text-white font-bold">
+          <div className="flex flex-col m-auto items-center">
+            <div className="flex  w-full gap-2 items-center justify-center">
+              <span className="text-center text-3xl ">Ludo Player</span>
+              <img
+                src={Verify}
+                alt="Iconparkoutlinesuccess"
+                className="mt-2 w-6"
+              />
+            </div>
+            <div className="text-center text-xl">@ludoplayer</div>
+          </div>
+
+          <div className="bg-[#0f002b] text-white flex flex-col justify-center gap-10 w-full items-start pt-5 pb-6 px-8">
+            <div className="flex  justify-between w-full items-center">
+              <div className="text-xl font-bold text-white">Basic Details</div>
+              <img
+                src={Edit}
+                alt="Materialsymbolseditoutline1"
+                className="ml-20 w-5"
+              />
+            </div>
+            <div className="flex flex-col justify-between gap-6 w-5/6 items-start ">
+              <div className="flex flex-row justify-between ml-4 w-full items-start">
+                <div className="text-sm  mt-px">Phone no. :</div>
+                <span>123456789</span>
+              </div>
+              <div className="flex flex-row justify-between ml-4 w-full items-start">
+                <div className="text-sm mt-px">User Id :</div>
+                <span>123456789</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-between gap-6 w-5/6 items-start">
+              <div className="text-xl font-bold text-white">
+                Notification Preference
+              </div>
+              <div className="flex flex-row justify-between ml-4 w-full items-start">
+                <div className="text-sm text-white mt-px">Email :</div>
+                <Switch color="amber" className="bg-brown-800" />
+              </div>
+              <div className="flex flex-row justify-between ml-4 w-full items-start">
+                <div id="Push" className="text-sm text-white mt-px">
+                  Push :
                 </div>
-                <div className="text-center text-xs font-bold">·</div>
-                <div className="text-center text-xs font-medium">
-                  Privacy Policy
+                <Switch color="amber" className="bg-brown-800" />
+              </div>
+              <div className="flex flex-row justify-between ml-4 w-full items-start">
+                <div id="Push" className="text-sm text-white mt-px">
+                  Phone No. :
                 </div>
-                <div className="text-center text-xs font-bold">·</div>
-                <div className="text-center text-xs font-medium">
-                  Content Policies
-                </div>
+                <Switch color="amber" className="bg-brown-800" />
               </div>
             </div>
           </div>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 
