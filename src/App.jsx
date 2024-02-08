@@ -79,6 +79,21 @@ function App() {
           <Route path="/referr&earn" element={<ReferrEarnPc />} />
           <Route path="/notification" element={<NotificationPc />} />
           <Route path="/support" element={<SupportPc />} />
+          <Route path="/supportmobile" element={<SupportMob />} />
+
+          // just for checking process
+
+          // go through listed game section
+          // in gamehistory you can see the way mobile and pc are managed.
+          <Route path="/success" element= {<SignUpSucess/>}/>
+          <Route path="/apptour" element= {<AppTour/>}/>
+          <Route path="/otppc" element= {<OtpPc/>}/>
+          <Route path="/info" element= {<Info/>}/>
+          <Route path="/cardclick" element= {<CardClickInstance/>}/>
+          <Route path="/cardclick2" element= {<CardClickInstance2/>}/>
+          <Route path="/chatwithpc" element= {<ChatWithUserPc/>}/>
+
+
         </Routes>
       </BrowserRouter>
       {/* <Info /> */}
