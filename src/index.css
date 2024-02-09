@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+
+@keyframes zoom-in {
+    0% {
+      transform: scale(0.1);
+    }
+    100% {
+      transform: scale(1.5);
+    }
+  }
+  
+  .animate-zoom-in-stick {
+    animation: zoom-in 1.3s ease-in-out forwards;
+  }

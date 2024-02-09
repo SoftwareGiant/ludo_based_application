@@ -58,6 +58,8 @@ import { useMediaQuery } from "react-responsive";
 import MainLayout from "./components/MainLayout/MainLayout";
 import MyButton from "./components/MainLayout/MyButton";
 import GameHistoryPc from "./components/game_history/GameHistoryPc";
+import TopbarMobile from "./components/MainLayout/TopbarMobile";
+import NewGameSLider from "./components/live_battle/NewGameSLider";
 
 function App() {
   return (
@@ -107,6 +109,12 @@ function App() {
           <Route path="/notification" element={<NotificationPc />} />
           <Route path="/support" element={<SupportMob />} />
           <Route path="/apptour" element={<AppTour />} />
+          <Route path="/livebattle" element={<LiveBattle />} />
+          <Route path="/livebattle2" element={<LiveBattle2 />} />
+          <Route path="/filter" element={<FilterLiveBattle/>} />
+          <Route path="/requestchallange" element={<OpenChallengeReq/>} />
+          <Route path="/startbattle" element={<CardClickInstance/>} />
+          <Route path="/TopbarMobile" element={<CardClickInstance/>} />
         </Routes>
       </BrowserRouter>
       {/* <Info /> */}

@@ -1,9 +1,10 @@
 import React from "react";
+import TopbarMobile from "../MainLayout/TopbarMobile";
 
 const CardClickInstance = () => {
   return (
     <div>
-      <div id="NotificationspaceRoot" className="bg-[#fead3a] w-full h-8" />
+      {/* <div id="NotificationspaceRoot" className="bg-[#fead3a] w-full h-8" />
       <div className="bg-[#fead3a] flex flex-row justify-between w-full h-12 items-start pt-2 px-5">
         <div className="flex flex-row gap-3 w-2/5 items-start">
           <img
@@ -31,7 +32,22 @@ const CardClickInstance = () => {
         <div className="text-xs font-['Inter'] font-bold text-white">
           Battle
         </div>
+      </div> */}
+
+
+
+<div className="min-h-screen h-full bg-[#0f002b]">
+
+<TopbarMobile/>
+<div className="w-full pt-20">
+<div className="flex justify-center items-center h-screen">
+      <div className="text-4xl font-bold text-center animate-zoom-in-stick text-white">
+        Battle
       </div>
+    </div>
+</div>
+</div>
+
     </div>
   );
 };

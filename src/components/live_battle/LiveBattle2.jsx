@@ -1,52 +1,40 @@
 import React from "react";
-
+import { SidebarMob } from "../MainLayout/SidebarMob";
+import FrameProfile from "../../assets/profile/Frame_profile.png";
+import LiveBattles from "../../assets/new_game/livebattle.svg";
+import { useNavigate } from "react-router-dom";
+import TopbarMobile from "../MainLayout/TopbarMobile";
 const LiveBattle2 = () => {
+ const navigate =useNavigate()
   return (
-    <div>
-      <div id="NotificationspaceRoot" className="bg-[#fead3a] w-full h-8" />
-      <div className="bg-[#fead3a] flex flex-row justify-between w-full h-12 items-start pt-2 px-5">
-        <div className="flex flex-row gap-3 w-2/5 items-start">
-          <img
-            src="https://file.rendit.io/n/c069tsTkMzmjgvYgx5P1.svg"
-            alt="Materialsymbolsmenu"
-            id="Materialsymbolsmenu"
-            className="mt-1 w-6"
-          />
-          <div className="relative flex flex-row justify-center w-24 items-start">
-            <div className="text-center text-base font-['Nunito_Sans'] font-bold text-[#0f002b] absolute top-0 left-0 h-5 w-24">
-              LUDO KING
-            </div>
-            <div className="text-center text-base font-['Oooh_Baby'] text-[#0f002b] relative mt-4">
-              punch line
-            </div>
-          </div>
-        </div>
-        <img
-          src="https://file.rendit.io/n/c6s0VUvNnJMhUIhfdrvJ.png"
-          alt="Frame1"
-          className="mt-1 w-8 border"
-        />
-      </div>
+  
+<div className="min-h-screen h-full bg-white ">
+     
+      <TopbarMobile/>
 
-      <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] overflow-hidden bg-white flex flex-col justify-between gap-6 w-full items-start">
-        <div className="flex flex-col gap-2 w-full items-start">
-          <div className="bg-white flex flex-row justify-between w-full h-16 items-start pt-4 px-5">
-            <div className="flex flex-row gap-5 w-2/5 items-start">
+      <div className="bg-white w-full mt-20">
+      <div
+          
+          className="flex justify-between items-center px-4 py-2 w-full">
+            <div className="flex gap-5 items-center">
               <img
+              onClick={()=>navigate("/livebattle")}
                 src="https://file.rendit.io/n/Bh3TjQUvsgxuYLevIVW7.svg"
                 alt="HardwareKeyboardBackspace icon"
                 id="Epback"
                 className="w-6"
               />
               <div
-                id="LiveBattle1"
-                className="text-center text-xl font-['Inter'] text-[#0f002b] mt-px"
+                id="LiveBattle13"
+                className="text-center text-xl font-['Inter'] text-[#0f002b]"
               >
                 live <span className="font-bold">battle</span>
               </div>
             </div>
-            <div className="flex flex-row gap-5 w-20 items-start">
+          
+             <div className="flex gap-5">
               <img
+              onClick={()=>navigate("/filter")}
                 src="https://file.rendit.io/n/TRSmeMNnarMTIYOYVVL2.svg"
                 alt="Ionfilter"
                 id="Ionfilter"
@@ -60,137 +48,101 @@ const LiveBattle2 = () => {
               />
             </div>
           </div>
-          <div className="border-solid border-[rgba(15,_0,_43,_0.2)] shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-end ml-12 gap-3 w-3/4 items-start pt-4 pb-1 px-1 border rounded-lg">
-            <div className="flex flex-col ml-4 gap-1 w-4/5 items-start">
-              <div className="font-['Inter'] text-[#0f002b]">
-                open challenge<span> </span>
-                <div>from</div>
-                <span> </span>
-                <span className="font-bold">ravan3p</span>
-              </div>
-              <div
-                id="MinutesAgo1"
-                className="font-['Inter'] font-bold text-[#0f002b]"
-              >
-                · <span>2 minutes ago</span>
-              </div>
-            </div>
-            <div className="shadow-[inset_0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#fead3a] flex flex-row gap-16 w-full h-24 items-start pt-5 pl-5 pr-8 rounded-br-lg rounded-bl-lg">
-              <div className="flex flex-col gap-3 w-1/2 items-start">
-                <div className="flex flex-row gap-4 w-full items-start">
-                  <div className="font-['Inter'] text-white">Entry fee</div>
-                  <div className="font-['Inter'] font-bold text-white">₹40</div>
+
+          <div className="p-6 flex flex-col  gap-4 m-auto w-full">
+              <div onClick={()=>navigate("/requestchallange")} className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
+                <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
+                  <div className="italic">
+                    open challenge from
+                    <span className="font-extrabold pl-1">ravan3p</span>
+                  </div>
+                  <div className="italic font-semibold ">· 2 minutes ago</div>
                 </div>
-                <div className="flex flex-row gap-12 w-full items-start">
-                  <div className="font-['Inter'] text-white">Prize</div>
-                  <div className="font-['Inter'] font-bold text-white">₹80</div>
+                <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
+                  <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
+                    <div className="flex justify-between ">
+                      <span>Entry fee</span>
+                      <span> ₹40</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Prize</span>
+                      <span> ₹80</span>
+                    </div>
+                  </div>
+
+                  <div className=" flex w-[25.5px] h-[25.5px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
+                    <img
+                      src={LiveBattles}
+                      alt="Arcticonsbattleforwesnoth"
+                      className="w-4"
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-1 pt-3 w-10 h-10 items-start rounded-[32px]">
-                <img
-                  src="https://file.rendit.io/n/03xSpMncYNE2O1MW1HUI.svg"
-                  alt="Arcticonsbattleforwesnoth"
-                  className="w-5"
-                />
+
+              <div className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
+                <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
+                  <div className="italic">
+                    open challenge from
+                    <span className="font-extrabold pl-1">ravan3p</span>
+                  </div>
+                  <div className="italic font-semibold ">· 2 minutes ago</div>
+                </div>
+                <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
+                  <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
+                    <div className="flex justify-between ">
+                      <span>Entry fee</span>
+                      <span> ₹40</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Prize</span>
+                      <span> ₹80</span>
+                    </div>
+                  </div>
+
+                  <div className=" flex w-[25.5px] h-[25.5px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
+                    <img
+                      src={LiveBattles}
+                      alt="Arcticonsbattleforwesnoth"
+                      className="w-4"
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div className="border-solid border-[rgba(15,_0,_43,_0.2)] shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-end ml-12 gap-3 w-3/4 items-start pt-4 pb-1 px-1 border rounded-lg">
-          <div className="flex flex-col ml-4 gap-1 w-5/6 items-start">
-            <div className="font-['Inter'] text-[#0f002b]">
-              open challenge<span> </span>
-              <div>from</div>
-              <span> </span>
-              <span className="font-bold">kansh23i</span>
-            </div>
-            <div
-              id="MinutesAgo3"
-              className="font-['Inter'] font-bold text-[#0f002b]"
-            >
-              · <span>2 minutes ago</span>
-            </div>
-          </div>
-          <div className="shadow-[inset_0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#fead3a] flex flex-row gap-16 w-full h-24 items-start pt-5 pl-5 pr-8 rounded-br-lg rounded-bl-lg">
-            <div className="flex flex-col gap-3 w-1/2 items-start">
-              <div className="flex flex-row gap-4 w-full items-start">
-                <div className="font-['Inter'] text-white">Entry fee</div>
-                <div className="font-['Inter'] font-bold text-white">₹40</div>
+              <div className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
+                <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
+                  <div className="italic">
+                    open challenge from
+                    <span className="font-extrabold pl-1">ravan3p</span>
+                  </div>
+                  <div className="italic font-semibold ">· 2 minutes ago</div>
+                </div>
+                <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
+                  <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
+                    <div className="flex justify-between ">
+                      <span>Entry fee</span>
+                      <span> ₹40</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Prize</span>
+                      <span> ₹80</span>
+                    </div>
+                  </div>
+
+                  <div className=" flex w-[25.5px] h-[25.5px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
+                    <img
+                      src={LiveBattles}
+                      alt="Arcticonsbattleforwesnoth"
+                      className="w-4"
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="flex flex-row gap-12 w-full items-start">
-                <div className="font-['Inter'] text-white">Prize</div>
-                <div className="font-['Inter'] font-bold text-white">₹80</div>
-              </div>
+             
             </div>
-            <div className="shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-1 pt-3 w-10 h-10 items-start rounded-[32px]">
-              <img
-                src="https://file.rendit.io/n/03xSpMncYNE2O1MW1HUI.svg"
-                alt="Arcticonsbattleforwesnoth1"
-                className="w-5"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="border-solid border-[rgba(15,_0,_43,_0.2)] shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-end ml-12 gap-3 w-3/4 items-start pt-4 pb-1 px-1 border rounded-lg">
-          <div className="flex flex-col ml-4 gap-1 w-4/5 items-start">
-            <div className="font-['Inter'] text-[#0f002b]">
-              open challenge<span> </span>
-              <div>from</div>
-              <span> </span>
-              <span className="font-bold">ravan3p</span>
-            </div>
-            <div
-              id="MinutesAgo5"
-              className="font-['Inter'] font-bold text-[#0f002b]"
-            >
-              · <span>2 minutes ago</span>
-            </div>
-          </div>
-          <div className="shadow-[inset_0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#fead3a] flex flex-row gap-16 w-full h-24 items-start pt-5 pl-5 pr-8 rounded-br-lg rounded-bl-lg">
-            <div className="flex flex-col gap-3 w-1/2 items-start">
-              <div className="flex flex-row gap-4 w-full items-start">
-                <div className="font-['Inter'] text-white">Entry fee</div>
-                <div className="font-['Inter'] font-bold text-white">₹40</div>
-              </div>
-              <div className="flex flex-row gap-12 w-full items-start">
-                <div className="font-['Inter'] text-white">Prize</div>
-                <div className="font-['Inter'] font-bold text-white">₹80</div>
-              </div>
-            </div>
-            <div className="shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-1 pt-3 w-10 h-10 items-start rounded-[32px]">
-              <img
-                src="https://file.rendit.io/n/03xSpMncYNE2O1MW1HUI.svg"
-                alt="Arcticonsbattleforwesnoth2"
-                className="w-5"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="border-solid border-[rgba(15,_0,_43,_0.2)] shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-end gap-3 w-3/4 items-start mb-[-66px] ml-12 pt-4 pb-1 px-1 border rounded-lg">
-          <div className="flex flex-col ml-4 gap-1 w-5/6 items-start">
-            <div className="font-['Inter'] text-[#0f002b]">
-              open challenge<span> </span>
-              <div>from</div>
-              <span> </span>
-              <span className="font-bold">kansh23i</span>
-            </div>
-            <div
-              id="MinutesAgo7"
-              className="font-['Inter'] font-bold text-[#0f002b]"
-            >
-              · <span>2 minutes ago</span>
-            </div>
-          </div>
-          <div className="shadow-[inset_0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#fead3a] flex flex-row gap-16 w-full h-24 items-start pt-5 pl-5 pr-8 rounded-br-lg rounded-bl-lg">
-            <div className="flex flex-row gap-4 w-1/2 items-start">
-              <div className="font-['Inter'] text-white">Entry fee</div>
-              <div className="font-['Inter'] font-bold text-white">₹40</div>
-            </div>
-            <div className="shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] mt-1 w-10 h-10 rounded-[32px]" />
-          </div>
-        </div>
       </div>
-    </div>
+      </div>
+  
   );
 };
 

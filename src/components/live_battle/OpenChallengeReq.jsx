@@ -1,38 +1,46 @@
 import React from "react";
+import { SidebarMob } from "../MainLayout/SidebarMob";
+import FrameProfile from "../../assets/profile/Frame_profile.png";
+import LiveBattles from "../../assets/new_game/livebattle.svg";
+import { useNavigate } from "react-router-dom";
 
 const OpenChallengeReq = () => {
+  const navigate =useNavigate()
   return (
-    <div>
-      <div id="NotificationspaceRoot" className="bg-[#fead3a] w-full h-8" />
-      <div className="bg-[#fead3a] flex flex-row justify-between w-full h-12 items-start pt-2 px-5">
-        <div className="flex flex-row gap-3 w-2/5 items-start">
-          <img
-            src="https://file.rendit.io/n/c069tsTkMzmjgvYgx5P1.svg"
-            alt="Materialsymbolsmenu"
-            id="Materialsymbolsmenu"
-            className="mt-1 w-6"
-          />
-          <div className="relative flex flex-row justify-center w-24 items-start">
-            <div className="text-center text-base font-['Nunito_Sans'] font-bold text-[#0f002b] absolute top-0 left-0 h-5 w-24">
+<div className="min-h-screen h-full bg-white ">
+      <div
+        id="NotificationspaceRoot"
+        className="bg-[#fead3a]  h-8 overflow-hidden"
+      />
+      <div className="bg-[#fead3a]  flex justify-between  w-full   h-[51px]  px-4">
+        <div className="flex flex-row gap-3 items-start mt-3">
+          <SidebarMob />
+          <div className="flex flex-col text-[#0f002b] ">
+            <div className="  text-base font-['Nunito_Sans'] font-extrabold ">
               LUDO KING
             </div>
-            <div className="text-center text-base font-['Oooh_Baby'] text-[#0f002b] relative mt-4">
+
+            <div className="text-center text-base font-['Oooh_Baby'] font-normal  -mt-2">
               punch line
             </div>
           </div>
         </div>
         <img
-          src="https://file.rendit.io/n/c6s0VUvNnJMhUIhfdrvJ.png"
+          src={FrameProfile}
           alt="Frame1"
-          className="mt-1 w-8 border"
+          className="w-[30px] h-[30px] mt-[9.5px] rounded-[100px] border border-solid border-white "
         />
       </div>
+
+
+
       <div id="NewRootRoot" className="flex flex-row w-full items-start">
         <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-between pb-20 w-full h-[762px] items-start">
           <div className="flex flex-col gap-4 w-full items-start">
             <div className="bg-white flex flex-row justify-between w-full h-16 items-start pt-4 px-5">
               <div className="flex flex-row gap-5 w-2/5 items-start">
                 <img
+                  onClick={()=>navigate("/livebattle2")}
                   src="https://file.rendit.io/n/stxeGrguy8pBFLiVl8PK.svg"
                   alt="HardwareKeyboardBackspace icon"
                   id="Epback"
@@ -47,6 +55,7 @@ const OpenChallengeReq = () => {
               </div>
               <div className="flex flex-row gap-5 w-20 items-start">
                 <img
+                   onClick={()=>navigate("/livebattle2")}
                   src="https://file.rendit.io/n/msQ1lGtXT3Hr1PIYGXxX.svg"
                   alt="Radixiconscross"
                   id="Radixiconscross"
@@ -119,6 +128,7 @@ const OpenChallengeReq = () => {
                     </div>
                   </div>
                   <div
+                  onClick={()=>navigate("/profile")}
                     id="ViewProfile1"
                     className="font-['Inter'] text-[#0f002b]"
                   >
@@ -136,6 +146,7 @@ const OpenChallengeReq = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };
