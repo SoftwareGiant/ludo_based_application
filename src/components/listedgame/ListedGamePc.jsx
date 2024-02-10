@@ -17,15 +17,18 @@ import Back from "../../assets/profile/ep_back.svg";
 import Favorite from "../../assets/new_game/fav.svg";
 import BellIcon from "../../assets/new_game/notification.svg";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../MainLayout/Sidebar";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 
 const ListedGamePc = () => {
+  const navigate = useNavigate();
+
   const [isOpen, setIsOpen] = useState(false);
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
+  
   return (
     <>
       <div>
@@ -107,7 +110,9 @@ const ListedGamePc = () => {
                     <div className="text-xl text-[#0f002b] mb-1">₹</div>
                     <div className="text-xl font-bold text-[#0f002b]">205</div>
                   </div>
-                  <div className="text-sm font-bold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-px pt-2 w-16 h-8 items-start rounded-lg">
+                  <div
+                  onClick={()=>navigate("/startbattle")}
+                  className="text-sm font-bold text-white shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-row justify-center mt-px pt-2 w-16 h-8 items-start rounded-lg">
                     Battle
                   </div>
                 </div>

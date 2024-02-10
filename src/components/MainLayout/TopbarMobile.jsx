@@ -1,31 +1,35 @@
 import React from "react";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
-import HamBurger from "../../assets/profile/hamburger.svg";
+import { SidebarMob } from "./SidebarMob";
+import { useNavigate } from "react-router-dom";
 const TopbarMobile = () => {
+  const navigate = useNavigate();
   return (
-    <div className="bg-[#fead3a] flex flex-row justify-between w-full sm:hidden h-12 items-start pt-2 px-5  lg:hidden">
-      <div className="flex flex-row gap-3 w-2/5 items-start">
-        <img
-          src={HamBurger}
-          alt="Materialsymbolsmenu"
-          id="Materialsymbolsmenu"
-          className="mt-1 w-6"
-          //   onClick={toggleNavbar}
-        />
-        <div className="relative flex flex-row justify-center w-24 items-start">
-          <div className="text-center text-base font-['Nunito_Sans'] font-bold text-[#0f002b] absolute top-0 left-0 h-5 w-24">
+    <div className="fixed bg-[#fead3a] top-0 w-full shadow-lg z-50">
+    <div
+      id="NotificationspaceRoot"
+      className="bg-[#fead3a]  h-8 overflow-hidden"
+    />
+    <div className="bg-[#fead3a]  flex justify-between  w-full   h-[51px]  px-4">
+      <div className="flex flex-row gap-3 items-start mt-3">
+        <SidebarMob />
+        <div className="flex flex-col text-[#0f002b] ">
+          <div className="  text-base font-['Nunito_Sans'] font-extrabold ">
             LUDO KING
           </div>
-          <div className="text-center text-base font-['Oooh_Baby'] text-[#0f002b] relative mt-4">
+
+          <div className="text-center text-base font-['Oooh_Baby'] font-normal  -mt-2">
             punch line
           </div>
         </div>
       </div>
       <img
+      onClick={()=>navigate("/profile")}
         src={FrameProfile}
         alt="Frame1"
-        className="mt-1 w-8 h-8 border rounded-[100px]"
+        className="w-[30px] h-[30px] mt-[9.5px] rounded-[100px] border border-solid border-white "
       />
+    </div>
     </div>
   );
 };

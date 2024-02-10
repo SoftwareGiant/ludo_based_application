@@ -14,8 +14,10 @@ import FrameProfile from "../../assets/profile/Frame_profile.png";
 import HamBurger from "../../assets/profile/hamburger.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import NewGameSLider from "./NewGameSLider";
+import { useNavigate } from "react-router-dom";
 
 const NewGameMob = () => {
+  const navigate = useNavigate();
   return (
     <div className="max-w-[480px] w-full min-h-screen h-full">
       <div
@@ -114,7 +116,9 @@ const NewGameMob = () => {
               </div>
             </div>
           </div>
-          <div className="shadow-[0px_0px_4px_1px_rgba(0,_0,_0,_0.25)] bg-white  flex flex-row justify-center -mt-6 relative ml-[42%] pt-2 w-12 h-12 items-start rounded-[24px]">
+          <div 
+          onClick={()=>navigate("/LiveBattle")}
+          className="shadow-[0px_0px_4px_1px_rgba(0,_0,_0,_0.25)] bg-white  flex flex-row justify-center -mt-6 relative ml-[42%] pt-2 w-12 h-12 items-start rounded-[24px]">
             <img
               src="https://file.rendit.io/n/PZF2SOJvNd8p90uk3rGr.svg"
               alt="HardwareKeyboardArrowDown icon"
