@@ -2,7 +2,7 @@ import React from "react";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { SidebarMob } from "./SidebarMob";
 import { useNavigate } from "react-router-dom";
-const TopbarMobile = ({isStart}) => {
+const TopbarMobile = ({isStart,handlestart}) => {
   const navigate = useNavigate();
   return (
     <div className="fixed bg-[#fead3a] top-0 w-full shadow-lg z-50">
@@ -23,7 +23,7 @@ const TopbarMobile = ({isStart}) => {
           </div>
         </div>
       </div>
-      {isStart ? <div className="bg-[#1E1E1E] px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold">Start</div> : 
+      {isStart ? <div className="bg-[#1E1E1E] px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold" onClick={handlestart}>Start</div> : 
  <img
  onClick={()=>navigate("/profile")}
    src={FrameProfile}

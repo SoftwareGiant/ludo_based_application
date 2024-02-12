@@ -62,6 +62,7 @@ import TopbarMobile from "./components/MainLayout/TopbarMobile";
 import NewGameSLider from "./components/live_battle/NewGameSLider";
 import ChatUserMob from "./components/listedgame/ChatUserMob";
 import ButtonLoader from "./components/MainLayout/ButtonLoader";
+import MatchProgress from "./components/live_battle/MatchProgress";
 
 function App() {
   return (
@@ -116,7 +117,7 @@ function App() {
           <Route path="/filter" element={<FilterLiveBattle />} />
           <Route path="/requestchallange" element={<OpenChallengeReq />} />
           <Route path="/startbattle" element={<CardClickInstance />} />
-
+          <Route path="/matchstart" element={<MatchProgress/>} />
           <Route path="/chat" element={<ChatUserMob />} />
 
           {/* <Route path="/loader" element={<ButtonLoader/>} /> */}

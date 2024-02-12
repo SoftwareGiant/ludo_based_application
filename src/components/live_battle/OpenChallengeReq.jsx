@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import LiveBattles from "../../assets/new_game/livebattle.svg";
 import { useNavigate } from "react-router-dom";
-
+import {
+  Button,
+  Drawer,
+  IconButton,
+  Typography,
+} from "@material-tailwind/react";
 const OpenChallengeReq = () => {
-  const navigate =useNavigate()
+  const [openBottom, setOpenBottom] = useState(false);
+  const [isRequest, setIsRequest] = useState(false);
+  const navigate = useNavigate();
+  const openDrawerBottom = () => {
+    setIsRequest(false);
+    setOpenBottom(true);
+    setTimeout(() => {
+      setIsRequest(true);
+    }, 3000);
+  };
+  const closeDrawerBottom = () => setOpenBottom(false);
   return (
-<div className="min-h-screen h-full bg-white ">
+    <div className="min-h-screen h-full bg-white ">
       <div
         id="NotificationspaceRoot"
         className="bg-[#fead3a]  h-8 overflow-hidden"
@@ -32,15 +47,13 @@ const OpenChallengeReq = () => {
         />
       </div>
 
-
-
       <div id="NewRootRoot" className="flex flex-row w-full items-start">
         <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-between pb-20 w-full h-[762px] items-start">
           <div className="flex flex-col gap-4 w-full items-start">
             <div className="bg-white flex flex-row justify-between w-full h-16 items-start pt-4 px-5">
               <div className="flex flex-row gap-5 w-2/5 items-start">
                 <img
-                  onClick={()=>navigate("/livebattle2")}
+                  onClick={() => navigate("/livebattle2")}
                   src="https://file.rendit.io/n/stxeGrguy8pBFLiVl8PK.svg"
                   alt="HardwareKeyboardBackspace icon"
                   id="Epback"
@@ -55,7 +68,7 @@ const OpenChallengeReq = () => {
               </div>
               <div className="flex flex-row gap-5 w-20 items-start">
                 <img
-                   onClick={()=>navigate("/livebattle2")}
+                  onClick={() => navigate("/livebattle2")}
                   src="https://file.rendit.io/n/msQ1lGtXT3Hr1PIYGXxX.svg"
                   alt="Radixiconscross"
                   id="Radixiconscross"
@@ -128,7 +141,7 @@ const OpenChallengeReq = () => {
                     </div>
                   </div>
                   <div
-                  onClick={()=>navigate("/profile")}
+                    onClick={() => navigate("/profile")}
                     id="ViewProfile1"
                     className="font-['Inter'] text-[#0f002b]"
                   >
@@ -139,6 +152,7 @@ const OpenChallengeReq = () => {
             </div>
           </div>
           <div
+            onClick={openDrawerBottom}
             id="ContinueAndLoading"
             className="text-center text-xl font-['Inter'] font-medium text-[#0f002b] shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row ml-8 w-5/6 h-12 items-start pt-4 px-6 rounded-lg"
           >
@@ -147,6 +161,53 @@ const OpenChallengeReq = () => {
         </div>
       </div>
 
+      <Drawer
+        placement="bottom"
+        open={openBottom}
+        onClose={closeDrawerBottom}
+        className="p-4  bg-[#0f002b] rounded-t-3xl"
+      >
+        {isRequest == false ? (
+          <div className="flex flex-col p-4">
+            <div className="mb-4 flex items-center w-full justify-center gap-2">
+              <div className="bg-white w-[120px] h-[120px] rounded-full relative">
+                <div className="text-[#00C300] bold absolute top-8 left-5 text-6xl">
+                  45
+                </div>
+              </div>
+            </div>
+            <Typography
+              color="white"
+              className=" pr-4 flex justify-center text-xl font-bold"
+            >
+              Requesting...
+            </Typography>
+          </div>
+        ) : (
+          <div>
+            <div className="flex justify-center gap-6 mt-10 w-full">
+              <Button
+                onClick={closeDrawerBottom}
+                className="bg-[#0f002b] text-white text-lg font-extrabold  border border-gray-600  rounded-md"
+              >
+                Reject
+              </Button>
+              <Button
+                onClick={() => navigate("/chat")}
+                className="bg-white text-[#0f002b] text-lg font-extrabold border border-white "
+              >
+                Start
+              </Button>
+            </div>
+            <Typography
+              color="gray"
+              className=" mt-12 pr-4 flex justify-center font-normal"
+            >
+              Reject will delete this open challenges from list
+            </Typography>
+          </div>
+        )}
+      </Drawer>
     </div>
   );
 };
