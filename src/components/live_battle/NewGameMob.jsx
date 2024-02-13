@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../App.css";
 import Copy from "../../assets/new_game/copy.svg";
 import Share from "../../assets/new_game/share.svg";
@@ -12,12 +12,36 @@ import Elp from "../../assets/new_game/Ellipse.svg";
 import Prfl from "../../assets/new_game/ludo-indian.png";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import HamBurger from "../../assets/profile/hamburger.svg";
+import back from "../../assets/profile/ep_back.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import NewGameSLider from "./NewGameSLider";
 import { useNavigate } from "react-router-dom";
+import {
+  Button,
+  Drawer,
+  IconButton,
+  Typography,
+} from "@material-tailwind/react";
+import ButtonLoader from "../MainLayout/ButtonLoader";
 
 const NewGameMob = () => {
   const navigate = useNavigate();
+  const[battleAmount,setBattleAmount]=useState("");
+  const [buttonStatus, setButtonStatus] = useState("create");
+  const [openBottom, setOpenBottom] = useState(false);
+  const openDrawerBottom = () => setOpenBottom(true);
+  const closeDrawerBottom = () => setOpenBottom(false);
+
+  const handleCreate = () => {
+    if(battleAmount===""){
+     alert("fill battle amount")
+      return; 
+    }
+    setButtonStatus("loading");
+    setTimeout(() => {
+      setButtonStatus("success");
+    }, 2000);
+  };
   return (
     <div className="max-w-[480px] w-full min-h-screen h-full">
       <div
@@ -43,7 +67,7 @@ const NewGameMob = () => {
           className="w-[30px] h-[30px] mt-[9.5px] rounded-[100px] border border-solid border-white "
         />
       </div>
-      
+
       <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative">
         <div className="bg-[#fead3a] h-80 w-[650px] rounded-[50%]   -top-20 absolute -left-24" />
         <div className="py-4">
@@ -116,9 +140,10 @@ const NewGameMob = () => {
               </div>
             </div>
           </div>
-          <div 
-          onClick={()=>navigate("/LiveBattle")}
-          className="shadow-[0px_0px_4px_1px_rgba(0,_0,_0,_0.25)] bg-white  flex flex-row justify-center -mt-6 relative ml-[42%] pt-2 w-12 h-12 items-start rounded-[24px]">
+          <div
+            onClick={() => navigate("/LiveBattle")}
+            className="shadow-[0px_0px_4px_1px_rgba(0,_0,_0,_0.25)] bg-white  flex flex-row justify-center -mt-6 relative ml-[42%] pt-2 w-12 h-12 items-start rounded-[24px]"
+          >
             <img
               src="https://file.rendit.io/n/PZF2SOJvNd8p90uk3rGr.svg"
               alt="HardwareKeyboardArrowDown icon"
@@ -128,83 +153,143 @@ const NewGameMob = () => {
           </div>
         </div>
 
-
-
-
-        <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#fead3a] relative flex flex-col justify-center ml-6 gap-10 w-5/6 items-start p-5 rounded-lg mb-6">
-          <div className="flex flex-col justify-between gap-6 w-full items-start">
+        <div className="relative m-6">
+          <div className="hadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#fead3a] flex flex-col p-4 gap-6 w-fullw-full  max-w-screen items-start rounded-lg pb-8">
             <div
               id="StartYourOwnBattle1"
-              className="text-center text-xl font-['Inter'] text-[#0f002b] ml-1"
+              className="text-xl font-['Inter'] text-[#0f002b]"
             >
               start your own <span className="font-bold">battle</span>
             </div>
-            <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row justify-end ml-px gap-16 w-full items-start pt-2 px-2 rounded-lg">
-              <div className="flex flex-row mt-3 gap-1 w-3/5 items-start">
-                <div className="text-center font-['Inter'] text-[#0f002b]">
-                  ₹
+            <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg">
+              <div className="flex" onClick={openDrawerBottom}>
+                <span>₹</span>
+                <input
+                  placeholder="Your battle amount"
+                  className="outline-none pl-2  focus:outline-none w-full"
+                />
+              </div>
+
+              <Drawer
+                placement="bottom"
+                open={openBottom}
+                onClose={closeDrawerBottom}
+                className="p-4  bg-[#fead3a] rounded-t-3xl"
+              >
+                <div className="mb-4 flex items-center justify-start gap-2">
+                  <IconButton
+                    variant="text"
+                    color="blue-gray"
+                    onClick={closeDrawerBottom}
+                  >
+                    <img src={back} />
+                  </IconButton>
+                  <Typography variant="h5" color="white">
+                    Enter Battle Amount
+                  </Typography>
                 </div>
-                <div className="text-center font-['Inter'] text-black/56.99999999999999">
-                  Your battle amount
-                </div>
-              </div>
-              <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex flex-row mb-2 w-10 items-start pt-1 px-1 rounded-[20px]">
-                <img
-                  src="https://file.rendit.io/n/oR12vSMymgw9l2fo50rk.svg"
-                  alt="Arcticonsbattleforwesnoth2"
-                  className="mb-1 w-6"
-                />
-              </div>
-            </div>
-            <div className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row justify-center pt-1 gap-6 w-full items-start rounded-lg">
-              <div className="flex flex-row mt-1 gap-5 w-20 items-start">
-                <img
-                  src="https://file.rendit.io/n/5PdA4wmMt9GMBxV6CW6P.svg"
-                  alt="Logoswhatsappicon"
-                  id="Logoswhatsappicon"
-                  className="w-8"
-                />
-                <img
-                  src="https://file.rendit.io/n/55XD5jWezeMUMD482SOu.svg"
-                  alt="Logosfacebook"
-                  id="Logosfacebook"
-                  className="mt-px w-8"
-                />
-              </div>
-              <div className="flex flex-row mb-1 gap-4 w-1/2 items-start">
-                <img
-                  src="https://file.rendit.io/n/xkOX2mj2hPIoROecNSu8.svg"
-                  alt="Ritwitterxfill"
-                  id="Ritwitterxfill"
-                  className="mt-2 w-6"
-                />
-                <div className="flex flex-row gap-2 w-24 items-start">
-                  <div className="bg-white flex flex-row w-10 h-10 items-start pt-2 px-2">
+                <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg">
+                  <div className="flex" onClick={openDrawerBottom}>
+                    <span>₹</span>
+                    <input
+                    val={battleAmount}
+                    onChange={(e)=>setBattleAmount(e.target.value)}
+                      placeholder="Your battle amount"
+                      className="outline-none pl-2  focus:outline-none w-full"
+                    />
+                  </div>
+                  <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-2">
                     <img
-                      src="https://file.rendit.io/n/8hRbplCBTS8XBc5b8CmV.svg"
-                      alt="ActionLabelOutline icon"
-                      id="Solarcopylinear"
+                      src="https://file.rendit.io/n/oR12vSMymgw9l2fo50rk.svg"
+                      alt="Arcticonsbattleforwesnoth2"
                       className="w-6"
                     />
                   </div>
-                  <div className="bg-white flex flex-row w-10 items-start pt-1 px-1">
-                    <img
-                      src="https://file.rendit.io/n/SF3ew7gbHLPpUywDhwmw.svg"
-                      alt="Mdishare"
-                      id="Mdishare"
-                      className="mb-1 w-8"
-                    />
-                  </div>
                 </div>
+
+                <Typography
+                  color="gray"
+                  className="mb-4 mt-12 pr-4 flex justify-center font-normal"
+                >
+                  You are creating a new open battle
+                </Typography>
+                <div className="flex justify-center w-full">
+                  {buttonStatus === "success" ? (
+                    <Button
+                    onClick={closeDrawerBottom}
+                    className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5">
+                      Success
+                    </Button>
+                  ) : buttonStatus === "loading" ? (
+                    <Button
+                      className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5 "
+                      disabled
+                    >
+                    <ButtonLoader/>
+                    </Button>
+                  ) : (
+                    <Button
+                      className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5 "
+                      onClick={handleCreate}
+                    >
+                      Create!
+                    </Button>
+                  )}
+                </div>
+              </Drawer>
+
+              <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-2">
+                <img
+                  src="https://file.rendit.io/n/oR12vSMymgw9l2fo50rk.svg"
+                  alt="Arcticonsbattleforwesnoth2"
+                  className="w-6"
+                />
               </div>
             </div>
+            <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between w-full items-center px-4 py-2 rounded-lg">
+              <img
+                src="https://file.rendit.io/n/5PdA4wmMt9GMBxV6CW6P.svg"
+                alt="Logoswhatsappicon"
+                id="Logoswhatsappicon"
+                className="w-8"
+              />
+              <img
+                src="https://file.rendit.io/n/55XD5jWezeMUMD482SOu.svg"
+                alt="Logosfacebook"
+                id="Logosfacebook"
+                className=" w-8"
+              />
+
+              <img
+                src="https://file.rendit.io/n/xkOX2mj2hPIoROecNSu8.svg"
+                alt="Ritwitterxfill"
+                id="Ritwitterxfill"
+                className="w-7"
+              />
+
+              <img
+                src="https://file.rendit.io/n/8hRbplCBTS8XBc5b8CmV.svg"
+                alt="ActionLabelOutline icon"
+                id="Solarcopylinear"
+                className="w-7"
+              />
+
+              <img
+                src="https://file.rendit.io/n/SF3ew7gbHLPpUywDhwmw.svg"
+                alt="Mdishare"
+                id="Mdishare"
+                className=" w-8"
+              />
+            </div>
+            <div className="flex items-center justify-center w-full m-auto">
+              <img
+                src="https://file.rendit.io/n/KPwS2RCsAs5e6sLj4eAj.svg"
+                alt="Line"
+                id="Line"
+                className="w-24"
+              />
+            </div>
           </div>
-          <img
-            src="https://file.rendit.io/n/KPwS2RCsAs5e6sLj4eAj.svg"
-            alt="Line"
-            id="Line"
-            className="ml-24 w-24"
-          />
         </div>
       </div>
     </div>

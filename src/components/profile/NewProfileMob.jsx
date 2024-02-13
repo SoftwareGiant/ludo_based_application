@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../app.css";
 import ProfileEditbtn from "../../assets/profile/editbutton.svg";
 import HamBurger from "../../assets/profile/hamburger.svg";
@@ -24,6 +24,18 @@ import { Switch } from "@material-tailwind/react";
 
 const NewProfileMob = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
@@ -54,22 +66,60 @@ const NewProfileMob = () => {
       <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative">
         <div className="bg-[#fead3a] h-80 w-[650px] rounded-[50%]   -top-20 absolute -left-24" />
 
-        <div className="w-full relative mt-6">
-          <div className="w-48 m-auto relative">
-            <img
-              className="w-48 rounded-full"
-              src="https://images.unsplash.com/photo-1529524987368-af489318987c?q=80&w=582&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            />
-            <img
-              className="absolute top-0 right-0"
-              alt="editbtn"
-              src={ProfileEditbtn}
-            />
+        <div
+          className={`w-full relative mt-6  flex ${
+            scrollPosition > 10 ? "flex-row items-center" : "flex-col"
+          }`}
+        >
+          <div
+            className={`${
+              scrollPosition > 10 ? "flex" : "w-full"
+            } m-auto relative `}
+          >
+            <div
+              className={`${
+                scrollPosition > 10 ? "" : "w-full"
+              } flex justify-center items-center`}
+            >
+              <img
+                className={`${
+                  scrollPosition > 10 ? "w-12" : "w-48"
+                } relative  rounded-full`}
+                src="https://images.unsplash.com/photo-1529524987368-af489318987c?q=80&w=582&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              />
+              <img
+                className={`absolute  ${
+                  scrollPosition > 10 ? "hidden " : "top-0 right-[30%]"
+                }`}
+                alt="editbtn"
+                src={ProfileEditbtn}
+              />
+            </div>
+
+            <div
+              className={`flex  flex-col m-auto items-center text-white font-bold ${
+                scrollPosition > 10 ? "pt-0" : "pt-10"
+              }`}
+            >
+              <div className="flex  w-full gap-2 items-center justify-center">
+                <span className="text-center text-3xl ">Ludo Player</span>
+                <img
+                  src={Verify}
+                  alt="Iconparkoutlinesuccess"
+                  className="mt-2 w-6"
+                />
+              </div>
+              <div className="text-center text-xl">@ludoplayer</div>
+            </div>
+          </div>
+
+          <div className={`${scrollPosition > 10 ? "pr-10" : "hidden"}`}>
+            <Switch color="amber" className="bg-brown-800" />
           </div>
         </div>
 
         <div className="mt-10 flex flex-col gap-3 w-full font-['Nunito_Sans'] items-start relative text-white font-bold">
-          <div className="flex flex-col m-auto items-center">
+          {/* <div className="flex flex-col m-auto items-center">
             <div className="flex  w-full gap-2 items-center justify-center">
               <span className="text-center text-3xl ">Ludo Player</span>
               <img
@@ -79,7 +129,7 @@ const NewProfileMob = () => {
               />
             </div>
             <div className="text-center text-xl">@ludoplayer</div>
-          </div>
+          </div> */}
 
           <div className="bg-[#0f002b] text-white flex flex-col justify-center gap-10 w-full items-start pt-5 pb-6 px-8">
             <div className="flex  justify-between w-full items-center">
@@ -119,6 +169,14 @@ const NewProfileMob = () => {
                 <div id="Push" className="text-sm text-white mt-px">
                   Phone No. :
                 </div>
+                <Switch color="amber" className="bg-brown-800" />
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-between gap-6 w-5/6 items-start">
+              <div className="text-xl font-bold text-white">App Preference</div>
+              <div className="flex flex-row justify-between ml-4 w-full items-start">
+                <div className="text-sm text-white mt-px">Theme :</div>
                 <Switch color="amber" className="bg-brown-800" />
               </div>
             </div>

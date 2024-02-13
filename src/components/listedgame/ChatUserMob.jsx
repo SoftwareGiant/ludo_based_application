@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import TopbarMobile from "../MainLayout/TopbarMobile";
 import startchat from "../../assets/profile/startchat.svg";
 import menu from "../../assets/profile/menusvg.svg";
+import feedback from "../../assets/new_game/feedback.svg";
+import report from "../../assets/new_game/report.svg";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
-// import { Popover, PopoverContent, PopoverHandler } from "@material-tailwind/react";
 import {
   Popover,
   PopoverHandler,
@@ -15,8 +16,10 @@ import {
   ListItem,
   ListItemPrefix,
 } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
-const SupportMob = () => {
+const ChatUserMob = () => {
+  const navigate = useNavigate();
   const user = [
     {
       text: "hi",
@@ -44,6 +47,8 @@ const SupportMob = () => {
   const [image, setImage] = useState(null);
 
   const handleSendMessage = () => {
+    const times = new Date().toLocaleTimeString();
+    console.log(times.slice(0, 4), typeof times);
     if (inputText.trim() === "" && !image) return;
     setMessages([
       ...messages,
@@ -51,7 +56,7 @@ const SupportMob = () => {
         text: inputText,
         image,
         sender: "me",
-        time: new Date().toLocaleTimeString(),
+        time: new Date().toLocaleTimeString().slice(0, 4),
       },
     ]);
     setInputText("");
@@ -68,57 +73,79 @@ const SupportMob = () => {
       reader.readAsDataURL(file);
     }
   };
+  const handleStart=()=>{
+    navigate("/matchstart");
+  }
 
   return (
     <div className="min-h-screen w-full h-full  bg-[#0f002b] overflow-hidden relative">
       <div className="max-w-[480px] w-full overflow-hidden">
-        <TopbarMobile />
+        <TopbarMobile isStart={true} handlestart={handleStart} />
       </div>
 
-      <div className="w-full overflow-hidden  ">
-        <div className="bg-[#fead3a] h-4/5 w-[200%]  rounded-[50%]   -top-20 absolute -left-60 " />
+      <div className="w-full overflow-hidden h-full ">
+        <div className="bg-[#fead3a] h-[700px] w-[200%]  rounded-[50%]   -top-20 absolute -left-60 " />
 
-        <div className="fixed flex justify-between p-4  items-center mt-3 bg-[#fead3a] w-full pt-20 ">
+        <div className="relative flex justify-between p-4  items-center mt-3 bg-[#fead3a] w-full pt-20 ">
           <div className="flex justify-center gap-2 items-center">
             <img
               src={FrameProfile}
               className="w-[30px] h-[30px] rounded-[100px] border border-solid border-white "
             />
             <div className="flex flex-col text-black items-start justify-center">
-              <span className="text-[20px] leading-tight font-medium">Customer Service</span>
-             
+              <span className="text-[20px] leading-tight">Player</span>
+              <span className="text-[14px] leading-tight">online</span>
             </div>
           </div>
           <div className="flex gap-2">
-           
+            <img src={startchat} className="w-[30px] h-[30px]  " />
             <div>
-              <Popover placement="bottom-end">
+              <Popover placement="left-start">
                 <PopoverHandler>
-                  <img src={menu} className="w-[5px] h-[30px] " />
+                  <div className="px-3">
+                    <img src={menu} className="w-[5px] h-[30px] " />
+                  </div>
                 </PopoverHandler>
-                <PopoverContent className="w-72 h-20 bg-white z-50">
-                  hi gaurav
+                <PopoverContent className="bg-white  z-50">
+                  <ListItem className="hover:bg-black hover:text-white">
+                    <ListItemPrefix>
+                      <img src={startchat} />
+                    </ListItemPrefix>{" "}
+                    Add Fav
+                  </ListItem>
+                  <ListItem className="hover:bg-black hover:text-white">
+                  <ListItemPrefix>
+                      <img src={feedback} />
+                    </ListItemPrefix>
+                    Feedback
+                  </ListItem>
+                  <ListItem className="hover:bg-black hover:text-white">
+                  <ListItemPrefix>
+                      <img src={report} />
+                    </ListItemPrefix>
+                    Report
+                  </ListItem>
                 </PopoverContent>
               </Popover>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col h-screen relative pt-36 ">
+        <div className="flex flex-col h-full relative  ">
           <div className="flex-1 p-4 overflow-y-auto">
             {messages.map((message, index) => (
               <div
                 key={index}
                 className={`flex  ${
-                  message.sender === "me" ? "justify-end" : "justify-start"
+                  message.sender === "me" ? "justify-end " : "justify-start"
                 } mb-2`}
               >
                 <div
                   className={`${
                     message.sender === "me"
-                      ? "bg-white text-black self-end"
-                      : "bg-black text-white self-start"
-                  } p-2 rounded-lg max-w-md overflow-hidden `}
+                      ? "bg-white text-black self-end pl-5"
+                      : "bg-black text-white self-start pr-5 "
+                  } p-2 rounded-lg max-w-md overflow-hidden font-semibold `}
                   style={{
                     maxWidth: "80%",
                     whiteSpace: "normal",
@@ -134,14 +161,18 @@ const SupportMob = () => {
                       style={{ maxWidth: "100%" }}
                     />
                   )}
-                  <span className="text-xs block text-gray-500 mt-1">
+                  <span
+                    className={`text-xs block text-gray-500 mt-1 ${
+                      message.sender === "me" ? "text-end" : "text-start"
+                    }`}
+                  >
                     {message.time}
                   </span>
                 </div>
               </div>
             ))}
           </div>
-          <div className="p-4 m-4 mb-8 rounded-md border-t bg-white flex ">
+          <div className="px-4 py-2 m-4 mb-8 rounded-md border-t bg-white flex fixed w-[94%] bottom-3">
             <img
               src="https://file.rendit.io/n/aXGTlHYYkimk9HRIA15k.svg"
               alt="Emoji"
@@ -189,4 +220,4 @@ const SupportMob = () => {
   );
 };
 
-export default SupportMob;
+export default ChatUserMob;

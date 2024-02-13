@@ -60,6 +60,9 @@ import MyButton from "./components/MainLayout/MyButton";
 import GameHistoryPc from "./components/game_history/GameHistoryPc";
 import TopbarMobile from "./components/MainLayout/TopbarMobile";
 import NewGameSLider from "./components/live_battle/NewGameSLider";
+import ChatUserMob from "./components/listedgame/ChatUserMob";
+import ButtonLoader from "./components/MainLayout/ButtonLoader";
+import MatchProgress from "./components/live_battle/MatchProgress";
 
 function App() {
   return (
@@ -76,7 +79,7 @@ function App() {
               useMediaQuery({ minWidth: 768 }) ? <NewGame /> : <NewGameMob />
             }
           /> */}
-            {/* <Route path="/" element={<NewGameMob />} />
+          {/* <Route path="/" element={<NewGameMob />} />
           <Route path="/profile" element={<NewProfile />} />
           <Route path="/wincash" element={<ListedGamePc />} />
           <Route path="/mywallet" element={<MyWalletMain />} />
@@ -92,10 +95,10 @@ function App() {
           <Route path="/notification" element={<NotificationPc />} />
           <Route path="/support" element={<SupportPc />} />
           <Route path="/apptour" element={<AppTour />} /> */}
-      
+
           <Route path="/" element={<NewGameMob />} />
           <Route path="/profile" element={<NewProfileMob />} />
-          <Route path="/wincash" element={<ListedGamePc/>} />
+          <Route path="/wincash" element={<ListedGamePc />} />
           <Route path="/mywallet" element={<MyWalletMain />} />
           <Route path="/deposite" element={<AddCashPc />} />
           <Route path="/withdraw" element={<WithDrawPc />} />
@@ -111,10 +114,13 @@ function App() {
           <Route path="/apptour" element={<AppTour />} />
           <Route path="/livebattle" element={<LiveBattle />} />
           <Route path="/livebattle2" element={<LiveBattle2 />} />
-          <Route path="/filter" element={<FilterLiveBattle/>} />
-          <Route path="/requestchallange" element={<OpenChallengeReq/>} />
-          <Route path="/startbattle" element={<CardClickInstance/>} />
-          <Route path="/TopbarMobile" element={<CardClickInstance/>} />
+          <Route path="/filter" element={<FilterLiveBattle />} />
+          <Route path="/requestchallange" element={<OpenChallengeReq />} />
+          <Route path="/startbattle" element={<CardClickInstance />} />
+          <Route path="/matchstart" element={<MatchProgress/>} />
+          <Route path="/chat" element={<ChatUserMob />} />
+
+          {/* <Route path="/loader" element={<ButtonLoader/>} /> */}
         </Routes>
       </BrowserRouter>
       {/* <Info /> */}
