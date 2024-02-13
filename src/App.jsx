@@ -63,6 +63,8 @@ import NewGameSLider from "./components/live_battle/NewGameSLider";
 import ChatUserMob from "./components/listedgame/ChatUserMob";
 import ButtonLoader from "./components/MainLayout/ButtonLoader";
 import MatchProgress from "./components/live_battle/MatchProgress";
+import HelpPage from "./components/live_battle/HelpPage";
+import LoginMob from "./components/app_start/LoginMob";
 
 function App() {
   return (
@@ -72,7 +74,7 @@ function App() {
           <Route path="/admin" element={<Login />} />
           <Route path="/superadmin" element={<SAdminLogin />} />
           <Route path="/onboard" element={<NewOnboard />} />
-          <Route path="/login" element={<SignUpDesktop />} />
+          <Route path="/login" element={<LoginMob />} />
           {/* <Route
             path="/"
             element={
@@ -119,8 +121,9 @@ function App() {
           <Route path="/startbattle" element={<CardClickInstance />} />
           <Route path="/matchstart" element={<MatchProgress/>} />
           <Route path="/chat" element={<ChatUserMob />} />
+          <Route path="/help" element={<HelpPage/>}/>
 
-          {/* <Route path="/loader" element={<ButtonLoader/>} /> */}
+         {/* <Route path="/loader" element={<ProfileImagePC/>} />  */}
         </Routes>
       </BrowserRouter>
       {/* <Info /> */}

@@ -18,7 +18,7 @@ const LiveBattle = () => {
     setIsRequest(false);
     setOpenBottom(true);
     setTimeout(() => {
-      setIsRequest(true);
+     setIsRequest(true);
     }, 3000);
   };
   const closeDrawerBottom = () => setOpenBottom(false);
@@ -43,6 +43,7 @@ const LiveBattle = () => {
             </div>
           </div>
           <img
+            onClick={() => navigate("/help")}
             src="https://file.rendit.io/n/ib8IMr1PTiCuwTfVAXZs.svg"
             alt="ActionInfoOutline icon"
             id="Icoutlineinfo"
@@ -126,21 +127,19 @@ const LiveBattle = () => {
       <Drawer
         placement="bottom"
         open={openBottom}
-        onClose={closeDrawerBottom}
+        // onClose={closeDrawerBottom}
         className="p-4  bg-[#0f002b] rounded-t-3xl"
       >
         {isRequest == false ? (
           <div className="flex flex-col p-4">
             <div className="mb-4 flex items-center w-full justify-center gap-2">
-              <div className="bg-white w-[120px] h-[120px] rounded-full relative">
-                <div className="text-[#00C300] bold absolute top-8 left-5 text-6xl">
-                  45
-                </div>
+              <div className="bg-white p-7 rounded-full relative flex justify-center items-center">
+                <div className="text-[#00C300] bold text-6xl ">45</div>
               </div>
             </div>
             <Typography
               color="white"
-              className=" pr-4 flex justify-center text-xl font-bold"
+              className="flex justify-center text-xl font-bold"
             >
               Requesting...
             </Typography>

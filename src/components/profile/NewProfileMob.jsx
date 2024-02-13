@@ -11,7 +11,7 @@ import ToggleOn from "../../assets/profile/ToggleOn.svg";
 import Back from "../../assets/profile/ep_back.svg";
 import Favorite from "../../assets/new_game/fav.svg";
 import BellIcon from "../../assets/new_game/notification.svg";
-
+import kyc from "../../assets/new_game/KYC.svg";
 import AddGame from "../../assets/new_game/addgame.svg";
 import Profile from "../../assets/new_game/profile.svg";
 import WinCash from "../../assets/new_game/wincash.svg";
@@ -21,10 +21,11 @@ import ReferEarn from "../../assets/new_game/refer&earn.svg";
 import Support from "../../assets/new_game/support.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { Switch } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
 const NewProfileMob = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+const navigate =useNavigate();
   const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
@@ -58,22 +59,31 @@ const NewProfileMob = () => {
             </div>
           </div>
         </div>
-        <div className="flex  h-9 my-1 px-3 justify-center items-center border-solid border border-[rgba(15,_0,_43,_0.3)] bg-[rgba(15,_0,_43,_0.3)] rounded-2xl">
+        <div 
+        onClick={()=>navigate("/login")}
+        className={`flex  h-9 my-1 px-3 justify-center items-center border-solid border border-[rgba(15,_0,_43,_0.3)] bg-[rgba(15,_0,_43,_0.3)] rounded-2xl ${scrollPosition >10 ? "hidden" : "flex"}`}>
           <img src={LogOutMob} alt="Frame1" className=" w-[20px] h-[20px]" />
         </div>
       </div>
 
       <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative">
         <div className="bg-[#fead3a] h-80 w-[650px] rounded-[50%]   -top-20 absolute -left-24" />
-
+        <div
+          onClick={() => setScrollPosition(0)}
+          className={`flex ${
+            scrollPosition > 10 ? "relative px-3 pt-2" : "hidden"
+          }`}
+        >
+          <img src={Back} />
+        </div>
         <div
           className={`w-full relative mt-6  flex ${
-            scrollPosition > 10 ? "flex-row items-center" : "flex-col"
+            scrollPosition > 10 ? "flex-row items-center " : "flex-col"
           }`}
         >
           <div
             className={`${
-              scrollPosition > 10 ? "flex" : "w-full"
+              scrollPosition > 10 ? "flex gap-4" : "w-full"
             } m-auto relative `}
           >
             <div
@@ -83,7 +93,7 @@ const NewProfileMob = () => {
             >
               <img
                 className={`${
-                  scrollPosition > 10 ? "w-12" : "w-48"
+                  scrollPosition > 10 ? "w-16 " : "w-48"
                 } relative  rounded-full`}
                 src="https://images.unsplash.com/photo-1529524987368-af489318987c?q=80&w=582&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               />
@@ -97,24 +107,36 @@ const NewProfileMob = () => {
             </div>
 
             <div
-              className={`flex  flex-col m-auto items-center text-white font-bold ${
-                scrollPosition > 10 ? "pt-0" : "pt-10"
+              className={`flex  flex-col m-auto items-center font-bold ${
+                scrollPosition > 10 ? "pt-0" : "pt-10 text-white"
               }`}
             >
               <div className="flex  w-full gap-2 items-center justify-center">
-                <span className="text-center text-3xl ">Ludo Player</span>
+                <span
+                  className={`text-center text-3xl ${
+                    scrollPosition > 10 ? "text-xl" : ""
+                  }`}
+                >
+                  Ludo Player
+                </span>
                 <img
+                  className={`${scrollPosition > 10 ? "hidden " : ""} mt-2 w-6`}
                   src={Verify}
                   alt="Iconparkoutlinesuccess"
-                  className="mt-2 w-6"
                 />
               </div>
-              <div className="text-center text-xl">@ludoplayer</div>
+              <div
+                className={`text-center text-3xl ${
+                  scrollPosition > 10 ? "text-base" : " text-xl"
+                }`}
+              >
+                @ludoplayer
+              </div>
             </div>
           </div>
 
           <div className={`${scrollPosition > 10 ? "pr-10" : "hidden"}`}>
-            <Switch color="amber" className="bg-brown-800" />
+            <img src={kyc} />
           </div>
         </div>
 

@@ -15,7 +15,9 @@ import {
   List,
   ListItem,
   ListItemPrefix,
+  Drawer,
 } from "@material-tailwind/react";
+
 import { useNavigate } from "react-router-dom";
 
 const ChatUserMob = () => {
@@ -42,9 +44,24 @@ const ChatUserMob = () => {
       sender: "me",
     },
   ];
+  const [openBottom, setOpenBottom] = useState(true);
+
   const [messages, setMessages] = useState(user);
   const [inputText, setInputText] = useState("");
   const [image, setImage] = useState(null);
+
+  const openDrawerBottom = () => {
+    setOpenBottom(true);
+  };
+  const closeDrawerBottom = (event) =>{
+    event.preventDefault();
+    if(inputValue==="") {
+      alert("Please enter code")
+      return
+    }
+    console.log('Form submitted with value:', inputValue);
+    setOpenBottom(false);
+  } 
 
   const handleSendMessage = () => {
     const times = new Date().toLocaleTimeString();
@@ -73,9 +90,16 @@ const ChatUserMob = () => {
       reader.readAsDataURL(file);
     }
   };
-  const handleStart=()=>{
+  const handleStart = () => {
     navigate("/matchstart");
-  }
+  };
+
+  const [inputValue, setInputValue] = useState('');
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
 
   return (
     <div className="min-h-screen w-full h-full  bg-[#0f002b] overflow-hidden relative">
@@ -86,7 +110,7 @@ const ChatUserMob = () => {
       <div className="w-full overflow-hidden h-full ">
         <div className="bg-[#fead3a] h-[700px] w-[200%]  rounded-[50%]   -top-20 absolute -left-60 " />
 
-        <div className="relative flex justify-between p-4  items-center mt-3 bg-[#fead3a] w-full pt-20 ">
+        <div className="fixed z-10 flex justify-between p-4  items-center mt-3 bg-[#fead3a] w-full pt-20 ">
           <div className="flex justify-center gap-2 items-center">
             <img
               src={FrameProfile}
@@ -114,13 +138,13 @@ const ChatUserMob = () => {
                     Add Fav
                   </ListItem>
                   <ListItem className="hover:bg-black hover:text-white">
-                  <ListItemPrefix>
+                    <ListItemPrefix>
                       <img src={feedback} />
                     </ListItemPrefix>
                     Feedback
                   </ListItem>
                   <ListItem className="hover:bg-black hover:text-white">
-                  <ListItemPrefix>
+                    <ListItemPrefix>
                       <img src={report} />
                     </ListItemPrefix>
                     Report
@@ -132,7 +156,7 @@ const ChatUserMob = () => {
         </div>
 
         <div className="flex flex-col h-full relative  ">
-          <div className="flex-1 p-4 overflow-y-auto">
+          <div className="flex-1 p-4 overflow-y-auto pt-20 mt-20 pb-36">
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -172,7 +196,7 @@ const ChatUserMob = () => {
               </div>
             ))}
           </div>
-          <div className="px-4 py-2 m-4 mb-8 rounded-md border-t bg-white flex fixed w-[94%] bottom-3">
+          <div className="px-4 py-2 h-[56px] mb-8 rounded-md border-t bg-white flex fixed w-[89.48%] bottom-3 left-0 right-0 m-auto">
             <img
               src="https://file.rendit.io/n/aXGTlHYYkimk9HRIA15k.svg"
               alt="Emoji"
@@ -181,7 +205,7 @@ const ChatUserMob = () => {
             />
             <input
               type="text"
-              className="w-full  rounded-lg p-2 outline-none text-2xl font-semibold"
+              className="w-full  rounded-lg p-2 outline-none  font-semibold"
               placeholder="Type a message..."
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
@@ -216,6 +240,40 @@ const ChatUserMob = () => {
           </div>
         </div>
       </div>
+
+      <Drawer
+        placement="bottom"
+        open={openBottom}
+        // onClose={closeDrawerBottom}
+        className="p-4  bg-[#0f002b] rounded-t-3xl"
+      >
+        <div>
+          <div className="flex flex-col justify-center items-center gap-6 mt-10 w-full">
+            <Typography
+              color="white"
+              className="text-2xl flex justify-center font-bold"
+            >
+              Enter Ludo King Code
+            </Typography>
+            <form className="flex flex-col gap-4 w-full items-center" onSubmit={closeDrawerBottom}>
+            <input
+            value={inputValue}
+            onChange={handleChange}
+              type="text"
+              placeholder="LK8634798"
+              className="p-4 rounded-md outline-none border-gray-400 border bg-[#0f002b] text-gray-400 font-bold w-[90%]"
+            />
+            <Button
+            type="submit"
+              // onClick={closeDrawerBottom}
+              className="text-[#0f002b] bg-white text-lg font-extrabold    rounded-md bold w-[90%]"
+            >
+              Start
+            </Button>
+            </form> 
+          </div>
+        </div>
+      </Drawer>
     </div>
   );
 };

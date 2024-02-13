@@ -13,7 +13,7 @@ import HamBurger from "../../assets/profile/hamburger.svg";
 import BackBlack from "../../assets/profile/back_black.svg";
 import Favorite from "../../assets/new_game/fav.svg";
 import BellIcon from "../../assets/new_game/notification.svg";
-
+import { IoMenu } from "react-icons/io5";
 export function SidebarMob({
   isClick1,
   isClick2,
@@ -31,209 +31,208 @@ export function SidebarMob({
 
   return (
     <React.Fragment>
-      <img
-        onClick={openDrawer}
-        src={HamBurger}
-        alt="Materialsymbolsmenu"
-        id="Materialsymbolsmenu"
-        className="w-[28px] h-[28px] flex-shrink-0"
-      />
+      <Button className="bg-[#fead3a] shadow-none p-0 hover:shadow-none">
+        <IoMenu
+          onClick={openDrawer}
+          className="text-white w-[28px] h-[28px] "
+        />
+      </Button>
+
       <Drawer
-        className="bg-[#fead3a]"
+        className="bg-[#fead3a] min-h-screen overflow-scroll"
         size={490}
         open={open}
         onClose={closeDrawer}
       >
-        <div className=" flex-col pb-16  h-full w-full min-h-screen  items-start flex overflow-scroll">
-          <div className="w-full h-8" />
-          <Button className="bg-yello shadow-none" onClick={closeDrawer}>
-            <img
-              src={BackBlack}
-              alt="HardwareKeyboardBackspace icon"
-              id="Epback"
-              className="text-black w-6"
-            />
-          </Button>
-          <div className="flex flex-col justify-between w-full h-full">
-            <div className="flex flex-col justify-center  mx-auto gap-2 w-3/5 items-center">
-              <Link
-                to="/"
-                className={`border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]   ${
-                  isClick1 ? "bg-[#ffcc4d]" : "bg-white"
-                } flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg`}
-              >
-                <img
-                  src={AddGame}
-                  alt="ContentAdd icon"
-                  id="Materialsymbolsadd"
-                  className="w-5"
-                />
-                <div className="text-xs font-['Nunito_Sans'] font-bold text-[#0f002b]">
-                  New game
-                </div>
-              </Link>
-              <Link
-                to="/profile"
-                className={`border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] ${
-                  isClick2 ? "bg-[#ffcc4d]" : "bg-white"
-                } flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg`}
-              >
-                <img
-                  src={Profile}
-                  alt="SocialPersonOutline icon"
-                  className="w-5"
-                />
-                <div className="text-xs font-['Nunito_Sans'] font-bold">
-                  Profile
-                </div>
-              </Link>
-              <Link
-                to="/wincash"
-                className={`border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  ${
-                  isClick3 ? "bg-[#ffcc4d]" : "bg-white"
-                } flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg`}
-              >
-                <img
-                  src={WinCash}
-                  alt="Twemojimoneymouthface"
-                  className="w-5"
-                />
-                <div className="text-xs font-['Nunito_Sans'] font-bold">
-                  Win Cash
-                </div>
-              </Link>
-              <Link
-                to="/mywallet"
-                className={`
+        {/* <div className=" flex-col pb-16  h-full w-full min-h-screen  flex "> */}
+        <div className="w-full h-8" />
+        <Button
+          className="bg-yello shadow-none hover:shadow-none p-0 px-4"
+          onClick={closeDrawer}
+        >
+          <img
+            src={BackBlack}
+            alt="HardwareKeyboardBackspace icon"
+            id="Epback"
+            className="text-black w-6"
+          />
+        </Button>
+        <div className="flex flex-col justify-between w-full h-full">
+          <div className="flex flex-col justify-center  mx-auto gap-2 w-3/5 items-center">
+            <Link
+              to="/"
+              className={`border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]   ${
+                isClick1 ? "bg-[#ffcc4d]" : "bg-white"
+              } flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg`}
+            >
+              <img
+                src={AddGame}
+                alt="ContentAdd icon"
+                id="Materialsymbolsadd"
+                className="w-5"
+              />
+              <div className="text-xs font-['Nunito_Sans'] font-bold text-[#0f002b]">
+                New game
+              </div>
+            </Link>
+            <Link
+              to="/profile"
+              className={`border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] ${
+                isClick2 ? "bg-[#ffcc4d]" : "bg-white"
+              } flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg`}
+            >
+              <img
+                src={Profile}
+                alt="SocialPersonOutline icon"
+                className="w-5"
+              />
+              <div className="text-xs font-['Nunito_Sans'] font-bold">
+                Profile
+              </div>
+            </Link>
+            <Link
+              to="/wincash"
+              className={`border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  ${
+                isClick3 ? "bg-[#ffcc4d]" : "bg-white"
+              } flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg`}
+            >
+              <img src={WinCash} alt="Twemojimoneymouthface" className="w-5" />
+              <div className="text-xs font-['Nunito_Sans'] font-bold">
+                Win Cash
+              </div>
+            </Link>
+            <Link
+              to="/mywallet"
+              className={`
          
           border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg
           ${isClick4 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
-              >
-                <img
-                  src={Wallet}
-                  alt="Phwalletlight"
-                  id="Phwalletlight"
-                  className="w-5"
-                />
-                <div className="text-xs font-['Nunito_Sans'] font-bold">
-                  My Wallet
-                </div>
-              </Link>
-              <Link
-                to="/gamehistory"
-                className={`
+            >
+              <img
+                src={Wallet}
+                alt="Phwalletlight"
+                id="Phwalletlight"
+                className="w-5"
+              />
+              <div className="text-xs font-['Nunito_Sans'] font-bold">
+                My Wallet
+              </div>
+            </Link>
+            <Link
+              to="/gamehistory"
+              className={`
        
           border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg
           ${isClick5 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
-              >
-                <img
-                  src={GameHistory}
-                  alt="ActionHistory icon"
-                  id="lgihistory"
-                  className="w-5"
-                />
-                <div className="text-xs font-['Nunito_Sans'] font-bold">
-                  Game History
-                </div>
-              </Link>
-              <Link
-                to="/transactionhistory"
-                className={`
+            >
+              <img
+                src={GameHistory}
+                alt="ActionHistory icon"
+                id="lgihistory"
+                className="w-5"
+              />
+              <div className="text-xs font-['Nunito_Sans'] font-bold">
+                Game History
+              </div>
+            </Link>
+            <Link
+              to="/transactionhistory"
+              className={`
         
           border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg
           ${isClick6 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
-              >
-                <img
-                  src={Profile}
-                  alt="SocialPersonOutline icon"
-                  className="w-5"
-                />
-                <div className="text-xs font-['Nunito_Sans'] font-bold">
-                  Transaction History
-                </div>
-              </Link>
-              <Link
-                to="/referr&earn"
-                className={`
+            >
+              <img
+                src={Profile}
+                alt="SocialPersonOutline icon"
+                className="w-5"
+              />
+              <div className="text-xs font-['Nunito_Sans'] font-bold">
+                Transaction History
+              </div>
+            </Link>
+            <Link
+              to="/referr&earn"
+              className={`
           
           border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg
           ${isClick7 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
-              >
-                <img
-                  src={ReferEarn}
-                  alt="Gameiconsreceivemoney"
-                  className="w-5"
-                />
-                <div className="text-xs font-['Nunito_Sans'] font-bold">
-                  Refer and Earn
-                </div>
-              </Link>
-              <Link
-                to="/notification"
-                className={`
+            >
+              <img
+                src={ReferEarn}
+                alt="Gameiconsreceivemoney"
+                className="w-5"
+              />
+              <div className="text-xs font-['Nunito_Sans'] font-bold">
+                Refer and Earn
+              </div>
+            </Link>
+            <Link
+              to="/notification"
+              className={`
         
           border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg
           ${isClick8 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
-              >
-                <img
-                  src={Notification}
-                  alt="Iconamoonnotificationlight"
-                  className="w-5"
-                />
-                <div className="text-xs font-['Nunito_Sans'] font-bold">
-                  Notification
-                </div>
-              </Link>
-              <Link
-                to="/support"
-                className={`
+            >
+              <img
+                src={Notification}
+                alt="Iconamoonnotificationlight"
+                className="w-5"
+              />
+              <div className="text-xs font-['Nunito_Sans'] font-bold">
+                Notification
+              </div>
+            </Link>
+            <Link
+              to="/support"
+              className={`
        
           border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg
           ${isClick9 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
-              >
-                <img
-                  src={Support}
-                  alt="Materialsymbolssupportagent"
-                  className="w-5"
-                />
-                <div className="text-xs font-['Nunito_Sans'] font-bold">
-                  Support
-                </div>
-              </Link>
-            </div>
-            <div className="flex flex-col gap-2 w-full max-w-[480px] px-6 font-['Oooh_Baby'] justify-center items-center pt-4">
-              {" "}
-              <div className="flex flex-col justify-center items-center">
-                <div className="text-2xl font-['Nunito_Sans'] font-bold text-[#0f002b]">
-                  {" "}
-                  LUDO KING{" "}
-                </div>{" "}
-                <div className=" text-xl text-[#0f002b] -mt-2"> punch line</div>
+            >
+              <img
+                src={Support}
+                alt="Materialsymbolssupportagent"
+                className="w-5"
+              />
+              <div className="text-xs font-['Nunito_Sans'] font-bold">
+                Support
               </div>
-              <div className="flex justify-between font-['Inter'] items-start w-full ">
+            </Link>
+          </div>
+          <div className="flex flex-col gap-2 w-full max-w-[480px] px-6 font-['Oooh_Baby'] justify-center items-center pt-4">
+            {" "}
+            <div className="flex flex-col justify-center items-center">
+              <div className="text-2xl font-['Nunito_Sans'] font-bold text-[#0f002b]">
                 {" "}
-                <div className="text-center text-xs font-medium">
-                  {" "}
-                  Terms of Service{" "}
-                </div>{" "}
-                <div className="text-center text-xs font-bold">·</div>
-                <div className="text-center text-xs font-medium">
-                  Privacy Policy
-                </div>{" "}
-                <div className="text-center text-xs font-bold">·</div>
-                <div className="text-center text-xs font-medium">
-                  Content Policies
-                </div>
+                LUDO KING{" "}
+              </div>{" "}
+              <div className=" text-xl text-[#0f002b] -mt-2"> punch line</div>
+            </div>
+            <div className="flex justify-between font-['Inter'] items-start w-full ">
+              {" "}
+              <div className="text-center text-xs font-medium">
+                {" "}
+                Terms of Service{" "}
+              </div>{" "}
+              <div className="text-center text-xs font-bold">·</div>
+              <div className="text-center text-xs font-medium">
+                Privacy Policy
+              </div>{" "}
+              <div className="text-center text-xs font-bold">·</div>
+              <div className="text-center text-xs font-medium">
+                Content Policies
               </div>
             </div>
           </div>
         </div>
+        {/* </div> */}
       </Drawer>
     </React.Fragment>
   );
