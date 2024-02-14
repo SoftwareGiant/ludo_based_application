@@ -21,10 +21,21 @@ import Twtr from "../../assets/new_game/twtr.svg";
 
 import Profile from "../../assets/new_game/profile.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";
+import { useNavigate } from "react-router-dom";
 const ReferrEarnMob = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [referno, setReferno] = useState(753478);
+  const navigate = useNavigate();
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
+  };
+  const copyToClipboard = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("Text copied to clipboard:", text);
+    } catch (error) {
+      alert("Error copying to clipboard:", error);
+    }
   };
   return (
     <>
@@ -47,6 +58,7 @@ const ReferrEarnMob = () => {
             </div>
           </div>
           <img
+            onClick={() => navigate("/profile")}
             src={FrameProfile}
             alt="Frame1"
             className="w-[30px] h-[30px] mt-[9.5px] rounded-[100px] border border-solid border-white "
@@ -58,7 +70,10 @@ const ReferrEarnMob = () => {
 
           <div className="relative pt-6 w-full flex flex-col gap-4 justify-center items-center m-auto">
             <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] bg-white inline-flex  gap-[10px]  h-10 items-center   justify-center px-4 rounded-[10px] ">
-              <div className="bg-white flex  w-8 h-8 items-center justify-center p-[6px]">
+              <div
+                onClick={() => copyToClipboard(referno)}
+                className="bg-white flex  w-8 h-8 items-center justify-center p-[6px] cursor-pointer"
+              >
                 <img
                   src={Copy}
                   alt="Solarcopylinear"
@@ -102,7 +117,10 @@ const ReferrEarnMob = () => {
                   className="w-8"
                 />
               </div>
-              <div className="flex w-[42.24px] h-[42.24px] justify-center items-center p-[7.92px]">
+              <div
+                onClick={() => copyToClipboard(referno)}
+                className="flex w-[42.24px] h-[42.24px] justify-center items-center p-[7.92px] cursor-pointer"
+              >
                 <img
                   src={Copy}
                   alt="ActionLabelOutline icon"

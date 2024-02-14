@@ -49,7 +49,7 @@ const LoginMob = () => {
         className="bg-[#fead3a]  h-8 overflow-hidden max-w-[480px] w-full "
       />
       {isSuccess ? (
-        <div className="flex flex-col gap-6 w-full font-['Inter'] items-center h-screen justify-center">
+        <div className="flex flex-col gap-6 w-full font-['Inter'] items-center h-screen justify-center max-w-[480px]">
           <div
             id="Ellipse"
             className="bg-[url(https://file.rendit.io/n/AgmUwxcDhU56xN8BuC7y.svg)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-row justify-center ml-3 pt-6 w-[150px] h-[150px] items-start"
@@ -66,7 +66,7 @@ const LoginMob = () => {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between w-full max-w-[480px]">
           <div className="max-w-[480px] w-full min-h-screen h-full">
             <div
               className="bg-[#fead3a] min-h-[420px] overflow-hidden bg-cover bg-center  "
@@ -74,11 +74,11 @@ const LoginMob = () => {
             ></div>
             <div className="h-full flex flex-col justify-between">
               <div className="max-w-[480px] w-full h-full">
-                <div className="justify-center items-center md:mt-[88px] bg-gradient md:bg-none flex flex-col md:w-full  -mt-[6.95rem]">
-                  <h3 className="text-center md:text-white  text-5xl font-['Nunito_Sans'] uppercase font-extrabold p-3 flex flex-wrap justify-center text-[#0f002b]">
+                <div className="justify-center items-center  bg-gradient  flex flex-col   -mt-[6.95rem]">
+                  <h3 className="text-center text-5xl font-['Nunito_Sans'] uppercase font-extrabold p-3 flex flex-wrap justify-center text-[#0f002b]">
                     <span>Ludo</span> <span>King </span>
                   </h3>
-                  <h5 className="font-oooh text-4xl font-bold text-center md:text-white">
+                  <h5 className="font-oooh text-4xl font-bold text-center ">
                     Punch Line
                   </h5>
                 </div>
@@ -87,7 +87,7 @@ const LoginMob = () => {
                   <div className="flex justify-center w-full ">
                     <div
                       id="Line"
-                      className="border-solid border-black/30 md:border-white/30 w-full h-px absolute top-8 left-0 border-t border-b-0 border-x-0"
+                      className="border-solid border-black/30 w-full h-px absolute top-8 left-0 border-t border-b-0 border-x-0"
                     />
                     <div className="text-center text-lg font-['Inter'] font-medium text-[#0f002b] relative flex flex-row justify-center p-4  items-start rounded-lg bg-white">
                       Log in or sign up
@@ -175,7 +175,7 @@ const LoginMob = () => {
                         </div>
                         <button
                           onClick={handlePhoneSubmit}
-                          className="text-center items-center text-xl mx-auto font-['Inter'] h-[56px] w-full px-[16px] text-[20px] font-bold md:py-[0px] gap-[10px]   shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row justify-center pt-4 rounded-lg bg-[#0f002b] text-white p-4"
+                          className="text-center items-center text-xl mx-auto font-['Inter'] h-[56px] w-full px-[16px] text-[20px] font-bold  gap-[10px]   shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row justify-center pt-4 rounded-lg bg-[#0f002b] text-white p-4"
                         >
                           Continue
                         </button>
@@ -186,7 +186,7 @@ const LoginMob = () => {
               </div>
             </div>
           </div>
-          <div className="flex items-center w-full m-auto justify-center gap-2 pb-10">
+          <div className="flex items-center w-full max-w-[480px] m-auto justify-center gap-2 pb-10">
             <div className="text-center text-xs font-['Inter'] font-medium">
               Terms of Service
             </div>

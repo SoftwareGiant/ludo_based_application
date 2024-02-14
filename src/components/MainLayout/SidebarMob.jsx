@@ -57,7 +57,7 @@ export function SidebarMob({
             className="text-black w-6"
           />
         </Button>
-        <div className="flex flex-col justify-between w-full h-full">
+        <div className="flex flex-col justify-between w-full h-[90%]">
           <div className="flex flex-col justify-center  mx-auto gap-2 w-3/5 items-center">
             <Link
               to="/"
@@ -155,7 +155,7 @@ export function SidebarMob({
               </div>
             </Link>
             <Link
-              to="/referr&earn"
+              to="/refer&earn"
               className={`
           
           border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg

@@ -141,17 +141,6 @@ const navigate =useNavigate();
         </div>
 
         <div className="mt-10 flex flex-col gap-3 w-full font-['Nunito_Sans'] items-start relative text-white font-bold">
-          {/* <div className="flex flex-col m-auto items-center">
-            <div className="flex  w-full gap-2 items-center justify-center">
-              <span className="text-center text-3xl ">Ludo Player</span>
-              <img
-                src={Verify}
-                alt="Iconparkoutlinesuccess"
-                className="mt-2 w-6"
-              />
-            </div>
-            <div className="text-center text-xl">@ludoplayer</div>
-          </div> */}
 
           <div className="bg-[#0f002b] text-white flex flex-col justify-center gap-10 w-full items-start pt-5 pb-6 px-8">
             <div className="flex  justify-between w-full items-center">
