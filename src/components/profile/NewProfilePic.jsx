@@ -1,94 +1,147 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import "../../app.css";
+import ProfileEditbtn from "../../assets/profile/editbutton.svg";
 import HamBurger from "../../assets/profile/hamburger.svg";
-
+import Edit from "../../assets/profile/edit.svg";
+import ProfileEdit from "../../assets/profile/profile_edit.svg";
+import LogOutMob from "../../assets/profile/respon_logout.svg";
+import Verify from "../../assets/profile/verify.svg";
+import ToggleOff from "../../assets/profile/toggleOff.svg";
+import ToggleOn from "../../assets/profile/ToggleOn.svg";
+import Back from "../../assets/profile/ep_back.svg";
+import Favorite from "../../assets/new_game/fav.svg";
+import BellIcon from "../../assets/new_game/notification.svg";
+import kyc from "../../assets/new_game/KYC.svg";
+import AddGame from "../../assets/new_game/addgame.svg";
+import Profile from "../../assets/new_game/profile.svg";
+import WinCash from "../../assets/new_game/wincash.svg";
+import Wallet from "../../assets/new_game/wallet.svg";
+import GameHistory from "../../assets/new_game/history.svg";
+import ReferEarn from "../../assets/new_game/refer&earn.svg";
+import Support from "../../assets/new_game/support.svg";
+import { SidebarMob } from "../MainLayout/SidebarMob";
+import { Switch } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
+import image from "../../assets/new_game/image.svg";
+import video from "../../assets/new_game/video.svg";
+import {
+  Button,
+  Drawer,
+  IconButton,
+  Typography,
+} from "@material-tailwind/react";
 const NewProfilePic = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [openBottom, setOpenBottom] = useState(true);
+  const navigate = useNavigate();
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const openDrawerBottom = () => {
+    setOpenBottom(true);
+  };
+  const closeDrawerBottom = () => setOpenBottom(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  const toggleNavbar = () => {
+    setIsOpen(!isOpen);
+  };
   return (
-    <div>
-      <div className="w-[390px] h-[32px] bg-[var(--main-coloryellow-orange)]" />
-      {/* Hamburger section */}
-      <div className="bg-[#fead3a] flex flex-row justify-between w-[390px] h-12 items-start pt-2 pl-5 pr-6">
-        <div className="flex flex-row gap-3 w-2/5 items-start">
-          <img
-            src="https://file.rendit.io/n/c069tsTkMzmjgvYgx5P1.svg"
-            alt="Materialsymbolsmenu"
-            id="Materialsymbolsmenu"
-            className="mt-1 w-6"
-          />
-          <div className="relative flex flex-row justify-center w-24 items-start">
-            <div className="text-center text-base font-['Nunito_Sans'] font-bold text-[#0f002b] absolute top-0 left-0 h-5 w-24">
+    <div className="max-w-[480px] w-full min-h-screen h-full">
+      <div
+        id="NotificationspaceRoot"
+        className="bg-[#fead3a]  h-8 overflow-hidden"
+      />
+      <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
+        <div className="flex flex-row gap-3 items-start mt-3">
+          <SidebarMob />
+          <div className="flex flex-col text-[#0f002b] ">
+            <div className="  text-base font-['Nunito_Sans'] font-extrabold ">
               LUDO KING
             </div>
-            <div className="text-center text-base font-['Oooh_Baby'] text-[#0f002b] relative mt-4">
+
+            <div className="text-center text-base font-['Oooh_Baby'] font-normal  -mt-2">
               punch line
             </div>
           </div>
         </div>
-        <div className="text-center font-['Inter'] font-medium text-[#0f002b] mt-2">
-          Done
-        </div>
       </div>
-      {/* HamBurger Ends */}
-      <div className="overflow-hidden bg-[#0f002b] flex flex-row w-[390px] items-start">
-        <div
-          id="Ellipse"
-          className="bg-[#fead3a] flex flex-col gap-16 w-[256.41%] h-[1000px] items-start mx-[-305px] my-[-119px] pl-[305px] py-32 rounded-[50%]"
-        >
-          <img
-            src="https://file.rendit.io/n/oJu8U6sgg8p9kMiTgMvP.svg"
-            alt="HardwareKeyboardBackspace icon"
-            id="Epback"
-            className="ml-5 w-6"
-          />
-          <img
-            src="https://file.rendit.io/n/HpB2HUIZe0Kwf65QMPxv.png"
-            alt="Frame1"
-            className="mb-1"
-          />
-          <div className="bg-[#0f002b] flex flex-row justify-center pt-12 w-3/5 h-48 items-start rounded-tl-lg rounded-tr-lg">
-            <div className="flex flex-col gap-2 w-3/5 items-start">
-              <div className="flex flex-row justify-between w-full items-start">
-                <div className="bg-white flex flex-row justify-center pt-5 w-16 h-16 items-start rounded-[40px]">
-                  <img
-                    src="https://file.rendit.io/n/O4ITQjHNAx80aEVPlTnm.svg"
-                    alt="Tdesignapp"
-                    id="Tdesignapp"
-                    className="w-5"
-                  />
-                </div>
-                <div className="bg-white flex flex-row justify-center pt-5 w-16 h-16 items-start rounded-[40px]">
-                  <img
-                    src="https://file.rendit.io/n/duXjra6FzFQP90RwI66T.svg"
-                    alt="Solargallerybold"
-                    id="Solargallerybold"
-                    className="w-5"
-                  />
-                </div>
-                <div className="bg-white flex flex-row justify-center pt-5 w-16 h-16 items-start rounded-[40px]">
-                  <img
-                    src="https://file.rendit.io/n/kfec5cOcD3BzO3kFKt6m.svg"
-                    alt="Icroundcamera"
-                    id="Icroundcamera"
-                    className="w-5"
-                  />
-                </div>
-              </div>
-              <div className="flex flex-row ml-1 gap-20 w-full items-start">
-                <div className="text-center text-xs font-['Inter'] font-semibold text-white">
-                  File
-                </div>
-                <div className="flex flex-row gap-12 w-3/5 items-start">
-                  <div className="text-center text-xs font-['Inter'] font-semibold text-white">
-                    Gallery
-                  </div>
-                  <div className="text-center text-xs font-['Inter'] font-semibold text-white">
-                    Camera
-                  </div>
-                </div>
-              </div>
-            </div>
+
+      <div className="bg-[#fead3a]  w-full min-h-screen overflow-hidden relative">
+        <div className="flex bg-[#fead3a] justify-between items-center px-4 py-2 w-full">
+          <div className="flex gap-5 items-center">
+            <img
+              onClick={() => navigate("/profile")}
+              src="https://file.rendit.io/n/Bh3TjQUvsgxuYLevIVW7.svg"
+              alt="HardwareKeyboardBackspace icon"
+              id="Epback"
+              className="w-6"
+            />
           </div>
         </div>
+        <div className="w-full flex justify-center">
+          <img
+            className="w-48
+                 relative  rounded-full"
+            src="https://images.unsplash.com/photo-1529524987368-af489318987c?q=80&w=582&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          />
+        </div>
       </div>
+
+      <Drawer
+        placement="bottom"
+        open={openBottom}
+        onClose={closeDrawerBottom}
+        className="p-4  bg-[#0f002b] rounded-t-3xl"
+      >
+        <div className="flex w-full justify-center items-end gap-4 pt-10">
+          <label
+            htmlFor="image-upload"
+            className="flex justify-center items-center flex-col"
+          >
+            <div className="p-4 w-16 h-16 flex justify-center items-center bg-white rounded-full ">
+              <img src={image} />
+            </div>
+            <span className="text-white">Upload Image</span>{" "}
+          </label>
+          <input
+            accept="image/*"
+            id="image-upload"
+            type="file"
+            className="hidden"
+            // onChange={handleImageUpload}
+          />
+          <label
+            htmlFor="video-upload"
+            className="flex justify-center items-center flex-col"
+          >
+            <div className="p-4 w-16 h-16 flex justify-center items-center bg-white rounded-full ">
+              <img src={video} />
+            </div>
+            <span className="text-white">Upload Video</span>{" "}
+          </label>
+          <input
+            className="hidden"
+            accept="video/*"
+            id="video-upload"
+            type="file"
+            // onChange={handleVideoUpload}
+          />
+        </div>
+
+        <Typography
+          color="white"
+          className="flex justify-center text-gray-400 pt-6"
+        >
+          Make sure that you upload the correct image or video. This will be
+          used in future for reference in case of any issues.
+        </Typography>
+      </Drawer>
     </div>
   );
 };

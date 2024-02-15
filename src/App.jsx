@@ -63,6 +63,13 @@ import NewGameSLider from "./components/live_battle/NewGameSLider";
 import ChatUserMob from "./components/listedgame/ChatUserMob";
 import ButtonLoader from "./components/MainLayout/ButtonLoader";
 import MatchProgress from "./components/live_battle/MatchProgress";
+import HelpPage from "./components/live_battle/HelpPage";
+import LoginMob from "./components/app_start/LoginMob";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import MyWalletMob from "./components/wallet/MyWalletMob";
+import ListedGameMOb from "./components/listedgame/ListedGameMOb";
+import AddCashMob from "./components/wallet/AddCashMob";
+import WithdrawMob from "./components/wallet/WithdrawMob";
 
 function App() {
   return (
@@ -72,57 +79,53 @@ function App() {
           <Route path="/admin" element={<Login />} />
           <Route path="/superadmin" element={<SAdminLogin />} />
           <Route path="/onboard" element={<NewOnboard />} />
-          <Route path="/login" element={<SignUpDesktop />} />
-          {/* <Route
+          <Route path="/login" element={<LoginMob />} />
+
+          <Route path="/" element={<ProtectedRoute />}>
+            <Route path="/apptour" element={<AppTour />} />
+            {/* new game page routes */}
+            <Route path="/" element={<NewGameMob />} />
+            <Route path="/livebattle" element={<LiveBattle />} />
+            <Route path="/livebattle2" element={<LiveBattle2 />} />
+            <Route path="/filter" element={<FilterLiveBattle />} />
+            <Route path="/requestchallange" element={<OpenChallengeReq />} />
+            <Route path="/chat" element={<ChatUserMob />} />
+            <Route path="/matchstart" element={<MatchProgress />} />
+            <Route path="/help" element={<HelpPage />} />
+            {/* Profile page routes */}
+            <Route path="/profile" element={<NewProfileMob />} />
+          
+
+            <Route path="/editprofile" element={<NewProfilePic />} />
+            {/* wincash page */}
+            <Route path="/wincash" element={<ListedGameMOb />} />
+            {/* my wallet page */}
+            <Route path="/mywallet" element={<MyWalletMob />} />
+            <Route path="/deposite" element={<AddCashMob />} />
+            <Route path="/withdraw" element={<WithdrawMob />} />
+            <Route path="/gamehistory" element={<GameHistoryMob />} />
+            <Route
+              path="/transactionhistory"
+              element={<TransactioHistoryMob />}
+            />
+            <Route path="/refer&earn" element={<ReferrEarnMob />} />
+            <Route path="/notification" element={<Notification />} />
+            <Route path="/support" element={<SupportMob />} />
+          </Route>
+
+          <Route path="/reedem" element={<ReferalBalancePc />} />
+
+          <Route path="/startbattle" element={<CardClickInstance />} />
+        </Routes>
+      </BrowserRouter>
+
+      {/* <Route
             path="/"
             element={
               useMediaQuery({ minWidth: 768 }) ? <NewGame /> : <NewGameMob />
             }
           /> */}
-          {/* <Route path="/" element={<NewGameMob />} />
-          <Route path="/profile" element={<NewProfile />} />
-          <Route path="/wincash" element={<ListedGamePc />} />
-          <Route path="/mywallet" element={<MyWalletMain />} />
-          <Route path="/deposite" element={<AddCashPc />} />
-          <Route path="/withdraw" element={<WithDrawPc />} />
-          <Route path="/reedem" element={<ReferalBalancePc />} />
-          <Route path="/gamehistory" element={<GameHistoryComponent />} />
-          <Route
-            path="/transactionhistory"
-            element={<TransactionHistoryPc />}
-          />
-          <Route path="/referr&earn" element={<ReferrEarnPc />} />
-          <Route path="/notification" element={<NotificationPc />} />
-          <Route path="/support" element={<SupportPc />} />
-          <Route path="/apptour" element={<AppTour />} /> */}
 
-          <Route path="/" element={<NewGameMob />} />
-          <Route path="/profile" element={<NewProfileMob />} />
-          <Route path="/wincash" element={<ListedGamePc />} />
-          <Route path="/mywallet" element={<MyWalletMain />} />
-          <Route path="/deposite" element={<AddCashPc />} />
-          <Route path="/withdraw" element={<WithDrawPc />} />
-          <Route path="/reedem" element={<ReferalBalancePc />} />
-          <Route path="/gamehistory" element={<GameHistoryPc />} />
-          <Route
-            path="/transactionhistory"
-            element={<TransactionHistoryPc />}
-          />
-          <Route path="/referr&earn" element={<ReferrEarnMob />} />
-          <Route path="/notification" element={<NotificationPc />} />
-          <Route path="/support" element={<SupportMob />} />
-          <Route path="/apptour" element={<AppTour />} />
-          <Route path="/livebattle" element={<LiveBattle />} />
-          <Route path="/livebattle2" element={<LiveBattle2 />} />
-          <Route path="/filter" element={<FilterLiveBattle />} />
-          <Route path="/requestchallange" element={<OpenChallengeReq />} />
-          <Route path="/startbattle" element={<CardClickInstance />} />
-          <Route path="/matchstart" element={<MatchProgress/>} />
-          <Route path="/chat" element={<ChatUserMob />} />
-
-          {/* <Route path="/loader" element={<ButtonLoader/>} /> */}
-        </Routes>
-      </BrowserRouter>
       {/* <Info /> */}
       {/* <SignUpDesktop /> */}
       {/* <OtpPc /> */}

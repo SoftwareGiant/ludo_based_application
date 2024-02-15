@@ -26,16 +26,16 @@ import ButtonLoader from "../MainLayout/ButtonLoader";
 
 const NewGameMob = () => {
   const navigate = useNavigate();
-  const[battleAmount,setBattleAmount]=useState("");
+  const [battleAmount, setBattleAmount] = useState("");
   const [buttonStatus, setButtonStatus] = useState("create");
   const [openBottom, setOpenBottom] = useState(false);
   const openDrawerBottom = () => setOpenBottom(true);
   const closeDrawerBottom = () => setOpenBottom(false);
 
   const handleCreate = () => {
-    if(battleAmount===""){
-     alert("fill battle amount")
-      return; 
+    if (battleAmount === "") {
+      alert("fill battle amount");
+      return;
     }
     setButtonStatus("loading");
     setTimeout(() => {
@@ -48,7 +48,7 @@ const NewGameMob = () => {
         id="NotificationspaceRoot"
         className="bg-[#fead3a]  h-8 overflow-hidden"
       />
-      <div className="bg-[#fead3a]  flex justify-between  w-full   h-[51px]  px-4">
+      <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
           <SidebarMob />
           <div className="flex flex-col text-[#0f002b] ">
@@ -62,6 +62,7 @@ const NewGameMob = () => {
           </div>
         </div>
         <img
+          onClick={() => navigate("/profile")}
           src={FrameProfile}
           alt="Frame1"
           className="w-[30px] h-[30px] mt-[9.5px] rounded-[100px] border border-solid border-white "
@@ -192,8 +193,8 @@ const NewGameMob = () => {
                   <div className="flex" onClick={openDrawerBottom}>
                     <span>₹</span>
                     <input
-                    val={battleAmount}
-                    onChange={(e)=>setBattleAmount(e.target.value)}
+                      val={battleAmount}
+                      onChange={(e) => setBattleAmount(e.target.value)}
                       placeholder="Your battle amount"
                       className="outline-none pl-2  focus:outline-none w-full"
                     />
@@ -216,8 +217,9 @@ const NewGameMob = () => {
                 <div className="flex justify-center w-full">
                   {buttonStatus === "success" ? (
                     <Button
-                    onClick={closeDrawerBottom}
-                    className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5">
+                      onClick={closeDrawerBottom}
+                      className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5"
+                    >
                       Success
                     </Button>
                   ) : buttonStatus === "loading" ? (
@@ -225,7 +227,7 @@ const NewGameMob = () => {
                       className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5 "
                       disabled
                     >
-                    <ButtonLoader/>
+                      <ButtonLoader />
                     </Button>
                   ) : (
                     <Button
