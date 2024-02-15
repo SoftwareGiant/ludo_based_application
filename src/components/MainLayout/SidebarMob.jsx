@@ -1,6 +1,6 @@
 import React from "react";
 import { Drawer, Button } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AddGame from "../../assets/new_game/addgame.svg";
 import Profile from "../../assets/new_game/profile.svg";
 import WinCash from "../../assets/new_game/wincash.svg";
@@ -28,7 +28,7 @@ export function SidebarMob({
   const [open, setOpen] = React.useState(false);
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
-
+const navigate = useNavigate();
   return (
     <React.Fragment>
       <Button className="bg-[#fead3a] shadow-none p-0 hover:shadow-none">
@@ -217,16 +217,22 @@ export function SidebarMob({
             </div>
             <div className="flex justify-between font-['Inter'] items-start w-full ">
               {" "}
-              <div className="text-center text-xs font-medium">
+              <div
+              onClick={()=>navigate("/terms")}
+              className="text-center text-xs font-medium">
                 {" "}
                 Terms of Service{" "}
               </div>{" "}
               <div className="text-center text-xs font-bold">·</div>
-              <div className="text-center text-xs font-medium">
+              <div 
+              onClick={()=>navigate("/privacy")}
+              className="text-center text-xs font-medium">
                 Privacy Policy
               </div>{" "}
               <div className="text-center text-xs font-bold">·</div>
-              <div className="text-center text-xs font-medium">
+              <div
+              onClick={()=>navigate("/content")}
+              className="text-center text-xs font-medium">
                 Content Policies
               </div>
             </div>

@@ -70,6 +70,13 @@ import MyWalletMob from "./components/wallet/MyWalletMob";
 import ListedGameMOb from "./components/listedgame/ListedGameMOb";
 import AddCashMob from "./components/wallet/AddCashMob";
 import WithdrawMob from "./components/wallet/WithdrawMob";
+import Terms from "./components/policy/Terms";
+import Content from "./components/policy/Content";
+import Privacy from "./components/policy/Privacy";
+import Feedback from "./components/support/Feedback";
+import UserProfile from "./components/live_battle/UserProfile";
+import UserProfile2 from "./components/live_battle/userProfile2";
+import UserProfile3 from "./components/live_battle/UserProfile3";
 
 function App() {
   return (
@@ -90,6 +97,9 @@ function App() {
             <Route path="/filter" element={<FilterLiveBattle />} />
             <Route path="/requestchallange" element={<OpenChallengeReq />} />
             <Route path="/chat" element={<ChatUserMob />} />
+            <Route path="/userprofile" element={<UserProfile />} />
+            <Route path="/userprofile2" element={<UserProfile2 />} />
+            <Route path="/userprofile3" element={<UserProfile3 />} />
             <Route path="/matchstart" element={<MatchProgress />} />
             <Route path="/help" element={<HelpPage />} />
             {/* Profile page routes */}
@@ -111,6 +121,10 @@ function App() {
             <Route path="/refer&earn" element={<ReferrEarnMob />} />
             <Route path="/notification" element={<Notification />} />
             <Route path="/support" element={<SupportMob />} />
+            <Route path="/feedback" element={<Feedback />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/content" element={<Content />} />
           </Route>
 
           <Route path="/reedem" element={<ReferalBalancePc />} />
