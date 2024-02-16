@@ -31,26 +31,29 @@ import {
   Typography,
 } from "@material-tailwind/react";
 const NewProfilePic = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [imageFile, setImageFile] = useState("https://images.unsplash.com/photo-1529524987368-af489318987c?q=80&w=582&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+
   const [openBottom, setOpenBottom] = useState(true);
   const navigate = useNavigate();
-  const [scrollPosition, setScrollPosition] = useState(0);
+  
   const openDrawerBottom = () => {
     setOpenBottom(true);
   };
   const closeDrawerBottom = () => setOpenBottom(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-  const toggleNavbar = () => {
-    setIsOpen(!isOpen);
+
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageFile(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+    alert("image upload successfully")
   };
+
   return (
     <div className="max-w-[480px] w-full min-h-screen h-full">
       <div
@@ -82,24 +85,28 @@ const NewProfilePic = () => {
               id="Epback"
               className="w-6"
             />
+           
           </div>
         </div>
-        <div className="w-full flex justify-center">
+        <div className="w-full flex flex-col items-center gap-4 justify-center">
           <img
             className="w-48
                  relative  rounded-full"
-            src="https://images.unsplash.com/photo-1529524987368-af489318987c?q=80&w=582&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          />
-        </div>
-      </div>
 
-      <Drawer
-        placement="bottom"
-        open={openBottom}
-        onClose={closeDrawerBottom}
-        className="p-4  bg-[#0f002b] rounded-t-3xl"
-      >
-        <div className="flex w-full justify-center items-end gap-4 pt-10">
+          
+            src={imageFile} alt="Preview"
+          />
+           <span className="text-[#0F002B] font-bold font-[Nunito-Sans]">
+            Upload or take a new picture.
+            </span>
+        </div>
+
+
+
+
+        <div className="flex fixed bottom-0 py-10 rounded-t-3xl bg-black w-full justify-center items-center gap-10 pt-10 max-w-[480px]  ">
+          
+          <div >
           <label
             htmlFor="image-upload"
             className="flex justify-center items-center flex-col"
@@ -107,41 +114,38 @@ const NewProfilePic = () => {
             <div className="p-4 w-16 h-16 flex justify-center items-center bg-white rounded-full ">
               <img src={image} />
             </div>
-            <span className="text-white">Upload Image</span>{" "}
+            <span className="text-white">Gallery</span>{" "}
           </label>
           <input
             accept="image/*"
             id="image-upload"
             type="file"
             className="hidden"
-            // onChange={handleImageUpload}
+            onChange={handleImageChange}
           />
-          <label
-            htmlFor="video-upload"
+          </div>
+        <div>
+        <label
+            htmlFor="camera"
             className="flex justify-center items-center flex-col"
           >
             <div className="p-4 w-16 h-16 flex justify-center items-center bg-white rounded-full ">
               <img src={video} />
             </div>
-            <span className="text-white">Upload Video</span>{" "}
+            <span className="text-white">Camera</span>{" "}
           </label>
           <input
-            className="hidden"
-            accept="video/*"
-            id="video-upload"
+            accept="image/*"
+            id="camera"
             type="file"
-            // onChange={handleVideoUpload}
+            className="hidden"
+            onChange={handleImageChange}
           />
         </div>
+       
+        </div>
+      </div>
 
-        <Typography
-          color="white"
-          className="flex justify-center text-gray-400 pt-6"
-        >
-          Make sure that you upload the correct image or video. This will be
-          used in future for reference in case of any issues.
-        </Typography>
-      </Drawer>
     </div>
   );
 };

@@ -98,6 +98,7 @@ const navigate =useNavigate();
                 src="https://images.unsplash.com/photo-1529524987368-af489318987c?q=80&w=582&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               />
               <img
+              onClick={()=> navigate("/editprofile")}
                 className={`absolute  ${
                   scrollPosition > 10 ? "hidden " : "top-0 right-[30%]"
                 }`}

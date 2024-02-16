@@ -113,6 +113,7 @@ const ChatUserMob = () => {
         <div className="fixed z-10 flex justify-between p-4  items-center mt-3 bg-[#fead3a] w-full pt-20 ">
           <div className="flex justify-center gap-2 items-center">
             <img
+            onClick={()=>navigate("/userprofile")}
               src={FrameProfile}
               className="w-[30px] h-[30px] rounded-[100px] border border-solid border-white "
             />

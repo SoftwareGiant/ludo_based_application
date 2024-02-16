@@ -16,7 +16,7 @@ const GameHistoryMob = () => {
   };
   const navigate = useNavigate();
   return (
-    <>
+   
       <div className="max-w-[480px] w-full min-h-screen h-full">
         <div
           id="NotificationspaceRoot"
@@ -123,7 +123,7 @@ const GameHistoryMob = () => {
           </div>
         </div>
       </div>
-    </>
+   
   );
 };
 
