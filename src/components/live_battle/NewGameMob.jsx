@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../App.css";
 import Copy from "../../assets/new_game/copy.svg";
 import Share from "../../assets/new_game/share.svg";
@@ -23,6 +23,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import ButtonLoader from "../MainLayout/ButtonLoader";
+import axios from "axios";
 
 const NewGameMob = () => {
   const navigate = useNavigate();
@@ -31,6 +32,21 @@ const NewGameMob = () => {
   const [openBottom, setOpenBottom] = useState(false);
   const openDrawerBottom = () => setOpenBottom(true);
   const closeDrawerBottom = () => setOpenBottom(false);
+  useEffect(() => {
+    axios
+      .post("http://localhost:8003/api/user/register", {
+        mobileNo: "7610981931",
+      })
+      .then((res) => console.log(res))
+      .then((data) => {
+        // Handle the response data
+        console.log(data);
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error("There was a problem with your fetch operation:", error);
+      });
+  }, []);
 
   const handleCreate = () => {
     if (battleAmount === "") {

@@ -4,14 +4,10 @@ import FrameProfile from "../../assets/profile/Frame_profile.png";
 import LiveBattles from "../../assets/new_game/livebattle.svg";
 import { useNavigate } from "react-router-dom";
 import TopbarMobile from "../MainLayout/TopbarMobile";
-import {
-  Button,
-  Drawer,
-  IconButton,
-  Typography,
-} from "@material-tailwind/react";
+
 
 const HelpPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen h-full bg-white">
       <TopbarMobile />

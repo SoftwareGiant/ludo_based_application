@@ -1,18 +1,40 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
+import scanner from "../../assets/new_game/scanner.svg";
 import { useState } from "react";
+import ButtonLoader from "../MainLayout/ButtonLoader.jsx"
 import "../../app.css";
 
 const AddCashMob = () => {
+  const [isScanner,setIsScanner] = useState(false);
     const [inputValue, setInputValue] = useState('');
+    const[isbtnLoad,setIsButtonLoad] = useState(false);
+
+    const fileInputRef = useRef(null);
+
+  const handleFileUpload = () => {
+    fileInputRef.current.click();
+   
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setIsButtonLoad(false);
+      console.log('Uploaded file:', file);
+      alert("balance will update soon")
+    }
+  };
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
-  };
+  };                 
 
   const handleClick = () => {
+    setIsScanner(true);
+    setIsButtonLoad(true)
     // Replace this with your desired action on button click
     if(inputValue===""){
         alert("please select amount")
@@ -23,7 +45,7 @@ const AddCashMob = () => {
         return;
     }
     console.log('Button clicked!', inputValue);
-    alert("amount added successfully")
+  
     setInputValue("")
   };
 
@@ -96,16 +118,42 @@ const AddCashMob = () => {
                 className="outline-none hover:outline-none w-full px-2"
               />
             </div>
-            <div className="bg-[0F002B] opacity-[30%] font-[Nunito-Sans]" onClick={handleClick}>Add</div>
+            <div className="bg-[0F002B] opacity-[30%] font-[Nunito-Sans]" onClick={handleClick}>{isbtnLoad ? <ButtonLoader/> : "Add"}</div>
           </div>
           <div className="text-white text-right">Min. ₹ 10  Max. ₹ 10,000</div>
-          <div className="text-white flex font-[Inter] gap-4 flex-wrap ">
-            <div onClick={()=>setInputValue(100)} className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md">₹ 100</div>
-            <div onClick={()=>setInputValue(200)} className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md">₹ 250</div>
-            <div onClick={()=>setInputValue(500)} className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md">₹ 500</div>
-            <div onClick={()=>setInputValue(1000)} className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md">₹ 1000</div>
-            <div onClick={()=>setInputValue(2000)} className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md">₹ 2000</div>
-          </div>
+        
+        {isScanner ? 
+        <div className="flex justify-center flex-col items-center">
+         <img src={scanner}/>
+
+         <div className="container mx-auto mt-10 flex items-center justify-center">
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handleFileChange}
+      />
+      <button
+        className="bg-[#0F002B]  text-white font-bold py-2 px-10 rounded-lg"
+        onClick={handleFileUpload}
+      >
+        Upload Image
+      </button>
+    </div>
+        </div>
+        : 
+        <div className="text-white flex font-[Inter] gap-4 flex-wrap ">
+        <div onClick={()=>setInputValue(100)} className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md">₹ 100</div>
+        <div onClick={()=>setInputValue(200)} className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md">₹ 250</div>
+        <div onClick={()=>setInputValue(500)} className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md">₹ 500</div>
+        <div onClick={()=>setInputValue(1000)} className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md">₹ 1000</div>
+        <div onClick={()=>setInputValue(2000)} className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md">₹ 2000</div>
+      </div>
+        }
+          
+
+          
         </div>
         <div className="font-[Nunito-Sans] text-white relative text-center pb-32">*Minimum Deposit Amount ₹ 10</div>
       </div>
