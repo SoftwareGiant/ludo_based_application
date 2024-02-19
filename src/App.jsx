@@ -113,6 +113,7 @@ function App() {
             <Route path="/mywallet" element={<MyWalletMob />} />
             <Route path="/deposite" element={<AddCashMob />} />
             <Route path="/withdraw" element={<WithdrawMob />} />
+            <Route path="referalwithdraw" element={<ReferalsBalanceWithDraw/>}/>
             <Route path="/gamehistory" element={<GameHistoryMob />} />
             <Route
               path="/transactionhistory"
