@@ -1,44 +1,80 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../App.css";
 import BackgroundImg from "../../assets/background.jpg";
 import CountryIcon from "../../assets/country.svg";
 import DropIcon from "../../assets/dropicon.svg";
 import LudoIcon from "../../assets/ludo-indian-monument-touch.svg";
 import SignUpSucess from "./SignUpSucess";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import MyButton from "../MainLayout/MyButton";
 import ButtonLoader from "../MainLayout/ButtonLoader";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAsync, selectIsAuthenticated, selectToken } from "./authSlice";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object().shape({
+  number: Yup.string()
+    .matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits")
+    .required("Phone number is required"),
+});
 
 const LoginMob = () => {
   const [number, setNumber] = useState("");
   const [isOtp, setIsOtp] = useState(false);
   const [otpNumber, setOtpNumber] = useState("");
-  const [isSuccess, seIsSuccess] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [isLoadButton, setIsLoadButton] = useState(false);
-  const navigate = useNavigate();
-  const handlePhoneSubmit = () => {
-    console.log(number);
-    if (number === "") {
-      alert("please enter number");
-      return;
-    } else {
-      setIsOtp(true);
-    }
-    console.log();
+
+  const initialValues = {
+    number: "",
   };
-  const handleFormSubmit = async () => {
-    setIsLoadButton(true);
-    console.log(number, isOtp);
-    let intervalId;
-    if (otpNumber && number) {
-      seIsSuccess(true);
-      intervalId = setTimeout(() => {
-        navigate("/apptour");
-      }, 3000);
-    }
-    () => {
+
+  const token = useSelector(selectToken);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   if (token) {
+  //     navigate("/");
+  //   }
+  // }, []);
+  const handlePhoneSubmit = async (values) => {
+    console.log(values.number);
+    dispatch(loginAsync(values.number))
+      .unwrap()
+      .then(() => {
+       setIsSuccess(true);
+    intervalId = setTimeout(() => {
+      setIsSuccess(false);
+      navigate("/apptour");
+    }, 3000);
+    return () => {
       clearInterval(intervalId);
     };
+      }).catch((error) => {
+        console.error('Login error:', error);
+      });;
+    // setIsOtp(true);
+  };
+  const handleFormSubmit = async () => {
+    if (!otpNumber || !number) {
+      return;
+    }
+    setIsLoadButton(true);
+    // let intervalId;
+    try {
+      await dispatch(loginAsync(number));
+      setIsLoadButton(false);
+    } catch (error) {
+      console.log("login failed", error);
+    }
+    // seIsSuccess(true);
+    // intervalId = setTimeout(() => {
+    //   navigate("/apptour");
+    // }, 3000);
+    // () => {
+    //   clearInterval(intervalId);
+    // };
   };
   console.log(isSuccess);
 
@@ -147,7 +183,7 @@ const LoginMob = () => {
                       </>
                     ) : (
                       <>
-                        <div
+                        {/* <div
                           id="EnterPhoneNumber1"
                           className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] items-center mx-auto bg-white flex flex-row gap-4 justify-center pt-3 px-4 rounded-lg w-full h-[56px] py-[10px]"
                         >
@@ -178,7 +214,55 @@ const LoginMob = () => {
                           className="text-center items-center text-xl mx-auto font-['Inter'] h-[56px] w-full px-[16px] text-[20px] font-bold  gap-[10px]   shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row justify-center pt-4 rounded-lg bg-[#0f002b] text-white p-4"
                         >
                           Continue
-                        </button>
+                        </button> */}
+                        <Formik
+                          initialValues={initialValues}
+                          validationSchema={validationSchema}
+                          onSubmit={handlePhoneSubmit}
+                        >
+                          {({ isValid }) => (
+                            <Form className="flex flex-col gap-2">
+                              {/* Your country code and input field */}
+
+                              <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] items-center mx-auto bg-white flex flex-row gap-4 justify-center pt-3 px-4 rounded-lg w-full h-[56px] py-[10px]">
+                                <div className="flex flex-row gap-2 w-16 items-start">
+                                  <img
+                                    src={CountryIcon}
+                                    alt="Twemojiflagindia"
+                                    id="Twemojiflagindia"
+                                    className="w-8"
+                                  />
+                                  <img
+                                    src={DropIcon}
+                                    alt="Gridiconsdropdown"
+                                    id="Gridiconsdropdown"
+                                    className="mt-1 w-5"
+                                  />
+                                </div>
+                                <Field
+                                  type="text"
+                                  name="number"
+                                  className="p-2 font-bold text-lg rounded-md w-full focus:outline-none appearance-none"
+                                  placeholder="Enter Phone Number"
+                                />
+                              </div>
+
+                              <ErrorMessage
+                                name="number"
+                                component="div"
+                                className="text-red-500"
+                              />
+
+                              <button
+                                type="submit"
+                                disabled={!isValid}
+                                className="text-center items-center text-xl mx-auto font-['Inter'] h-[56px] w-full px-[16px] text-[20px] font-bold gap-[10px] shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center pt-4 rounded-lg bg-[#0f002b] text-white p-4"
+                              >
+                                Continue
+                              </button>
+                            </Form>
+                          )}
+                        </Formik>
                       </>
                     )}
                   </div>

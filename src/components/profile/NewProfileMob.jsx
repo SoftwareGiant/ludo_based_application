@@ -12,22 +12,34 @@ import Back from "../../assets/profile/ep_back.svg";
 import Favorite from "../../assets/new_game/fav.svg";
 import BellIcon from "../../assets/new_game/notification.svg";
 import kyc from "../../assets/new_game/KYC.svg";
-import AddGame from "../../assets/new_game/addgame.svg";
-import Profile from "../../assets/new_game/profile.svg";
-import WinCash from "../../assets/new_game/wincash.svg";
-import Wallet from "../../assets/new_game/wallet.svg";
-import GameHistory from "../../assets/new_game/history.svg";
-import ReferEarn from "../../assets/new_game/refer&earn.svg";
-import Support from "../../assets/new_game/support.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { Switch } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  logoutAsync,
+  selectIsAuthenticated,
+  selectRefreshToken,
+  selectToken,
+} from "../app_start/authSlice";
+import { fetchUserDetail, selectUser } from "../live_battle/userSlice";
 
 const NewProfileMob = () => {
   const [isOpen, setIsOpen] = useState(false);
-const navigate =useNavigate();
-  const [scrollPosition, setScrollPosition] = useState(0);
 
+  const token = useSelector(selectToken);
+  
+  const refreshtoken = useSelector(selectRefreshToken);
+  
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const user = useSelector(selectUser);
+  console.log("user",user);
+  console.log("token",token);
+  useEffect(() => {
+    dispatch(fetchUserDetail(token));
+  }, [dispatch]);
   useEffect(() => {
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
@@ -37,6 +49,9 @@ const navigate =useNavigate();
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  const handleLogout = () => {
+    dispatch(logoutAsync({token,refreshtoken}));
+  };
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
@@ -59,9 +74,12 @@ const navigate =useNavigate();
             </div>
           </div>
         </div>
-        <div 
-        onClick={()=>navigate("/login")}
-        className={`flex  h-9 my-1 px-3 justify-center items-center border-solid border border-[rgba(15,_0,_43,_0.3)] bg-[rgba(15,_0,_43,_0.3)] rounded-2xl ${scrollPosition >10 ? "hidden" : "flex"}`}>
+        <div
+          onClick={handleLogout}
+          className={`flex  h-9 my-1 px-3 justify-center items-center border-solid border border-[rgba(15,_0,_43,_0.3)] bg-[rgba(15,_0,_43,_0.3)] rounded-2xl ${
+            scrollPosition > 10 ? "hidden" : "flex"
+          }`}
+        >
           <img src={LogOutMob} alt="Frame1" className=" w-[20px] h-[20px]" />
         </div>
       </div>
@@ -73,9 +91,7 @@ const navigate =useNavigate();
           className={`flex ${
             scrollPosition > 10 ? "relative px-3 pt-2" : "hidden"
           }`}
-        >
-          <img src={Back} />
-        </div>
+        ></div>
         <div
           className={`w-full relative mt-6  flex ${
             scrollPosition > 10 ? "flex-row items-center " : "flex-col"
@@ -98,7 +114,7 @@ const navigate =useNavigate();
                 src="https://images.unsplash.com/photo-1529524987368-af489318987c?q=80&w=582&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               />
               <img
-              onClick={()=> navigate("/editprofile")}
+                onClick={() => navigate("/editprofile")}
                 className={`absolute  ${
                   scrollPosition > 10 ? "hidden " : "top-0 right-[30%]"
                 }`}
@@ -142,7 +158,6 @@ const navigate =useNavigate();
         </div>
 
         <div className="mt-10 flex flex-col gap-3 w-full font-['Nunito_Sans'] items-start relative text-white font-bold">
-
           <div className="bg-[#0f002b] text-white flex flex-col justify-center gap-10 w-full items-start pt-5 pb-6 px-8">
             <div className="flex  justify-between w-full items-center">
               <div className="text-xl font-bold text-white">Basic Details</div>

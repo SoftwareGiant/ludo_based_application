@@ -6,10 +6,6 @@ import Fb from "../../assets/new_game/fb.svg";
 import Wp from "../../assets/new_game/wp.svg";
 import Twtr from "../../assets/new_game/twtr.svg";
 import LiveBattle from "../../assets/new_game/livebattle.svg";
-import DropIcon from "../../assets/new_game/dropdown.svg";
-import ElpAct from "../../assets/new_game/EllipseActive.svg";
-import Elp from "../../assets/new_game/Ellipse.svg";
-import Prfl from "../../assets/new_game/ludo-indian.png";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import HamBurger from "../../assets/profile/hamburger.svg";
 import back from "../../assets/profile/ep_back.svg";
@@ -32,21 +28,21 @@ const NewGameMob = () => {
   const [openBottom, setOpenBottom] = useState(false);
   const openDrawerBottom = () => setOpenBottom(true);
   const closeDrawerBottom = () => setOpenBottom(false);
-  useEffect(() => {
-    axios
-      .post("http://localhost:8003/api/user/register", {
-        mobileNo: "7610981931",
-      })
-      .then((res) => console.log(res))
-      .then((data) => {
-        // Handle the response data
-        console.log(data);
-      })
-      .catch((error) => {
-        // Handle errors
-        console.error("There was a problem with your fetch operation:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .post("/api/user/login", {
+  //       mobileNo: "7610981931",
+  //     })
+  //     .then((res) => console.log(res))
+  //     .then((data) => {
+        
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+      
+  //       console.error("There was a problem with your axios operation:", error);
+  //     });
+  // }, []);
 
   const handleCreate = () => {
     if (battleAmount === "") {
