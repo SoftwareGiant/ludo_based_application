@@ -1,77 +1,98 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-export const login = createAsyncThunk(
-    'auth/login',
-    async ({ username, password }, { rejectWithValue }) => {
-      try {
-        // Simulate API call
-        const response = await fetch('/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password }),
-        });
-  
-        if (!response.ok) {
-          throw new Error('Login failed');
-        }
-  
-        const user = await response.json();
-        return user;
-      } catch (error) {
-        return rejectWithValue(error.message);
-      }
-    }
-  );
-  
-  export const logout = createAsyncThunk('auth/logout', async () => {
-    // Handle logout logic
-    // Simulate API call
-    await fetch('/api/logout');
-    return null; // Indicate successful logout
-  });
-  
 
 const initialState = {
-  loggedInUserToken: null, 
-  isLoggedIn: false,
+  accessToken: localStorage.getItem('accessToken') || null,
+  refreshToken: localStorage.getItem('refreshToken') || null,
   user: null,
-  loading: false,
-  error: null,
 };
 
-export const authSlice = createSlice({
+
+export const loginAsync = createAsyncThunk(
+  'auth/login',
+  async (mobileNo, { rejectWithValue }) => {
+    console.log(typeof mobileNo, mobileNo)
+    try {
+      const response = await axios.post("/api/user/login", { mobileNo: mobileNo });
+      // Handle the response data here
+      const data = response.data;
+      console.log(data);
+      if (!data || !data.accessToken) {
+        throw new Error('Login failed');
+      }
+      const { accessToken, refreshToken } = data;
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+      return data;
+    }
+    catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const logoutAsync = createAsyncThunk(
+  'auth/logout',
+  async ({ token, refreshtoken }) => {
+    console.log("logout")
+    // const token = await JSON.parse(localStorage.getItem('accessToken'));
+    // const refreshToken =await JSON.parse(localStorage.getItem('refreshToken'));
+    console.log(token, refreshtoken);
+    try {
+      const response = await axios.post(
+        '/api/user/logout',
+        { refreshToken: refreshtoken },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response)
+      if (!response.statusText) {
+        throw new Error('Logout failed');
+      }
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+    }
+    catch (error) {
+      alert(error);
+    }
+  }
+);
+
+const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {}, // Add reducers for local actions if needed, like clearing error
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(login.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+      .addCase(loginAsync.fulfilled, (state, action) => {
+        const { accessToken, refreshToken } = action.payload;
+        state.accessToken = accessToken;
+        state.refreshToken = refreshToken;
       })
-      .addCase(login.fulfilled, (state, action) => {
-        state.loading = false;
-        state.isLoggedIn = true;
-        state.user = action.payload;
+      .addCase(loginAsync.rejected, (state, action) => {
+        state.accessToken = null;
+        state.refreshToken = null;
       })
-      .addCase(login.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
+      .addCase(logoutAsync.fulfilled, (state) => {
+        state.accessToken = null;
+        state.refreshToken = null;
       })
-      .addCase(logout.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+      .addCase(logoutAsync.rejected, (state, action) => {
+        // Handle rejected state
+        return;
       })
-      .addCase(logout.fulfilled, (state) => {
-        state.loading = false;
-        state.isLoggedIn = false;
-        state.user = null;
-      })
-      .addCase(logout.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      });
   },
 });
+
+
+export const selectToken = (state) => state.auth.accessToken;
+export const selectRefreshToken = (state) => state.auth.refreshToken;
+export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;
+
+// export { loginAsync, logoutAsync };
 
 export default authSlice.reducer;
