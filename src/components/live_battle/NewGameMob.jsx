@@ -20,7 +20,8 @@ import {
 } from "@material-tailwind/react";
 import ButtonLoader from "../MainLayout/ButtonLoader";
 import axios from "axios";
-
+import io from "socket.io-client";
+const socket = io("http://localhost:8003");
 const NewGameMob = () => {
   const navigate = useNavigate();
   const [battleAmount, setBattleAmount] = useState("");
@@ -28,6 +29,13 @@ const NewGameMob = () => {
   const [openBottom, setOpenBottom] = useState(false);
   const openDrawerBottom = () => setOpenBottom(true);
   const closeDrawerBottom = () => setOpenBottom(false);
+
+  socket.on("databaseChange",(data)=>{
+    console.log(data);
+  });
+
+
+
   // useEffect(() => {
   //   axios
   
