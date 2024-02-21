@@ -30,6 +30,7 @@ const NewGameMob = () => {
   const closeDrawerBottom = () => setOpenBottom(false);
   // useEffect(() => {
   //   axios
+  
   //     .post("/api/user/login", {
   //       mobileNo: "7610981931",
   //     })
