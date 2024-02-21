@@ -15,7 +15,8 @@ import WithDrawPc from "./components/wallet/WithDrawPc";
 import ReferalBalancePc from "./components/wallet/ReferalBalancePc";
 import Login from "./components/admin_and_S.admin/admin/Login";
 import SAdminLogin from "./components/admin_and_S.admin/superadmin/SAdminLogin";
-import NewOnboard from "./components/admin_and_S.admin/admin/NewOnboard";
+// import NewOnboard from "./components/admin_and_S.admin/admin/NewOnboard";
+import NewOnboard from "./components/admin_and_S.admin/admin/Pages/NewOnboard.jsx";
 // need some work
 import Info from "./components/continue/Info";
 import FilterLiveBattle from "./components/live_battle/FilterLiveBattle";
@@ -77,6 +78,15 @@ import Feedback from "./components/support/Feedback";
 import UserProfile from "./components/live_battle/UserProfile";
 import UserProfile2 from "./components/live_battle/userProfile2";
 import UserProfile3 from "./components/live_battle/UserProfile3";
+import AdminLayout from "./components/admin_and_S.admin/admin/AdminLayout";
+import KycVerification from "./components/admin_and_S.admin/admin/Pages/KycVerification";
+import GameVerificaion from "./components/admin_and_S.admin/admin/Pages/GameVerificaion.jsx";
+import Deposite from "./components/admin_and_S.admin/admin/Pages/Deposite.jsx";
+import Withdraw from "./components/admin_and_S.admin/admin/Pages/Withdraw.jsx";
+import ReferaalTrack from "./components/admin_and_S.admin/admin/Pages/ReferaalTrack.jsx";
+import UserHistory from "./components/admin_and_S.admin/admin/Pages/UserHistory.jsx";
+import AdminSupport from "./components/admin_and_S.admin/admin/Pages/AdminSupport.jsx";
+import AdminCustomer from "./components/admin_and_S.admin/admin/Pages/AdminCustomer.jsx";
 
 function App() {
   return (
@@ -85,7 +95,7 @@ function App() {
         <Routes>
           <Route path="/admin" element={<Login />} />
           <Route path="/superadmin" element={<SAdminLogin />} />
-          <Route path="/onboard" element={<NewOnboard />} />
+          {/* <Route path="/onboard" element={<NewOnboard />} /> */}
           <Route path="/login" element={<LoginMob />} />
 
           <Route path="/" element={<ProtectedRoute />}>
@@ -127,10 +137,24 @@ function App() {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/content" element={<Content />} />
           </Route>
-
           <Route path="/reedem" element={<ReferalBalancePc />} />
-
           <Route path="/startbattle" element={<CardClickInstance />} />
+
+
+
+
+
+          <Route path="/" element={<AdminLayout />} >
+            <Route path="/newonboard" element={<NewOnboard/>} />
+            <Route path="/kycverification" element={<KycVerification />} />
+            <Route path="/admingamehistory" element={<GameVerificaion />} />
+            <Route path="/admindeposite" element={<Deposite />} />
+            <Route path="/adminwithdraw" element={<Withdraw />} />
+            <Route path="/adminreferral" element={<ReferaalTrack />} />
+            <Route path="/adminuserhistory" element={<UserHistory />} />
+            <Route path="/adminsuport" element={<AdminSupport />} />
+            <Route path="/admincustomer" element={<AdminCustomer />} />
+          </Route>
         </Routes>
       </BrowserRouter>
 
