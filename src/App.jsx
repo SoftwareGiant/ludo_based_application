@@ -93,7 +93,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/admin" element={<Login />} />
+          {/* <Route path="/admin" element={<Login />} /> */}
           <Route path="/superadmin" element={<SAdminLogin />} />
           {/* <Route path="/onboard" element={<NewOnboard />} /> */}
           <Route path="/login" element={<LoginMob />} />

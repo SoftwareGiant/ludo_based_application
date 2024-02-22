@@ -92,7 +92,7 @@ export function NewOnboard() {
     setIsClicked(!isClicked);
   };
   return (
-    <div className="font-[Inter] w-full overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
+    <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
         <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
           <span className="underline">Admin Control Panel </span>
@@ -112,8 +112,8 @@ export function NewOnboard() {
         </p>
         <Icon icon="charm:cross" width="12" />
       </div>
-      <Card className="overflow-y-scroll scrollbar-hide h-full w-full py-1 px-4">
-        <CardBody className=" px-0">
+      <Card className="table-auto overflow-scroll h-full w-full py-1 px-4">
+        <CardBody className=" px-0 h-full w-full">
           <div className="flex justify-between">
             <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
               New Users
@@ -167,7 +167,7 @@ export function NewOnboard() {
               <Stats />
             </div>
           </div>
-          <table className="mt-4 w-full min-w-max table-auto text-left font-[Inter] font-medium text-[16px]">
+          <table className="mt-4 h-full w-full min-w-max table-auto text-left font-[Inter] font-medium text-[16px]">
             <thead>
               <tr>
                 {TABLE_HEAD.map((head, index) => (
@@ -192,12 +192,12 @@ export function NewOnboard() {
                 ))}
               </tr>
             </thead>
-            <tbody>
+            <tbody className=" h-full w-full">
               {TABLE_ROWS.map(({ uid, name, mobno, onboard }, index) => {
                 const isLast = index === TABLE_ROWS.length - 1;
                 const classes = isLast ? "p-4" : "p-4";
                 return (
-                  <tr key={mobno} className="text-[#000000]">
+                  <tr key={mobno} className="text-[#000000] ">
                     <td className={classes}>
                       <div className="flex items-center gap-3">
                         <Typography className="font-[Inter] font-medium text-[16px]">
