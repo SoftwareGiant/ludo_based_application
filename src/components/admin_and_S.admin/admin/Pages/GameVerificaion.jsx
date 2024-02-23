@@ -212,7 +212,7 @@ export function GameVerificaion() {
     setIsClicked(!isClicked);
   };
   return (
-    <div className="font-[Inter] w-full min-h-screen bg-[#ffff] rounded-tl-3xl">
+    <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
         <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
           <span className="underline">Admin Control Panel </span>
@@ -232,7 +232,7 @@ export function GameVerificaion() {
         </p>
         <Icon icon="charm:cross" width="12" />
       </div>
-      <Card className="overflow-scroll h-full w-full py-1 px-4">
+      <Card className="overflow-scroll table-auto h-full w-full py-1 px-4">
         <CardBody className=" px-0">
           <div className="flex justify-between">
             <span className="font-[Inter] font-medium text-[16px] text-[#000000]">

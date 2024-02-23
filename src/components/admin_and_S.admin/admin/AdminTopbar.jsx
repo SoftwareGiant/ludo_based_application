@@ -24,8 +24,15 @@ import Kyc from "../../../assets/admin_Sadmin/admin/kyc.svg";
 import Setting from "../../../assets/admin_Sadmin/admin/settings.svg";
 import Stats from "../../../assets/admin_Sadmin/admin/stats.svg";
 import ButtonLoader from "../../MainLayout/ButtonLoader";
+import { useNavigate } from "react-router-dom";
 
 const AdminTopbar = () => {
+  <Icon
+    onClick={() => navigate("/adminlogin")}
+    icon="material-symbols:logout"
+    width="24"
+  />;
+  const navigate = useNavigate();
   return (
     <div className="flex font-[Inter] p-2 items-center justify-between ">
       <p className="text-[20px]">Admin Control Panel</p>
@@ -39,14 +46,14 @@ const AdminTopbar = () => {
           />
         </div>
         <div className="flex justify-between w-[104px] h-[24px]">
-        <Menu >
-              <MenuHandler>
-                 <Icon icon="iconamoon:notification-light" width="24" />
-                 </MenuHandler>
-              <MenuList className="h-20 flex justify-center items-center">
- <ButtonLoader/>
-              </MenuList>
-              </Menu>  
+          <Menu>
+            <MenuHandler>
+              <Icon className="cursor-pointer" icon="iconamoon:notification-light" width="24" />
+            </MenuHandler>
+            <MenuList className="h-20 flex justify-center items-center">
+              <ButtonLoader />
+            </MenuList>
+          </Menu>
           <div className="border-white border rounded-full w-[24px] h-[24px] overflow-hidden ">
             <Menu>
               <MenuHandler>
@@ -123,7 +130,12 @@ const AdminTopbar = () => {
               </MenuList>
             </Menu>
           </div>
-          <Icon icon="material-symbols:logout" width="24" />
+          <Icon
+            onClick={() => navigate("/adminlogin")}
+            icon="material-symbols:logout"
+            width="24"
+            className="cursor-pointer"
+          />
         </div>
       </div>
     </div>

@@ -87,6 +87,14 @@ import ReferaalTrack from "./components/admin_and_S.admin/admin/Pages/ReferaalTr
 import UserHistory from "./components/admin_and_S.admin/admin/Pages/UserHistory.jsx";
 import AdminSupport from "./components/admin_and_S.admin/admin/Pages/AdminSupport.jsx";
 import AdminCustomer from "./components/admin_and_S.admin/admin/Pages/AdminCustomer.jsx";
+import SuperAdminLayout from "./components/admin_and_S.admin/superadmin/SuperAdminLayout.jsx";
+import SuperDashboard from "./components/admin_and_S.admin/superadmin/Pages/SuperDashboard.jsx";
+import SuperNotification from "./components/admin_and_S.admin/superadmin/Pages/SuperNotification.jsx";
+import SuperAdmins from "./components/admin_and_S.admin/superadmin/Pages/SuperAdmins.jsx";
+import SuperTournaments from "./components/admin_and_S.admin/superadmin/Pages/SuperTournaments.jsx";
+import SuperCustomer from "./components/admin_and_S.admin/superadmin/Pages/SuperCustomer.jsx";
+import SuperDeposite from "./components/admin_and_S.admin/superadmin/Pages/SuperDeposite.jsx";
+import SuperWithdrawal from "./components/admin_and_S.admin/superadmin/Pages/SuperWithdrawal.jsx";
 
 function App() {
   return (
@@ -94,7 +102,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* <Route path="/admin" element={<Login />} /> */}
-          <Route path="/superadmin" element={<SAdminLogin />} />
+          <Route path="/adminlogin" element={<SAdminLogin />} />
           {/* <Route path="/onboard" element={<NewOnboard />} /> */}
           <Route path="/login" element={<LoginMob />} />
 
@@ -114,7 +122,6 @@ function App() {
             <Route path="/help" element={<HelpPage />} />
             {/* Profile page routes */}
             <Route path="/profile" element={<NewProfileMob />} />
-          
 
             <Route path="/editprofile" element={<NewProfilePic />} />
             {/* wincash page */}
@@ -123,7 +130,10 @@ function App() {
             <Route path="/mywallet" element={<MyWalletMob />} />
             <Route path="/deposite" element={<AddCashMob />} />
             <Route path="/withdraw" element={<WithdrawMob />} />
-            <Route path="referalwithdraw" element={<ReferalsBalanceWithDraw/>}/>
+            <Route
+              path="referalwithdraw"
+              element={<ReferalsBalanceWithDraw />}
+            />
             <Route path="/gamehistory" element={<GameHistoryMob />} />
             <Route
               path="/transactionhistory"
@@ -140,12 +150,10 @@ function App() {
           <Route path="/reedem" element={<ReferalBalancePc />} />
           <Route path="/startbattle" element={<CardClickInstance />} />
 
+          {/* admin routes */}
 
-
-
-
-          <Route path="/" element={<AdminLayout />} >
-            <Route path="/newonboard" element={<NewOnboard/>} />
+          <Route path="/" element={<AdminLayout />}>
+            <Route path="/newonboard" element={<NewOnboard />} />
             <Route path="/kycverification" element={<KycVerification />} />
             <Route path="/admingamehistory" element={<GameVerificaion />} />
             <Route path="/admindeposite" element={<Deposite />} />
@@ -154,6 +162,17 @@ function App() {
             <Route path="/adminuserhistory" element={<UserHistory />} />
             <Route path="/adminsuport" element={<AdminSupport />} />
             <Route path="/admincustomer" element={<AdminCustomer />} />
+          </Route>
+
+          {/* super admin routes */}
+          <Route path="/superadmin" element={<SuperAdminLayout />}>
+            <Route path="dashboard" element={<SuperDashboard />} />
+            <Route path="notification" element={<SuperNotification />} />
+            <Route path="admins" element={<SuperAdmins />} />
+            <Route path="tournaments" element={<SuperTournaments />} />
+            <Route path="customer" element={<SuperCustomer />} />
+            <Route path="deposite" element={<SuperDeposite />} />
+            <Route path="withdrawal" element={<SuperWithdrawal />} />
           </Route>
         </Routes>
       </BrowserRouter>
