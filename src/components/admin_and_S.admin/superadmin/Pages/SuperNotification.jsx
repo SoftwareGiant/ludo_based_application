@@ -10,6 +10,7 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 import graph from "../../../../assets/admin_Sadmin/admin/graph.png";
+import AdminFooter from "../../admin/Common.jsx/AdminFooter";
 
 const TABLE_ROWS = [
   {
@@ -61,7 +62,7 @@ export function SuperNotification() {
     setIsClicked(!isClicked);
   };
   return (
-    <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
+    <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen pb-10 bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
         <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
           <span className="underline">Super Admin Control Panel </span>
@@ -82,7 +83,7 @@ export function SuperNotification() {
         </p>
         <Icon icon="charm:cross" width="12" />
       </div>
-      <Card className="text-[#000000] table-auto  overflow-y-scroll h-full w-full px-4">
+      <Card className="text-[#000000] table-auto  w-full px-4">
         <CardBody className=" p-0 mt-3 h-full w-full">
           <div className="flex gap-3 justify-start">
             <div className="flex border-gray-200 border shadow-md rounded-3xl cursor-pointer items-center justify-between px-3 gap-2 h-[32px]">
@@ -442,6 +443,7 @@ export function SuperNotification() {
           </div>
         </CardBody>
       </Card>
+      <AdminFooter/>
     </div>
   );
 }

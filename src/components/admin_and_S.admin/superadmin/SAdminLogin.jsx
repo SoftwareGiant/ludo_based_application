@@ -87,9 +87,11 @@ const SAdminLogin = () => {
                 </div>
               </div>
               <div
-                onClick={() => {isToggled ?  navigate("/superadmin/dashboard") :
-                  navigate("/newonboard")}
-                }
+                onClick={() => {
+                  isToggled
+                    ? navigate("/superadmin/dashboard")
+                    : navigate("/newonboard");
+                }}
                 className={`cursor-pointer items-center font-medium text-white flex py-3 px-5 gap-4 justify-center w-[104px] h-[43px] border-2 border-solid border-white rounded-[30px]  ${
                   isToggled ? "bg-[#28BD75]" : "bg-[#6079FF]"
                 }`}

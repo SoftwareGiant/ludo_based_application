@@ -18,6 +18,7 @@ import {
   MenuHandler,
   MenuItem,
 } from "@material-tailwind/react";
+import AdminFooter from "../../admin/Common.jsx/AdminFooter";
 
 const TABLE_HEAD = ["Name", "Number", "Position", "Status", "Onboarding Date"];
 
@@ -62,7 +63,7 @@ export function SuperAdmins() {
     setIsClicked(false);
   };
   return (
-    <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
+    <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl pb-10">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
         <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
           <span className="underline">Admin Control Panel </span>
@@ -206,6 +207,7 @@ export function SuperAdmins() {
           </table>
         </CardBody>
       </Card>
+      <AdminFooter/>
     </div>
   );
 }

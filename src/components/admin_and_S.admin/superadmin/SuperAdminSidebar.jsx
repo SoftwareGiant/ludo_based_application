@@ -32,7 +32,7 @@ const SuperAdminSidebar = () => {
           <Icon icon="ic:baseline-menu" width="24" />
           {showFullSidebar && <span>Menu</span>}
         </div>
-        <Link to="/superadmin/dashboard">
+        <Link to="/superadmin">
           <div
             className={`flex justify-start gap-4 items-center px-3 rounded-3xl m-1 cursor-pointer bg-[#EEEEEE] hover:bg-[#EEEEEE] h-[51px]`}
           >

@@ -166,7 +166,7 @@ function App() {
 
           {/* super admin routes */}
           <Route path="/superadmin" element={<SuperAdminLayout />}>
-            <Route path="dashboard" element={<SuperDashboard />} />
+            <Route path="" element={<SuperDashboard />} />
             <Route path="notification" element={<SuperNotification />} />
             <Route path="admins" element={<SuperAdmins />} />
             <Route path="tournaments" element={<SuperTournaments />} />

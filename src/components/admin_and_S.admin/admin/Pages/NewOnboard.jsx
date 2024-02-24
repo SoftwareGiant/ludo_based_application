@@ -231,6 +231,7 @@ export function NewOnboard() {
           </table>
         </CardBody>
       </Card>
+      <AdminFooter/>
     </div>
   );
 }
