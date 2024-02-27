@@ -141,9 +141,6 @@ function App() {
           <Route path="/startbattle" element={<CardClickInstance />} />
 
 
-
-
-
           <Route path="/" element={<AdminLayout />} >
             <Route path="/newonboard" element={<NewOnboard/>} />
             <Route path="/kycverification" element={<KycVerification />} />
