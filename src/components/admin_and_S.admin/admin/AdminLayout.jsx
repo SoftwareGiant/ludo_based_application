@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 
 const AdminLayout = ({children}) => {
   return (
-    <div className="bg-[#E6E6E6] box-border min-h-screen h-full w-full">
+    <div className="bg-[#E6E6E6] box-border h-screen w-full">
       <AdminTopbar/>
       <div className="flex gap-2 h-full overflow-hidden">
         <AdminSidebar />

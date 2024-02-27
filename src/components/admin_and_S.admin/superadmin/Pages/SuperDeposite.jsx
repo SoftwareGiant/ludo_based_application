@@ -1,114 +1,102 @@
-import {
-  MagnifyingGlassIcon,
-  ChevronUpDownIcon,
-} from "@heroicons/react/24/outline";
 import React, { useState } from "react";
 import { Icon } from "@iconify-icon/react";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
+import Stats from "../../admin/Common.jsx/Stats";
 import {
   Card,
-  CardHeader,
-  Input,
   Typography,
-  Button,
   CardBody,
   MenuList,
   Menu,
   MenuHandler,
   MenuItem,
 } from "@material-tailwind/react";
-import Stats from "../Common.jsx/Stats";
-import AdminFooter from "../Common.jsx/AdminFooter";
+import AdminFooter from "../../admin/Common.jsx/AdminFooter";
 
-const TABLE_HEAD = ["UID", "Name", "Mobile Number", "Onboarding Date"];
-
-const TABLE_ROWS = [
-  {
-    uid: "1",
-    name: "John Doe",
-    mobno: "7610981931",
-    onboard: "22/12/2014",
-  },
-  {
-    uid: "2",
-    name: "Jane Smith",
-    mobno: "7610981932",
-    onboard: "23/12/2014",
-  },
-  {
-    uid: "3",
-    name: "Alice Johnson",
-    mobno: "7610981933",
-    onboard: "24/12/2014",
-  },
-  {
-    uid: "4",
-    name: "Bob Brown",
-    mobno: "7610981934",
-    onboard: "25/12/2014",
-  },
-  {
-    uid: "5",
-    name: "Eve Williams",
-    mobno: "7610981935",
-    onboard: "26/12/2014",
-  },
-  {
-    uid: "6",
-    name: "Charlie Davis",
-    mobno: "7610981936",
-    onboard: "27/12/2014",
-  },
-  {
-    uid: "7",
-    name: "Grace Wilson",
-    mobno: "7610981937",
-    onboard: "28/12/2014",
-  },
-  {
-    uid: "8",
-    name: "David Martinez",
-    mobno: "7610981938",
-    onboard: "29/12/2014",
-  },
-  {
-    uid: "9",
-    name: "Frank Taylor",
-    mobno: "7610981939",
-    onboard: "30/12/2014",
-  },
-  {
-    uid: "10",
-    name: "Sophie Lee",
-    mobno: "7610981940",
-    onboard: "31/12/2014",
-  },
+const TABLE_HEAD = [
+  "Name",
+  "Mobile Number",
+  "Current Wallet",
+  "Amount",
+  "Status",
+  "Verified",
+  "Date",
 ];
 
-export function NewOnboard() {
+const TABLE_ROWS = [
+    {
+      "name": "John Doe",
+      "mobno": "1234567890",
+      "currwallet": "$100",
+      "Amount": "$50",
+      "status": "Completed",
+      "Verified": true,
+      "Date": "2024-02-24"
+    },
+    {
+      "name": "Jane Smith",
+      "mobno": "0987654321",
+      "currwallet": "$150",
+      "Amount": "$25",
+      "status": "Pending",
+      "Verified": false,
+      "Date": "2024-02-24"
+    },
+    {
+      "name": "Alice Johnson",
+      "mobno": "1112223333",
+      "currwallet": "$200",
+      "Amount": "$75",
+      "status": "Completed",
+      "Verified": true,
+      "Date": "2024-02-23"
+    },
+    {
+      "name": "Bob Brown",
+      "mobno": "4445556666",
+      "currwallet": "$50",
+      "Amount": "$10",
+      "status": "Rejected",
+      "Verified": true,
+      "Date": "2024-02-23"
+    },
+    {
+      "name": "Eve White",
+      "mobno": "7778889999",
+      "currwallet": "$300",
+      "Amount": "$100",
+      "status": "Completed",
+      "Verified": false,
+      "Date": "2024-02-22"
+    }
+  
+];
+
+function SuperDeposite() {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
-    setIsClicked(!isClicked);
+    setIsClicked(true);
+  };
+  const handleClose = () => {
+    setIsClicked(false);
   };
   return (
-    <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
+    <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl pb-10">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
         <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
           <span className="underline">Admin Control Panel </span>
           <span>&gt;&gt;</span>
           <span className="underline">Menu</span>
           <span>&gt;&gt;</span>
-          <span className="underline">New Onboard</span>
+          <span className="underline">Deposits</span>
         </div>
         <h3 className="text-[#0F002B] text-lg">
-          <span className="underline">N</span>ew{" "}
-          <span className="underline">O</span>nboard
+          <span className="underline">D</span>eposits{" "}
         </h3>
       </div>
       <div className="flex px-3 py-2 items-center justify-between bg-[#EEEEEE]">
         <p className="text-[#000000] font-medium text-xs">
-          Detail : Full detail of new users onboarding on the platform.
+        Detail : All deposit details
         </p>
         <Icon icon="charm:cross" width="12" />
       </div>
@@ -116,12 +104,12 @@ export function NewOnboard() {
         <CardBody className=" px-0 h-full w-full">
           <div className="flex justify-between">
             <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
-              New Users
+            All Customers
             </span>
             <div className="flex gap-2 font-[Inter] font-medium text-[16px]">
               <div
                 onClick={handleClick}
-                onBlur={handleClick}
+                onBlur={handleClose}
                 className="bg-[#F4F4F4] justify-between flex items-center p-1 px-2 h-[32px]  border rounded-lg"
               >
                 <input
@@ -136,6 +124,9 @@ export function NewOnboard() {
               <div className="w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
                 <span>Refresh</span>{" "}
                 <Icon icon="material-symbols:refresh" width="24" />
+              </div>
+              <div className="shadow-sm w-[78px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
+                <span>Edit</span> <Icon icon="circum:edit" width="24" />
               </div>
               <Menu>
                 <MenuHandler>
@@ -167,7 +158,7 @@ export function NewOnboard() {
               <Stats />
             </div>
           </div>
-          <table className="mt-4 h-full w-full min-w-max table-auto text-left font-[Inter] font-medium text-[16px]">
+          <table className="mt-4 w-full min-w-max table-auto text-left font-[Inter] font-medium text-[16px]">
             <thead>
               <tr>
                 {TABLE_HEAD.map((head, index) => (
@@ -180,60 +171,82 @@ export function NewOnboard() {
                       color="blue-gray"
                       className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]"
                     >
-                      {head}{" "}
-                      {(index == 0 || index === 3) && (
-                        <ChevronUpDownIcon
-                          strokeWidth={2}
-                          className="h-4 w-4"
-                        />
-                      )}
+                      {head} <Icon icon="prime:sort" width="19" />
                     </Typography>
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody className=" h-full w-full">
-              {TABLE_ROWS.map(({ uid, name, mobno, onboard }, index) => {
-                const isLast = index === TABLE_ROWS.length - 1;
-                const classes = isLast ? "p-4" : "p-4";
-                return (
-                  <tr key={mobno} className="text-[#000000] ">
-                    <td className={classes}>
-                      <div className="flex items-center gap-3">
+            <tbody className="w-full">
+              {TABLE_ROWS.map(
+                (
+                  {
+                    name,
+                    mobno,
+                    currwallet,
+                    Amount,
+                    status,
+                    Verified,
+                    Date
+                  },
+                  index
+                ) => {
+                  return (
+                    <tr className="text-[#000000] ">
+                      <td className="p-4">
+                        <div className="flex flex-col">
+                          <Typography className="font-[Inter] font-medium text-[16px]">
+                            {name}
+                          </Typography>
+                        </div>
+                      </td>
+                      <td className="p-4">
+                        <div className="w-max">
+                          <Typography className="font-[Inter] font-medium text-[16px]">
+                            {mobno}
+                          </Typography>
+                        </div>
+                      </td>
+                      <td className="p-4">
+                        <div className="flex items-center gap-3">
+                          <Typography className="font-[Inter] font-medium text-[16px]">
+                            {currwallet}
+                          </Typography>
+                        </div>
+                      </td>
+                      <td className="p-4">
+                        <div className="flex items-center gap-3">
+                          <Typography className="font-[Inter] font-medium text-[16px]">
+                            {Amount}
+                          </Typography>
+                        </div>
+                      </td>
+                      <td className="p-4">
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {uid}
+                          {status}
                         </Typography>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <div className="flex flex-col">
+                      </td>
+                      <td className="p-4">
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {name}
+                          {Verified===true ? "true" : "false"}
                         </Typography>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <div className="w-max">
+                      </td>
+                      <td className="p-4">
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {mobno}
+                          {Date}
                         </Typography>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <Typography className="font-[Inter] font-medium text-[16px]">
-                        {onboard}
-                      </Typography>
-                    </td>
-                  </tr>
-                );
-              })}
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
             </tbody>
           </table>
         </CardBody>
       </Card>
-      <AdminFooter/>
+      <AdminFooter />
     </div>
   );
 }
 
-export default NewOnboard;
+export default SuperDeposite;

@@ -3,8 +3,6 @@
 @tailwind utilities;
 
 
-
-
 @keyframes zoom-in {
     0% {
       transform: scale(0.1);
@@ -16,4 +14,16 @@
   
   .animate-zoom-in-stick {
     animation: zoom-in 1.3s ease-in-out forwards;
+  }
+
+
+
+  .table-auto::-webkit-scrollbar,.main-body-right::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge, and Firefox */
+  .table-auto,.main-body-right {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
