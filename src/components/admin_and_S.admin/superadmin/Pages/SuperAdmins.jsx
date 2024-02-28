@@ -1,17 +1,9 @@
-import {
-  MagnifyingGlassIcon,
-  ChevronUpDownIcon,
-} from "@heroicons/react/24/outline";
 import React, { useState } from "react";
 import { Icon } from "@iconify-icon/react";
 import Stats from "../../admin/Common.jsx/Stats";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
   Card,
-  CardHeader,
-  Input,
   Typography,
-  Button,
   CardBody,
   MenuList,
   Menu,
@@ -19,6 +11,7 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 import AdminFooter from "../../admin/Common.jsx/AdminFooter";
+import EditAdmins from "../Admins/EditAdmins";
 
 const TABLE_HEAD = ["Name", "Number", "Position", "Status", "Onboarding Date"];
 
@@ -55,7 +48,7 @@ const TABLE_ROWS = [
 
 export function SuperAdmins() {
   const [isClicked, setIsClicked] = useState(false);
-
+  const [page,setPage]= useState("admins");
   const handleClick = () => {
     setIsClicked(true);
   };
@@ -70,12 +63,20 @@ export function SuperAdmins() {
           <span>&gt;&gt;</span>
           <span className="underline">Menu</span>
           <span>&gt;&gt;</span>
-          <span className="underline">Admins</span>
-        </div>
-        <h3 className="text-[#0F002B] text-lg">
+          <span onClick={()=>setPage("admins")} className="cursor-pointer underline">Admins</span>
+          {page==="editadmins" && <>
+          <span>&gt;&gt;</span>
+          <span className="underline">Edit (Pending Withdrawal)</span>
+          </> }
+        </div>  
+      </div>
+      { page==="admins" &&
+      <div>
+      <div className="bg-[#F4F4F4]  py-1 px-4 flex flex-col gap-4">
+      <h3 className="text-[#0F002B] text-lg">
           <span className="underline">A</span>dmins{" "}
         </h3>
-      </div>
+        </div>
       <div className="flex px-3 py-2 items-center justify-between bg-[#EEEEEE]">
         <p className="text-[#000000] font-medium text-xs">
           Detail : Details of all admins and super admin
@@ -107,7 +108,7 @@ export function SuperAdmins() {
                 <span>Refresh</span>{" "}
                 <Icon icon="material-symbols:refresh" width="24" />
               </div>
-              <div className="shadow-sm w-[78px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
+              <div onClick={()=>setPage("editadmins")} className="shadow-sm w-[78px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
                 <span>Edit</span> <Icon icon="circum:edit" width="24" />
               </div>
               <Menu>
@@ -207,8 +208,10 @@ export function SuperAdmins() {
           </table>
         </CardBody>
       </Card>
+      </div>}
+      {page==="editadmins" && <EditAdmins setPage={setPage} TABLE_ROWS={TABLE_ROWS}/>}
       <AdminFooter/>
-    </div>
+    </div> 
   );
 }
 

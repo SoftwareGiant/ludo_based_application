@@ -11,6 +11,7 @@ import {
 } from "@material-tailwind/react";
 import graph from "../../../../assets/admin_Sadmin/admin/graph.png";
 import AdminFooter from "../../admin/Common.jsx/AdminFooter";
+import Refreshloader from "../Common/Refreshloader";
 
 const TABLE_ROWS = [
   {
@@ -65,8 +66,13 @@ const TABLE_ROWS = [
 
 export function SuperDashboard() {
   const [isClicked, setIsClicked] = useState(false);
+  const [withdrawalLoad, setWithdrawalLoad] = useState(false);
+  const [depositelLoad, setDepositeLoad] = useState(false);
+  const [commisionLoad, setCommisionLoad] = useState(false);
+  const [referLoad, setReferLoad] = useState(false);
+
   const [stats, setStats] = useState("Inflow / Outflow");
-  const[time,setTime] = useState("Today");
+  const [time, setTime] = useState("Today");
   const handleClick = () => {
     setIsClicked(!isClicked);
   };
@@ -126,13 +132,35 @@ export function SuperDashboard() {
                   </MenuItem>
                 </MenuList>
               </Menu>
+
               {stats === "Inflow / Outflow" && (
-                <div className="flex border-gray-200 border shadow-md rounded-3xl cursor-pointer items-center justify-between px-3  w-[184px] h-[32px]">
-                  <span className="font-[Inter] text-[12px] ">
-                    Choose Wallet To View
-                  </span>
-                  <Icon icon="teenyicons:down-solid" width="10" />
-                </div>
+                <Menu>
+                  <MenuHandler>
+                    <div className="flex border-gray-200 border shadow-md rounded-3xl cursor-pointer items-center justify-between px-3  w-[184px] h-[32px]">
+                      <span className="font-[Inter] text-[12px] ">
+                        Choose Wallet To View
+                      </span>
+                      <Icon icon="teenyicons:down-solid" width="10" />
+                    </div>
+                  </MenuHandler>
+                  <MenuList className="p-1">
+                    <MenuItem className="font-[Inter] text-[16px] text-[#0F002B] font-medium flex justify-start gap-3 items-center">
+                      Admin #1 : Default
+                    </MenuItem>
+                    <MenuItem className="font-[Inter] text-[16px] text-[#0F002B] font-medium flex justify-start gap-3 items-center">
+                      Admin #2 : Player
+                    </MenuItem>
+                    <MenuItem className="font-[Inter] text-[16px] text-[#0F002B] font-medium flex justify-start gap-3 items-center">
+                      Admin #3 : Default
+                    </MenuItem>
+                    <MenuItem className="font-[Inter] text-[16px] text-[#0F002B] font-medium flex justify-start gap-3 items-center">
+                      Admin #4 : Default
+                    </MenuItem>
+                    <MenuItem className="font-[Inter] text-[16px] text-[#0F002B] font-medium flex justify-start gap-3 items-center">
+                      Admin #5 : Default
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
               )}
               {stats === "Inflow / Outflow" && (
                 <div className="flex border-gray-200 border shadow-md rounded-3xl cursor-pointer items-center justify-between px-3  w-[159px] h-[32px]">
@@ -164,12 +192,12 @@ export function SuperDashboard() {
                 <span className="font-[Inter] text-[12px] ">Pie Chart</span>
                 <Icon icon="teenyicons:down-solid" width="10" />
               </div>
-              <Menu >
+              <Menu>
                 <MenuHandler>
-                <div className="flex border-gray-200 border shadow-md rounded-3xl cursor-pointer items-center justify-between px-3  w-[109px] h-[32px]">
-                <span className="font-[Inter] text-[12px] ">{time}</span>
-                <Icon icon="teenyicons:down-solid" width="10" />
-              </div>
+                  <div className="flex border-gray-200 border shadow-md rounded-3xl cursor-pointer items-center justify-between px-3  w-[109px] h-[32px]">
+                    <span className="font-[Inter] text-[12px] ">{time}</span>
+                    <Icon icon="teenyicons:down-solid" width="10" />
+                  </div>
                 </MenuHandler>
                 <MenuList className="p-2 ">
                   <MenuItem
@@ -202,19 +230,44 @@ export function SuperDashboard() {
                   >
                     All Time
                   </MenuItem>
-                  <MenuItem
-                    onClick={() => setTime("Custom")}
+                  <MenuItem className="font-[Inter] text-[12px] text-[#000000] font-medium flex justify-start items-center">
+                    <Menu>
+                      <MenuHandler>
+                        <span className="font-[Inter] text-[12px] ">
+                          {" "}
+                          Custom
+                        </span>
+                      </MenuHandler>
+                      <MenuList className="p-2 ">
+                        <div className="font-[Inter] text-[12px] p-2 px-3 text-[#000000] font-medium flex justify-start items-center">
+                          From
+                        </div>
+                        <input
+                          type="text"
+                          className="px-3 font-[Inter] text-[12px] outline-none text-[#000000] font-medium flex justify-start items-center"
+                        />
+                        <div className="font-[Inter] text-[12px] p-2 px-3 text-[#000000] font-medium flex justify-start items-center">
+                          To
+                        </div>
+
+                        <input
+                          type="text"
+                          className="px-3 font-[Inter] text-[12px] outline-none text-[#000000] font-medium flex justify-start items-center"
+                        />
+                      </MenuList>
+                    </Menu>
+                    {/* <MenuItem
+                    // onClick={() => setTime("Custom")}
                     className="font-[Inter] text-[12px] text-[#000000] font-medium flex justify-start items-center"
                   >
-                    Custom
+                    Custom */}
                   </MenuItem>
                 </MenuList>
               </Menu>
-            
             </div>
           </div>
-          <div className="my-[60px] flex justify-center">
-            <img src={graph} className="h-[186px] w-[80%]" />
+          <div className="my-[50px] flex justify-center">
+            <img src={graph} className="h-[186px] w-[65%]" />
           </div>
 
           {stats === "Inflow / Outflow" && (
@@ -244,10 +297,24 @@ export function SuperDashboard() {
                       />
                       <Icon icon="material-symbols:search" width="24" />
                     </div>
-                    <div className="shadow-sm w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
-                      <span>Refresh</span>{" "}
-                      <Icon icon="material-symbols:refresh" width="24" />
-                    </div>
+                    {withdrawalLoad ? (
+                      <div className="shadow-sm w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
+                        <span>Refresh</span> <Refreshloader />
+                      </div>
+                    ) : (
+                      <div
+                        onClick={() => {
+                          setWithdrawalLoad(true);
+                          setTimeout(() => {
+                            setWithdrawalLoad(false);
+                          }, 3000);
+                        }}
+                        className="shadow-sm w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg"
+                      >
+                        <span>Refresh</span>{" "}
+                        <Icon icon="material-symbols:refresh" width="24" />
+                      </div>
+                    )}
                     <Menu>
                       <MenuHandler>
                         <div className="shadow-sm p-1 w-[88px] h-[32px] bg-[#F4F4F4] flex items-center justify-between border rounded-lg">
@@ -285,7 +352,7 @@ export function SuperDashboard() {
                     <tr>
                       <th className="cursor-pointer   p-2 transition-colors  rounded-lg">
                         <div className="w-[139.57px] px-3 h-[35px] flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]">
-                          <span>Wallet Na...</span>
+                          <span>Wallet Name</span>
                           <Icon icon="prime:sort" className="h-4 w-4" />
                         </div>
                       </th>
@@ -297,19 +364,19 @@ export function SuperDashboard() {
                       </th>
                       <th className="cursor-pointer   p-2 transition-colors  rounded-lg">
                         <div className="w-[139.57px] h-[35px] flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]">
-                          <span>Total Wit...</span>
+                          <span>Total Withdrawal</span>
                           <Icon icon="prime:sort" className="h-4 w-4" />
                         </div>
                       </th>
                       <th className="cursor-pointer   p-2 transition-colors  rounded-lg">
                         <div className="w-[139.57px] h-[35px] flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]">
-                          <span>Pending...</span>
+                          <span>Pending Withdrawal</span>
                           <Icon icon="prime:sort" className="h-4 w-4" />
                         </div>
                       </th>
                       <th className="cursor-pointer   p-2 transition-colors  rounded-lg">
                         <div className="w-[139.57px] h-[35px] flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]">
-                          <span>In Proces...</span>
+                          <span>In Process Withdrawal</span>
                           <Icon icon="prime:sort" className="h-4 w-4" />
                         </div>
                       </th>
@@ -417,10 +484,24 @@ export function SuperDashboard() {
                       />
                       <Icon icon="material-symbols:search" width="24" />
                     </div>
-                    <div className="shadow-sm w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
-                      <span>Refresh</span>{" "}
-                      <Icon icon="material-symbols:refresh" width="24" />
-                    </div>
+                    {depositelLoad ? (
+                      <div className="shadow-sm w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
+                        <span>Refresh</span> <Refreshloader />
+                      </div>
+                    ) : (
+                      <div
+                        onClick={() => {
+                          setDepositeLoad(true);
+                          setTimeout(() => {
+                            setDepositeLoad(false);
+                          }, 3000);
+                        }}
+                        className="shadow-sm w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg"
+                      >
+                        <span>Refresh</span>{" "}
+                        <Icon icon="material-symbols:refresh" width="24" />
+                      </div>
+                    )}
                     <Menu>
                       <MenuHandler>
                         <div className="shadow-sm p-1 w-[88px] h-[32px] bg-[#F4F4F4] flex items-center justify-between border rounded-lg">
@@ -590,10 +671,24 @@ export function SuperDashboard() {
                       />
                       <Icon icon="material-symbols:search" width="24" />
                     </div>
-                    <div className="shadow-sm w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
-                      <span>Refresh</span>{" "}
-                      <Icon icon="material-symbols:refresh" width="24" />
-                    </div>
+                    {commisionLoad ? (
+                      <div className="shadow-sm w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
+                        <span>Refresh</span> <Refreshloader />
+                      </div>
+                    ) : (
+                      <div
+                        onClick={() => {
+                          setCommisionLoad(true);
+                          setTimeout(() => {
+                            setCommisionLoad(false);
+                          }, 3000);
+                        }}
+                        className="shadow-sm w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg"
+                      >
+                        <span>Refresh</span>{" "}
+                        <Icon icon="material-symbols:refresh" width="24" />
+                      </div>
+                    )}
                     <Menu>
                       <MenuHandler>
                         <div className="shadow-sm p-1 w-[88px] h-[32px] bg-[#F4F4F4] flex items-center justify-between border rounded-lg">
@@ -763,10 +858,24 @@ export function SuperDashboard() {
                       />
                       <Icon icon="material-symbols:search" width="24" />
                     </div>
-                    <div className="shadow-sm w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
-                      <span>Refresh</span>{" "}
-                      <Icon icon="material-symbols:refresh" width="24" />
-                    </div>
+                    {referLoad ? (
+                      <div className="shadow-sm w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
+                        <span>Refresh</span> <Refreshloader />
+                      </div>
+                    ) : (
+                      <div
+                        onClick={() => {
+                          setReferLoad(true);
+                          setTimeout(() => {
+                            setReferLoad(false);
+                          }, 3000);
+                        }}
+                        className="shadow-sm w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg"
+                      >
+                        <span>Refresh</span>{" "}
+                        <Icon icon="material-symbols:refresh" width="24" />
+                      </div>
+                    )}
                     <Menu>
                       <MenuHandler>
                         <div className="shadow-sm p-1 w-[88px] h-[32px] bg-[#F4F4F4] flex items-center justify-between border rounded-lg">

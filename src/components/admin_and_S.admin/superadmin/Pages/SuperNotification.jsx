@@ -11,53 +11,77 @@ import {
 } from "@material-tailwind/react";
 import graph from "../../../../assets/admin_Sadmin/admin/graph.png";
 import AdminFooter from "../../admin/Common.jsx/AdminFooter";
+import { Navigate } from "react-router-dom";
+import EditPendingWithdrawal from "../Notification/EditPendingWithdrawal";
+import EditDeposite from "../Notification/EditDeposite";
 
 const TABLE_ROWS = [
   {
-    walletname: "Wallet #1",
+    name: "User#1 Name",
+    mobileno: "761293939393",
+    id: "1122",
     balance: "₹2,00,000",
-    totalwithdra: "₹2,000",
-    pending: "₹2,000",
-    inprocess: "₹3,000",
+    withdrawal: "₹2,000",
+    utr: "UBSD33438HH",
+    depositeamount: "₹30,000",
+    status: "pending",
+    towallet: "Wallet #1",
     date: "12-Dec-2023",
   },
   {
-    walletname: "Wallet #2",
+    name: "User#2 Name",
+    mobileno: "761293939394",
+    id: "1123",
     balance: "₹1,50,000",
-    totalwithdra: "₹1,500",
-    pending: "₹1,000",
-    inprocess: "₹2,500",
-    date: "13-Dec-2023",
-  },
-  {
-    walletname: "Wallet #3",
-    balance: "₹1,75,000",
-    totalwithdra: "₹1,750",
-    pending: "₹1,250",
-    inprocess: "₹2,000",
-    date: "14-Dec-2023",
-  },
-  {
-    walletname: "Wallet #4",
-    balance: "₹2,20,000",
-    totalwithdra: "₹2,200",
-    pending: "₹1,800",
-    inprocess: "₹3,500",
+    withdrawal: "₹1,000",
+    utr: "UBSD33438HI",
+    depositeamount: "₹25,000",
+    status: "completed",
+    towallet: "Wallet #2",
     date: "15-Dec-2023",
   },
   {
-    walletname: "Wallet #5",
-    balance: "₹1,90,000",
-    totalwithdra: "₹1,900",
-    pending: "₹1,500",
-    inprocess: "₹2,500",
-    date: "16-Dec-2023",
+    name: "User#3 Name",
+    mobileno: "761293939395",
+    id: "1124",
+    balance: "₹1,80,000",
+    withdrawal: "₹1,500",
+    utr: "UBSD33438HJ",
+    depositeamount: "₹20,000",
+    status: "rejected",
+    towallet: "Wallet #3",
+    date: "18-Dec-2023",
+  },
+  {
+    name: "User#4 Name",
+    mobileno: "761293939396",
+    id: "1125",
+    balance: "₹2,50,000",
+    withdrawal: "₹2,500",
+    utr: "UBSD33438HK",
+    depositeamount: "₹35,000",
+    status: "completed",
+    towallet: "Wallet #4",
+    date: "20-Dec-2023",
+  },
+  {
+    name: "User#5 Name",
+    mobileno: "761293939397",
+    id: "1126",
+    balance: "₹2,20,000",
+    withdrawal: "₹2,200",
+    utr: "UBSD33438HL",
+    depositeamount: "₹28,000",
+    status: "pending",
+    towallet: "Wallet #5",
+    date: "22-Dec-2023",
   },
 ];
 
+
 export function SuperNotification() {
   const [isClicked, setIsClicked] = useState(false);
-
+const [page,setPage]= useState("notification");
   const handleClick = () => {
     setIsClicked(!isClicked);
   };
@@ -71,12 +95,26 @@ export function SuperNotification() {
           <span>&gt;&gt;</span>
           <span className="underline">Dashboard</span>
           <span>&gt;&gt;</span>
-          <span className="underline">Notification</span>
+          <span onClick={()=>setPage("notification")} className="underline cursor-pointer">Notification</span>
+          {page==="withdraw" && <>
+          <span>&gt;&gt;</span>
+          <span className="underline">Edit (Pending Withdrawal)</span>
+          </> }
+          {page==="deposite" && <>
+          <span>&gt;&gt;</span>
+          <span className="underline">Edit (Deposit)</span>
+          </> }
         </div>
-        <h3 className="text-[#0F002B] text-lg">
+        
+      </div>
+
+   {   page==="notification" &&
+      <div>
+      <div className="bg-[#F4F4F4]  py-1 px-4 flex flex-col gap-4">
+      <h3 className="text-[#0F002B] text-lg">
           <span className="underline">N</span>otification{" "}
         </h3>
-      </div>
+        </div>
       <div className="flex px-3 py-2 items-center justify-between bg-[#EEEEEE]">
         <p className="text-[#000000] font-medium text-xs">
           Detail : Super Admin Dashboard
@@ -86,7 +124,7 @@ export function SuperNotification() {
       <Card className="text-[#000000] table-auto  w-full px-4">
         <CardBody className=" p-0 mt-3 h-full w-full">
           <div className="flex gap-3 justify-start">
-            <div className="flex border-gray-200 border shadow-md rounded-3xl cursor-pointer items-center justify-between px-3 gap-2 h-[32px]">
+            <div onClick={()=>setPage("withdraw")} className="flex border-gray-200 border shadow-md rounded-3xl cursor-pointer items-center justify-between px-3 gap-2 h-[32px]">
               <span className="font-[Inter] text-[12px] ">
                 Approve Pending Withdrawals
               </span>
@@ -130,7 +168,7 @@ export function SuperNotification() {
                   <span>Refresh</span>{" "}
                   <Icon icon="material-symbols:refresh" width="24" />
                 </div>
-                <div className="shadow-sm w-[78px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
+                <div onClick={()=>setPage("withdraw")} className="shadow-sm w-[78px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
                   <span>Edit</span>{" "}
                   <Icon icon="circum:edit"  width="24" />
                 </div>
@@ -209,11 +247,11 @@ export function SuperNotification() {
                 {TABLE_ROWS.map(
                   (
                     {
-                      walletname,
+                      name,
+                      mobileno,
+                      id,
                       balance,
-                      totalwithdra,
-                      pending,
-                      inprocess,
+                      withdrawal,
                       date,
                     },
                     index
@@ -221,36 +259,36 @@ export function SuperNotification() {
                     const isLast = index === TABLE_ROWS.length - 1;
                     const classes = isLast ? "p-4" : "p-4";
                     return (
-                      <tr key={walletname} className="text-[#000000]">
+                      <tr key={name} className="text-[#000000]">
                         <td className={classes}>
                           <div className="flex items-center gap-3">
                             <Typography className=" font-[Inter] font-normal text-[16px]">
-                              {walletname}
+                              {name}
                             </Typography>
                           </div>
                         </td>
                         <td className={classes}>
                           <div className="flex flex-col">
                             <Typography className="font-[Inter] font-normal text-[16px]">
-                              {balance}
+                              {mobileno}
                             </Typography>
                           </div>
                         </td>
                         <td className={classes}>
                           <div className="w-max">
                             <Typography className="font-[Inter] font-normal text-[16px]">
-                              {totalwithdra}
+                              {id}
                             </Typography>
                           </div>
                         </td>
                         <td className={classes}>
                           <Typography className="font-[Inter] font-normal text-[16px]">
-                            {pending}
+                            {balance}
                           </Typography>
                         </td>
                         <td className={classes}>
                           <Typography className="font-[Inter] font-normal text-[16px]">
-                            {inprocess}
+                            {withdrawal}
                           </Typography>
                         </td>
                         <td className={classes}>
@@ -305,7 +343,7 @@ export function SuperNotification() {
                   <span>Refresh</span>{" "}
                   <Icon icon="material-symbols:refresh" width="24" />
                 </div>
-                <div className="shadow-sm w-[78px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
+                <div onClick={()=>setPage("deposite")} className="shadow-sm w-[78px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
                   <span>Edit</span>{" "}
                   <Icon icon="circum:edit"  width="24" />
                 </div>
@@ -380,11 +418,10 @@ export function SuperNotification() {
                 {TABLE_ROWS.map(
                   (
                     {
-                      walletname,
-                      balance,
-                      totalwithdra,
-                      pending,
-                      inprocess,
+                      utr,
+                      depositeamount,
+                     status,
+                     towallet,
                       date,
                     },
                     index
@@ -392,31 +429,31 @@ export function SuperNotification() {
                     const isLast = index === TABLE_ROWS.length - 1;
                     const classes = isLast ? "p-4" : "p-4";
                     return (
-                      <tr key={walletname} className="text-[#000000]">
+                      <tr key={utr} className="text-[#000000]">
                         <td className={classes}>
                           <div className="flex items-center gap-3">
                             <Typography className=" font-[Inter] font-normal text-[16px]">
-                              {walletname}
+                              {utr}
                             </Typography>
                           </div>
                         </td>
                         <td className={classes}>
                           <div className="flex flex-col">
                             <Typography className="font-[Inter] font-normal text-[16px]">
-                              {balance}
+                              {depositeamount}
                             </Typography>
                           </div>
                         </td>
                         <td className={classes}>
                           <div className="w-max">
                             <Typography className="font-[Inter] font-normal text-[16px]">
-                              {totalwithdra}
+                              {status}
                             </Typography>
                           </div>
                         </td>
                         <td className={classes}>
                           <Typography className="font-[Inter] font-normal text-[16px]">
-                            {pending}
+                            {towallet}
                           </Typography>
                         </td>
 
@@ -443,6 +480,11 @@ export function SuperNotification() {
           </div>
         </CardBody>
       </Card>
+      </div>
+}
+{page==="withdraw" && <EditPendingWithdrawal setPage={setPage} TABLE_ROWS={TABLE_ROWS}/>}
+{page==="deposite" && <EditDeposite setPage={setPage} TABLE_ROWS={TABLE_ROWS}/>}
+
       <AdminFooter/>
     </div>
   );

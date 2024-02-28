@@ -1,79 +1,35 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify-icon/react";
-import Stats from "../../admin/Common.jsx/Stats";
 import {
   Card,
+  CardHeader,
+  Input,
   Typography,
+  Button,
   CardBody,
   MenuList,
   Menu,
   MenuHandler,
   MenuItem,
 } from "@material-tailwind/react";
-import AdminFooter from "../../admin/Common.jsx/AdminFooter";
-import EditWithdraw from "../Withdraw/EditWithdraw";
+import Stats from "../../admin/Common.jsx/Stats";
+import UpdateUser from "./UpdateUser";
+
 
 const TABLE_HEAD = [
   "Name",
-  "Mobile Number",
-  "Current Wallet",
-  "Amount",
-  "Status",
-  "Method",
+  "Earning",
+  "Deposit",
+  "Withdrawal",
+  "Total Games",
+  "Verified",
   "Date",
+ 
 ];
 
-const TABLE_ROWS = [
-  {
-    name: "John Doe",
-    mobno: "1234567890",
-    currwallet: "$100",
-    Amount: "$50",
-    status: "Completed",
-    method: "UPI",
-    Date: "2024-02-24",
-  },
-  {
-    name: "Jane Smith",
-    mobno: "0987654321",
-    currwallet: "$150",
-    Amount: "$25",
-    status: "Pending",
-    method: "UPI",
-    Date: "2024-02-24",
-  },
-  {
-    name: "Alice Johnson",
-    mobno: "1112223333",
-    currwallet: "$200",
-    Amount: "$75",
-    status: "Completed",
-    method: "UPI",
-    Date: "2024-02-23",
-  },
-  {
-    name: "Bob Brown",
-    mobno: "4445556666",
-    currwallet: "$50",
-    Amount: "$10",
-    status: "Rejected",
-    method: "UPI",
-    Date: "2024-02-23",
-  },
-  {
-    name: "Eve White",
-    mobno: "7778889999",
-    currwallet: "$300",
-    Amount: "$100",
-    status: "Completed",
-    method: "UPI",
-    Date: "2024-02-22",
-  },
-];
-
-function SuperWithdrawal() {
+const EditUser = ({ TABLE_ROWS ,setPage}) => {
   const [isClicked, setIsClicked] = useState(false);
-  const [page,setPage]= useState("withdraw");
+
   const handleClick = () => {
     setIsClicked(true);
   };
@@ -81,41 +37,13 @@ function SuperWithdrawal() {
     setIsClicked(false);
   };
   return (
-    <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl pb-10">
-      <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
-        <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
-          <span className="underline">Admin Control Panel </span>
-          <span>&gt;&gt;</span>
-          <span className="underline">Menu</span>
-          <span>&gt;&gt;</span>
-          <span onClick={()=>setPage("withdraw")} className="underline">Withdrawal</span>
-          {page==="edit" && <>
-          <span>&gt;&gt;</span>
-          <span className="underline">Edit</span>
-          </> }
-        </div>
-       
-      </div>
-      { page==="withdraw" &&
-        <div>
-        <div className="bg-[#F4F4F4]  py-1 px-4 flex flex-col gap-4">
+    <div>
+      <div className="bg-[#F4F4F4]  py-1 px-4 flex pt-2 items-center justify-between  gap-4">
         <h3 className="text-[#0F002B] text-lg">
-          <span className="underline">W</span>ithdrawal{" "}
+          <span className="underline">E</span>dit{" "}
+          <span className="underline">U</span>ser{" "}
         </h3>
-        </div>
-      <div className="flex px-3 py-2 items-center justify-between bg-[#EEEEEE]">
-        <p className="text-[#000000] font-medium text-xs">
-          Detail : All Withdrawal details
-        </p>
-        <Icon icon="charm:cross" width="12" />
-      </div>
-      <Card className="table-auto overflow-scroll h-full w-full py-1 px-4">
-        <CardBody className=" px-0 h-full w-full">
-          <div className="flex justify-between">
-            <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
-              All Customers
-            </span>
-            <div className="flex gap-2 font-[Inter] font-medium text-[16px]">
+        <div className="flex gap-2 font-[Inter] font-medium text-[16px]">
               <div
                 onClick={handleClick}
                 onBlur={handleClose}
@@ -134,9 +62,7 @@ function SuperWithdrawal() {
                 <span>Refresh</span>{" "}
                 <Icon icon="material-symbols:refresh" width="24" />
               </div>
-              <div onClick={()=>setPage("edit")} className="shadow-sm w-[78px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
-                <span>Edit</span> <Icon icon="circum:edit" width="24" />
-              </div>
+           
               <Menu>
                 <MenuHandler>
                   <div className="p-1 w-[88px] h-[32px] bg-[#F4F4F4] flex items-center justify-between border rounded-lg">
@@ -165,9 +91,16 @@ function SuperWithdrawal() {
                 </MenuList>
               </Menu>
               <Stats />
+              <div onClick={()=>setPage("user")} className="shadow-sm  h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
+                <span>Collapse</span> <Icon  icon="iconoir:collapse" width="24" />
+              </div>
             </div>
-          </div>
-          <table className="mt-4 w-full min-w-max table-auto text-left font-[Inter] font-medium text-[16px]">
+
+      </div>
+      <Card className="table-auto overflow-scroll h-full w-full py-1 px-4">
+        <CardBody className=" px-0 h-full w-full">
+    
+          <table className=" w-full min-w-max table-auto text-left font-[Inter] font-medium text-[16px]">
             <thead>
               <tr>
                 {TABLE_HEAD.map((head, index) => (
@@ -184,58 +117,99 @@ function SuperWithdrawal() {
                     </Typography>
                   </th>
                 ))}
+                <th
+                  
+                    className="cursor-pointer   p-2 transition-colors  rounded-lg"
+                  >
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="flex items-center justify-center gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]"
+                    >
+                      Edit
+                    </Typography>
+                  </th>
               </tr>
             </thead>
             <tbody className="w-full">
               {TABLE_ROWS.map(
                 (
-                  { name, mobno, currwallet, Amount, status, method, Date },
+                  {
+                    name,
+                    minimum,
+                    maximum,
+                    commission,
+                    totalgame,
+                    verified,
+                    onboard,
+                  },
                   index
                 ) => {
+                  const isLast = index === TABLE_ROWS.length - 1;
+                  const classes = isLast ? "p-4" : "p-4";
                   return (
-                    <tr className="text-[#000000] ">
-                      <td className="p-4">
+                    <tr key={name} className="text-[#000000] ">
+                      <td className={classes}>
                         <div className="flex flex-col">
                           <Typography className="font-[Inter] font-medium text-[16px]">
                             {name}
                           </Typography>
                         </div>
                       </td>
-                      <td className="p-4">
+                      <td className={classes}>
                         <div className="w-max">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {mobno}
+                            {minimum}
                           </Typography>
                         </div>
                       </td>
-                      <td className="p-4">
+                      <td className={classes}>
                         <div className="flex items-center gap-3">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {currwallet}
+                            {maximum}
                           </Typography>
                         </div>
-                      </td>
-                      <td className="p-4">
+                      </td>                     
+                      <td className={classes}>
                         <div className="flex items-center gap-3">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {Amount}
+                            {commission}
                           </Typography>
                         </div>
                       </td>
-                      <td className="p-4">
+                      <td className={classes}>
+                        <div className="flex items-center gap-3">
+                          <Typography className="font-[Inter] font-medium text-[16px]">
+                            {totalgame}
+                          </Typography>
+                        </div>
+                      </td>
+                      <td className={classes}>
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {status}
+                          {verified}
                         </Typography>
                       </td>
-                      <td className="p-4">
+                      <td className={classes}>
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {method}
+                          {onboard}
                         </Typography>
                       </td>
-                      <td className="p-4">
-                        <Typography className="font-[Inter] font-medium text-[16px]">
-                          {Date}
-                        </Typography>
+                     
+                    
+                      <td className={classes}>
+                     
+                   <UpdateUser 
+                    name={name}
+                    status="True"
+                    verified={verified}       
+                 minimum={minimum}
+                  maximum= {maximum}
+                  commission={commission}
+                  totalgame={totalgame}                 
+                     onboard={onboard}
+                   />
+                   
+                     
                       </td>
                     </tr>
                   );
@@ -245,12 +219,8 @@ function SuperWithdrawal() {
           </table>
         </CardBody>
       </Card>
-      </div>
-      }
-       {page==="edit" && <EditWithdraw setPage={setPage} TABLE_ROWS={TABLE_ROWS}/>}
-      <AdminFooter />
     </div>
   );
-}
+};
 
-export default SuperWithdrawal;
+export default EditUser;

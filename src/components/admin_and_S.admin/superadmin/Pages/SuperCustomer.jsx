@@ -11,6 +11,7 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 import AdminFooter from "../../admin/Common.jsx/AdminFooter";
+import EditUser from "../customer/EditUser";
 
 const TABLE_HEAD = [
   "Name",
@@ -27,7 +28,7 @@ const TABLE_ROWS = [
     name: "John Doe",
     minimum: "₹ 50",
     maximum: "₹ 80,000",
-    commission: "2.5%",
+    commission: "20,000",
     totalgame: "32",
     verified: "Yes",
     onboard: "22/12/2014",
@@ -36,7 +37,7 @@ const TABLE_ROWS = [
     name: "Jane Smith",
     minimum: "₹ 50",
     maximum: "₹ 80,000",
-    commission: "3.5%",
+    commission: "10,000",
     totalgame: "32",
     verified: "Yes",
     onboard: "23/12/2014",
@@ -45,7 +46,7 @@ const TABLE_ROWS = [
     name: "Alice Johnson",
     minimum: "₹ 50",
     maximum: "₹ 80,000",
-    commission: "4.5%",
+    commission: "50,000",
     totalgame: "32",
     verified: "Yes",
     onboard: "24/12/2014",
@@ -54,7 +55,7 @@ const TABLE_ROWS = [
     name: "Bob Brown",
     minimum: "₹ 50",
     maximum: "₹ 80,000",
-    commission: "2.5%",
+    commission: "30,000",
     totalgame: "32",
     verified: "Yes",
     onboard: "25/12/2014",
@@ -64,7 +65,7 @@ const TABLE_ROWS = [
 
 function SuperCustomer() {
   const [isClicked, setIsClicked] = useState(false);
-
+  const [page,setPage]= useState("user");
   const handleClick = () => {
     setIsClicked(true);
   };
@@ -79,12 +80,20 @@ function SuperCustomer() {
           <span>&gt;&gt;</span>
           <span className="underline">Menu</span>
           <span>&gt;&gt;</span>
-          <span className="underline">Users</span>
-        </div>
+          <span  onClick={()=>setPage("user")}  className="underline">Users</span>
+          {page==="edit" && <>
+          <span>&gt;&gt;</span>
+          <span className="underline">Edit</span>
+          </> }
+        </div>    
+      </div>
+      { page==="user" &&
+        <div>
+        <div className="bg-[#F4F4F4]  py-1 px-4 flex flex-col gap-4">
         <h3 className="text-[#0F002B] text-lg">
           <span className="underline">C</span>ustomer{" "}
         </h3>
-      </div>
+          </div>
       <div className="flex px-3 py-2 items-center justify-between bg-[#EEEEEE]">
         <p className="text-[#000000] font-medium text-xs">
           Detail : Customer name and all...
@@ -116,7 +125,7 @@ function SuperCustomer() {
                 <span>Refresh</span>{" "}
                 <Icon icon="material-symbols:refresh" width="24" />
               </div>
-              <div className="shadow-sm w-[78px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
+              <div onClick={()=>setPage("edit")} className="shadow-sm w-[78px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
                 <span>Edit</span> <Icon icon="circum:edit" width="24" />
               </div>
               <Menu>
@@ -235,6 +244,9 @@ function SuperCustomer() {
           </table>
         </CardBody>
       </Card>
+      </div>
+      }
+      {page==="edit" && <EditUser setPage={setPage} TABLE_ROWS={TABLE_ROWS}/>}
       <AdminFooter />
     </div>
   );

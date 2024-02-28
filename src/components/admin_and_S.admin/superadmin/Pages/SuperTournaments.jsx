@@ -11,6 +11,7 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 import AdminFooter from "../../admin/Common.jsx/AdminFooter";
+import EditTournaments from "../Tournaments/EditTournaments";
 
 const TABLE_HEAD = [
   "Name",
@@ -58,7 +59,7 @@ const TABLE_ROWS = [
 
 export function SuperTournaments() {
   const [isClicked, setIsClicked] = useState(false);
-
+  const [page,setPage]= useState("tournaments");
   const handleClick = () => {
     setIsClicked(true);
   };
@@ -73,12 +74,21 @@ export function SuperTournaments() {
           <span>&gt;&gt;</span>
           <span className="underline">Menu</span>
           <span>&gt;&gt;</span>
-          <span className="underline">Tournaments</span>
+          <span onClick={()=>setPage("tournaments")} className="cursor-pointer underline">Tournaments</span>
+          {page==="edit" && <>
+          <span>&gt;&gt;</span>
+          <span className="underline">Edit</span>
+          </> }
         </div>
-        <h3 className="text-[#0F002B] text-lg">
+       
+      </div>
+      { page==="tournaments" &&
+        <div>
+        <div className="bg-[#F4F4F4]  py-1 px-4 flex flex-col gap-4">
+       <h3 className="text-[#0F002B] text-lg">
           <span className="underline">T</span>ournaments{" "}
         </h3>
-      </div>
+          </div>
       <div className="flex px-3 py-2 items-center justify-between bg-[#EEEEEE]">
         <p className="text-[#000000] font-medium text-xs">
           Detail : All running and halted games in one place
@@ -110,7 +120,7 @@ export function SuperTournaments() {
                 <span>Refresh</span>{" "}
                 <Icon icon="material-symbols:refresh" width="24" />
               </div>
-              <div className="shadow-sm w-[78px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
+              <div onClick={()=>setPage("edit")} className="shadow-sm w-[78px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
                 <span>Edit</span> <Icon icon="circum:edit" width="24" />
               </div>
               <Menu>
@@ -216,6 +226,9 @@ export function SuperTournaments() {
           </table>
         </CardBody>
       </Card>
+          </div>
+      }
+      {page==="edit" && <EditTournaments setPage={setPage} TABLE_ROWS={TABLE_ROWS}/>}
       <AdminFooter />
     </div>
   );
