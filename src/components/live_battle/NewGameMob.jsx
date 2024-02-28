@@ -20,16 +20,42 @@ import {
 } from "@material-tailwind/react";
 import ButtonLoader from "../MainLayout/ButtonLoader";
 import axios from "axios";
-
+import io from "socket.io-client";
+const socket = io("http://localhost:8003");
 const NewGameMob = () => {
   const navigate = useNavigate();
   const [battleAmount, setBattleAmount] = useState("");
   const [buttonStatus, setButtonStatus] = useState("create");
   const [openBottom, setOpenBottom] = useState(false);
+  const [battles,setAllBattles] = useState([]);
   const openDrawerBottom = () => setOpenBottom(true);
   const closeDrawerBottom = () => setOpenBottom(false);
+
+  useEffect(()=>{
+  socket.on("databaseChange",(data)=>{
+      console.log("inside database changes");
+      setAllBattles(data);
+    });
+  },[])
+
+  useEffect(()=>{
+  socket.emit("allNewGame");
+  socket.on("allNewGame",(data)=>{
+    setAllBattles(data);
+  })
+  },[])
+
+  const battleCreationTime = (e) =>{
+    const previousTimestamp = e.battleTimeStamp;
+    const currentTimestamp = Date.now();
+    const timeDifference = currentTimestamp - previousTimestamp;
+    const timeDifferenceInSeconds = timeDifference / (1000*60);
+    return timeDifferenceInSeconds;
+  }
+
   // useEffect(() => {
   //   axios
+  
   //     .post("/api/user/login", {
   //       mobileNo: "7610981931",
   //     })
@@ -92,7 +118,41 @@ const NewGameMob = () => {
               live <span className="font-bold">battle</span>
             </div>
             <div className="p-2 flex flex-col  gap-4 m-auto w-full">
+              {
+               battles.length>0 && battles.map((e)=>(
               <div className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
+                <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
+                  <div className="italic">
+                    open challenge from
+                    <span className="font-extrabold pl-1">{e.player1.slice(e.player1.length-6,e.player1.length)}</span>
+                  </div>2
+                  <div className="italic font-semibold ">· {Math.floor(battleCreationTime(e))} Minutes ago</div>
+                </div>
+                <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
+                  <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
+                    <div className="flex justify-between ">
+                      <span>Entry fee</span>
+                      <span>₹{e.amount}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Prize</span>
+                      <span> ₹{e.amount*1.95}</span>
+                    </div>
+                  </div>
+
+                  <div className=" flex w-[25.5px] h-[25.5px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
+                    <img
+                      src={LiveBattle}
+                      alt="Arcticonsbattleforwesnoth"
+                      className="w-4"
+                    />
+                  </div>
+                </div>
+              </div>
+               ))
+              }
+
+              {/* <div className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
                 <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
                   <div className="italic">
                     open challenge from
@@ -120,37 +180,7 @@ const NewGameMob = () => {
                     />
                   </div>
                 </div>
-              </div>
-
-              <div className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
-                <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
-                  <div className="italic">
-                    open challenge from
-                    <span className="font-extrabold pl-1">ravan3p</span>
-                  </div>
-                  <div className="italic font-semibold ">· 2 minutes ago</div>
-                </div>
-                <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
-                  <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
-                    <div className="flex justify-between ">
-                      <span>Entry fee</span>
-                      <span> ₹40</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Prize</span>
-                      <span> ₹80</span>
-                    </div>
-                  </div>
-
-                  <div className=" flex w-[25.5px] h-[25.5px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
-                    <img
-                      src={LiveBattle}
-                      alt="Arcticonsbattleforwesnoth"
-                      className="w-4"
-                    />
-                  </div>
-                </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div
