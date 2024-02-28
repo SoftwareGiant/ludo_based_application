@@ -21,7 +21,6 @@ import {
 import ButtonLoader from "../MainLayout/ButtonLoader";
 import axios from "axios";
 import io from "socket.io-client";
-import { useHistory } from 'react-router-dom';
 const socket = io("http://localhost:8003");
 const NewGameMob = () => {
   const navigate = useNavigate();
@@ -33,13 +32,11 @@ const NewGameMob = () => {
   const closeDrawerBottom = () => setOpenBottom(false);
 
   useEffect(()=>{
-  console.log("hello world raja jee")
   socket.on("databaseChange",(data)=>{
       console.log("inside database changes");
       setAllBattles(data);
-      console.log(data);
     });
-  },[socket])
+  },[])
 
   useEffect(()=>{
   socket.emit("allNewGame");
@@ -48,6 +45,13 @@ const NewGameMob = () => {
   })
   },[])
 
+  const battleCreationTime = (e) =>{
+    const previousTimestamp = e.battleTimeStamp;
+    const currentTimestamp = Date.now();
+    const timeDifference = currentTimestamp - previousTimestamp;
+    const timeDifferenceInSeconds = timeDifference / (1000*60);
+    return timeDifferenceInSeconds;
+  }
 
   // useEffect(() => {
   //   axios
@@ -120,9 +124,9 @@ const NewGameMob = () => {
                 <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
                   <div className="italic">
                     open challenge from
-                    <span className="font-extrabold pl-1">ravan3p</span>
-                  </div>
-                  <div className="italic font-semibold ">· 2 minutes ago</div>
+                    <span className="font-extrabold pl-1">{e.player1.slice(e.player1.length-6,e.player1.length)}</span>
+                  </div>2
+                  <div className="italic font-semibold ">· {Math.floor(battleCreationTime(e))} Minutes ago</div>
                 </div>
                 <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
                   <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
@@ -132,7 +136,7 @@ const NewGameMob = () => {
                     </div>
                     <div className="flex justify-between">
                       <span>Prize</span>
-                      <span> ₹80</span>
+                      <span> ₹{e.amount*1.95}</span>
                     </div>
                   </div>
 
