@@ -112,8 +112,7 @@ function App() {
             <Route path="/" element={<NewGameMob />} />
             <Route path="/livebattle" element={<LiveBattle />} />
             <Route path="/livebattle2" element={<LiveBattle2 />} />
-            <Route path="/filter" element={<FilterLiveBattle />} />
-            <Route path="/requestchallange" element={<OpenChallengeReq />} />
+            <Route path="/requestchallange/:userId" element={<OpenChallengeReq />} />
             <Route path="/chat" element={<ChatUserMob />} />
             <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/userprofile2" element={<UserProfile2 />} />

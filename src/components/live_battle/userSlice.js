@@ -6,22 +6,22 @@ const initialState = {
     user: null,
 };
 
-
 export const fetchUserDetail = createAsyncThunk(
     'user/detail',
-    async (token, { rejectWithValue }) => {
+    async (_,{ rejectWithValue }) => {
+        console.log('Fetching user detail')
         try {
-            // const token = JSON.parse(localStorage.getItem('accessToken'));
-            console.log(token)
-            if (!token) {
+            const accessToken = localStorage.getItem('accessToken');
+            console.log(accessToken)
+            if (!accessToken) {
                 throw new Error('Token not found');
             }
             const response = await axios.get('/api/user/currentuser', {
                 headers: {
-                  Authorization: `Bearer ${token}`,
+                  Authorization: `Bearer ${accessToken}`,
                 },
               });
-            console.log(response.data)
+            // console.log(response.data)
             if (!response.data) {
                 throw new Error('userdata fetched failed');
             }

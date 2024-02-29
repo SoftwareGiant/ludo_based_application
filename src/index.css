@@ -15,8 +15,7 @@
   .animate-zoom-in-stick {
     animation: zoom-in 1.3s ease-in-out forwards;
   }
-
-
+ 
 
   .table-auto::-webkit-scrollbar,.main-body-right::-webkit-scrollbar {
     display: none;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../App.css";
+import { Icon } from "@iconify-icon/react";
 import BackgroundImg from "../../assets/background.jpg";
 import CountryIcon from "../../assets/country.svg";
 import DropIcon from "../../assets/dropicon.svg";
@@ -39,21 +40,23 @@ const LoginMob = () => {
   //   }
   // }, []);
   const handlePhoneSubmit = async (values) => {
+    let intervalId;
     console.log(values.number);
     dispatch(loginAsync(values.number))
       .unwrap()
       .then(() => {
-       setIsSuccess(true);
-    intervalId = setTimeout(() => {
-      setIsSuccess(false);
-      navigate("/apptour");
-    }, 3000);
-    return () => {
-      clearInterval(intervalId);
-    };
-      }).catch((error) => {
-        console.error('Login error:', error);
-      });;
+        setIsSuccess(true);
+        intervalId = setTimeout(() => {
+          setIsSuccess(false);
+          navigate("/apptour");
+        }, 3000);
+        return () => {
+          clearInterval(intervalId);
+        };
+      })
+      .catch((error) => {
+        console.error("Login error:", error);
+      });
     // setIsOtp(true);
   };
   const handleFormSubmit = async () => {
@@ -86,17 +89,10 @@ const LoginMob = () => {
       />
       {isSuccess ? (
         <div className="flex flex-col gap-6 w-full font-['Inter'] items-center h-screen justify-center max-w-[480px]">
-          <div
-            id="Ellipse"
-            className="bg-[url(https://file.rendit.io/n/AgmUwxcDhU56xN8BuC7y.svg)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-row justify-center ml-3 pt-6 w-[150px] h-[150px] items-start"
-          >
-            <img
-              src="https://file.rendit.io/n/pMEYBbJ6aVmtSmbzARlI.svg"
-              alt="Mditick"
-              id="Mditick"
-              className="w-24"
-            />
+          <div className="bg-[#fead3a] rounded-full w-[150px] h-[150px] flex justify-center items-center">
+            <Icon icon="mdi:tick" width="94" className="text-white" />
           </div>
+
           <div className="text-center text-5xl font-medium text-black">
             success
           </div>
@@ -256,7 +252,7 @@ const LoginMob = () => {
                               <button
                                 type="submit"
                                 disabled={!isValid}
-                                className="text-center items-center text-xl mx-auto font-['Inter'] h-[56px] w-full px-[16px] text-[20px] font-bold gap-[10px] shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center pt-4 rounded-lg bg-[#0f002b] text-white p-4"
+                                className="text-center items-center text-xl mx-auto font-['Inter'] h-[56px] w-full px-[16px] text-[20px] font-bold gap-[10px] shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-center pt-4 rounded-lg bg-[#0f002b] text-white p-4 mt-2"
                               >
                                 Continue
                               </button>

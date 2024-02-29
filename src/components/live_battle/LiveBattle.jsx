@@ -2,24 +2,103 @@ import React, { useEffect, useState } from "react";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import LiveBattles from "../../assets/new_game/livebattle.svg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import TopbarMobile from "../MainLayout/TopbarMobile";
-import {
-  Button,
-  Drawer,
-  IconButton,
-  Typography,
-} from "@material-tailwind/react";
+import { Button, Drawer, Typography } from "@material-tailwind/react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllBattles } from "./battleSlice";
+import { matchUser } from "./matchSlice";
+import { fetchUserDetail } from "./userSlice";
+
 const LiveBattle = () => {
+  const dispatch = useDispatch();
   const [openBottom, setOpenBottom] = useState(false);
-  const [isRequest, setIsRequest] = useState(false);
+  const [isRequest, setIsRequest] = useState(null);
+  const [timers, setTimers] = useState({});
   const navigate = useNavigate();
-  const openDrawerBottom = () => {
-    setIsRequest(false);
-    setOpenBottom(true);
-    setTimeout(() => {
-     setIsRequest(true);
-    }, 3000);
+  const battles = useSelector((state) => state.battle.battles);
+  const users = useSelector((state) => state.user.user);
+  const match = useSelector((state) => state.match);
+  console.log(match);
+  const [requestTimer, setRequestTimer] = useState(0);
+  // console.log(users);
+  // const newGameDetail = useSelector((state) => state.match.match);
+  // console.log(newGameDetail);
+  // console.log(battles);
+  useEffect(() => {
+    dispatch(fetchAllBattles());
+    dispatch(fetchUserDetail());
+  }, []);
+  useEffect(() => {
+    console.log("hi");
+    if (isRequest === false && requestTimer < 50) {
+      let requestInterval = setInterval(() => {
+        setRequestTimer((prev) => prev + 1);
+      }, 1000);
+
+      return () => clearInterval(requestInterval);
+    }
+  }, [isRequest, requestTimer]);
+
+  useEffect(() => {
+    const intervalIds = {};
+
+    battles.forEach((e) => {
+      const id = e._id;
+      const previousTimestamp = e.battleTimeStamp;
+      const currentTimestamp = Date.now();
+      const timeDifference = currentTimestamp - previousTimestamp;
+      const timeDifferenceInSeconds = timeDifference / 1000; // Convert to seconds
+      const minutes = Math.floor(timeDifferenceInSeconds / 60); // Get the minutes
+      const seconds = Math.floor(timeDifferenceInSeconds % 60); // Get the remaining seconds
+
+      if (seconds < 50 && minutes < 1) {
+        intervalIds[id] = setInterval(() => {
+          setTimers((prevTimers) => {
+            if (prevTimers[id] >= 50 || minutes >= 1) {
+              return { ...prevTimers, [id]: 50 };
+            }
+            return { ...prevTimers, [id]: (prevTimers[id] || 0) + 1 };
+          });
+        }, 1000);
+        setTimers((prevTimers) => ({ ...prevTimers, [id]: seconds }));
+      } else {
+        setTimers((prevTimers) => ({ ...prevTimers, [id]: 50 }));
+      }
+    });
+    return () => {
+      Object.values(intervalIds).forEach((intervalId) =>
+        clearInterval(intervalId)
+      );
+    };
+  }, [battles]);
+  // console.log(users?.user._id);
+  const battleCreationTime = (e) => {
+    const previousTimestamp = e.battleTimeStamp;
+    const currentTimestamp = Date.now();
+    const timeDifference = currentTimestamp - previousTimestamp;
+    const timeDifferenceInSeconds = timeDifference / (1000 * 60);
+    return timeDifferenceInSeconds;
+  };
+
+  const openDrawerBottom = async (e) => {
+    // console.log(e.player1)
+    // console.log(users?.user._id)
+    if (users?.user._id === e.player1) {
+      alert("you have to wait until other user can't join the battle");
+      return;
+    }
+
+    const data = {
+      battleAmount: e.amount,
+      id: e._id,
+      player1: e.player1,
+    };
+    if (users?.user._id !== e._id) {
+      setIsRequest(false);
+      setOpenBottom(true);
+      dispatch(matchUser({ data, setIsRequest ,closeDrawerBottom}));
+    }
   };
   const closeDrawerBottom = () => setOpenBottom(false);
   return (
@@ -50,9 +129,59 @@ const LiveBattle = () => {
             className="w-6"
           />
         </div>
-
         <div className="p-6 flex flex-col  gap-4 m-auto w-full">
-          <div className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
+          {battles.length > 0 &&
+            battles.slice(0, 2).map((e) => (
+              <div
+                key={e._id}
+                className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]"
+              >
+                <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
+                  <div className="italic">
+                    open challenge from
+                    <span className="font-extrabold pl-1">
+                      {e.player1.slice(e.player1.length - 6, e.player1.length)}
+                    </span>
+                  </div>
+                  2
+                  <div className="italic font-semibold ">
+                    ·{" "}
+                    {Math.floor(battleCreationTime(e)) == 0
+                      ? "Now"
+                      : `${Math.floor(battleCreationTime(e))} Minutes ago`}
+                  </div>
+                </div>
+                <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
+                  <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
+                    <div className="flex justify-between ">
+                      <span>Entry fee</span>
+                      <span>₹{e.amount}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Prize</span>
+                      <span> ₹{e.amount * 1.95}</span>
+                    </div>
+                  </div>
+                  {users?.user._id === e.player1 ? (
+                    <div className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
+                      <span className="text-white">{timers[e._id]}</span>
+                    </div>
+                  ) : (
+                    <div
+                      onClick={() => openDrawerBottom(e)}
+                      className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]"
+                    >
+                      <img
+                        src={LiveBattles}
+                        alt="Arcticonsbattleforwesnoth"
+                        className="w-4"
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          {/* <div className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
             <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
               <div className="italic">
                 open challenge from
@@ -83,37 +212,7 @@ const LiveBattle = () => {
                 />
               </div>
             </div>
-          </div>
-
-          <div className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
-            <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
-              <div className="italic">
-                open challenge from
-                <span className="font-extrabold pl-1">ravan3p</span>
-              </div>
-              <div className="italic font-semibold ">· 2 minutes ago</div>
-            </div>
-            <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
-              <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
-                <div className="flex justify-between ">
-                  <span>Entry fee</span>
-                  <span> ₹40</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Prize</span>
-                  <span> ₹80</span>
-                </div>
-              </div>
-
-              <div className=" flex w-[25.5px] h-[25.5px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
-                <img
-                  src={LiveBattles}
-                  alt="Arcticonsbattleforwesnoth"
-                  className="w-4"
-                />
-              </div>
-            </div>
-          </div>
+          </div> */}
 
           <div
             onClick={() => navigate("/livebattle2")}
@@ -130,11 +229,13 @@ const LiveBattle = () => {
         // onClose={closeDrawerBottom}
         className="p-4  bg-[#0f002b] rounded-t-3xl"
       >
-        {isRequest == false ? (
+        {isRequest == false && (
           <div className="flex flex-col p-4">
-            <div className="mb-4 flex items-center w-full justify-center gap-2">
-              <div className="bg-white p-7 rounded-full relative flex justify-center items-center">
-                <div className="text-[#00C300] bold text-6xl ">45</div>
+            <div className="mb-4 flex items-center  w-full justify-center gap-2">
+              <div className="bg-white p-7 w-32 h-32 rounded-full relative flex justify-center items-center">
+                <div className="text-[#00C300] bold text-6xl ">
+                  {requestTimer}
+                </div>
               </div>
             </div>
             <Typography
@@ -144,7 +245,8 @@ const LiveBattle = () => {
               Requesting...
             </Typography>
           </div>
-        ) : (
+        )}
+        {isRequest == true && (
           <div>
             <div className="flex justify-center gap-6 mt-10 w-full">
               <Button

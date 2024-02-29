@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import LiveBattles from "../../assets/new_game/livebattle.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Button,
   Drawer,
-  IconButton,
   Typography,
 } from "@material-tailwind/react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllBattles } from "./battleSlice";
 const OpenChallengeReq = () => {
+
+  const navigate = useNavigate();
+  const { userId } = useParams();
+  const dispatch = useDispatch();
+  const battles = useSelector((state) => state.battle.battles);
+  console.log(userId, battles);
   const [openBottom, setOpenBottom] = useState(false);
   const [isRequest, setIsRequest] = useState(false);
-  const navigate = useNavigate();
   const openDrawerBottom = () => {
     setIsRequest(false);
     setOpenBottom(true);
@@ -20,7 +26,26 @@ const OpenChallengeReq = () => {
       setIsRequest(true);
     }, 3000);
   };
+  useEffect(() => {
+    dispatch(fetchAllBattles());
+  }, []);
+
+  const battleCreationTime = (e) => {
+    const previousTimestamp = e.battleTimeStamp;
+    const currentTimestamp = Date.now();
+    const timeDifference = currentTimestamp - previousTimestamp;
+    const timeDifferenceInSeconds = timeDifference / (1000 * 60);
+    return timeDifferenceInSeconds;
+  };
+  const battledetail =battles && battles?.filter((data) => data._id === userId)[0];
+  console.log(battledetail);
+  // useEffct(()=>{
+  //   if(battledetail===undefined){
+  //     navigate("/");
+  //   }
+  // },[])
   const closeDrawerBottom = () => setOpenBottom(false);
+
   return (
     <div className="min-h-screen h-full bg-white ">
       <div
@@ -51,7 +76,7 @@ const OpenChallengeReq = () => {
         <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-between pb-20 w-full h-[762px] items-start">
           <div className="flex flex-col gap-4 w-full items-start">
             <div className="bg-white flex flex-row justify-between w-full h-16 items-start pt-4 px-5">
-              <div className="flex flex-row gap-5 w-2/5 items-start">
+              <div className="flex flex-row gap-5  items-start">
                 <img
                   onClick={() => navigate("/livebattle2")}
                   src="https://file.rendit.io/n/stxeGrguy8pBFLiVl8PK.svg"
@@ -119,10 +144,10 @@ const OpenChallengeReq = () => {
                   </div>
                   <div className="flex flex-col gap-3 w-8 items-start">
                     <div className="font-['Inter'] font-bold text-[#0f002b]">
-                      ₹40
+                      ₹{battledetail.amount}
                     </div>
                     <div className="font-['Inter'] font-bold text-[#0f002b]">
-                      ₹80
+                      ₹{battledetail.amount * 1.95}
                     </div>
                   </div>
                 </div>
@@ -131,13 +156,27 @@ const OpenChallengeReq = () => {
                     <div className="font-['Inter'] text-[#0f002b]">
                       open challenge<span> </span>
                       <div>from </div>
-                      <span className="font-bold">ravan3p</span>
+                      <span className="font-bold">
+                        {" "}
+                        {battledetail.player1.slice(
+                          battledetail.player1.length - 6,
+                          battledetail.player1.length
+                        )}
+                      </span>
                     </div>
                     <div
                       id="MinutesAgo1"
                       className="font-['Inter'] font-bold text-[#0f002b]"
                     >
-                      · <span>2 minutes ago</span>
+                      ·{" "}
+                      <span>
+                        {" "}
+                        {Math.floor(battleCreationTime(battledetail)) === 0
+                          ? "Now"
+                          : `${Math.floor(
+                              battleCreationTime(battledetail)
+                            )} Minutes ago`}
+                      </span>
                     </div>
                   </div>
                   <div
@@ -154,7 +193,7 @@ const OpenChallengeReq = () => {
           <div
             onClick={openDrawerBottom}
             id="ContinueAndLoading"
-            className="text-center text-xl font-['Inter'] font-medium text-[#0f002b] shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-row ml-8 w-5/6 h-12 items-start pt-4 px-6 rounded-lg"
+            className="text-center text-xl font-['Inter'] font-medium text-[#0f002b] shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-center items-center mx-auto w-5/6 h-12 pt-4 px-6 rounded-lg"
           >
             Request
           </div>

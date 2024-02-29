@@ -22,7 +22,6 @@ import {
   selectRefreshToken,
   selectToken,
 } from "../app_start/authSlice";
-import { fetchUserDetail, selectUser } from "../live_battle/userSlice";
 
 const NewProfileMob = () => {
   const [isOpen, setIsOpen] = useState(false);

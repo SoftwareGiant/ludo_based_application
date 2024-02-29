@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "../../App.css";
-import Copy from "../../assets/new_game/copy.svg";
-import Share from "../../assets/new_game/share.svg";
-import Fb from "../../assets/new_game/fb.svg";
-import Wp from "../../assets/new_game/wp.svg";
-import Twtr from "../../assets/new_game/twtr.svg";
-import LiveBattle from "../../assets/new_game/livebattle.svg";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
-import HamBurger from "../../assets/profile/hamburger.svg";
 import back from "../../assets/profile/ep_back.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import NewGameSLider from "./NewGameSLider";
 import { useNavigate } from "react-router-dom";
+import LiveBattles from "../../assets/new_game/livebattle.svg";
 import {
   Button,
   Drawer,
@@ -21,64 +15,118 @@ import {
 import ButtonLoader from "../MainLayout/ButtonLoader";
 import axios from "axios";
 import io from "socket.io-client";
+import { useDispatch, useSelector } from "react-redux";
+import { selectRefreshToken, selectToken } from "../app_start/authSlice";
+import { fetchAllBattles } from "./battleSlice";
+import { fetchUserDetail } from "./userSlice";
 const socket = io("http://localhost:8003");
 const NewGameMob = () => {
+  const { accessToken, refreshToken } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const [battleAmount, setBattleAmount] = useState("");
   const [buttonStatus, setButtonStatus] = useState("create");
   const [openBottom, setOpenBottom] = useState(false);
-  const [battles,setAllBattles] = useState([]);
+  const[timers,setTimers] = useState({});
+  const users = useSelector((state) => state.user.user);
+  // const [battles, setAllBattles] = useState([]);
+  const battles = useSelector((state) => state.battle.battles);
   const openDrawerBottom = () => setOpenBottom(true);
   const closeDrawerBottom = () => setOpenBottom(false);
+  const dispatch = useDispatch();
+  // console.log(battles);
+  // useEffect(() => {
+  //   socket.on("databaseChange", (data) => {
+  //     console.log("inside database changes");
+  //     setAllBattles(data);
+  //   });
+   // socket.emit("allNewGame");
+    // socket.on("allNewGame", (data) => {
+    //   setAllBattles(data);
+    //   dispatch(setAllBattles(data));
+    //   console.log(data);
+    // });
+  // }, []);
 
-  useEffect(()=>{
-  socket.on("databaseChange",(data)=>{
-      console.log("inside database changes");
-      setAllBattles(data);
+  useEffect(() => {
+    dispatch(fetchAllBattles());
+  }, [buttonStatus]);
+  useEffect(() => {
+    dispatch(fetchAllBattles());
+    dispatch(fetchUserDetail());
+  }, []);
+
+  useEffect(() => {
+    const intervalIds = {};
+
+    battles.forEach((e) => {
+      const id = e._id;
+      const previousTimestamp = e.battleTimeStamp;
+      const currentTimestamp = Date.now();
+      const timeDifference = currentTimestamp - previousTimestamp;
+      const timeDifferenceInSeconds = timeDifference / 1000; // Convert to seconds
+      const minutes = Math.floor(timeDifferenceInSeconds / 60); // Get the minutes
+      const seconds = Math.floor(timeDifferenceInSeconds % 60); // Get the remaining seconds
+
+      if (seconds < 50 && minutes < 1) {
+        intervalIds[id] = setInterval(() => {
+          setTimers((prevTimers) => {
+            if (prevTimers[id] >= 50 || minutes >= 1) {
+              return { ...prevTimers, [id]: 50 };
+            }
+            return { ...prevTimers, [id]: (prevTimers[id] || 0) + 1 };
+          });
+        }, 1000);
+        setTimers((prevTimers) => ({ ...prevTimers, [id]: seconds }));
+      }
+      else{
+        setTimers((prevTimers) => ({ ...prevTimers, [id]: 50 }));
+      }
     });
-  },[])
-
-  useEffect(()=>{
-  socket.emit("allNewGame");
-  socket.on("allNewGame",(data)=>{
-    setAllBattles(data);
-  })
-  },[])
-
-  const battleCreationTime = (e) =>{
+    return () => {
+      Object.values(intervalIds).forEach((intervalId) => clearInterval(intervalId));
+    };
+  }, [battles]);
+  const battleCreationTime = (e) => {
     const previousTimestamp = e.battleTimeStamp;
     const currentTimestamp = Date.now();
     const timeDifference = currentTimestamp - previousTimestamp;
-    const timeDifferenceInSeconds = timeDifference / (1000*60);
+    const timeDifferenceInSeconds = timeDifference / (1000 * 60);
     return timeDifferenceInSeconds;
-  }
+  };
 
-  // useEffect(() => {
-  //   axios
-  
-  //     .post("/api/user/login", {
-  //       mobileNo: "7610981931",
-  //     })
-  //     .then((res) => console.log(res))
-  //     .then((data) => {
-        
-  //       console.log(data);
-  //     })
-  //     .catch((error) => {
-      
-  //       console.error("There was a problem with your axios operation:", error);
-  //     });
-  // }, []);
-
-  const handleCreate = () => {
+  const handleCreate = async () => {
+    setButtonStatus("loading");
     if (battleAmount === "") {
       alert("fill battle amount");
+      setBattleAmount("");
+      setButtonStatus("create");
       return;
     }
-    setButtonStatus("loading");
-    setTimeout(() => {
+    if (battleAmount < 50 || battleAmount > 20000) {
+      alert("Battle amount should be greater than 50 and less than 20,000");
+      setBattleAmount("");
+      setButtonStatus("create");
+      return;
+    }
+    const response = await axios.post(
+      "api/game/newgame",
+      { battleAmount: battleAmount }, // Pass battleAmount in the request body
+      {
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
+      }
+    );
+    console.log(response);
+    const data = response.data;
+    if (data.message === "You don't have sufficient amount!") {
+      alert(data.message);
+      setButtonStatus("create");
+      setBattleAmount("");
+    } else {
       setButtonStatus("success");
-    }, 2000);
+      setBattleAmount("");
+    }
   };
   return (
     <div className="max-w-[480px] w-full min-h-screen h-full">
@@ -112,45 +160,60 @@ const NewGameMob = () => {
         <div className="py-4">
           <NewGameSLider />
         </div>
-        <div className="m-6 relative">
+        <div className="m-6 relative ">
           <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white relative w-full  max-w-screen  flex flex-col gap-6 items-start rounded-lg p-2 pb-8">
             <div className="text-center text-xl font-['Inter'] text-[#0f002b] ml-6  top-5">
               live <span className="font-bold">battle</span>
             </div>
             <div className="p-2 flex flex-col  gap-4 m-auto w-full">
-              {
-               battles.length>0 && battles.map((e)=>(
-              <div className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
-                <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
-                  <div className="italic">
-                    open challenge from
-                    <span className="font-extrabold pl-1">{e.player1.slice(e.player1.length-6,e.player1.length)}</span>
-                  </div>2
-                  <div className="italic font-semibold ">· {Math.floor(battleCreationTime(e))} Minutes ago</div>
-                </div>
-                <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
-                  <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
-                    <div className="flex justify-between ">
-                      <span>Entry fee</span>
-                      <span>₹{e.amount}</span>
+              {battles.length > 0 &&
+                battles.slice(0, 2).map((e) => (
+                  <div
+                    key={e._id}
+                    className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]"
+                  >
+                    <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
+                      <div className="italic">
+                        open challenge from
+                        <span className="font-extrabold pl-1">
+                          {e.player1.slice(
+                            e.player1.length - 6,
+                            e.player1.length
+                          )}
+                        </span>
+                      </div>
+                      2
+                      <div className="italic font-semibold ">
+                        ·{" "}
+                        {Math.floor(battleCreationTime(e)) === 0
+                          ? "Now"
+                          : `${Math.floor(battleCreationTime(e))} Minutes ago`}
+                      </div>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Prize</span>
-                      <span> ₹{e.amount*1.95}</span>
-                    </div>
-                  </div>
+                    <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
+                      <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
+                        <div className="flex justify-between ">
+                          <span>Entry fee</span>
+                          <span>₹{e.amount}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Prize</span>
+                          <span> ₹{e.amount * 1.95}</span>
+                        </div>
+                      </div>
 
-                  <div className=" flex w-[25.5px] h-[25.5px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
-                    <img
-                      src={LiveBattle}
+                      <div className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
+                  { (users?.user._id === e.player1) ? 
+                   <span className="text-white">{timers[e._id]}</span>
+                  :     <img
+                      src={LiveBattles}
                       alt="Arcticonsbattleforwesnoth"
                       className="w-4"
-                    />
+                    />}
                   </div>
-                </div>
-              </div>
-               ))
-              }
+                    </div>
+                  </div>
+                ))}
 
               {/* <div className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
                 <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
@@ -184,7 +247,7 @@ const NewGameMob = () => {
             </div>
           </div>
           <div
-            onClick={() => navigate("/LiveBattle")}
+            onClick={() => navigate("/LiveBattle", { state: { battles } })}
             className="shadow-[0px_0px_4px_1px_rgba(0,_0,_0,_0.25)] bg-white  flex flex-row justify-center -mt-6 relative ml-[42%] pt-2 w-12 h-12 items-start rounded-[24px]"
           >
             <img
@@ -194,6 +257,7 @@ const NewGameMob = () => {
               className="w-6 mt-1"
             />
           </div>
+          <div className="absolute bottom-7 inset-0 bg-gradient-to-b from-transparent to-white opacity-50" />
         </div>
 
         <div className="relative m-6">
@@ -235,7 +299,7 @@ const NewGameMob = () => {
                   <div className="flex" onClick={openDrawerBottom}>
                     <span>₹</span>
                     <input
-                      val={battleAmount}
+                      value={battleAmount}
                       onChange={(e) => setBattleAmount(e.target.value)}
                       placeholder="Your battle amount"
                       className="outline-none pl-2  focus:outline-none w-full"

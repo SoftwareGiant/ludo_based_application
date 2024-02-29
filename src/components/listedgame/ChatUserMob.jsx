@@ -19,9 +19,12 @@ import {
 } from "@material-tailwind/react";
 
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateGameCode } from "../live_battle/gameSlice";
 
 const ChatUserMob = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = [
     {
       text: "hi",
@@ -50,17 +53,18 @@ const ChatUserMob = () => {
   const [inputText, setInputText] = useState("");
   const [image, setImage] = useState(null);
 
-  const openDrawerBottom = () => {
-    setOpenBottom(true);
-  };
+  // const openDrawerBottom = () => {
+  //   setOpenBottom(true);
+  // };
   const closeDrawerBottom = (event) =>{
     event.preventDefault();
     if(inputValue==="") {
       alert("Please enter code")
       return
     }
+    dispatch(updateGameCode({ gameCode: inputValue, setOpenBottom }));
+
     console.log('Form submitted with value:', inputValue);
-    setOpenBottom(false);
   } 
 
   const handleSendMessage = () => {
