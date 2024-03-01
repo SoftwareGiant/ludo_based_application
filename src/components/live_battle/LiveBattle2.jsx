@@ -62,7 +62,7 @@ const LiveBattle2 = () => {
   };
 
   return (
-    <div className="min-h-screen h-full bg-white ">
+    <div className="min-h-screen h-full bg-white  max-w-[480px]">
       <TopbarMobile />
       {filter === true ? (
         <div className="mt-20 shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-between w-full h-[762px] items-start pt-2 pb-24 pl-px">
@@ -137,7 +137,7 @@ const LiveBattle2 = () => {
           </div>
           <div
             onClick={() => setFilter(false)}
-            className="cursor-pointer fixed bottom-10 left-0 right-0  font-['Inter'] font-bold text-white bg-[#0f002b] flex  justify-center w-3/5 m-auto items-center p-2 rounded-lg "
+            className="cursor-pointer fixed bottom-10  font-['Inter'] font-bold text-white bg-[#0f002b] flex  justify-center w-full max-w-[480px]  items-center p-2 rounded-lg "
           >
             Apply Filter
           </div>
@@ -215,7 +215,7 @@ const LiveBattle2 = () => {
                       </div>
                     </div>
                     <div className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
-                      {users?.user._id === e.player1 ? (
+                      {users?._id === e.player1 ? (
                         <span className="text-white">{timers[e._id]}</span>
                       ) : (
                         <img

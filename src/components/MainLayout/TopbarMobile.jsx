@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const TopbarMobile = ({ isStart, handlestart }) => {
   const navigate = useNavigate();
   return (
-    <div className="fixed bg-[#fead3a] top-0 w-full shadow-lg z-50">
+    <div className="fixed bg-[#fead3a] max-w-[480px] top-0 w-full shadow-lg z-50">
       <div
         id="NotificationspaceRoot"
         className="bg-[#fead3a]  h-8 overflow-hidden"

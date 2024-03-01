@@ -1,53 +1,39 @@
 import React, { useEffect, useState } from "react";
 import "../../app.css";
-import ProfileEditbtn from "../../assets/profile/editbutton.svg";
-import HamBurger from "../../assets/profile/hamburger.svg";
-import Edit from "../../assets/profile/edit.svg";
-import ProfileEdit from "../../assets/profile/profile_edit.svg";
-import LogOutMob from "../../assets/profile/respon_logout.svg";
-import Verify from "../../assets/profile/verify.svg";
-import ToggleOff from "../../assets/profile/toggleOff.svg";
-import ToggleOn from "../../assets/profile/ToggleOn.svg";
-import Back from "../../assets/profile/ep_back.svg";
-import Favorite from "../../assets/new_game/fav.svg";
-import BellIcon from "../../assets/new_game/notification.svg";
-import kyc from "../../assets/new_game/KYC.svg";
-import AddGame from "../../assets/new_game/addgame.svg";
-import Profile from "../../assets/new_game/profile.svg";
-import WinCash from "../../assets/new_game/wincash.svg";
-import Wallet from "../../assets/new_game/wallet.svg";
-import GameHistory from "../../assets/new_game/history.svg";
-import ReferEarn from "../../assets/new_game/refer&earn.svg";
-import Support from "../../assets/new_game/support.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";
-import { Switch } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import image from "../../assets/new_game/image.svg";
 import video from "../../assets/new_game/video.svg";
-import {
-  Button,
-  Drawer,
-  IconButton,
-  Typography,
-} from "@material-tailwind/react";
+import axios from "axios";
+import { useSelector } from "react-redux";
 const NewProfilePic = () => {
   const [imageFile, setImageFile] = useState("https://images.unsplash.com/photo-1529524987368-af489318987c?q=80&w=582&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
 
   const [openBottom, setOpenBottom] = useState(true);
   const navigate = useNavigate();
-  
+  const { accessToken } = useSelector((state) => state.auth);
   const openDrawerBottom = () => {
     setOpenBottom(true);
   };
   const closeDrawerBottom = () => setOpenBottom(false);
 
-
-  const handleImageChange = (event) => {
+  const handleImageChange = async(event) => {
     const file = event.target.files[0];
+    console.log(file);
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => {
+      reader.onloadend =async () => {
         setImageFile(reader.result);
+        const response = await axios.post(
+          "api/user/addPicture",
+          { image: file }, // Passed image in request body
+          {
+            headers: {
+              Authorization: `bearer ${accessToken}`,
+            },
+          }
+        );
+        console.log(response)
       };
       reader.readAsDataURL(file);
     }

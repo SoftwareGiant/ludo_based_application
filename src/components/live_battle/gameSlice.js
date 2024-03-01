@@ -9,10 +9,12 @@ const initialState = {
 
 export const updateGameCode = createAsyncThunk(
     'game/updategamecode',
-    async ({ gameCode, setOpenBottom }) => {
+    async (gameCode, setOpenBottom) => {
+        const obj = { "gameCode": gameCode }
+        console.log(gameCode)
         const accessToken = localStorage.getItem('accessToken');
         try {
-            const response = await axios.post('/api/game/updategamecode', gameCode, {
+            const response = await axios.post('/api/game/updategamecode', obj, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },

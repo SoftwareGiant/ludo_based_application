@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import LiveBattles from "../../assets/new_game/livebattle.svg";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import TopbarMobile from "../MainLayout/TopbarMobile";
 import { Button, Drawer, Typography } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +19,7 @@ const LiveBattle = () => {
   const battles = useSelector((state) => state.battle.battles);
   const users = useSelector((state) => state.user.user);
   const match = useSelector((state) => state.match);
-  console.log(match);
+  // console.log(match);
   const [requestTimer, setRequestTimer] = useState(0);
   // console.log(users);
   // const newGameDetail = useSelector((state) => state.match.match);
@@ -30,7 +30,6 @@ const LiveBattle = () => {
     dispatch(fetchUserDetail());
   }, []);
   useEffect(() => {
-    console.log("hi");
     if (isRequest === false && requestTimer < 50) {
       let requestInterval = setInterval(() => {
         setRequestTimer((prev) => prev + 1);
@@ -84,7 +83,7 @@ const LiveBattle = () => {
   const openDrawerBottom = async (e) => {
     // console.log(e.player1)
     // console.log(users?.user._id)
-    if (users?.user._id === e.player1) {
+    if (users?._id === e.player1) {
       alert("you have to wait until other user can't join the battle");
       return;
     }
@@ -94,7 +93,7 @@ const LiveBattle = () => {
       id: e._id,
       player1: e.player1,
     };
-    if (users?.user._id !== e._id) {
+    if (users?._id !== e._id) {
       setIsRequest(false);
       setOpenBottom(true);
       dispatch(matchUser({ data, setIsRequest ,closeDrawerBottom}));
@@ -102,9 +101,9 @@ const LiveBattle = () => {
   };
   const closeDrawerBottom = () => setOpenBottom(false);
   return (
-    <div className="min-h-screen h-full bg-[#0f002b]">
+    <div className="min-h-screen h-full  max-w-[480px] bg-[#0f002b]">
       <TopbarMobile />
-      <div className="bg-white w-full pt-20">
+      <div className="bg-white w-full pt-20  ">
         <div className="flex justify-between items-center px-4 py-2 w-full">
           <div className="flex gap-5 items-center">
             <img
@@ -162,7 +161,7 @@ const LiveBattle = () => {
                       <span> ₹{e.amount * 1.95}</span>
                     </div>
                   </div>
-                  {users?.user._id === e.player1 ? (
+                  {users?._id === e.player1 ? (
                     <div className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
                       <span className="text-white">{timers[e._id]}</span>
                     </div>

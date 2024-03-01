@@ -9,7 +9,8 @@ const initialState = {
 
 export const matchUser = createAsyncThunk(
   'match/matchUser',
-  async ({ data, setIsRequest, closeDrawerBottom }) => {
+  async ({ data, setIsRequest, closematchDrawerBottom }) => {
+    console.log(data)
     const accessToken = localStorage.getItem('accessToken');
     try {
       const response = await axios.post('/api/game/matchuser', data, {
@@ -17,10 +18,11 @@ export const matchUser = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
+      console.log(response)
       if (response.status === 204) {
         alert("Failed");
         setIsRequest("failed");
-        closeDrawerBottom();
+        closematchDrawerBottom();
         return null;
       }
       if (response.status === 200) {

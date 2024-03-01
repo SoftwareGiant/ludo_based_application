@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../App.css";
+import { Icon } from "@iconify-icon/react";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
-import back from "../../assets/profile/ep_back.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import NewGameSLider from "./NewGameSLider";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectRefreshToken, selectToken } from "../app_start/authSlice";
 import { fetchAllBattles } from "./battleSlice";
 import { fetchUserDetail } from "./userSlice";
+import { matchUser } from "./matchSlice";
 const socket = io("http://localhost:8003");
 const NewGameMob = () => {
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
@@ -26,12 +27,20 @@ const NewGameMob = () => {
   const [battleAmount, setBattleAmount] = useState("");
   const [buttonStatus, setButtonStatus] = useState("create");
   const [openBottom, setOpenBottom] = useState(false);
-  const[timers,setTimers] = useState({});
+  const [openMatchBottom, setOpenMatchBottom] = useState(false);
+  const [timers, setTimers] = useState({});
+  const [isRequest, setIsRequest] = useState(null);
+  const [requestTimer, setRequestTimer] = useState(0);
   const users = useSelector((state) => state.user.user);
+  // const match = useSelector((state) => state.match);
   // const [battles, setAllBattles] = useState([]);
   const battles = useSelector((state) => state.battle.battles);
   const openDrawerBottom = () => setOpenBottom(true);
-  const closeDrawerBottom = () => setOpenBottom(false);
+  const closeDrawerBottom = () => {
+    setBattleAmount("");
+    setButtonStatus("create");
+    setOpenBottom(false);
+  };
   const dispatch = useDispatch();
   // console.log(battles);
   // useEffect(() => {
@@ -39,13 +48,22 @@ const NewGameMob = () => {
   //     console.log("inside database changes");
   //     setAllBattles(data);
   //   });
-   // socket.emit("allNewGame");
-    // socket.on("allNewGame", (data) => {
-    //   setAllBattles(data);
-    //   dispatch(setAllBattles(data));
-    //   console.log(data);
-    // });
+  // socket.emit("allNewGame");
+  // socket.on("allNewGame", (data) => {
+  //   setAllBattles(data);
+  //   dispatch(setAllBattles(data));
+  //   console.log(data);
+  // });
   // }, []);
+
+  useEffect(() => {
+    if (isRequest === false && requestTimer < 50) {
+      let requestInterval = setInterval(() => {
+        setRequestTimer((prev) => prev + 1);
+      }, 1000);
+      return () => clearInterval(requestInterval);
+    }
+  }, [isRequest, requestTimer]);
 
   useEffect(() => {
     dispatch(fetchAllBattles());
@@ -77,13 +95,14 @@ const NewGameMob = () => {
           });
         }, 1000);
         setTimers((prevTimers) => ({ ...prevTimers, [id]: seconds }));
-      }
-      else{
+      } else {
         setTimers((prevTimers) => ({ ...prevTimers, [id]: 50 }));
       }
     });
     return () => {
-      Object.values(intervalIds).forEach((intervalId) => clearInterval(intervalId));
+      Object.values(intervalIds).forEach((intervalId) =>
+        clearInterval(intervalId)
+      );
     };
   }, [battles]);
   const battleCreationTime = (e) => {
@@ -120,14 +139,37 @@ const NewGameMob = () => {
     console.log(response);
     const data = response.data;
     if (data.message === "You don't have sufficient amount!") {
-      alert(data.message);
+      // alert(data.message);
       setButtonStatus("create");
       setBattleAmount("");
     } else {
       setButtonStatus("success");
       setBattleAmount("");
+      closeDrawerBottom();
+    }
+    alert(data.message);
+  };
+
+  const openmatchDrawerBottom = async (e) => {
+    if(!users) return;
+    if (users?._id === e?.player1) {
+      alert("you have to wait until other user can't join the battle");
+      return;
+    }
+
+    const data = {
+      battleAmount: e?.amount,
+      id: e?._id,
+      player1: e?.player1,
+    };
+    console.log(data)
+    if (users?._id !== e._id) {
+      setIsRequest(false);
+      setOpenMatchBottom(true);
+      dispatch(matchUser({ data, setIsRequest, closematchDrawerBottom }));
     }
   };
+  const closematchDrawerBottom = () => setOpenMatchBottom(false);
   return (
     <div className="max-w-[480px] w-full min-h-screen h-full">
       <div
@@ -160,106 +202,6 @@ const NewGameMob = () => {
         <div className="py-4">
           <NewGameSLider />
         </div>
-        <div className="m-6 relative ">
-          <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white relative w-full  max-w-screen  flex flex-col gap-6 items-start rounded-lg p-2 pb-8">
-            <div className="text-center text-xl font-['Inter'] text-[#0f002b] ml-6  top-5">
-              live <span className="font-bold">battle</span>
-            </div>
-            <div className="p-2 flex flex-col  gap-4 m-auto w-full">
-              {battles.length > 0 &&
-                battles.slice(0, 2).map((e) => (
-                  <div
-                    key={e._id}
-                    className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]"
-                  >
-                    <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
-                      <div className="italic">
-                        open challenge from
-                        <span className="font-extrabold pl-1">
-                          {e.player1.slice(
-                            e.player1.length - 6,
-                            e.player1.length
-                          )}
-                        </span>
-                      </div>
-                      2
-                      <div className="italic font-semibold ">
-                        ·{" "}
-                        {Math.floor(battleCreationTime(e)) === 0
-                          ? "Now"
-                          : `${Math.floor(battleCreationTime(e))} Minutes ago`}
-                      </div>
-                    </div>
-                    <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
-                      <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
-                        <div className="flex justify-between ">
-                          <span>Entry fee</span>
-                          <span>₹{e.amount}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Prize</span>
-                          <span> ₹{e.amount * 1.95}</span>
-                        </div>
-                      </div>
-
-                      <div className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
-                  { (users?.user._id === e.player1) ? 
-                   <span className="text-white">{timers[e._id]}</span>
-                  :     <img
-                      src={LiveBattles}
-                      alt="Arcticonsbattleforwesnoth"
-                      className="w-4"
-                    />}
-                  </div>
-                    </div>
-                  </div>
-                ))}
-
-              {/* <div className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
-                <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
-                  <div className="italic">
-                    open challenge from
-                    <span className="font-extrabold pl-1">ravan3p</span>
-                  </div>
-                  <div className="italic font-semibold ">· 2 minutes ago</div>
-                </div>
-                <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
-                  <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
-                    <div className="flex justify-between ">
-                      <span>Entry fee</span>
-                      <span> ₹40</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Prize</span>
-                      <span> ₹80</span>
-                    </div>
-                  </div>
-
-                  <div className=" flex w-[25.5px] h-[25.5px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
-                    <img
-                      src={LiveBattle}
-                      alt="Arcticonsbattleforwesnoth"
-                      className="w-4"
-                    />
-                  </div>
-                </div>
-              </div> */}
-            </div>
-          </div>
-          <div
-            onClick={() => navigate("/LiveBattle", { state: { battles } })}
-            className="shadow-[0px_0px_4px_1px_rgba(0,_0,_0,_0.25)] bg-white  flex flex-row justify-center -mt-6 relative ml-[42%] pt-2 w-12 h-12 items-start rounded-[24px]"
-          >
-            <img
-              src="https://file.rendit.io/n/PZF2SOJvNd8p90uk3rGr.svg"
-              alt="HardwareKeyboardArrowDown icon"
-              id="Phcaretdown"
-              className="w-6 mt-1"
-            />
-          </div>
-          <div className="absolute bottom-7 inset-0 bg-gradient-to-b from-transparent to-white opacity-50" />
-        </div>
-
         <div className="relative m-6">
           <div className="hadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#fead3a] flex flex-col p-4 gap-6 w-fullw-full  max-w-screen items-start rounded-lg pb-8">
             <div
@@ -269,7 +211,7 @@ const NewGameMob = () => {
               start your own <span className="font-bold">battle</span>
             </div>
             <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg">
-              <div className="flex" onClick={openDrawerBottom}>
+              <div className="flex w-full pr-3" onClick={openDrawerBottom}>
                 <span>₹</span>
                 <input
                   placeholder="Your battle amount"
@@ -281,7 +223,7 @@ const NewGameMob = () => {
                 placement="bottom"
                 open={openBottom}
                 onClose={closeDrawerBottom}
-                className="p-4  bg-[#fead3a] rounded-t-3xl"
+                className="w-[480px] p-4  bg-[#fead3a] rounded-t-3xl"
               >
                 <div className="mb-4 flex items-center justify-start gap-2">
                   <IconButton
@@ -289,14 +231,14 @@ const NewGameMob = () => {
                     color="blue-gray"
                     onClick={closeDrawerBottom}
                   >
-                    <img src={back} />
+                    <Icon icon="ep:back" className="text-white" width="24" />
                   </IconButton>
                   <Typography variant="h5" color="white">
                     Enter Battle Amount
                   </Typography>
                 </div>
                 <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg">
-                  <div className="flex" onClick={openDrawerBottom}>
+                  <div className="flex w-full pr-3" onClick={openDrawerBottom}>
                     <span>₹</span>
                     <input
                       value={battleAmount}
@@ -306,11 +248,7 @@ const NewGameMob = () => {
                     />
                   </div>
                   <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-2">
-                    <img
-                      src="https://file.rendit.io/n/oR12vSMymgw9l2fo50rk.svg"
-                      alt="Arcticonsbattleforwesnoth2"
-                      className="w-6"
-                    />
+                    <Icon icon="arcticons:battleforwesnoth" width="24" />
                   </div>
                 </div>
 
@@ -347,47 +285,15 @@ const NewGameMob = () => {
               </Drawer>
 
               <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-2">
-                <img
-                  src="https://file.rendit.io/n/oR12vSMymgw9l2fo50rk.svg"
-                  alt="Arcticonsbattleforwesnoth2"
-                  className="w-6"
-                />
+                <Icon icon="arcticons:battleforwesnoth" width="24" />
               </div>
             </div>
             <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between w-full items-center px-4 py-2 rounded-lg">
-              <img
-                src="https://file.rendit.io/n/5PdA4wmMt9GMBxV6CW6P.svg"
-                alt="Logoswhatsappicon"
-                id="Logoswhatsappicon"
-                className="w-8"
-              />
-              <img
-                src="https://file.rendit.io/n/55XD5jWezeMUMD482SOu.svg"
-                alt="Logosfacebook"
-                id="Logosfacebook"
-                className=" w-8"
-              />
-
-              <img
-                src="https://file.rendit.io/n/xkOX2mj2hPIoROecNSu8.svg"
-                alt="Ritwitterxfill"
-                id="Ritwitterxfill"
-                className="w-7"
-              />
-
-              <img
-                src="https://file.rendit.io/n/8hRbplCBTS8XBc5b8CmV.svg"
-                alt="ActionLabelOutline icon"
-                id="Solarcopylinear"
-                className="w-7"
-              />
-
-              <img
-                src="https://file.rendit.io/n/SF3ew7gbHLPpUywDhwmw.svg"
-                alt="Mdishare"
-                id="Mdishare"
-                className=" w-8"
-              />
+              <Icon icon="logos:whatsapp-icon" width="32" />
+              <Icon icon="logos:facebook" width="32" />
+              <Icon icon="ri:twitter-x-fill" width="30" />
+              <Icon icon="solar:copy-linear" width="30" />
+              <Icon icon="mdi:share" width="32" />
             </div>
             <div className="flex items-center justify-center w-full m-auto">
               <img
@@ -398,6 +304,210 @@ const NewGameMob = () => {
               />
             </div>
           </div>
+        </div>
+
+        <div className="m-6 relative ">
+          <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white relative w-full  max-w-screen  flex flex-col gap-6 items-start rounded-lg p-2 pb-8">
+            <div className="text-center text-xl font-['Inter'] text-[#0f002b] ml-6  top-5">
+              live <span className="font-bold">battle</span>
+            </div>
+            <div className="p-2 flex flex-col  gap-4 m-auto w-full">
+              {/* {battles.length > 0 &&
+                battles.map((e) => (
+                  <div
+                    key={e._id}
+                    className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]"
+                  >
+                    <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
+                      <div className="italic">
+                        open challenge from
+                        <span className="font-extrabold pl-1">
+                          {e.player1.slice(
+                            e.player1.length - 6,
+                            e.player1.length
+                          )}
+                        </span>
+                      </div>
+                      2
+                      <div className="italic font-semibold ">
+                        ·{" "}
+                        {Math.floor(battleCreationTime(e)) === 0
+                          ? "Now"
+                          : `${Math.floor(battleCreationTime(e))} Minutes ago`}
+                      </div>
+                    </div>
+                    <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
+                      <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
+                        <div className="flex justify-between ">
+                          <span>Entry fee</span>
+                          <span>₹{e.amount}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Prize</span>
+                          <span> ₹{e.amount * 1.95}</span>
+                        </div>
+                      </div>
+
+                      <div className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
+                        {users?.user._id === e.player1 ? (
+                          <span className="text-white">{timers[e._id]}</span>
+                        ) : (
+                          <img
+                            src={LiveBattles}
+                            alt="Arcticonsbattleforwesnoth"
+                            className="w-4"
+                          />
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))} */}
+              {battles.length > 0 &&
+                battles.map((e) => (
+                  <div
+                    key={e._id}
+                    className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]"
+                  >
+                    <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
+                      <div className="italic">
+                        open challenge from
+                        <span className="font-extrabold pl-1">
+                          {e.player1.slice(
+                            e.player1.length - 6,
+                            e.player1.length
+                          )}
+                        </span>
+                      </div>
+                      2
+                      <div className="italic font-semibold ">
+                        ·{" "}
+                        {Math.floor(battleCreationTime(e)) == 0
+                          ? "Now"
+                          : `${Math.floor(battleCreationTime(e))} Minutes ago`}
+                      </div>
+                    </div>
+                    <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
+                      <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
+                        <div className="flex justify-between ">
+                          <span>Entry fee</span>
+                          <span>₹{e.amount}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Prize</span>
+                          <span> ₹{e.amount * 1.95}</span>
+                        </div>
+                      </div>
+                      {users?._id === e.player1 ? (
+                        <div className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
+                          <span className="text-white">{timers[e._id]}</span>
+                        </div>
+                      ) : (
+                        <div
+                          onClick={() => openmatchDrawerBottom(e)}
+                          className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]"
+                        >
+                          <img
+                            src={LiveBattles}
+                            alt="Arcticonsbattleforwesnoth"
+                            className="w-4"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              {/* <div className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
+                <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
+                  <div className="italic">
+                    open challenge from
+                    <span className="font-extrabold pl-1">ravan3p</span>
+                  </div>
+                  <div className="italic font-semibold ">· 2 minutes ago</div>
+                </div>
+                <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
+                  <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
+                    <div className="flex justify-between ">
+                      <span>Entry fee</span>
+                      <span> ₹40</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Prize</span>
+                      <span> ₹80</span>
+                    </div>
+                  </div>
+
+                  <div className=" flex w-[25.5px] h-[25.5px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
+                    <img
+                      src={LiveBattle}
+                      alt="Arcticonsbattleforwesnoth"
+                      className="w-4"
+                    />
+                  </div>
+                </div>
+              </div> */}
+
+              <Drawer
+                placement="bottom"
+                open={openMatchBottom}
+                // onClose={closeDrawerBottom}
+                className="p-4 w-[480px] bg-[#0f002b] rounded-t-3xl"
+              >
+                {isRequest == false && (
+                  <div className="flex flex-col p-4">
+                    <div className="mb-4 flex items-center  w-full justify-center gap-2">
+                      <div className="bg-white p-7 w-32 h-32 rounded-full relative flex justify-center items-center">
+                        <div className="text-[#00C300] bold text-6xl ">
+                          {requestTimer}
+                        </div>
+                      </div>
+                    </div>
+                    <Typography
+                      color="white"
+                      className="flex justify-center text-xl font-bold"
+                    >
+                      Requesting...
+                    </Typography>
+                  </div>
+                )}
+                {isRequest == true && (
+                  <div>
+                    <div className="flex justify-center gap-6 mt-10 w-full">
+                      <Button
+                        onClick={closematchDrawerBottom}
+                        className="bg-[#0f002b] text-white text-lg font-extrabold  border border-gray-600  rounded-md"
+                      >
+                        Reject
+                      </Button>
+                      <Button
+                        onClick={() => navigate("/chat")}
+                        className="bg-white text-[#0f002b] text-lg font-extrabold border border-white "
+                      >
+                        Start
+                      </Button>
+                    </div>
+                    <Typography
+                      color="gray"
+                      className=" mt-12 pr-4 flex justify-center font-normal"
+                    >
+                      Reject will delete this open challenges from list
+                    </Typography>
+                  </div>
+                )}
+              </Drawer>
+            </div>
+          </div>
+          <div
+            onClick={() => navigate("/LiveBattle", { state: { battles } })}
+            className="shadow-[0px_0px_4px_1px_rgba(0,_0,_0,_0.25)] bg-white  flex flex-row justify-center -mt-6 relative ml-[42%] pt-2 w-12 h-12 items-start rounded-[24px]"
+          >
+            <img
+              src="https://file.rendit.io/n/PZF2SOJvNd8p90uk3rGr.svg"
+              alt="HardwareKeyboardArrowDown icon"
+              id="Phcaretdown"
+              className="w-6 mt-1"
+            />
+          </div>
+          {/* <div className="absolute bottom-7 inset-0 bg-gradient-to-b from-transparent to-white opacity-50" /> */}
         </div>
       </div>
     </div>

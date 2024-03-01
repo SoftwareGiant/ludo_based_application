@@ -62,7 +62,7 @@ const ChatUserMob = () => {
       alert("Please enter code")
       return
     }
-    dispatch(updateGameCode({ gameCode: inputValue, setOpenBottom }));
+    dispatch(updateGameCode( inputValue, setOpenBottom ));
 
     console.log('Form submitted with value:', inputValue);
   } 
@@ -106,15 +106,15 @@ const ChatUserMob = () => {
 
 
   return (
-    <div className="min-h-screen w-full h-full  bg-[#0f002b] overflow-hidden relative">
+    <div className="min-h-screen w-full max-w-[480px] h-full  bg-[#0f002b] overflow-hidden relative">
       <div className="max-w-[480px] w-full overflow-hidden">
         <TopbarMobile isStart={true} handlestart={handleStart} />
       </div>
 
-      <div className="w-full overflow-hidden h-full ">
-        <div className="bg-[#fead3a] h-[700px] w-[200%]  rounded-[50%]   -top-20 absolute -left-60 " />
+      <div className="w-full  overflow-hidden h-full ">
+        <div className="bg-[#fead3a]  h-[700px] w-[200%]  rounded-[50%]   -top-20 absolute -left-60 " />
 
-        <div className="fixed z-10 flex justify-between p-4  items-center mt-3 bg-[#fead3a] w-full pt-20 ">
+        <div className="fixed z-10 flex justify-between p-4  items-center mt-3 bg-[#fead3a] max-w-[480px] w-full pt-20 ">
           <div className="flex justify-center gap-2 items-center">
             <img
             onClick={()=>navigate("/userprofile")}
@@ -201,7 +201,7 @@ const ChatUserMob = () => {
               </div>
             ))}
           </div>
-          <div className="px-4 py-2 h-[56px] mb-8 rounded-md border-t bg-white flex fixed w-[89.48%] bottom-3 left-0 right-0 m-auto">
+          <div className="px-4 py-2 h-[56px] mb-8 rounded-md border-t bg-white flex fixed mx-[5.3%] w-[88.93%] max-w-[400px] bottom-3">
             <img
               src="https://file.rendit.io/n/aXGTlHYYkimk9HRIA15k.svg"
               alt="Emoji"
@@ -250,7 +250,7 @@ const ChatUserMob = () => {
         placement="bottom"
         open={openBottom}
         // onClose={closeDrawerBottom}
-        className="p-4  bg-[#0f002b] rounded-t-3xl"
+        className="p-4  bg-[#0f002b] w-[480px] rounded-t-3xl"
       >
         <div>
           <div className="flex flex-col justify-center items-center gap-6 mt-10 w-full">

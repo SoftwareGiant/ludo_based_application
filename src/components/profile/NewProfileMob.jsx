@@ -18,27 +18,25 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   logoutAsync,
-  selectIsAuthenticated,
   selectRefreshToken,
   selectToken,
 } from "../app_start/authSlice";
+import { fetchUserDetail } from "../live_battle/userSlice";
 
 const NewProfileMob = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const token = useSelector(selectToken);
-  
   const refreshtoken = useSelector(selectRefreshToken);
   
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [scrollPosition, setScrollPosition] = useState(0);
-  const user = useSelector(selectUser);
-  console.log("user",user);
+  const users = useSelector((state) => state.user.user);
+ console.log("user",users);
   console.log("token",token);
   useEffect(() => {
-    dispatch(fetchUserDetail(token));
-  }, [dispatch]);
+    dispatch(fetchUserDetail());
+  }, []);
   useEffect(() => {
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
@@ -169,11 +167,11 @@ const NewProfileMob = () => {
             <div className="flex flex-col justify-between gap-6 w-5/6 items-start ">
               <div className="flex flex-row justify-between ml-4 w-full items-start">
                 <div className="text-sm  mt-px">Phone no. :</div>
-                <span>123456789</span>
+                <span>{users?.mobileNo}</span>
               </div>
               <div className="flex flex-row justify-between ml-4 w-full items-start">
                 <div className="text-sm mt-px">User Id :</div>
-                <span>123456789</span>
+                <span>{users?._id}</span>
               </div>
             </div>
 
