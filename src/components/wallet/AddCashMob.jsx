@@ -1,52 +1,92 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import scanner from "../../assets/new_game/scanner.svg";
 import { useState } from "react";
-import ButtonLoader from "../MainLayout/ButtonLoader.jsx"
+import ButtonLoader from "../MainLayout/ButtonLoader.jsx";
 import "../../app.css";
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserDetail } from "../live_battle/userSlice.js";
+import { Icon } from "@iconify-icon/react";
+import axios from "axios";
 const AddCashMob = () => {
-  const [isScanner,setIsScanner] = useState(false);
-    const [inputValue, setInputValue] = useState('');
-    const[isbtnLoad,setIsButtonLoad] = useState(false);
-
-    const fileInputRef = useRef(null);
+  const [isScanner, setIsScanner] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [isbtnLoad, setIsButtonLoad] = useState(false);
+  const users = useSelector((state) => state.user.user);
+  const { accessToken, refreshToken } = useSelector((state) => state.auth);
+  console.log(accessToken, refreshToken);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchUserDetail());
+  }, []);
+  console.log(users);
+  const fileInputRef = useRef(null);
 
   const handleFileUpload = () => {
     fileInputRef.current.click();
-   
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
-    if (file) {
-      setIsButtonLoad(false);
-      console.log('Uploaded file:', file);
-      alert("balance will update soon")
+    console.log(file);
+    if (file && inputValue) {
+      try {
+        console.log(file,inputValue);
+        const formData = {
+          "amount": inputValue,
+          "paymentPlatform": "Paytm",
+          "image": file
+        }
+        // console.log(formData);
+      const response = await axios.post(
+        "api/payment/deposit",
+        formData, 
+        {
+          headers: {
+            Authorization: `bearer ${accessToken}`,
+          },
+        }
+      );
+      alert(response.data.message)
+      if(response.status===200){
+        setIsButtonLoad(false);
+        setIsScanner(false);
+        setInputValue("");
+      }
+      console.log(response);
+      }
+      catch (error) {
+        console.error(error);
+      }
+    }
+    else{
+      alert("failed to upload file");
     }
   };
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
-  };                 
+  };
 
   const handleClick = () => {
-    setIsScanner(true);
-    setIsButtonLoad(true)
+    if (inputValue === "") {
+      alert("please select amount");
+      return;
+    }
+    
     // Replace this with your desired action on button click
-    if(inputValue===""){
-        alert("please select amount")
-    return;
+    
+    if (inputValue < 10 || inputValue > 10000) {
+      alert("please select amount between 10 and 10,000");
+      return;
     }
-    if(inputValue<10 || inputValue>2000){
-        alert("please select amount between 10 and 2000")
-        return;
-    }
-    console.log('Button clicked!', inputValue);
-  
-    setInputValue("")
+    setIsScanner(true);
+    setIsButtonLoad(true);
+    console.log("Button clicked!", inputValue);
+
+    // setInputValue("");
   };
 
   const navigate = useNavigate();
@@ -70,7 +110,7 @@ const AddCashMob = () => {
           </div>
         </div>
         <img
-         onClick={() => navigate("/")}
+          onClick={() => navigate("/")}
           src={FrameProfile}
           alt="Frame1"
           className="mt-1 w-8 h-8 border rounded-[100px]"
@@ -78,12 +118,10 @@ const AddCashMob = () => {
       </div>
       <div className="flex justify-between items-center px-4 py-2 w-full">
         <div className="flex gap-5 items-center">
-          <img
+          <Icon
+            icon="ep:back"
+            width="24"
             onClick={() => navigate("/mywallet")}
-            src="https://file.rendit.io/n/Bh3TjQUvsgxuYLevIVW7.svg"
-            alt="HardwareKeyboardBackspace icon"
-            id="Epback"
-            className="w-6"
           />
           <div
             id="LiveBattle13"
@@ -106,56 +144,86 @@ const AddCashMob = () => {
         <div className="relative m-8 flex flex-col gap-4">
           <div className="flex justify-between ">
             <span>Available Balance</span>
-            <span>₹ 501</span>
+            <span>₹ {users?.walletDetails?.totalAmount}</span>
           </div>
           <div className="flex justify-between items-center rounded-md bg-white p-3">
             <div className="flex w-full">
               <span>₹</span>
               <input
-              value={inputValue} onChange={handleChange} 
+                value={inputValue}
+                onChange={handleChange}
                 type="text"
                 placeholder="Enter Amount"
                 className="outline-none hover:outline-none w-full px-2"
               />
             </div>
-            <div className="bg-[0F002B] opacity-[30%] font-[Nunito-Sans]" onClick={handleClick}>{isbtnLoad ? <ButtonLoader/> : "Add"}</div>
+            <div
+              className="bg-[0F002B] opacity-[30%] font-[Nunito-Sans]"
+              onClick={handleClick}
+            >
+              {isbtnLoad ? <ButtonLoader /> : "Add"}
+            </div>
           </div>
-          <div className="text-white text-right">Min. ₹ 10  Max. ₹ 10,000</div>
-        
-        {isScanner ? 
-        <div className="flex justify-center flex-col items-center">
-         <img src={scanner}/>
+          <div className="text-white text-right">Min. ₹ 10 Max. ₹ 10,000</div>
 
-         <div className="container mx-auto mt-10 flex items-center justify-center">
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept="image/*"
-        className="hidden"
-        onChange={handleFileChange}
-      />
-      <button
-        className="bg-[#0F002B]  text-white font-bold py-2 px-10 rounded-lg"
-        onClick={handleFileUpload}
-      >
-        Upload Image
-      </button>
-    </div>
-        </div>
-        : 
-        <div className="text-white flex font-[Inter] gap-4 flex-wrap ">
-        <div onClick={()=>setInputValue(100)} className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md">₹ 100</div>
-        <div onClick={()=>setInputValue(200)} className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md">₹ 250</div>
-        <div onClick={()=>setInputValue(500)} className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md">₹ 500</div>
-        <div onClick={()=>setInputValue(1000)} className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md">₹ 1000</div>
-        <div onClick={()=>setInputValue(2000)} className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md">₹ 2000</div>
-      </div>
-        }
-          
+          {isScanner ? (
+            <div className="flex justify-center flex-col items-center">
+              <img src={scanner} />
 
-          
+              <div className="container mx-auto mt-10 flex items-center justify-center">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+                <button
+                  className="bg-[#0F002B]  text-white font-bold py-2 px-10 rounded-lg"
+                  onClick={handleFileUpload}
+                >
+                  Upload Image
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="text-white flex font-[Inter] gap-4 flex-wrap ">
+              <div
+                onClick={() => setInputValue(100)}
+                className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md"
+              >
+                ₹ 100
+              </div>
+              <div
+                onClick={() => setInputValue(200)}
+                className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md"
+              >
+                ₹ 250
+              </div>
+              <div
+                onClick={() => setInputValue(500)}
+                className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md"
+              >
+                ₹ 500
+              </div>
+              <div
+                onClick={() => setInputValue(1000)}
+                className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md"
+              >
+                ₹ 1000
+              </div>
+              <div
+                onClick={() => setInputValue(2000)}
+                className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md"
+              >
+                ₹ 2000
+              </div>
+            </div>
+          )}
         </div>
-        <div className="font-[Nunito-Sans] text-white relative text-center pb-32">*Minimum Deposit Amount ₹ 10</div>
+        <div className="font-[Nunito-Sans] text-white relative text-center pb-32">
+          *Minimum Deposit Amount ₹ 10
+        </div>
       </div>
     </div>
   );

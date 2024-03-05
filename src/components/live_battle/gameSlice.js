@@ -9,7 +9,7 @@ const initialState = {
 
 export const updateGameCode = createAsyncThunk(
     'game/updategamecode',
-    async (gameCode, setOpenBottom) => {
+    async (gameCode) => {
         const obj = { "gameCode": gameCode }
         console.log(gameCode)
         const accessToken = localStorage.getItem('accessToken');
@@ -21,7 +21,6 @@ export const updateGameCode = createAsyncThunk(
             });
             console.log(response)
             if (response.status === 200) {
-                setOpenBottom(false);
                 return response.data.gameDetail;
             }
             else {

@@ -10,7 +10,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import MyButton from "../MainLayout/MyButton";
 import ButtonLoader from "../MainLayout/ButtonLoader";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAsync, selectIsAuthenticated, selectToken } from "./authSlice";
+import { loginAsync, selectToken } from "./authSlice";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
@@ -55,6 +55,7 @@ const LoginMob = () => {
         };
       })
       .catch((error) => {
+        alert(error.message);
         console.error("Login error:", error);
       });
     // setIsOtp(true);

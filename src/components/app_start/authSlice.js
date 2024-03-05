@@ -12,7 +12,6 @@ const initialState = {
 export const loginAsync = createAsyncThunk(
   'auth/login',
   async (mobileNo, { rejectWithValue }) => {
-    console.log(typeof mobileNo, mobileNo)
     try {
       const response = await axios.post("/api/user/login", { mobileNo: mobileNo });
       // Handle the response data here
@@ -82,7 +81,6 @@ const authSlice = createSlice({
         state.refreshToken = null;
       })
       .addCase(logoutAsync.rejected, (state, action) => {
-        // Handle rejected state
         return;
       })
   },

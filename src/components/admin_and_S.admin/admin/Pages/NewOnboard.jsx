@@ -1,16 +1,10 @@
-import {
-  MagnifyingGlassIcon,
-  ChevronUpDownIcon,
-} from "@heroicons/react/24/outline";
-import React, { useState } from "react";
+import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify-icon/react";
 import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
   Card,
-  CardHeader,
-  Input,
   Typography,
-  Button,
   CardBody,
   MenuList,
   Menu,
@@ -19,78 +13,72 @@ import {
 } from "@material-tailwind/react";
 import Stats from "../Common.jsx/Stats";
 import AdminFooter from "../Common.jsx/AdminFooter";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchAllUsers,
+  selectAllUsers,
+  selectAllUsersStatus,
+} from "../AdminSlice/alluserSlice";
 
 const TABLE_HEAD = ["UID", "Name", "Mobile Number", "Onboarding Date"];
-
-const TABLE_ROWS = [
-  {
-    uid: "1",
-    name: "John Doe",
-    mobno: "7610981931",
-    onboard: "22/12/2014",
-  },
-  {
-    uid: "2",
-    name: "Jane Smith",
-    mobno: "7610981932",
-    onboard: "23/12/2014",
-  },
-  {
-    uid: "3",
-    name: "Alice Johnson",
-    mobno: "7610981933",
-    onboard: "24/12/2014",
-  },
-  {
-    uid: "4",
-    name: "Bob Brown",
-    mobno: "7610981934",
-    onboard: "25/12/2014",
-  },
-  {
-    uid: "5",
-    name: "Eve Williams",
-    mobno: "7610981935",
-    onboard: "26/12/2014",
-  },
-  {
-    uid: "6",
-    name: "Charlie Davis",
-    mobno: "7610981936",
-    onboard: "27/12/2014",
-  },
-  {
-    uid: "7",
-    name: "Grace Wilson",
-    mobno: "7610981937",
-    onboard: "28/12/2014",
-  },
-  {
-    uid: "8",
-    name: "David Martinez",
-    mobno: "7610981938",
-    onboard: "29/12/2014",
-  },
-  {
-    uid: "9",
-    name: "Frank Taylor",
-    mobno: "7610981939",
-    onboard: "30/12/2014",
-  },
-  {
-    uid: "10",
-    name: "Sophie Lee",
-    mobno: "7610981940",
-    onboard: "31/12/2014",
-  },
-];
-
 export function NewOnboard() {
+  const [sortConfig, setSortConfig] = useState({
+    key: null,
+    direction: "ascending",
+  });
+  const [searchQuery, setSearchQuery] = useState("");
   const [isClicked, setIsClicked] = useState(false);
-
+  const dispatch = useDispatch();
+  const users = useSelector(selectAllUsers);
+  const status = useSelector(selectAllUsersStatus);
+  useEffect(() => {
+    dispatch(fetchAllUsers());
+  }, [dispatch]);
+  console.log(users);
   const handleClick = () => {
     setIsClicked(!isClicked);
   };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (status === "failed") {
+    return <div>Error loading users</div>;
+  }
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const sortTable = (key) => {
+    let direction = "ascending";
+    if (sortConfig.key === key && sortConfig.direction === "ascending") {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedUsers = [...users].sort((a, b) => {
+    if (sortConfig.key && sortConfig.direction) {
+      if (sortConfig.direction === "ascending") {
+        return a[sortConfig.key] > b[sortConfig.key] ? 1 : -1;
+      } else {
+        return a[sortConfig.key] < b[sortConfig.key] ? 1 : -1;
+      }
+    }
+    return 0;
+  });
+  const filteredUsers = sortedUsers.filter(
+    (user) =>
+      user._id.includes(searchQuery) || user.mobileNo.includes(searchQuery)
+  );
+
   return (
     <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
@@ -112,8 +100,8 @@ export function NewOnboard() {
         </p>
         <Icon icon="charm:cross" width="12" />
       </div>
-      <Card className="table-auto overflow-scroll h-full w-full py-1 px-4">
-        <CardBody className=" px-0 h-full w-full">
+      <Card className=" w-full py-1 pb-10 px-4">
+        <CardBody className=" px-0 w-full">
           <div className="flex justify-between">
             <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
               New Users
@@ -130,6 +118,8 @@ export function NewOnboard() {
                     isClicked ? "delay-200" : "w-[54px]"
                   } transition-all duration-700 outline-none bg-[#F4F4F4] `}
                   type="text"
+                  value={searchQuery}
+                  onChange={handleSearch}
                 />
                 <Icon icon="material-symbols:search" width="24" />
               </div>
@@ -173,15 +163,20 @@ export function NewOnboard() {
                 {TABLE_HEAD.map((head, index) => (
                   <th
                     key={head}
-                    className="cursor-pointer   p-2 transition-colors  rounded-lg"
+                    className="cursor-pointer p-2 transition-colors rounded-lg"
+                    onClick={() =>
+                      sortTable(
+                        index === 0 ? "_id" : index === 3 ? "createdAt" : ""
+                      )
+                    }
                   >
                     <Typography
                       variant="small"
                       color="blue-gray"
-                      className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]"
+                      className="flex items-center justify-between gap-2 leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]"
                     >
                       {head}{" "}
-                      {(index == 0 || index === 3) && (
+                      {(index === 0 || index === 3) && (
                         <ChevronUpDownIcon
                           strokeWidth={2}
                           className="h-4 w-4"
@@ -193,35 +188,33 @@ export function NewOnboard() {
               </tr>
             </thead>
             <tbody className=" h-full w-full">
-              {TABLE_ROWS.map(({ uid, name, mobno, onboard }, index) => {
-                const isLast = index === TABLE_ROWS.length - 1;
-                const classes = isLast ? "p-4" : "p-4";
+              {filteredUsers?.map(({ _id, mobileNo, createdAt }) => {
                 return (
-                  <tr key={mobno} className="text-[#000000] ">
-                    <td className={classes}>
+                  <tr key={_id} className="text-[#000000] ">
+                    <td className="p-4">
                       <div className="flex items-center gap-3">
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {uid}
+                          {_id}
                         </Typography>
                       </div>
                     </td>
-                    <td className={classes}>
+                    <td className="p-4">
                       <div className="flex flex-col">
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {name}
+                          {mobileNo}
                         </Typography>
                       </div>
                     </td>
-                    <td className={classes}>
+                    <td className="p-4">
                       <div className="w-max">
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {mobno}
+                          {mobileNo}
                         </Typography>
                       </div>
                     </td>
-                    <td className={classes}>
+                    <td className="p-4">
                       <Typography className="font-[Inter] font-medium text-[16px]">
-                        {onboard}
+                        {formatDate(createdAt)}
                       </Typography>
                     </td>
                   </tr>
@@ -231,7 +224,7 @@ export function NewOnboard() {
           </table>
         </CardBody>
       </Card>
-      <AdminFooter/>
+      <AdminFooter />
     </div>
   );
 }

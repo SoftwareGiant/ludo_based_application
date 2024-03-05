@@ -9,10 +9,10 @@ const initialState = {
 export const fetchUserDetail = createAsyncThunk(
     'user/detail',
     async (_,{ rejectWithValue }) => {
-        console.log('Fetching user detail')
+        // console.log('Fetching user detail')
         try {
             const accessToken = localStorage.getItem('accessToken');
-            console.log(accessToken)
+            // console.log(accessToken)
             if (!accessToken) {
                 throw new Error('Token not found');
             }

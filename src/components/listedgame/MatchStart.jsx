@@ -3,7 +3,7 @@ import React from "react";
 const MatchStart = () => {
   return (
     <div>
-      <div id="NotificationspaceRoot" className="bg-[#fead3a] w-full h-8" />
+      <div id="NotificationspaceRoot" className="bg-[#fead3a] w-full h-8 " />
       <div className="bg-[#fead3a] flex flex-row justify-between w-full h-12 items-start pt-2 px-5">
         <div className="flex flex-row gap-3 w-2/5 items-start">
           <img

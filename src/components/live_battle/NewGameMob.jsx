@@ -16,10 +16,10 @@ import ButtonLoader from "../MainLayout/ButtonLoader";
 import axios from "axios";
 import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
-import { selectRefreshToken, selectToken } from "../app_start/authSlice";
 import { fetchAllBattles } from "./battleSlice";
 import { fetchUserDetail } from "./userSlice";
 import { matchUser } from "./matchSlice";
+import { toast } from "react-toastify";
 const socket = io("http://localhost:8003");
 const NewGameMob = () => {
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
@@ -86,19 +86,37 @@ const NewGameMob = () => {
       const seconds = Math.floor(timeDifferenceInSeconds % 60); // Get the remaining seconds
 
       if (seconds < 50 && minutes < 1) {
+        const initialTimerValue = 50 - seconds;
         intervalIds[id] = setInterval(() => {
           setTimers((prevTimers) => {
-            if (prevTimers[id] >= 50 || minutes >= 1) {
-              return { ...prevTimers, [id]: 50 };
+            if (prevTimers[id] <= 0 || minutes >= 1) {
+              clearInterval(intervalIds[id]);
+              return { ...prevTimers, [id]: 0 };
             }
-            return { ...prevTimers, [id]: (prevTimers[id] || 0) + 1 };
+            return {
+              ...prevTimers,
+              [id]: (prevTimers[id] || initialTimerValue) - 1,
+            };
           });
         }, 1000);
-        setTimers((prevTimers) => ({ ...prevTimers, [id]: seconds }));
+        setTimers((prevTimers) => ({ ...prevTimers, [id]: initialTimerValue }));
       } else {
-        setTimers((prevTimers) => ({ ...prevTimers, [id]: 50 }));
+        setTimers((prevTimers) => ({ ...prevTimers, [id]: 0 }));
       }
     });
+    // if (seconds < 50 && minutes < 1) {
+    //   intervalIds[id] = setInterval(() => {
+    //     setTimers((prevTimers) => {
+    //       if (prevTimers[id] >= 50 || minutes >= 1) {
+    //         return { ...prevTimers, [id]: 50 };
+    //       }
+    //       return { ...prevTimers, [id]: (prevTimers[id] || 0) + 1 };
+    //     });
+    //   }, 1000);
+    //   setTimers((prevTimers) => ({ ...prevTimers, [id]: seconds }));
+    // } else {
+    //   setTimers((prevTimers) => ({ ...prevTimers, [id]: 50 }));
+    // }
     return () => {
       Object.values(intervalIds).forEach((intervalId) =>
         clearInterval(intervalId)
@@ -109,51 +127,71 @@ const NewGameMob = () => {
     const previousTimestamp = e.battleTimeStamp;
     const currentTimestamp = Date.now();
     const timeDifference = currentTimestamp - previousTimestamp;
-    const timeDifferenceInSeconds = timeDifference / (1000 * 60);
-    return timeDifferenceInSeconds;
+    const timeDifferenceInSeconds = Math.floor(timeDifference / (1000 * 60));
+    // return timeDifferenceInSeconds;
+    if (timeDifferenceInSeconds === 0) {
+      return "Now";
+    } else if (timeDifferenceInSeconds < 60) {
+      return Math.floor(timeDifferenceInSeconds) + " Minutes ago";
+    } else {
+      const timeDifferenceInHours = timeDifferenceInSeconds / 60;
+      return Math.floor(timeDifferenceInHours) + " Hours ago";
+    }
   };
 
   const handleCreate = async () => {
-    setButtonStatus("loading");
-    if (battleAmount === "") {
-      alert("fill battle amount");
-      setBattleAmount("");
-      setButtonStatus("create");
-      return;
-    }
-    if (battleAmount < 50 || battleAmount > 20000) {
-      alert("Battle amount should be greater than 50 and less than 20,000");
-      setBattleAmount("");
-      setButtonStatus("create");
-      return;
-    }
-    const response = await axios.post(
-      "api/game/newgame",
-      { battleAmount: battleAmount }, // Pass battleAmount in the request body
-      {
-        headers: {
-          Authorization: `bearer ${accessToken}`,
-        },
+    try {
+      setButtonStatus("loading");
+      if (battleAmount === "") {
+        toast.error("Please fill in the battle amount");
+        setBattleAmount("");
+        setButtonStatus("create");
+        return;
       }
-    );
-    console.log(response);
-    const data = response.data;
-    if (data.message === "You don't have sufficient amount!") {
-      // alert(data.message);
+      if (battleAmount < 50 || battleAmount > 20000) {
+        toast.error(
+          "Battle amount should be greater than 50 and less than 20,000"
+        );
+        setBattleAmount("");
+        setButtonStatus("create");
+        return;
+      }
+      const response = await axios.post(
+        "api/game/newgame",
+        { battleAmount: battleAmount },
+        {
+          headers: {
+            Authorization: `bearer ${accessToken}`,
+          },
+        }
+      );
+      const data = response.data;
+      if (data.message === "You don't have sufficient amount!") {
+        toast.error(data.message);
+        setButtonStatus("create");
+        setBattleAmount("");
+      } else {
+        setButtonStatus("success");
+        setBattleAmount("");
+        closeDrawerBottom();
+      }
+      if (response.status === 200) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error("Error occurred while creating game:", error);
+      toast.error("An error occurred. Please try again.");
       setButtonStatus("create");
       setBattleAmount("");
-    } else {
-      setButtonStatus("success");
-      setBattleAmount("");
-      closeDrawerBottom();
     }
-    alert(data.message);
   };
 
   const openmatchDrawerBottom = async (e) => {
-    if(!users) return;
+    if (!users) return;
     if (users?._id === e?.player1) {
-      alert("you have to wait until other user can't join the battle");
+      toast.error("you have to wait until other user can't join the battle");
       return;
     }
 
@@ -162,7 +200,7 @@ const NewGameMob = () => {
       id: e?._id,
       player1: e?.player1,
     };
-    console.log(data)
+    console.log(data);
     if (users?._id !== e._id) {
       setIsRequest(false);
       setOpenMatchBottom(true);
@@ -289,11 +327,31 @@ const NewGameMob = () => {
               </div>
             </div>
             <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between w-full items-center px-4 py-2 rounded-lg">
-              <Icon icon="logos:whatsapp-icon" width="32" />
-              <Icon icon="logos:facebook" width="32" />
-              <Icon icon="ri:twitter-x-fill" width="30" />
-              <Icon icon="solar:copy-linear" width="30" />
-              <Icon icon="mdi:share" width="32" />
+              <Icon
+                className="cursor-pointer hover:scale-110 transition-transform"
+                icon="logos:whatsapp-icon"
+                width="32"
+              />
+              <Icon
+                className="cursor-pointer hover:scale-110 transition-transform"
+                icon="logos:facebook"
+                width="32"
+              />
+              <Icon
+                className="cursor-pointer hover:scale-110 transition-transform"
+                icon="ri:twitter-x-fill"
+                width="30"
+              />
+              <Icon
+                className="cursor-pointer hover:scale-110 transition-transform"
+                icon="solar:copy-linear"
+                width="30"
+              />
+              <Icon
+                className="cursor-pointer hover:scale-110 transition-transform"
+                icon="mdi:share"
+                width="32"
+              />
             </div>
             <div className="flex items-center justify-center w-full m-auto">
               <img
@@ -362,8 +420,9 @@ const NewGameMob = () => {
                     </div>
                   </div>
                 ))} */}
-              {battles.length > 0 &&
-                battles.map((e) => (
+              {users &&
+                battles?.length > 0 &&
+                battles?.map((e) => (
                   <div
                     key={e._id}
                     className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]"
@@ -380,10 +439,7 @@ const NewGameMob = () => {
                       </div>
                       2
                       <div className="italic font-semibold ">
-                        ·{" "}
-                        {Math.floor(battleCreationTime(e)) == 0
-                          ? "Now"
-                          : `${Math.floor(battleCreationTime(e))} Minutes ago`}
+                        · {battleCreationTime(e)}
                       </div>
                     </div>
                     <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
@@ -404,7 +460,7 @@ const NewGameMob = () => {
                       ) : (
                         <div
                           onClick={() => openmatchDrawerBottom(e)}
-                          className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]"
+                          className="cursor-pointer flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]"
                         >
                           <img
                             src={LiveBattles}

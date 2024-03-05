@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const initialState = {
   match: null,
@@ -19,19 +20,19 @@ export const matchUser = createAsyncThunk(
         },
       });
       console.log(response)
-      if (response.status === 204) {
-        alert("Failed");
-        setIsRequest("failed");
-        closematchDrawerBottom();
-        return null;
-      }
       if (response.status === 200) {
         console.log(response)
         setIsRequest(true);
         return response.data;
       }
+      else {
+        toast.error("Failed");
+        setIsRequest("failed");
+        closematchDrawerBottom();
+        return null;
+      }
     } catch (error) {
-      alert(error)
+      toast.error(error)
       throw new Error('Failed to match user');
     }
   }

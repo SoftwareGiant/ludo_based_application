@@ -9,10 +9,8 @@ import {
   Popover,
   PopoverHandler,
   PopoverContent,
-  Avatar,
   Button,
   Typography,
-  List,
   ListItem,
   ListItemPrefix,
   Drawer,
@@ -56,16 +54,23 @@ const ChatUserMob = () => {
   // const openDrawerBottom = () => {
   //   setOpenBottom(true);
   // };
-  const closeDrawerBottom = (event) =>{
+  const closeDrawerBottom = (event) => {
     event.preventDefault();
-    if(inputValue==="") {
-      alert("Please enter code")
-      return
+    if (inputValue === "") {
+      alert("Please enter code");
+      return;
     }
-    dispatch(updateGameCode( inputValue, setOpenBottom ));
-
-    console.log('Form submitted with value:', inputValue);
-  } 
+    // dispatch(updateGameCode(inputValue, setOpenBottom));
+    dispatch(updateGameCode(inputValue)).then((result) => {
+      if (result) {
+        setOpenBottom(false);
+      }
+      else{
+        alert("please try again after some time")
+      }
+    });
+    console.log("Form submitted with value:", inputValue);
+  };
 
   const handleSendMessage = () => {
     const times = new Date().toLocaleTimeString();
@@ -98,12 +103,11 @@ const ChatUserMob = () => {
     navigate("/matchstart");
   };
 
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
   };
-
 
   return (
     <div className="min-h-screen w-full max-w-[480px] h-full  bg-[#0f002b] overflow-hidden relative">
@@ -117,7 +121,7 @@ const ChatUserMob = () => {
         <div className="fixed z-10 flex justify-between p-4  items-center mt-3 bg-[#fead3a] max-w-[480px] w-full pt-20 ">
           <div className="flex justify-center gap-2 items-center">
             <img
-            onClick={()=>navigate("/userprofile")}
+              onClick={() => navigate("/userprofile")}
               src={FrameProfile}
               className="w-[30px] h-[30px] rounded-[100px] border border-solid border-white "
             />
@@ -260,22 +264,25 @@ const ChatUserMob = () => {
             >
               Enter Ludo King Code
             </Typography>
-            <form className="flex flex-col gap-4 w-full items-center" onSubmit={closeDrawerBottom}>
-            <input
-            value={inputValue}
-            onChange={handleChange}
-              type="text"
-              placeholder="LK8634798"
-              className="p-4 rounded-md outline-none border-gray-400 border bg-[#0f002b] text-gray-400 font-bold w-[90%]"
-            />
-            <Button
-            type="submit"
-              // onClick={closeDrawerBottom}
-              className="text-[#0f002b] bg-white text-lg font-extrabold    rounded-md bold w-[90%]"
+            <form
+              className="flex flex-col gap-4 w-full items-center"
+              onSubmit={closeDrawerBottom}
             >
-              Start
-            </Button>
-            </form> 
+              <input
+                value={inputValue}
+                onChange={handleChange}
+                type="text"
+                placeholder="LK8634798"
+                className="p-4 rounded-md outline-none border-gray-400 border bg-[#0f002b] text-gray-400 font-bold w-[90%]"
+              />
+              <Button
+                type="submit"
+                // onClick={closeDrawerBottom}
+                className="text-[#0f002b] bg-white text-lg font-extrabold    rounded-md bold w-[90%]"
+              >
+                Start
+              </Button>
+            </form>
           </div>
         </div>
       </Drawer>

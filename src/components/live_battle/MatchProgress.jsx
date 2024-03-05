@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { SidebarMob } from "../MainLayout/SidebarMob";
-import FrameProfile from "../../assets/profile/Frame_profile.png";
-import LiveBattles from "../../assets/new_game/livebattle.svg";
-import cross from "../../assets/new_game/cross.svg";
-import lock from "../../assets/new_game/lock.svg";
 import image from "../../assets/new_game/image.svg";
 import video from "../../assets/new_game/video.svg";
+import { Icon } from "@iconify-icon/react";
 import { useNavigate } from "react-router-dom";
 import TopbarMobile from "../MainLayout/TopbarMobile";
 import {
@@ -14,18 +10,78 @@ import {
   IconButton,
   Typography,
 } from "@material-tailwind/react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 const MatchProgress = () => {
   const navigate = useNavigate();
   const [isStarted, setIsStarted] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
   const [openBottom, setOpenBottom] = useState(false);
   const [gameStatus, setGameStatus] = useState("");
+  const [screenshot, setScreenshot] = useState("");
+  const { accessToken } = useSelector((state) => state.auth);
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0]; // Get the first file selected by the user
+    setScreenshot(file);
+    if (file) {
+      toast.success("image uploaded successfully");
+      setOpenBottom(false);
+    }
+  };
   const openDrawerBottom = () => {
     setOpenBottom(true);
   };
+  const handleResult = async (result) => {
+    try {
+      if (gameStatus === "won" || gameStatus === "loss") {
+        return;
+      }
+      if (result === "loss") {
+        const obj = { outcome: "lose" };
+        const response = await axios.post("api/game/updateresult", obj, {
+          headers: {
+            Authorization: `bearer ${accessToken}`,
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        const data = response.data;
+        if (response.status === 200) {
+          toast.success(data.message);
+          setGameStatus(result);
+        } else {
+          toast.error(data?.message);
+        }
+      } else {
+        if (!screenshot) {
+          toast.error("please upload a image");
+          return;
+        }
+        const obj = { outcome: "win", image: screenshot };
+        console.log(obj);
+        const response = await axios.post("api/game/updateresult", obj, {
+          headers: {
+            Authorization: `bearer ${accessToken}`,
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        const data = response.data;
+        if (response.status === 200) {
+          toast.success(data.message);
+          setGameStatus(result);
+        } else {
+          toast.error(data?.message);
+        }
+      }
+    } catch (error) {
+      if (error?.response?.data?.message)
+        toast.error(error.response.data.message);
+      else toast.error("An error occurred. Please try again.");
+    }
+  };
   const closeDrawerBottom = () => setOpenBottom(false);
   return (
-    <div className="min-h-screen h-full  bg-white">
+    <div className="h-screen w-full max-w-[480px] bg-white">
       <TopbarMobile />
       <div className=" flex flex-col w-full pt-20">
         <div className="flex justify-between items-center px-4 py-2 w-full">
@@ -35,7 +91,7 @@ const MatchProgress = () => {
               src="https://file.rendit.io/n/Bh3TjQUvsgxuYLevIVW7.svg"
               alt="HardwareKeyboardBackspace icon"
               id="Epback"
-              className="w-6"
+              className="w-6 cursor-pointer"
             />
             <div
               id="LiveBattle13"
@@ -48,7 +104,7 @@ const MatchProgress = () => {
             src="https://file.rendit.io/n/ib8IMr1PTiCuwTfVAXZs.svg"
             alt="ActionInfoOutline icon"
             id="Icoutlineinfo"
-            className="w-6"
+            className="w-6 cursor-pointer"
           />
         </div>
 
@@ -57,7 +113,8 @@ const MatchProgress = () => {
             {isStarted ? (
               <button className="p-2 flex items-center justify-center gap-2 text-white bg-[#0F002B] rounded-md font-bold">
                 <span> Match in Progress </span>
-                <img src={lock} />
+
+                <Icon icon="material-symbols:lock" width="21" />
               </button>
             ) : (
               <button
@@ -81,7 +138,7 @@ const MatchProgress = () => {
           </div>
           <hr className="bg-gray-900" />
         </div>
-        {isStarted ? (
+        {isStarted && (
           <div>
             <div className="flex flex-col  w-full gap-4 p-8 ">
               {isEnd ? (
@@ -107,42 +164,41 @@ const MatchProgress = () => {
             </div>
             <hr className="bg-gray-900" />
           </div>
-        ) : (
-          ""
         )}
-        {isEnd ? (
+        {isEnd && (
           <div className="w-full p-6 flex gap-2 justify-center items-center">
             <IconButton
+              onClick={() => setIsEnd(false)}
               className={`${
-                gameStatus === "won" || gameStatus === "lost" ? "hidden" : ""
-              } w-full`}
+                gameStatus === "won" || gameStatus === "loss" ? "hidden" : ""
+              } w-full `}
               variant="text"
             >
-              <img src={cross} />
+              <Icon icon="gridicons:cross" width="26" />
             </IconButton>
             <Button
-              onClick={() => setGameStatus("won")}
-              className={`${gameStatus === "lost" ? "hidden" : ""} w-full`}
+              onClick={() => handleResult("loss")}
+              // onClick={() => setGameStatus("won")}
+              className={`${gameStatus === "won" ? "hidden" : ""} w-full`}
               color="red"
             >
               Lost
             </Button>
             <Button
-              onClick={() => setGameStatus("lost")}
+              onClick={() => handleResult("won")}
+              // onClick={() => setGameStatus("lost")}
               color="green"
-              className={`${gameStatus === "won" ? "hidden" : ""} w-full`}
+              className={`${gameStatus === "loss" ? "hidden" : ""} w-full`}
             >
               won
             </Button>
           </div>
-        ) : (
-          ""
         )}
         <Drawer
           placement="bottom"
           open={openBottom}
           onClose={closeDrawerBottom}
-          className="p-4  bg-[#0f002b] rounded-t-3xl"
+          className="p-4 w-[480px] bg-[#0f002b] rounded-t-3xl"
         >
           <div className="flex w-full justify-center items-end gap-4 pt-10">
             <label
@@ -159,7 +215,7 @@ const MatchProgress = () => {
               id="image-upload"
               type="file"
               className="hidden"
-              // onChange={handleImageUpload}
+              onChange={handleImageUpload}
             />
             <label
               htmlFor="video-upload"
@@ -175,7 +231,7 @@ const MatchProgress = () => {
               accept="video/*"
               id="video-upload"
               type="file"
-              // onChange={handleVideoUpload}
+              onChange={handleImageUpload}
             />
           </div>
 

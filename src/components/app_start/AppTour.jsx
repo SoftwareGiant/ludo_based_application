@@ -7,14 +7,22 @@ const AppTour = () => {
   return (
     <div
       id="AppStartAppTourRoot"
-      className="min-h-screen h-full flex flex-col w-full "
+      className="h-screen max-w-[480px] flex flex-col w-full "
     >
       <div
         id="NotificationspaceRoot"
         className="bg-[#fead3a]  h-8 overflow-hidden "
       />
-      <div className="flex justify-between p-4 font-[Inter] "><span className="font-extrabold">App Tour</span> <span className="font-bold" onClick={()=>navigate("/")}>Skip</span></div>
-      <div className=" w-full p-4 bg-white  h-full min-h-[592px]">
+      <div className="flex justify-between p-4 font-[Inter] ">
+        <span className="font-extrabold">App Tour</span>{" "}
+        <span
+          className="font-bold cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          Skip
+        </span>
+      </div>
+      <div className=" w-full p-4 bg-white h-full">
         <CarouselDefault />
       </div>
     </div>

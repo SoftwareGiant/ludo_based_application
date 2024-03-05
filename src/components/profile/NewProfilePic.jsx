@@ -29,7 +29,8 @@ const NewProfilePic = () => {
           { image: file }, // Passed image in request body
           {
             headers: {
-              Authorization: `bearer ${accessToken}`,
+              'Content-Type': 'multipart/form-data',
+              Authorization: `bearer ${accessToken}`,          
             },
           }
         );
