@@ -19,6 +19,7 @@ import {
   selectAllUsers,
   selectAllUsersStatus,
 } from "../AdminSlice/alluserSlice";
+import Refreshloader from "../../superadmin/Common/Refreshloader";
 
 const TABLE_HEAD = ["UID", "Name", "Mobile Number", "Onboarding Date"];
 export function NewOnboard() {
@@ -28,15 +29,20 @@ export function NewOnboard() {
   });
   const [searchQuery, setSearchQuery] = useState("");
   const [isClicked, setIsClicked] = useState(false);
+  const [isRefresh, setRefresh] = useState(false);
   const dispatch = useDispatch();
   const users = useSelector(selectAllUsers);
   const status = useSelector(selectAllUsersStatus);
-  useEffect(() => {
+console.log(users)
+  useEffect(() => {  
     dispatch(fetchAllUsers());
   }, [dispatch]);
-  console.log(users);
-  const handleClick = () => {
-    setIsClicked(!isClicked);
+
+  const handleOpen = () => {
+    setIsClicked(true);
+  };
+  const handleClose = () => {
+    setIsClicked(false);
   };
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -45,13 +51,14 @@ export function NewOnboard() {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
-  if (status === "loading") {
+  if (status === "loading" && isRefresh===false) {
     return <div>Loading...</div>;
   }
 
-  if (status === "failed") {
+  if (status === "failed" ) {
     return <div>Error loading users</div>;
   }
+  
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
   };
@@ -78,7 +85,17 @@ export function NewOnboard() {
     (user) =>
       user._id.includes(searchQuery) || user.mobileNo.includes(searchQuery)
   );
-
+  const handleRefresh = async () => {
+    setRefresh(true);
+    // dispatch(fetchAllUsers());
+   await dispatch(fetchAllUsers())
+    .then(() => {
+      setRefresh(false);
+    })
+    .catch(() => {
+      setRefresh(false);
+    });
+  };
   return (
     <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
@@ -108,8 +125,8 @@ export function NewOnboard() {
             </span>
             <div className="flex gap-2 font-[Inter] font-medium text-[16px]">
               <div
-                onClick={handleClick}
-                onBlur={handleClick}
+                onClick={handleOpen}
+                onBlur={handleClose}
                 className="bg-[#F4F4F4] justify-between flex items-center p-1 px-2 h-[32px]  border rounded-lg"
               >
                 <input
@@ -125,7 +142,15 @@ export function NewOnboard() {
               </div>
               <div className="w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
                 <span>Refresh</span>{" "}
-                <Icon icon="material-symbols:refresh" width="24" />
+                {isRefresh ? (
+                  <Refreshloader />
+                ) : (
+                  <Icon
+                    onClick={handleRefresh}
+                    icon="material-symbols:refresh"
+                    width="24"
+                  />
+                )}
               </div>
               <Menu>
                 <MenuHandler>

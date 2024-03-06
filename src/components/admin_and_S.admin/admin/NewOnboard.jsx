@@ -21,7 +21,7 @@ const NewOnboard = () => {
   const [notification, setNotification] = useState(false);
   return (
     <>
-      <div className="flex w-full flex-col justify-center items-start rounded-[20px] bg-[#E6E6E6]">
+      <div className="flex h-screen w-full flex-col justify-center items-start rounded-[20px] bg-[#E6E6E6]">
         {/* top bar */}
         <div className="bg-[#e6e6e6] flex flex-row justify-between w-full h-[60px] font-['Inter']">
           <div className="text-center text-xl mt-[18px] h-[24px] ml-[18px] font-normal font-['Inter'] text-black leading-normal ">

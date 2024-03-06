@@ -7,6 +7,7 @@ import gameReducer from "./components/live_battle/gameSlice";
 import userHistoryReducer from "./components/transaction_history/userHistorySlice";
 import gamehistoryReducer from "./components/game_history/gamehistorySlice";
 import alluserReducer from "./components/admin_and_S.admin/admin/AdminSlice/alluserSlice";
+import allkycuserReducer from "./components/admin_and_S.admin/admin/AdminSlice/AllKycSlice";
 
 export const store = configureStore({
     reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
         game: gameReducer,
         userhistory: userHistoryReducer,
         gamehistory:gamehistoryReducer,
-        allUsers:alluserReducer
+        allUsers:alluserReducer,
+        allkyc:allkycuserReducer,
     },
 });

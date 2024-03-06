@@ -1,8 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AdminLogo from "../../../assets/admin_Sadmin/admin/admin.svg";
 import UidLogo from "../../../assets/admin_Sadmin/admin/uid.svg";
 import PasswordLogo from "../../../assets/admin_Sadmin/admin/pswd.svg";
+import { useNavigate } from "react-router-dom";
+import { loginAsync, selectToken } from "../../app_start/authSlice";
+import { useSelector } from "react-redux";
 const Login = () => {
+  const navigate = useNavigate();
+  const [mob, setMob] = useState("");
+  const token = useSelector(selectToken);
+useEffect(()=>{
+  if (token) {
+    navigate("/newonboard");
+  }
+},[])
+  const handleProceed = (event) => {
+    event.preventDefault()
+    dispatch(loginAsync(mob))
+      .unwrap()
+      .then(() => {
+        setMob("");
+        navigate("/newonboard");
+      })
+      .catch((error) => {
+        alert(error.message);
+        console.error("Login error:", error);
+      });
+  };
+console.log("Login success")
   return (
     <>
       <div className="flex w-full h-[100vh] py-[135px] px-[186px] justify-center items-center flex-shrink-0 bg-blue-400 bg-opacity-40 ">
@@ -29,6 +54,8 @@ const Login = () => {
                   className="w-9 h-9"
                 />
                 <input
+                  value={mob}
+                  onChange={(e) => setMob(e.target.value)}
                   type="text"
                   placeholder="ID / Mobile Number"
                   className="font-medium text-black/50 bg-transparent w-[180px] font-['Inter'] text-base  leading-normal"
@@ -48,7 +75,7 @@ const Login = () => {
                 />
               </div>
             </div>
-            <div className="items-center font-medium text-white flex py-3 px-5 gap-4 justify-center w-[104px] h-[43px] border-2 border-solid border-white rounded-[30px] bg-[#8060ff]">
+            <div onClick={handleProceed} className="items-center font-medium text-white flex py-3 px-5 gap-4 justify-center w-[104px] h-[43px] border-2 border-solid border-white rounded-[30px] bg-[#8060ff]">
               Proceed
             </div>
           </div>

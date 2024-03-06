@@ -1,16 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminLogo from "../../../assets/admin_Sadmin/admin/admin.svg";
 import UidLogo from "../../../assets/admin_Sadmin/admin/uid.svg";
 import PasswordLogo from "../../../assets/admin_Sadmin/admin/pswd.svg";
 import logindesign from "../../../assets/admin_Sadmin/admin/adminloginimg.svg";
 import { useNavigate } from "react-router-dom";
+import { loginAsync, selectToken } from "../../app_start/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const SAdminLogin = () => {
   const [isToggled, setIsToggled] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [mob, setMob] = useState("");
+  const token = useSelector(selectToken);
+  useEffect(() => {
+    if (token) {
+      navigate("/newonboard");
+    }
+  }, []);
+  const handleProceed = (event) => {
+    if (!mob) {
+      toast.error("Please enter a mobile number");
+      return;
+    }
+    event.preventDefault();
+    dispatch(loginAsync(mob))
+      .unwrap()
+      .then(() => {
+        setMob("");
+        isToggled ? navigate("/superadmin") : navigate("/newonboard");
+      })
+      .catch((error) => {
+        alert(error.message);
+        console.error("Login error:", error);
+      });
+  };
+  console.log("Login success");
+
   const handleClick = () => {
     setIsToggled(!isToggled);
   };
+
   return (
     <>
       <div
@@ -67,6 +98,8 @@ const SAdminLogin = () => {
                     className="w-9 h-9"
                   />
                   <input
+                    value={mob}
+                    onChange={(e) => setMob(e.target.value)}
                     type="text"
                     placeholder="ID / Mobile Number"
                     className="font-medium outline-none text-black/50 bg-transparent w-[180px] font-['Inter'] text-base  leading-normal"
@@ -87,11 +120,12 @@ const SAdminLogin = () => {
                 </div>
               </div>
               <div
-                onClick={() => {
-                  isToggled
-                    ? navigate("/superadmin")
-                    : navigate("/newonboard");
-                }}
+                onClick={handleProceed}
+                // onClick={() => {
+                //   isToggled
+                //     ? navigate("/superadmin")
+                //     : navigate("/newonboard");
+                // }}
                 className={`cursor-pointer items-center font-medium text-white flex py-3 px-5 gap-4 justify-center w-[104px] h-[43px] border-2 border-solid border-white rounded-[30px]  ${
                   isToggled ? "bg-[#28BD75]" : "bg-[#6079FF]"
                 }`}

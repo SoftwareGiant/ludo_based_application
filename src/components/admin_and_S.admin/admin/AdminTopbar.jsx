@@ -25,14 +25,23 @@ import Setting from "../../../assets/admin_Sadmin/admin/settings.svg";
 import Stats from "../../../assets/admin_Sadmin/admin/stats.svg";
 import ButtonLoader from "../../MainLayout/ButtonLoader";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  logoutAsync,
+  selectRefreshToken,
+  selectToken,
+} from "../../app_start/authSlice";
 
 const AdminTopbar = () => {
-  <Icon
-    onClick={() => navigate("/adminlogin")}
-    icon="material-symbols:logout"
-    width="24"
-  />;
+  const dispatch = useDispatch();
+  const token = useSelector(selectToken);
+  const refreshtoken = useSelector(selectRefreshToken);
+
   const navigate = useNavigate();
+  const handleLogout = () => {
+    console.log("logout");
+    dispatch(logoutAsync({ token, refreshtoken }));
+  };
   return (
     <div className="flex font-[Inter] p-2 items-center justify-between ">
       <p className="text-[20px]">Admin Control Panel</p>
@@ -48,7 +57,11 @@ const AdminTopbar = () => {
         <div className="flex justify-between w-[104px] h-[24px]">
           <Menu>
             <MenuHandler>
-              <Icon className="cursor-pointer" icon="iconamoon:notification-light" width="24" />
+              <Icon
+                className="cursor-pointer"
+                icon="iconamoon:notification-light"
+                width="24"
+              />
             </MenuHandler>
             <MenuList className="h-20 flex justify-center items-center">
               <ButtonLoader />
@@ -115,7 +128,10 @@ const AdminTopbar = () => {
                   </div>
                 </MenuItem>
                 <MenuItem className="flex items-center gap-2">
-                  <div className="flex items-center gap-[13px]">
+                  <div
+                  
+                    className="flex items-center gap-[13px]"
+                  >
                     <img
                       src={LogOut}
                       alt="Logout"
@@ -131,7 +147,7 @@ const AdminTopbar = () => {
             </Menu>
           </div>
           <Icon
-            onClick={() => navigate("/adminlogin")}
+            onClick={handleLogout}
             icon="material-symbols:logout"
             width="24"
             className="cursor-pointer"

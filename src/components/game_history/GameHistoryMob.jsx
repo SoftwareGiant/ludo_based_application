@@ -8,9 +8,9 @@ import { fetchUserDetail } from "../live_battle/userSlice";
 import { Icon } from "@iconify-icon/react";
 const GameHistoryMob = () => {
   const users = useSelector((state) => state.user.user);
-  const gameHistory = useSelector((state) => state.gamehistory?.gameHistory);
+  const gameHistorys = useSelector((state) => state.gamehistory?.gameHistory);
   console.log(users);
-  console.log(gameHistory);
+  console.log(gameHistorys);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUserDetail());
@@ -55,12 +55,16 @@ const GameHistoryMob = () => {
         />
       </div>
 
-      <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative">
+      <div className="bg-[#fead3a] w-full min-h-screen overflow-hidden relative">
         <div className="bg-[#fead3a] h-[98%] w-[200%] rounded-[50%]   -top-20 absolute -left-[50%]" />
 
-        {gameHistory?.length !== 0 &&
-          gameHistory?.map((game) => (
-            <div className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-4">
+        {gameHistorys &&
+          gameHistorys?.length !== 0 &&
+          gameHistorys?.map((game) => (
+            <div
+              key={game._id}
+              className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-4"
+            >
               <div className="text-white bg-[#0f002b] flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
                 <div className="flex justify-between w-full items-center p-3">
                   <span className=" shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)]">
@@ -72,7 +76,7 @@ const GameHistoryMob = () => {
                     {" "}
                     You
                     <span>
-                      {game?.gameResultDetail.player1.outcome === "lose"
+                      {game?.gameResultDetail?.player1?.outcome === "lose"
                         ? "lost"
                         : "won"}
                     </span>
@@ -82,9 +86,9 @@ const GameHistoryMob = () => {
                         <span>you vs</span>
                         <span>
                           {/* {game?.player2._id}{" "} */}
-                          {game.player2._id.slice(
-                            game.player2._id.length - 6,
-                            game.player2._id.length
+                          {game?.player2._id.slice(
+                            game?.player2._id.length - 6,
+                            game?.player2._id.length
                           )}
                         </span>
                       </span>
@@ -94,9 +98,9 @@ const GameHistoryMob = () => {
                         <span>
                           {" "}
                           {/* {game?.player1._id} */}
-                          {game.player1._id.slice(
-                            game.player1._id.length - 6,
-                            game.player1._id.length
+                          {game?.player1._id.slice(
+                            game?.player1._id.length - 6,
+                            game?.player1._id.length
                           )}
                         </span>
                       </span>
@@ -106,16 +110,16 @@ const GameHistoryMob = () => {
               </div>
               <div
                 className={`border-solid border-t-4  mt-1 w-full  ${
-                  game?.gameResultDetail.player1.outcome === "lose"
+                  game?.gameResultDetail?.player1?.outcome === "lose"
                     ? "border-[#FF0000]"
                     : "border-[#008000]"
                 } `}
               ></div>
               <div className="flex  w-full p-4">
                 <div className="flex text-xl font-['Inter'] font-bold text-[#0f002b] flex-1">
-                  ₹ {game.battleDetails.amount}
+                  ₹ {game?.battleDetails.amount}
                 </div>
-                {game?.gameResultDetail.player1.outcome === "lose" ? (
+                {game?.gameResultDetail?.player1?.outcome === "lose" ? (
                   <div className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex gap-2 items-center p-2 rounded-lg flex-1 max-w-[76px]">
                     <Icon icon="noto:crying-face" />
                     <div className="text-sm font-['Inter'] text-white">

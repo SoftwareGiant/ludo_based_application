@@ -1,16 +1,9 @@
-import {
-  MagnifyingGlassIcon,
-  ChevronUpDownIcon,
-} from "@heroicons/react/24/outline";
-import React, { useState } from "react";
+import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify-icon/react";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
   Card,
-  CardHeader,
-  Input,
   Typography,
-  Button,
   CardBody,
   Menu,
   MenuHandler,
@@ -18,6 +11,19 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 import Stats from "../Common.jsx/Stats";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchAllUsers,
+  selectAllUsers,
+  selectAllUsersStatus,
+} from "../AdminSlice/alluserSlice";
+import {
+  fetchAllKyc,
+  selectAllKycUsersStatus,
+  selectKycUsers,
+} from "../AdminSlice/AllKycSlice";
+import Refreshloader from "../../superadmin/Common/Refreshloader";
+import KycStatusCard from "../Common.jsx/KycStatusCard";
 
 const TABLE_HEAD = [
   "UID",
@@ -25,76 +31,90 @@ const TABLE_HEAD = [
   "Initiation Date",
   "Request Status",
 ];
-
-const TABLE_ROWS = [
-  {
-    uid: "1",
-    mobno: "7610981931",
-    initiatedata: "22/12/2014",
-    status: "Pending",
-  },
-  {
-    uid: "2",
-    mobno: "7610981932",
-    initiatedata: "20/12/2014",
-    status: "Approved",
-  },
-  {
-    uid: "3",
-    mobno: "7610981933",
-    initiatedata: "22/12/2014",
-    status: "Pending",
-  },
-  {
-    uid: "4",
-    mobno: "7610981934",
-    initiatedata: "20/12/2014",
-    status: "Approved",
-  },
-  {
-    uid: "5",
-    mobno: "7610981935",
-    initiatedata: "22/12/2014",
-    status: "Pending",
-  },
-  {
-    uid: "6",
-    mobno: "7610981936",
-    initiatedata: "20/12/2014",
-    status: "Approved",
-  },
-  {
-    uid: "7",
-    mobno: "7610981937",
-    initiatedata: "22/12/2014",
-    status: "Pending",
-  },
-  {
-    uid: "8",
-    mobno: "7610981938",
-    initiatedata: "20/12/2014",
-    status: "Approved",
-  },
-  {
-    uid: "9",
-    mobno: "7610981939",
-    initiatedata: "22/12/2014",
-    status: "Pending",
-  },
-  {
-    uid: "10",
-    mobno: "7610981940",
-    initiatedata: "20/12/2014",
-    status: "Approved",
-  },
-];
-
 export function KycVerification() {
+  const [sortConfig, setSortConfig] = useState({
+    key: null,
+    direction: "ascending",
+  });
+  const [searchQuery, setSearchQuery] = useState("");
   const [isClicked, setIsClicked] = useState(false);
+  const [isRefresh, setRefresh] = useState(false);
+  const dispatch = useDispatch();
 
+  const users = useSelector(selectAllUsers);
+  const status = useSelector(selectAllUsersStatus);
+  console.log(users);
+  useEffect(() => {
+    dispatch(fetchAllUsers());
+  }, [dispatch]);
+  //   const kycusers = useSelector(selectKycUsers);
+  //   const status = useSelector(selectAllKycUsersStatus);
+  //   console.log(kycusers);
+  //   useEffect(() => {
+  //     dispatch(fetchAllKyc());
+  // }, []);
   const handleClick = () => {
     setIsClicked(!isClicked);
   };
+  const handleOpen = () => {
+    setIsClicked(true);
+  };
+  const handleClose = () => {
+    setIsClicked(false);
+  };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+  if (status === "loading" && isRefresh === false) {
+    return <div>Loading...</div>;
+  }
+
+  if (status === "failed") {
+    return <div>Error loading users</div>;
+  }
+
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const sortTable = (key) => {
+    let direction = "ascending";
+    if (sortConfig.key === key && sortConfig.direction === "ascending") {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedUsers = [...users].sort((a, b) => {
+    if (sortConfig.key && sortConfig.direction) {
+      if (sortConfig.direction === "ascending") {
+        return a[sortConfig.key] > b[sortConfig.key] ? 1 : -1;
+      } else {
+        return a[sortConfig.key] < b[sortConfig.key] ? 1 : -1;
+      }
+    }
+    return 0;
+  });
+  const filteredUsers = sortedUsers.filter(
+    (user) =>
+      user._id.includes(searchQuery) || user.mobileNo.includes(searchQuery)
+  );
+  const handleRefresh = async () => {
+    setRefresh(true);
+    await dispatch(fetchAllUsers())
+      .then(() => {
+        setRefresh(false);
+      })
+      .catch(() => {
+        setRefresh(false);
+      });
+  };
+
+  console.log(filteredUsers);
   return (
     <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
@@ -116,14 +136,16 @@ export function KycVerification() {
         </p>
         <Icon icon="charm:cross" width="12" />
       </div>
-      <Card className="table-auto overflow-scroll h-full w-full py-1 px-4">
+      <Card className=" h-full w-full py-1 px-4">
         <CardBody className=" px-0">
           <div className="flex justify-between">
-            <span className="font-[Inter] font-medium text-[16px] text-[#000000]">New Requests</span>
+            <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
+              New Requests
+            </span>
             <div className="flex gap-2 font-[Inter] font-medium text-[16px]">
               <div
-                onClick={handleClick}
-                onBlur={handleClick}
+                onClick={handleOpen}
+                onBlur={handleClose}
                 className="bg-[#F4F4F4] justify-between flex items-center p-1 px-2 h-[32px]  border rounded-lg"
               >
                 <input
@@ -132,12 +154,22 @@ export function KycVerification() {
                     isClicked ? "delay-200" : "w-[54px]"
                   } transition-all duration-700 outline-none bg-[#F4F4F4] `}
                   type="text"
+                  value={searchQuery}
+                  onChange={handleSearch}
                 />
                 <Icon icon="material-symbols:search" width="24" />
               </div>
               <div className="w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
                 <span>Refresh</span>{" "}
-                <Icon icon="material-symbols:refresh" width="24" />
+                {isRefresh ? (
+                  <Refreshloader />
+                ) : (
+                  <Icon
+                    onClick={handleRefresh}
+                    icon="material-symbols:refresh"
+                    width="24"
+                  />
+                )}
               </div>
               <Menu>
                 <MenuHandler>
@@ -176,6 +208,11 @@ export function KycVerification() {
                   <th
                     key={head}
                     className="cursor-pointer   p-2 transition-colors  rounded-lg"
+                    onClick={() =>
+                      sortTable(
+                        index === 0 ? "_id" : index === 2 ? "createdAt" : ""
+                      )
+                    }
                   >
                     <Typography
                       variant="small"
@@ -183,7 +220,7 @@ export function KycVerification() {
                       className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]"
                     >
                       {head}{" "}
-                      {(index == 0 || index === 3) && (
+                      {(index == 0 || index === 2) && (
                         <ChevronUpDownIcon
                           strokeWidth={2}
                           className="h-4 w-4"
@@ -194,47 +231,53 @@ export function KycVerification() {
                 ))}
               </tr>
             </thead>
-            <tbody >
-              {TABLE_ROWS.map(({ uid, mobno, initiatedata, status }, index) => {
-                const isLast = index === TABLE_ROWS.length - 1;
-                const classes = isLast ? "p-4" : "p-4";
-                return (
-                  <tr key={name}>
-                    <td className={classes}>
-                      <div className="flex items-center gap-3">
-                        <Typography className="font-[Inter] font-medium text-[16px]">
-                          {uid}
-                        </Typography>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <div className="flex flex-col">
-                        <Typography className="font-[Inter] font-medium text-[16px]">
-                          {mobno}
-                        </Typography>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <div className="w-max">
-                        <Typography className="font-[Inter] font-medium text-[16px]">
-                          {initiatedata}
-                        </Typography>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <div
-                        className={`rounded-xl flex justify-center items-center w-[87px] h-[19px] ${
-                          status === "Pending" ? "bg-[#00C300]" : "bg-[#FF0000]"
-                        }`}
-                      >
-                        <Typography className="font-[Inter] font-normal text-[10px] text-[#FFFFFF] ">
-                          {status}
-                        </Typography>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
+            <tbody>
+              {filteredUsers.map(
+                ({ _id, mobileNo, createdAt, userKyc, updatedAt }) => {
+                  return (
+                    <tr key={_id}>
+                      <td className="p-4">
+                        <div className="flex items-center gap-3">
+                          <Typography className="font-[Inter] font-medium text-[16px]">
+                            {_id}
+                          </Typography>
+                        </div>
+                      </td>
+                      <td className="p-4">
+                        <div className="flex flex-col">
+                          <Typography className="font-[Inter] font-medium text-[16px]">
+                            {mobileNo}
+                          </Typography>
+                        </div>
+                      </td>
+                      <td className="p-4">
+                        <div className="w-max">
+                          <Typography className="font-[Inter] font-medium text-[16px]">
+                            {formatDate(createdAt)}
+                          </Typography>
+                        </div>
+                      </td>
+                      <td className="p-4">
+                        {/* <div
+                          className={`rounded-xl flex justify-center items-center w-[87px] h-[19px]
+                         ${userKyc.verificationStatus  ? "bg-[#00C300]" : "bg-[#FF0000]"}
+                        `}
+                        >
+                          <Typography className="font-[Inter] font-normal text-[10px] text-[#FFFFFF] ">
+                            {userKyc.verificationStatus ? "success" : "Pending"}
+                          </Typography>
+                        </div> */}
+                        <KycStatusCard
+                          handleRefresh={handleRefresh}
+                          updatedAt={updatedAt}
+                          status={userKyc.verificationStatus}
+                          uid={_id}
+                        />
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
             </tbody>
           </table>
         </CardBody>

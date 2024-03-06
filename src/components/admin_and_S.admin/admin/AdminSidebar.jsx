@@ -20,7 +20,7 @@ const AdminSidebar = () => {
 
   return (
     <div
-      className={`bg-[#FFFFFF] min-h-screen h-100vw  rounded-tr-3xl text-[#0F002B] text-[16px] font-bold font-[Nunito-Sans] overflow-hidden transition-all duration-300 ${
+      className={`bg-[#FFFFFF] min-h-screen h-full  rounded-tr-3xl text-[#0F002B] text-[16px] font-bold font-[Nunito-Sans] overflow-hidden transition-all duration-300 ${
         showFullSidebar ? "w-[225px]  " : "w-[86px]  "
       } `}
     >

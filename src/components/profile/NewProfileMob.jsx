@@ -27,7 +27,7 @@ const NewProfileMob = () => {
   const [isOpen, setIsOpen] = useState(false);
   const token = useSelector(selectToken);
   const refreshtoken = useSelector(selectRefreshToken);
-  
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [scrollPosition, setScrollPosition] = useState(0);

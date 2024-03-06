@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 const initialState = {
@@ -56,7 +57,7 @@ export const logoutAsync = createAsyncThunk(
       localStorage.removeItem('refreshToken');
     }
     catch (error) {
-      alert(error);
+      toast.error(error);
     }
   }
 );
@@ -81,6 +82,8 @@ const authSlice = createSlice({
         state.refreshToken = null;
       })
       .addCase(logoutAsync.rejected, (state, action) => {
+        state.accessToken = accessToken;
+        state.refreshToken = refreshToken;
         return;
       })
   },
