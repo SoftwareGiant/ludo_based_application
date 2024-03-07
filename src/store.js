@@ -8,6 +8,9 @@ import userHistoryReducer from "./components/transaction_history/userHistorySlic
 import gamehistoryReducer from "./components/game_history/gamehistorySlice";
 import alluserReducer from "./components/admin_and_S.admin/admin/AdminSlice/alluserSlice";
 import allkycuserReducer from "./components/admin_and_S.admin/admin/AdminSlice/AllKycSlice";
+import allDepositRequestsReducer from "./components/admin_and_S.admin/admin/AdminSlice/depositeHisory";
+import allWithdrawalRequestsReducer from "./components/admin_and_S.admin/admin/AdminSlice/withdrawlSlice";
+import gameHistoryReducer from "./components/admin_and_S.admin/admin/AdminSlice/gameHistorySlice ";
 
 export const store = configureStore({
     reducer: {
@@ -20,5 +23,8 @@ export const store = configureStore({
         gamehistory:gamehistoryReducer,
         allUsers:alluserReducer,
         allkyc:allkycuserReducer,
+        allDepositRequests:allDepositRequestsReducer,
+        allWithdrawalRequests:allWithdrawalRequestsReducer,
+        gameHistory:gameHistoryReducer,
     },
 });

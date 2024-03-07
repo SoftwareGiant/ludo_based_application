@@ -2,7 +2,7 @@ import {
   MagnifyingGlassIcon,
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify-icon/react";
 import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
@@ -18,6 +18,13 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 import Stats from "../Common.jsx/Stats";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchAllWithdrawalRequests,
+  selectAllWithdrawalRequests,
+  selectAllWithdrawalRequestsStatus,
+} from "../AdminSlice/withdrawlSlice";
+import AdminFooter from "../Common.jsx/AdminFooter";
 
 const TABLE_ROWS = [
   {
@@ -54,12 +61,26 @@ const TABLE_ROWS = [
 
 function Withdraw() {
   const [isClicked, setIsClicked] = useState(false);
+  const dispatch = useDispatch();
+  const withdrawalRequests = useSelector(selectAllWithdrawalRequests);
+  const status = useSelector(selectAllWithdrawalRequestsStatus);
+  console.log(withdrawalRequests);
+  useEffect(() => {
+    dispatch(fetchAllWithdrawalRequests());
+  }, [dispatch]);
 
   const handleClick = () => {
     setIsClicked(!isClicked);
   };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
   return (
-    <div className="font-[Inter] w-full min-h-screen bg-[#ffff] rounded-tl-3xl">
+    <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
         <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
           <span className="underline">Admin Control Panel </span>
@@ -79,7 +100,7 @@ function Withdraw() {
         </p>
         <Icon icon="charm:cross" width="12" />
       </div>
-      <Card className="overflow-scroll h-full w-full py-1 px-4">
+      <Card className="overflow-scroll table-auto h-full w-full py-1 px-4">
         <CardBody className=" px-0">
           <div className="flex justify-between items-center">
             <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
@@ -167,13 +188,13 @@ function Withdraw() {
                     <MenuHandler>
                       <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
                         Transacion Status
-                        <div className="flex justify-center items-center w-[19px] h-[19px] relative ">
+                        {/* <div className="flex justify-center items-center w-[19px] h-[19px] relative ">
                           <div className="bg-[#FEAD3A] w-[6.33px] absolute top-0 right-0 h-[6.33px]  rounded-full"></div>
                           <Icon
                             icon="oi:caret-bottom"
                             className="h-[3.96px] w-[7.92px] -mt-2 -ml-2"
                           />
-                        </div>
+                        </div> */}
                       </Typography>
                     </MenuHandler>
                     <MenuList className="flex flex-col gap-3">
@@ -194,44 +215,42 @@ function Withdraw() {
               </tr>
             </thead>
             <tbody>
-              {TABLE_ROWS.map(({ uid, amount, registered, status }, index) => {
-                const isLast = index === TABLE_ROWS.length - 1;
-                const classes = isLast ? "p-4" : "p-4";
+              {withdrawalRequests?.map((val) => {
                 return (
-                  <tr key={index} className="text-[#000000]">
-                    <td className={classes}>
+                  <tr key={val._id}>
+                    <td className="p-4">
                       <div className="flex items-center gap-3">
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {uid}
+                          {val._id}
                         </Typography>
                       </div>
                     </td>
-                    <td className={classes}>
+                    <td className="p-4">
                       <div className="flex flex-col">
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {amount}
+                          {val.amount}
                         </Typography>
                       </div>
                     </td>
-                    <td className={classes}>
+                    <td className="p-4">
                       <div className="w-max">
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {registered}
+                          {formatDate(val.timestamp)}
                         </Typography>
                       </div>
                     </td>
-                    <td className={classes}>
+                    <td className="p-4">
                       <div
                         className={`rounded-xl flex justify-center items-center w-[87px] h-[19px] ${
-                          status === "Success"
+                          val.status === "success"
                             ? "bg-[#00C300] text-[#FFFFFF] "
-                            : status === "Failed"
+                            : status === "failed"
                             ? "bg-[#FF0000] text-[#FFFFFF] "
                             : "bg-gray-400 text-[#FFFFFF]"
                         }`}
                       >
                         <Typography className="font-[Inter] font-normal text-[10px]  ">
-                          {status}
+                          {val.status}
                         </Typography>
                       </div>
                     </td>
@@ -242,6 +261,7 @@ function Withdraw() {
           </table>
         </CardBody>
       </Card>
+      <AdminFooter />
     </div>
   );
 }

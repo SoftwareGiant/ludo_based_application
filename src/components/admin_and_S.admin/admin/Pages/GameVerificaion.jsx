@@ -2,7 +2,7 @@ import {
   MagnifyingGlassIcon,
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify-icon/react";
 import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
@@ -18,198 +18,86 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 import Stats from "../Common.jsx/Stats";
-
-const TABLE_HEAD = ["GID", "Game Type", "Time Stamp", "Status"];
-
-const TABLE_ROWS = [
-  {
-    uid: "1234",
-    gametype: "Open Challenge",
-    timestamp: "Started 5min ago",
-    status: "Pending",
-  },
-  {
-    uid: "2333",
-    gametype: "Listed Battle",
-    timestamp: "Completed 55sec ago",
-    status: "Approved",
-  },
-  // Add 28 more objects
-  {
-    uid: "3456",
-    gametype: "Open Challenge",
-    timestamp: "Started 10min ago",
-    status: "Pending",
-  },
-  {
-    uid: "4567",
-    gametype: "Listed Battle",
-    timestamp: "Completed 2min ago",
-    status: "Approved",
-  },
-  {
-    uid: "5678",
-    gametype: "Open Challenge",
-    timestamp: "Started 15min ago",
-    status: "Pending",
-  },
-  {
-    uid: "6789",
-    gametype: "Listed Battle",
-    timestamp: "Completed 3min ago",
-    status: "Approved",
-  },
-  {
-    uid: "7890",
-    gametype: "Open Challenge",
-    timestamp: "Started 20min ago",
-    status: "Pending",
-  },
-  {
-    uid: "8901",
-    gametype: "Listed Battle",
-    timestamp: "Completed 4min ago",
-    status: "Approved",
-  },
-  {
-    uid: "9012",
-    gametype: "Open Challenge",
-    timestamp: "Started 25min ago",
-    status: "Pending",
-  },
-  {
-    uid: "0123",
-    gametype: "Listed Battle",
-    timestamp: "Completed 5min ago",
-    status: "Approved",
-  },
-  {
-    uid: "2345",
-    gametype: "Open Challenge",
-    timestamp: "Started 30min ago",
-    status: "Pending",
-  },
-  {
-    uid: "3456",
-    gametype: "Listed Battle",
-    timestamp: "Completed 6min ago",
-    status: "Approved",
-  },
-  {
-    uid: "4567",
-    gametype: "Open Challenge",
-    timestamp: "Started 35min ago",
-    status: "Pending",
-  },
-  {
-    uid: "5678",
-    gametype: "Listed Battle",
-    timestamp: "Completed 7min ago",
-    status: "Approved",
-  },
-  {
-    uid: "6789",
-    gametype: "Open Challenge",
-    timestamp: "Started 40min ago",
-    status: "Pending",
-  },
-  {
-    uid: "7890",
-    gametype: "Listed Battle",
-    timestamp: "Completed 8min ago",
-    status: "Approved",
-  },
-  {
-    uid: "8901",
-    gametype: "Open Challenge",
-    timestamp: "Started 45min ago",
-    status: "Pending",
-  },
-  {
-    uid: "9012",
-    gametype: "Listed Battle",
-    timestamp: "Completed 9min ago",
-    status: "Approved",
-  },
-  {
-    uid: "0123",
-    gametype: "Open Challenge",
-    timestamp: "Started 50min ago",
-    status: "Pending",
-  },
-  {
-    uid: "2345",
-    gametype: "Listed Battle",
-    timestamp: "Completed 10min ago",
-    status: "Approved",
-  },
-  {
-    uid: "3456",
-    gametype: "Open Challenge",
-    timestamp: "Started 55min ago",
-    status: "Pending",
-  },
-  {
-    uid: "4567",
-    gametype: "Listed Battle",
-    timestamp: "Completed 11min ago",
-    status: "Approved",
-  },
-  {
-    uid: "5678",
-    gametype: "Open Challenge",
-    timestamp: "Started 60min ago",
-    status: "Pending",
-  },
-  {
-    uid: "6789",
-    gametype: "Listed Battle",
-    timestamp: "Completed 12min ago",
-    status: "Approved",
-  },
-  {
-    uid: "7890",
-    gametype: "Open Challenge",
-    timestamp: "Started 65min ago",
-    status: "Pending",
-  },
-  {
-    uid: "8901",
-    gametype: "Listed Battle",
-    timestamp: "Completed 13min ago",
-    status: "Approved",
-  },
-  {
-    uid: "9012",
-    gametype: "Open Challenge",
-    timestamp: "Started 70min ago",
-    status: "Pending",
-  },
-  {
-    uid: "0123",
-    gametype: "Listed Battle",
-    timestamp: "Completed 14min ago",
-    status: "Approved",
-  },
-  {
-    uid: "2345",
-    gametype: "Open Challenge",
-    timestamp: "Started 75min ago",
-    status: "Pending",
-  },
-  {
-    uid: "3456",
-    gametype: "Listed Battle",
-    timestamp: "Completed 15min ago",
-    status: "Approved",
-  },
-];
+import {
+  fetchAllGameHistory,
+  selectAllGameHistory,
+  selectAllGameHistoryStatus,
+} from "../AdminSlice/gameHistorySlice ";
+import { useDispatch, useSelector } from "react-redux";
+import AdminFooter from "../Common.jsx/AdminFooter";
+import Refreshloader from "../../superadmin/Common/Refreshloader";
+import GameStatusCard from "../Common.jsx/gameStatusCard";
 
 export function GameVerificaion() {
+  const [sortConfig, setSortConfig] = useState({
+    key: null,
+    direction: "ascending",
+  });
+  const [searchQuery, setSearchQuery] = useState("");
   const [isClicked, setIsClicked] = useState(false);
+  const [isRefresh, setRefresh] = useState(false);
+  const dispatch = useDispatch();
+  const gameHistory = useSelector(selectAllGameHistory);
+  const status = useSelector(selectAllGameHistoryStatus);
+  useEffect(() => {
+    dispatch(fetchAllGameHistory());
+  }, [dispatch]);
+  console.log(gameHistory);
+  const handleOpen = () => {
+    setIsClicked(true);
+  };
+  const handleClose = () => {
+    setIsClicked(false);
+  };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+  if (status === "loading" && isRefresh === false) {
+    return <div>Loading...</div>;
+  }
 
-  const handleClick = () => {
-    setIsClicked(!isClicked);
+  if (status === "failed") {
+    return <div>Error loading</div>;
+  }
+
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const sortTable = (key) => {
+    let direction = "ascending";
+    if (sortConfig.key === key && sortConfig.direction === "ascending") {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedGame = [...gameHistory].sort((a, b) => {
+    if (sortConfig.key && sortConfig.direction) {
+      if (sortConfig.direction === "ascending") {
+        return a[sortConfig.key] > b[sortConfig.key] ? 1 : -1;
+      } else {
+        return a[sortConfig.key] < b[sortConfig.key] ? 1 : -1;
+      }
+    }
+    return 0;
+  });
+  const filteredGame = sortedGame?.filter((user) =>
+    user._id.includes(searchQuery)
+  );
+  const handleRefresh = async () => {
+    setRefresh(true);
+    await dispatch(fetchAllGameHistory())
+      .then(() => {
+        setRefresh(false);
+      })
+      .catch(() => {
+        setRefresh(false);
+      });
   };
   return (
     <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
@@ -232,16 +120,16 @@ export function GameVerificaion() {
         </p>
         <Icon icon="charm:cross" width="12" />
       </div>
-      <Card className="overflow-scroll table-auto h-full w-full py-1 px-4">
-        <CardBody className=" px-0">
+      <Card className=" w-full py-1 pb-10 px-4">
+        <CardBody className=" px-0 w-full">
           <div className="flex justify-between">
             <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
               New games and recent game history
             </span>
             <div className="flex gap-2 font-[Inter] font-medium text-[16px]">
               <div
-                onClick={handleClick}
-                onBlur={handleClick}
+                onClick={handleOpen}
+                onBlur={handleClose}
                 className="bg-[#F4F4F4] justify-between flex items-center p-1 px-2 h-[32px]  border rounded-lg"
               >
                 <input
@@ -250,12 +138,22 @@ export function GameVerificaion() {
                     isClicked ? "delay-200" : "w-[54px]"
                   } transition-all duration-700 outline-none bg-[#F4F4F4] `}
                   type="text"
+                  value={searchQuery}
+                  onChange={handleSearch}
                 />
                 <Icon icon="material-symbols:search" width="24" />
               </div>
               <div className="w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
                 <span>Refresh</span>{" "}
-                <Icon icon="material-symbols:refresh" width="24" />
+                {isRefresh ? (
+                  <Refreshloader />
+                ) : (
+                  <Icon
+                    onClick={handleRefresh}
+                    icon="material-symbols:refresh"
+                    width="24"
+                  />
+                )}
               </div>
               <Menu>
                 <MenuHandler>
@@ -287,69 +185,86 @@ export function GameVerificaion() {
               <Stats />
             </div>
           </div>
-          <table className="mt-4 w-full min-w-max table-auto text-left font-[Inter] font-medium text-[16px]">
+          <table className="mt-4 h-full w-full min-w-max table-auto text-left font-[Inter] font-medium text-[16px]">
             <thead>
               <tr>
-                {TABLE_HEAD.map((head, index) => (
-                  <th
-                    key={head}
-                    className="cursor-pointer   p-2 transition-colors  rounded-lg"
-                  >
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]"
-                    >
-                      {head}{" "}
-                      {(index == 0 || index === 2) && (
-                        <ChevronUpDownIcon
-                          strokeWidth={2}
-                          className="h-4 w-4"
-                        />
-                      )}
-                    </Typography>
-                  </th>
-                ))}
+                <th
+                  onClick={() => sortTable("_id")}
+                  className="cursor-pointer   p-2 transition-colors  rounded-lg"
+                >
+                  <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
+                    GID
+                    <Icon
+                      icon="prime:sort"
+                      strokeWidth={2}
+                      className="h-4 w-4"
+                    />
+                  </Typography>
+                </th>
+                <th className="cursor-pointer   p-2 transition-colors  rounded-lg">
+                  <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
+                    Game Type
+                  </Typography>
+                </th>
+                <th
+                  onClick={() => sortTable("gameactivationTimestamp")}
+                  className="cursor-pointer   p-2 transition-colors  rounded-lg"
+                >
+                  <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
+                    Time Stamp
+                    <Icon
+                      icon="prime:sort"
+                      strokeWidth={2}
+                      className="h-4 w-4"
+                    />
+                  </Typography>
+                </th>
+                <th
+                  onClick={() => sortTable("status")}
+                  className="cursor-pointer   p-2 transition-colors  rounded-lg"
+                >
+                  <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
+                    Status
+                    <Icon
+                      icon="prime:sort"
+                      strokeWidth={2}
+                      className="h-4 w-4"
+                    />
+                  </Typography>
+                </th>
               </tr>
             </thead>
             <tbody>
-              {TABLE_ROWS.map(({ uid, gametype, timestamp, status }, index) => {
-                const isLast = index === TABLE_ROWS.length - 1;
-                const classes = isLast ? "p-4" : "p-4";
+              {filteredGame.map((val) => {
                 return (
-                  <tr key={name}>
-                    <td className={classes}>
+                  <tr key={val._id} className="text-[#000000] ">
+                    <td className="p-4">
                       <div className="flex items-center gap-3">
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {uid}
+                          {val._id}
                         </Typography>
                       </div>
                     </td>
-                    <td className={classes}>
+                    <td className="p-4">
                       <div className="flex flex-col">
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {gametype}
+                          Open Challenge
                         </Typography>
                       </div>
                     </td>
-                    <td className={classes}>
+                    <td className="p-4">
                       <div className="w-max">
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {timestamp}
+                          {formatDate(val.gameactivationTimestamp)}
                         </Typography>
                       </div>
                     </td>
-                    <td className={classes}>
-                      <div
-                        className={`rounded-xl flex justify-center items-center w-[87px] h-[19px] ${
-                          status === "Pending" ? "bg-[#60E560]" : "bg-[#FF7676]"
-                        }`}
-                      >
-                        <Typography className="font-[Inter] font-normal text-[10px] text-[#FFFFFF] ">
-                          {status}
-                        </Typography>
-                      </div>
-                    </td>
+
+                    <GameStatusCard
+                      val={val}
+                      handleRefresh={handleRefresh}
+                      isRefresh={isRefresh}
+                    />
                   </tr>
                 );
               })}
@@ -357,6 +272,7 @@ export function GameVerificaion() {
           </table>
         </CardBody>
       </Card>
+      <AdminFooter />
     </div>
   );
 }

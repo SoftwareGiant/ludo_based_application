@@ -24,6 +24,7 @@ import {
 } from "../AdminSlice/AllKycSlice";
 import Refreshloader from "../../superadmin/Common/Refreshloader";
 import KycStatusCard from "../Common.jsx/KycStatusCard";
+import AdminFooter from "../Common.jsx/AdminFooter";
 
 const TABLE_HEAD = [
   "UID",
@@ -136,7 +137,7 @@ export function KycVerification() {
         </p>
         <Icon icon="charm:cross" width="12" />
       </div>
-      <Card className=" h-full w-full py-1 px-4">
+      <Card className="overflow-scroll table-auto h-full w-full py-1 px-4">
         <CardBody className=" px-0">
           <div className="flex justify-between">
             <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
@@ -282,6 +283,7 @@ export function KycVerification() {
           </table>
         </CardBody>
       </Card>
+      <AdminFooter />
     </div>
   );
 }

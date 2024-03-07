@@ -14,7 +14,7 @@ const Stats = () => {
     <div className="flex gap-3 mb-3">
       <div
         onClick={openModal}
-        className="p-1 w-[88px] h-[32px] bg-[#F4F4F4] flex items-center justify-between border rounded-lg"
+        className="cursor-pointer p-1 w-[88px] h-[32px] bg-[#F4F4F4] flex items-center justify-between border rounded-lg"
       >
         <span>Stats</span>{" "}
         <Icon icon="material-symbols:query-stats" width="24" />

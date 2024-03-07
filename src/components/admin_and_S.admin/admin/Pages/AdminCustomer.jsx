@@ -1,5 +1,5 @@
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify-icon/react";
 import {
   Card,
@@ -22,6 +22,14 @@ import { RiFeedbackFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
 import Stats from "../Common.jsx/Stats";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchAllUsers,
+  selectAllUsers,
+  selectAllUsersStatus,
+} from "../AdminSlice/alluserSlice";
+import Refreshloader from "../../superadmin/Common/Refreshloader";
+import AdminFooter from "../Common.jsx/AdminFooter";
 
 const TABLE_HEAD = ["UID", "Name", "Phone", "Status"];
 
@@ -120,16 +128,34 @@ const user = [
   },
 ];
 export function AdminCustomer() {
+  const [sortConfig, setSortConfig] = useState({
+    key: null,
+    direction: "ascending",
+  });
   const [isClicked, setIsClicked] = useState(false);
-
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
-
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isRefresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   const [messages, setMessages] = useState(user);
   const [inputText, setInputText] = useState("");
   const [image, setImage] = useState(null);
+  const dispatch = useDispatch();
+  const users = useSelector(selectAllUsers);
+  const status = useSelector(selectAllUsersStatus);
+  console.log(users);
+  useEffect(() => {
+    dispatch(fetchAllUsers());
+  }, [dispatch]);
+
+  const handleOpen = () => {
+    setIsClicked(true);
+  };
+  const handleClose = () => {
+    setIsClicked(false);
+  };
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  };
 
   const handleSendMessage = () => {
     const times = new Date().toLocaleTimeString();
@@ -158,9 +184,62 @@ export function AdminCustomer() {
       reader.readAsDataURL(file);
     }
   };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+  if (status === "loading" && isRefresh === false) {
+    return <div>Loading...</div>;
+  }
+
+  if (status === "failed") {
+    return <div>Error loading users</div>;
+  }
+
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const sortTable = (key) => {
+    let direction = "ascending";
+    if (sortConfig.key === key && sortConfig.direction === "ascending") {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedUsers = [...users].sort((a, b) => {
+    if (sortConfig.key && sortConfig.direction) {
+      if (sortConfig.direction === "ascending") {
+        return a[sortConfig.key] > b[sortConfig.key] ? 1 : -1;
+      } else {
+        return a[sortConfig.key] < b[sortConfig.key] ? 1 : -1;
+      }
+    }
+    return 0;
+  });
+  const filteredUsers = sortedUsers.filter(
+    (user) =>
+      user._id.includes(searchQuery) || user.mobileNo.includes(searchQuery)
+  );
+  const handleRefresh = async () => {
+    setRefresh(true);
+    // dispatch(fetchAllUsers());
+    await dispatch(fetchAllUsers())
+      .then(() => {
+        setRefresh(false);
+      })
+      .catch(() => {
+        setRefresh(false);
+      });
+  };
   return (
     <div className="flex w-full gap-2 h-screen">
-      <div className="font-[Inter] main-body-right w-3/5 min-h-screen bg-[#ffff] rounded-t-3xl overflow-y-scroll h-screen">
+      <div className="font-[Inter] main-body-right w-3/5 bg-[#ffff] rounded-t-3xl overflow-y-scroll h-screen">
         <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
           <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
             <span className="underline">Admin Control Panel </span>
@@ -171,25 +250,24 @@ export function AdminCustomer() {
           </div>
           <h3 className="text-[#0F002B] text-lg">
             <span className="underline">C</span>ustomer{" "}
-           
           </h3>
         </div>
         <div className="flex px-3 py-2 items-center justify-between bg-[#EEEEEE]">
           <p className="text-[#000000] font-medium text-xs">
-          Detail : Chat assistant
+            Detail : Chat assistant
           </p>
           <Icon icon="charm:cross" width="12" />
         </div>
-        <Card className="table-auto overflow-scroll h-full w-full py-1 px-4">
-          <CardBody className=" px-0 h-full w-full">
+        <Card className="w-full py-1 pb-10 px-4">
+          <CardBody className=" px-0">
             <div className="flex justify-between">
               <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
-              Customer Care
+                Customer Care
               </span>
               <div className="flex gap-2 font-[Inter] font-medium text-[16px]">
                 <div
-                  onClick={handleClick}
-                  onBlur={handleClick}
+                  onClick={handleOpen}
+                  onBlur={handleClose}
                   className="bg-[#F4F4F4] justify-between flex items-center p-1 px-2 h-[32px]  border rounded-lg"
                 >
                   <input
@@ -198,12 +276,23 @@ export function AdminCustomer() {
                       isClicked ? "delay-200" : "w-[54px]"
                     } transition-all duration-700 outline-none bg-[#F4F4F4] `}
                     type="text"
+                    value={searchQuery}
+                    onChange={handleSearch}
                   />
                   <Icon icon="material-symbols:search" width="24" />
                 </div>
+
                 <div className="w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
                   <span>Refresh</span>{" "}
-                  <Icon icon="material-symbols:refresh" width="24" />
+                  {isRefresh ? (
+                    <Refreshloader />
+                  ) : (
+                    <Icon
+                      onClick={handleRefresh}
+                      icon="material-symbols:refresh"
+                      width="24"
+                    />
+                  )}
                 </div>
                 <Menu>
                   <MenuHandler>
@@ -235,13 +324,14 @@ export function AdminCustomer() {
                 </Menu>
               </div>
             </div>
-            <table className="mt-4 h-full w-full min-w-max table-auto text-left font-[Inter] font-medium text-[16px]">
+            <table className="mt-4 w-full min-w-max table-auto text-left font-[Inter] font-medium text-[16px]">
               <thead>
                 <tr>
                   {TABLE_HEAD.map((head, index) => (
                     <th
                       key={head}
                       className="cursor-pointer   p-2 transition-colors  rounded-lg"
+                      onClick={() => index===0 ? sortTable("_id") : ""}
                     >
                       <Typography
                         variant="small"
@@ -249,7 +339,7 @@ export function AdminCustomer() {
                         className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]"
                       >
                         {head}{" "}
-                        {(index == 0 || index === 3) && (
+                        {index == 0 && (
                           <ChevronUpDownIcon
                             strokeWidth={2}
                             className="h-4 w-4"
@@ -260,37 +350,43 @@ export function AdminCustomer() {
                   ))}
                 </tr>
               </thead>
-              <tbody className=" h-full w-full">
-                {TABLE_ROWS.map(({ uid, name, mobno, onboard }, index) => {
-                  const isLast = index === TABLE_ROWS.length - 1;
-                  const classes = isLast ? "p-4" : "p-4";
+              <tbody className="w-full">
+                {filteredUsers?.map(({ _id, mobileNo, createdAt }) => {
                   return (
-                    <tr key={mobno} className="text-[#000000] ">
-                      <td className={classes}>
+                    <tr key={_id} className="text-[#000000] ">
+                      <td className="p-4">
                         <div className="flex items-center gap-3">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {uid}
+                            {_id}
                           </Typography>
                         </div>
                       </td>
-                      <td className={classes}>
+                      <td className="p-4">
                         <div className="flex flex-col">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {name}
+                            user
                           </Typography>
                         </div>
                       </td>
-                      <td className={classes}>
+                      <td className="p-4">
                         <div className="w-max">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {mobno}
+                            {mobileNo}
                           </Typography>
                         </div>
                       </td>
-                      <td className={classes}>
-                        <Typography className="font-[Inter] font-medium text-[16px]">
-                          {onboard}
-                        </Typography>
+                      <td className="p-4">
+                        <div
+                          className={`rounded-xl flex justify-center items-center w-[87px] h-[19px] ${
+                            !mobileNo
+                              ? "bg-[#0F002B] text-[#FFFFFF] "
+                              : "bg-[#FEAD3A] text-[#FFFFFF] "
+                          }`}
+                        >
+                          <Typography className="font-[Inter] font-normal text-[10px]  ">
+                            pending
+                          </Typography>
+                        </div>
                       </td>
                     </tr>
                   );
@@ -299,6 +395,7 @@ export function AdminCustomer() {
             </table>
           </CardBody>
         </Card>
+        <AdminFooter logohide={true}/>
       </div>
       <div className="w-2/5 relative overflow-scroll main-body-right max-h-screen">
         <div className=" w-full   bg-none overflow-hidden relative">

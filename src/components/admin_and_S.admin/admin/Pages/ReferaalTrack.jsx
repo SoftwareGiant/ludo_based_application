@@ -18,6 +18,8 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 import Stats from "../Common.jsx/Stats";
+import RefferalCard from "../Common.jsx/RefferalCard";
+import AdminFooter from "../Common.jsx/AdminFooter";
 
 const TABLE_ROWS = [
   {
@@ -59,7 +61,7 @@ function ReferaalTrack() {
     setIsClicked(!isClicked);
   };
   return (
-    <div className="font-[Inter] w-full min-h-screen bg-[#ffff] rounded-tl-3xl">
+    <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
         <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
           <span className="underline">Admin Control Panel </span>
@@ -79,8 +81,8 @@ function ReferaalTrack() {
         </p>
         <Icon icon="charm:cross" width="12" />
       </div>
-      <Card className="overflow-scroll h-full w-full py-1 px-4">
-        <CardBody className=" px-0">
+      <Card className=" w-full py-1 pb-10 px-4">
+        <CardBody className=" px-0 w-full">
           <div className="flex justify-between items-center">
             <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
               Referral Details
@@ -134,7 +136,7 @@ function ReferaalTrack() {
               <Stats />
             </div>
           </div>
-          <table className="mt-4 w-full min-w-max table-auto text-left font-[Inter] font-medium text-[16px]">
+          <table className="mt-4 h-full w-full min-w-max table-auto text-left font-[Inter] font-medium text-[16px]">
             <thead>
               <tr>
                 <th className="cursor-pointer   p-2 transition-colors  rounded-lg">
@@ -219,9 +221,10 @@ function ReferaalTrack() {
                       </div>
                     </td>
                     <td className={classes}>
-                      <div className="cursor-pointer w-[81px] rounded-lg flex items-center justify-center h-[19px] bg-[#0F002B] hover:bg-black shadow-xl font-[Inter] text-[10px] text-[#FFFFFF] ">
+                      {/* <div className="cursor-pointer w-[81px] rounded-lg flex items-center justify-center h-[19px] bg-[#0F002B] hover:bg-black shadow-xl font-[Inter] text-[10px] text-[#FFFFFF] ">
                         Details
-                      </div>
+                      </div> */}
+                      <RefferalCard  status={referid} uid={uid} updatedAt={rewardid}/>
                     </td>
                   </tr>
                 );
@@ -230,6 +233,7 @@ function ReferaalTrack() {
           </table>
         </CardBody>
       </Card>
+      <AdminFooter />
     </div>
   );
 }
