@@ -18,6 +18,7 @@ import {
 } from "../AdminSlice/alluserSlice";
 import Refreshloader from "../../superadmin/Common/Refreshloader";
 import AdminFooter from "../Common.jsx/AdminFooter";
+import UserHistoryCard from "../Common.jsx/UserHistoryCard";
 
 export function UserHistory() {
   const [sortConfig, setSortConfig] = useState({
@@ -265,19 +266,8 @@ export function UserHistory() {
                       </div>
                     </td>
                     <td className="p-4">
-                      <div
-                        className={`rounded-xl flex justify-center items-center w-[87px] h-[19px] ${
-                          abanDoned
-                            ? "bg-[#0F002B] text-[#FFFFFF] "
-                            : // : status === "Inactive"
-                              // ? "bg-gray-400 text-[#FFFFFF] "
-                              "bg-gray-200 text-[#000000] "
-                        }`}
-                      >
-                        <Typography className="font-[Inter] font-normal text-[10px]  ">
-                          Active
-                        </Typography>
-                      </div>
+                    <UserHistoryCard status="ACtive" uid="123" updatedAt="123"/>
+                    
                     </td>
                   </tr>
                 );
