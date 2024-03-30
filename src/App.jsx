@@ -95,6 +95,8 @@ import SuperTournaments from "./components/admin_and_S.admin/superadmin/Pages/Su
 import SuperCustomer from "./components/admin_and_S.admin/superadmin/Pages/SuperCustomer.jsx";
 import SuperDeposite from "./components/admin_and_S.admin/superadmin/Pages/SuperDeposite.jsx";
 import SuperWithdrawal from "./components/admin_and_S.admin/superadmin/Pages/SuperWithdrawal.jsx";
+import Chathistory from "./components/Chathistory/Chathistory.jsx";
+import MatchUserChat from "./components/Chathistory/MatchUserChat.jsx";
 
 function App() {
   return (
@@ -112,7 +114,10 @@ function App() {
             <Route path="/" element={<NewGameMob />} />
             <Route path="/livebattle" element={<LiveBattle />} />
             <Route path="/livebattle2" element={<LiveBattle2 />} />
-            <Route path="/requestchallange/:userId" element={<OpenChallengeReq />} />
+            <Route
+              path="/requestchallange/:userId"
+              element={<OpenChallengeReq />}
+            />
             <Route path="/chat" element={<ChatUserMob />} />
             <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/userprofile2" element={<UserProfile2 />} />
@@ -141,6 +146,9 @@ function App() {
             <Route path="/refer&earn" element={<ReferrEarnMob />} />
             <Route path="/notification" element={<Notification />} />
             <Route path="/support" element={<SupportMob />} />
+            <Route path="/chathistory" element={<Chathistory />} />
+            <Route path="/matchUserChat" element={<MatchUserChat />} />
+            
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />

@@ -13,7 +13,7 @@ import Favorite from "../../assets/new_game/fav.svg";
 import BellIcon from "../../assets/new_game/notification.svg";
 import kyc from "../../assets/new_game/KYC.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";
-import { Switch } from "@material-tailwind/react";
+import { Drawer, Switch, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -22,18 +22,26 @@ import {
   selectToken,
 } from "../app_start/authSlice";
 import { fetchUserDetail } from "../live_battle/userSlice";
+import { Icon } from "@iconify-icon/react";
 
 const NewProfileMob = () => {
   const [isOpen, setIsOpen] = useState(false);
   const token = useSelector(selectToken);
   const refreshtoken = useSelector(selectRefreshToken);
-
+  const [openBottom, setOpenBottom] = useState(true);
+  const [aadharFront, setAadharFront] = useState(null);
+  const [aadharBack, setAadharBack] = useState(null);
+  const [kycStatus, setKycStatus] = useState("Not Uploaded");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [scrollPosition, setScrollPosition] = useState(0);
   const users = useSelector((state) => state.user.user);
- console.log("user",users);
-  console.log("token",token);
+
+  const openDrawerBottom = () => setOpenBottom(true);
+  const closeDrawerBottom = () => setOpenBottom(false);
+
+  console.log("user", users);
+  console.log("token", token);
   useEffect(() => {
     dispatch(fetchUserDetail());
   }, []);
@@ -46,8 +54,28 @@ const NewProfileMob = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // for aadhar front and back photo
+  const handleAadharFrontUpload = (e) => {
+    setAadharFront(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const handleAadharBackUpload = (e) => {
+    setAadharBack(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const handleSubmit = () => {
+    if (!aadharFront || !aadharBack) {
+      alert("Please upload both Aadhar front and back images.");
+    } else {
+      setKycStatus("Complete");
+      closeDrawerBottom();
+      // You can add additional logic here for submitting the images
+    }
+  };
+
   const handleLogout = () => {
-    dispatch(logoutAsync({token,refreshtoken}));
+    dispatch(logoutAsync({ token, refreshtoken }));
   };
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -207,6 +235,58 @@ const NewProfileMob = () => {
           </div>
         </div>
       </div>
+
+      <Drawer
+        placement="bottom"
+        open={openBottom}
+        onClose={closeDrawerBottom}
+        className="w-[480px] p-4  bg-[#0F002B] rounded-t-3xl"
+      >
+        <div className="p-2  max-w-sm mx-auto rounded-xl shadow-md flex flex-col items-center gap-2">
+        <div className="text-white  font-bold flex items-center gap-2 bg-[#FF0000] pl-2 pr-0 rounded-3xl">
+          <p className="text-xs"> KYC Status: {kycStatus}</p>
+          <div className="bg-white rounded-full w-5 h-5 flex justify-center items-center">
+          <Icon icon="material-symbols:info-outline" style={{color:"#0F002B"}}/>
+          </div>
+         
+          </div> 
+          {kycStatus === "Not Uploaded" && (
+            <div className="flex flex-col gap-2 w-[60%]">
+              <label className="font-bold text-center cursor-pointer bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
+                Aadhar Front
+                <input
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                  onChange={handleAadharFrontUpload}
+                />
+              </label>
+              <label className="cursor-pointer  text-center font-bold bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
+                Aadhar Back
+                <input
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                  onChange={handleAadharBackUpload}
+                />
+              </label>
+              <button
+                className="bg-gray-50 hover:bg-gray-100 text-[#0F002B] py-2 px-4 rounded-lg"
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
+            </div>
+          )}
+        </div>
+        <Typography
+          color="gray"
+          className="mb-4 text-[14px] font-[Inter] mt-4 px-9 flex justify-center font-normal"
+        >
+          Make sure that you upload the correct image or video. This will be
+          used in future for reference in case of any issues.
+        </Typography>
+      </Drawer>
     </div>
   );
 };

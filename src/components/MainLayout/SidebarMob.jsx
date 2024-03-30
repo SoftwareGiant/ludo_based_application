@@ -14,6 +14,7 @@ import BackBlack from "../../assets/profile/back_black.svg";
 import Favorite from "../../assets/new_game/fav.svg";
 import BellIcon from "../../assets/new_game/notification.svg";
 import { IoMenu } from "react-icons/io5";
+import { Icon } from "@iconify-icon/react";
 export function SidebarMob({
   isClick1,
   isClick2,
@@ -28,7 +29,7 @@ export function SidebarMob({
   const [open, setOpen] = React.useState(false);
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
-const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <React.Fragment>
       <Button className="bg-[#fead3a] shadow-none p-0 hover:shadow-none">
@@ -205,6 +206,18 @@ const navigate = useNavigate();
                 Support
               </div>
             </Link>
+            <Link
+              to="/chathistory"
+              className={`    
+          border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg
+          ${isClick9 ? "bg-[#ffcc4d]" : "bg-white"}
+          `}
+            >
+              <Icon icon="tdesign:chat-bubble-history" />
+              <div className="text-xs font-['Nunito_Sans'] font-bold">
+                Chat History
+              </div>
+            </Link>
           </div>
           <div className="flex flex-col gap-2 w-full max-w-[480px] px-6 font-['Oooh_Baby'] justify-center items-center pt-4">
             {" "}
@@ -218,21 +231,24 @@ const navigate = useNavigate();
             <div className="flex justify-between font-['Inter'] items-start w-full ">
               {" "}
               <div
-              onClick={()=>navigate("/terms")}
-              className="text-center text-xs font-medium">
+                onClick={() => navigate("/terms")}
+                className="text-center text-xs font-medium"
+              >
                 {" "}
                 Terms of Service{" "}
               </div>{" "}
               <div className="text-center text-xs font-bold">·</div>
-              <div 
-              onClick={()=>navigate("/privacy")}
-              className="text-center text-xs font-medium">
+              <div
+                onClick={() => navigate("/privacy")}
+                className="text-center text-xs font-medium"
+              >
                 Privacy Policy
               </div>{" "}
               <div className="text-center text-xs font-bold">·</div>
               <div
-              onClick={()=>navigate("/content")}
-              className="text-center text-xs font-medium">
+                onClick={() => navigate("/content")}
+                className="text-center text-xs font-medium"
+              >
                 Content Policies
               </div>
             </div>
