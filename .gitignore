@@ -1,0 +1,6 @@
+node_modules 
+.env
+dummy.js
+seeder.js
+package-lock.json
+index.html

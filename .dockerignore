@@ -1,0 +1,5 @@
+node_modules
+.git
+seeder.js
+.prettier.json
+package-lock.json
