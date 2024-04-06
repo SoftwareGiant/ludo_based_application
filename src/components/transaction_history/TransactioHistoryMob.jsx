@@ -89,7 +89,7 @@ const TransactioHistoryMob = () => {
                   </div>
                   <div className=" text-sm font-['Inter'] text-white  flex gap-2 justify-end items-center  w-full max-w-[180px]">
                     <div className="text-sm font-['Inter'] p-2 rounded-lg  text-white bg-[#0f002b]  shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)]">
-                      {` ${payment.paymentAction} ${payment.status}`}
+                      {` ${payment.paymentAction==="withdrawl"? "Withdrawal": "Deposite"} ${payment.status}`}
                     </div>
                   </div>
                 </div>

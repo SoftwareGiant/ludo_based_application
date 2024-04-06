@@ -64,7 +64,7 @@ export function SidebarMob({
               to="/"
               className={`border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]   ${
                 isClick1 ? "bg-[#ffcc4d]" : "bg-white"
-              } flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg`}
+              } flex flex-row gap-2 w-full h-8 items-center  px-3 border rounded-lg`}
             >
               <img
                 src={AddGame}
@@ -80,7 +80,7 @@ export function SidebarMob({
               to="/profile"
               className={`border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] ${
                 isClick2 ? "bg-[#ffcc4d]" : "bg-white"
-              } flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg`}
+              } flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg`}
             >
               <img
                 src={Profile}
@@ -95,7 +95,7 @@ export function SidebarMob({
               to="/wincash"
               className={`border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  ${
                 isClick3 ? "bg-[#ffcc4d]" : "bg-white"
-              } flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg`}
+              } flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg`}
             >
               <img src={WinCash} alt="Twemojimoneymouthface" className="w-5" />
               <div className="text-xs font-['Nunito_Sans'] font-bold">
@@ -142,7 +142,7 @@ export function SidebarMob({
               to="/transactionhistory"
               className={`
         
-          border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg
+          border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg
           ${isClick6 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
             >
@@ -159,7 +159,7 @@ export function SidebarMob({
               to="/refer&earn"
               className={`
           
-          border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg
+          border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg
           ${isClick7 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
             >
@@ -176,7 +176,7 @@ export function SidebarMob({
               to="/notification"
               className={`
         
-          border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg
+          border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg
           ${isClick8 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
             >
@@ -193,7 +193,7 @@ export function SidebarMob({
               to="/support"
               className={`
        
-          border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg
+          border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg
           ${isClick9 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
             >
@@ -209,7 +209,7 @@ export function SidebarMob({
             <Link
               to="/chathistory"
               className={`    
-          border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg
+          border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg
           ${isClick9 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
             >

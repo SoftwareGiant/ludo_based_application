@@ -36,7 +36,11 @@ const NewProfileMob = () => {
   const dispatch = useDispatch();
   const [scrollPosition, setScrollPosition] = useState(0);
   const users = useSelector((state) => state.user.user);
+  const [isChecked, setIsChecked] = useState(false);
 
+  const toggleCheckbox = () => {
+    setIsChecked((prevState) => !prevState);
+  };
   const openDrawerBottom = () => setOpenBottom(true);
   const closeDrawerBottom = () => setOpenBottom(false);
 
@@ -119,12 +123,12 @@ const NewProfileMob = () => {
         ></div>
         <div
           className={`w-full relative mt-6  flex ${
-            scrollPosition > 10 ? "flex-row items-center " : "flex-col"
+            scrollPosition > 10 ? "flex-row items-center  " : "flex-col"
           }`}
         >
           <div
             className={`${
-              scrollPosition > 10 ? "flex gap-4" : "w-full"
+              scrollPosition > 10 ? "flex gap-4 ml-4" : "w-full"
             } m-auto relative `}
           >
             <div
@@ -177,9 +181,48 @@ const NewProfileMob = () => {
             </div>
           </div>
 
-          <div className={`${scrollPosition > 10 ? "pr-10" : "hidden"}`}>
+          {/* <div className={`${scrollPosition > 10 ? "pr-10" : "hidden"}`}>
             <img src={kyc} />
-          </div>
+          </div> */}
+
+          <label  className={`${scrollPosition > 10 ? "pr-10" : "hidden"}`}>
+            <input
+              type="checkbox"
+              className="hidden"
+              checked={isChecked}
+              onChange={toggleCheckbox}
+            />
+            <div
+              className={`w-[76px] rounded-full shadow-lg cursor-pointer text-white font-bold text-sm ${
+                isChecked ? "bg-green-500" : "bg-red-500"
+              }`}
+            >
+              {isChecked ? (
+                <div className="flex  transition-all ease-in-out gap-1 items-center justify-center pr-2">
+                  <div className="bg-white  rounded-full flex items-center justify-center p-1">
+                    <Icon
+                      icon="charm:circle-tick"
+                      style={{ color: "green" }}
+                      width={24}
+                    />
+                  </div>
+
+                  <p> KYC</p>
+                </div>
+              ) : (
+                <div className="flex transition-all ease-in-out items-center justify-center gap-1 pl-2">
+                  <p> KYC</p>
+                  <div className="bg-white rounded-full flex items-center justify-center p-1">
+                    <Icon
+                      icon="material-symbols:error-outline"
+                      style={{ color: "green" }}
+                      width={24}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </label>
         </div>
 
         <div className="mt-10 flex flex-col gap-3 w-full font-['Nunito_Sans'] items-start relative text-white font-bold">
@@ -203,7 +246,7 @@ const NewProfileMob = () => {
               </div>
             </div>
 
-            <div className="flex flex-col justify-between gap-6 w-5/6 items-start">
+            {/* <div className="flex flex-col justify-between gap-6 w-5/6 items-start">
               <div className="text-xl font-bold text-white">
                 Notification Preference
               </div>
@@ -223,15 +266,15 @@ const NewProfileMob = () => {
                 </div>
                 <Switch color="amber" className="bg-brown-800" />
               </div>
-            </div>
+            </div> */}
 
-            <div className="flex flex-col justify-between gap-6 w-5/6 items-start">
+            {/* <div className="flex flex-col justify-between gap-6 w-5/6 items-start">
               <div className="text-xl font-bold text-white">App Preference</div>
               <div className="flex flex-row justify-between ml-4 w-full items-start">
                 <div className="text-sm text-white mt-px">Theme :</div>
                 <Switch color="amber" className="bg-brown-800" />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -243,13 +286,15 @@ const NewProfileMob = () => {
         className="w-[480px] p-4  bg-[#0F002B] rounded-t-3xl"
       >
         <div className="p-2  max-w-sm mx-auto rounded-xl shadow-md flex flex-col items-center gap-2">
-        <div className="text-white  font-bold flex items-center gap-2 bg-[#FF0000] pl-2 pr-0 rounded-3xl">
-          <p className="text-xs"> KYC Status: {kycStatus}</p>
-          <div className="bg-white rounded-full w-5 h-5 flex justify-center items-center">
-          <Icon icon="material-symbols:info-outline" style={{color:"#0F002B"}}/>
+          <div className="text-white  font-bold flex items-center gap-2 bg-[#FF0000] pl-2 pr-0 rounded-3xl">
+            <p className="text-xs"> KYC Status: {kycStatus}</p>
+            <div className="bg-white rounded-full w-5 h-5 flex justify-center items-center">
+              <Icon
+                icon="material-symbols:info-outline"
+                style={{ color: "#0F002B" }}
+              />
+            </div>
           </div>
-         
-          </div> 
           {kycStatus === "Not Uploaded" && (
             <div className="flex flex-col gap-2 w-[60%]">
               <label className="font-bold text-center cursor-pointer bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
