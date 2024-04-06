@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../App.css";
 import { Icon } from "@iconify-icon/react";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
@@ -35,7 +35,11 @@ const NewGameMob = () => {
   // const match = useSelector((state) => state.match);
   // const [battles, setAllBattles] = useState([]);
   const battles = useSelector((state) => state.battle.battles);
-  const openDrawerBottom = () => setOpenBottom(true);
+  const inputRef = useRef(null);
+  const openDrawerBottom = () => {
+    inputRef.current.focus();
+    setOpenBottom(true);
+  };
   const closeDrawerBottom = () => {
     setBattleAmount("");
     setButtonStatus("create");
@@ -248,80 +252,16 @@ const NewGameMob = () => {
             >
               start your own <span className="font-bold">battle</span>
             </div>
-            <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg">
-              <div className="flex w-full pr-3" onClick={openDrawerBottom}>
+            <div
+              onClick={openDrawerBottom}
+              className="cursor-pointer shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg"
+            >
+              <div className="flex w-full pr-3">
                 <span>₹</span>
-                <input
-                  placeholder="Your battle amount"
-                  className="outline-none pl-2  focus:outline-none w-full"
-                />
+                <div className="outline-none pl-2   focus:outline-none w-full">
+                  Your battle amount
+                </div>
               </div>
-
-              <Drawer
-                placement="bottom"
-                open={openBottom}
-                onClose={closeDrawerBottom}
-                className="w-[480px] p-4  bg-[#fead3a] rounded-t-3xl"
-              >
-                <div className="mb-4 flex items-center justify-start gap-2">
-                  <IconButton
-                    variant="text"
-                    color="blue-gray"
-                    onClick={closeDrawerBottom}
-                  >
-                    <Icon icon="ep:back" className="text-white" width="24" />
-                  </IconButton>
-                  <Typography variant="h5" color="white">
-                    Enter Battle Amount
-                  </Typography>
-                </div>
-                <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg">
-                  <div className="flex w-full pr-3" onClick={openDrawerBottom}>
-                    <span>₹</span>
-                    <input
-                      value={battleAmount}
-                      onChange={(e) => setBattleAmount(e.target.value)}
-                      placeholder="Your battle amount"
-                      className="outline-none pl-2  focus:outline-none w-full"
-                    />
-                  </div>
-                  <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-2">
-                    <Icon icon="arcticons:battleforwesnoth" width="24" />
-                  </div>
-                </div>
-
-                <Typography
-                  color="gray"
-                  className="mb-4 mt-12 pr-4 flex justify-center font-normal"
-                >
-                  You are creating a new open battle
-                </Typography>
-                <div className="flex justify-center w-full">
-                  {buttonStatus === "success" ? (
-                    <Button
-                      onClick={closeDrawerBottom}
-                      className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5"
-                    >
-                      Success
-                    </Button>
-                  ) : buttonStatus === "loading" ? (
-                    <Button
-                      className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5 "
-                      disabled
-                    >
-                      <ButtonLoader />
-                    </Button>
-                  ) : (
-                    <Button
-                      className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5 "
-                      onClick={handleCreate}
-                    >
-                      Create!
-                    </Button>
-                  )}
-                </div>
-              </Drawer>
-
               <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-2">
                 <Icon icon="arcticons:battleforwesnoth" width="24" />
               </div>
@@ -549,6 +489,72 @@ const NewGameMob = () => {
                     </Typography>
                   </div>
                 )}
+              </Drawer>
+
+              <Drawer
+                placement="bottom"
+                open={openBottom}
+                onClose={closeDrawerBottom}
+                className="w-[480px] p-4  bg-[#fead3a] rounded-t-3xl"
+              >
+                <div className="mb-4 flex items-center justify-start gap-2">
+                  <IconButton
+                    variant="text"
+                    color="blue-gray"
+                    onClick={closeDrawerBottom}
+                  >
+                    <Icon icon="ep:back" className="text-white" width="24" />
+                  </IconButton>
+                  <Typography variant="h5" color="white">
+                    Enter Battle Amount
+                  </Typography>
+                </div>
+                <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg">
+                  <div className="flex w-full pr-3" onClick={openDrawerBottom}>
+                    <span>₹</span>
+                    <input
+                      value={battleAmount}
+                      ref={inputRef}
+                      onChange={(e) => setBattleAmount(e.target.value)}
+                      placeholder="Your battle amount"
+                      className="outline-none pl-2  focus:outline-none w-full"
+                    />
+                  </div>
+                  <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-2">
+                    <Icon icon="arcticons:battleforwesnoth" width="24" />
+                  </div>
+                </div>
+
+                <Typography
+                  color="gray"
+                  className="mb-4 mt-12 pr-4 flex justify-center font-normal"
+                >
+                  You are creating a new open battle
+                </Typography>
+                <div className="flex justify-center w-full">
+                  {buttonStatus === "success" ? (
+                    <Button
+                      onClick={closeDrawerBottom}
+                      className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5"
+                    >
+                      Success
+                    </Button>
+                  ) : buttonStatus === "loading" ? (
+                    <Button
+                      className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5 "
+                      disabled
+                    >
+                      <ButtonLoader />
+                    </Button>
+                  ) : (
+                    <Button
+                      className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5 "
+                      onClick={handleCreate}
+                    >
+                      Create!
+                    </Button>
+                  )}
+                </div>
               </Drawer>
             </div>
           </div>

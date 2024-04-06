@@ -11,22 +11,24 @@ const initialState = {
 export const loginAsync = createAsyncThunk("auth/login", async (mobileNo, { rejectWithValue }) => {
   try {
     const response = await axios.post("/api/user/login",{ mobileNo: mobileNo },{ withCredentials: true });
+   console.log(response)
     const accessToken = response.headers.get("Authorization");
     const refreshToken = document.cookie
       .split("; ")
       .find((row) => row.startsWith("refreshToken"))
       .split("=")[1];
-    const data = response.data;
-    if(!accessToken){
-      throw new Error("Login failed");
-    }
+    // const data = response.data;
+    // if(!accessToken){
+    //   throw new Error("Login failed");
+    // }
     // if (!data || !data.accessToken) {
     //   throw new Error("Login failed");
     // }
     // const { accessToken, refreshToken } = data;
-    localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('refreshToken', refreshToken);
-    return data;
+    
+    localStorage.setItem('accessToken', response.data.accessToken);
+    localStorage.setItem('refreshToken', response.data.refreshToken);
+    return response.data;
   } catch (error) {
     return rejectWithValue(error.response.data);
   }

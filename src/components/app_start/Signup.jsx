@@ -1,16 +1,19 @@
 import React from "react";
 import "../../App.css";
-
 import BackgroundImg from "../../assets/background.jpg";
 import CountryIcon from "../../assets/country.svg";
 import DropIcon from "../../assets/dropicon.svg";
 
-const Info = () => {
+const Signup = () => {
   return (
-    <div>
+    <div className="mob">
       <div className="max-h-[26.3rem]">
         <div className=" absolute top-8">
-          <img src={BackgroundImg} alt="background/img" />
+          <img
+            src={BackgroundImg}
+            alt="background/img"
+            className="md:w-[720px] md:h-[720px] float-right"
+          />
           <div className="bg-gradient-to-b from-transparent to-white h-44 flex  justify-center items-center flex-col mt-auto absolute top-64 w-full txt ">
             <h3 className="text-center text-blue-950 text-6xl font-nunito uppercase font-extrabold p-3">
               Ludo King
@@ -21,6 +24,7 @@ const Info = () => {
           </div>
         </div>
       </div>
+      {/* info details */}
       <div className=" max-h-[26.5rem] relative top-[33rem]">
         <div className="inline-flex h-14 px-4 py-3 justify-center items-center gap-2 absolute top-[-1.92rem] left-[70px] -mt-32">
           <p className="text-center text-[13px] font-bold leading-normal font-inter -mx-[4.5rem]  text-blue-950 hr">
@@ -43,14 +47,14 @@ const Info = () => {
             Continue
           </button>
         </div>
-        {/* <div className="inline-flex p-1 justify-center items-center gap-2 text-[12px] font-inter font-[500] leading-normal text-center mt-20">
+        <div className="inline-flex p-1 justify-center items-center gap-2 text-[12px] font-inter font-[500] leading-normal text-center mt-20">
           <li className="list-none">Terms of Service</li>
           <li>Privacy Policy</li>
           <li>Content Policies</li>
-        </div> */}
+        </div>
       </div>
     </div>
   );
 };
 
-export default Info;
+export default Signup;
