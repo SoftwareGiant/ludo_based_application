@@ -1,22 +1,25 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import io from "socket.io-client";
-const socket = io("http://localhost:8003");
+import React, { useEffect,useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import io from "socket.io-client";
+// const socket = io("http://localhost:8003");
+
 const initialState = {
     battles: [],
-    loading: 'idle', // Add loading state for async operations
+    loading: 'idle', 
     error: null,
 };
 
 export const fetchAllBattles = createAsyncThunk(
     'battles/fetchAll',
-    async () => {
+    async (socket) => {
+        console.log(socket,"socket okayy")
         return new Promise((resolve) => {
-            socket.on("databaseChange", (data) => {
-                console.log("inside database changes");
+            socket?.on("databaseChange", (data) => {
                 resolve(data);
             });
-            socket.emit("allNewGame");
-            socket.on("allNewGame", (data) => {
+            socket?.emit("allNewGame");
+            socket?.on("allNewGame", (data) => {
                 resolve(data);
             });
         });

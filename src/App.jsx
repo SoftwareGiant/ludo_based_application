@@ -102,8 +102,10 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      
         <Routes>
           {/* <Route path="/admin" element={<Login />} /> */}
+         
           <Route path="/adminlogin" element={<SAdminLogin />} />
           {/* <Route path="/onboard" element={<NewOnboard />} /> */}
           <Route path="/login" element={<LoginMob />} />
@@ -181,7 +183,9 @@ function App() {
             <Route path="deposite" element={<SuperDeposite />} />
             <Route path="withdrawal" element={<SuperWithdrawal />} />
           </Route>
+        
         </Routes>
+       
       </BrowserRouter>
 
       {/* <Route

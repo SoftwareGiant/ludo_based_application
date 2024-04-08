@@ -17,11 +17,21 @@ export const loginAsync = createAsyncThunk(
       const response = await axios.post("/api/user/login", { mobileNo: mobileNo });
       // Handle the response data here
       const data = response.data;
-      console.log(data);
+      // console.log(data);
       if (!data || !data.accessToken) {
         throw new Error('Login failed');
       }
       const { accessToken, refreshToken } = data;
+    // const accessToken = response.headers.get("Authorization"); 
+    // const refreshToken = document.cookie 
+    //   .split("; ")
+    //   .find((row) => row.startsWith("refreshToken"))
+    //   .split("=")[1];
+    //   console.log(accessToken,refreshToken,"balajee mishra")
+    // const data = response.data;
+    // if(!accessToken){
+    //   throw new Error("Login failed");
+    // }
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
       return data;
