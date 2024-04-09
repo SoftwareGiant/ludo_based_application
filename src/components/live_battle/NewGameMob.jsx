@@ -84,12 +84,18 @@ const NewGameMob = () => {
     dispatch(fetchUserDetail());
   }, [socketData]);
 
+  useEffect(()=>{
+    if(socketData){
+    socketData?.on("battlecreated", (e) => {
+      console.log(e, "hello world");
+    });
+  }
+  },[socketData])
+
 
 
   useEffect(() => {
-    // socket?.on("battlecreated", (e) => {
-    //   console.log(e, "hello world");
-    // });
+   
 
     // socket?.emit("allNewGame");
     // socket?.on("allNewGame", (data) => {

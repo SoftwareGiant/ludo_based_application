@@ -13,11 +13,10 @@ const initialState = {
 export const fetchAllBattles = createAsyncThunk(
     'battles/fetchAll',
     async (socket) => {
-        console.log(socket,"socket okayy")
         return new Promise((resolve) => {
-            socket?.on("databaseChange", (data) => {
-                resolve(data);
-            });
+            // socket?.on("databaseChange", (data) => {
+            //     resolve(data);
+            // });
             socket?.emit("allNewGame");
             socket?.on("allNewGame", (data) => {
                 resolve(data);

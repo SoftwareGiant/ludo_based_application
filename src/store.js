@@ -33,6 +33,6 @@ export const store = configureStore({
         gameHistory:gameHistoryReducer,
         socket:socketReducer
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+    
 
 });
