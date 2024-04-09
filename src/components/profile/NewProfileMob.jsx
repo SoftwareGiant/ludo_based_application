@@ -114,7 +114,7 @@ const NewProfileMob = () => {
       </div>
 
       <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative">
-        <div className="bg-[#fead3a] h-80 w-[650px] rounded-[50%]   -top-20 absolute -left-24" />
+        <div className="bg-[#fead3a] h-80 w-[160%] rounded-[50%]   -top-20 absolute -left-[30%]" />
         <div
           onClick={() => setScrollPosition(0)}
           className={`flex ${
@@ -185,7 +185,7 @@ const NewProfileMob = () => {
             <img src={kyc} />
           </div> */}
 
-          <label  className={`${scrollPosition > 10 ? "pr-10" : "hidden"}`}>
+          <label className={`${scrollPosition > 10 ? "pr-10" : "hidden"}`}>
             <input
               type="checkbox"
               className="hidden"
@@ -197,16 +197,15 @@ const NewProfileMob = () => {
                 isChecked ? "bg-green-500" : "bg-red-500"
               }`}
             >
-              {isChecked ? (
+              {!isChecked ? (
                 <div className="flex  transition-all ease-in-out gap-1 items-center justify-center pr-2">
                   <div className="bg-white  rounded-full flex items-center justify-center p-1">
                     <Icon
-                      icon="charm:circle-tick"
+                      icon="material-symbols:error-outline"
                       style={{ color: "green" }}
                       width={24}
                     />
                   </div>
-
                   <p> KYC</p>
                 </div>
               ) : (
@@ -214,7 +213,7 @@ const NewProfileMob = () => {
                   <p> KYC</p>
                   <div className="bg-white rounded-full flex items-center justify-center p-1">
                     <Icon
-                      icon="material-symbols:error-outline"
+                      icon="charm:circle-tick"
                       style={{ color: "green" }}
                       width={24}
                     />
@@ -242,7 +241,8 @@ const NewProfileMob = () => {
               </div>
               <div className="flex flex-row justify-between ml-4 w-full items-start">
                 <div className="text-sm mt-px">User Id :</div>
-                <span>{users?._id}</span>
+                <span>{users?._id?.slice(0,6)}</span>
+               
               </div>
             </div>
 

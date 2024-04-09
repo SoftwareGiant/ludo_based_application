@@ -116,7 +116,7 @@ const MatchUserChat = () => {
       </div>
 
       <div className="w-full  overflow-hidden h-full ">
-        <div className="bg-[#fead3a]  h-[700px] w-[200%]  rounded-[50%]   -top-20 absolute -left-60 " />
+        <div className="bg-[#fead3a]  h-[80%] w-[200%]  rounded-[50%] sm:hidden   -top-20 fixed -left-[50%] " />
 
         <div className="fixed z-10 flex justify-between p-4  items-center mt-3 bg-[#fead3a] max-w-[480px] w-full pt-20 ">
           <div className="flex justify-center gap-2 items-center">

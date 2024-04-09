@@ -102,14 +102,15 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      
         <Routes>
           {/* <Route path="/admin" element={<Login />} /> */}
-         
+
           <Route path="/adminlogin" element={<SAdminLogin />} />
           {/* <Route path="/onboard" element={<NewOnboard />} /> */}
           <Route path="/login" element={<LoginMob />} />
-
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/content" element={<Content />} />
           <Route path="/" element={<ProtectedRoute />}>
             <Route path="/apptour" element={<AppTour />} />
             {/* new game page routes */}
@@ -150,11 +151,11 @@ function App() {
             <Route path="/support" element={<SupportMob />} />
             <Route path="/chathistory" element={<Chathistory />} />
             <Route path="/matchUserChat" element={<MatchUserChat />} />
-            
+
             <Route path="/feedback" element={<Feedback />} />
-            <Route path="/terms" element={<Terms />} />
+            {/* <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
-            <Route path="/content" element={<Content />} />
+            <Route path="/content" element={<Content />} /> */}
           </Route>
           <Route path="/reedem" element={<ReferalBalancePc />} />
           <Route path="/startbattle" element={<CardClickInstance />} />
@@ -183,9 +184,7 @@ function App() {
             <Route path="deposite" element={<SuperDeposite />} />
             <Route path="withdrawal" element={<SuperWithdrawal />} />
           </Route>
-        
         </Routes>
-       
       </BrowserRouter>
 
       {/* <Route

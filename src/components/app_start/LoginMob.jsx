@@ -6,13 +6,20 @@ import CountryIcon from "../../assets/country.svg";
 import DropIcon from "../../assets/dropicon.svg";
 import LudoIcon from "../../assets/ludo-indian-monument-touch.svg";
 import SignUpSucess from "./SignUpSucess";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MyButton from "../MainLayout/MyButton";
 import ButtonLoader from "../MainLayout/ButtonLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAsync, selectToken } from "./authSlice";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import {
+  Button,
+  Menu,
+  MenuItem,
+  MenuList,
+  MenuHandler,
+} from "@material-tailwind/react";
 
 const validationSchema = Yup.object().shape({
   number: Yup.string()
@@ -26,7 +33,6 @@ const LoginMob = () => {
   const [otpNumber, setOtpNumber] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoadButton, setIsLoadButton] = useState(false);
-
   const initialValues = {
     number: "",
   };
@@ -83,13 +89,13 @@ const LoginMob = () => {
   console.log(isSuccess);
 
   return (
-    <>
+    <div className="h-full min-h-screen">
       <div
         id="NotificationspaceRoot"
         className="bg-[#fead3a]  h-8 overflow-hidden max-w-[480px] w-full "
       />
       {isSuccess ? (
-        <div className="flex flex-col gap-6 w-full font-['Inter'] items-center h-screen justify-center max-w-[480px]">
+        <div className="flex flex-col h-[500px] gap-6 w-full font-['Inter'] items-center  justify-center max-w-[480px]">
           <div className="bg-[#fead3a] rounded-full w-[150px] h-[150px] flex justify-center items-center">
             <Icon icon="mdi:tick" width="94" className="text-white" />
           </div>
@@ -100,7 +106,7 @@ const LoginMob = () => {
         </div>
       ) : (
         <div className="flex flex-col justify-between w-full max-w-[480px]">
-          <div className="max-w-[480px] w-full min-h-screen h-full">
+          <div className="max-w-[480px] w-full  h-full">
             <div
               className="bg-[#fead3a] min-h-[420px] overflow-hidden bg-cover bg-center  "
               style={{ backgroundImage: `url(${BackgroundImg})` }}
@@ -127,7 +133,7 @@ const LoginMob = () => {
                     </div>
                   </div>
 
-                  <div className="flex flex-col m-8 pt-8 gap-6  items-start">
+                  <div className="flex flex-col m-4  gap-6 ">
                     {isOtp ? (
                       <>
                         <div
@@ -222,20 +228,39 @@ const LoginMob = () => {
                               {/* Your country code and input field */}
 
                               <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] items-center mx-auto bg-white flex flex-row gap-4 justify-center pt-3 px-4 rounded-lg w-full h-[56px] py-[10px]">
-                                <div className="flex flex-row gap-2 w-16 items-start">
-                                  <img
-                                    src={CountryIcon}
-                                    alt="Twemojiflagindia"
-                                    id="Twemojiflagindia"
-                                    className="w-8"
-                                  />
-                                  <img
-                                    src={DropIcon}
-                                    alt="Gridiconsdropdown"
-                                    id="Gridiconsdropdown"
-                                    className="mt-1 w-5"
-                                  />
-                                </div>
+                                <Menu>
+                                  <MenuHandler>
+                                    <div className="flex flex-row gap-2 w-16 items-start">
+                                      <img
+                                        src={CountryIcon}
+                                        alt="Twemojiflagindia"
+                                        id="Twemojiflagindia"
+                                        className="w-8"
+                                      />
+                                      <img
+                                        src={DropIcon}
+                                        alt="Gridiconsdropdown"
+                                        id="Gridiconsdropdown"
+                                        className="mt-1 w-5"
+                                      />
+                                    </div>
+                                  </MenuHandler>
+                                  <MenuList className="min-w-[100px]">
+                                    <MenuItem className="flex p-1 justify-center">
+                                      <div className="flex  gap-2 w-16 items-center">
+                                        <img
+                                          src={CountryIcon}
+                                          alt="Twemojiflagindia"
+                                          id="Twemojiflagindia"
+                                          className="w-8"
+                                        />
+                                        <span className="font-bold text-black text-xl">
+                                          +91
+                                        </span>
+                                      </div>
+                                    </MenuItem>
+                                  </MenuList>
+                                </Menu>
                                 <Field
                                   type="text"
                                   name="number"
@@ -267,22 +292,32 @@ const LoginMob = () => {
               </div>
             </div>
           </div>
+
           <div className="flex items-center w-full max-w-[480px] m-auto justify-center gap-2 pb-10">
-            <div className="text-center text-xs font-['Inter'] font-medium">
+            <Link
+              to="/terms"
+              className="text-center text-xs font-['Inter'] font-medium"
+            >
               Terms of Service
-            </div>
+            </Link>
             <div className="h-1 w-1 rounded-full bg-black"></div>
-            <div className="text-center text-xs font-['Inter'] font-medium">
+            <Link
+              to="/privacy"
+              className="text-center text-xs font-['Inter'] font-medium"
+            >
               Privacy Policy
-            </div>
+            </Link>
             <div className="h-1 w-1 rounded-full bg-black"></div>
-            <div className="text-center text-xs font-['Inter'] font-medium">
+            <Link
+              to="/content"
+              className="text-center text-xs font-['Inter'] font-medium"
+            >
               Content Policies
-            </div>
+            </Link>
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
