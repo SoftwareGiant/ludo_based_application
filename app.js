@@ -20,7 +20,7 @@ expressMiddleware(app);
 await connectDB();
 
 
-const io = new Server(httpServer, {
+ global.io = new Server(httpServer, {
   cors: {
     origin: "http://localhost:5173",
     methods: ["GET", "POST"],
@@ -31,6 +31,7 @@ app.use((req, res, next) => {
   const date = new Date();
   const hours = date.getHours();
   const minutes = date.getMinutes();
+  // req.io = io;
   if (hours >= 0 && minutes > 0) {
     // return res.status(200).json({
     //   message: "The website is under service. Please come back later.",
@@ -57,8 +58,18 @@ app.use(limiter);
 const roomId = () => {
   return "Chatting" + Date.now();
 };
+global.onlineUsers = new Map();
+global.io.on("connection", (socket) => {
 
-io.on("connection", (socket) => {
+  const userId = socket.handshake.query.userId;
+  global.onlineUsers[userId]= socket;
+
+
+  /// yaha pe chances hai kya 
+ 
+
+  // console.log("socket connected",socket.id);
+ 
   // const changeStream = Battle.watch();
   // changeStream.on("change", async (change) => {
   //   try {
@@ -109,9 +120,12 @@ io.on("connection", (socket) => {
     await message.save();
     io.to(data.gameSessionId).emit("message", data);
   });
+ 
   socket.on("disconnect", () => {
+    delete global.onlineUsers[userId];
     console.log("user disconnecteddd", socket.id);
   });
+ 
 });
 
 app.get("/", (req, res) => {
@@ -123,7 +137,7 @@ app.use("/api/user", require("./router/user"));
 app.use("/api/battle", require("./router/battle_superadmin"));
 app.use("/api/admin", require("./router/admin"));
 app.use("/api/userhistory", require("./router/userhistory"));
-app.use("/api/game", require("./router/gameDetails")(io));
+app.use("/api/game", require("./router/gameDetails"));
 app.use("/api/payment", require("./router/payment"));
 app.use("/api/message", require("./router/message"));
 app.use("/api/notifier", require("./router/notifier"));

@@ -13,19 +13,18 @@ function generateRoomId() {
   return "roomid" + Date.now();
 }
 
-const createBattle = async (req, res, next, io) => {
+const createBattle = async (req, res, next) => {
   try {
     const { battleAmount } = req.body;
     if (parseInt(battleAmount) < 50 || parseInt(battleAmount) > 20000) {
-      return res.status(200).json({
+      return res.status(400).json({
         message: "Battle amount should be greater than 50 and less than 20,000"
       });
     }
     const userId = req.userId;
     const user = await User.findById(userId);
-
     if (parseInt(battleAmount) > user.walletDetails.totalAmount) {
-      return res.status(200).json({ message: "You don't have sufficient amount!" });
+      return res.status(400).json({ message: "You don't have sufficient amount!" });
     }
 
     const battleDetail = await Battle.findOne({
@@ -40,7 +39,7 @@ const createBattle = async (req, res, next, io) => {
     });
 
     if (gameDetail?.gameactivationTimestamp > Date.now() && (gameDetail?.status == "running" || gameDetail?.status == "matched")) {
-      return res.status(204).json({ message: "You are already active in other game!" });
+      return res.status(400).json({ message: "You are already active in other game!" });
     }
     const currentTime = Date.now();
 
@@ -48,7 +47,7 @@ const createBattle = async (req, res, next, io) => {
     user.walletDetails.totalAmount -= parseInt(battleAmount);
     // agar battle nhi khela jata hai then hamlogo ko wapas back karna hoga amount
     await user.save();
-    const battleTimeOnScreen = currentTime + 50*60* 1000;
+    const battleTimeOnScreen = currentTime + 50 * 60 * 1000;
     const roomId = generateRoomId();
     const newBattle = new Battle({
       amount: parseInt(battleAmount),
@@ -57,12 +56,12 @@ const createBattle = async (req, res, next, io) => {
       player1: userId,
       roomId
     });
-    io.on("connection", (socket) => {
-      // socket.on("ready_to_play", () => {
-      //   socket.join(roomId);
-      // });
-      socket.join(roomId);
-    });
+    
+    // socket.join(roomId);
+    const authHeader = req.headers["authorization"];
+    const bearerToken = authHeader.split(" ");
+    const token = bearerToken[1];
+    global.onlineUsers[token].join(roomId);
 
     await newBattle.save();
     const notification = new Notification({
@@ -77,6 +76,7 @@ const createBattle = async (req, res, next, io) => {
     });
     // on frontend we need to create timer for it.
   } catch (err) {
+    console.log(err, "error in ");
     return next(err);
   }
 };
@@ -84,13 +84,13 @@ const createBattle = async (req, res, next, io) => {
 // IN MATCHUSER PART ALSO WE NEED TO USE SOCVKET IO
 // MATCH HOTE HI AGLE USER KO DIKHANA HAII.
 
-const matchUser = async (req, res, next, io) => {
+const matchUser = async (req, res, next) => {
   try {
     const { battleAmount, id, player1 } = req.body;
     const userId = req.userId;
     const user = await User.findById(userId);
     if (parseInt(battleAmount) > user.walletDetails.totalAmount) {
-      return res.status(204).json({
+      return res.status(400).json({
         message: "You don't have sufficient amount to play this game!"
       });
     }
@@ -100,10 +100,10 @@ const matchUser = async (req, res, next, io) => {
     });
     if (!user) {
       throw new AppError("Something went wrong!Please try again later", 500);
-    } 
+    }
     // else if (gameDetail && (gameDetail?.gameactivationTimestamp > Date.now() || gameDetail?.status != "matched")) {
-    //   return res.status(200).json({ message: "You are already active in other game!" });
-    // } 
+    //   return res.status(400).json({ message: "You are already active in other game!" });
+    // }
     else {
       const matchingTimeStamp = Date.now();
       const newGameDetail = new GameDetail({
@@ -126,17 +126,20 @@ const matchUser = async (req, res, next, io) => {
 
       const battle = await Battle.findByIdAndUpdate(id, { player2: userId, userMatched: true }, { new: true });
       newGameDetail.battleDetails.roomId = battle.roomId;
-      // io.on("connection", async(socket) => {
-      //   // socket.on("ready_to_play", () => {
-      //   //   socket.join(battle.roomId);
-      //   // });
-      //   socket.join(battle.roomId);
-      //   io.to(roomID).emit("game_start", { roomId });
+      const roomID = battle.roomId;
       //   const message = new Message({
       //     roomId
       //   });
       //   await message.save();
       // });
+    const authHeader = req.headers["authorization"];
+    const bearerToken = authHeader.split(" ");
+    const token = bearerToken[1];
+  
+    global.onlineUsers[token].join(roomID);
+      // req.io.to(roomID).emit("battlecreated", "Battle created successfully");
+      global.io.sockets.in(roomID).emit("battlecreated", "You get matched!!");
+      // global.io.to(roomID).emit("battlecreated", "Battle created successfully");
       await newGameDetail.save();
       const notification = new Notification({
         user: req.userId,
@@ -181,7 +184,6 @@ const updatePayment = async (gameDetail) => {
   await adminWallet.save();
 };
 
-
 // gameactivationTimestamp
 cron.schedule("*/5 * * * *", async () => {
   const gameDetail = await GameDetail.find({
@@ -199,7 +201,7 @@ cron.schedule("*/5 * * * *", async () => {
   }
 });
 
-const updateResult = async (req, res, next, io) => {
+const updateResult = async (req, res, next) => {
   try {
     const userId = req.userId;
     const user = await User.findById(userId);
@@ -261,7 +263,7 @@ const updateResult = async (req, res, next, io) => {
 
 // PLAYER1 OR PLAYER2 JISSE BHI CODE DALWANA AASAN HOGA
 // AND I THINK PLAYER2 SE
-const updateCode = async(req, res, next, io) => {
+const updateCode = async (req, res, next) => {
   try {
     const { gameCode } = req.body;
     const userId = req.userId;
@@ -301,7 +303,7 @@ const afterCancellingGame = async (cancelanyway, id, userId) => {
     const adminWalletSchema = await AdminWallet.findOne({});
     if (gameDetail.player1 == userId) {
       const player1 = await User.findById(userId);
-      
+
       const lockedAmount = gameDetail.battleDetails.amount;
       // player1.walletDetails.totalAmount = player1.walletDetails.totalAmount - lockedAmount;
       player1.walletDetails.lockedAmount = player1.walletDetails.lockedAmount - lockedAmount;
@@ -332,13 +334,13 @@ const afterCancellingGame = async (cancelanyway, id, userId) => {
   }
 };
 
-const cancelGame = async (req, res, next, io) => {
+const cancelGame = async (req, res, next) => {
   try {
     // in very starting only they can cancel the game once they will send the code then they wont
     // be able to cancel it.
-    const { cancelanyway } = req.query ? req.query: false;
+    const { cancelanyway } = req.query ? req.query : false;
     const gameDetail = await GameDetail.findById(req.query.id);
-  
+
     // { status: 'cancelled' },
     // { new: true }
     if (!gameDetail) {
@@ -375,18 +377,17 @@ const cancelGame = async (req, res, next, io) => {
   }
 };
 
-const allGameHistory = async(req,res,next,io) =>{
-  try{
-  const allGame = await GameDetail.find({});
-  if(allGame.length == 0){
-    return res.status(404).json({messege:"No Data Found"});
-  }
-  return res.status(200).json({allGame});
-  }
-  catch(err){
+const allGameHistory = async (req, res, next) => {
+  try {
+    const allGame = await GameDetail.find({});
+    if (allGame.length == 0) {
+      return res.status(404).json({ messege: "No Data Found" });
+    }
+    return res.status(200).json({ allGame });
+  } catch (err) {
     return next(err);
   }
-}
+};
 
 module.exports = {
   createBattle,

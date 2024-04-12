@@ -138,12 +138,12 @@ const loginUser = async (req, res, next) => {
 
     const accessToken = await signAccessToken(user.id);
     const refreshToken = await signRefreshToken(user.id);
-    // return res.status(200).json({
-    //   message: "User LoggedIn Successfully",
-    //   accessToken,
-    //   refreshToken,
-    // });
-    return res.cookie("refreshToken", refreshToken, { httpOnly: false, sameSite: "strict" }).header("Authorization", accessToken).status(200).json({ message: "User LoggedIn Successfully" });
+    return res.status(200).json({
+      message: "User LoggedIn Successfully",
+      accessToken,
+      refreshToken,
+    });
+    // return res.cookie("refreshToken", refreshToken, { httpOnly: false, sameSite: "strict" }).header("Authorization", accessToken).status(200).json({ message: "User LoggedIn Successfully" });
   } catch (err) {
     if (err.isJoi === true) {
       err.status = 422;

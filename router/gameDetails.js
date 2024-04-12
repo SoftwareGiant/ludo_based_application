@@ -7,26 +7,26 @@ const { createBattle, matchUser, updateResult, updateCode, cancelGame,allGameHis
 
 const { upload } = require("../helper/multer");
 
-module.exports = (io) => {
+
   // game created by user itself
   router.post(
     "/newgame",
     [verifyToken],
-    wrapAsync((req, res, next) => createBattle(req, res, next, io))
+    wrapAsync((req, res, next) => createBattle(req, res, next))
   );
 
   //once the user create game then user gets matched with this route.
   router.post(
     "/matchuser",
     [verifyToken],
-    wrapAsync((req, res, next) => matchUser(req, res, next, io))
+    wrapAsync((req, res, next) => matchUser(req, res, next))
   );
 
   //after match updating the code for playing game
   router.post(
     "/updategamecode",
     [verifyToken],
-    wrapAsync((req, res, next) => updateCode(req, res, next, io))
+    wrapAsync((req, res, next) => updateCode(req, res, next))
   );
 
   //updating result
@@ -34,20 +34,19 @@ module.exports = (io) => {
     "/updateresult",
     [verifyToken],
     upload.single("image"),
-    wrapAsync((req, res, next) => updateResult(req, res, next, io))
+    wrapAsync((req, res, next) => updateResult(req, res, next))
   );
   //canceling game by user.
   router.get(
     "/cancel",
     [verifyToken],
-    wrapAsync((req, res, next) => cancelGame(req, res, next, io))
+    wrapAsync((req, res, next) => cancelGame(req, res, next))
   );
 
   router.get(
     "/allgamehistory",
     [verifyToken,admin],
-    wrapAsync((req, res, next) => allGameHistory(req, res, next, io))
+    wrapAsync((req, res, next) => allGameHistory(req, res, next))
   );
 
-  return router;
-};
+  module.exports = router;
