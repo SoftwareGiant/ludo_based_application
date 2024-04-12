@@ -1,8 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import React, { useEffect,useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
-// import io from "socket.io-client";
-// const socket = io("http://localhost:8003");
 
 const initialState = {
     battles: [],

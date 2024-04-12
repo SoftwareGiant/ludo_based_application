@@ -83,15 +83,15 @@ const SupportMob = () => {
   };
 
   return (
-    <div className="min-h-screen w-full h-full   bg-[#0f002b] overflow-hidden relative">
+    <div className="min-h-screen w-full max-w-[480px] h-full  bg-[#0f002b] overflow-hidden relative">
       <div className="max-w-[480px] w-full overflow-hidden">
         <TopbarMobile />
       </div>
 
-      <div className="w-full overflow-hidden h-full ">
-        <div className="bg-[#fead3a] h-[700px] w-[200%]  rounded-[50%]   -top-20 absolute -left-60 " />
+      <div className="w-full overflow-hidden h-full max-w-[480px] relative">
+        <div className=" bg-[#fead3a] h-[80%]   w-[200%] sm:hidden  rounded-[50%]   -top-20 fixed -left-[50%] " />
 
-        <div className="fixed z-10 flex justify-between p-4  items-center mt-3 bg-[#fead3a] w-full pt-20 ">
+        <div className="fixed  max-w-[480px] z-10 flex justify-between p-4  items-center mt-3 bg-[#fead3a] w-full pt-20 ">
           <div className="flex justify-center gap-2 items-center">
             <img
               src={FrameProfile}
@@ -114,7 +114,10 @@ const SupportMob = () => {
                   </div>
                 </PopoverHandler>
                 <PopoverContent className="bg-white  z-50 p-0 py-2">
-                  <ListItem onClick={()=>navigate("/feedback")} className="hover:bg-black  hover:text-white rounded-none">
+                  <ListItem
+                    onClick={() => navigate("/feedback")}
+                    className="hover:bg-black  hover:text-white rounded-none"
+                  >
                     <ListItemPrefix>
                       <RiFeedbackFill />
                     </ListItemPrefix>
@@ -132,8 +135,8 @@ const SupportMob = () => {
           </div>
         </div>
 
-        <div className="flex flex-col h-full relative">
-          <div className="flex-1 p-4 overflow-y-auto pt-20 mt-20 pb-36">
+        <div className="flex flex-col h-full  relative">
+          <div className="flex-1 p-4  overflow-y-auto pt-20  mt-20 pb-36">
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -173,7 +176,7 @@ const SupportMob = () => {
               </div>
             ))}
           </div>
-          <div className="px-4 py-2 h-[56px] mb-8 rounded-md border-t bg-white flex fixed w-[89.48%] bottom-3 left-0 right-0 m-auto">
+          {/* <div className="px-4 py-2 h-[56px] mb-8 rounded-md border-t bg-white flex fixed w-[89.48%] bottom-3 left-0 right-0 m-auto">
             <img
               src="https://file.rendit.io/n/aXGTlHYYkimk9HRIA15k.svg"
               alt="Emoji"
@@ -213,6 +216,50 @@ const SupportMob = () => {
                 className="w-5"
                 onClick={handleSendMessage}
               />
+            </div>
+          </div> */}
+          <div className="bg-[#0f002b] max-w-[480px] fixed bottom-0 h-28 w-full">
+            <div className="px-4 py-2 h-[56px] mb-8 rounded-md border-t bg-white flex fixed  mx-[5.3%]  w-[88.93%] max-w-[400px] bottom-3 ">
+              <img
+                src="https://file.rendit.io/n/aXGTlHYYkimk9HRIA15k.svg"
+                alt="Emoji"
+                id="Emoji"
+                className="w-8"
+              />
+              <input
+                type="text"
+                className="w-full  rounded-lg p-2 outline-none  font-semibold"
+                placeholder="Type a message..."
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+              />
+              <div className="flex gap-4 bg-white">
+                <label
+                  htmlFor="upload-image"
+                  className="cursor-pointer flex items-center justify-center w-10"
+                >
+                  <img
+                    src="https://file.rendit.io/n/4O0XpGwpisRtWpwRjwPK.svg"
+                    alt="Attachment"
+                    id="Attachment"
+                    className="w-5"
+                  />
+                </label>
+                <input
+                  id="upload-image"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="hidden"
+                />
+                <img
+                  src="https://file.rendit.io/n/RZycssPvHc5Wv7cQAkwD.svg"
+                  alt="Send"
+                  id="Send"
+                  className="w-5"
+                  onClick={handleSendMessage}
+                />
+              </div>
             </div>
           </div>
         </div>

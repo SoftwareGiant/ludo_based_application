@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore  } from "@reduxjs/toolkit";
 import authReducer from "./components/app_start/authSlice";
 import userReducer from "./components/live_battle/userSlice";
 import battleReducer from "./components/live_battle/battleSlice";
@@ -12,10 +12,6 @@ import allkycuserReducer from "./components/admin_and_S.admin/admin/AdminSlice/A
 import allDepositRequestsReducer from "./components/admin_and_S.admin/admin/AdminSlice/depositeHisory";
 import allWithdrawalRequestsReducer from "./components/admin_and_S.admin/admin/AdminSlice/withdrawlSlice";
 import gameHistoryReducer from "./components/admin_and_S.admin/admin/AdminSlice/gameHistorySlice ";
-
-
-
-
 
 export const store = configureStore({
     reducer: {
@@ -31,8 +27,11 @@ export const store = configureStore({
         allDepositRequests:allDepositRequestsReducer,
         allWithdrawalRequests:allWithdrawalRequestsReducer,
         gameHistory:gameHistoryReducer,
-        socket:socketReducer
+        socketfor:socketReducer
     },
-    
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 
 });

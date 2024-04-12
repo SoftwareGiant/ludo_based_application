@@ -97,19 +97,22 @@ import SuperDeposite from "./components/admin_and_S.admin/superadmin/Pages/Super
 import SuperWithdrawal from "./components/admin_and_S.admin/superadmin/Pages/SuperWithdrawal.jsx";
 import Chathistory from "./components/Chathistory/Chathistory.jsx";
 import MatchUserChat from "./components/Chathistory/MatchUserChat.jsx";
+// import SocketProvider from "./socket";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-      
+      {/* <SocketProvider> */}
         <Routes>
           {/* <Route path="/admin" element={<Login />} /> */}
-         
+          
           <Route path="/adminlogin" element={<SAdminLogin />} />
           {/* <Route path="/onboard" element={<NewOnboard />} /> */}
           <Route path="/login" element={<LoginMob />} />
-
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/content" element={<Content />} />
           <Route path="/" element={<ProtectedRoute />}>
             <Route path="/apptour" element={<AppTour />} />
             {/* new game page routes */}
@@ -150,11 +153,11 @@ function App() {
             <Route path="/support" element={<SupportMob />} />
             <Route path="/chathistory" element={<Chathistory />} />
             <Route path="/matchUserChat" element={<MatchUserChat />} />
-            
+
             <Route path="/feedback" element={<Feedback />} />
-            <Route path="/terms" element={<Terms />} />
+            {/* <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
-            <Route path="/content" element={<Content />} />
+            <Route path="/content" element={<Content />} /> */}
           </Route>
           <Route path="/reedem" element={<ReferalBalancePc />} />
           <Route path="/startbattle" element={<CardClickInstance />} />
@@ -185,8 +188,9 @@ function App() {
           </Route>
         
         </Routes>
-       
+        {/* </SocketProvider> */}
       </BrowserRouter>
+
 
       {/* <Route
             path="/"
