@@ -90,14 +90,28 @@ const NewGameMob = () => {
 
   useEffect(()=>{
     if(socketData){
-      socketData?.on("battlecreated", (e) => {
-      return toast.success(e);
+      socketData?.on("match", (e) => {
+      const roomId= e.roomID;
+      const itemsJSON = localStorage.getItem('roomids');
+      if(itemsJSON?.length>0){
+        itemsJSON.push(JSON.stringify(roomId));
+      }
+      else{
+        const arr = [roomId]
+        localStorage.setItem('roomids',JSON.stringify(arr));
+      }
+      return toast.success(e.message);
     });
+    socketData?.on("updatecode",(e)=>{
+      return toast.success(e);
+    })
   }
   },[socketData])
   
   useEffect(() => {
-    dispatch(fetchSocket(accessToken));
+    const itemsJSON = localStorage.getItem('roomids');
+    console.log(itemsJSON,"hii")
+    dispatch(fetchSocket({accessToken,itemsJSON}));
   }, []);
 
   useEffect(() => {
