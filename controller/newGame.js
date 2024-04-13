@@ -76,7 +76,6 @@ const createBattle = async (req, res, next) => {
     });
     // on frontend we need to create timer for it.
   } catch (err) {
-    console.log(err, "error in ");
     return next(err);
   }
 };
@@ -138,7 +137,7 @@ const matchUser = async (req, res, next) => {
   
     global.onlineUsers[token].join(roomID);
       // req.io.to(roomID).emit("battlecreated", "Battle created successfully");
-      global.io.sockets.in(roomID).emit("battlecreated", "You get matched!!");
+      global.io.sockets.in(roomID).emit("match", {message: "You get matched!!", roomID: roomID});
       // global.io.to(roomID).emit("battlecreated", "Battle created successfully");
       await newGameDetail.save();
       const notification = new Notification({
@@ -273,8 +272,19 @@ const updateCode = async (req, res, next) => {
     });
     gameDetail.gameCode = gameCode;
     gameDetail.status = "running";
-    // io.to(gameDetail.battleDetails.roomId).emit("code_sending", { gameCode });
+    const roomId = gameDetail.battleDetails.roomId;
     await gameDetail.save();
+    const authHeader = req.headers["authorization"];
+    const bearerToken = authHeader.split(" ");
+    const token = bearerToken[1];
+    // global.onlineUsers[token].join(roomID);
+    // "sendcode",{inputValue,accessToken}
+    global.onlineUsers[token].on("sendcode",(e)=>{
+     
+    });
+
+
+    global.io.sockets.in(roomId).emit("updatecode", "You get matched!!");
 
     return res.status(200).json({ gameDetail });
   } catch (err) {

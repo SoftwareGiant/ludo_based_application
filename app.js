@@ -6,20 +6,15 @@ const { expressMiddleware } = require("./config/middleware/express_middleware");
 const connectDB = require("./config/database/db");
 const Battle = require("./models/battle");
 const Message = require("./models/message");
-const rateLimit = require("express-rate-limit");
 const logger = require("./logger/index");
 const sendMail = require("./helper/mailsending");
 
 
 
 const httpServer = createServer(app);
-
 const startServer = async()=>{
-
 expressMiddleware(app);
 await connectDB();
-
-
  global.io = new Server(httpServer, {
   cors: {
     origin: "http://localhost:5173",
@@ -27,30 +22,7 @@ await connectDB();
   },
 });
 
-app.use((req, res, next) => {
-  const date = new Date();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  // req.io = io;
-  if (hours >= 0 && minutes > 0) {
-    // return res.status(200).json({
-    //   message: "The website is under service. Please come back later.",
-    // });
-    next();
-  } else {
-    next();
-  }
-});
 
-const limiter = rateLimit({
-  windowMs: 24 * 60 * 60 * 1000,
-  max: 1000,
-  message: "You have exceeded the 100 requests in 24 hrs limit!",
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-app.use(limiter);
 
 // yaha me admin ko ek room id bana ke denge aur usme bhejenge yaha se 50 sec ke hatne ke bad
 // then agar khel pata hai to thik haii nhi to pls try again
@@ -60,16 +32,13 @@ const roomId = () => {
 };
 global.onlineUsers = new Map();
 global.io.on("connection", (socket) => {
-
   const userId = socket.handshake.query.userId;
   global.onlineUsers[userId]= socket;
-
-
-  /// yaha pe chances hai kya 
- 
-
-  // console.log("socket connected",socket.id);
- 
+  const roomIds = JSON.parse(socket.handshake.query.roomIds);
+  for(let i =0; i<roomIds?.length;i++){
+    // console.log(typeof roomIds[0])
+    global.onlineUsers[userId].join(roomIds[i])
+  } 
   // const changeStream = Battle.watch();
   // changeStream.on("change", async (change) => {
   //   try {
