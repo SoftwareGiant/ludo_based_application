@@ -15,7 +15,7 @@ export const fetchAllBattles = createAsyncThunk(
             socket?.on("allNewGame", (data) => {
                 resolve(data);
             });
-            
+          
         });
     }
 );

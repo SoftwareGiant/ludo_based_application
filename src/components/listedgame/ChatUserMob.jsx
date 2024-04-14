@@ -25,11 +25,7 @@ const ChatUserMob = () => {
   const dispatch = useDispatch();
   const { socketData } = useSelector((state) => state.socketfor);
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
-  // useEffect(() => {
-  //   dispatch(fetchSocket(accessToken));
-  // }, []);
 
-  
   const user = [
     {
       text: "hi",

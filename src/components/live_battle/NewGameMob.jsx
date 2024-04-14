@@ -33,8 +33,8 @@ const NewGameMob = () => {
   const users = useSelector((state) => state.user.user);
   const inputRef = useRef(null);
   // const match = useSelector((state) => state.match);
-  const [battles, setAllBattles] = useState(useSelector((state) => state.battle.battles));
-
+  // const [battles, setAllBattles] = useState([]);
+  const battles = useSelector((state) => state.battle.battles);
   const [activeToggle, setActiveToggle] = useState("live"); // 'live' or 'challenges'
 
   const handleToggle = (toggle) => {
@@ -51,19 +51,6 @@ const NewGameMob = () => {
     setOpenBottom(false);
   };
   const dispatch = useDispatch();
-  // console.log(battles);
-  // useEffect(() => {
-  //   socket.on("databaseChange", (data) => {
-  //     console.log("inside database changes");
-  //     setAllBattles(data);
-  //   });
-  // socket.emit("allNewGame");
-  // socket.on("allNewGame", (data) => {
-  //   setAllBattles(data);
-  //   dispatch(setAllBattles(data));
-  //   console.log(data);
-  // });
-  // }, []);
 
   useEffect(() => {
     if (isRequest === false && requestTimer < 50) {
@@ -103,10 +90,11 @@ const NewGameMob = () => {
         return toast.success(e.message);
       });
       socketData?.on("databaseChange", (data) => {
-        setAllBattles(data);
-      });
+        // console.log(data,"data");
+    });
       socketData?.on("updatecode", (e) => {
-        return toast.success(e);
+        // return toast.success(e);
+        return navigate("/chat")
       });
     }
   }, [socketData]);
