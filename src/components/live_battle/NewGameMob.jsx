@@ -434,7 +434,7 @@ const NewGameMob = () => {
                   {activeToggle === "challenges" && (
                     <div className="mt-4 flex flex-wrap justify-start gap-5 w-full m-auto">
                       {Array.from({ length: 4 }, (_, index) => (
-                        <div className="shadow-[0px_0px_2px_1px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-end gap-3  w-[170px] h-[170px] items-start pt-3 pb-1 px-1 rounded-lg">
+                        <div key={index} className="shadow-[0px_0px_2px_1px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-end gap-3  w-[170px] h-[170px] items-start pt-3 pb-1 px-1 rounded-lg">
                           <div className="flex flex-col ml-3 w-2/3 items-start">
                             <div
                               id="LiveBattle1"
@@ -673,3 +673,5 @@ const NewGameMob = () => {
 };
 
 export default NewGameMob;
+
+
