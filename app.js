@@ -39,21 +39,20 @@ global.io.on("connection", (socket) => {
     // console.log(typeof roomIds[0])
     global.onlineUsers[userId].join(roomIds[i])
   } 
-  // const changeStream = Battle.watch();
-  // changeStream.on("change", async (change) => {
-  //   try {
-  //     const currentTime = Date.now();
-  //     const filteredData = await Battle.find({
-  //       userMatched: false,
-  //       createdByUser: true,
-  //       battleTimeStampOnUserScreen: { $gt: currentTime },
-  //     });
-  //     socket.emit("databaseChange", filteredData);
-  //   } catch (error) {
-  //     console.log(error,"okayy")
-  //     socket.emit("error", err);
-  //   }
-  // });
+  const changeStream = Battle.watch();
+  changeStream.on("change", async (change) => {
+    try {
+      const currentTime = Date.now();
+      const filteredData = await Battle.find({
+        userMatched: false,
+        createdByUser: true,
+        battleTimeStampOnUserScreen: { $gt: currentTime },
+      });
+      socket.emit("databaseChange", filteredData);
+    } catch (error) {
+      socket.emit("error", err);
+    }
+  });
   socket.on("allNewGame",async()=>{
     const currentTime = Date.now();
     const allGameData = await Battle.find({
