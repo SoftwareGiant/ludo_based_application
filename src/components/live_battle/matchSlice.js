@@ -19,9 +19,7 @@ export const matchUser = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log(response)
       if (response.status === 200) {
-        console.log(response)
         setIsRequest(true);
         return response.data;
       }
@@ -32,8 +30,10 @@ export const matchUser = createAsyncThunk(
         return null;
       }
     } catch (error) {
-      toast.error(error)
-      throw new Error('Failed to match user');
+      console.log(error,"error")
+      if (error.response.status != 200) {
+       return toast.error(error.response.data.message);
+      }
     }
   }
 );

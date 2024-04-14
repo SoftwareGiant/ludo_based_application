@@ -24,7 +24,20 @@ import React, { useEffect, useContext } from "react";
 
 
 import io from "socket.io-client";
-const socket = io("http://localhost:8003");
+
+const socketServerUrl = "http://localhost:8003";
+
+// Create a function to initialize the socket connection with user ID
+const initializeSocket = (userId,roomIds) => {
+    // Establish socket connection with the server and pass the user ID
+    const socket = io(socketServerUrl, {
+        query: {
+            userId: userId,
+            roomIds:(roomIds)
+        }
+    });
+    return socket;
+};
 
 const initialState = {
     socketData: ""
@@ -33,9 +46,9 @@ const initialState = {
 //     socketData: JSON.stringify(socket)
 // };
 
-
 export const fetchSocket = createAsyncThunk(
-    'socketfor/userconnection', () => {
+    'socketfor/userconnection', async(param) => {
+        const socket = initializeSocket(param.accessToken,param.itemsJSON);
         return socket;
     }
 );

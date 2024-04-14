@@ -17,12 +17,15 @@ import {
 } from "@material-tailwind/react";
 
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { updateGameCode } from "../live_battle/gameSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const ChatUserMob = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { socketData } = useSelector((state) => state.socketfor);
+  const { accessToken, refreshToken } = useSelector((state) => state.auth);
+
   const user = [
     {
       text: "hi",
@@ -60,21 +63,22 @@ const ChatUserMob = () => {
       alert("Please enter code");
       return;
     }
+    
+
     // dispatch(updateGameCode(inputValue, setOpenBottom));
     dispatch(updateGameCode(inputValue)).then((result) => {
       if (result) {
         setOpenBottom(false);
+        socketData.emit("sendcode",{inputValue,accessToken});
       }
       else{
         alert("please try again after some time")
       }
     });
-    console.log("Form submitted with value:", inputValue);
   };
 
   const handleSendMessage = () => {
     const times = new Date().toLocaleTimeString();
-    console.log(times.slice(0, 4), typeof times);
     if (inputText.trim() === "" && !image) return;
     setMessages([
       ...messages,

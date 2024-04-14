@@ -97,14 +97,16 @@ import SuperDeposite from "./components/admin_and_S.admin/superadmin/Pages/Super
 import SuperWithdrawal from "./components/admin_and_S.admin/superadmin/Pages/SuperWithdrawal.jsx";
 import Chathistory from "./components/Chathistory/Chathistory.jsx";
 import MatchUserChat from "./components/Chathistory/MatchUserChat.jsx";
+// import SocketProvider from "./socket";
 
 function App() {
   return (
     <>
       <BrowserRouter>
+      {/* <SocketProvider> */}
         <Routes>
           {/* <Route path="/admin" element={<Login />} /> */}
-
+          
           <Route path="/adminlogin" element={<SAdminLogin />} />
           {/* <Route path="/onboard" element={<NewOnboard />} /> */}
           <Route path="/login" element={<LoginMob />} />
@@ -184,8 +186,11 @@ function App() {
             <Route path="deposite" element={<SuperDeposite />} />
             <Route path="withdrawal" element={<SuperWithdrawal />} />
           </Route>
+        
         </Routes>
+        {/* </SocketProvider> */}
       </BrowserRouter>
+
 
       {/* <Route
             path="/"

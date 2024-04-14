@@ -13,10 +13,6 @@ import allDepositRequestsReducer from "./components/admin_and_S.admin/admin/Admi
 import allWithdrawalRequestsReducer from "./components/admin_and_S.admin/admin/AdminSlice/withdrawlSlice";
 import gameHistoryReducer from "./components/admin_and_S.admin/admin/AdminSlice/gameHistorySlice ";
 
-
-
-
-
 export const store = configureStore({
     reducer: {
         auth: authReducer,
