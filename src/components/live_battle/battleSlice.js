@@ -11,13 +11,11 @@ export const fetchAllBattles = createAsyncThunk(
     'battles/fetchAll',
     async (socket) => {
         return new Promise((resolve) => {
-            // socket?.on("databaseChange", (data) => {
-            //     resolve(data);
-            // });
             socket?.emit("allNewGame");
             socket?.on("allNewGame", (data) => {
                 resolve(data);
             });
+            
         });
     }
 );

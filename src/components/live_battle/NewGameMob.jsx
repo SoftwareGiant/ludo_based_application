@@ -6,12 +6,7 @@ import { SidebarMob } from "../MainLayout/SidebarMob";
 import NewGameSLider from "./NewGameSLider";
 import { useNavigate } from "react-router-dom";
 import LiveBattles from "../../assets/new_game/livebattle.svg";
-import {
-  Button,
-  Drawer,
-  IconButton,
-  Typography,
-} from "@material-tailwind/react";
+import { Button, Drawer, IconButton, Typography } from "@material-tailwind/react";
 import ButtonLoader from "../MainLayout/ButtonLoader";
 import axios from "axios";
 // import io from "socket.io-client";
@@ -38,8 +33,8 @@ const NewGameMob = () => {
   const users = useSelector((state) => state.user.user);
   const inputRef = useRef(null);
   // const match = useSelector((state) => state.match);
-  // const [battles, setAllBattles] = useState([]);
-  const battles = useSelector((state) => state.battle.battles);
+  const [battles, setAllBattles] = useState(useSelector((state) => state.battle.battles));
+
   const [activeToggle, setActiveToggle] = useState("live"); // 'live' or 'challenges'
 
   const handleToggle = (toggle) => {
@@ -88,30 +83,37 @@ const NewGameMob = () => {
     dispatch(fetchUserDetail());
   }, [socketData]);
 
-  useEffect(()=>{
-    if(socketData){
-      socketData?.on("match", (e) => {
-      const roomId= e.roomID;
-      const itemsJSON = localStorage.getItem('roomids');
-      if(itemsJSON?.length>0){
-        itemsJSON.push(JSON.stringify(roomId));
-      }
-      else{
-        const arr = [roomId]
-        localStorage.setItem('roomids',JSON.stringify(arr));
-      }
-      return toast.success(e.message);
-    });
-    socketData?.on("updatecode",(e)=>{
-      return toast.success(e);
-    })
-  }
-  },[socketData])
-  
   useEffect(() => {
-    const itemsJSON = localStorage.getItem('roomids');
-    console.log(itemsJSON,"hii")
-    dispatch(fetchSocket({accessToken,itemsJSON}));
+    if (socketData) {
+      socketData?.on("match", (e) => {
+        const roomId = e.roomID;
+
+        const itemsJSON = localStorage.getItem("roomids");
+        let itemsArray = [];
+        if (itemsJSON) {
+          itemsArray = JSON.parse(itemsJSON);
+        }
+        if (itemsArray.length > 0) {
+          itemsArray.push(roomId);
+          localStorage.setItem('roomids', JSON.stringify(itemsArray));
+        } else {
+          const arr = [roomId];
+          localStorage.setItem("roomids", JSON.stringify(arr));
+        }
+        return toast.success(e.message);
+      });
+      socketData?.on("databaseChange", (data) => {
+        setAllBattles(data);
+      });
+      socketData?.on("updatecode", (e) => {
+        return toast.success(e);
+      });
+    }
+  }, [socketData]);
+
+  useEffect(() => {
+    const itemsJSON = localStorage.getItem("roomids");
+    dispatch(fetchSocket({ accessToken, itemsJSON }));
   }, []);
 
   useEffect(() => {
@@ -136,7 +138,7 @@ const NewGameMob = () => {
             }
             return {
               ...prevTimers,
-              [id]: (prevTimers[id] || initialTimerValue) - 1,
+              [id]: (prevTimers[id] || initialTimerValue) - 1
             };
           });
         }, 1000);
@@ -159,9 +161,7 @@ const NewGameMob = () => {
     //   setTimers((prevTimers) => ({ ...prevTimers, [id]: 50 }));
     // }
     return () => {
-      Object.values(intervalIds).forEach((intervalId) =>
-        clearInterval(intervalId)
-      );
+      Object.values(intervalIds).forEach((intervalId) => clearInterval(intervalId));
     };
   }, [battles]);
   const battleCreationTime = (e) => {
@@ -190,9 +190,7 @@ const NewGameMob = () => {
         return;
       }
       if (battleAmount < 50 || battleAmount > 20000) {
-        toast.error(
-          "Battle amount should be greater than 50 and less than 20,000"
-        );
+        toast.error("Battle amount should be greater than 50 and less than 20,000");
         setBattleAmount("");
         setButtonStatus("create");
         return;
@@ -202,8 +200,8 @@ const NewGameMob = () => {
         { battleAmount: battleAmount },
         {
           headers: {
-            Authorization: `bearer ${accessToken}`,
-          },
+            Authorization: `bearer ${accessToken}`
+          }
         }
       );
 
@@ -241,7 +239,7 @@ const NewGameMob = () => {
     const data = {
       battleAmount: e?.amount,
       id: e?._id,
-      player1: e?.player1,
+      player1: e?.player1
     };
     if (users?._id !== e._id) {
       setIsRequest(false);
@@ -260,29 +258,17 @@ const NewGameMob = () => {
   const closematchDrawerBottom = () => setOpenMatchBottom(false);
   return (
     <div className="max-w-[480px] w-full min-h-screen h-full">
-      <div
-        id="NotificationspaceRoot"
-        className="bg-[#fead3a]  h-8 overflow-hidden"
-      />
+      <div id="NotificationspaceRoot" className="bg-[#fead3a]  h-8 overflow-hidden" />
       <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
           <SidebarMob />
           <div className="flex flex-col text-[#0f002b] ">
-            <div className="  text-base font-['Nunito_Sans'] font-extrabold ">
-              LUDO KING
-            </div>
+            <div className="  text-base font-['Nunito_Sans'] font-extrabold ">LUDO KING</div>
 
-            <div className="text-center text-base font-['Oooh_Baby'] font-normal  -mt-2">
-              punch line
-            </div>
+            <div className="text-center text-base font-['Oooh_Baby'] font-normal  -mt-2">punch line</div>
           </div>
         </div>
-        <img
-          onClick={() => navigate("/profile")}
-          src={FrameProfile}
-          alt="Frame1"
-          className="w-[30px] h-[30px] mt-[9.5px] rounded-[100px] border border-solid border-white "
-        />
+        <img onClick={() => navigate("/profile")} src={FrameProfile} alt="Frame1" className="w-[30px] h-[30px] mt-[9.5px] rounded-[100px] border border-solid border-white " />
       </div>
 
       <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative">
@@ -292,21 +278,13 @@ const NewGameMob = () => {
         </div>
         <div className="relative m-6">
           <div className="border-[2px] border-white shadow-lg bg-[#fead3a] flex flex-col p-4 gap-6 w-full  max-w-screen items-start rounded-lg pb-8">
-            <div
-              id="StartYourOwnBattle1"
-              className="text-xl font-['Inter'] text-[#0f002b]"
-            >
+            <div id="StartYourOwnBattle1" className="text-xl font-['Inter'] text-[#0f002b]">
               start your own <span className="font-bold">battle</span>
             </div>
-            <div
-              onClick={openDrawerBottom}
-              className="cursor-pointer shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg"
-            >
+            <div onClick={openDrawerBottom} className="cursor-pointer shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg">
               <div className="flex w-full pr-3">
                 <span>₹</span>
-                <p className="outline-none pl-2  focus:outline-none w-full">
-                  Your battle amount
-                </p>
+                <p className="outline-none pl-2  focus:outline-none w-full">Your battle amount</p>
               </div>
 
               <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-2">
@@ -356,21 +334,13 @@ const NewGameMob = () => {
             <div className="flex flex-col w-full">
               <div className="flex w-full space-x-0.5 bg-white">
                 <button
-                  className={`flex-1 py-2 px-4 rounded-lg text-black font-semibold focus:outline-none transition-all duration-300 ${
-                    activeToggle === "live"
-                      ? "bg-[#fead3a] text-white"
-                      : "bg-white text-black"
-                  }`}
+                  className={`flex-1 py-2 px-4 rounded-lg text-black font-semibold focus:outline-none transition-all duration-300 ${activeToggle === "live" ? "bg-[#fead3a] text-white" : "bg-white text-black"}`}
                   onClick={() => handleToggle("live")}
                 >
                   Live <b>battle</b>
                 </button>
                 <button
-                  className={`flex-1 py-2 px-4 rounded-lg text-black font-semibold focus:outline-none transition-all duration-300 ${
-                    activeToggle === "challenges"
-                      ? "bg-[#fead3a] text-white"
-                      : "bg-white text-black"
-                  }`}
+                  className={`flex-1 py-2 px-4 rounded-lg text-black font-semibold focus:outline-none transition-all duration-300 ${activeToggle === "challenges" ? "bg-[#fead3a] text-white" : "bg-white text-black"}`}
                   onClick={() => handleToggle("challenges")}
                 >
                   Open <b>challenges</b>
@@ -378,36 +348,20 @@ const NewGameMob = () => {
               </div>
 
               <div className="mt-4">
-                <ul
-                  className={` transition-transform duration-300 ease-in-out ${
-                    activeToggle === "live"
-                      ? "opacity-100 translate-y-0"
-                      : "-translate-y-2"
-                  }`}
-                >
+                <ul className={` transition-transform duration-300 ease-in-out ${activeToggle === "live" ? "opacity-100 translate-y-0" : "-translate-y-2"}`}>
                   {activeToggle === "live" && (
                     <div className="p-2 flex flex-col  gap-4 m-auto w-full">
                       {users &&
                         battles?.length > 0 &&
                         battles?.map((e) => (
-                          <div
-                            key={e._id}
-                            className="inline-flex flex-col justify-between w-full min-h-[120px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]"
-                          >
+                          <div key={e._id} className="inline-flex flex-col justify-between w-full min-h-[120px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]">
                             <div className="font-['Inter'] text-[#0f002b] w-full py-4 px-4 flex  justify-between">
                               <div className="italic">
                                 open challenge from
-                                <span className="font-extrabold pl-1">
-                                  {e.player1.slice(
-                                    e.player1.length - 6,
-                                    e.player1.length
-                                  )}
-                                </span>
+                                <span className="font-extrabold pl-1">{e.player1.slice(e.player1.length - 6, e.player1.length)}</span>
                               </div>
 
-                              <div className="italic font-semibold ">
-                                · {battleCreationTime(e)}
-                              </div>
+                              <div className="italic font-semibold ">· {battleCreationTime(e)}</div>
                             </div>
                             <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full p-4 mb-0">
                               <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
@@ -422,20 +376,11 @@ const NewGameMob = () => {
                               </div>
                               {users?._id === e.player1 ? (
                                 <div className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
-                                  <span className="text-white">
-                                    {timers[e._id]}
-                                  </span>
+                                  <span className="text-white">{timers[e._id]}</span>
                                 </div>
                               ) : (
-                                <div
-                                  onClick={() => openmatchDrawerBottom(e)}
-                                  className="cursor-pointer flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]"
-                                >
-                                  <img
-                                    src={LiveBattles}
-                                    alt="Arcticonsbattleforwesnoth"
-                                    className="w-4"
-                                  />
+                                <div onClick={() => openmatchDrawerBottom(e)} className="cursor-pointer flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
+                                  <img src={LiveBattles} alt="Arcticonsbattleforwesnoth" className="w-4" />
                                 </div>
                               )}
                             </div>
@@ -448,39 +393,21 @@ const NewGameMob = () => {
                       {Array.from({ length: 4 }, (_, index) => (
                         <div className="shadow-[0px_0px_2px_1px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-end gap-3  w-[170px] h-[170px] items-start pt-3 pb-1 px-1 rounded-lg">
                           <div className="flex flex-col ml-3 w-2/3 items-start">
-                            <div
-                              id="LiveBattle1"
-                              className="text-xs font-['Inter'] text-[#0f002b]"
-                            >
+                            <div id="LiveBattle1" className="text-xs font-['Inter'] text-[#0f002b]">
                               live <span className="font-bold">battle</span>
                             </div>
-                            <div
-                              id="StartedMinAgo2"
-                              className="text-xs font-['Inter'] font-bold text-[#0f002b]"
-                            >
+                            <div id="StartedMinAgo2" className="text-xs font-['Inter'] font-bold text-[#0f002b]">
                               ·<span> started </span>
                               <span>5min ago</span>
                             </div>
                           </div>
                           <div className="shadow-[inset_0px_0px_12px_0px_rgba(0,_0,_0,_0.25)] overflow-hidden bg-[#fead3a] relative flex flex-row justify-center pt-8 w-full items-start rounded-br-lg rounded-bl-lg">
-                            <div className="text-xl font-['Inter'] font-bold text-[#0f002b] absolute top-1 left-3 h-6 w-20">
-                              ravan3p
-                            </div>
+                            <div className="text-xl font-['Inter'] font-bold text-[#0f002b] absolute top-1 left-3 h-6 w-20">ravan3p</div>
                             <div className="shadow-[0px_11px_11px_0px_rgba(0,_0,_0,_0.25)] w-2/3 h-[113px] bg-[#0f002b] absolute top-0 left-20 flex flex-row justify-center pt-8 items-start rounded-tl-[86.39999389648438px] rounded-bl-[86.39999389648438px]">
-                              <img
-                                src="https://file.rendit.io/n/dzvjOLVXy80wPZnly7SR.svg"
-                                alt="Arcticonsbattleforwesnoth2"
-                                className="w-12"
-                              />
+                              <img src="https://file.rendit.io/n/dzvjOLVXy80wPZnly7SR.svg" alt="Arcticonsbattleforwesnoth2" className="w-12" />
                             </div>
-                            <div className="text-xl font-['Inter'] font-bold text-white absolute top-20 left-3 h-6 w-24">
-                              kansh23i
-                            </div>
-                            <img
-                              src="https://file.rendit.io/n/q7ht7E6QOUQA59yGnbt3.svg"
-                              alt="Materialsymbolsplaycircle"
-                              className="relative mb-8 w-12"
-                            />
+                            <div className="text-xl font-['Inter'] font-bold text-white absolute top-20 left-3 h-6 w-24">kansh23i</div>
+                            <img src="https://file.rendit.io/n/q7ht7E6QOUQA59yGnbt3.svg" alt="Materialsymbolsplaycircle" className="relative mb-8 w-12" />
                           </div>
                         </div>
                       ))}
@@ -576,15 +503,10 @@ const NewGameMob = () => {
             <div className="flex flex-col p-4">
               <div className="mb-4 flex items-center  w-full justify-center gap-2">
                 <div className="bg-white p-7 w-32 h-32 rounded-full relative flex justify-center items-center">
-                  <div className="text-[#00C300] bold text-6xl ">
-                    {requestTimer}
-                  </div>
+                  <div className="text-[#00C300] bold text-6xl ">{requestTimer}</div>
                 </div>
               </div>
-              <Typography
-                color="white"
-                className="flex justify-center text-xl font-bold"
-              >
+              <Typography color="white" className="flex justify-center text-xl font-bold">
                 Requesting...
               </Typography>
             </div>
@@ -592,41 +514,23 @@ const NewGameMob = () => {
           {isRequest == true && (
             <div>
               <div className="flex justify-center gap-6 mt-10 w-full">
-                <Button
-                  onClick={closematchDrawerBottom}
-                  className="bg-[#0f002b] text-white text-lg font-extrabold  border border-gray-600  rounded-md"
-                >
+                <Button onClick={closematchDrawerBottom} className="bg-[#0f002b] text-white text-lg font-extrabold  border border-gray-600  rounded-md">
                   Reject
                 </Button>
-                <Button
-                  onClick={() => navigate("/chat")}
-                  className="bg-white text-[#0f002b] text-lg font-extrabold border border-white "
-                >
+                <Button onClick={() => navigate("/chat")} className="bg-white text-[#0f002b] text-lg font-extrabold border border-white ">
                   Start
                 </Button>
               </div>
-              <Typography
-                color="gray"
-                className=" mt-12 pr-4 flex justify-center font-normal"
-              >
+              <Typography color="gray" className=" mt-12 pr-4 flex justify-center font-normal">
                 Reject will delete this open challenges from list
               </Typography>
             </div>
           )}
         </Drawer>
 
-        <Drawer
-          placement="bottom"
-          open={openBottom}
-          onClose={closeDrawerBottom}
-          className="w-[480px] p-4  bg-[#fead3a] rounded-t-3xl"
-        >
+        <Drawer placement="bottom" open={openBottom} onClose={closeDrawerBottom} className="w-[480px] p-4  bg-[#fead3a] rounded-t-3xl">
           <div className="mb-4 flex items-center justify-start gap-2">
-            <IconButton
-              variant="text"
-              color="blue-gray"
-              onClick={closeDrawerBottom}
-            >
+            <IconButton variant="text" color="blue-gray" onClick={closeDrawerBottom}>
               <Icon icon="ep:back" className="text-white" width="24" />
             </IconButton>
             <Typography variant="h5" color="white">
@@ -636,44 +540,25 @@ const NewGameMob = () => {
           <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg">
             <div className="flex w-full pr-3" onClick={openDrawerBottom}>
               <span>₹</span>
-              <input
-                inputMode="numeric"
-                pattern="[0-9]*"
-                ref={inputRef}
-                value={battleAmount}
-                onChange={handleBattleAmountChange}
-                placeholder="Your battle amount"
-                className="outline-none pl-2  focus:outline-none w-full"
-              />
+              <input inputMode="numeric" pattern="[0-9]*" ref={inputRef} value={battleAmount} onChange={handleBattleAmountChange} placeholder="Your battle amount" className="outline-none pl-2  focus:outline-none w-full" />
             </div>
             <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-2">
               <Icon icon="arcticons:battleforwesnoth" width="24" />
             </div>
           </div>
 
-          <Typography className="mb-4 mt-12 pr-4 flex justify-center font-normal">
-            You are creating a new open battle
-          </Typography>
+          <Typography className="mb-4 mt-12 pr-4 flex justify-center font-normal">You are creating a new open battle</Typography>
           <div className="flex justify-center w-full">
             {buttonStatus === "success" ? (
-              <Button
-                onClick={closeDrawerBottom}
-                className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5"
-              >
+              <Button onClick={closeDrawerBottom} className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5">
                 Success
               </Button>
             ) : buttonStatus === "loading" ? (
-              <Button
-                className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5 "
-                disabled
-              >
+              <Button className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5 " disabled>
                 <ButtonLoader />
               </Button>
             ) : (
-              <Button
-                className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5 "
-                onClick={handleCreate}
-              >
+              <Button className="bg-white text-[#0f002b] text-lg font-extrabold w-4/5 " onClick={handleCreate}>
                 Create!
               </Button>
             )}

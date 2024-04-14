@@ -79,7 +79,6 @@ const ChatUserMob = () => {
         alert("please try again after some time")
       }
     });
-    console.log("Form submitted with value:", inputValue);
   };
 
   const handleSendMessage = () => {

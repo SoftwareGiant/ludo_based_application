@@ -30,12 +30,10 @@ const socketServerUrl = "http://localhost:8003";
 // Create a function to initialize the socket connection with user ID
 const initializeSocket = (userId,roomIds) => {
     // Establish socket connection with the server and pass the user ID
-     console.log(roomIds,"room okayy")
     const socket = io(socketServerUrl, {
         query: {
             userId: userId,
             roomIds:(roomIds)
-
         }
     });
     return socket;
