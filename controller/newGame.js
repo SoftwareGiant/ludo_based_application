@@ -284,7 +284,7 @@ const updateCode = async (req, res, next) => {
     });
 
 
-    global.io.sockets.in(roomId).emit("updatecode", "You get matched!!");
+    global.io.sockets.in(roomId).emit("updatecode", gameCode);
 
     return res.status(200).json({ gameDetail });
   } catch (err) {
