@@ -98,8 +98,8 @@ const NewGameMob = () => {
         // console.log(data,"data");
       });
       socketData?.on("updatecode", (e) => {
-        // return toast.success(e);
-        return navigate("/chat");
+        return toast.success(`code to start game ${e}`);
+        // return navigate("/chat")
       });
     }
   }, [socketData]);
