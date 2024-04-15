@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 const MessageSchema = new mongoose.Schema({
-  roomId: String,
+  // roomId: [String],
+  // gameId: [{ type: mongoose.Schema.Types.ObjectId, ref: "GameDetails" }],
   messageDetails: [
     {
       senderId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },

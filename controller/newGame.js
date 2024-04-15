@@ -1,6 +1,5 @@
 const GameDetail = require("../models/gameDetails");
 const User = require("../models/user");
-const WaitingQueue = require("../models/waitingQueue");
 const Battle = require("../models/battle");
 const AdminWallet = require("../models/adminwallet");
 const Notification = require("../models/notification");
@@ -56,7 +55,7 @@ const createBattle = async (req, res, next) => {
       player1: userId,
       roomId
     });
-    
+
     // socket.join(roomId);
     const authHeader = req.headers["authorization"];
     const bearerToken = authHeader.split(" ");
@@ -131,13 +130,13 @@ const matchUser = async (req, res, next) => {
       //   });
       //   await message.save();
       // });
-    const authHeader = req.headers["authorization"];
-    const bearerToken = authHeader.split(" ");
-    const token = bearerToken[1];
-  
-    global.onlineUsers[token].join(roomID);
+      const authHeader = req.headers["authorization"];
+      const bearerToken = authHeader.split(" ");
+      const token = bearerToken[1];
+
+      global.onlineUsers[token].join(roomID);
       // req.io.to(roomID).emit("battlecreated", "Battle created successfully");
-      global.io.sockets.in(roomID).emit("match", {message: "You get matched!!", roomID: roomID});
+      global.io.sockets.in(roomID).emit("match", { message: "You get matched!!", roomID: roomID });
       // global.io.to(roomID).emit("battlecreated", "Battle created successfully");
       await newGameDetail.save();
       const notification = new Notification({
@@ -277,13 +276,29 @@ const updateCode = async (req, res, next) => {
     const authHeader = req.headers["authorization"];
     const bearerToken = authHeader.split(" ");
     const token = bearerToken[1];
-    // global.onlineUsers[token].join(roomID);
-    // "sendcode",{inputValue,accessToken}
-    global.onlineUsers[token].on("sendcode",(e)=>{
-     
+    global.onlineUsers[token].on("sendcode", (e) => {});
+    const player1 = gameDetail.player1;
+    const player2 = gameDetail.player2;
+    const message = await Message.findOne({
+      $and: [{ $or: [{ "messageDetails.senderId": player1 }, { "messageDetails.receiverId": player1 }] },
+       { $or: [{ "messageDetails.senderId": player2 }, { "messageDetails.receiverId": player2 }] }]
     });
-
-
+    if(message){
+      message.messageDetails.push({
+      senderId:player2,
+      receiverId:player1,
+      message: gameDetail.gameCode,
+      })
+      await message.save();
+    }
+    else{
+      const newMessage= new Message({messageDetails:[{
+        senderId:player2,
+        receiverId:player1,
+        message: gameDetail.gameCode,
+        }]});
+      await newMessage.save();
+    }
     global.io.sockets.in(roomId).emit("updatecode", gameCode);
 
     return res.status(200).json({ gameDetail });
