@@ -56,11 +56,8 @@ const createBattle = async (req, res, next) => {
       roomId
     });
 
-    // socket.join(roomId);
-    const authHeader = req.headers["authorization"];
-    const bearerToken = authHeader.split(" ");
-    const token = bearerToken[1];
-    global.onlineUsers[token].join(roomId);
+    
+    global.onlineUsers[userId].join(roomId);
 
     await newBattle.save();
     const notification = new Notification({
@@ -130,11 +127,8 @@ const matchUser = async (req, res, next) => {
       //   });
       //   await message.save();
       // });
-      const authHeader = req.headers["authorization"];
-      const bearerToken = authHeader.split(" ");
-      const token = bearerToken[1];
 
-      global.onlineUsers[token].join(roomID);
+      global.onlineUsers[userId].join(roomID);
       // req.io.to(roomID).emit("battlecreated", "Battle created successfully");
       global.io.sockets.in(roomID).emit("match", { message: "You get matched!!", roomID: roomID });
       // global.io.to(roomID).emit("battlecreated", "Battle created successfully");
@@ -273,10 +267,6 @@ const updateCode = async (req, res, next) => {
     gameDetail.status = "running";
     const roomId = gameDetail.battleDetails.roomId;
     await gameDetail.save();
-    const authHeader = req.headers["authorization"];
-    const bearerToken = authHeader.split(" ");
-    const token = bearerToken[1];
-    global.onlineUsers[token].on("sendcode", (e) => {});
     const player1 = gameDetail.player1;
     const player2 = gameDetail.player2;
     const message = await Message.findOne({

@@ -20,7 +20,6 @@ const Socket = (app) =>{
   global.io.on("connection", (socket) => {
     const userId = socket.handshake.query.userId;
     global.onlineUsers[userId]= socket;
-   
     // const roomIds = JSON.parse(socket.handshake.query.roomIds);
     // for(let i =0; i<roomIds?.length;i++){
     //   global.onlineUsers[userId].join(roomIds[i])
@@ -82,11 +81,6 @@ const Socket = (app) =>{
       delete global.onlineUsers[userId];
       console.log("user disconnecteddd", socket.id);
     });
-
-    socket.on("hi",(e)=>{
-      console.log(e,"eee")
-    })
-    // console.log( global.onlineUsers)
 
   });
 

@@ -1,0 +1,6 @@
+{
+  message: "undefined - Cannot set properties of null (setting 'gameCode') - /api/game/updategamecode - POST",
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'Apr-17-2024 02:12:12'
+}
