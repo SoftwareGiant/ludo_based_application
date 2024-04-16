@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import TopbarMobile from "../MainLayout/TopbarMobile";
 import startchat from "../../assets/profile/startchat.svg";
 import menu from "../../assets/profile/menusvg.svg";
@@ -15,45 +15,41 @@ import {
   ListItemPrefix,
   Drawer,
 } from "@material-tailwind/react";
-
+import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import { updateGameCode } from "../live_battle/gameSlice";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useJwt } from "react-jwt";
+import { fetchSocket } from "../../socket";
 const ChatUserMob = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { socketData } = useSelector((state) => state.socketfor);
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
+  const { decodedToken} = useJwt(accessToken);
+  const userId = decodedToken?.aud;
 
-  const user = [
-    {
-      text: "hi",
-      time: "09:12",
-      sender: "me",
-    },
-    {
-      text: "hello",
-      time: "09:13",
-      sender: "gaurav",
-    },
-    {
-      text: "how are you",
-      time: "09:12",
-      sender: "gaurav",
-    },
-    {
-      text: "fine",
-      time: "09:12",
-      sender: "me",
-    },
-  ];
   const [openBottom, setOpenBottom] = useState(true);
 
-  const [messages, setMessages] = useState(user);
-  const [inputText, setInputText] = useState("");
   const [image, setImage] = useState(null);
+  const [message, setMessage] = useState("");
 
+  const [messageList, setMessageList] = useState([]);
+
+  useEffect(() => {
+    if (socketData) {
+      console.log("hello world okayy");
+      socketData.emit("hii","hello");
+      socketData.on("newMessage", (newMessage) => {
+        setMessageList((prevMessageList) => [...prevMessageList, newMessage]);
+      });
+      return () => socketData.off();
+    }
+  }, [socketData]);
+
+  useEffect(() => {
+    dispatch(fetchSocket({ accessToken}));
+  }, []);
   // const openDrawerBottom = () => {
   //   setOpenBottom(true);
   // };
@@ -77,19 +73,51 @@ const ChatUserMob = () => {
     });
   };
 
-  const handleSendMessage = () => {
-    const times = new Date().toLocaleTimeString();
-    if (inputText.trim() === "" && !image) return;
-    setMessages([
-      ...messages,
+  const fn = async()=>{
+    const response = await axios.get(
+      "/api/message/allmessages/65d1d85de7bd7b2f2edbad2f",
       {
-        text: inputText,
-        image,
-        sender: "me",
-        time: new Date().toLocaleTimeString().slice(0, 4),
-      },
-    ]);
-    setInputText("");
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
+      }
+    );
+    if(response.status == 200){
+      setMessageList([]);
+      setMessageList((prevMessageList) => [...prevMessageList, ...response.data.messageDetails]);
+    }
+  }
+
+  useEffect(()=>{
+    fn();
+  },[])
+
+  const handleSendMessage = async() => {
+    // console.log("hello world ")
+    // const times = new Date().toLocaleTimeString();
+    // if (inputText.trim() === "" && !image) return;
+    // setMessages([
+    //   ...messages,
+    //   {
+    //     text: inputText,
+    //     image,
+    //     sender: "me",
+    //     time: new Date().toLocaleTimeString().slice(0, 4),
+    //   },
+    // ]);
+    const response = await axios.post(
+      "/api/message/sendmessage/65d1d85de7bd7b2f2edbad2f",
+      { message },
+      {
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
+      }
+    );
+    if(response.status == 200){
+      setMessageList((prevMessageList) => [...prevMessageList, response.data]);
+    }
+    setMessage("");
     setImage(null);
   };
 
@@ -168,18 +196,24 @@ const ChatUserMob = () => {
           </div>
         </div>
 
+        {/* {
+      message: "fine",
+      time: "09:12",
+      role:"sender"
+    }, */}
+
         <div className="flex flex-col h-full relative  ">
           <div className="flex-1 p-4 overflow-y-auto pt-20 mt-20 pb-36">
-            {messages.map((message, index) => (
+            {messageList.map((message, index) => (
               <div
                 key={index}
                 className={`flex  ${
-                  message.sender === "me" ? "justify-end " : "justify-start"
+                  message.senderId == userId ? "justify-end " : "justify-start"
                 } mb-2`}
               >
                 <div
                   className={`${
-                    message.sender === "me"
+                    message.senderId == userId
                       ? "bg-white text-black self-end pl-5"
                       : "bg-black text-white self-start pr-5 "
                   } p-2 rounded-lg max-w-md overflow-hidden font-semibold `}
@@ -189,7 +223,7 @@ const ChatUserMob = () => {
                     overflowWrap: "break-word",
                   }}
                 >
-                  <span>{message.text}</span>
+                  <span>{message.message}</span>
                   {message.image && (
                     <img
                       src={message.image}
@@ -200,10 +234,10 @@ const ChatUserMob = () => {
                   )}
                   <span
                     className={`text-xs block text-gray-500 mt-1 ${
-                      message.sender === "me" ? "text-end" : "text-start"
+                      message.role === "sender"  ? "text-end" : "text-start"
                     }`}
                   >
-                    {message.time}
+                    {message.time??"2:20 pm"}
                   </span>
                 </div>
               </div>
@@ -220,8 +254,8 @@ const ChatUserMob = () => {
               type="text"
               className="w-full  rounded-lg p-2 outline-none  font-semibold"
               placeholder="Type a message..."
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
             />
             <div className="flex gap-4 bg-white">
               <label
@@ -254,7 +288,7 @@ const ChatUserMob = () => {
         </div>
       </div>
 
-      <Drawer
+      {/* <Drawer
         placement="bottom"
         open={openBottom}
         // onClose={closeDrawerBottom}
@@ -289,7 +323,7 @@ const ChatUserMob = () => {
             </form>
           </div>
         </div>
-      </Drawer>
+      </Drawer> */}
     </div>
   );
 };

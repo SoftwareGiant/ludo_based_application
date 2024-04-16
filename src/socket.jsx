@@ -27,10 +27,14 @@ import io from "socket.io-client";
 
 const socketServerUrl = "http://localhost:8003";
 
+let socket;
 // Create a function to initialize the socket connection with user ID
 const initializeSocket = (userId,roomIds) => {
     // Establish socket connection with the server and pass the user ID
-    const socket = io(socketServerUrl, {
+    if(socket){
+        return socket;
+    }
+     socket = io(socketServerUrl, {
         query: {
             userId: userId,
             roomIds:(roomIds)
