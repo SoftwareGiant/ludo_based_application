@@ -21,6 +21,7 @@ import { updateGameCode } from "../live_battle/gameSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useJwt } from "react-jwt";
 import { fetchSocket } from "../../socket";
+import { toast } from "react-toastify";
 const ChatUserMob = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -36,20 +37,25 @@ const ChatUserMob = () => {
 
   const [messageList, setMessageList] = useState([]);
 
+
   useEffect(() => {
     if (socketData) {
-      console.log("hello world okayy");
-      socketData.emit("hii","hello");
       socketData.on("newMessage", (newMessage) => {
         setMessageList((prevMessageList) => [...prevMessageList, newMessage]);
+      });
+      socketData?.on("updatecode", (e) => {
+        return toast.success(`code to start game ${e}`);
+        // return navigate("/chat")
       });
       return () => socketData.off();
     }
   }, [socketData]);
 
   useEffect(() => {
-    dispatch(fetchSocket({ accessToken}));
-  }, []);
+    if(decodedToken){
+      dispatch(fetchSocket(decodedToken));
+    }
+  }, [decodedToken]);
   // const openDrawerBottom = () => {
   //   setOpenBottom(true);
   // };
@@ -82,9 +88,9 @@ const ChatUserMob = () => {
         },
       }
     );
-    if(response.status == 200){
+    if(response?.status == 200&&response?.data){
       setMessageList([]);
-      setMessageList((prevMessageList) => [...prevMessageList, ...response.data.messageDetails]);
+      setMessageList((prevMessageList) => [...prevMessageList, ...response?.data?.messageDetails]);
     }
   }
 
@@ -93,18 +99,9 @@ const ChatUserMob = () => {
   },[])
 
   const handleSendMessage = async() => {
-    // console.log("hello world ")
-    // const times = new Date().toLocaleTimeString();
-    // if (inputText.trim() === "" && !image) return;
-    // setMessages([
-    //   ...messages,
-    //   {
-    //     text: inputText,
-    //     image,
-    //     sender: "me",
-    //     time: new Date().toLocaleTimeString().slice(0, 4),
-    //   },
-    // ]);
+
+     if (message.trim() === "") return;
+ 
     const response = await axios.post(
       "/api/message/sendmessage/65d1d85de7bd7b2f2edbad2f",
       { message },
@@ -115,7 +112,7 @@ const ChatUserMob = () => {
       }
     );
     if(response.status == 200){
-      setMessageList((prevMessageList) => [...prevMessageList, response.data]);
+      setMessageList((prevMessageList) => [...prevMessageList, response?.data]);
     }
     setMessage("");
     setImage(null);
@@ -196,15 +193,9 @@ const ChatUserMob = () => {
           </div>
         </div>
 
-        {/* {
-      message: "fine",
-      time: "09:12",
-      role:"sender"
-    }, */}
-
         <div className="flex flex-col h-full relative  ">
           <div className="flex-1 p-4 overflow-y-auto pt-20 mt-20 pb-36">
-            {messageList.map((message, index) => (
+            {messageList?.map((message, index) => (
               <div
                 key={index}
                 className={`flex  ${
@@ -288,7 +279,7 @@ const ChatUserMob = () => {
         </div>
       </div>
 
-      {/* <Drawer
+       <Drawer
         placement="bottom"
         open={openBottom}
         // onClose={closeDrawerBottom}
@@ -323,7 +314,7 @@ const ChatUserMob = () => {
             </form>
           </div>
         </div>
-      </Drawer> */}
+      </Drawer> 
     </div>
   );
 };

@@ -11,7 +11,7 @@ const initialState = {
 export const matchUser = createAsyncThunk(
   'match/matchUser',
   async ({ data, setIsRequest, closematchDrawerBottom }) => {
-    console.log(data)
+    setIsRequest(true);
     const accessToken = localStorage.getItem('accessToken');
     try {
       const response = await axios.post('/api/game/matchuser', data, {
@@ -20,7 +20,6 @@ export const matchUser = createAsyncThunk(
         },
       });
       if (response.status === 200) {
-        setIsRequest(true);
         return response.data;
       }
       else {
@@ -30,7 +29,6 @@ export const matchUser = createAsyncThunk(
         return null;
       }
     } catch (error) {
-      console.log(error,"error")
       if (error.response.status != 200) {
        return toast.error(error.response.data.message);
       }

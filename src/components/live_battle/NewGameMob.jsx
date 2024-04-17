@@ -14,19 +14,19 @@ import {
 } from "@material-tailwind/react";
 import ButtonLoader from "../MainLayout/ButtonLoader";
 import axios from "axios";
-// import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllBattles } from "./battleSlice";
 import { fetchUserDetail } from "./userSlice";
 import { matchUser } from "./matchSlice";
 import { toast } from "react-toastify";
 import { fetchSocket } from "../../socket";
-// import { SocketContext } from "../../socket";
+import { useJwt } from "react-jwt";
 
 const NewGameMob = () => {
-  // const { socket } = useContext(SocketContext);
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
+  const { decodedToken } = useJwt(accessToken);
   const { socketData } = useSelector((state) => state.socketfor);
+  const {match} = useSelector((state) => state.match);
   const navigate = useNavigate();
   const [battleAmount, setBattleAmount] = useState("");
   const [buttonStatus, setButtonStatus] = useState("create");
@@ -37,10 +37,9 @@ const NewGameMob = () => {
   const [requestTimer, setRequestTimer] = useState(0);
   const users = useSelector((state) => state.user.user);
   const inputRef = useRef(null);
-  // const match = useSelector((state) => state.match);
-  // const [battles, setAllBattles] = useState([]);
   const battles = useSelector((state) => state.battle.battles);
   const [activeToggle, setActiveToggle] = useState("live"); // 'live' or 'challenges'
+  const [battleToPlay,setBattleToPlay] = useState();
 
   const handleToggle = (toggle) => {
     setActiveToggle(toggle);
@@ -78,20 +77,6 @@ const NewGameMob = () => {
   useEffect(() => {
     if (socketData) {
       socketData?.on("match", (e) => {
-        const roomId = e.roomID;
-
-        const itemsJSON = localStorage.getItem("roomids");
-        let itemsArray = [];
-        if (itemsJSON) {
-          itemsArray = JSON.parse(itemsJSON);
-        }
-        if (itemsArray.length > 0) {
-          itemsArray.push(roomId);
-          localStorage.setItem("roomids", JSON.stringify(itemsArray));
-        } else {
-          const arr = [roomId];
-          localStorage.setItem("roomids", JSON.stringify(arr));
-        }
         return toast.success(e.message);
       });
       socketData?.on("databaseChange", (data) => {
@@ -103,11 +88,19 @@ const NewGameMob = () => {
       });
     }
   }, [socketData]);
+  
+  useEffect(()=>{
+    if(match){
+      const player1 = match.newGameDetail.player1;
+      return navigate(`/chat/${player1}`);
+    }
+  },[match]);
 
   useEffect(() => {
-    const itemsJSON = localStorage.getItem("roomids");
-    dispatch(fetchSocket({ accessToken, itemsJSON }));
-  }, []);
+    if (decodedToken) {
+      dispatch(fetchSocket(decodedToken));
+    }
+  }, [decodedToken]);
 
   useEffect(() => {
     const intervalIds = {};
@@ -232,18 +225,18 @@ const NewGameMob = () => {
       toast.error("you have to wait until other user can't join the battle");
       return;
     }
-
-    const data = {
+    setOpenMatchBottom(true);
+    setIsRequest(false); 
+    setBattleToPlay( {
       battleAmount: e?.amount,
       id: e?._id,
       player1: e?.player1,
-    };
-    if (users?._id !== e._id) {
-      setIsRequest(false);
-      setOpenMatchBottom(true);
-      dispatch(matchUser({ data, setIsRequest, closematchDrawerBottom }));
-    }
+    })
   };
+
+  const creategame = async(e) =>{
+      dispatch(matchUser({ data:battleToPlay, setIsRequest, closematchDrawerBottom }));
+  }
 
   const handleBattleAmountChange = (e) => {
     const value = e.target.value;
@@ -308,41 +301,6 @@ const NewGameMob = () => {
                 <Icon icon="arcticons:battleforwesnoth" width="24" />
               </div>
             </div>
-            {/* <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between w-full items-center px-4 py-2 rounded-lg">
-              <Icon
-                className="cursor-pointer hover:scale-110 transition-transform"
-                icon="logos:whatsapp-icon"
-                width="32"
-              />
-              <Icon
-                className="cursor-pointer hover:scale-110 transition-transform"
-                icon="logos:facebook"
-                width="32"
-              />
-              <Icon
-                className="cursor-pointer hover:scale-110 transition-transform"
-                icon="ri:twitter-x-fill"
-                width="30"
-              />
-              <Icon
-                className="cursor-pointer hover:scale-110 transition-transform"
-                icon="solar:copy-linear"
-                width="30"
-              />
-              <Icon
-                className="cursor-pointer hover:scale-110 transition-transform"
-                icon="mdi:share"
-                width="32"
-              />
-            </div> */}
-            {/* <div className="flex items-center justify-center w-full m-auto">
-              <img
-                src="https://file.rendit.io/n/KPwS2RCsAs5e6sLj4eAj.svg"
-                alt="Line"
-                id="Line"
-                className="w-24"
-              />
-            </div> */}
           </div>
         </div>
 
@@ -489,79 +447,7 @@ const NewGameMob = () => {
             </div>
           </div>
 
-          {/* <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white relative w-full  max-w-screen  flex flex-col gap-6 items-start rounded-lg p-2 pb-8">
-            <div className="text-center text-xl font-['Inter'] text-[#0f002b] ml-6  top-5">
-              live <span className="font-bold">battle</span>
-            </div>
-            <div className="p-2 flex flex-col  gap-4 m-auto w-full">
-              {users &&
-                battles?.length > 0 &&
-                battles?.map((e) => (
-                  <div
-                    key={e._id}
-                    className="inline-flex flex-col justify-between w-full min-h-[168px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]"
-                  >
-                    <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-4 flex flex-col justify-start">
-                      <div className="italic">
-                        open challenge from
-                        <span className="font-extrabold pl-1">
-                          {e.player1.slice(
-                            e.player1.length - 6,
-                            e.player1.length
-                          )}
-                        </span>
-                      </div>
-                      2
-                      <div className="italic font-semibold ">
-                        · {battleCreationTime(e)}
-                      </div>
-                    </div>
-                    <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full m-3 p-6 mb-0">
-                      <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
-                        <div className="flex justify-between ">
-                          <span>Entry fee</span>
-                          <span>₹{e.amount}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Prize</span>
-                          <span> ₹{e.amount * 1.95}</span>
-                        </div>
-                      </div>
-                      {users?._id === e.player1 ? (
-                        <div className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
-                          <span className="text-white">{timers[e._id]}</span>
-                        </div>
-                      ) : (
-                        <div
-                          onClick={() => openmatchDrawerBottom(e)}
-                          className="cursor-pointer flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]"
-                        >
-                          <img
-                            src={LiveBattles}
-                            alt="Arcticonsbattleforwesnoth"
-                            className="w-4"
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-
           
-            </div>
-          </div>
-          <div
-            onClick={() => navigate("/LiveBattle", { state: { battles } })}
-            className="shadow-[0px_0px_4px_1px_rgba(0,_0,_0,_0.25)] bg-white  flex flex-row justify-center -mt-6 relative ml-[42%] pt-2 w-12 h-12 items-start rounded-[24px]"
-          >
-            <img
-              src="https://file.rendit.io/n/PZF2SOJvNd8p90uk3rGr.svg"
-              alt="HardwareKeyboardArrowDown icon"
-              id="Phcaretdown"
-              className="w-6 mt-1"
-            />
-          </div> */}
-          {/* <div className="absolute bottom-7 inset-0 bg-gradient-to-b from-transparent to-white opacity-50" /> */}
         </div>
 
         <Drawer
@@ -570,7 +456,7 @@ const NewGameMob = () => {
           // onClose={closeDrawerBottom}
           className="p-4 w-[480px] bg-[#0f002b] rounded-t-3xl"
         >
-          {isRequest == false && (
+          {isRequest == true && (
             <div className="flex flex-col p-4">
               <div className="mb-4 flex items-center  w-full justify-center gap-2">
                 <div className="bg-white p-7 w-32 h-32 rounded-full relative flex justify-center items-center">
@@ -587,17 +473,17 @@ const NewGameMob = () => {
               </Typography>
             </div>
           )}
-          {isRequest == true && (
+          {isRequest == false && (
             <div>
               <div className="flex justify-center gap-6 mt-10 w-full">
                 <Button
                   onClick={closematchDrawerBottom}
                   className="bg-[#0f002b] text-white text-lg font-extrabold  border border-gray-600  rounded-md"
                 >
-                  Reject
+                  Cancel
                 </Button>
                 <Button
-                  onClick={() => navigate("/chat")}
+                  onClick={creategame}
                   className="bg-white text-[#0f002b] text-lg font-extrabold border border-white "
                 >
                   Start

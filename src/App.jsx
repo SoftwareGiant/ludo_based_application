@@ -118,6 +118,7 @@ function App() {
               element={<OpenChallengeReq />}
             />
             <Route path="/chat" element={<ChatUserMob />} />
+            <Route path="/chat/:chatId" element={<ChatUserMob />} />
             <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/userprofile2" element={<UserProfile2 />} />
             <Route path="/userprofile3" element={<UserProfile3 />} />
