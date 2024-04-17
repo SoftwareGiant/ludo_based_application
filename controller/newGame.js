@@ -289,7 +289,8 @@ const updateCode = async (req, res, next) => {
         }]});
       await newMessage.save();
     }
-    global.io.sockets.in(roomId).emit("updatecode", gameCode);
+    global.io.sockets.in(roomId).emit("updatecode", {gameCode,player2});
+    
 
     return res.status(200).json({ gameDetail });
   } catch (err) {
