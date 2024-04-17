@@ -294,7 +294,7 @@ const updateCode = async (req, res, next) => {
     return res.status(200).json({ gameDetail });
   } catch (err) {
     return next(err);
-  }
+  } 
 };
 
 // working is required in cancel partt
