@@ -82,9 +82,9 @@ const NewGameMob = () => {
       socketData?.on("databaseChange", (data) => {
         // console.log(data,"data");
       });
-      socketData?.on("updatecode", (e) => {
-        return toast.success(`code to start game ${e}`);
-        // return navigate("/chat")
+      socketData?.on("updatecode", ({gameCode,player2}) => {
+      toast.success(`code to start game ${gameCode}`);
+      return navigate(`/chat/${player2}/player2`)
       });
     }
   }, [socketData]);
@@ -92,7 +92,7 @@ const NewGameMob = () => {
   useEffect(()=>{
     if(match){
       const player1 = match.newGameDetail.player1;
-      return navigate(`/chat/${player1}`);
+      return navigate(`/chat/${player1}/player1/`);
     }
   },[match]);
 

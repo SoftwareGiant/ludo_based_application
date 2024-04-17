@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import TopbarMobile from "../MainLayout/TopbarMobile";
 import startchat from "../../assets/profile/startchat.svg";
 import menu from "../../assets/profile/menusvg.svg";
@@ -15,21 +15,22 @@ import {
   ListItemPrefix,
   Drawer,
 } from "@material-tailwind/react";
-import axios from "axios"
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { updateGameCode } from "../live_battle/gameSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useJwt } from "react-jwt";
 import { fetchSocket } from "../../socket";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 const ChatUserMob = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { socketData } = useSelector((state) => state.socketfor);
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
-  const { decodedToken} = useJwt(accessToken);
+  const { decodedToken } = useJwt(accessToken);
   const userId = decodedToken?.aud;
-
+  const { player,chatId } = useParams();
   const [openBottom, setOpenBottom] = useState(true);
 
   const [image, setImage] = useState(null);
@@ -37,14 +38,13 @@ const ChatUserMob = () => {
 
   const [messageList, setMessageList] = useState([]);
 
-
   useEffect(() => {
     if (socketData) {
       socketData.on("newMessage", (newMessage) => {
         setMessageList((prevMessageList) => [...prevMessageList, newMessage]);
       });
-      socketData?.on("updatecode", (e) => {
-        return toast.success(`code to start game ${e}`);
+      socketData?.on("updatecode", ({ gameCode }) => {
+        return toast.success(`code to start game ${gameCode}`);
         // return navigate("/chat")
       });
       return () => socketData.off();
@@ -52,7 +52,7 @@ const ChatUserMob = () => {
   }, [socketData]);
 
   useEffect(() => {
-    if(decodedToken){
+    if (decodedToken) {
       dispatch(fetchSocket(decodedToken));
     }
   }, [decodedToken]);
@@ -65,45 +65,46 @@ const ChatUserMob = () => {
       alert("Please enter code");
       return;
     }
-    
 
     // dispatch(updateGameCode(inputValue, setOpenBottom));
     dispatch(updateGameCode(inputValue)).then((result) => {
       if (result) {
         setOpenBottom(false);
-        socketData.emit("sendcode",{inputValue,accessToken});
-      }
-      else{
-        alert("please try again after some time")
+        // setMessageList((prevMessageList) => [...prevMessageList,inputValue]);
+      } else {
+        alert("please try again after some time");
       }
     });
   };
 
-  const fn = async()=>{
+
+  const fn = async () => {
     const response = await axios.get(
-      "/api/message/allmessages/65d1d85de7bd7b2f2edbad2f",
+      `/api/message/allmessages/${chatId}`,
       {
         headers: {
           Authorization: `bearer ${accessToken}`,
         },
       }
     );
-    if(response?.status == 200&&response?.data){
+    if (response?.status == 200 && response?.data) {
       setMessageList([]);
-      setMessageList((prevMessageList) => [...prevMessageList, ...response?.data?.messageDetails]);
+      setMessageList((prevMessageList) => [
+        ...prevMessageList,
+        ...response?.data?.messageDetails,
+      ]);
     }
-  }
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     fn();
-  },[])
+  }, []);
 
-  const handleSendMessage = async() => {
+  const handleSendMessage = async () => {
+    if (message.trim() === "") return;
 
-     if (message.trim() === "") return;
- 
     const response = await axios.post(
-      "/api/message/sendmessage/65d1d85de7bd7b2f2edbad2f",
+      `/api/message/sendmessage/${chatId}`,
       { message },
       {
         headers: {
@@ -111,7 +112,7 @@ const ChatUserMob = () => {
         },
       }
     );
-    if(response.status == 200){
+    if (response.status == 200) {
       setMessageList((prevMessageList) => [...prevMessageList, response?.data]);
     }
     setMessage("");
@@ -195,7 +196,7 @@ const ChatUserMob = () => {
 
         <div className="flex flex-col h-full relative  ">
           <div className="flex-1 p-4 overflow-y-auto pt-20 mt-20 pb-36">
-            {messageList?.map((message, index) => (
+            {messageList.length>0 && messageList?.map((message, index) => (
               <div
                 key={index}
                 className={`flex  ${
@@ -214,7 +215,7 @@ const ChatUserMob = () => {
                     overflowWrap: "break-word",
                   }}
                 >
-                  <span>{message.message}</span>
+                  <span>{message?.message}</span>
                   {message.image && (
                     <img
                       src={message.image}
@@ -223,13 +224,13 @@ const ChatUserMob = () => {
                       style={{ maxWidth: "100%" }}
                     />
                   )}
-                  <span
+                  {/* <span
                     className={`text-xs block text-gray-500 mt-1 ${
-                      message.role === "sender"  ? "text-end" : "text-start"
+                      message.senderId == userId ? "text-end" : "text-start"
                     }`}
                   >
-                    {message.time??"2:20 pm"}
-                  </span>
+                    {message.time ?? "2:20 pm"}
+                  </span> */}
                 </div>
               </div>
             ))}
@@ -278,43 +279,44 @@ const ChatUserMob = () => {
           </div>
         </div>
       </div>
-
-       <Drawer
-        placement="bottom"
-        open={openBottom}
-        // onClose={closeDrawerBottom}
-        className="p-4  bg-[#0f002b] w-[480px] rounded-t-3xl"
-      >
-        <div>
-          <div className="flex flex-col justify-center items-center gap-6 mt-10 w-full">
-            <Typography
-              color="white"
-              className="text-2xl flex justify-center font-bold"
-            >
-              Enter Ludo King Code
-            </Typography>
-            <form
-              className="flex flex-col gap-4 w-full items-center"
-              onSubmit={closeDrawerBottom}
-            >
-              <input
-                value={inputValue}
-                onChange={handleChange}
-                type="text"
-                placeholder="LK8634798"
-                className="p-4 rounded-md outline-none border-gray-400 border bg-[#0f002b] text-gray-400 font-bold w-[90%]"
-              />
-              <Button
-                type="submit"
-                // onClick={closeDrawerBottom}
-                className="text-[#0f002b] bg-white text-lg font-extrabold    rounded-md bold w-[90%]"
+      {player != "player2" && (
+        <Drawer
+          placement="bottom"
+          open={openBottom}
+          // onClose={closeDrawerBottom}
+          className="p-4  bg-[#0f002b] w-[480px] rounded-t-3xl"
+        >
+          <div>
+            <div className="flex flex-col justify-center items-center gap-6 mt-10 w-full">
+              <Typography
+                color="white"
+                className="text-2xl flex justify-center font-bold"
               >
-                Start
-              </Button>
-            </form>
+                Enter Ludo King Code
+              </Typography>
+              <form
+                className="flex flex-col gap-4 w-full items-center"
+                onSubmit={closeDrawerBottom}
+              >
+                <input
+                  value={inputValue}
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="LK8634798"
+                  className="p-4 rounded-md outline-none border-gray-400 border bg-[#0f002b] text-gray-400 font-bold w-[90%]"
+                />
+                <Button
+                  type="submit"
+                  // onClick={closeDrawerBottom}
+                  className="text-[#0f002b] bg-white text-lg font-extrabold    rounded-md bold w-[90%]"
+                >
+                  Start
+                </Button>
+              </form>
+            </div>
           </div>
-        </div>
-      </Drawer> 
+        </Drawer>
+      )}
     </div>
   );
 };
