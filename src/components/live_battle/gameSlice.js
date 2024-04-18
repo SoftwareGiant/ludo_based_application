@@ -19,7 +19,6 @@ export const updateGameCode = createAsyncThunk(
                     Authorization: `Bearer ${accessToken}`,
                 },
             });
-            console.log(response)
             if (response.status === 200) {
                 return response.data.gameDetail;
             }
