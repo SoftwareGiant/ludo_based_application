@@ -1,20 +1,7 @@
 import React, { useState } from "react";
 import "../../app.css";
 
-import AddGame from "../../assets/new_game/addgame.svg";
-import Profile from "../../assets/new_game/profile.svg";
-import WinCash from "../../assets/new_game/wincash.svg";
-import Wallet from "../../assets/new_game/wallet.svg";
-import GameHistory from "../../assets/new_game/history.svg";
-import ReferEarn from "../../assets/new_game/refer&earn.svg";
-import BellIcon from "../../assets/new_game/notification.svg";
-import Support from "../../assets/new_game/support.svg";
-import HamBurger from "../../assets/profile/hamburger.svg";
-import Back from "../../assets/profile/ep_back.svg";
-import Favorite from "../../assets/new_game/fav.svg";
 import Mail from "../../assets/notification/mail.svg";
-import Swipe from "../../assets/notification/rightswipe.svg";
-import DropIcon from "../../assets/notification/dropicon.svg";
 import { useNavigate } from "react-router-dom";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
@@ -51,6 +38,7 @@ const Notification = () => {
             </div>
           </div>
           <img
+          onClick={()=>navigate("/profile")}
             src={FrameProfile}
             alt="Frame1"
             className="mt-1 w-8 h-8 border rounded-[100px]"

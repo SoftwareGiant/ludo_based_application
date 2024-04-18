@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TopbarMobile from "../MainLayout/TopbarMobile";
 import startchat from "../../assets/profile/startchat.svg";
 import menu from "../../assets/profile/menusvg.svg";
 import feedback from "../../assets/new_game/feedback.svg";
 import report from "../../assets/new_game/report.svg";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
+import { Icon } from "@iconify-icon/react";
 import {
   Popover,
   PopoverHandler,
@@ -51,9 +52,9 @@ const MatchUserChat = () => {
   const [inputText, setInputText] = useState("");
   const [image, setImage] = useState(null);
 
-  // const openDrawerBottom = () => {
-  //   setOpenBottom(true);
-  // };
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
   const closeDrawerBottom = (event) => {
     event.preventDefault();
     if (inputValue === "") {
@@ -64,15 +65,15 @@ const MatchUserChat = () => {
     dispatch(updateGameCode(inputValue)).then((result) => {
       if (result) {
         setOpenBottom(false);
-      }
-      else{
-        alert("please try again after some time")
+      } else {
+        alert("please try again after some time");
       }
     });
     console.log("Form submitted with value:", inputValue);
   };
-
-  const handleSendMessage = () => {
+  const inputRef = useRef(null);
+  const handleSendMessage = (e) => {
+    e.preventDefault();
     const times = new Date().toLocaleTimeString();
     console.log(times.slice(0, 4), typeof times);
     if (inputText.trim() === "" && !image) return;
@@ -164,8 +165,8 @@ const MatchUserChat = () => {
           </div>
         </div>
 
-        <div className="flex flex-col h-full relative  ">
-          <div className="flex-1 p-4 overflow-y-auto pt-20 mt-20 pb-36">
+        <div className="flex  flex-col h-full relative  ">
+          <div className="flex-1    bottom-0 left-0 right-0 p-4 overflow-y-auto pt-20 mt-20 pb-36">
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -205,90 +206,46 @@ const MatchUserChat = () => {
               </div>
             ))}
           </div>
-          <div className="px-4 py-2 h-[56px] mb-8 rounded-md border-t bg-white flex fixed mx-[5.3%] w-[88.93%] max-w-[400px] bottom-3">
-            <img
-              src="https://file.rendit.io/n/aXGTlHYYkimk9HRIA15k.svg"
-              alt="Emoji"
-              id="Emoji"
-              className="w-8"
-            />
-            <input
-              type="text"
-              className="w-full  rounded-lg p-2 outline-none  font-semibold"
-              placeholder="Type a message..."
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-            />
-            <div className="flex gap-4 bg-white">
-              <label
-                htmlFor="upload-image"
-                className="cursor-pointer flex items-center justify-center w-10"
-              >
-                <img
-                  src="https://file.rendit.io/n/4O0XpGwpisRtWpwRjwPK.svg"
-                  alt="Attachment"
-                  id="Attachment"
-                  className="w-5"
-                />
-              </label>
+          <form onSubmit={handleSendMessage}>
+            <div className="items-center px-4 py-2 h-[56px] mb-8 rounded-md border-t bg-white flex fixed mx-[5.3%] w-[88.93%] max-w-[400px] bottom-3">
+              <Icon icon="mingcute:emoji-line" width="32" />
               <input
-                id="upload-image"
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="hidden"
+                ref={inputRef}
+                type="text"
+                className="w-full  rounded-lg p-2 outline-none  font-semibold"
+                placeholder="Type a message..."
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
               />
-              <img
-                src="https://file.rendit.io/n/RZycssPvHc5Wv7cQAkwD.svg"
-                alt="Send"
-                id="Send"
-                className="w-5"
-                onClick={handleSendMessage}
-              />
+              <div className="flex items-center gap-2 bg-white">
+                <label
+                  htmlFor="upload-image"
+                  className="cursor-pointer flex items-center justify-center w-10"
+                >
+                  <Icon id="Attachment" icon="tdesign:attach" width="28" />
+                </label>
+                <input
+                  id="upload-image"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="hidden"
+                />
+                <button type="submit">
+                  <Icon
+                    id="Send"
+                    onClick={handleSendMessage}
+                    icon="carbon:send-filled"
+                    width="28"
+                  />
+                </button>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
-
-      {/* <Drawer
-        placement="bottom"
-        open={openBottom}
-
-        className="p-4  bg-[#0f002b] w-[480px] rounded-t-3xl"
-      >
-        <div>
-          <div className="flex flex-col justify-center items-center gap-6 mt-10 w-full">
-            <Typography
-              color="white"
-              className="text-2xl flex justify-center font-bold"
-            >
-              Enter Ludo King Code
-            </Typography>
-            <form
-              className="flex flex-col gap-4 w-full items-center"
-              onSubmit={closeDrawerBottom}
-            >
-              <input
-                value={inputValue}
-                onChange={handleChange}
-                type="text"
-                placeholder="LK8634798"
-                className="p-4 rounded-md outline-none border-gray-400 border bg-[#0f002b] text-gray-400 font-bold w-[90%]"
-              />
-              <Button
-                type="submit"
-              
-                className="text-[#0f002b] bg-white text-lg font-extrabold    rounded-md bold w-[90%]"
-              >
-                Start
-              </Button>
-            </form>
-          </div>
-        </div>
-      </Drawer> */}
     </div>
   );
 };
 
 export default MatchUserChat;
-

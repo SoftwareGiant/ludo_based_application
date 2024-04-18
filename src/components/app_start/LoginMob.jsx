@@ -14,7 +14,6 @@ import { loginAsync, selectToken } from "./authSlice";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import {
-  Button,
   Menu,
   MenuItem,
   MenuList,
@@ -40,11 +39,11 @@ const LoginMob = () => {
   const token = useSelector(selectToken);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   if (token) {
-  //     navigate("/");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, []);
   const handlePhoneSubmit = async (values) => {
     let intervalId;
     console.log(values.number);

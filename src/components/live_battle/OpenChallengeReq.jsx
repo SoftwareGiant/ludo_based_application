@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
-import LiveBattles from "../../assets/new_game/livebattle.svg";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   Button,

@@ -140,19 +140,6 @@ const NewGameMob = () => {
         setTimers((prevTimers) => ({ ...prevTimers, [id]: 0 }));
       }
     });
-    // if (seconds < 50 && minutes < 1) {
-    //   intervalIds[id] = setInterval(() => {
-    //     setTimers((prevTimers) => {
-    //       if (prevTimers[id] >= 50 || minutes >= 1) {
-    //         return { ...prevTimers, [id]: 50 };
-    //       }
-    //       return { ...prevTimers, [id]: (prevTimers[id] || 0) + 1 };
-    //     });
-    //   }, 1000);
-    //   setTimers((prevTimers) => ({ ...prevTimers, [id]: seconds }));
-    // } else {
-    //   setTimers((prevTimers) => ({ ...prevTimers, [id]: 50 }));
-    // }
     return () => {
       Object.values(intervalIds).forEach((intervalId) =>
         clearInterval(intervalId)
@@ -254,7 +241,7 @@ const NewGameMob = () => {
   };
   const closematchDrawerBottom = () => setOpenMatchBottom(false);
   return (
-    <div className="max-w-[480px] w-full min-h-screen h-full">
+    <div className="max-w-[480px] bg-[#0f002b] w-full min-h-screen h-full">
       <div
         id="NotificationspaceRoot"
         className="bg-[#fead3a]  h-8 overflow-hidden"
@@ -280,7 +267,7 @@ const NewGameMob = () => {
         />
       </div>
 
-      <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative">
+      <div className="bg-[#0f002b] w-full  overflow-hidden relative">
         <div className="bg-[#fead3a] h-80 w-[650px] rounded-[50%]   -top-20 absolute -left-24" />
         <div className="py-4">
           <NewGameSLider />
@@ -435,7 +422,11 @@ const NewGameMob = () => {
                               )}
                             </div>
                           </div>
+
+
+
                         ))}
+  
                     </div>
                   )}
                   {activeToggle === "challenges" && (
@@ -443,9 +434,9 @@ const NewGameMob = () => {
                       {Array.from({ length: 4 }, (_, index) => (
                         <div
                           key={index}
-                          className="shadow-[0px_0px_2px_1px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-end gap-3  w-[170px] h-[170px] items-start pt-3 pb-1 px-1 rounded-lg"
+                          className="shadow-[0px_0px_2px_1px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-end gap-3  w-[160px] h-[170px] items-start pt-3 pb-1 px-1 rounded-lg"
                         >
-                          <div className="flex flex-col ml-3 w-2/3 items-start">
+                          <div className="flex flex-col ml-3  items-start">
                             <div
                               id="LiveBattle1"
                               className="text-xs font-['Inter'] text-[#0f002b]"
@@ -460,25 +451,18 @@ const NewGameMob = () => {
                               <span>5min ago</span>
                             </div>
                           </div>
-                          <div className="shadow-[inset_0px_0px_12px_0px_rgba(0,_0,_0,_0.25)] overflow-hidden bg-[#fead3a] relative flex flex-row justify-center pt-8 w-full items-start rounded-br-lg rounded-bl-lg">
+                          <div className="shadow-[inset_0px_0px_12px_0px_rgba(0,_0,_0,_0.25)] overflow-hidden bg-[#fead3a] relative flex h-[110px] flex-row justify-center pt-8 w-full items-start rounded-br-lg rounded-bl-lg">
                             <div className="text-xl font-['Inter'] font-bold text-[#0f002b] absolute top-1 left-3 h-6 w-20">
                               ravan3p
                             </div>
                             <div className="shadow-[0px_11px_11px_0px_rgba(0,_0,_0,_0.25)] w-2/3 h-[113px] bg-[#0f002b] absolute top-0 left-20 flex flex-row justify-center pt-8 items-start rounded-tl-[86.39999389648438px] rounded-bl-[86.39999389648438px]">
-                              <img
-                                src="https://file.rendit.io/n/dzvjOLVXy80wPZnly7SR.svg"
-                                alt="Arcticonsbattleforwesnoth2"
-                                className="w-12"
-                              />
+                          
+                              <Icon  width={44} icon="arcticons:battleforwesnoth"  style={{color: "white"}}  />
                             </div>
-                            <div className="text-xl font-['Inter'] font-bold text-white absolute top-20 left-3 h-6 w-24">
+                            <div  className="text-xl font-['Inter'] font-bold text-white absolute top-20 left-3 h-6 w-24">
                               kansh23i
                             </div>
-                            <img
-                              src="https://file.rendit.io/n/q7ht7E6QOUQA59yGnbt3.svg"
-                              alt="Materialsymbolsplaycircle"
-                              className="relative mb-8 w-12"
-                            />
+                            <Icon  className="relative mb-8 w-12" width={42} icon="icon-park-solid:play"  style={{color: "white"}} />
                           </div>
                         </div>
                       ))}

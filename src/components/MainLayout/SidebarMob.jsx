@@ -9,10 +9,7 @@ import GameHistory from "../../assets/new_game/history.svg";
 import ReferEarn from "../../assets/new_game/refer&earn.svg";
 import Notification from "../../assets/new_game/notification.svg";
 import Support from "../../assets/new_game/support.svg";
-import HamBurger from "../../assets/profile/hamburger.svg";
 import BackBlack from "../../assets/profile/back_black.svg";
-import Favorite from "../../assets/new_game/fav.svg";
-import BellIcon from "../../assets/new_game/notification.svg";
 import { IoMenu } from "react-icons/io5";
 import { Icon } from "@iconify-icon/react";
 export function SidebarMob({
@@ -31,8 +28,8 @@ export function SidebarMob({
   const closeDrawer = () => setOpen(false);
   const navigate = useNavigate();
   return (
-    <React.Fragment>
-      <Button className="bg-[#fead3a] shadow-none p-0 hover:shadow-none">
+    <React.Fragment >
+      <Button className="bg-[#fead3a]  shadow-none p-0 hover:shadow-none">
         <IoMenu
           onClick={openDrawer}
           className="text-white w-[28px] h-[28px] "
@@ -40,7 +37,7 @@ export function SidebarMob({
       </Button>
 
       <Drawer
-        className="bg-[#fead3a] min-h-screen overflow-scroll"
+        className="bg-[#fead3a]  min-h-screen overflow-scroll"
         size={490}
         open={open}
         onClose={closeDrawer}

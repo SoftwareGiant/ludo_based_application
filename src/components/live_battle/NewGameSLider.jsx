@@ -5,18 +5,18 @@ import "react-multi-carousel/lib/styles.css";
 const NewGameSLider = () => {
   const responsive = {
     superLargeDesktop: {
-        // the naming can be any, depends on you.
-        breakpoint: { max: 4000, min: 3000 },
-        items: 1
-      },
-      desktop: {
-        breakpoint: { max: 3000, min: 1024 },
-        items: 1
-      },
-      tablet: {
-        breakpoint: { max: 1024, min: 484 },
-        items: 1
-      },
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 1,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 484 },
+      items: 1,
+    },
     mobile: {
       breakpoint: { max: 480, min: 0 },
       items: 1,
@@ -29,7 +29,7 @@ const NewGameSLider = () => {
         className=" w-full max-h-[90px] "
         centerMode={true}
         draggable={false}
-         showDots={true}
+        showDots={true}
         infinite={true}
         autoPlay={true}
         transitionDuration={500}

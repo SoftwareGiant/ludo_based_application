@@ -17,7 +17,6 @@ const TopbarMobile = ({ isStart, handlestart }) => {
             <div className="  text-base font-['Nunito_Sans'] font-extrabold ">
               LUDO KING
             </div>
-
             <div className="text-center text-base font-['Oooh_Baby'] font-normal  -mt-2">
               punch line
             </div>

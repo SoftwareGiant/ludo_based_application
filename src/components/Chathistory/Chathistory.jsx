@@ -1,35 +1,16 @@
 import React, { useState } from "react";
 import "../../app.css";
-
-import HamBurger from "../../assets/profile/hamburger.svg";
-import Back from "../../assets/profile/ep_back.svg";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
-import AddGame from "../../assets/new_game/addgame.svg";
-import WinCash from "../../assets/new_game/wincash.svg";
-import Wallet from "../../assets/new_game/wallet.svg";
-import GameHistory from "../../assets/new_game/history.svg";
-import ReferEarn from "../../assets/new_game/refer&earn.svg";
-import Support from "../../assets/new_game/support.svg";
-import BellIcon from "../../assets/new_game/notification.svg";
-import Favorite from "../../assets/new_game/fav.svg";
 
-import Copy from "../../assets/new_game/copy.svg";
-import Share from "../../assets/new_game/share.svg";
-import Fb from "../../assets/new_game/fb.svg";
-import Wp from "../../assets/new_game/wp.svg";
-import Twtr from "../../assets/new_game/twtr.svg";
 import {
   Card,
-  CardHeader,
-  CardBody,
   Typography,
   Avatar,
 } from "@material-tailwind/react";
-import Profile from "../../assets/new_game/profile.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify-icon/react";
-import { Drawer } from "@material-tailwind/react";
+
 const Chathistory = () => {
   const [openBottom, setOpenBottom] = useState(true);
   const [OpenchatHiustory, setOpenChatHistory] = useState(false);

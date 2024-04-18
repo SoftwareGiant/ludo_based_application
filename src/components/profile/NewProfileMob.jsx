@@ -23,6 +23,7 @@ import {
 } from "../app_start/authSlice";
 import { fetchUserDetail } from "../live_battle/userSlice";
 import { Icon } from "@iconify-icon/react";
+import { toast } from "react-toastify";
 
 const NewProfileMob = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +32,7 @@ const NewProfileMob = () => {
   const [openBottom, setOpenBottom] = useState(true);
   const [aadharFront, setAadharFront] = useState(null);
   const [aadharBack, setAadharBack] = useState(null);
+  const [aadharNumber, setAadharNumber] = useState("");
   const [kycStatus, setKycStatus] = useState("Not Uploaded");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -67,10 +69,20 @@ const NewProfileMob = () => {
   const handleAadharBackUpload = (e) => {
     setAadharBack(URL.createObjectURL(e.target.files[0]));
   };
-
+  function validateAadhar(aadharNumber) {
+    // Regex pattern for Aadhar number
+    const aadharPattern = /^\d{12}$/;
+    // Check if the input matches the Aadhar pattern
+    return aadharPattern.test(aadharNumber);
+  }
   const handleSubmit = () => {
+    if (!validateAadhar(aadharNumber)) {
+      toast.error("Please Enter Valid Aadhar number");
+      return;
+    }
     if (!aadharFront || !aadharBack) {
-      alert("Please upload both Aadhar front and back images.");
+      toast.error("Please upload both Aadhar front and back images.");
+      return;
     } else {
       setKycStatus("Complete");
       closeDrawerBottom();
@@ -181,11 +193,7 @@ const NewProfileMob = () => {
             </div>
           </div>
 
-          {/* <div className={`${scrollPosition > 10 ? "pr-10" : "hidden"}`}>
-            <img src={kyc} />
-          </div> */}
-
-          <label className={`${scrollPosition > 10 ? "pr-10" : "hidden"}`}>
+          {/* <label className={`${scrollPosition > 10 ? "pr-10" : "hidden"}`}>
             <input
               type="checkbox"
               className="hidden"
@@ -221,7 +229,7 @@ const NewProfileMob = () => {
                 </div>
               )}
             </div>
-          </label>
+          </label> */}
         </div>
 
         <div className="mt-10 flex flex-col gap-3 w-full font-['Nunito_Sans'] items-start relative text-white font-bold">
@@ -241,11 +249,55 @@ const NewProfileMob = () => {
               </div>
               <div className="flex flex-row justify-between ml-4 w-full items-start">
                 <div className="text-sm mt-px">User Id :</div>
-                <span>{users?._id?.slice(0,6)}</span>
-               
+                <span>{users?._id?.slice(0, 6)}</span>
               </div>
             </div>
+            <div className="flex flex-col justify-between gap-6 w-5/6 items-start">
+              <div className="text-xl font-bold text-white">Kyc</div>
+              <div className="flex flex-row justify-between ml-4 w-full items-start">
+                <div className="text-sm text-white mt-px">Kyc :</div>
 
+                {/* <Switch color="amber" className="bg-brown-800" /> */}
+
+                <label>
+                  <input
+                    type="checkbox"
+                    className="hidden"
+                    checked={isChecked}
+                    onChange={openDrawerBottom}
+                  />
+                  <div
+                    className={`w-[56px] rounded-full shadow-lg cursor-pointer text-white font-bold text-sm ${
+                      isChecked ? "bg-green-500" : "bg-red-500"
+                    }`}
+                  >
+                    {!isChecked ? (
+                      <div className="flex  transition-all ease-in-out gap-1 items-center justify-center pr-2">
+                        <div className="bg-white  rounded-full flex items-center justify-center p-1">
+                          <Icon
+                            icon="material-symbols:error-outline"
+                            style={{ color: "green" }}
+                            width={16}
+                          />
+                        </div>
+                        <p className="text-xs"> KYC</p>
+                      </div>
+                    ) : (
+                      <div className="flex transition-all ease-in-out items-center justify-center gap-1 pl-2">
+                        <p className="text-xs"> KYC</p>
+                        <div className="bg-white rounded-full flex items-center justify-center p-1">
+                          <Icon
+                            icon="charm:circle-tick"
+                            style={{ color: "green" }}
+                            width={16}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </label>
+              </div>
+            </div>
             {/* <div className="flex flex-col justify-between gap-6 w-5/6 items-start">
               <div className="text-xl font-bold text-white">
                 Notification Preference
@@ -297,6 +349,13 @@ const NewProfileMob = () => {
           </div>
           {kycStatus === "Not Uploaded" && (
             <div className="flex flex-col gap-2 w-[60%]">
+              <input
+                type="text"
+                value={aadharNumber}
+                onChange={(e) => setAadharNumber(e.target.value)}
+                placeholder="Enter Aadhaar Number"
+                className="font-bold  cursor-pointer bg-white bg-opacity-[30%]  text-white py-2 px-4 rounded-lg"
+              />
               <label className="font-bold text-center cursor-pointer bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
                 Aadhar Front
                 <input
@@ -326,9 +385,9 @@ const NewProfileMob = () => {
         </div>
         <Typography
           color="gray"
-          className="mb-4 text-[14px] font-[Inter] mt-4 px-9 flex justify-center font-normal"
+          className="mb-4 text-[14px] font-[Inter] mt-2 px-9 flex justify-center font-normal"
         >
-          Make sure that you upload the correct image or video. This will be
+          Make sure that you upload the correct image. This will be
           used in future for reference in case of any issues.
         </Typography>
       </Drawer>
