@@ -57,7 +57,7 @@ const createBattle = async (req, res, next) => {
     });
 
     
-    global.onlineUsers[userId].join(roomId);
+    global.onlineUsers[userId]?.join(roomId);
 
     await newBattle.save();
     const notification = new Notification({
@@ -128,9 +128,9 @@ const matchUser = async (req, res, next) => {
       //   await message.save();
       // });
 
-      global.onlineUsers[userId].join(roomID);
+      global.onlineUsers[userId]?.join(roomID);
       // req.io.to(roomID).emit("battlecreated", "Battle created successfully");
-      global.io.sockets.in(roomID).emit("match", { message: "You get matched!!", roomID: roomID });
+      global.io?.sockets.in(roomID).emit("match", { message: "You get matched!!", roomID: roomID });
       // global.io.to(roomID).emit("battlecreated", "Battle created successfully");
       await newGameDetail.save();
       const notification = new Notification({
@@ -289,7 +289,7 @@ const updateCode = async (req, res, next) => {
         }]});
       await newMessage.save();
     }
-    global.io.sockets.in(roomId).emit("updatecode", {gameCode,player2});
+    global.io?.sockets.in(roomId).emit("updatecode", {gameCode,player2});
     
 
     return res.status(200).json({ gameDetail });

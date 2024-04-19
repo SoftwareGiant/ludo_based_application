@@ -1,6 +1,0 @@
-{
-  message: 'undefined - Cast to ObjectId failed for value "undefined" (type string) at path "senderId" for model "Message" - /api/message/allmessages/undefined - GET',
-  level: 'error',
-  service: 'user-services',
-  timestamp: 'Apr-18-2024 02:43:10'
-}
