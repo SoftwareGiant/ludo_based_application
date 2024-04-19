@@ -5,6 +5,7 @@ import PasswordLogo from "../../../assets/admin_Sadmin/admin/pswd.svg";
 import { useNavigate } from "react-router-dom";
 import { loginAsync, selectToken } from "../../app_start/authSlice";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 const Login = () => {
   const navigate = useNavigate();
   const [mob, setMob] = useState("");
@@ -23,7 +24,7 @@ useEffect(()=>{
         navigate("/newonboard");
       })
       .catch((error) => {
-        alert(error.message);
+        toast.error(error.message);
         console.error("Login error:", error);
       });
   };

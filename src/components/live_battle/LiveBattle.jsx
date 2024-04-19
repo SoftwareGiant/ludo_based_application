@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllBattles } from "./battleSlice";
 import { matchUser } from "./matchSlice";
 import { fetchUserDetail } from "./userSlice";
+import { toast } from "react-toastify";
 
 const LiveBattle = () => {
   const dispatch = useDispatch();
@@ -84,7 +85,7 @@ const LiveBattle = () => {
     // console.log(e.player1)
     // console.log(users?.user._id)
     if (users?._id === e.player1) {
-      alert("you have to wait until other user can't join the battle");
+      toast.success("you have to wait until other user can't join the battle");
       return;
     }
 

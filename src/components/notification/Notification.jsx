@@ -58,8 +58,8 @@ const Notification = () => {
           className="border-solid w-full h-px border-t border-black/30"
         />
 
-        <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative">
-          <div className="bg-[#fead3a] h-[98%] w-[200%] rounded-[50%]   -top-20 absolute -left-[50%]" />
+        <div className="bg-[#fead3a] w-full min-h-screen overflow-hidden relative">
+          {/* <div className="bg-[#fead3a] h-[98%] w-[200%] rounded-[50%]   -top-20 absolute -left-[50%]" /> */}
           <div className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-4">
             <div className="text-white bg-[#0f002b] flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
               <div className="flex justify-between w-full items-center p-3">
@@ -85,6 +85,7 @@ const Notification = () => {
               </Button>
             </div>
           </div>
+
           <div className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-4">
             <div className="text-white bg-[#0f002b] flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
               <div className="flex justify-between w-full items-center p-3 pb-1">
@@ -126,6 +127,7 @@ const Notification = () => {
               </Button>
             </div>
           </div>
+
 
           <button className="bg-black text-white px-8 py-2 w-3/5  max-w-[480px] relative rounded-lg flex justify-center m-auto mt-20">Clear All</button>
         </div>

@@ -22,6 +22,7 @@ import Twtr from "../../assets/new_game/twtr.svg";
 import Profile from "../../assets/new_game/profile.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const ReferrEarnMob = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [referno, setReferno] = useState(753478);
@@ -32,11 +33,12 @@ const ReferrEarnMob = () => {
   const copyToClipboard = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
-      alert("Text copied to clipboard:", text);
+      toast.success("Text copied to clipboard: ");
     } catch (error) {
-      alert("Error copying to clipboard:", error);
+      alert("Error copying to clipboard");
     }
   };
+
   return (
     <>
       <div className="max-w-[480px] w-full min-h-screen h-full">

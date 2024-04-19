@@ -227,7 +227,7 @@ const NewGameMob = () => {
 
   const handleBattleAmountChange = (e) => {
     const value = e.target.value;
-    // Use regex to allow only numeric values
+    // Used regex to allow only numeric values
     if (/^\d*$/.test(value)) {
       setBattleAmount(value);
     }

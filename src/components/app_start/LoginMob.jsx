@@ -19,6 +19,7 @@ import {
   MenuList,
   MenuHandler,
 } from "@material-tailwind/react";
+import { toast } from "react-toastify";
 
 const validationSchema = Yup.object().shape({
   number: Yup.string()
@@ -60,7 +61,7 @@ const LoginMob = () => {
         };
       })
       .catch((error) => {
-        alert(error.message);
+        toast.error(error.message);
         console.error("Login error:", error);
       });
     // setIsOtp(true);

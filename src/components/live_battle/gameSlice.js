@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const initialState = {
     gameCodeUpdateStatus: 'idle',
@@ -26,7 +27,7 @@ export const updateGameCode = createAsyncThunk(
                 return null;
             }
         } catch (error) {
-            alert(error);
+            toast.error(error);
             throw new Error('Failed to update game code');
         }
     }

@@ -150,7 +150,7 @@ const MyChat = () => {
                   </ListItemPrefix>{" "}
                   Add Fav
                 </ListItem>
-                <ListItem className="hover:bg-black hover:text-white">
+                <ListItem onClick={()=>navigate("/feedback")}  className="hover:bg-black hover:text-white">
                   <ListItemPrefix>
                     <img src={feedback} />
                   </ListItemPrefix>

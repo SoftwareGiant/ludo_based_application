@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import "../../app.css";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
-
-import {
-  Card,
-  Typography,
-  Avatar,
-} from "@material-tailwind/react";
+import { Card, Typography, Avatar } from "@material-tailwind/react";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify-icon/react";
 
 const Chathistory = () => {
   const [openBottom, setOpenBottom] = useState(true);
-  const [OpenchatHiustory, setOpenChatHistory] = useState(false);
+  const [OpenchatHistory, setOpenChatHistory] = useState(false);
   const [OpenRecent, setOpenRecent] = useState(false);
   const openDrawerBottom = () => setOpenBottom(true);
   const closeDrawerBottom = () => setOpenBottom(false);
@@ -65,10 +60,10 @@ const Chathistory = () => {
                   icon="mingcute:arrow-left-line"
                   width="32"
                 />
-                <p className="flex gap-1">
+                <div className="flex gap-1">
                   {" "}
                   <p className="font-extrabold">chat</p>history
-                </p>
+                </div>
               </div>
               <Icon icon="material-symbols:info-outline" width="32" />
             </div>
@@ -77,14 +72,9 @@ const Chathistory = () => {
                 color="transparent"
                 className="w-full mt-5 max-w-[22rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-3xl "
               >
-                <div
-                  color="transparent"
-                  floated={false}
-                  shadow={false}
-                  className="flex items-center gap-4 "
-                >
+                <div className="flex items-center gap-4 ">
                   <Avatar
-                      onClick={()=>navigate("/matchUserChat")}
+                    onClick={() => navigate("/matchUserChat")}
                     size="lg"
                     variant="circular"
                     src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
@@ -100,13 +90,10 @@ const Chathistory = () => {
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <Typography
-                        color="blue-gray "
-                        className="flex items-center gap-1"
-                      >
+                      <div className="flex items-center gap-1">
                         <Icon icon="mdi:tick-circle-outline" />
                         Let’s play again
-                      </Typography>
+                      </div>
 
                       <Icon
                         className="cursor-pointer"
@@ -117,18 +104,14 @@ const Chathistory = () => {
                   </div>
                 </div>
               </Card>
+
               <Card
                 color="transparent"
                 className="w-full max-w-[22rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-3xl "
               >
-                <div
-                  color="transparent"
-                  floated={false}
-                  shadow={false}
-                  className="flex items-center gap-4 "
-                >
+                <div className="flex items-center gap-4 ">
                   <Avatar
-                      onClick={()=>navigate("/matchUserChat")}
+                    onClick={() => navigate("/matchUserChat")}
                     size="lg"
                     variant="circular"
                     src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
@@ -158,7 +141,7 @@ const Chathistory = () => {
               </Card>
             </div>
           </div>
-        ) : OpenchatHiustory ? (
+        ) : OpenchatHistory ? (
           <div className="relative   h-full">
             <div className="text-white py-2 px-4 flex font-extrabold text-[20px] items-center justify-between">
               <div className="gap-2 flex items-center">
@@ -176,14 +159,9 @@ const Chathistory = () => {
                 color="transparent"
                 className="w-full mt-5 max-w-[22rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-3xl "
               >
-                <div
-                  color="transparent"
-                  floated={false}
-                  shadow={false}
-                  className="flex items-center gap-4 "
-                >
+                <div className="flex items-center gap-4 ">
                   <Avatar
-                  onClick={()=>navigate("/matchUserChat")}
+                    onClick={() => navigate("/matchUserChat")}
                     size="lg"
                     variant="circular"
                     src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
@@ -191,7 +169,9 @@ const Chathistory = () => {
                   />
                   <div className="flex w-full  flex-col gap-0.5">
                     <div className="flex items-center justify-between">
-                      <Typography variant="h5" color="blue-gray">
+                      <Typography variant="h5" 
+                      // color="blue-gray"
+                      >
                         Ludo Player
                       </Typography>
                       <div className="5 flex items-center gap-0 ">
@@ -200,7 +180,7 @@ const Chathistory = () => {
                     </div>
                     <div className="flex items-center justify-between">
                       <Typography
-                        color="blue-gray "
+                        // color="blue-gray "
                         className="flex items-center gap-1"
                       >
                         <Icon icon="mdi:tick-circle-outline" />
@@ -226,14 +206,9 @@ const Chathistory = () => {
                 color="transparent"
                 className="w-full max-w-[22rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-3xl "
               >
-                <div
-                  color="transparent"
-                  floated={false}
-                  shadow={false}
-                  className="flex items-center gap-4 "
-                >
+                <div className="flex items-center gap-4 ">
                   <Avatar
-                   onClick={()=>navigate("/matchUserChat")}
+                    onClick={() => navigate("/matchUserChat")}
                     size="lg"
                     variant="circular"
                     src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
@@ -241,7 +216,9 @@ const Chathistory = () => {
                   />
                   <div className="flex w-full  flex-col gap-0.5">
                     <div className="flex items-center justify-between">
-                      <Typography variant="h5" color="blue-gray">
+                      <Typography variant="h5" 
+                      // color="blue-gray"
+                      >
                         Ludo Player
                       </Typography>
                       <div className="5 flex items-center gap-0 ">
@@ -249,7 +226,9 @@ const Chathistory = () => {
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <Typography color="blue-gray">
+                      <Typography
+                      //  color="blue-gray"
+                       >
                         Let’s play again
                       </Typography>
 
@@ -259,11 +238,11 @@ const Chathistory = () => {
                           className="cursor-pointer"
                           width="26"
                         />
-                      <Icon
-                        className="cursor-pointer"
-                        icon="wpf:mute"
-                        width="26"
-                      />
+                        <Icon
+                          className="cursor-pointer"
+                          icon="wpf:mute"
+                          width="26"
+                        />
                       </div>
                     </div>
                   </div>
@@ -291,7 +270,7 @@ const Chathistory = () => {
             </div>
             <div
               className={`flex flex-col h-[60%] ${
-                OpenchatHiustory
+                OpenchatHistory
                   ? "translate-y-[100%] transition-transform delay-200"
                   : ""
               } fixed bottom-0 py-10 rounded-t-3xl bg-black w-full justify-start items-center gap-3 pt-4 max-w-[480px]`}
@@ -303,12 +282,7 @@ const Chathistory = () => {
                 color="transparent"
                 className="w-full mt-5 max-w-[22rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-3xl "
               >
-                <div
-                  color="transparent"
-                  floated={false}
-                  shadow={false}
-                  className="flex items-center gap-4 "
-                >
+                <div color="transparent" className="flex items-center gap-4 ">
                   <Avatar
                     size="lg"
                     variant="circular"
@@ -317,7 +291,9 @@ const Chathistory = () => {
                   />
                   <div className="flex w-full  flex-col gap-0.5">
                     <div className="flex items-center justify-between">
-                      <Typography variant="h5" color="blue-gray">
+                      <Typography variant="h5" 
+                      // color="blue-gray"
+                      >
                         Ludo Player
                       </Typography>
                       <div className="5 flex items-center gap-0 ">
@@ -325,13 +301,10 @@ const Chathistory = () => {
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <Typography
-                        color="blue-gray "
-                        className="flex items-center gap-1"
-                      >
+                      <p className="flex items-center gap-1">
                         <Icon icon="mdi:tick-circle-outline" />
                         Let’s play again
-                      </Typography>
+                      </p>
 
                       <Icon
                         className="cursor-pointer"
@@ -346,12 +319,7 @@ const Chathistory = () => {
                 color="transparent"
                 className="w-full max-w-[22rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-3xl "
               >
-                <div
-                  color="transparent"
-                  floated={false}
-                  shadow={false}
-                  className="flex items-center gap-4 "
-                >
+                <div className="flex items-center gap-4 ">
                   <Avatar
                     size="lg"
                     variant="circular"
@@ -360,7 +328,9 @@ const Chathistory = () => {
                   />
                   <div className="flex w-full  flex-col gap-0.5">
                     <div className="flex items-center justify-between">
-                      <Typography variant="h5" color="blue-gray">
+                      <Typography variant="h5" 
+                      // color="blue-gray"
+                      >
                         Ludo Player
                       </Typography>
                       <div className="5 flex items-center gap-0 ">
@@ -368,7 +338,9 @@ const Chathistory = () => {
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <Typography color="blue-gray">
+                      <Typography 
+                      // color="blue-gray"
+                      >
                         Let’s play again
                       </Typography>
                       <Icon

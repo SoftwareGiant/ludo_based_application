@@ -86,7 +86,7 @@ function App() {
             <Route path="/livebattle2" element={<LiveBattle2 />} />
             <Route path="/requestchallange/:userId" element={<OpenChallengeReq />}
             />
-            <Route path="/chat" element={<ChatUserMob />} />
+            {/* <Route path="/chat" element={<ChatUserMob />} /> */}
             <Route path="/chat/:chatId/:player" element={<ChatUserMob />} />
             <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/userprofile2" element={<UserProfile2 />} />

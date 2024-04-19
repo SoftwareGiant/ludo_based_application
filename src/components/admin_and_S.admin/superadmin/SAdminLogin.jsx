@@ -32,7 +32,7 @@ const SAdminLogin = () => {
         isToggled ? navigate("/superadmin") : navigate("/newonboard");
       })
       .catch((error) => {
-        alert(error.message);
+        toast.error(error.message);
         console.error("Login error:", error);
       });
   };

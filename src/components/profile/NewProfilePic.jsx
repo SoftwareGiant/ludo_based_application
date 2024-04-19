@@ -6,6 +6,7 @@ import image from "../../assets/new_game/image.svg";
 import video from "../../assets/new_game/video.svg";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 const NewProfilePic = () => {
   const [imageFile, setImageFile] = useState("https://images.unsplash.com/photo-1529524987368-af489318987c?q=80&w=582&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
 
@@ -38,7 +39,7 @@ const NewProfilePic = () => {
       };
       reader.readAsDataURL(file);
     }
-    alert("image upload successfully")
+    toast.success("image upload successfully")
   };
 
   return (
@@ -87,9 +88,6 @@ const NewProfilePic = () => {
             Upload or take a new picture.
             </span>
         </div>
-
-
-
 
         <div className="flex fixed bottom-0 py-10 rounded-t-3xl bg-black w-full justify-center items-center gap-10 pt-10 max-w-[480px]  ">
           
