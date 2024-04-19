@@ -278,7 +278,7 @@ const ChatUserMob = () => {
           </div>
         </div>
       </div>
-      {player != "player2" && (
+      {player != "player2" && messageList.length==0  && (
         <Drawer
           placement="bottom"
           open={openBottom}
