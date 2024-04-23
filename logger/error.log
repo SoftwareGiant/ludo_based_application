@@ -1,0 +1,6 @@
+{
+  message: '401 - Unauthorized credential - /api/message/favourite/65d1c0a8c204a235d05cb883 - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'Apr-23-2024 15:37:16'
+}

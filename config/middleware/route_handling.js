@@ -20,6 +20,9 @@ const RouteHandling = (app) =>{
       `${err.status} - ${err.message} - ${req.originalUrl} - ${req.method}`,
     );
     // await sendMail();
+    if(!err?.status){
+      err.status = 404;
+    }
     return res.status(err.status).json({ message: err.message });
   });
 }

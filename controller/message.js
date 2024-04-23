@@ -115,8 +115,8 @@ const allmessage = await Message.findOne({
   ],
 });
 if(allmessage){
-  allMessage.favourite.userId.push(userId);
-  await allMessage.save();
+  allmessage.favourite.userId.push(userId);
+  await allmessage.save();
   return res.status(200).json({message:"Added in favourite list"})
 }
 return res.status(400).json({message:"Please try again"})

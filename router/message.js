@@ -8,9 +8,11 @@ router.get("/allmessages/:id", [verifyToken], wrapAsync(allMessage));
 
 router.get("/allChat", [verifyToken], wrapAsync(allChat));
 
-router.get("/favourite",[verifyToken],wrapAsync(makefavourite))
+router.get("/favourite/:id",[verifyToken],wrapAsync(makefavourite))
 
-router.get("listoffavourite",[verifyToken],wrapAsync(listOfFavourite))
+
+router.get("/listoffavourite",[verifyToken],wrapAsync(listOfFavourite))
+
 
 router.post("/sendmessage/:id", [verifyToken], wrapAsync(sendMessage));
 
