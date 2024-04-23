@@ -70,7 +70,6 @@ function App() {
       {/* <SocketProvider> */}
         <Routes>
         
-        
         <Route path="/mychat" element={<MyChat />} />
           <Route path="/adminlogin" element={<SAdminLogin />} />
        
