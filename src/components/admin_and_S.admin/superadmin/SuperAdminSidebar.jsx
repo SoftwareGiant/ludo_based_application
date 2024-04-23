@@ -1,18 +1,10 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify-icon/react";
-import kyc from "../../../assets/admin_Sadmin/admin/kycicon.svg";
-import game from "../../../assets/admin_Sadmin/admin/game.svg";
-import deposite from "../../../assets/admin_Sadmin/admin/deposite.svg";
-import referal from "../../../assets/admin_Sadmin/admin/referral.svg";
-import history from "../../../assets/admin_Sadmin/admin/history.svg";
-import withdraw from "../../../assets/admin_Sadmin/admin/withdraw.svg";
 import { Link, useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 const SuperAdminSidebar = () => {
   const [showFullSidebar, setShowFullSidebar] = useState(false);
   const location = useLocation();
-
-  console.log(location.pathname);
 
   const toggleSidebar = () => {
     setShowFullSidebar(!showFullSidebar);
@@ -71,7 +63,7 @@ const SuperAdminSidebar = () => {
                 : ""
             } hover:bg-[#EEEEEE] h-[51px]`}
           >
-            <Icon icon="arcticons:battleforwesnoth" width="24"  />
+            <Icon icon="arcticons:battleforwesnoth" width="24" />
             {showFullSidebar && <span>Tournamnets</span>}
           </div>
         </Link>

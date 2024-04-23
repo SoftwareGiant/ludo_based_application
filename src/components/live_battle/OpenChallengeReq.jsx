@@ -9,6 +9,7 @@ import {
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllBattles } from "./battleSlice";
+import LudoMainLogo from "../MainLayout/LudoMainLogo";
 const OpenChallengeReq = () => {
 
   const navigate = useNavigate();
@@ -54,15 +55,7 @@ const OpenChallengeReq = () => {
       <div className="bg-[#fead3a]  flex justify-between  w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
           <SidebarMob />
-          <div className="flex flex-col text-[#0f002b] ">
-            <div className="  text-base font-['Nunito_Sans'] font-extrabold ">
-              LUDO KING
-            </div>
-
-            <div className="text-center text-base font-['Oooh_Baby'] font-normal  -mt-2">
-              punch line
-            </div>
-          </div>
+          <LudoMainLogo/>
         </div>
         <img
           src={FrameProfile}

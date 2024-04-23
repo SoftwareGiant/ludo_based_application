@@ -2,6 +2,7 @@ import React from "react";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { SidebarMob } from "./SidebarMob";
 import { useNavigate } from "react-router-dom";
+import LudoMainLogo from "./LudoMainLogo";
 const TopbarMobile = ({ isStart, handlestart }) => {
   const navigate = useNavigate();
   return (
@@ -13,14 +14,7 @@ const TopbarMobile = ({ isStart, handlestart }) => {
       <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
           <SidebarMob />
-          <div className="flex flex-col text-[#0f002b] ">
-            <div className="  text-base font-['Nunito_Sans'] font-extrabold ">
-              LUDO KING
-            </div>
-            <div className="text-center text-base font-['Oooh_Baby'] font-normal  -mt-2">
-              punch line
-            </div>
-          </div>
+          <LudoMainLogo/>
         </div>
         {isStart ? (
           <div

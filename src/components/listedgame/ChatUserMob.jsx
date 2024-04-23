@@ -23,6 +23,7 @@ import { SidebarMob } from "../MainLayout/SidebarMob";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import LudoMainLogo from "../MainLayout/LudoMainLogo";
 const ChatUserMob = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -148,15 +149,7 @@ const ChatUserMob = () => {
       <div className="bg-[#fead3a] max-w-[480px] absolute  shadow-lg border-b border-[#0f002b]  flex justify-between   items-center w-full  pt-4  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
           <SidebarMob />
-          <div className="flex flex-col text-[#0f002b] ">
-            <div className="  text-base font-['Nunito_Sans'] font-extrabold ">
-              LUDO KING
-            </div>
-
-            <div className="text-center text-base font-['Oooh_Baby'] font-normal  -mt-2">
-              punch line
-            </div>
-          </div>
+          <LudoMainLogo/>
         </div>
         <div
           className="bg-[#1E1E1E] px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold"

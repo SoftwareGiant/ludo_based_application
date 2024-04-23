@@ -12,6 +12,7 @@ import allkycuserReducer from "./components/admin_and_S.admin/admin/AdminSlice/A
 import allDepositRequestsReducer from "./components/admin_and_S.admin/admin/AdminSlice/depositeHisory";
 import allWithdrawalRequestsReducer from "./components/admin_and_S.admin/admin/AdminSlice/withdrawlSlice";
 import gameHistoryReducer from "./components/admin_and_S.admin/admin/AdminSlice/gameHistorySlice ";
+import ChatReducer from "./components/Chathistory/ChatSlice";
 
 export const store = configureStore({
     reducer: {
@@ -27,6 +28,7 @@ export const store = configureStore({
         allDepositRequests:allDepositRequestsReducer,
         allWithdrawalRequests:allWithdrawalRequestsReducer,
         gameHistory:gameHistoryReducer,
+        chatAll:ChatReducer,
         socketfor:socketReducer
     },
     middleware: (getDefaultMiddleware) =>

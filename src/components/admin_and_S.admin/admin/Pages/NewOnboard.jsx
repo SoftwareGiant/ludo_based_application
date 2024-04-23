@@ -203,10 +203,11 @@ export function NewOnboard() {
                       >
                         {head}{" "}
                         {(index === 0 || index === 3) && (
-                          <ChevronUpDownIcon
-                            strokeWidth={2}
-                            className="h-4 w-4"
-                          />
+                           <Icon
+                           icon="prime:sort"
+                           strokeWidth={2}
+                           className="h-4 w-4"
+                         />
                         )}
                       </Typography>
                     </th>

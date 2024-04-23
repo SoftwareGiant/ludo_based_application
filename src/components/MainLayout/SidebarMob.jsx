@@ -28,7 +28,7 @@ export function SidebarMob({
   const closeDrawer = () => setOpen(false);
   const navigate = useNavigate();
   return (
-    <React.Fragment >
+    <React.Fragment>
       <Button className="bg-[#fead3a]  shadow-none p-0 hover:shadow-none">
         <IoMenu
           onClick={openDrawer}
@@ -42,7 +42,6 @@ export function SidebarMob({
         open={open}
         onClose={closeDrawer}
       >
-        {/* <div className=" flex-col pb-16  h-full w-full min-h-screen  flex "> */}
         <div className="w-full h-8" />
         <Button
           className="bg-yello shadow-none hover:shadow-none p-0 px-4"
@@ -216,7 +215,7 @@ export function SidebarMob({
               </div>
             </Link>
           </div>
-          <div className="flex flex-col gap-2 w-full max-w-[480px] px-6 font-['Oooh_Baby'] justify-center items-center pt-4">
+          <div className="flex mb-2 flex-col gap-2 w-full max-w-[480px] px-6 font-['Oooh_Baby'] justify-center items-center pt-4">
             {" "}
             <div className="flex flex-col justify-center items-center">
               <div className="text-2xl font-['Nunito_Sans'] font-bold text-[#0f002b]">
@@ -229,7 +228,7 @@ export function SidebarMob({
               {" "}
               <div
                 onClick={() => navigate("/terms")}
-                className="text-center text-xs font-medium"
+                className="cursor-pointer  text-center text-xs font-medium"
               >
                 {" "}
                 Terms of Service{" "}
@@ -237,21 +236,20 @@ export function SidebarMob({
               <div className="text-center text-xs font-bold">·</div>
               <div
                 onClick={() => navigate("/privacy")}
-                className="text-center text-xs font-medium"
+                className=" cursor-pointer text-center text-xs font-medium"
               >
                 Privacy Policy
               </div>{" "}
               <div className="text-center text-xs font-bold">·</div>
               <div
                 onClick={() => navigate("/content")}
-                className="text-center text-xs font-medium"
+                className="text-center cursor-pointer text-xs font-medium"
               >
                 Content Policies
               </div>
             </div>
           </div>
         </div>
-        {/* </div> */}
       </Drawer>
     </React.Fragment>
   );

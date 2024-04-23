@@ -40,6 +40,7 @@ export function KycVerification() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isClicked, setIsClicked] = useState(false);
   const [isRefresh, setRefresh] = useState(false);
+  const [KycStatus, setKycStatus] = useState("");
   const dispatch = useDispatch();
 
   const users = useSelector(selectAllUsers);
@@ -205,36 +206,78 @@ export function KycVerification() {
           <table className=" mt-4 w-full min-w-max table-auto text-left font-[Inter] font-medium text-[16px]">
             <thead>
               <tr>
-                {TABLE_HEAD.map((head, index) => (
-                  <th
-                    key={head}
-                    className="cursor-pointer   p-2 transition-colors  rounded-lg"
-                    onClick={() =>
-                      sortTable(
-                        index === 0 ? "_id" : index === 2 ? "createdAt" : ""
-                      )
-                    }
-                  >
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]"
+                <th
+                  onClick={() => sortTable("_id")}
+                  className="cursor-pointer   p-2 transition-colors  rounded-lg"
+                >
+                  <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
+                    GID
+                    <Icon
+                      icon="prime:sort"
+                      strokeWidth={2}
+                      className="h-4 w-4"
+                    />
+                  </Typography>
+                </th>
+                <th className="cursor-pointer   p-2 transition-colors  rounded-lg">
+                  <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
+                    Mobile Number
+                  </Typography>
+                </th>
+                <th
+                  onClick={() => sortTable("createdAt")}
+                  className="cursor-pointer   p-2 transition-colors  rounded-lg"
+                >
+                  <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
+                    Initiation Date
+                    <Icon
+                      icon="prime:sort"
+                      strokeWidth={2}
+                      className="h-4 w-4"
+                    />
+                  </Typography>
+                </th>
+                <Menu>
+                  <MenuHandler>
+                    <th
+                      onClick={() => sortTable("userKyc.verificationStatus")}
+                      className="cursor-pointer   p-2 transition-colors  rounded-lg"
                     >
-                      {head}{" "}
-                      {(index == 0 || index === 2) && (
-                        <ChevronUpDownIcon
-                          strokeWidth={2}
-                          className="h-4 w-4"
-                        />
-                      )}
-                    </Typography>
-                  </th>
-                ))}
+                      <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
+                        Request Status
+                     
+                        <Icon icon="icon-park-solid:down-one" />
+                      </Typography>
+                    </th>
+                  </MenuHandler>
+                  <MenuList>
+                    <MenuItem
+                      onClick={() => setKycStatus("approved")}
+                      className="font-[Inter] text-[16px] text-[#0F002B] font-medium flex justify-start gap-3 items-center"
+                    >
+                      <Icon icon="mdi:calendar-today-outline" width="24" />
+                      Approved
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => setKycStatus("pending")}
+                      className="font-[Inter] text-[16px] text-[#0F002B] font-medium flex justify-start gap-3 items-center"
+                    >
+                      <Icon icon="bi:calendar4-week" width="24" />
+                      Pending
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
               </tr>
             </thead>
             <tbody>
-              {filteredUsers.map(
-                ({ _id, mobileNo, createdAt, userKyc, updatedAt }) => {
+              {filteredUsers?.filter((item) =>
+                  KycStatus === "approved"
+                    ? item.userKyc.verificationStatus === true
+                    : KycStatus === "pending"
+                    ? item.userKyc.verificationStatus === false
+                    : item
+                )
+                .map(({ _id, mobileNo, createdAt, userKyc, updatedAt }) => {
                   return (
                     <tr key={_id}>
                       <td className="p-4">
@@ -259,15 +302,6 @@ export function KycVerification() {
                         </div>
                       </td>
                       <td className="p-4">
-                        {/* <div
-                          className={`rounded-xl flex justify-center items-center w-[87px] h-[19px]
-                         ${userKyc.verificationStatus  ? "bg-[#00C300]" : "bg-[#FF0000]"}
-                        `}
-                        >
-                          <Typography className="font-[Inter] font-normal text-[10px] text-[#FFFFFF] ">
-                            {userKyc.verificationStatus ? "success" : "Pending"}
-                          </Typography>
-                        </div> */}
                         <KycStatusCard
                           handleRefresh={handleRefresh}
                           updatedAt={updatedAt}
@@ -277,8 +311,7 @@ export function KycVerification() {
                       </td>
                     </tr>
                   );
-                }
-              )}
+                })}
             </tbody>
           </table>
         </CardBody>

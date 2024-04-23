@@ -187,14 +187,11 @@ function Withdraw() {
                   <Menu>
                     <MenuHandler>
                       <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
-                        Transacion Status
-                        {/* <div className="flex justify-center items-center w-[19px] h-[19px] relative ">
-                          <div className="bg-[#FEAD3A] w-[6.33px] absolute top-0 right-0 h-[6.33px]  rounded-full"></div>
-                          <Icon
-                            icon="oi:caret-bottom"
-                            className="h-[3.96px] w-[7.92px] -mt-2 -ml-2"
-                          />
-                        </div> */}
+                     
+                        <div className="flex justify-between items-center w-full">
+                          <p> Transacion Status</p>
+                          <Icon icon="oi:caret-bottom" />
+                        </div>
                       </Typography>
                     </MenuHandler>
                     <MenuList className="flex flex-col gap-3">
@@ -204,7 +201,7 @@ function Withdraw() {
                       </MenuItem>
                       <MenuItem className="flex items-center gap-2 font-[Inter] font-medium text-[#0F002B] text-[16px]">
                         <Icon icon="mdi:receipt-text-pending" width="24" />{" "}
-                        Inactive Accounts
+                        Pending
                       </MenuItem>
                       <MenuItem className="flex items-center gap-2 font-[Inter] font-medium text-[#0F002B] text-[16px]">
                         <Icon icon="ic:sharp-error" width="24" /> Failed

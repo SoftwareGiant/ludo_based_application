@@ -47,7 +47,7 @@ const KycStatusCard = ({ status, uid, updatedAt, handleRefresh }) => {
                         `}
       >
         <span className="font-[Inter] font-normal text-[10px] text-[#FFFFFF] ">
-          {status ? "success" : "Pending"}
+          {status ? "Approved" : "Pending"}
         </span>
       </div>
       {isOpen && (

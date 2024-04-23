@@ -19,6 +19,7 @@ import { MdOutlineReport } from "react-icons/md";
 import { RiFeedbackFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import AdminFooter from "../Common.jsx/AdminFooter";
+import AdminSupportChat from "../Common.jsx/AdminSupportChat";
 
 const SUPPORT_QUES = [
   "What does it mean to run an application as an administrator?",
@@ -203,8 +204,8 @@ function AdminSupport() {
         </Card>
         <AdminFooter logohide={true}/>
       </div>
-      <div className="w-2/5 relative overflow-scroll main-body-right max-h-screen">
-        <div className=" w-full   bg-none overflow-hidden relative">
+      <div className="w-2/5 relative overflow-scroll main-body-right ">
+        {/* <div className=" w-full   bg-none overflow-hidden relative">
           <div className="w-full overflow-hidden h-full ">
             <div className="z-10 flex justify-between p-4  items-center  bg-[#E6E6E6] w-full  ">
               <div className="flex justify-center gap-2 items-center">
@@ -218,7 +219,7 @@ function AdminSupport() {
                 </div>
               </div>
               <div className="flex items-center gap-1">
-                {/* <Icon icon="formkit:hidden" width="24"/> */}
+              
                 <div>
                   <Popover placement="left-start">
                     <PopoverHandler>
@@ -333,7 +334,8 @@ function AdminSupport() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
+        <AdminSupportChat/>
       </div>
     </div>
   );

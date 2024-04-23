@@ -1,24 +1,4 @@
 import React, { useState } from "react";
-import "../../app.css";
-import AddGame from "../../assets/new_game/addgame.svg";
-import Profile from "../../assets/new_game/profile.svg";
-import WinCash from "../../assets/new_game/wincash.svg";
-import Wallet from "../../assets/new_game/wallet.svg";
-import GameHistory from "../../assets/new_game/history.svg";
-import ReferEarn from "../../assets/new_game/refer&earn.svg";
-import Notification from "../../assets/new_game/notification.svg";
-import Support from "../../assets/new_game/support.svg";
-import LiveBattle from "../../assets/new_game/livebattle.svg";
-import Filter from "../../assets/new_game/filter.svg";
-import Favorite from "../../assets/new_game/fav.svg";
-import HamBurger from "../../assets/profile/hamburger.svg";
-import Mail from "../../assets/notification/mail.svg";
-import Swipe from "../../assets/notification/rightswipe.svg";
-import DropIcon from "../../assets/notification/dropicon.svg";
-import Back from "../../assets/profile/ep_back.svg";
-import BellIcon from "../../assets/new_game/notification.svg";
-import { Link } from "react-router-dom";
-import Sidebar from "../MainLayout/Sidebar";
 import ButtonLoader from "./ButtonLoader";
 const MyButton = ({ text, isLoading, handleCLick, theme }) => {
     return (

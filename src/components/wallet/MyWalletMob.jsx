@@ -7,6 +7,7 @@ import { SidebarMob } from "../MainLayout/SidebarMob";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserDetail } from "../live_battle/userSlice";
 import { Icon } from "@iconify-icon/react";
+import LudoMainLogo from "../MainLayout/LudoMainLogo";
 const MyWalletMob = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.user);
@@ -25,14 +26,7 @@ console.log(users);
       <div className="bg-[#fead3a] flex flex-row justify-between max-w-[480px] w-full h-12 items-start pt-2 px-5 ">
         <div className="flex flex-row gap-3 w-2/5 items-start">
           <SidebarMob />
-          <div className="relative flex flex-row justify-center w-24 items-start">
-            <div className="text-center text-base font-['Nunito_Sans'] font-bold text-[#0f002b] absolute top-0 left-0 h-5 w-24">
-              LUDO KING
-            </div>
-            <div className="text-center text-base font-['Oooh_Baby'] text-[#0f002b] relative mt-4">
-              punch line
-            </div>
-          </div>
+          <LudoMainLogo/>
         </div>
         <img
           src={FrameProfile}

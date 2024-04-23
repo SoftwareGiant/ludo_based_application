@@ -1,18 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../app.css";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { Card, Typography, Avatar } from "@material-tailwind/react";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify-icon/react";
+import { fetchAllChatList } from "./ChatSlice";
+import { useDispatch, useSelector } from "react-redux";
+import LudoMainLogo from "../MainLayout/LudoMainLogo";
 
 const Chathistory = () => {
   const [openBottom, setOpenBottom] = useState(true);
   const [OpenchatHistory, setOpenChatHistory] = useState(false);
   const [OpenRecent, setOpenRecent] = useState(false);
+
   const openDrawerBottom = () => setOpenBottom(true);
   const closeDrawerBottom = () => setOpenBottom(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { allChatList, loading, error } = useSelector(
+    (state) => state?.chatAll
+  );
+ 
+  console.log(allChatList);
+  useEffect(() => {
+    dispatch(fetchAllChatList());
+  }, []);
   const handleChatHistory = () => {
     setOpenChatHistory(true);
   };
@@ -30,15 +43,7 @@ const Chathistory = () => {
         <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
           <div className="flex flex-row gap-3 items-start mt-3">
             <SidebarMob />
-            <div className="flex flex-col text-[#0f002b] ">
-              <div className="  text-base font-['Nunito_Sans'] font-extrabold ">
-                LUDO KING
-              </div>
-
-              <div className="text-center text-base font-['Oooh_Baby'] font-normal  -mt-2">
-                punch line
-              </div>
-            </div>
+            <LudoMainLogo/>
           </div>
           <img
             onClick={() => navigate("/profile")}
@@ -169,8 +174,9 @@ const Chathistory = () => {
                   />
                   <div className="flex w-full  flex-col gap-0.5">
                     <div className="flex items-center justify-between">
-                      <Typography variant="h5" 
-                      // color="blue-gray"
+                      <Typography
+                        variant="h5"
+                        // color="blue-gray"
                       >
                         Ludo Player
                       </Typography>
@@ -216,8 +222,9 @@ const Chathistory = () => {
                   />
                   <div className="flex w-full  flex-col gap-0.5">
                     <div className="flex items-center justify-between">
-                      <Typography variant="h5" 
-                      // color="blue-gray"
+                      <Typography
+                        variant="h5"
+                        // color="blue-gray"
                       >
                         Ludo Player
                       </Typography>
@@ -228,7 +235,7 @@ const Chathistory = () => {
                     <div className="flex items-center justify-between">
                       <Typography
                       //  color="blue-gray"
-                       >
+                      >
                         Let’s play again
                       </Typography>
 
@@ -291,8 +298,9 @@ const Chathistory = () => {
                   />
                   <div className="flex w-full  flex-col gap-0.5">
                     <div className="flex items-center justify-between">
-                      <Typography variant="h5" 
-                      // color="blue-gray"
+                      <Typography
+                        variant="h5"
+                        // color="blue-gray"
                       >
                         Ludo Player
                       </Typography>
@@ -328,8 +336,9 @@ const Chathistory = () => {
                   />
                   <div className="flex w-full  flex-col gap-0.5">
                     <div className="flex items-center justify-between">
-                      <Typography variant="h5" 
-                      // color="blue-gray"
+                      <Typography
+                        variant="h5"
+                        // color="blue-gray"
                       >
                         Ludo Player
                       </Typography>
@@ -338,7 +347,7 @@ const Chathistory = () => {
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <Typography 
+                      <Typography
                       // color="blue-gray"
                       >
                         Let’s play again

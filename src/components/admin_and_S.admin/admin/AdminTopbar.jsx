@@ -44,7 +44,7 @@ const AdminTopbar = () => {
   };
   return (
     <div className="flex font-[Inter] p-2 items-center justify-between ">
-      <p className="text-[20px]">Admin Control Panel</p>
+      <p onClick={()=>navigate("/newonboard")} className="cursor-pointer text-[20px]">Admin Control Panel</p>
       <div className="flex gap-2 items-center">
         <div className="bg-[#ffff] h-[40px] w-[253px] p-2 gap-3 rounded-lg flex items-center">
           <Icon icon="material-symbols:search" width="24" />

@@ -259,12 +259,13 @@ export function GameVerificaion() {
                         </Typography>
                       </div>
                     </td>
-
-                    <GameStatusCard
-                      val={val}
-                      handleRefresh={handleRefresh}
-                      isRefresh={isRefresh}
-                    />
+                    <td className="p-4">
+                      <GameStatusCard
+                        val={val}
+                        handleRefresh={handleRefresh}
+                        isRefresh={isRefresh}
+                      />
+                    </td>
                   </tr>
                 );
               })}

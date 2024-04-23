@@ -180,7 +180,10 @@ export function UserHistory() {
           <table className="mt-4 h-full w-full min-w-max table-auto text-left font-[Inter] font-medium text-[16px]">
             <thead>
               <tr>
-                <th className="cursor-pointer   p-2 transition-colors  rounded-lg">
+                <th
+                  onClick={() => sortTable("_id")}
+                  className="cursor-pointer   p-2 transition-colors  rounded-lg"
+                >
                   <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
                     UID
                     <Icon
@@ -195,7 +198,10 @@ export function UserHistory() {
                     Name
                   </Typography>
                 </th>
-                <th className="cursor-pointer   p-2 transition-colors  rounded-lg">
+                <th
+                  onClick={() => sortTable("createdAt")}
+                  className="cursor-pointer   p-2 transition-colors  rounded-lg"
+                >
                   <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
                     Register Date
                     <Icon
@@ -266,8 +272,11 @@ export function UserHistory() {
                       </div>
                     </td>
                     <td className="p-4">
-                    <UserHistoryCard status="ACtive" uid="123" updatedAt="123"/>
-                    
+                      <UserHistoryCard
+                        status="ACtive"
+                        uid="123"
+                        updatedAt="123"
+                      />
                     </td>
                   </tr>
                 );

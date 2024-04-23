@@ -150,8 +150,11 @@ const UserHistoryCard = ({ status, uid, updatedAt }) => {
               </div>
               <div className="overflow-y-auto table-auto p-2  flex flex-col flex-1  min-w-[70%] text-center font-[Inter] font-medium text-[16px]">
                 <div className=" w-full py-1 h-full pb-10 px-4">
-                  <CardBody className=" px-0 w-full">
-                    <div className="flex justify-between">
+                  <CardBody className="px-0 w-full">
+                    <div
+                      onClick={() => setTable1(!table1)}
+                      className="cursor-pointer  flex justify-between"
+                    >
                       <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
                         Information
                       </span>
@@ -162,14 +165,12 @@ const UserHistoryCard = ({ status, uid, updatedAt }) => {
                               width="12"
                               icon="teenyicons:up-solid"
                               className="cursor-pointer"
-                              onClick={() => setTable1(false)}
                             />
                           ) : (
                             <Icon
                               width="12"
                               icon="teenyicons:down-solid"
                               className="cursor-pointer"
-                              onClick={() => setTable1(true)}
                             />
                           )}
                         </div>

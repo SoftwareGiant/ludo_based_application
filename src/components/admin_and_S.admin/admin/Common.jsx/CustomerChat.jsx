@@ -1,10 +1,10 @@
-import feedback from "../../assets/new_game/feedback.svg";
-import report from "../../assets/new_game/report.svg";
-import menu from "../../assets/profile/menusvg.svg";
-import FrameProfile from "../../assets/profile/Frame_profile.png";
+import feedback from "../../../../assets/new_game/feedback.svg";
+import report from "../../../../assets/new_game/report.svg";
+import menu from "../../../../assets/profile/menusvg.svg";
+import FrameProfile from "../../../../assets/profile/Frame_profile.png";
 import React, { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify-icon/react";
-import { SidebarMob } from "../MainLayout/SidebarMob";
+import { SidebarMob } from "../../../MainLayout/SidebarMob";
 import { useNavigate } from "react-router-dom";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
@@ -16,8 +16,7 @@ import {
   PopoverContent,
   PopoverHandler,
 } from "@material-tailwind/react";
-import startchat from "../../assets/profile/startchat.svg";
-import LudoMainLogo from "../MainLayout/LudoMainLogo";
+import startchat from "../../../../assets/profile/startchat.svg";
 
 const user = [
   {
@@ -41,31 +40,30 @@ const user = [
     sender: "me",
   },
 ];
-const SupportMob = () => {
+const CustomerChat = () => {
+  const [showEmojis, setShowEmojis] = useState(false);
   const [messages, setMessages] = useState(user);
   const [inputText, setInputText] = useState("");
   const [image, setImage] = useState(null);
   const [selectedEmoji, setSelectedEmoji] = useState(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const inputRef = useRef(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
-
-  useEffect(() => {
-    const el = document.getElementById("messages");
-    el.scrollTop = el.scrollHeight;
-  }, [messages]);
 
   const handleEmojiSelect = (emoji) => {
     setSelectedEmoji(emoji);
     setInputText((prevInputText) => prevInputText + emoji.native);
   };
+  const navigate = useNavigate();
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+  useEffect(() => {
+    const el = document.getElementById("messages");
+    el.scrollTop = el.scrollHeight;
+  }, [messages]);
+
+  const inputRef = useRef(null);
   const handleSendMessage = (e) => {
     e.preventDefault();
-    setShowEmojiPicker(false);
     const times = new Date().toLocaleTimeString();
     console.log(times.slice(0, 4), typeof times);
     if (inputText.trim() === "" && !image) return;
@@ -95,33 +93,21 @@ const SupportMob = () => {
   const handleStart = () => {
     navigate("/matchstart");
   };
-
-  console.log(image);
-
+  const addEmoji = (emoji) => {
+    // Do something with the selected emoji
+    console.log(emoji);
+  };
   return (
-    <div className="flex-1 pb-4 bg-[#0f002b] sm:bg-[#fead3a]  w-full max-w-[480px]  justify-between flex flex-col h-screen">
-      <div className="bg-[#fead3a]  h-[80%] w-[200%]   rounded-[50%] sm:hidden   -top-20 fixed -left-[50%] " />
-      <div className="bg-[#fead3a] max-w-[480px] absolute  shadow-lg border-b border-[#0f002b]  flex justify-between   items-center w-full  pt-4  px-4">
-        <div className="flex flex-row gap-3 items-start mt-3">
-          <SidebarMob />
-          <LudoMainLogo/>
-        </div>
-        <img
-          onClick={() => navigate("/profile")}
-          src={FrameProfile}
-          className="w-[30px] h-[30px] rounded-[100px] border border-solid border-white "
-        />
-      </div>
-      <div className="z-10  flex mt-[68px]  border-b border-[#0f002b] justify-between py-2 px-4  items-center bg-[#fead3a] max-w-[480px] w-full">
+    <div className="flex-1 pb-4 bg-transparent  w-full   justify-between flex flex-col h-[92%]">
+      <div className="z-10 flex border-b border-gray-400 shadow-sm justify-between py-2 px-4  items-center   w-full">
         <div className="flex justify-center gap-2 items-center">
           <img
+            onClick={() => navigate("/userprofile")}
             src={FrameProfile}
             className="w-[30px] h-[30px] rounded-[100px] border border-solid border-white "
           />
           <div className="flex flex-col text-black items-start justify-center">
-            <span className="text-[20px] py-1 leading-tight">
-              Customer Service
-            </span>
+            <span className="text-[20px] leading-tight">Ludo Player</span>
           </div>
         </div>
         <div className="flex gap-2">
@@ -134,7 +120,16 @@ const SupportMob = () => {
                 </div>
               </PopoverHandler>
               <PopoverContent className="bg-white  z-50">
-                <ListItem onClick={()=>navigate("/feedback")} className="hover:bg-black hover:text-white">
+                <ListItem className="hover:bg-black hover:text-white">
+                  <ListItemPrefix>
+                    <img src={startchat} />
+                  </ListItemPrefix>{" "}
+                  Add Fav
+                </ListItem>
+                <ListItem
+                  onClick={() => navigate("/feedback")}
+                  className="hover:bg-black hover:text-white"
+                >
                   <ListItemPrefix>
                     <img src={feedback} />
                   </ListItemPrefix>
@@ -168,7 +163,7 @@ const SupportMob = () => {
                 message.sender === "me"
                   ? "bg-white text-black self-end pl-5 rounded-br-none"
                   : "bg-black text-white self-start pr-5 rounded-bl-none"
-              } p-2 rounded-2xl max-w-md overflow-hidden font-semibold `}
+              } p-2 rounded-lg max-w-md overflow-hidden font-semibold `}
               style={{
                 maxWidth: "80%",
                 whiteSpace: "normal",
@@ -196,7 +191,7 @@ const SupportMob = () => {
         ))}
       </div>
 
-      <div className="border-t-2  z-10 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
+      <div className="border-t-2  z-10 shadow-sm border-gray-400 px-4 pt-4 mb-2 sm:mb-0">
         <form
           onSubmit={handleSendMessage}
           className="relative items-center flex bg-gray-200 rounded-xl px-2"
@@ -206,28 +201,9 @@ const SupportMob = () => {
               <Picker autoFocus data={data} onEmojiSelect={handleEmojiSelect} />
             </div>
           )}
-          {image !== null ? (
-            <div className="absolute  bottom-16 right-2">
-              <Icon
-                onClick={() => setImage(null)}
-                icon="basil:cancel-solid"
-                width="40"
-                className="absolute right-0"
-              />
-              <div className="bg-white">
-                <img
-                  src={image}
-                  alt="image"
-                  className="w-48 rounded-xl border-4  border-gray-500  shadow-2xl"
-                />
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
           <div
             onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-            className="cursor-pointer inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+            className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
           >
             <Icon icon="mingcute:emoji-line" width="32" />
           </div>
@@ -241,10 +217,10 @@ const SupportMob = () => {
             className="rounded-full w-full pr-20 py-3 pl-1 bg-gray-200 focus:outline-none"
           />
           <div className="absolute inset-y-0 right-0 flex items-center">
-            <div className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none">
+            <div>
               <label
                 htmlFor="upload-image"
-                className="cursor-pointer flex items-center justify-center"
+                className="cursor-pointer flex items-center justify-center w-10"
               >
                 <Icon id="Attachment" icon="tdesign:attach" width="28" />
               </label>
@@ -275,4 +251,4 @@ const SupportMob = () => {
   );
 };
 
-export default SupportMob;
+export default CustomerChat;

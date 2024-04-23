@@ -1,41 +1,35 @@
 import React from "react";
 import { Icon } from "@iconify-icon/react";
 import {
-  Button,
   Menu,
   MenuHandler,
   MenuItem,
   MenuList,
 } from "@material-tailwind/react";
-import AdminLogo from "../../../assets/admin_Sadmin/admin/admin.svg";
-import UidLogo from "../../../assets/admin_Sadmin/admin/uid.svg";
-import PasswordLogo from "../../../assets/admin_Sadmin/admin/pswd.svg";
 
 // top pannel
-import BellIcon from "../../../assets/admin_Sadmin/admin/bell.svg";
-import Profile from "../../../assets/admin_Sadmin/admin/profile.png";
 import LogOut from "../../../assets/admin_Sadmin/admin/logout.svg";
-import Search from "../../../assets/admin_Sadmin/admin/search.svg";
 // left pannel
-import Deposite from "../../../assets/admin_Sadmin/admin/deposit.svg";
 import Games from "../../../assets/admin_Sadmin/admin/games.svg";
-import History from "../../../assets/admin_Sadmin/admin/history.svg";
-import Kyc from "../../../assets/admin_Sadmin/admin/kyc.svg";
 import Setting from "../../../assets/admin_Sadmin/admin/settings.svg";
 import Stats from "../../../assets/admin_Sadmin/admin/stats.svg";
 import ButtonLoader from "../../MainLayout/ButtonLoader";
 import { useNavigate } from "react-router-dom";
+import { logoutAsync, selectRefreshToken, selectToken } from "../../app_start/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const SuperAdminTopbar = () => {
-  <Icon
-    onClick={() => navigate("/adminlogin")}
-    icon="material-symbols:logout"
-    width="24"
-  />;
+  const dispatch = useDispatch();
+  const token = useSelector(selectToken);
+  const refreshtoken = useSelector(selectRefreshToken);
+  const handleLogout = () => {
+    console.log("logout");
+    dispatch(logoutAsync({ token, refreshtoken }));
+  };
   const navigate = useNavigate();
   return (
     <div className="flex h-[8.3%] font-[Inter] p-2 items-center justify-between ">
-      <p className="text-[20px]">Super Admin Control Panel</p>
+      <p onClick={()=>navigate("/superadmin")} className="cursor-pointer text-[20px]">Super Admin Control Panel</p>
       <div className="flex justify-between w-[144px] h-[24px]">
         <Icon
           icon="mdi:cloud-key-outline"
@@ -120,7 +114,8 @@ const SuperAdminTopbar = () => {
           </Menu>
         </div>
         <Icon
-          onClick={() => navigate("/adminlogin")}
+          // onClick={() => navigate("/adminlogin")}
+          onClick={handleLogout}
           icon="material-symbols:logout"
           width="24"
           className="cursor-pointer"

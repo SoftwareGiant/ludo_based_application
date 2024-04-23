@@ -4,6 +4,7 @@ import "../../app.css";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { RxCross2 } from "react-icons/rx";
+import LudoMainLogo from "../MainLayout/LudoMainLogo";
 
 const Terms = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -26,14 +27,8 @@ const Terms = () => {
             </div>
             <span>Terms of Service</span>
           </div>
-          <div className="relative flex flex-row justify-center w-24 items-start">
-            <div className="text-center text-base font-['Nunito_Sans'] font-bold text-[#0f002b] absolute top-0 left-0 h-5 w-24">
-              LUDO KING
-            </div>
-            <div className="text-center text-base font-['Oooh_Baby'] text-[#0f002b] relative mt-4">
-              punch line
-            </div>
-          </div>
+        
+          <LudoMainLogo/>
         </div>
 
         <div className="bg-white flex flex-col gap-2 text-[#0F002B] font-[Nunito-Sans] w-full min-h-screen overflow-hidden relative p-4 pb-20">

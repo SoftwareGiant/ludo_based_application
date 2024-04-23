@@ -7,6 +7,7 @@ import video from "../../assets/new_game/video.svg";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import LudoMainLogo from "../MainLayout/LudoMainLogo";
 const NewProfilePic = () => {
   const [imageFile, setImageFile] = useState("https://images.unsplash.com/photo-1529524987368-af489318987c?q=80&w=582&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
 
@@ -51,15 +52,7 @@ const NewProfilePic = () => {
       <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
           <SidebarMob />
-          <div className="flex flex-col text-[#0f002b] ">
-            <div className="  text-base font-['Nunito_Sans'] font-extrabold ">
-              LUDO KING
-            </div>
-
-            <div className="text-center text-base font-['Oooh_Baby'] font-normal  -mt-2">
-              punch line
-            </div>
-          </div>
+          <LudoMainLogo/>
         </div>
       </div>
 

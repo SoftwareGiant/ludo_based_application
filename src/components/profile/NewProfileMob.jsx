@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "../../app.css";
 import ProfileEditbtn from "../../assets/profile/editbutton.svg";
-import HamBurger from "../../assets/profile/hamburger.svg";
 import Edit from "../../assets/profile/edit.svg";
-import ProfileEdit from "../../assets/profile/profile_edit.svg";
 import LogOutMob from "../../assets/profile/respon_logout.svg";
 import Verify from "../../assets/profile/verify.svg";
-import ToggleOff from "../../assets/profile/toggleOff.svg";
-import ToggleOn from "../../assets/profile/ToggleOn.svg";
-import Back from "../../assets/profile/ep_back.svg";
-import Favorite from "../../assets/new_game/fav.svg";
-import BellIcon from "../../assets/new_game/notification.svg";
-import kyc from "../../assets/new_game/KYC.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { Drawer, Switch, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +15,8 @@ import {
 import { fetchUserDetail } from "../live_battle/userSlice";
 import { Icon } from "@iconify-icon/react";
 import { toast } from "react-toastify";
+import axios from "axios";
+import LudoMainLogo from "../MainLayout/LudoMainLogo";
 
 const NewProfileMob = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,6 +32,8 @@ const NewProfileMob = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const users = useSelector((state) => state.user.user);
   const [isChecked, setIsChecked] = useState(false);
+
+  const { accessToken, refreshToken } = useSelector((state) => state.auth);
 
   const toggleCheckbox = () => {
     setIsChecked((prevState) => !prevState);
@@ -63,11 +58,15 @@ const NewProfileMob = () => {
 
   // for aadhar front and back photo
   const handleAadharFrontUpload = (e) => {
-    setAadharFront(URL.createObjectURL(e.target.files[0]));
+    const file = e.target.files[0];
+    setAadharFront(file);
+    // setAadharFront(URL.createObjectURL(e.target.files[0]));
   };
 
   const handleAadharBackUpload = (e) => {
-    setAadharBack(URL.createObjectURL(e.target.files[0]));
+    const file = e.target.files[0];
+    setAadharBack(file);
+    // setAadharBack(URL.createObjectURL(e.target.files[0]));
   };
   function validateAadhar(aadharNumber) {
     // Regex pattern for Aadhar number
@@ -75,21 +74,42 @@ const NewProfileMob = () => {
     // Check if the input matches the Aadhar pattern
     return aadharPattern.test(aadharNumber);
   }
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!validateAadhar(aadharNumber)) {
       toast.error("Please Enter Valid Aadhar number");
       return;
     }
     if (!aadharFront || !aadharBack) {
-      toast.error("Please upload both Aadhar front and back images.");
+      toast.error("Please upload both Aadharcard front and back images.");
       return;
     } else {
+      const obj ={
+        "aadharno.":aadharNumber,
+        "image":[aadharFront,aadharBack]
+      }
+      console.log(obj)
+      // const formData = new FormData();
+      // formData.append("aadharNo", aadharNumber);
+      // formData.append("aadharFront", aadharFront); 
+      // formData.append("aadharBack", aadharBack); 
+
+      // console.log(formData);
+
+      try {
+        const response = await axios.post("/api/user/addKycdetail", obj, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        console.log(response.data); // Handle the response from the server as needed
+      } catch (error) {
+        console.error("Error:", error);
+      }
       setKycStatus("Complete");
       closeDrawerBottom();
       // You can add additional logic here for submitting the images
     }
   };
-
   const handleLogout = () => {
     dispatch(logoutAsync({ token, refreshtoken }));
   };
@@ -105,15 +125,8 @@ const NewProfileMob = () => {
       <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
           <SidebarMob />
-          <div className="flex flex-col text-[#0f002b] ">
-            <div className="  text-base font-['Nunito_Sans'] font-extrabold ">
-              LUDO KING
-            </div>
-
-            <div className="text-center text-base font-['Oooh_Baby'] font-normal  -mt-2">
-              punch line
-            </div>
-          </div>
+         
+          <LudoMainLogo/>
         </div>
         <div
           onClick={handleLogout}
@@ -263,15 +276,17 @@ const NewProfileMob = () => {
                   <input
                     type="checkbox"
                     className="hidden"
-                    checked={isChecked}
-                    onChange={openDrawerBottom}
+                    // checked={isChecked}
+                    // onChange={openDrawerBottom}
                   />
                   <div
                     className={`w-[56px] rounded-full shadow-lg cursor-pointer text-white font-bold text-sm ${
-                      isChecked ? "bg-green-500" : "bg-red-500"
+                      users?.userKyc?.verificationStatus
+                        ? "bg-green-500"
+                        : "bg-red-500"
                     }`}
                   >
-                    {!isChecked ? (
+                    {!users?.userKyc?.verificationStatus ? (
                       <div className="flex  transition-all ease-in-out gap-1 items-center justify-center pr-2">
                         <div className="bg-white  rounded-full flex items-center justify-center p-1">
                           <Icon
@@ -333,6 +348,7 @@ const NewProfileMob = () => {
 
       <Drawer
         placement="bottom"
+        // open={!users?.userKyc?.verificationStatus}
         open={openBottom}
         onClose={closeDrawerBottom}
         className="w-[480px] p-4  bg-[#0F002B] rounded-t-3xl"
@@ -387,8 +403,8 @@ const NewProfileMob = () => {
           color="gray"
           className="mb-4 text-[14px] font-[Inter] mt-2 px-9 flex justify-center font-normal"
         >
-          Make sure that you upload the correct image. This will be
-          used in future for reference in case of any issues.
+          Make sure that you upload the correct image. This will be used in
+          future for reference in case of any issues.
         </Typography>
       </Drawer>
     </div>

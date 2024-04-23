@@ -30,6 +30,7 @@ import {
 } from "../AdminSlice/alluserSlice";
 import Refreshloader from "../../superadmin/Common/Refreshloader";
 import AdminFooter from "../Common.jsx/AdminFooter";
+import CustomerChat from "../Common.jsx/CustomerChat";
 
 const TABLE_HEAD = ["UID", "Name", "Phone", "Status"];
 
@@ -398,7 +399,11 @@ export function AdminCustomer() {
         <AdminFooter logohide={true}/>
       </div>
       <div className="w-2/5 relative overflow-scroll main-body-right max-h-screen">
-        <div className=" w-full   bg-none overflow-hidden relative">
+      
+
+      <CustomerChat/>
+      
+        {/* <div className=" w-full   bg-none overflow-hidden relative">
           <div className="w-full overflow-hidden h-full ">
             <div className="z-10 flex justify-between p-4  items-center  bg-[#E6E6E6] w-full  ">
               <div className="flex justify-center gap-2 items-center">
@@ -527,7 +532,9 @@ export function AdminCustomer() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
+
+
       </div>
     </div>
   );
