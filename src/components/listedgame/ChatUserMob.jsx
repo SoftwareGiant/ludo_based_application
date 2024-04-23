@@ -45,7 +45,6 @@ const ChatUserMob = () => {
       });
       socketData?.on("updatecode", ({ gameCode }) => {
         return toast.success(`code to start game ${gameCode}`);
-        // return navigate("/chat")
       });
       return () => socketData.off();
     }
