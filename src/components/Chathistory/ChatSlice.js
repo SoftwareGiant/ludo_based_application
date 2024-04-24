@@ -17,13 +17,14 @@ export const fetchAllChatList = createAsyncThunk(
     console.log(accessToken)
     if (!accessToken) {
         throw new Error('Token not found');
-    }
+    } 
     const response = await axios.get('/api/message/allChat', {
         headers: {
             Authorization: `Bearer ${accessToken}`,
         },
     });
-    console.log(response.data);
+    // console.log(response)
+   
     return response.data;
   }
 );

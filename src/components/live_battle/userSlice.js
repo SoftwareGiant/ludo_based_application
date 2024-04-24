@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const initialState = {
     user: null,
+    loading:false
 };
 
 export const fetchUserDetail = createAsyncThunk(
@@ -12,7 +13,6 @@ export const fetchUserDetail = createAsyncThunk(
         // console.log('Fetching user detail')
         try {
             const accessToken = localStorage.getItem('accessToken');
-            // console.log(accessToken)
             if (!accessToken) {
                 throw new Error('Token not found');
             }
@@ -21,7 +21,7 @@ export const fetchUserDetail = createAsyncThunk(
                   Authorization: `Bearer ${accessToken}`,
                 },
               });
-            // console.log(response.data)
+          
             if (!response.data) {
                 throw new Error('userdata fetched failed');
             }
@@ -41,22 +41,20 @@ const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchUserDetail.pending, (state, action) => {
-                // Handle pending state if needed
+                state.loading = true;
                 state.user = null; // Reset user state
             })
             .addCase(fetchUserDetail.fulfilled, (state, action) => {
-                // Handle fulfilled state
+                state.loading = false;
                 state.user = action.payload;
             })
             .addCase(fetchUserDetail.rejected, (state, action) => {
-                // Handle rejected state
+                state.loading = false;
                 state.user = null; // Reset user state
             });
 
     },
 });
 
-
-export const selectUser = (state) => state.user.user;
 
 export default userSlice.reducer;

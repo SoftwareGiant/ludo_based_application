@@ -17,11 +17,10 @@ import { Icon } from "@iconify-icon/react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
+import PageLoader from "../MainLayout/PageLoader";
 
 const NewProfileMob = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const token = useSelector(selectToken);
-  const refreshtoken = useSelector(selectRefreshToken);
   const [openBottom, setOpenBottom] = useState(true);
   const [aadharFront, setAadharFront] = useState(null);
   const [aadharBack, setAadharBack] = useState(null);
@@ -31,18 +30,20 @@ const NewProfileMob = () => {
   const dispatch = useDispatch();
   const [scrollPosition, setScrollPosition] = useState(0);
   const users = useSelector((state) => state.user.user);
-  const [isChecked, setIsChecked] = useState(false);
-
+  const loading = useSelector((state) => state.user.loading);
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
+  // const [isChecked, setIsChecked] = useState(false);
 
-  const toggleCheckbox = () => {
-    setIsChecked((prevState) => !prevState);
-  };
+ 
+
+  // const toggleCheckbox = () => {
+  //   setIsChecked((prevState) => !prevState);
+  // };
   const openDrawerBottom = () => setOpenBottom(true);
   const closeDrawerBottom = () => setOpenBottom(false);
 
   console.log("user", users);
-  console.log("token", token);
+  console.log("token", accessToken,refreshToken);
   useEffect(() => {
     dispatch(fetchUserDetail());
   }, []);
@@ -111,11 +112,12 @@ const NewProfileMob = () => {
     }
   };
   const handleLogout = () => {
-    dispatch(logoutAsync({ token, refreshtoken }));
+    dispatch(logoutAsync({ accessToken, refreshToken }));
   };
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
+  if(!users) return <PageLoader/>
   return (
     <div className="max-w-[480px] w-full min-h-screen h-full">
       <div
@@ -262,7 +264,7 @@ const NewProfileMob = () => {
               </div>
               <div className="flex flex-row justify-between ml-4 w-full items-start">
                 <div className="text-sm mt-px">User Id :</div>
-                <span>{users?._id?.slice(0, 6)}</span>
+                <span>{users?._id?.slice(-6)}</span>
               </div>
             </div>
             <div className="flex flex-col justify-between gap-6 w-5/6 items-start">

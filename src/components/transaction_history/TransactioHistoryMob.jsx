@@ -5,12 +5,15 @@ import { SidebarMob } from "../MainLayout/SidebarMob";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserPaymentHistory } from "./userHistorySlice";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
+import { useNavigate } from "react-router-dom";
+import PageLoader from "../MainLayout/PageLoader";
 
 const TransactioHistoryMob = () => {
   const dispatch = useDispatch();
   const paymentHistory = useSelector(
     (state) => state?.userhistory?.paymentHistory
   );
+  const navigate = useNavigate();
   const loading = useSelector((state) => state?.userhistory?.loading);
   const error = useSelector((state) => state?.userhistory?.error);
   console.log(paymentHistory, loading, error);
@@ -34,6 +37,7 @@ const TransactioHistoryMob = () => {
       return Math.floor(timeDifferenceInHours) + " Hours ago";
     }
   };
+  if(loading) return <PageLoader/>
   return (
     <>
       <div className="max-w-[480px] w-full min-h-screen h-full">
@@ -47,6 +51,7 @@ const TransactioHistoryMob = () => {
             <LudoMainLogo/>
           </div>
           <img
+           onClick={() => navigate("/profile")}
             src={FrameProfile}
             alt="Frame1"
             className="mt-1 w-8 h-8 border rounded-[100px]"

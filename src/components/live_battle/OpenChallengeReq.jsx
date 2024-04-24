@@ -58,6 +58,7 @@ const OpenChallengeReq = () => {
           <LudoMainLogo/>
         </div>
         <img
+         onClick={() => navigate("/profile")}
           src={FrameProfile}
           alt="Frame1"
           className="w-[30px] h-[30px] mt-[9.5px] rounded-[100px] border border-solid border-white "

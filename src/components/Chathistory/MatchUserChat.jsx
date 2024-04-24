@@ -1,84 +1,109 @@
-import feedback from "../../assets/new_game/feedback.svg";
-import report from "../../assets/new_game/report.svg";
-import menu from "../../assets/profile/menusvg.svg";
+import React, { useState, useEffect, useRef } from "react";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
-import React, { useEffect, useRef, useState } from "react";
-import { Icon } from "@iconify-icon/react";
-import { SidebarMob } from "../MainLayout/SidebarMob";
-import { useNavigate } from "react-router-dom";
-import data from "@emoji-mart/data";
-import Picker from "@emoji-mart/react";
-
 import {
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+  Button,
+  Typography,
   ListItem,
   ListItemPrefix,
-  Popover,
-  PopoverContent,
-  PopoverHandler,
+  Drawer,
 } from "@material-tailwind/react";
-import startchat from "../../assets/profile/startchat.svg";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useJwt } from "react-jwt";
+import { fetchSocket } from "../../socket";
+import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
+import { SidebarMob } from "../MainLayout/SidebarMob";
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
-
-const user = [
-  {
-    text: "hi",
-    time: "09:12",
-    sender: "me",
-  },
-  {
-    text: "hello",
-    time: "09:13",
-    sender: "gaurav",
-  },
-  {
-    text: "how are you",
-    time: "09:12",
-    sender: "gaurav",
-  },
-  {
-    text: "fine",
-    time: "09:12",
-    sender: "me",
-  },
-];
 const MatchUserChat = () => {
-  const [messages, setMessages] = useState(user);
-  const [inputText, setInputText] = useState("");
-  const [image, setImage] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { socketData } = useSelector((state) => state.socketfor);
+  const { accessToken, refreshToken } = useSelector((state) => state.auth);
+  const { decodedToken } = useJwt(accessToken);
+  const userId = decodedToken?.aud;
+  const { chatId } = useParams();
   const [selectedEmoji, setSelectedEmoji] = useState(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const inputRef = useRef(null);
-  const navigate = useNavigate();
+  const [image, setImage] = useState(null);
+  const [messaged, setMessage] = useState("");
+  const [messageList, setMessageList] = useState([]);
 
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
+  const inputRef = useRef();
 
   useEffect(() => {
     const el = document.getElementById("messages");
     el.scrollTop = el.scrollHeight;
-  }, [messages]);
+  }, [messageList]);
 
-  const handleEmojiSelect = (emoji) => {
-    setSelectedEmoji(emoji);
-    setInputText((prevInputText) => prevInputText + emoji.native);
-  };
-  const handleSendMessage = (e) => {
-    e.preventDefault();
-    setShowEmojiPicker(false);
-    const times = new Date().toLocaleTimeString();
-    console.log(times.slice(0, 4), typeof times);
-    if (inputText.trim() === "" && !image) return;
-    setMessages([
-      ...messages,
-      {
-        text: inputText,
-        image,
-        sender: "me",
-        time: new Date().toLocaleTimeString().slice(0, 4),
+  useEffect(() => {
+    inputRef.current.focus();
+    fn();
+  }, []);
+  useEffect(() => {
+    if (socketData) {
+      socketData.on("newMessage", (newMessage) => {
+        setMessageList((prevMessageList) => [...prevMessageList, newMessage]);
+      });
+
+      return () => socketData.off();
+    }
+  }, [socketData]);
+
+  useEffect(() => {
+    if (decodedToken) {
+      dispatch(fetchSocket(decodedToken));
+    }
+  }, [decodedToken]);
+
+  const fn = async () => {
+    const response = await axios.get(`/api/message/allmessages/${chatId}`, {
+      headers: {
+        Authorization: `bearer ${accessToken}`,
       },
-    ]);
-    setInputText("");
+    });
+    console.log(response);
+    if (response?.status == 200 && response?.data) {
+      setMessageList([]);
+      console.log(response?.data);
+      setMessageList((prevMessageList) => [
+        ...prevMessageList,
+        ...response?.data?.messageDetails,
+      ]);
+    }
+  };
+
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+
+    const times = new Date().toLocaleTimeString();
+
+    setShowEmojiPicker(false);
+    if (messaged.trim() === "" && !image) return;
+    console.log(messaged);
+    //console.log(image);
+    const response = await axios.post(
+      `/api/message/sendmessage/${chatId}`,
+      //  { message,image,times },
+      { message: messaged },
+      {
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
+      }
+    );
+    console.log(response);
+    if (response.status == 200) {
+      setMessageList((prevMessageList) => [...prevMessageList, response?.data]);
+    }
+    setMessage("");
     setImage(null);
   };
 
@@ -92,11 +117,25 @@ const MatchUserChat = () => {
       reader.readAsDataURL(file);
     }
   };
-  const handleStart = () => {
-    navigate("/matchstart");
-  };
 
-  console.log(image);
+  const handleEmojiSelect = (emoji) => {
+    setSelectedEmoji(emoji);
+    setMessage((prevInputText) => prevInputText + emoji.native);
+  };
+  const handleFav = async () => {
+    try {
+      const response = await axios.get(`/api/message/favourite/${chatId}`, {
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
+      });
+      toast.success(response.data.message);
+    } catch (error) {
+      // Handle the error
+      console.error("Error fetching message:", error);
+      toast.error("Failed to fetch message");
+    }
+  };
 
   return (
     <div className="flex-1 pb-4 bg-[#0f002b] sm:bg-[#fead3a]  w-full max-w-[480px]  justify-between flex flex-col h-screen">
@@ -104,11 +143,11 @@ const MatchUserChat = () => {
       <div className="bg-[#fead3a] max-w-[480px] absolute  shadow-lg border-b border-[#0f002b]  flex justify-between   items-center w-full  pt-4  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
           <SidebarMob />
-          <LudoMainLogo/>
+          <LudoMainLogo />
         </div>
         <div
-          className="bg-[#1E1E1E] px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold"
-          onClick={handleStart}
+          className="bg-[#1E1E1E] cursor-pointer px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold"
+          onClick={() => navigate("/matchstart")}
         >
           Start
         </div>
@@ -125,158 +164,153 @@ const MatchUserChat = () => {
             <span className="text-[14px] leading-tight">online</span>
           </div>
         </div>
-        <div className="flex gap-2">
-          <img src={startchat} className="w-[30px] h-[30px]  " />
-          <div>
-            <Popover placement="left-start">
-              <PopoverHandler>
-                <div className="px-3">
-                  <img src={menu} className="w-[5px] h-[30px] " />
-                </div>
-              </PopoverHandler>
-              <PopoverContent className="bg-white  z-50">
-                <ListItem className="hover:bg-black hover:text-white">
-                  <ListItemPrefix>
-                    <img src={startchat} />
-                  </ListItemPrefix>{" "}
-                  Add Fav
-                </ListItem>
-                <ListItem onClick={()=>navigate("/feedback")} className="hover:bg-black hover:text-white">
-                  <ListItemPrefix>
-                    <img src={feedback} />
-                  </ListItemPrefix>
-                  Feedback
-                </ListItem>
-                <ListItem className="hover:bg-black hover:text-white">
-                  <ListItemPrefix>
-                    <img src={report} />
-                  </ListItemPrefix>
-                  Report
-                </ListItem>
-              </PopoverContent>
-            </Popover>
-          </div>
-        </div>
-      </div>
-      <div
-        onClick={() => setShowEmojiPicker(false)}
-        id="messages"
-        className="flex z-10 h-full flex-col space-y-4 p-3 overflow-y-auto table-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
-      >
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`flex  ${
-              message.sender === "me" ? "justify-end " : "justify-start"
-            } mb-2`}
-          >
-            <div
-              className={`${
-                message.sender === "me"
-                  ? "bg-white text-black self-end pl-5 rounded-br-none"
-                  : "bg-black text-white self-start pr-5 rounded-bl-none"
-              } p-2 rounded-2xl max-w-md overflow-hidden font-semibold `}
-              style={{
-                maxWidth: "80%",
-                whiteSpace: "normal",
-                overflowWrap: "break-word",
-              }}
-            >
-              <span>{message.text}</span>
-              {message.image && (
-                <img
-                  src={message.image}
-                  alt="Shared"
-                  className="mt-1"
-                  style={{ maxWidth: "100%" }}
-                />
-              )}
-              <span
-                className={`text-xs block text-gray-500 mt-1 ${
-                  message.sender === "me" ? "text-end" : "text-start"
-                }`}
-              >
-                {message.time}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="border-t-2  z-10 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
-        <form
-          onSubmit={handleSendMessage}
-          className="relative items-center flex bg-gray-200 rounded-xl px-2"
-        >
-          {showEmojiPicker && (
-            <div className="absolute bottom-16 left-2">
-              <Picker autoFocus data={data} onEmojiSelect={handleEmojiSelect} />
-            </div>
-          )}
-          {image !== null ? (
-            <div className="absolute  bottom-16 right-2">
-              <Icon
-                onClick={() => setImage(null)}
-                icon="basil:cancel-solid"
-                width="40"
-                className="absolute right-0"
-              />
-              <div className="bg-white">
-                <img
-                  src={image}
-                  alt="image"
-                  className="w-48 rounded-xl border-4  border-gray-500  shadow-2xl"
+        <div className="flex items-center gap-2">
+          <Icon
+            onClick={() => handleFav()}
+            icon="fluent:star-add-28-regular"
+            style={{ color: "black" }}
+            width="32"
+          />
+          <Popover placement="left-start">
+            <PopoverHandler>
+              <div className="px-3 flex cursor-pointer ">
+                <Icon
+                  icon="charm:menu-kebab"
+                  style={{ color: "black" }}
+                  width="28"
                 />
               </div>
-            </div>
-          ) : (
-            ""
-          )}
-          <div
-            onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-            className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
-          >
-            <Icon icon="mingcute:emoji-line" width="32" />
-          </div>
-          <input
-            onClick={() => setShowEmojiPicker(false)}
-            ref={inputRef}
-            type="text"
-            placeholder="Type a message..."
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            className="rounded-full w-full pr-20 py-3 pl-1 bg-gray-200 focus:outline-none"
-          />
-          <div className="absolute inset-y-0 right-0 flex items-center">
-            <div>
-              <label
-                htmlFor="upload-image"
-                className="cursor-pointer flex items-center justify-center w-10"
+            </PopoverHandler>
+            <PopoverContent className="bg-white  z-50">
+              <ListItem
+                onClick={() => handleFav()}
+                className="hover:bg-black hover:text-white"
               >
-                <Icon id="Attachment" icon="tdesign:attach" width="28" />
-              </label>
-              <input
-                id="upload-image"
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="hidden"
-              />
-            </div>
-            <button
-              type="submit"
-              className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
-              onClick={handleSendMessage}
-            >
-              <Icon
-                id="Send"
-                onClick={handleSendMessage}
-                icon="carbon:send-filled"
-                width="28"
-              />
-            </button>
+                <ListItemPrefix>
+                  <Icon icon="mdi:favorite-add" width="24" />
+                </ListItemPrefix>{" "}
+                Add Fav
+              </ListItem>
+              <ListItem
+                onClick={() => navigate("/feedback")}
+                className="hover:bg-black hover:text-white"
+              >
+                <ListItemPrefix>
+                  <Icon icon="material-symbols:feedback" width="22" />
+                </ListItemPrefix>
+                Feedback
+              </ListItem>
+              <ListItem className="hover:bg-black hover:text-white">
+                <ListItemPrefix>
+                  <Icon icon="material-symbols:report-outline" width="22" />
+                </ListItemPrefix>
+                Report
+              </ListItem>
+            </PopoverContent>
+          </Popover>
+        </div>
+      </div>
+
+      <div className="w-full  overflow-hidden h-full ">
+        <div className="flex flex-col h-full relative  ">
+          <div
+            onClick={() => setShowEmojiPicker(false)}
+            id="messages"
+            className="flex z-10 h-full flex-col space-y-4 p-3 overflow-y-auto table-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
+          >
+            {messageList.length > 0 &&
+              messageList?.map(
+                (message, index) =>
+                  message?.message && (
+                    <div
+                      key={index}
+                      className={`flex  ${
+                        message.senderId == userId
+                          ? "justify-end "
+                          : "justify-start"
+                      } mb-2`}
+                    >
+                      <div
+                        className={`${
+                          message.senderId == userId
+                            ? "bg-white text-black self-end pl-5 rounded-br-none"
+                            : "bg-black text-white self-start pr-5 rounded-bl-none "
+                        } p-2 rounded-xl max-w-md overflow-hidden font-semibold `}
+                        style={{
+                          maxWidth: "80%",
+                          whiteSpace: "normal",
+                          overflowWrap: "break-word",
+                        }}
+                      >
+                        <span>{message?.message}</span>
+                        {message.image && (
+                          <img
+                            src={message.image}
+                            alt="Shared"
+                            className="mt-1"
+                            style={{ maxWidth: "100%" }}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  )
+              )}
           </div>
-        </form>
+          <div className="border-t-2  z-10 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
+            <form
+              onSubmit={handleSendMessage}
+              className="relative items-center flex bg-gray-200 rounded-xl px-2"
+            >
+              {showEmojiPicker && (
+                <div className="absolute bottom-16 left-2">
+                  <Picker
+                    autoFocus
+                    data={data}
+                    onEmojiSelect={handleEmojiSelect}
+                  />
+                </div>
+              )}
+              <div
+                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+              >
+                <Icon icon="mingcute:emoji-line" width="32" />
+              </div>
+              <input
+                onClick={() => setShowEmojiPicker(false)}
+                ref={inputRef}
+                type="text"
+                placeholder="Type a message..."
+                value={messaged}
+                onChange={(e) => setMessage(e.target.value)}
+                className="rounded-full w-full pr-20 py-3 pl-1 bg-gray-200 focus:outline-none"
+              />
+              <div className="absolute inset-y-0 right-0 flex items-center">
+                <div>
+                  <label
+                    htmlFor="upload-image"
+                    className="cursor-pointer flex items-center justify-center w-10"
+                  >
+                    <Icon id="Attachment" icon="tdesign:attach" width="28" />
+                  </label>
+                  <input
+                    id="upload-image"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="hidden"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+                >
+                  <Icon id="Send" icon="carbon:send-filled" width="28" />
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );

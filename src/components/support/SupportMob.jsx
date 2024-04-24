@@ -107,6 +107,7 @@ const SupportMob = () => {
           <LudoMainLogo/>
         </div>
         <img
+        
           onClick={() => navigate("/profile")}
           src={FrameProfile}
           className="w-[30px] h-[30px] rounded-[100px] border border-solid border-white "

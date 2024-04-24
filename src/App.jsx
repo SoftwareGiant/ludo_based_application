@@ -67,12 +67,11 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      {/* <SocketProvider> */}
+        {/* <SocketProvider> */}
         <Routes>
-        
-        <Route path="/mychat" element={<MyChat />} />
+          <Route path="/mychat" element={<MyChat />} />
           <Route path="/adminlogin" element={<SAdminLogin />} />
-       
+
           <Route path="/login" element={<LoginMob />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
@@ -83,7 +82,9 @@ function App() {
             <Route path="/" element={<NewGameMob />} />
             <Route path="/livebattle" element={<LiveBattle />} />
             <Route path="/livebattle2" element={<LiveBattle2 />} />
-            <Route path="/requestchallange/:userId" element={<OpenChallengeReq />}
+            <Route
+              path="/requestchallange/:userId"
+              element={<OpenChallengeReq />}
             />
             {/* <Route path="/chat" element={<ChatUserMob />} /> */}
             <Route path="/chat/:chatId/:player" element={<ChatUserMob />} />
@@ -96,27 +97,33 @@ function App() {
 
             <Route path="/profile" element={<NewProfileMob />} />
             <Route path="/editprofile" element={<NewProfilePic />} />
-           
+
             {/* wincash page */}
 
             <Route path="/wincash" element={<ListedGameMOb />} />
-        
+
             {/* my wallet page */}
 
             <Route path="/mywallet" element={<MyWalletMob />} />
             <Route path="/deposite" element={<AddCashMob />} />
             <Route path="/withdraw" element={<WithdrawMob />} />
-            <Route path="referalwithdraw" element={<ReferalsBalanceWithDraw />}  />
+            <Route
+              path="referalwithdraw"
+              element={<ReferalsBalanceWithDraw />}
+            />
             <Route path="/gamehistory" element={<GameHistoryMob />} />
-            <Route path="/transactionhistory" element={<TransactioHistoryMob />}/>
+            <Route
+              path="/transactionhistory"
+              element={<TransactioHistoryMob />}
+            />
             <Route path="/refer&earn" element={<ReferrEarnMob />} />
             <Route path="/notification" element={<Notification />} />
             <Route path="/support" element={<SupportMob />} />
             <Route path="/chathistory" element={<Chathistory />} />
-            <Route path="/matchUserChat" element={<MatchUserChat />} />
+            <Route path="/matchUserChat/:chatId" element={<MatchUserChat />} />
+
             <Route path="/feedback" element={<Feedback />} />
           </Route>
-           
 
           {/* admin routes */}
 
@@ -142,11 +149,9 @@ function App() {
             <Route path="deposite" element={<SuperDeposite />} />
             <Route path="withdrawal" element={<SuperWithdrawal />} />
           </Route>
-        
         </Routes>
         {/* </SocketProvider> */}
       </BrowserRouter>
-
 
       {/* <Route
             path="/"
@@ -156,10 +161,9 @@ function App() {
           /> */}
 
       {/* <Info /> */}
-      
-     
+
       {/* <SignUpSucess /> */}
-    
+
       {/* <NewGame /> */}
       {/* <ResponGame /> */}
       {/* <NewGameMob /> */}
@@ -167,7 +171,7 @@ function App() {
       {/* <LiveBattle2 /> */}
       {/* <FilterLiveBattle /> */}
       {/* <OpenChallengeReq /> */}
-    
+
       {/* <InstanceStop /> */}
       {/* <RequestMatch /> */}
       {/* <RequestCounter /> */}
@@ -176,14 +180,14 @@ function App() {
       {/* <NewProfileMob /> */}
       {/* <NewProfile2/> */}
       {/* <UploadProfile/> */}
-      {/* <NewProfilePic /> */}  
-      {/* <MyWalletMain /> */} 
+      {/* <NewProfilePic /> */}
+      {/* <MyWalletMain /> */}
       {/* <WithDrawPc /> */}
       {/* <ListedGamePc /> */}
       {/* <Instance2Pc /> */}
 
       {/* <ItsAMatch /> */}
-   
+
       {/* <ReferalsBalanceWithDraw /> */}
       {/* <ReferrEarnPc /> */}
       {/* <GameHistoryPc /> */}

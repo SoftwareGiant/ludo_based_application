@@ -21,6 +21,7 @@ const Feedback = () => {
           <LudoMainLogo/>
         </div>
         <img
+         onClick={() => navigate("/profile")}
           src={FrameProfile}
           alt="Frame1"
           className="mt-1 w-8 h-8 border rounded-[100px]"

@@ -13,7 +13,8 @@ import allDepositRequestsReducer from "./components/admin_and_S.admin/admin/Admi
 import allWithdrawalRequestsReducer from "./components/admin_and_S.admin/admin/AdminSlice/withdrawlSlice";
 import gameHistoryReducer from "./components/admin_and_S.admin/admin/AdminSlice/gameHistorySlice ";
 import ChatReducer from "./components/Chathistory/ChatSlice";
-
+import favoriteMessagesReducer from "./components/Chathistory/favoriteMessagesSlice"
+ 
 export const store = configureStore({
     reducer: {
         auth: authReducer,
@@ -29,6 +30,7 @@ export const store = configureStore({
         allWithdrawalRequests:allWithdrawalRequestsReducer,
         gameHistory:gameHistoryReducer,
         chatAll:ChatReducer,
+        favChat:favoriteMessagesReducer,
         socketfor:socketReducer
     },
     middleware: (getDefaultMiddleware) =>

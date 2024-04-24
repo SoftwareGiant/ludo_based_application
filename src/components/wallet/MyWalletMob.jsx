@@ -8,17 +8,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserDetail } from "../live_battle/userSlice";
 import { Icon } from "@iconify-icon/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
+import PageLoader from "../MainLayout/PageLoader";
 const MyWalletMob = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.user);
 
-useEffect(() => {
-  dispatch(fetchUserDetail());
-}, []);
-console.log(users);
+  useEffect(() => {
+    dispatch(fetchUserDetail());
+  }, []);
+  console.log(users);
   const navigate = useNavigate();
+  if (users === null || users === undefined) {
+    return <PageLoader />;
+  }
   return (
-<div className="max-w-[480px] w-full min-h-screen h-full">
+    <div className="max-w-[480px] w-full min-h-screen h-full">
       <div
         id="NotificationspaceRoot"
         className="bg-[#fead3a]  h-8 overflow-hidden"
@@ -26,9 +30,10 @@ console.log(users);
       <div className="bg-[#fead3a] flex flex-row justify-between max-w-[480px] w-full h-12 items-start pt-2 px-5 ">
         <div className="flex flex-row gap-3 w-2/5 items-start">
           <SidebarMob />
-          <LudoMainLogo/>
+          <LudoMainLogo />
         </div>
         <img
+          onClick={() => navigate("/profile")}
           src={FrameProfile}
           alt="Frame1"
           className="mt-1 w-8 h-8 border rounded-[100px]"
@@ -57,7 +62,7 @@ console.log(users);
             <div
               onClick={() => navigate("/deposite")}
               className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex items-center p-2 rounded-lg flex-1 max-w-[100px]"
-            >          
+            >
               <Icon icon="material-symbols:add" className="text-white" />
               <div className="text-sm font-['Inter'] text-white">add cash</div>
             </div>
@@ -84,7 +89,7 @@ console.log(users);
               onClick={() => navigate("/withdraw")}
               className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-wrap items-center p-2 gap-2 rounded-lg flex-1 max-w-[110px]"
             >
-              <Icon icon="cil:bank" className="text-white"/>
+              <Icon icon="cil:bank" className="text-white" />
               <div className="text-sm font-['Inter'] text-white">Withdraw</div>
             </div>
           </div>
