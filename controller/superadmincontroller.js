@@ -35,6 +35,23 @@ const removeRole = async (req, res, next) => {
   }
 };
 
+const allAdminAndSuperAdmin = async(_,res,next) =>{
+  try{
+
+    const allAdmin = await User.find({role:[ "admin", "superAdmin"]});
+    if(allAdmin.length>0){
+      return res.status(200).json({allAdmin})
+    }
+    else{
+      return res.status(400).json({message:"Admin Not Found!"});
+    }
+
+  }
+  catch(err){
+     return next(err);
+  }
+}
+
 const depositManually = async (req, res, next) => {
   const { id, amount } = req.body;
   try {
@@ -95,10 +112,47 @@ const withdrawnbySuperAdmin = async (req, res, next) => {
   }
 };
 
+const allPendingWithdrawl =async(_,res,next)=>{
+  try{
+  const allPending = await Payment.find({status:"confirmationrequired"});
+  if(allPending.length>0){
+    return res.status(200).json({allPending});
+  }
+  else{
+    return res.status(404).json({message:"No Data Found"});
+  }
+}
+  catch(err){
+    return next(err)
+  }
+}
+
+const approvePendingWithdrawl = async(_,res,next)=>{
+  try{
+  const id = req.params.id; 
+  const {status} = req.body;
+  const approve = await Payment.findByIdAndUpdate(id,{status},{new:true});
+  if(approve){
+    return res.status(200).json({approve});
+  }
+  else {
+    return res.status(404).json({message:"Try again later"});
+  }
+}
+catch(err){
+  return next(err);
+}
+}
+
+
+
 module.exports = {
   addRole,
   removeRole,
   depositManually,
   minMax,
   withdrawnbySuperAdmin,
+  allPendingWithdrawl,
+  approvePendingWithdrawl,
+  allAdminAndSuperAdmin
 };

@@ -11,7 +11,7 @@ const PaymentSchema = new mongoose.Schema({
   currency: String,
   status: {
     type: String,
-    enum: ["pending", "success", "failed"],
+    enum: ["pending", "success", "failed","confirmationrequired"],
   },
   paymentAction: {
     type: String,

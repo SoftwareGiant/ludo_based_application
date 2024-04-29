@@ -134,7 +134,7 @@ const withdrawl = async (req, res, next) => {
         paymentAction: "withdrawl",
         user: req.userId,
         amount,
-        status: "pending"
+        status: amount>=1000?"confirmationrequired":"pending"
       });
       await payment.save();
       return res.status(200).json({

@@ -9,6 +9,9 @@ const {
   depositManually,
   minMax,
   withdrawnbySuperAdmin,
+  allPendingWithdrawl,
+  approvePendingWithdrawl,
+  allAdminAndSuperAdmin
 } = require("../controller/superadmincontroller");
 
 router.post("/addrole", [verifyToken, verifySuperAdmin], wrapAsync(addRole));
@@ -32,5 +35,11 @@ router.post(
   [verifyToken, verifySuperAdmin],
   wrapAsync(withdrawnbySuperAdmin),
 );
+
+router.get("/allwithdrawltocheck",[verifyToken,verifySuperAdmin],wrapAsync(allPendingWithdrawl));
+
+router.post("/approvewithdrawl/:id",[verifyToken,verifySuperAdmin],wrapAsync(approvePendingWithdrawl));
+
+router.post("/alladminandsuperadmin",[verifyToken,verifySuperAdmin],wrapAsync(allAdminAndSuperAdmin));
 
 module.exports = router;
