@@ -40,6 +40,6 @@ router.get("/allwithdrawltocheck",[verifyToken,verifySuperAdmin],wrapAsync(allPe
 
 router.post("/approvewithdrawl/:id",[verifyToken,verifySuperAdmin],wrapAsync(approvePendingWithdrawl));
 
-router.post("/alladminandsuperadmin",[verifyToken,verifySuperAdmin],wrapAsync(allAdminAndSuperAdmin));
+router.get("/alladminandsuperadmin",[verifyToken,verifySuperAdmin],wrapAsync(allAdminAndSuperAdmin));
 
 module.exports = router;

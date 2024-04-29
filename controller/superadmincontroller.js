@@ -127,7 +127,7 @@ const allPendingWithdrawl =async(_,res,next)=>{
   }
 }
 
-const approvePendingWithdrawl = async(_,res,next)=>{
+const approvePendingWithdrawl = async(req,res,next)=>{
   try{
   const id = req.params.id; 
   const {status} = req.body;
