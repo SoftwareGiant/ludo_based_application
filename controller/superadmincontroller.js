@@ -114,7 +114,7 @@ const withdrawnbySuperAdmin = async (req, res, next) => {
 
 const allPendingWithdrawl =async(_,res,next)=>{
   try{
-  const allPending = await Payment.find({status:"confirmationrequired"});
+  const allPending = await Payment.find({status:"confirmationrequired"}).populate("user");
   if(allPending.length>0){
     return res.status(200).json({allPending});
   }
