@@ -36,7 +36,7 @@ const MyWalletMob = () => {
           onClick={() => navigate("/profile")}
           src={FrameProfile}
           alt="Frame1"
-          className="mt-1 w-8 h-8 border rounded-[100px]"
+          className="cursor-pointer mt-1 w-8 h-8 border rounded-[100px]"
         />
       </div>
 

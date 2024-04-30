@@ -1,16 +1,10 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import "../../app.css";
-import FrameProfile from "../../assets/profile/Frame_profile.png";
-import { SidebarMob } from "../MainLayout/SidebarMob";
 import { RxCross2 } from "react-icons/rx";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 
 const Terms = () => {
-  const [isOpen, setIsOpen] = useState(true);
-  const toggleNavbar = () => {
-    setIsOpen(!isOpen);
-  };
   const navigate = useNavigate();
   return (
     <>
@@ -21,7 +15,7 @@ const Terms = () => {
         />
         <div className="bg-[#fead3a] flex justify-between max-w-[480px] w-full h-12 items-start pt-2 px-5 ">
           <div className="flex gap-3 items-center">
-            <div onClick={() => navigate("/")}>
+            <div className="cursor-pointer  p-1 " onClick={() => navigate("/")}>
               {" "}
               <RxCross2 />
             </div>
