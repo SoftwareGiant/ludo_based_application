@@ -18,7 +18,8 @@ const {
   giveToAbandoned,
   removefromAbandoned,
   allAbandonedUser,
-  kycVerificationStatus
+  kycVerificationStatus,
+  allSlider
 } = require("../controller/user");
 
 router.post("/register", wrapAsync(registerUser));
@@ -74,6 +75,8 @@ router.get(
 //finding kyc verified user and pending users on sorting basis
 
 router.get("/kycstatus",[verifyToken,admin],wrapAsync(kycVerificationStatus));
+
+router.get("/allSlider",wrapAsync(allSlider));
 
 
 module.exports = router;

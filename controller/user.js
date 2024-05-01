@@ -6,6 +6,7 @@ const { authSchema } = require("../helper/validation_schema");
 const { signAccessToken, signRefreshToken, verifyRefreshToken } = require("../helper/jwt_helper");
 const { sendOtp, verifyOtp } = require("../config/authentication/otpverify");
 const Notification = require("../models/notification");
+const Slider = require("../models/slider")
 const logger = require("../logger/index");
 require("dotenv").config();
 
@@ -269,7 +270,7 @@ const addPicture = async (req, res) => {
     const { userId } = req;
     await User.findByIdAndUpdate(userId, { profilePicture: req.file.filename }, { new: true });
     const notification = new Notification({
-      user: req.userId,
+      user: req.userId, 
       message: "🥳Your picture added successfully!🥳"
     });
     await notification.save();
@@ -328,6 +329,16 @@ const kycVerificationStatus = async (req, res, next) => {
   }
 };
 
+const allSlider = async(req,res,next) =>{
+  try{
+    const slider = await Slider.findOne({});
+    return res.status(200).json({slider});
+  }
+  catch{
+      return next(err);
+  }
+}
+
 module.exports = {
   registerUser,
   loginUser,
@@ -341,5 +352,6 @@ module.exports = {
   giveToAbandoned,
   removefromAbandoned,
   allAbandonedUser,
-  kycVerificationStatus
+  kycVerificationStatus,
+  allSlider
 };

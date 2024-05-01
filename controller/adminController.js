@@ -2,13 +2,12 @@ const AppError = require("../controlError/AppError");
 const GameDetails = require("../models/gameDetails");
 const PaymentDetails = require("../models/payment");
 const User = require("../models/user");
+const Slider = require("../models/slider");
 const httpStatusandError = require("../controlError/httpStatusandError");
 const error = httpStatusandError();
 
 const updateAmount = async (gameDetail) => {
-  console.log(gameDetail,"hiiiiiiii")
   if (gameDetail.gameResultDetail.player1.outcome == "win") {
-    console.log("hekkkk");
     const totalAmount = gameDetail.player1.walletDetails.totalAmount;
     const balletAmount = gameDetail.battleDetails.amount;
     const winningAmount = gameDetail.player1.walletDetails.winningAmount;
@@ -22,7 +21,6 @@ const updateAmount = async (gameDetail) => {
     gameDetail.player2.walletDetails.totalAmount =
       totalAmount - 1.95 * balletAmount;
   } else if (gameDetail.gameResultDetail.player2.outcome == "win") {
-    console.log("huhhhh");
     const totalAmount = gameDetail?.player2.walletDetails.totalAmount;
     const balletAmount = gameDetail?.battleDetails?.amount;
     const winningAmount = gameDetail?.player2.walletDetails.winningAmount;
@@ -135,10 +133,44 @@ const withdrawnDetails = async (req, res) => {
   }
 };
 
+const addSliderContent = async(req,res,next)=>{
+  try{
+  let slider = await Slider.findOne({});
+  if(!slider){
+    slider = new Slider({})
+  }
+  for(let i=0; i<req.files.length;i++){
+    slider.bannerContent.push(req.files[i].filename)
+  }
+  await slider.save();
+  return res.status(200).json({message:"Slider added"});
+}
+catch(err){
+  return next(err);
+}
+}
+
+const removeSliderContent = async(req,res,next)=>{
+  try{
+    const fileName = req.file.filename;
+    const slider = await Slider.findOne({});
+    const indexToRemove= slider.bannerContent(fileName);
+    slider.bannerContent.splice(indexToRemove, 1);
+    await slider.save();
+    return res.status(200).json({message:"Slider Removed Successfully"});
+
+  }
+  catch(err){
+    return next(err);
+  }
+}
+
 module.exports = {
   findGameAndChangeResult,
   finduserdetails,
   newKycVerification,
   depositDetails,
   withdrawnDetails,
+  addSliderContent,
+  removeSliderContent
 };

@@ -1,6 +1,0 @@
-{
-  message: 'undefined - req is not defined - /api/superadmin/approvewithdrawl/662f3987a5658f4816e9bf2a - POST',
-  level: 'error',
-  service: 'user-services',
-  timestamp: 'Apr-29-2024 11:41:33'
-}
