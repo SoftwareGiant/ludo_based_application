@@ -48,7 +48,7 @@ router.get(
 );
 
 router.post(
-  "/slider",
+  "/addslider",
   [verifyToken, admin],
   upload.array("image"),
   wrapAsync(addSliderContent)

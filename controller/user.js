@@ -329,7 +329,7 @@ const kycVerificationStatus = async (req, res, next) => {
   }
 };
 
-const allSlider = async(req,res,next) =>{
+const allSlider = async(_,res,next) =>{
   try{
     const slider = await Slider.findOne({});
     return res.status(200).json({slider});
