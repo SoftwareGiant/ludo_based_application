@@ -1,4 +1,5 @@
 const GameDetails = require("../models/gameDetails");
+const User = require("../models/user");
 const PaymentDetails = require("../models/payment");
 const userGameHistory = async (req, res, next) => {
   try {
@@ -24,4 +25,21 @@ const userPaymentHistory = async (req, res, next) => {
   }
 };
 
-module.exports = { userGameHistory, userPaymentHistory };
+const allTypeHistory = async(req,res,next)=>{
+  try{
+   const {id}= req.params;
+   console.log(id,"id okay")
+   const gameDetails = await GameDetails.find({
+    $or: [{ player1: id }, { player2: id }],
+  })
+    .populate("player1")
+    .populate("player2");
+  const paymentDetails = await PaymentDetails.find({ user: id });
+  return res.status(200).json({gameDetails,paymentDetails})
+
+  }catch(e){
+    return next(e)
+  }
+}
+
+module.exports = { userGameHistory, userPaymentHistory, allTypeHistory };
