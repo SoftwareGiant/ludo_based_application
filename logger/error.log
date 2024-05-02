@@ -1,0 +1,24 @@
+{
+  message: 'undefined - jwt expired - /api/notification/all - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 13:47:49'
+}
+{
+  message: '401 - Unauthorized credential - /api/notification/all - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 13:47:49'
+}
+{
+  message: 'undefined - jwt expired - /api/notification/read/6630e41d137027bc55e4c025 - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 13:52:58'
+}
+{
+  message: '401 - Unauthorized credential - /api/notification/read/6630e41d137027bc55e4c025 - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 13:52:58'
+}

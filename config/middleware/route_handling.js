@@ -14,6 +14,7 @@ const RouteHandling = (app) =>{
   app.use("/api/message", require("../../router/message"));
   app.use("/api/notifier", require("../../router/notifier"));
   app.use("/api/support", require("../../router/support"));
+  app.use("/api/notification",require("../../router/notification"));
   
   app.use(async(err, req, res, next) => {
     logger.error(
