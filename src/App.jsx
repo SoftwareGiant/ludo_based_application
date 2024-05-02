@@ -61,6 +61,7 @@ import SuperWithdrawal from "./components/admin_and_S.admin/superadmin/Pages/Sup
 import Chathistory from "./components/Chathistory/Chathistory.jsx";
 import MatchUserChat from "./components/Chathistory/MatchUserChat.jsx";
 import MyChat from "./components/Chathistory/MyChat.jsx";
+import AdminSLides from "./components/admin_and_S.admin/admin/Pages/AdminSLides.jsx";
 // import SocketProvider from "./socket";
 
 function App() {
@@ -137,6 +138,8 @@ function App() {
             <Route path="/adminuserhistory" element={<UserHistory />} />
             <Route path="/adminsuport" element={<AdminSupport />} />
             <Route path="/admincustomer" element={<AdminCustomer />} />
+            <Route path="/adminslides" element={<AdminSLides />} />
+            
           </Route>
 
           {/* super admin routes */}

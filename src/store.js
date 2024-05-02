@@ -17,6 +17,7 @@ import favoriteMessagesReducer from "./components/Chathistory/favoriteMessagesSl
 
 import AdminSuperAdminListReducer from "./components/admin_and_S.admin/superadmin/SuperAdminSlices/AdminSuperAdminListSlice";
 import withdrawalsReducer from "./components/admin_and_S.admin/superadmin/SuperAdminSlices/withdrawalsSlice";
+import userAllHistoryReducer from "./components/admin_and_S.admin/admin/AdminSlice/userAllHistorySlice";
 
 export const store = configureStore({
   reducer: {
@@ -35,10 +36,10 @@ export const store = configureStore({
     chatAll: ChatReducer,
     favChat: favoriteMessagesReducer,
     socketfor: socketReducer,
-
+    userAllHistory: userAllHistoryReducer,
 
     alladmins: AdminSuperAdminListReducer,
-allwithdrawal:withdrawalsReducer
+    allwithdrawal: withdrawalsReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

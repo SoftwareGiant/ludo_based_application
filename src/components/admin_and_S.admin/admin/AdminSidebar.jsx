@@ -126,6 +126,17 @@ const AdminSidebar = () => {
             {showFullSidebar && <span>Customer</span>}
           </div>
         </Link>
+        <Link to="/adminslides">
+          <div
+            className={`flex justify-start gap-4 items-center px-3 rounded-3xl m-1 cursor-pointer ${
+              location.pathname === "/adminslides" ? "bg-[#EEEEEE]" : ""
+            } hover:bg-[#EEEEEE] h-[51px]`}
+          >
+            <Icon icon="fluent:slide-add-28-regular" width="24" />
+
+            {showFullSidebar && <span>Slides</span>}
+          </div>
+        </Link>
       </div>
     </div>
   );
