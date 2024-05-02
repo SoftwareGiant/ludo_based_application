@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify-icon/react";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import { Button, Card, CardBody } from "@material-tailwind/react";
 
 import AdminFooter from "../Common.jsx/AdminFooter";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const AdminSLides = () => {
   const [sliderData, setSliderData] = useState([]);
@@ -22,6 +22,7 @@ const AdminSLides = () => {
     }
   };
   const handleDelete = (id) => {
+    toast.success("image deleted successfully");
     setImages(images.filter((image) => image.id !== id));
   };
 

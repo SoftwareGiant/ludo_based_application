@@ -35,6 +35,7 @@ export const loginAsync = createAsyncThunk(
       return data;
     }
     catch (error) {
+      console.log(error);
       toast.error(error)
       return rejectWithValue(error.response.data);
     }

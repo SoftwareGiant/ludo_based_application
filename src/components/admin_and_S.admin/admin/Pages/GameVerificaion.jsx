@@ -27,6 +27,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AdminFooter from "../Common.jsx/AdminFooter";
 import Refreshloader from "../../superadmin/Common/Refreshloader";
 import GameStatusCard from "../Common.jsx/gameStatusCard";
+import PageLoader from "../../../MainLayout/PageLoader";
 
 export function GameVerificaion() {
   const [sortConfig, setSortConfig] = useState({
@@ -57,7 +58,7 @@ export function GameVerificaion() {
     return `${day}/${month}/${year}`;
   };
   if (status === "loading" && isRefresh === false) {
-    return <div>Loading...</div>;
+    return <PageLoader full={true}/>
   }
 
   if (status === "failed") {

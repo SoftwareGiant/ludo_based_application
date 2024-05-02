@@ -130,7 +130,7 @@ const NewProfileMob = () => {
         </div>
         <div
           onClick={handleLogout}
-          className={`flex  h-9 my-1 px-3 justify-center items-center border-solid border border-[rgba(15,_0,_43,_0.3)] bg-[rgba(15,_0,_43,_0.3)] rounded-2xl ${
+          className={`flex cursor-pointer  h-9 my-1 px-3 justify-center items-center border-solid border border-[rgba(15,_0,_43,_0.3)] bg-[rgba(15,_0,_43,_0.3)] rounded-2xl ${
             scrollPosition > 10 ? "hidden" : "flex"
           }`}
         >

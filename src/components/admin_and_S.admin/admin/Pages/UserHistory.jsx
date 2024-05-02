@@ -19,6 +19,7 @@ import {
 import Refreshloader from "../../superadmin/Common/Refreshloader";
 import AdminFooter from "../Common.jsx/AdminFooter";
 import UserHistoryCard from "../Common.jsx/UserHistoryCard";
+import PageLoader from "../../../MainLayout/PageLoader";
 
 export function UserHistory() {
   const [sortConfig, setSortConfig] = useState({
@@ -50,7 +51,7 @@ export function UserHistory() {
     return `${day}/${month}/${year}`;
   };
   if (status === "loading" && isRefresh === false) {
-    return <div>Loading...</div>;
+    return <PageLoader full={true} />;
   }
 
   if (status === "failed") {
@@ -277,7 +278,7 @@ export function UserHistory() {
                         uid={_id}
                         updatedAt={formatDate(createdAt)}
                         mobileNo={mobileNo}
-                     />
+                      />
                     </td>
                   </tr>
                 );

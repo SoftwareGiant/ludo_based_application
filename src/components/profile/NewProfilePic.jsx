@@ -78,7 +78,7 @@ const NewProfilePic = () => {
               alt="Preview"
             />
           </div>
-          <span className="text-[#0F002B] font-bold font-[Nunito-Sans]">
+          <span className="text-[#0F002B] text-lg font-bold font-[Nunito-Sans]">
             Upload or take a new picture.
           </span>
         </div>

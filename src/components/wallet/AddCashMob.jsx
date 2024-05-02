@@ -124,13 +124,7 @@ const AddCashMob = () => {
             Deposit Cash
           </div>
         </div>
-        <img
-          onClick={() => navigate("/help")}
-          src="https://file.rendit.io/n/ib8IMr1PTiCuwTfVAXZs.svg"
-          alt="ActionInfoOutline icon"
-          id="Icoutlineinfo"
-          className="w-6"
-        />
+        <Icon className="cursor-pointer" onClick={() => navigate("/help")} icon="material-symbols:info-outline" width={24}/>
       </div>
       <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative flex flex-col justify-between h-full">
         <div className="bg-[#fead3a] h-[86%] w-[200%] rounded-[50%]   -top-20 absolute -left-[50%]" />

@@ -20,6 +20,7 @@ import {
   selectAllUsersStatus,
 } from "../AdminSlice/alluserSlice";
 import Refreshloader from "../../superadmin/Common/Refreshloader";
+import PageLoader from "../../../MainLayout/PageLoader";
 
 const TABLE_HEAD = ["UID", "Name", "Mobile Number", "Onboarding Date"];
 export function NewOnboard() {
@@ -115,7 +116,7 @@ export function NewOnboard() {
         <Icon icon="charm:cross" width="12" />
       </div>
       {status === "loading" && isRefresh === false ? (
-        <div>Loading...</div>
+        <PageLoader full={true}/>
       ) : (
         <Card className=" w-full py-1 pb-10 px-4">
           <CardBody className=" px-0 w-full">

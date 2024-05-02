@@ -7,6 +7,7 @@ import { fetchUserPaymentHistory } from "./userHistorySlice";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { useNavigate } from "react-router-dom";
 import PageLoader from "../MainLayout/PageLoader";
+import { convertTimestamp } from "../admin_and_S.admin/Functions/convertTimestamp";
 
 const TransactioHistoryMob = () => {
   const dispatch = useDispatch();
@@ -21,23 +22,7 @@ const TransactioHistoryMob = () => {
     dispatch(fetchUserPaymentHistory());
   }, [dispatch]);
 
-  const battleCreationTime = (time) => {
-    const currentTime = Date.now();
-    // Convert the timestamp to milliseconds (assuming timestamp is in ISO format)
-    const timestamp = Date.parse(time);
-    // Calculate the time difference in milliseconds
-    const timeDifference = currentTime - timestamp;
-    // Convert milliseconds to minutes
-    const timeDifferenceInMinutes = Math.floor(timeDifference / (1000 * 60));
-    // return timeDifferenceInMinutes;
-    if (timeDifferenceInMinutes < 60) {
-      return Math.floor(timeDifferenceInMinutes) + " Minutes ago";
-    } else {
-      const timeDifferenceInHours = timeDifferenceInMinutes / 60;
-      return Math.floor(timeDifferenceInHours) + " Hours ago";
-    }
-  };
-  if(loading) return <PageLoader/>
+  if (loading) return <PageLoader />;
   return (
     <>
       <div className="max-w-[480px] w-full min-h-screen h-full">
@@ -48,10 +33,10 @@ const TransactioHistoryMob = () => {
         <div className="bg-[#fead3a] flex flex-row justify-between max-w-[480px] w-full h-12 items-start pt-2 px-5 ">
           <div className="flex flex-row gap-3 w-2/5 items-start">
             <SidebarMob />
-            <LudoMainLogo/>
+            <LudoMainLogo />
           </div>
           <img
-           onClick={() => navigate("/profile")}
+            onClick={() => navigate("/profile")}
             src={FrameProfile}
             alt="Frame1"
             className="mt-1 w-8 h-8 border rounded-[100px]"
@@ -70,7 +55,7 @@ const TransactioHistoryMob = () => {
                 <div className="text-white bg-[#0f002b] flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
                   <div className="flex justify-between w-full items-center p-3">
                     <span className=" shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)]">
-                      {battleCreationTime(payment.timestamp)}
+                      {convertTimestamp(payment.timestamp)}
                     </span>
                   </div>
                   <div className="text-xs shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex  px-4 items-center  w-full  py-5 pb-8 ">
@@ -88,7 +73,11 @@ const TransactioHistoryMob = () => {
                   </div>
                   <div className=" text-sm font-['Inter'] text-white  flex gap-2 justify-end items-center  w-full max-w-[180px]">
                     <div className="text-sm font-['Inter'] p-2 rounded-lg  text-white bg-[#0f002b]  shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)]">
-                      {` ${payment.paymentAction==="withdrawl"? "Withdrawal": "Deposite"} ${payment.status}`}
+                      {` ${
+                        payment.paymentAction === "withdrawl"
+                          ? "Withdrawal"
+                          : "Deposite"
+                      } ${payment.status}`}
                     </div>
                   </div>
                 </div>

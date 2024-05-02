@@ -139,7 +139,6 @@ function App() {
             <Route path="/adminsuport" element={<AdminSupport />} />
             <Route path="/admincustomer" element={<AdminCustomer />} />
             <Route path="/adminslides" element={<AdminSLides />} />
-            
           </Route>
 
           {/* super admin routes */}
@@ -162,60 +161,6 @@ function App() {
               useMediaQuery({ minWidth: 768 }) ? <NewGame /> : <NewGameMob />
             }
           /> */}
-
-      {/* <Info /> */}
-
-      {/* <SignUpSucess /> */}
-
-      {/* <NewGame /> */}
-      {/* <ResponGame /> */}
-      {/* <NewGameMob /> */}
-      {/* <LiveBattle /> */}
-      {/* <LiveBattle2 /> */}
-      {/* <FilterLiveBattle /> */}
-      {/* <OpenChallengeReq /> */}
-
-      {/* <InstanceStop /> */}
-      {/* <RequestMatch /> */}
-      {/* <RequestCounter /> */}
-      {/* <MatchStart /> */}
-      {/* <NewProfile /> */}
-      {/* <NewProfileMob /> */}
-      {/* <NewProfile2/> */}
-      {/* <UploadProfile/> */}
-      {/* <NewProfilePic /> */}
-      {/* <MyWalletMain /> */}
-      {/* <WithDrawPc /> */}
-      {/* <ListedGamePc /> */}
-      {/* <Instance2Pc /> */}
-
-      {/* <ItsAMatch /> */}
-
-      {/* <ReferalsBalanceWithDraw /> */}
-      {/* <ReferrEarnPc /> */}
-      {/* <GameHistoryPc /> */}
-      {/* <TransactionHistoryPc /> */}
-      {/* <NotificationPc /> */}
-      {/* <SupportPc /> */}
-      {/* <ReferrEarnPc /> */}
-      {/* ============================== */}
-      {/* <NewProfileResp /> */}
-      {/* <MyWalletmobile /> */}
-      {/* <GameHistoryMob /> */}
-      {/* <Notification /> */}
-      {/* <Support /> */}
-      {/* <ReferrEarnMob /> */}
-      {/* <TransactioHistoryMob /> */}
-      {/* <GameCash /> */}
-      {/* <SupportMob /> */}
-      {/* <Route path="/success" element= {<SignUpSucess/>}/>
-    
-       
-          <Route path="/info" element= {<Info/>}/>
-          <Route path="/cardclick" element= {<CardClickInstance/>}/>
-          <Route path="/cardclick2" element= {<CardClickInstance2/>}/>
-        
-           */}
     </>
   );
 }

@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { Icon } from "@iconify-icon/react";
 import kyc from "../../../assets/admin_Sadmin/admin/kycicon.svg";
 import game from "../../../assets/admin_Sadmin/admin/game.svg";
-import deposite from "../../../assets/admin_Sadmin/admin/deposite.svg";
 import referal from "../../../assets/admin_Sadmin/admin/referral.svg";
 import history from "../../../assets/admin_Sadmin/admin/history.svg";
-import withdraw from "../../../assets/admin_Sadmin/admin/withdraw.svg";
 import { Link, useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 const AdminSidebar = () => {
@@ -24,10 +22,10 @@ const AdminSidebar = () => {
         showFullSidebar ? "w-[225px]  " : "w-[86px]  "
       } `}
     >
-      <div className="flex flex-col pt-4 h-full">
+      <div className="flex flex-col pt-3 h-full">
         <div
           onClick={toggleSidebar}
-          className="flex justify-start gap-4 h-[51px] items-center px-3  rounded-3xl m-1"
+          className="flex cursor-pointer justify-start gap-4 h-[51px] items-center px-3  rounded-3xl m-1"
         >
           <Icon icon="ic:baseline-menu" width="24" />
           {showFullSidebar && <span>Menu</span>}
