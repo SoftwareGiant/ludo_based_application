@@ -22,3 +22,375 @@
   service: 'user-services',
   timestamp: 'May-02-2024 13:52:58'
 }
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:24:21'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:24:21'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:24:21'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:24:21'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:24:21'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:24:21'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:31:09'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:31:09'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:31:09'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:31:09'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:31:17'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:31:17'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:31:17'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:31:17'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:34:07'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:34:07'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:34:07'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:34:07'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:34:56'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:34:56'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:35:49'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:35:49'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:35:49'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:35:49'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:35:52'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:35:52'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:35:52'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:35:52'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:36:00'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:36:00'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:36:00'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:36:00'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:36:15'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:36:15'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:36:15'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:36:15'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:37:04'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:37:04'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:37:04'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:37:04'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:38:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:38:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:38:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:38:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:38:43'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:38:43'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:38:43'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:38:43'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:40:27'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:40:27'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:40:27'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:40:27'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:45:03'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:45:03'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:45:03'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:45:03'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:45:07'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:45:07'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:45:07'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:45:07'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:45:08'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/currentuser - GET',
+  level: 'error',
+  service: 'user-services',
+  timestamp: 'May-02-2024 14:45:08'
+}

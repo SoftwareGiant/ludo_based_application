@@ -39,7 +39,12 @@ const registerUser = async (req, res, next) => {
     //   refreshToken,
     // });
 
-    return res.cookie("refreshToken", refreshToken, { httpOnly: true, sameSite: "strict" }).header("Authorization", accessToken).status(200).json({ message: "User Registered Successfully" });
+    // return res.cookie("refreshToken", refreshToken, { httpOnly: true, sameSite: "strict" }).header("Authorization", accessToken).status(200).json({ message: "User Registered Successfully" });
+    return res.status(200).json({
+      message: "User Registered Successfully",
+      accessToken,
+      refreshToken,
+    });
   } catch (err) {
     if (err.isJoi === true) {
       err.status = 422;
