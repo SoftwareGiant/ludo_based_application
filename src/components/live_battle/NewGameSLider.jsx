@@ -1,8 +1,24 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 const NewGameSLider = () => {
+  const [sliderData, setSliderData] = useState([]);
+  useEffect(() => {
+    getSlides();
+  }, []);
+
+  const getSlides = async () => {
+    try {
+      const response = await axios.get("/api/user/allSlider");
+      console.log(response.data.slider.bannerContent);
+      setSliderData(response.data.slider.bannerContent);
+    } catch (error) {
+      console.error("Error fetching slider data:", error);
+    }
+  };
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -23,6 +39,9 @@ const NewGameSLider = () => {
       //   partialVisibilityGutter: 50,
     },
   };
+  if (sliderData === undefined || sliderData?.length <= 0) {
+    return;
+  }
   return (
     <div className="w-full max-w-[480px] h-[130px] relative ">
       <Carousel
@@ -38,33 +57,11 @@ const NewGameSLider = () => {
         removeArrowOnDeviceType={["tablet", "mobile"]}
         responsive={responsive}
       >
-        <div className="p-2 ">
-          <img
-            className="rounded-xl"
-            src="https://plus.unsplash.com/premium_photo-1701693533734-bc279bdd0c80?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="img1"
-          />
-        </div>
-        <div className="p-2 ">
-          <img
-            className="rounded-xl"
-            src="https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          />
-        </div>
-        <div className="p-2 ">
-          <img
-            className="rounded-xl"
-            src="https://plus.unsplash.com/premium_photo-1701693533734-bc279bdd0c80?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="img1"
-          />
-        </div>
-        <div className="p-2 ">
-          <img
-            className="rounded-xl"
-            alt="img2"
-            src="https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          />
-        </div>
+        {sliderData?.map((slideimg, index) => (
+          <div key={index} className="p-2 ">
+            <img className="rounded-xl" src={slideimg} alt="img1" />
+          </div>
+        ))}
       </Carousel>
     </div>
   );

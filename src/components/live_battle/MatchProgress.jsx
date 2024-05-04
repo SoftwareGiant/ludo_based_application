@@ -100,11 +100,12 @@ const MatchProgress = () => {
               live <span className="font-bold">battle</span>
             </div>
           </div>
-          <img
-            src="https://file.rendit.io/n/ib8IMr1PTiCuwTfVAXZs.svg"
-            alt="ActionInfoOutline icon"
-            id="Icoutlineinfo"
-            className="w-6 cursor-pointer"
+
+          <Icon
+            className="cursor-pointer"
+            onClick={() => navigate("/help")}
+            icon="material-symbols:info-outline"
+            width={24}
           />
         </div>
 

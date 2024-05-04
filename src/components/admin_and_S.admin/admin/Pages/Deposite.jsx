@@ -21,6 +21,7 @@ import {
 } from "../AdminSlice/depositeHisory";
 import Refreshloader from "../../superadmin/Common/Refreshloader";
 import AdminFooter from "../Common.jsx/AdminFooter";
+import PageLoader from "../../../MainLayout/PageLoader";
 
 function Deposite() {
   const [sortConfig, setSortConfig] = useState({
@@ -52,10 +53,10 @@ function Deposite() {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
-  if (status === "loading" && isRefresh === false) {
-    return <div>Loading...</div>;
-  }
 
+  if (status === "loading" && isRefresh === false) {
+    return <PageLoader full={true} />;
+  }
   if (status === "failed") {
     return <div>Error loading users</div>;
   }

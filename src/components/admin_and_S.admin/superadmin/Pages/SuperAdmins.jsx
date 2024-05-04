@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify-icon/react";
 import Stats from "../../admin/Common.jsx/Stats";
 import {
@@ -12,49 +12,30 @@ import {
 } from "@material-tailwind/react";
 import AdminFooter from "../../admin/Common.jsx/AdminFooter";
 import EditAdmins from "../Admins/EditAdmins";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAdminSadmin } from "../SuperAdminSlices/AdminSuperAdminListSlice";
+import { formatDate } from "../../Functions/FormateDate";
 
 const TABLE_HEAD = ["Name", "Number", "Position", "Status", "Onboarding Date"];
 
-const TABLE_ROWS = [
-  {
-    position: "Admin",
-    status: "Verified",
-    name: "John Doe",
-    mobno: "7610981931",
-    onboard: "22/12/2014",
-  },
-  {
-    position: "Super Admin",
-    status: "Verified",
-    name: "Jane Smith",
-    mobno: "7610981932",
-    onboard: "23/12/2014",
-  },
-  {
-    position: "Super Admin",
-    status: "Verified",
-    name: "Alice Johnson",
-    mobno: "7610981933",
-    onboard: "24/12/2014",
-  },
-  {
-    position: "Super Admin",
-    status: "Verified",
-    name: "Bob Brown",
-    mobno: "7610981934",
-    onboard: "25/12/2014",
-  },
-];
-
-export function SuperAdmins() {
+function SuperAdmins() {
   const [isClicked, setIsClicked] = useState(false);
   const [page, setPage] = useState("admins");
+  const { adminList, status, error } = useSelector((state) => state.alladmins);
+  console.log(adminList);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchAdminSadmin());
+    }
+  }, [status, dispatch]);
   const handleClick = () => {
     setIsClicked(true);
   };
   const handleClose = () => {
     setIsClicked(false);
   };
+  if (adminList === undefined) return "Loading...";
   return (
     <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl pb-10">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
@@ -173,49 +154,47 @@ export function SuperAdmins() {
                   </tr>
                 </thead>
                 <tbody className="w-full">
-                  {TABLE_ROWS.map(
-                    ({ position, status, name, mobno, onboard }, index) => {
-                      const isLast = index === TABLE_ROWS.length - 1;
-                      const classes = isLast ? "p-4" : "p-4";
-                      return (
-                        <tr key={mobno} className="text-[#000000] ">
-                          <td className={classes}>
-                            <div className="flex flex-col">
-                              <Typography className="font-[Inter] font-medium text-[16px]">
-                                {name}
-                              </Typography>
-                            </div>
-                          </td>
-                          <td className={classes}>
-                            <div className="w-max">
-                              <Typography className="font-[Inter] font-medium text-[16px]">
-                                {mobno}
-                              </Typography>
-                            </div>
-                          </td>
-                          <td className={classes}>
-                            <div className="flex items-center gap-3">
-                              <Typography className="font-[Inter] font-medium text-[16px]">
-                                {position}
-                              </Typography>
-                            </div>
-                          </td>
-                          <td className={classes}>
-                            <div className="flex items-center gap-3">
-                              <Typography className="font-[Inter] font-medium text-[16px]">
-                                {status}
-                              </Typography>
-                            </div>
-                          </td>
-                          <td className={classes}>
+                  {adminList.map((detail) => {
+                    return (
+                      <tr key={detail._id} className="text-[#000000] ">
+                        <td className="p-4">
+                          <div className="flex flex-col">
                             <Typography className="font-[Inter] font-medium text-[16px]">
-                              {onboard}
+                              {detail._id}
                             </Typography>
-                          </td>
-                        </tr>
-                      );
-                    }
-                  )}
+                          </div>
+                        </td>
+                        <td className="p-4">
+                          <div className="w-max">
+                            <Typography className="font-[Inter] font-medium text-[16px]">
+                              {detail.mobileNo}
+                            </Typography>
+                          </div>
+                        </td>
+                        <td className="p-4">
+                          <div className="flex items-center gap-3">
+                            <Typography className="font-[Inter] font-medium text-[16px]">
+                              {detail.role}
+                            </Typography>
+                          </div>
+                        </td>
+                        <td className="p-4">
+                          <div className="flex items-center gap-3">
+                            <Typography className="font-[Inter] font-medium text-[16px]">
+                              {detail.userKyc.verificationStatus === true
+                                ? "Verified"
+                                : "Not Verified"}
+                            </Typography>
+                          </div>
+                        </td>
+                        <td className="p-4">
+                          <Typography className="font-[Inter] font-medium text-[16px]">
+                            {formatDate(detail.createdAt)}
+                          </Typography>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </CardBody>
@@ -223,7 +202,7 @@ export function SuperAdmins() {
         </div>
       )}
       {page === "editadmins" && (
-        <EditAdmins setPage={setPage} TABLE_ROWS={TABLE_ROWS} />
+        <EditAdmins setPage={setPage} adminList={adminList} />
       )}
       <AdminFooter />
     </div>

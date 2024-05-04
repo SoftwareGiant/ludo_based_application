@@ -1,4 +1,4 @@
-import { configureStore  } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./components/app_start/authSlice";
 import userReducer from "./components/live_battle/userSlice";
 import battleReducer from "./components/live_battle/battleSlice";
@@ -14,26 +14,36 @@ import allWithdrawalRequestsReducer from "./components/admin_and_S.admin/admin/A
 import gameHistoryReducer from "./components/admin_and_S.admin/admin/AdminSlice/gameHistorySlice ";
 import ChatReducer from "./components/Chathistory/ChatSlice";
 import favoriteMessagesReducer from "./components/Chathistory/favoriteMessagesSlice"
- 
+
+import AdminSuperAdminListReducer from "./components/admin_and_S.admin/superadmin/SuperAdminSlices/AdminSuperAdminListSlice";
+import withdrawalsReducer from "./components/admin_and_S.admin/superadmin/SuperAdminSlices/withdrawalsSlice";
+import userAllHistoryReducer from "./components/admin_and_S.admin/admin/AdminSlice/userAllHistorySlice";
+import NotificationReducer from "./components/notification/NotificationSlice";
+
 export const store = configureStore({
-    reducer: {
-        auth: authReducer,
-        user: userReducer,
-        battle: battleReducer,
-        match: matchReducer,
-        game: gameReducer,
-        userhistory: userHistoryReducer,
-        gamehistory:gamehistoryReducer,
-        allUsers:alluserReducer,
-        allkyc:allkycuserReducer,
-        allDepositRequests:allDepositRequestsReducer,
-        allWithdrawalRequests:allWithdrawalRequestsReducer,
-        gameHistory:gameHistoryReducer,
-        chatAll:ChatReducer,
-        favChat:favoriteMessagesReducer,
-        socketfor:socketReducer
-    },
-    middleware: (getDefaultMiddleware) =>
+  reducer: {
+    auth: authReducer,
+    user: userReducer,
+    battle: battleReducer,
+    match: matchReducer,
+    game: gameReducer,
+    userhistory: userHistoryReducer,
+    gamehistory: gamehistoryReducer,
+    allUsers: alluserReducer,
+    allkyc: allkycuserReducer,
+    allDepositRequests: allDepositRequestsReducer,
+    allWithdrawalRequests: allWithdrawalRequestsReducer,
+    gameHistory: gameHistoryReducer,
+    chatAll: ChatReducer,
+    favChat: favoriteMessagesReducer,
+    socketfor: socketReducer,
+    userAllHistory: userAllHistoryReducer,
+    notifications : NotificationReducer,
+
+    alladmins: AdminSuperAdminListReducer,
+    allwithdrawal: withdrawalsReducer
+  },
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
     }),

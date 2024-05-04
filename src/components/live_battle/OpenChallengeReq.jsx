@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllBattles } from "./battleSlice";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 const OpenChallengeReq = () => {
 
   const navigate = useNavigate();
@@ -92,12 +93,7 @@ const OpenChallengeReq = () => {
                   id="Radixiconscross"
                   className="w-6"
                 />
-                <img
-                  src="https://file.rendit.io/n/0W8t0wapI2QW1SoYU8Qq.svg"
-                  alt="ActionInfoOutline icon"
-                  id="Icoutlineinfo"
-                  className="w-6"
-                />
+ <Icon className="cursor-pointer" onClick={() => navigate("/help")} icon="material-symbols:info-outline" width={24}/>
               </div>
             </div>
             <div className="flex flex-row ml-8 gap-6 w-2/3 items-start">

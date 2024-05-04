@@ -32,14 +32,12 @@ const NewProfileMob = () => {
   const users = useSelector((state) => state.user.user);
   const loading = useSelector((state) => state.user.loading);
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
-  // const [isChecked, setIsChecked] = useState(false);
 
- 
-
-  // const toggleCheckbox = () => {
-  //   setIsChecked((prevState) => !prevState);
-  // };
-  const openDrawerBottom = () => setOpenBottom(true);
+  const openDrawerBottom = () => {
+    if (users?.userKyc?.verificationStatus === true) {
+      return;
+    } else setOpenBottom(true);
+  };
   const closeDrawerBottom = () => setOpenBottom(false);
 
   useEffect(() => {
@@ -82,15 +80,15 @@ const NewProfileMob = () => {
       toast.error("Please upload both Aadharcard front and back images.");
       return;
     } else {
-      const obj ={
-        "aadharno.":aadharNumber,
-        "image":[aadharFront,aadharBack]
-      }
-      console.log(obj)
+      const obj = {
+        "aadharno.": aadharNumber,
+        image: [aadharFront, aadharBack],
+      };
+      console.log(obj);
       // const formData = new FormData();
       // formData.append("aadharNo", aadharNumber);
-      // formData.append("aadharFront", aadharFront); 
-      // formData.append("aadharBack", aadharBack); 
+      // formData.append("aadharFront", aadharFront);
+      // formData.append("aadharBack", aadharBack);
 
       // console.log(formData);
 
@@ -115,7 +113,7 @@ const NewProfileMob = () => {
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
-  if(!users) return <PageLoader/>
+  if (!users) return <PageLoader />;
   return (
     <div className="max-w-[480px] w-full min-h-screen h-full">
       <div
@@ -125,12 +123,12 @@ const NewProfileMob = () => {
       <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
           <SidebarMob />
-         
-          <LudoMainLogo/>
+
+          <LudoMainLogo />
         </div>
         <div
           onClick={handleLogout}
-          className={`flex  h-9 my-1 px-3 justify-center items-center border-solid border border-[rgba(15,_0,_43,_0.3)] bg-[rgba(15,_0,_43,_0.3)] rounded-2xl ${
+          className={`flex cursor-pointer  h-9 my-1 px-3 justify-center items-center border-solid border border-[rgba(15,_0,_43,_0.3)] bg-[rgba(15,_0,_43,_0.3)] rounded-2xl ${
             scrollPosition > 10 ? "hidden" : "flex"
           }`}
         >
@@ -161,15 +159,20 @@ const NewProfileMob = () => {
                 scrollPosition > 10 ? "" : "w-full"
               } flex justify-center items-center`}
             >
-              <img
+              <div
                 className={`${
-                  scrollPosition > 10 ? "w-16 " : "w-48"
-                } relative  rounded-full`}
-                src="https://images.unsplash.com/photo-1529524987368-af489318987c?q=80&w=582&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              />
+                  scrollPosition > 10 ? "w-16 h-16" : "h-48 w-48"
+                } relative  rounded-full overflow-hidden`}
+              >
+                <img
+                  className="absolute h-full w-full object-cover"
+                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt="Cover"
+                />
+              </div>
               <img
                 onClick={() => navigate("/editprofile")}
-                className={`absolute  ${
+                className={`cursor-pointer  absolute  ${
                   scrollPosition > 10 ? "hidden " : "top-0 right-[30%]"
                 }`}
                 alt="editbtn"
@@ -201,11 +204,10 @@ const NewProfileMob = () => {
                   scrollPosition > 10 ? "text-base" : " text-xl"
                 }`}
               >
-                @ludoplayer
+                {users?._id?.slice(-6)}
               </div>
             </div>
           </div>
-
           {/* <label className={`${scrollPosition > 10 ? "pr-10" : "hidden"}`}>
             <input
               type="checkbox"
@@ -269,15 +271,12 @@ const NewProfileMob = () => {
               <div className="text-xl font-bold text-white">Kyc</div>
               <div className="flex flex-row justify-between ml-4 w-full items-start">
                 <div className="text-sm text-white mt-px">Kyc :</div>
-
-                {/* <Switch color="amber" className="bg-brown-800" /> */}
-
                 <label>
                   <input
                     type="checkbox"
                     className="hidden"
-                    // checked={isChecked}
-                    // onChange={openDrawerBottom}
+                    checked={users?.userKyc?.verificationStatus}
+                    onChange={openDrawerBottom}
                   />
                   <div
                     className={`w-[56px] rounded-full shadow-lg cursor-pointer text-white font-bold text-sm ${
@@ -346,67 +345,68 @@ const NewProfileMob = () => {
         </div>
       </div>
 
-      <Drawer
-        placement="bottom"
-        // open={!users?.userKyc?.verificationStatus}
-        open={openBottom}
-        onClose={closeDrawerBottom}
-        className="w-[480px] p-4  bg-[#0F002B] rounded-t-3xl"
-      >
-        <div className="p-2  max-w-sm mx-auto rounded-xl shadow-md flex flex-col items-center gap-2">
-          <div className="text-white  font-bold flex items-center gap-2 bg-[#FF0000] pl-2 pr-0 rounded-3xl">
-            <p className="text-xs"> KYC Status: {kycStatus}</p>
-            <div className="bg-white rounded-full w-5 h-5 flex justify-center items-center">
-              <Icon
-                icon="material-symbols:info-outline"
-                style={{ color: "#0F002B" }}
-              />
-            </div>
-          </div>
-          {kycStatus === "Not Uploaded" && (
-            <div className="flex flex-col gap-2 w-[60%]">
-              <input
-                type="text"
-                value={aadharNumber}
-                onChange={(e) => setAadharNumber(e.target.value)}
-                placeholder="Enter Aadhaar Number"
-                className="font-bold  cursor-pointer bg-white bg-opacity-[30%]  text-white py-2 px-4 rounded-lg"
-              />
-              <label className="font-bold text-center cursor-pointer bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
-                Aadhar Front
-                <input
-                  type="file"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={handleAadharFrontUpload}
-                />
-              </label>
-              <label className="cursor-pointer  text-center font-bold bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
-                Aadhar Back
-                <input
-                  type="file"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={handleAadharBackUpload}
-                />
-              </label>
-              <button
-                className="bg-gray-50 hover:bg-gray-100 text-[#0F002B] py-2 px-4 rounded-lg"
-                onClick={handleSubmit}
-              >
-                Submit
-              </button>
-            </div>
-          )}
-        </div>
-        <Typography
-          color="gray"
-          className="mb-4 text-[14px] font-[Inter] mt-2 px-9 flex justify-center font-normal"
+      {!users?.userKyc?.verificationStatus && (
+        <Drawer
+          placement="bottom"
+          open={openBottom}
+          onClose={closeDrawerBottom}
+          className="w-[480px] p-4  bg-[#0F002B] rounded-t-3xl"
         >
-          Make sure that you upload the correct image. This will be used in
-          future for reference in case of any issues.
-        </Typography>
-      </Drawer>
+          <div className="p-2  max-w-sm mx-auto rounded-xl shadow-md flex flex-col items-center gap-2">
+            <div className="text-white  font-bold flex items-center gap-2 bg-[#FF0000] pl-2 pr-0 rounded-3xl">
+              <p className="text-xs"> KYC Status: {kycStatus}</p>
+              <div className="bg-white rounded-full w-5 h-5 flex justify-center items-center">
+                <Icon
+                  icon="material-symbols:info-outline"
+                  style={{ color: "#0F002B" }}
+                />
+              </div>
+            </div>
+            {kycStatus === "Not Uploaded" && (
+              <div className="flex flex-col gap-2 w-[60%]">
+                <input
+                  type="text"
+                  value={aadharNumber}
+                  onChange={(e) => setAadharNumber(e.target.value)}
+                  placeholder="Enter Aadhaar Number"
+                  className="font-bold  cursor-pointer bg-white bg-opacity-[30%]  text-white py-2 px-4 rounded-lg"
+                />
+                <label className="font-bold text-center cursor-pointer bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
+                  Aadhar Front
+                  <input
+                    type="file"
+                    className="hidden"
+                    accept="image/*"
+                    onChange={handleAadharFrontUpload}
+                  />
+                </label>
+                <label className="cursor-pointer  text-center font-bold bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
+                  Aadhar Back
+                  <input
+                    type="file"
+                    className="hidden"
+                    accept="image/*"
+                    onChange={handleAadharBackUpload}
+                  />
+                </label>
+                <button
+                  className="bg-gray-50 hover:bg-gray-100 text-[#0F002B] py-2 px-4 rounded-lg"
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </button>
+              </div>
+            )}
+          </div>
+          <Typography
+            color="gray"
+            className="mb-4 text-[14px] font-[Inter] mt-2 px-9 flex justify-center font-normal"
+          >
+            Make sure that you upload the correct image. This will be used in
+            future for reference in case of any issues.
+          </Typography>
+        </Drawer>
+      )}
     </div>
   );
 };

@@ -25,6 +25,7 @@ import { SidebarMob } from "../MainLayout/SidebarMob";
 import React, { useState } from "react";
 import "../../app.css";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 
 // import AddGame from "../../assets/new_game/addgame.svg";
 // import Profile from "../../assets/new_game/profile.svg";
@@ -87,13 +88,7 @@ const ListedGameMOb = () => {
               <span className="font-bold"> listed </span> battle
             </div>
           </div>
-          <img
-            onClick={() => navigate("/help")}
-            src="https://file.rendit.io/n/ib8IMr1PTiCuwTfVAXZs.svg"
-            alt="ActionInfoOutline icon"
-            id="Icoutlineinfo"
-            className="w-6"
-          />
+          <Icon className="cursor-pointer" onClick={() => navigate("/help")} icon="material-symbols:info-outline" width={24}/>
         </div>
         <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative">
           <div className="bg-[#fead3a] h-[98%] w-[200%] rounded-[50%]   -top-20 absolute -left-[50%]" />

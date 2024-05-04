@@ -36,7 +36,7 @@ const MyWalletMob = () => {
           onClick={() => navigate("/profile")}
           src={FrameProfile}
           alt="Frame1"
-          className="mt-1 w-8 h-8 border rounded-[100px]"
+          className="cursor-pointer mt-1 w-8 h-8 border rounded-[100px]"
         />
       </div>
 
@@ -61,7 +61,7 @@ const MyWalletMob = () => {
             </div>
             <div
               onClick={() => navigate("/deposite")}
-              className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex items-center p-2 rounded-lg flex-1 max-w-[100px]"
+              className="cursor-pointer shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex items-center p-2 rounded-lg flex-1 max-w-[100px]"
             >
               <Icon icon="material-symbols:add" className="text-white" />
               <div className="text-sm font-['Inter'] text-white">add cash</div>
@@ -87,7 +87,7 @@ const MyWalletMob = () => {
             </div>
             <div
               onClick={() => navigate("/withdraw")}
-              className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-wrap items-center p-2 gap-2 rounded-lg flex-1 max-w-[110px]"
+              className="cursor-pointer shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-wrap items-center p-2 gap-2 rounded-lg flex-1 max-w-[110px]"
             >
               <Icon icon="cil:bank" className="text-white" />
               <div className="text-sm font-['Inter'] text-white">Withdraw</div>

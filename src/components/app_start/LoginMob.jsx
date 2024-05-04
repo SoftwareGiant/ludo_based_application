@@ -62,7 +62,7 @@ const LoginMob = () => {
       })
       .catch((error) => {
         toast.error(error.message);
-        console.error("Login error:", error);
+        // console.error("Login error:", error);
       });
     // setIsOtp(true);
   };

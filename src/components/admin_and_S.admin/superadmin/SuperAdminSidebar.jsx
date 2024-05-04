@@ -63,7 +63,8 @@ const SuperAdminSidebar = () => {
                 : ""
             } hover:bg-[#EEEEEE] h-[51px]`}
           >
-            <Icon icon="arcticons:battleforwesnoth" width="24" />
+          
+            <Icon icon="arcticons:battleforwesnoth"  width="24" />
             {showFullSidebar && <span>Tournamnets</span>}
           </div>
         </Link>

@@ -10,6 +10,7 @@ import { fetchAllBattles } from "./battleSlice";
 import { matchUser } from "./matchSlice";
 import { fetchUserDetail } from "./userSlice";
 import { toast } from "react-toastify";
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 
 const LiveBattle = () => {
   const dispatch = useDispatch();
@@ -121,13 +122,7 @@ const LiveBattle = () => {
               live <span className="font-bold">battle</span>
             </div>
           </div>
-          <img
-            onClick={() => navigate("/help")}
-            src="https://file.rendit.io/n/ib8IMr1PTiCuwTfVAXZs.svg"
-            alt="ActionInfoOutline icon"
-            id="Icoutlineinfo"
-            className="w-6"
-          />
+          <Icon className="cursor-pointer" onClick={() => navigate("/help")} icon="material-symbols:info-outline" width={24}/>
         </div>
         <div className="p-6 flex flex-col  gap-4 m-auto w-full">
           {battles.length > 0 &&

@@ -25,39 +25,8 @@ import {
   selectAllWithdrawalRequestsStatus,
 } from "../AdminSlice/withdrawlSlice";
 import AdminFooter from "../Common.jsx/AdminFooter";
+import PageLoader from "../../../MainLayout/PageLoader";
 
-const TABLE_ROWS = [
-  {
-    uid: "1234",
-    amount: "10000",
-    registered: "Joined today",
-    status: "Success",
-  },
-  {
-    uid: "2345",
-    amount: "20000",
-    registered: "Joined yesterday",
-    status: "Failed",
-  },
-  {
-    uid: "3456",
-    amount: "30000",
-    registered: "Joined last week",
-    status: "Pending",
-  },
-  {
-    uid: "4567",
-    amount: "30000",
-    registered: "Joined last week",
-    status: "Pending",
-  },
-  {
-    uid: "5678",
-    amount: "10000",
-    registered: "Joined today",
-    status: "Success",
-  },
-];
 
 function Withdraw() {
   const [isClicked, setIsClicked] = useState(false);
@@ -79,6 +48,10 @@ function Withdraw() {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
+  if (status === "loading") {
+    return <PageLoader full={true}/>
+    
+  }
   return (
     <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
@@ -241,7 +214,7 @@ function Withdraw() {
                         className={`rounded-xl flex justify-center items-center w-[87px] h-[19px] ${
                           val.status === "success"
                             ? "bg-[#00C300] text-[#FFFFFF] "
-                            : status === "failed"
+                            : val.status === "failed"
                             ? "bg-[#FF0000] text-[#FFFFFF] "
                             : "bg-gray-400 text-[#FFFFFF]"
                         }`}

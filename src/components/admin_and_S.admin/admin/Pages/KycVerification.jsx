@@ -25,6 +25,7 @@ import {
 import Refreshloader from "../../superadmin/Common/Refreshloader";
 import KycStatusCard from "../Common.jsx/KycStatusCard";
 import AdminFooter from "../Common.jsx/AdminFooter";
+import PageLoader from "../../../MainLayout/PageLoader";
 
 const TABLE_HEAD = [
   "UID",
@@ -72,7 +73,7 @@ export function KycVerification() {
     return `${day}/${month}/${year}`;
   };
   if (status === "loading" && isRefresh === false) {
-    return <div>Loading...</div>;
+    return <PageLoader full={true}/>
   }
 
   if (status === "failed") {

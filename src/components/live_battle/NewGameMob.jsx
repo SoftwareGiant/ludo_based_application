@@ -27,7 +27,7 @@ const NewGameMob = () => {
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
   const { decodedToken } = useJwt(accessToken);
   const { socketData } = useSelector((state) => state.socketfor);
-  const {match} = useSelector((state) => state.match);
+  const { match } = useSelector((state) => state.match);
   const navigate = useNavigate();
   const [battleAmount, setBattleAmount] = useState("");
   const [buttonStatus, setButtonStatus] = useState("create");
@@ -36,11 +36,12 @@ const NewGameMob = () => {
   const [timers, setTimers] = useState({});
   const [isRequest, setIsRequest] = useState(null);
   const [requestTimer, setRequestTimer] = useState(0);
+  
   const users = useSelector((state) => state.user.user);
   const inputRef = useRef(null);
   const battles = useSelector((state) => state.battle.battles);
   const [activeToggle, setActiveToggle] = useState("live"); // 'live' or 'challenges'
-  const [battleToPlay,setBattleToPlay] = useState();
+  const [battleToPlay, setBattleToPlay] = useState();
 
   const handleToggle = (toggle) => {
     setActiveToggle(toggle);
@@ -83,19 +84,19 @@ const NewGameMob = () => {
       socketData?.on("databaseChange", (data) => {
         // console.log(data,"data");
       });
-      socketData?.on("updatecode", ({gameCode,player2}) => {
-      toast.success(`code to start game ${gameCode}`);
-      return navigate(`/chat/${player2}/player2`)
+      socketData?.on("updatecode", ({ gameCode, player2 }) => {
+        toast.success(`code to start game ${gameCode}`);
+        return navigate(`/chat/${player2}/player2`);
       });
     }
   }, [socketData]);
-  
-  useEffect(()=>{
-    if(match){
+
+  useEffect(() => {
+    if (match) {
       const player1 = match.newGameDetail.player1;
       return navigate(`/chat/${player1}/player1/`);
     }
-  },[match]);
+  }, [match]);
 
   useEffect(() => {
     if (decodedToken) {
@@ -156,6 +157,8 @@ const NewGameMob = () => {
     }
   };
 
+ 
+
   const handleCreate = async () => {
     try {
       setButtonStatus("loading");
@@ -214,17 +217,19 @@ const NewGameMob = () => {
       return;
     }
     setOpenMatchBottom(true);
-    setIsRequest(false); 
-    setBattleToPlay( {
+    setIsRequest(false);
+    setBattleToPlay({
       battleAmount: e?.amount,
       id: e?._id,
       player1: e?.player1,
-    })
+    });
   };
 
-  const creategame = async(e) =>{
-      dispatch(matchUser({ data:battleToPlay, setIsRequest, closematchDrawerBottom }));
-  }
+  const creategame = async (e) => {
+    dispatch(
+      matchUser({ data: battleToPlay, setIsRequest, closematchDrawerBottom })
+    );
+  };
 
   const handleBattleAmountChange = (e) => {
     const value = e.target.value;
@@ -243,8 +248,8 @@ const NewGameMob = () => {
       <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
           <SidebarMob />
-        
-          <LudoMainLogo/>
+
+          <LudoMainLogo />
         </div>
         <img
           onClick={() => navigate("/profile")}
@@ -374,11 +379,7 @@ const NewGameMob = () => {
                               )}
                             </div>
                           </div>
-
-
-
                         ))}
-  
                     </div>
                   )}
                   {activeToggle === "challenges" && (
@@ -408,13 +409,21 @@ const NewGameMob = () => {
                               ravan3p
                             </div>
                             <div className="shadow-[0px_11px_11px_0px_rgba(0,_0,_0,_0.25)] w-2/3 h-[113px] bg-[#0f002b] absolute top-0 left-20 flex flex-row justify-center pt-8 items-start rounded-tl-[86.39999389648438px] rounded-bl-[86.39999389648438px]">
-                          
-                              <Icon  width={44} icon="arcticons:battleforwesnoth"  style={{color: "white"}}  />
+                              <Icon
+                                width={44}
+                                icon="arcticons:battleforwesnoth"
+                                style={{ color: "white" }}
+                              />
                             </div>
-                            <div  className="text-xl font-['Inter'] font-bold text-white absolute top-20 left-3 h-6 w-24">
+                            <div className="text-xl font-['Inter'] font-bold text-white absolute top-20 left-3 h-6 w-24">
                               kansh23i
                             </div>
-                            <Icon  className="relative mb-8 w-12" width={42} icon="icon-park-solid:play"  style={{color: "white"}} />
+                            <Icon
+                              className="relative mb-8 w-12"
+                              width={42}
+                              icon="icon-park-solid:play"
+                              style={{ color: "white" }}
+                            />
                           </div>
                         </div>
                       ))}
@@ -424,8 +433,6 @@ const NewGameMob = () => {
               </div>
             </div>
           </div>
-
-          
         </div>
 
         <Drawer
