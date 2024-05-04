@@ -42,8 +42,6 @@ const NewProfileMob = () => {
   const openDrawerBottom = () => setOpenBottom(true);
   const closeDrawerBottom = () => setOpenBottom(false);
 
-  console.log("user", users);
-  console.log("token", accessToken,refreshToken);
   useEffect(() => {
     dispatch(fetchUserDetail());
   }, []);

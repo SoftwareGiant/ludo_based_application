@@ -10,7 +10,6 @@ const initialState = {
 export const fetchUserDetail = createAsyncThunk(
     'user/detail',
     async (_,{ rejectWithValue }) => {
-        // console.log('Fetching user detail')
         try {
             const accessToken = localStorage.getItem('accessToken');
             if (!accessToken) {
@@ -21,6 +20,7 @@ export const fetchUserDetail = createAsyncThunk(
                   Authorization: `Bearer ${accessToken}`,
                 },
               });
+            
           
             if (!response.data) {
                 throw new Error('userdata fetched failed');

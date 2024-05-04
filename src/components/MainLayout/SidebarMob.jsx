@@ -87,7 +87,7 @@ export function SidebarMob({
                 Profile
               </div>
             </Link>
-            <Link
+            {/* <Link
               to="/wincash"
               className={`border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  ${
                 isClick3 ? "bg-[#ffcc4d]" : "bg-white"
@@ -97,7 +97,7 @@ export function SidebarMob({
               <div className="text-xs font-['Nunito_Sans'] font-bold">
                 Win Cash
               </div>
-            </Link>
+            </Link> */}
             <Link
               to="/mywallet"
               className={`
