@@ -22,6 +22,7 @@ import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
+import { fetchUserDetail } from "../live_battle/userSlice";
 const MatchUserChat = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,7 +36,8 @@ const MatchUserChat = () => {
   const [image, setImage] = useState(null);
   const [messaged, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-
+  const users = useSelector((state) => state.user.user);
+  const [isFav, setIsfav] = useState(false);
   const inputRef = useRef();
 
   useEffect(() => {
@@ -46,6 +48,7 @@ const MatchUserChat = () => {
   useEffect(() => {
     inputRef.current.focus();
     fn();
+    dispatch(fetchUserDetail());
   }, []);
   useEffect(() => {
     if (socketData) {
@@ -73,6 +76,10 @@ const MatchUserChat = () => {
     if (response?.status == 200 && response?.data) {
       setMessageList([]);
       console.log(response?.data);
+      if (response?.data.favourite.userId.length > 0) {
+        setIsfav(true);
+      }
+
       setMessageList((prevMessageList) => [
         ...prevMessageList,
         ...response?.data?.messageDetails,
@@ -136,7 +143,7 @@ const MatchUserChat = () => {
       toast.error("Failed to fetch message");
     }
   };
-
+  console.log(messageList, users);
   return (
     <div className="flex-1 pb-4 bg-[#0f002b] sm:bg-[#fead3a]  w-full max-w-[480px]  justify-between flex flex-col h-screen">
       <div className="bg-[#fead3a]  h-[80%] w-[200%]   rounded-[50%] sm:hidden   -top-20 fixed -left-[50%] " />
@@ -165,12 +172,31 @@ const MatchUserChat = () => {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Icon
-            onClick={() => handleFav()}
-            icon="fluent:star-add-28-regular"
-            style={{ color: "black" }}
-            width="32"
-          />
+          {isFav && messageList[0]?.senderId === users?._id ? (
+            <Icon
+              className="cursor-pointer"
+              icon="ph:star-fill"
+              style={{ color: "black" }}
+              width="32"
+            />
+          ) : (
+            <Icon
+              className="cursor-pointer"
+              icon="ph:star-fill"
+              style={{ color: "black" }}
+              width="32"
+            />
+          )}
+          {!isFav && (
+            <Icon
+              className="cursor-pointer"
+              onClick={() => handleFav()}
+              icon="fluent:star-add-28-regular"
+              style={{ color: "black" }}
+              width="32"
+            />
+          )}
+
           <Popover placement="left-start">
             <PopoverHandler>
               <div className="px-3 flex cursor-pointer ">
@@ -182,15 +208,32 @@ const MatchUserChat = () => {
               </div>
             </PopoverHandler>
             <PopoverContent className="bg-white  z-50">
-              <ListItem
-                onClick={() => handleFav()}
-                className="hover:bg-black hover:text-white"
-              >
-                <ListItemPrefix>
-                  <Icon icon="mdi:favorite-add" width="24" />
-                </ListItemPrefix>{" "}
-                Add Fav
-              </ListItem>
+              {isFav && messageList[0]?.senderId === users?._id ? (
+                <ListItem className="hover:bg-black hover:text-white">
+                  <ListItemPrefix>
+                    <Icon icon="ph:star-fill" width="24" />
+                  </ListItemPrefix>{" "}
+                  Fav chat
+                </ListItem>
+              ) : (
+                <ListItem className="hover:bg-black hover:text-white">
+                  <ListItemPrefix>
+                    <Icon icon="ph:star-fill" width="24" />
+                  </ListItemPrefix>{" "}
+                  Fav chat
+                </ListItem>
+              )}
+              {!isFav && (
+                <ListItem
+                  onClick={() => handleFav()}
+                  className="hover:bg-black hover:text-white"
+                >
+                  <ListItemPrefix>
+                    <Icon icon="mdi:favorite-add" width="24" />
+                  </ListItemPrefix>{" "}
+                  Add Fav
+                </ListItem>
+              )}
               <ListItem
                 onClick={() => navigate("/feedback")}
                 className="hover:bg-black hover:text-white"
