@@ -46,9 +46,7 @@ export const logoutAsync = createAsyncThunk(
   'auth/logout',
   async ({ token, refreshtoken }) => {
     console.log("logout")
-    // const token = await JSON.parse(localStorage.getItem('accessToken'));
-    // const refreshToken =await JSON.parse(localStorage.getItem('refreshToken'));
-    console.log(token, refreshtoken);
+ 
     try {
       const response = await axios.post(
         '/api/user/logout',
@@ -67,6 +65,10 @@ export const logoutAsync = createAsyncThunk(
       localStorage.removeItem('refreshToken');
     }
     catch (error) {
+      if (error.response.status === 400 || error.response.data.message === "Unauthorized credential") {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+      }
       toast.error(error);
     }
   }
@@ -92,8 +94,9 @@ const authSlice = createSlice({
         state.refreshToken = null;
       })
       .addCase(logoutAsync.rejected, (state, action) => {
-        state.accessToken = accessToken;
-        state.refreshToken = refreshToken;
+
+        state.accessToken = null;
+        state.refreshToken = null;
         return;
       })
   },
@@ -103,7 +106,5 @@ const authSlice = createSlice({
 export const selectToken = (state) => state.auth.accessToken;
 export const selectRefreshToken = (state) => state.auth.refreshToken;
 export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;
-
-// export { loginAsync, logoutAsync };
 
 export default authSlice.reducer;
