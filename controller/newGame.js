@@ -17,28 +17,37 @@ const createBattle = async (req, res, next) => {
     const { battleAmount } = req.body;
     if (parseInt(battleAmount) < 50 || parseInt(battleAmount) > 20000) {
       return res.status(400).json({
-        message: "Battle amount should be greater than 50 and less than 20,000"
+        message: "Battle amount should be greater than 50 and less than 20,000",
       });
     }
     const userId = req.userId;
     const user = await User.findById(userId);
     if (parseInt(battleAmount) > user.walletDetails.totalAmount) {
-      return res.status(400).json({ message: "You don't have sufficient amount!" });
+      return res
+        .status(400)
+        .json({ message: "You don't have sufficient amount!" });
     }
 
     const battleDetail = await Battle.findOne({
-      $or: [{ player1: userId }, { player2: userId }]
+      $or: [{ player1: userId }, { player2: userId }],
     });
 
     // if (battleDetail && !battleDetail?.userMatched) {
-    //   return res.status(200).json({ message: "You can't create other battle at same time!" });
+    //   return res
+    //     .status(200)
+    //     .json({ message: "You can't create other battle at same time!" });
     // }
     const gameDetail = await GameDetail.findOne({
-      $or: [{ player1: userId }, { player2: userId }]
+      $or: [{ player1: userId }, { player2: userId }],
     });
 
-    if (gameDetail?.gameactivationTimestamp > Date.now() && (gameDetail?.status == "running" || gameDetail?.status == "matched")) {
-      return res.status(400).json({ message: "You are already active in other game!" });
+    if (
+      gameDetail?.gameactivationTimestamp > Date.now() &&
+      (gameDetail?.status == "running" || gameDetail?.status == "matched")
+    ) {
+      return res
+        .status(400)
+        .json({ message: "You are already active in other game!" });
     }
     const currentTime = Date.now();
 
@@ -53,22 +62,21 @@ const createBattle = async (req, res, next) => {
       battleTimeStamp: currentTime,
       battleTimeStampOnUserScreen: battleTimeOnScreen,
       player1: userId,
-      roomId
+      roomId,
     });
 
-    
     global.onlineUsers[userId]?.join(roomId);
 
     await newBattle.save();
     const notification = new Notification({
       user: req.userId,
-      message: "Battle created!"
+      message: "Battle created!",
     });
     await notification.save();
 
     return res.status(200).json({
       message: "Please wait we are searching a user for you",
-      battleTimeOnScreen
+      battleTimeOnScreen,
     });
     // on frontend we need to create timer for it.
   } catch (err) {
@@ -86,32 +94,36 @@ const matchUser = async (req, res, next) => {
     const user = await User.findById(userId);
     if (parseInt(battleAmount) > user.walletDetails.totalAmount) {
       return res.status(400).json({
-        message: "You don't have sufficient amount to play this game!"
+        message: "You don't have sufficient amount to play this game!",
       });
     }
     const gameDetail = await GameDetail.findOne({
       $or: [{ player1: userId }, { player2: userId }],
-      $or: [{ status: "running" }, { status: "matched" }]
+      $or: [{ status: "running" }, { status: "matched" }],
     });
     if (!user) {
       throw new AppError("Something went wrong!Please try again later", 500);
-    }
-    // else if (gameDetail && (gameDetail?.gameactivationTimestamp > Date.now() || gameDetail?.status != "matched")) {
-    //   return res.status(400).json({ message: "You are already active in other game!" });
-    // }
-    else {
+    } else if (
+      gameDetail &&
+      (gameDetail?.gameactivationTimestamp > Date.now() ||
+        gameDetail?.status != "matched")
+    ) {
+      return res
+        .status(400)
+        .json({ message: "You are already active in other game!" });
+    } else {
       const matchingTimeStamp = Date.now();
       const newGameDetail = new GameDetail({
         battleDetails: {
           battleTitle: "",
           amount: battleAmount,
-          battleId: id
+          battleId: id,
         },
         player1,
         player2: userId,
         matchingTimeStamp,
         gameactivationTimestamp: matchingTimeStamp + 30 * 60 * 1000,
-        status: "matched"
+        status: "matched",
       });
 
       //locking the amount.
@@ -119,23 +131,23 @@ const matchUser = async (req, res, next) => {
       user.walletDetails.totalAmount -= parseInt(battleAmount);
       await user.save();
 
-      const battle = await Battle.findByIdAndUpdate(id, { player2: userId, userMatched: true }, { new: true });
+      const battle = await Battle.findByIdAndUpdate(
+        id,
+        { player2: userId, userMatched: true },
+        { new: true }
+      );
       newGameDetail.battleDetails.roomId = battle.roomId;
       const roomID = battle.roomId;
-      //   const message = new Message({
-      //     roomId
-      //   });
-      //   await message.save();
-      // });
 
       global.onlineUsers[userId]?.join(roomID);
-      // req.io.to(roomID).emit("battlecreated", "Battle created successfully");
-      global.io?.sockets.in(roomID).emit("match", { message: "You get matched!!", roomID: roomID });
-      // global.io.to(roomID).emit("battlecreated", "Battle created successfully");
+
+      global.io?.sockets
+        .in(roomID)
+        .emit("match", { message: "You get matched!!", roomID: roomID });
       await newGameDetail.save();
       const notification = new Notification({
         user: req.userId,
-        message: "You got a match!🥳Let's play the game"
+        message: "You got a match!🥳Let's play the game",
       });
       await notification.save();
       return res.status(200).json({ newGameDetail });
@@ -146,30 +158,44 @@ const matchUser = async (req, res, next) => {
 };
 
 const updatePayment = async (gameDetail) => {
-  const adminWallet = await AdminWallet.findOneAndUpdate({}, {}, { upsert: true, new: true });
+  const adminWallet = await AdminWallet.findOneAndUpdate(
+    {},
+    {},
+    { upsert: true, new: true }
+  );
   if (gameDetail.gameResultDetail.player1.outcome == "win") {
-    gameDetail.player1.walletDetails.totalAmount += gameDetail?.battleDetails?.amount * 1.95;
-    gameDetail.player1.walletDetails.winningAmount += gameDetail?.battleDetails?.amount * 0.95;
-    gameDetail.player1.walletDetails.lockedAmount -= gameDetail?.battleDetails?.amount;
+    gameDetail.player1.walletDetails.totalAmount +=
+      gameDetail?.battleDetails?.amount * 1.95;
+    gameDetail.player1.walletDetails.winningAmount +=
+      gameDetail?.battleDetails?.amount * 0.95;
+    gameDetail.player1.walletDetails.lockedAmount -=
+      gameDetail?.battleDetails?.amount;
     adminWallet.totalAmount += gameDetail.battleDetails.amount * 0.05;
     // store extra 0.05 amount in admin wallet.
   }
   if (gameDetail.gameResultDetail.player2.outcome == "win") {
-    gameDetail.player2.walletDetails.totalAmount += gameDetail?.battleDetails?.amount * 1.95;
-    gameDetail.player2.walletDetails.winningAmount += gameDetail?.battleDetails?.amount * 0.95;
-    gameDetail.player2.walletDetails.lockedAmount -= gameDetail?.battleDetails?.amount;
+    gameDetail.player2.walletDetails.totalAmount +=
+      gameDetail?.battleDetails?.amount * 1.95;
+    gameDetail.player2.walletDetails.winningAmount +=
+      gameDetail?.battleDetails?.amount * 0.95;
+    gameDetail.player2.walletDetails.lockedAmount -=
+      gameDetail?.battleDetails?.amount;
     adminWallet.totalAmount += gameDetail.battleDetails.amount * 0.05;
     // store extra 0.05 amount in admin wallet.
   }
   if (gameDetail.gameResultDetail.player1.outcome == "lose") {
-    gameDetail.player1.walletDetails.lockedAmount -= gameDetail?.battleDetails?.amount;
+    gameDetail.player1.walletDetails.lockedAmount -=
+      gameDetail?.battleDetails?.amount;
     // gameDetail.player1.walletDetails.totalAmount -= gameDetail?.battleDetails?.amount;
-    gameDetail.player1.walletDetails.losingAmount += gameDetail?.battleDetails?.amount;
+    gameDetail.player1.walletDetails.losingAmount +=
+      gameDetail?.battleDetails?.amount;
   }
   if (gameDetail?.gameResultDetail.player2.outcome == "lose") {
-    gameDetail.player2.walletDetails.lockedAmount -= gameDetail?.battleDetails?.amount;
+    gameDetail.player2.walletDetails.lockedAmount -=
+      gameDetail?.battleDetails?.amount;
     // gameDetail.player2.walletDetails.totalAmount -= gameDetail?.battleDetails?.amount;
-    gameDetail.player2.walletDetails.losingAmount += gameDetail?.battleDetails?.amount;
+    gameDetail.player2.walletDetails.losingAmount +=
+      gameDetail?.battleDetails?.amount;
   }
   await gameDetail.player1.save();
   await gameDetail.player2.save();
@@ -180,13 +206,16 @@ const updatePayment = async (gameDetail) => {
 cron.schedule("*/5 * * * *", async () => {
   const gameDetail = await GameDetail.find({
     gameactivationTimestamp: {
-      $lt: Date.now()
-    }
+      $lt: Date.now(),
+    },
   });
   for (i = 0; i < gameDetail.length; i++) {
     if (
-      (gameDetail[i].status == "closed" && gameDetail[i].gameResultDetail.player1.outcome == "win" && gameDetail[i].gameResultDetail.player2.outcome == null) ||
-      (gameDetail[i].gameResultDetail.player2.outcome == "win" && gameDetail[i].gameResultDetail.player1.outcome == null)
+      (gameDetail[i].status == "closed" &&
+        gameDetail[i].gameResultDetail.player1.outcome == "win" &&
+        gameDetail[i].gameResultDetail.player2.outcome == null) ||
+      (gameDetail[i].gameResultDetail.player2.outcome == "win" &&
+        gameDetail[i].gameResultDetail.player1.outcome == null)
     ) {
       await updatePayment(gameDetail[i]);
     }
@@ -203,7 +232,7 @@ const updateResult = async (req, res, next) => {
     }
     const gameDetail = await GameDetail.findOne({
       $or: [{ player1: userId }, { player2: userId }],
-      status: "running"
+      status: "running",
     }).populate("player1 player2");
 
     if (!gameDetail) {
@@ -232,7 +261,12 @@ const updateResult = async (req, res, next) => {
       }
     }
 
-    if ((gameDetail.gameResultDetail.player1.outcome == "win" && gameDetail.gameResultDetail.player2.outcome == "lose") || (gameDetail.gameResultDetail.player2.outcome == "win" && gameDetail.gameResultDetail.player1.outcome == "lose")) {
+    if (
+      (gameDetail.gameResultDetail.player1.outcome == "win" &&
+        gameDetail.gameResultDetail.player2.outcome == "lose") ||
+      (gameDetail.gameResultDetail.player2.outcome == "win" &&
+        gameDetail.gameResultDetail.player1.outcome == "lose")
+    ) {
       await gameDetail.save();
       await updatePayment(gameDetail);
     }
@@ -244,7 +278,7 @@ const updateResult = async (req, res, next) => {
     await gameDetail.save();
     if (outcome == "win") {
       return res.status(200).json({
-        message: "Result updated!In sometime you will get your winning cash."
+        message: "Result updated!In sometime you will get your winning cash.",
       });
     }
     return res.status(200).json({ message: "Result updated" });
@@ -261,41 +295,66 @@ const updateCode = async (req, res, next) => {
     const userId = req.userId;
     const gameDetail = await GameDetail.findOne({
       $or: [{ player1: userId }, { player2: userId }],
-      status: "matched"
+      status: "matched",
     });
+    if(!gameDetail){
+      return res.status(404).json({message:"Code is already set for this battle"});
+    }
     gameDetail.gameCode = gameCode;
     gameDetail.status = "running";
-    const roomId = gameDetail.battleDetails.roomId;
-    await gameDetail.save();
+    const roomId = gameDetail?.battleDetails.roomId;
+    await gameDetail?.save();
     const player1 = gameDetail.player1;
+    global.onlineUsers[player1]?.join(roomId);
     const player2 = gameDetail.player2;
+    global.onlineUsers[player2].join(roomId);
     const message = await Message.findOne({
-      $and: [{ $or: [{ "messageDetails.senderId": player1 }, { "messageDetails.receiverId": player1 }] },
-       { $or: [{ "messageDetails.senderId": player2 }, { "messageDetails.receiverId": player2 }] }]
+      $and: [
+        {
+          $or: [
+            { "messageDetails.senderId": player1 },
+            { "messageDetails.receiverId": player1 },
+          ],
+        },
+        {
+          $or: [
+            { "messageDetails.senderId": player2 },
+            { "messageDetails.receiverId": player2 },
+          ],
+        },
+      ],
     });
-    if(message){
+    if (message) {
       message.messageDetails.push({
-      senderId:player2,
-      receiverId:player1,
-      message: gameDetail.gameCode,
-      })
-      await message.save();
-    }
-    else{
-      const newMessage= new Message({messageDetails:[{
-        senderId:player2,
-        receiverId:player1,
+        senderId: player2,
+        receiverId: player1,
         message: gameDetail.gameCode,
-        }]});
+      });
+      await message.save();
+    } else {
+      const newMessage = new Message({
+        messageDetails: [
+          {
+            senderId: player2,
+            receiverId: player1,
+            message: gameDetail.gameCode,
+          },
+        ],
+      });
       await newMessage.save();
     }
-    global.io?.sockets.in(roomId).emit("updatecode", {gameCode,player2});
-    
+    global.io?.sockets.in(roomId).emit("updatecode", { gameCode, player2 });
+
+    io.to(global.onlineUsers[userId]?.id).emit("newMessage", {
+      senderId: player2,
+      receiverId: player1,
+      message: gameDetail.gameCode,
+    });
 
     return res.status(200).json({ gameDetail });
   } catch (err) {
     return next(err);
-  } 
+  }
 };
 
 // working is required in cancel partt
@@ -306,14 +365,18 @@ const afterCancellingGame = async (cancelanyway, id, userId) => {
     const player1_id = gameDetail.player1;
     const player1 = await User.findById(player1_id);
     const lockedAmount = gameDetail.battleDetails.amount;
-    player1.walletDetails.totalAmount = player1.walletDetails.totalAmount + lockedAmount;
-    player1.walletDetails.lockedAmount = player1.walletDetails.lockedAmount - lockedAmount;
+    player1.walletDetails.totalAmount =
+      player1.walletDetails.totalAmount + lockedAmount;
+    player1.walletDetails.lockedAmount =
+      player1.walletDetails.lockedAmount - lockedAmount;
     await player1.save();
     const player2_id = gameDetail.player2;
     const player2 = await User.findById(player2_id);
     const lockedAmount_2 = player2.walletDetails.lockedAmount;
-    player2.walletDetails.totalAmount = player2.walletDetails.totalAmount + lockedAmount_2;
-    player2.walletDetails.lockedAmount = player2.walletDetails.lockedAmount - lockedAmount_2;
+    player2.walletDetails.totalAmount =
+      player2.walletDetails.totalAmount + lockedAmount_2;
+    player2.walletDetails.lockedAmount =
+      player2.walletDetails.lockedAmount - lockedAmount_2;
     await player2.save();
   } else if (cancelanyway) {
     const adminWalletSchema = await AdminWallet.findOne({});
@@ -322,13 +385,17 @@ const afterCancellingGame = async (cancelanyway, id, userId) => {
 
       const lockedAmount = gameDetail.battleDetails.amount;
       // player1.walletDetails.totalAmount = player1.walletDetails.totalAmount - lockedAmount;
-      player1.walletDetails.lockedAmount = player1.walletDetails.lockedAmount - lockedAmount;
+      player1.walletDetails.lockedAmount =
+        player1.walletDetails.lockedAmount - lockedAmount;
       await player1.save();
       const player2_id = gameDetail.player2;
       const player2 = await User.findById(player2_id);
-      player2.walletDetails.totalAmount = player2.walletDetails.totalAmount + 1.95 * lockedAmount;
-      player2.walletDetails.lockedAmount = player2.walletDetails.lockedAmount - lockedAmount;
-      adminWalletSchema.totalAmount = adminWalletSchema.totalAmount + lockedAmount * 0.05;
+      player2.walletDetails.totalAmount =
+        player2.walletDetails.totalAmount + 1.95 * lockedAmount;
+      player2.walletDetails.lockedAmount =
+        player2.walletDetails.lockedAmount - lockedAmount;
+      adminWalletSchema.totalAmount =
+        adminWalletSchema.totalAmount + lockedAmount * 0.05;
       await player2.save();
       await adminWalletSchema.save();
     }
@@ -337,13 +404,17 @@ const afterCancellingGame = async (cancelanyway, id, userId) => {
       const player2 = await User.findById(userId);
       const lockedAmount = player2.walletDetails.lockedAmount;
       // player2.walletDetails.totalAmount = player2.walletDetails.totalAmount - lockedAmount;
-      player2walletDetails.lockedAmount = player2.walletDetails.lockedAmount - lockedAmount;
+      player2walletDetails.lockedAmount =
+        player2.walletDetails.lockedAmount - lockedAmount;
       await player2.save();
       const player1_id = gameDetail.player1;
       const player1 = await User.findById(player1_id);
-      player1.walletDetails.totalAmount = player1.walletDetails.totalAmount + 1.95 * lockedAmount;
-      player1.walletDetails.lockedAmount = player1.walletDetails.lockedAmount - lockedAmount;
-      adminWalletSchema.totalAmount = adminWalletSchema.totalAmount + lockedAmount * 0.05;
+      player1.walletDetails.totalAmount =
+        player1.walletDetails.totalAmount + 1.95 * lockedAmount;
+      player1.walletDetails.lockedAmount =
+        player1.walletDetails.lockedAmount - lockedAmount;
+      adminWalletSchema.totalAmount =
+        adminWalletSchema.totalAmount + lockedAmount * 0.05;
       await player1.save();
       await adminWalletSchema.save();
     }
@@ -368,14 +439,15 @@ const cancelGame = async (req, res, next) => {
       gameDetail.status = "cancelled";
       await gameDetail.save();
       io.to(gameDetail.battleDetails.roomId).emit("game_cancelled", {
-        message: "Game cancelled"
+        message: "Game cancelled",
       });
       return res.status(200).json({ message: "Game cancelled successfully" });
     }
 
     if (gameDetail.gameCode && !cancelanyway) {
       return res.status(200).json({
-        message: "You already receive the code.You couldn't cancel the game,If you will cancel it then opponent user would be winner"
+        message:
+          "You already receive the code.You couldn't cancel the game,If you will cancel it then opponent user would be winner",
       });
     }
 
@@ -384,7 +456,7 @@ const cancelGame = async (req, res, next) => {
       gameDetail.status = "cancelled";
       await gameDetail.save();
       io.to(gameDetail.battleDetails.roomId).emit("game_cancelled", {
-        message: "Game cancelled"
+        message: "Game cancelled",
       });
       return res.status(200).json({ message: "Game canelled successfully" });
     }
@@ -405,11 +477,22 @@ const allGameHistory = async (req, res, next) => {
   }
 };
 
+const openChallenge = async(req,res,next)=>{
+  try{
+  const allOpenChallenge = await GameDetail.find({status:"running"});
+  return res.status(200).json({allOpenChallenge});
+  }
+  catch(err){
+    return next(err);
+  }
+}
+
 module.exports = {
   createBattle,
   matchUser,
   updateResult,
   updateCode,
   cancelGame,
-  allGameHistory
+  allGameHistory,
+  openChallenge
 };
