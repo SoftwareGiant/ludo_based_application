@@ -28,7 +28,18 @@ const readNotification = async (req, res, next) => {
   }
 };
 
+const clearNotification = async (req, res, next) => {
+  try {
+    const userId = req.userId;
+    const allnotification = await Notification.deleteMany({ user: userId });
+    return res.status(200).json({ allnotification });
+  } catch (err) {
+    return next(err);
+  }
+};
+
 module.exports = {
   allNotification,
   readNotification,
+  clearNotification,
 };
