@@ -227,12 +227,12 @@ const OpenChallengeReq = () => {
                 Start
               </Button>
             </div>
-            <Typography
+            {/* <Typography
               color="gray"
               className=" mt-12 pr-4 flex justify-center font-normal"
             >
               Reject will delete this open challenges from list
-            </Typography>
+            </Typography> */}
           </div>
         )}
       </Drawer>

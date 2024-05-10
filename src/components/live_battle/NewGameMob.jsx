@@ -39,7 +39,7 @@ const NewGameMob = () => {
   
   const users = useSelector((state) => state.user.user);
   const inputRef = useRef(null);
-  const battles = useSelector((state) => state.battle.battles);
+  let battles = useSelector((state) => state.battle.battles);
   const [activeToggle, setActiveToggle] = useState("live"); // 'live' or 'challenges'
   const [battleToPlay, setBattleToPlay] = useState();
 
@@ -82,7 +82,7 @@ const NewGameMob = () => {
         return toast.success(e.message);
       });
       socketData?.on("databaseChange", (data) => {
-        // console.log(data,"data");
+        console.log(data,"data in databasechanges");
       });
       socketData?.on("updatecode", ({ gameCode, player2 }) => {
         toast.success(`code to start game ${gameCode}`);
@@ -212,10 +212,6 @@ const NewGameMob = () => {
 
   const openmatchDrawerBottom = async (e) => {
     if (!users) return;
-    if (users?._id === e?.player1) {
-      toast.error("you have to wait until other user can't join the battle");
-      return;
-    }
     setOpenMatchBottom(true);
     setIsRequest(false);
     setBattleToPlay({
@@ -474,12 +470,6 @@ const NewGameMob = () => {
                   Start
                 </Button>
               </div>
-              <Typography
-                color="gray"
-                className=" mt-12 pr-4 flex justify-center font-normal"
-              >
-                Reject will delete this open challenges from list
-              </Typography>
             </div>
           )}
         </Drawer>

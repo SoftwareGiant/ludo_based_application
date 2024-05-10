@@ -24,7 +24,6 @@ export const matchUser = createAsyncThunk(
       }
       else {
         toast.error("Failed");
-        setIsRequest("failed");
         closematchDrawerBottom();
         return null;
       }

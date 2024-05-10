@@ -12,7 +12,6 @@ export const updateGameCode = createAsyncThunk(
     'game/updategamecode',
     async (gameCode) => {
         const obj = { "gameCode": gameCode }
-        console.log(gameCode)
         const accessToken = localStorage.getItem('accessToken');
         try {
             const response = await axios.post('/api/game/updategamecode', obj, {
@@ -20,6 +19,7 @@ export const updateGameCode = createAsyncThunk(
                     Authorization: `Bearer ${accessToken}`,
                 },
             });
+            console.log(response,"responsee")
             if (response.status === 200) {
                 return response.data.gameDetail;
             }
