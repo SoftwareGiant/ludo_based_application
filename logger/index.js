@@ -8,7 +8,7 @@ const logger = createLogger({
     format.timestamp({ format: "MMM-DD-YYYY HH:mm:ss" }),
     prettyPrint(),
   ),
-  defaultMeta: { service: "user-services" },
+  // defaultMeta: { service: "user-services" },
   transports: [
     new transports.File({ filename: "./logger/error.log", level: "error" }),
   ],
