@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { toast } from "react-toastify";
 
 const NewGameSLider = () => {
   const [sliderData, setSliderData] = useState([]);
@@ -12,10 +13,10 @@ const NewGameSLider = () => {
   const getSlides = async () => {
     try {
       const response = await axios.get("/api/user/allSlider");
-      console.log(response.data.slider.bannerContent);
+      // console.log(response.data.slider.bannerContent);
       setSliderData(response.data.slider.bannerContent);
     } catch (error) {
-      console.error("Error fetching slider data:", error);
+      toast.error("Error fetching slider data:", error);
     }
   };
 

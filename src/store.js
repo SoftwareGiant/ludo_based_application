@@ -19,6 +19,7 @@ import AdminSuperAdminListReducer from "./components/admin_and_S.admin/superadmi
 import withdrawalsReducer from "./components/admin_and_S.admin/superadmin/SuperAdminSlices/withdrawalsSlice";
 import userAllHistoryReducer from "./components/admin_and_S.admin/admin/AdminSlice/userAllHistorySlice";
 import NotificationReducer from "./components/notification/NotificationSlice";
+import openChallengeReducer from "./components/live_battle/openChallengeSlice";
 
 export const store = configureStore({
   reducer: {
@@ -38,10 +39,11 @@ export const store = configureStore({
     favChat: favoriteMessagesReducer,
     socketfor: socketReducer,
     userAllHistory: userAllHistoryReducer,
-    notifications : NotificationReducer,
+    notifications: NotificationReducer,
 
     alladmins: AdminSuperAdminListReducer,
-    allwithdrawal: withdrawalsReducer
+    allwithdrawal: withdrawalsReducer,
+    opengame: openChallengeReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

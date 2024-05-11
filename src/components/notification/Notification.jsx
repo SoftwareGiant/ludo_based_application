@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../../app.css";
-import Mail from "../../assets/notification/mail.svg";
 import { useNavigate } from "react-router-dom";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
-import { IoIosArrowForward } from "react-icons/io";
-import { IoIosArrowUp } from "react-icons/io";
-import { IoIosArrowDown } from "react-icons/io";
 import { Button } from "@material-tailwind/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,13 +24,11 @@ const Notification = () => {
     dispatch(fetchNotifications());
   }, [dispatch]);
 
-  const toggleOpen = () => setOpen(true);
-  const toggleClose = () => setOpen(false);
-
   const handlenotificationRead = async (notificationid) => {
+    if (notificationid.readStatus === true) return;
     try {
       const apiResponse = await axios.get(
-        `http://localhost:8003/api/notification/read/${notificationid}`,
+        `http://localhost:8003/api/notification/read/${notificationid._id}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -42,10 +36,10 @@ const Notification = () => {
         }
       );
 
-      console.log(apiResponse);
+      // console.log(apiResponse);
       dispatch(fetchNotifications());
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       toast.error(err);
     }
   };
@@ -88,8 +82,8 @@ const Notification = () => {
         <div className="bg-[#fead3a] w-full min-h-screen overflow-hidden relative">
           {notifications?.map((item) => (
             <div
-              onClick={() => handlenotificationRead(item._id)}
-              className=" bg-white flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-4"
+              onClick={() => handlenotificationRead(item)}
+              className="cursor-pointer  bg-white flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-4"
             >
               <div
                 className={`${
@@ -185,9 +179,9 @@ const Notification = () => {
             </div>
           </div> */}
 
-          <button className="bg-black text-white px-8 py-2 w-3/5  max-w-[480px] relative rounded-lg flex justify-center m-auto mt-20 mb-16">
+          <Button className="bg-black text-white  py-2 w-3/5  max-w-[480px] relative rounded-lg flex justify-center m-auto mt-20 mb-16">
             Clear All
-          </button>
+          </Button>
         </div>
       </div>
     </>

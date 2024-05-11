@@ -283,44 +283,7 @@ const Chathistory = () => {
                   </Card>
                 ))}
 
-              {/* <Card
-                color="transparent"
-                className="w-full max-w-[22rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-3xl "
-              >
-                <div className="flex items-center gap-4 ">
-                  <Avatar
-                    size="lg"
-                    variant="circular"
-                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-                    alt="tania andrew"
-                  />
-                  <div className="flex w-full  flex-col gap-0.5">
-                    <div className="flex items-center justify-between">
-                      <Typography
-                        variant="h5"
-                        // color="blue-gray"
-                      >
-                        Ludo Player
-                      </Typography>
-                      <div className="5 flex items-center gap-0 ">
-                        17/05/2023
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <Typography
-                      // color="blue-gray"
-                      >
-                        Let’s play again
-                      </Typography>
-                      <Icon
-                        className="cursor-pointer"
-                        icon="wpf:mute"
-                        width="26"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </Card> */}
+             
             </div>
           </div>
         )}

@@ -49,7 +49,7 @@ const UserProfile = () => {
 
       <div className="flex text-white bg-[#0f002b] mt-10 pt-5 justify-between items-center px-4 py-2 w-full">
         <div
-          onClick={() => navigate("/matchUserChat")}
+          onClick={() => navigate("/")}
           className="flex gap-5 items-center text-white "
         >
           <FaArrowLeft className="w-6 h-6" />
@@ -95,7 +95,10 @@ const UserProfile = () => {
           </div>
         </div>
 
-        <div onClick={()=>navigate("/userprofile2")} className="bg-white  max-w-[415px] font-[Nunito-Sans] font-bold mx-8 rounded-t-2xl  h-52 fixed bottom-0 left-0 right-0 p-4 flex flex-col justify-center items-center s gap-4">
+        <div
+          onClick={() => navigate("/userprofile2")}
+          className="bg-white  max-w-[415px] font-[Nunito-Sans] font-bold mx-8 rounded-t-2xl  h-52 fixed bottom-0 left-0 right-0 p-4 flex flex-col justify-center items-center s gap-4"
+        >
           <div className="flex  items-center gap-2">
             <img
               className="rounded-full w-16"

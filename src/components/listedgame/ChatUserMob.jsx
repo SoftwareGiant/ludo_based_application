@@ -136,7 +136,20 @@ const ChatUserMob = () => {
     setSelectedEmoji(emoji);
     setMessage((prevInputText) => prevInputText + emoji.native);
   };
-
+  const handleFav = async () => {
+    try {
+      const response = await axios.get(`/api/message/favourite/${chatId}`, {
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
+      });
+      toast.success(response.data.message);
+    } catch (error) {
+      // Handle the error
+      console.error("Error fetching message:", error);
+      toast.error("Failed to fetch message");
+    }
+  };
   return (
     <div className="flex-1 pb-4 bg-[#0f002b] sm:bg-[#fead3a]  w-full max-w-[480px]  justify-between flex flex-col h-screen">
       <div className="bg-[#fead3a]  h-[80%] w-[200%]   rounded-[50%] sm:hidden   -top-20 fixed -left-[50%] " />
@@ -165,7 +178,9 @@ const ChatUserMob = () => {
           </div>
         </div>
         <div className="flex items-center gap-2">
+       
           <Icon
+           onClick={() => handleFav()}
             icon="fluent:star-add-28-regular"
             style={{ color: "black" }}
             width="32"
@@ -181,7 +196,7 @@ const ChatUserMob = () => {
               </div>
             </PopoverHandler>
             <PopoverContent className="bg-white  z-50">
-              <ListItem className="hover:bg-black hover:text-white">
+              <ListItem onClick={() => handleFav()} className="hover:bg-black hover:text-white">
                 <ListItemPrefix>
                   <Icon icon="mdi:favorite-add" width="24" />
                 </ListItemPrefix>{" "}

@@ -22,7 +22,7 @@ import { toast } from "react-toastify";
 import { fetchSocket } from "../../socket";
 import { useJwt } from "react-jwt";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
-
+import { fetchOpenChallenges } from "./openChallengeSlice";
 const NewGameMob = () => {
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
   const { decodedToken } = useJwt(accessToken);
@@ -36,12 +36,12 @@ const NewGameMob = () => {
   const [timers, setTimers] = useState({});
   const [isRequest, setIsRequest] = useState(null);
   const [requestTimer, setRequestTimer] = useState(0);
-  
   const users = useSelector((state) => state.user.user);
   const inputRef = useRef(null);
   let battles = useSelector((state) => state.battle.battles);
   const [activeToggle, setActiveToggle] = useState("live"); // 'live' or 'challenges'
   const [battleToPlay, setBattleToPlay] = useState();
+  const openChallenges = useSelector((state) => state.opengame.openChallenges);
 
   const handleToggle = (toggle) => {
     setActiveToggle(toggle);
@@ -74,6 +74,7 @@ const NewGameMob = () => {
   useEffect(() => {
     dispatch(fetchAllBattles(socketData));
     dispatch(fetchUserDetail());
+    dispatch(fetchOpenChallenges());
   }, [socketData]);
 
   useEffect(() => {
@@ -141,8 +142,7 @@ const NewGameMob = () => {
       );
     };
   }, [battles]);
-  const battleCreationTime = (e) => {
-    const previousTimestamp = e.battleTimeStamp;
+  const battleCreationTime = (previousTimestamp) => {
     const currentTimestamp = Date.now();
     const timeDifference = currentTimestamp - previousTimestamp;
     const timeDifferenceInSeconds = Math.floor(timeDifference / (1000 * 60));
@@ -156,8 +156,6 @@ const NewGameMob = () => {
       return Math.floor(timeDifferenceInHours) + " hr ago";
     }
   };
-
- 
 
   const handleCreate = async () => {
     try {
@@ -331,17 +329,22 @@ const NewGameMob = () => {
                           >
                             <div className="font-['Inter'] text-[#0f002b] w-full py-4 px-4 flex  justify-between">
                               <div className="italic">
-                                open challenge from
-                                <span className="font-extrabold pl-1">
-                                  {e.player1.slice(
-                                    e.player1.length - 6,
-                                    e.player1.length
-                                  )}
-                                </span>
+                                {users?._id === e.player1 ? (
+                                  <span className="font-extrabold pl-1">
+                                    Your battle
+                                  </span>
+                                ) : (
+                                  <div>
+                                    open challenge from
+                                    <span className="font-extrabold pl-1">
+                                      {e.player1.slice(-6)}
+                                    </span>
+                                  </div>
+                                )}
                               </div>
 
                               <div className="italic font-semibold ">
-                                · {battleCreationTime(e)}
+                                · {battleCreationTime(e.battleTimeStamp)}
                               </div>
                             </div>
                             <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full p-4 mb-0">
@@ -355,24 +358,26 @@ const NewGameMob = () => {
                                   <span> ₹{e.amount * 1.95}</span>
                                 </div>
                               </div>
-                              {users?._id === e.player1 ? (
-                                <div className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
-                                  <span className="text-white">
-                                    {timers[e._id]}
-                                  </span>
-                                </div>
-                              ) : (
-                                <div
-                                  onClick={() => openmatchDrawerBottom(e)}
-                                  className="cursor-pointer flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]"
-                                >
-                                  <img
-                                    src={LiveBattles}
-                                    alt="Arcticonsbattleforwesnoth"
-                                    className="w-4"
-                                  />
-                                </div>
-                              )}
+                              <IconButton className="rounded-full">
+                                {users?._id === e.player1 ? (
+                                  <div className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
+                                    <span className="text-white">
+                                      {timers[e._id]}
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <div
+                                    onClick={() => openmatchDrawerBottom(e)}
+                                    className="cursor-pointer flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]"
+                                  >
+                                    <img
+                                      src={LiveBattles}
+                                      alt="Arcticonsbattleforwesnoth"
+                                      className="w-4"
+                                    />
+                                  </div>
+                                )}
+                              </IconButton>
                             </div>
                           </div>
                         ))}
@@ -380,9 +385,9 @@ const NewGameMob = () => {
                   )}
                   {activeToggle === "challenges" && (
                     <div className="mt-4 flex flex-wrap justify-start gap-5 w-full m-auto">
-                      {Array.from({ length: 4 }, (_, index) => (
+                      {openChallenges?.map((item, index) => (
                         <div
-                          key={index}
+                          key={item._id}
                           className="shadow-[0px_0px_2px_1px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-end gap-3  w-[160px] h-[170px] items-start pt-3 pb-1 px-1 rounded-lg"
                         >
                           <div className="flex flex-col ml-3  items-start">
@@ -397,12 +402,14 @@ const NewGameMob = () => {
                               className="text-xs font-['Inter'] font-bold text-[#0f002b]"
                             >
                               ·<span> started </span>
-                              <span>5min ago</span>
+                              <span>
+                                {battleCreationTime(item.matchingTimeStamp)}
+                              </span>
                             </div>
                           </div>
                           <div className="shadow-[inset_0px_0px_12px_0px_rgba(0,_0,_0,_0.25)] overflow-hidden bg-[#fead3a] relative flex h-[110px] flex-row justify-center pt-8 w-full items-start rounded-br-lg rounded-bl-lg">
-                            <div className="text-xl font-['Inter'] font-bold text-[#0f002b] absolute top-1 left-3 h-6 w-20">
-                              ravan3p
+                            <div className="text-lg font-['Inter'] font-bold text-[#0f002b] absolute top-1 left-3 h-6 w-20">
+                              {item?.player1.slice(-6)}
                             </div>
                             <div className="shadow-[0px_11px_11px_0px_rgba(0,_0,_0,_0.25)] w-2/3 h-[113px] bg-[#0f002b] absolute top-0 left-20 flex flex-row justify-center pt-8 items-start rounded-tl-[86.39999389648438px] rounded-bl-[86.39999389648438px]">
                               <Icon
@@ -411,8 +418,8 @@ const NewGameMob = () => {
                                 style={{ color: "white" }}
                               />
                             </div>
-                            <div className="text-xl font-['Inter'] font-bold text-white absolute top-20 left-3 h-6 w-24">
-                              kansh23i
+                            <div className="text-lg font-['Inter'] font-bold text-white absolute top-20 left-3 h-6 w-24">
+                              {item?.player2.slice(-6)}
                             </div>
                             <Icon
                               className="relative mb-8 w-12"

@@ -20,7 +20,6 @@ import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import PageLoader from "../MainLayout/PageLoader";
 
 const NewProfileMob = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [openBottom, setOpenBottom] = useState(true);
   const [aadharFront, setAadharFront] = useState(null);
   const [aadharBack, setAadharBack] = useState(null);
@@ -89,9 +88,7 @@ const NewProfileMob = () => {
       // formData.append("aadharNo", aadharNumber);
       // formData.append("aadharFront", aadharFront);
       // formData.append("aadharBack", aadharBack);
-
       // console.log(formData);
-
       try {
         const response = await axios.post("/api/user/addKycdetail", obj, {
           headers: {
@@ -108,12 +105,15 @@ const NewProfileMob = () => {
     }
   };
   const handleLogout = () => {
-    dispatch(logoutAsync({ accessToken, refreshToken }));
+    dispatch(logoutAsync({ token: accessToken, refreshtoken: refreshToken }));
   };
-  const toggleNavbar = () => {
-    setIsOpen(!isOpen);
-  };
-  if (!users) return <PageLoader />;
+ 
+  if (!users)
+    return (
+      <div className="max-w-[480px]">
+        <PageLoader />{" "}
+      </div>
+    );
   return (
     <div className="max-w-[480px] w-full min-h-screen h-full">
       <div
