@@ -13,7 +13,7 @@ export const fetchNotifications = createAsyncThunk(
     async () => {
         const accessToken = localStorage.getItem('accessToken');
         try {
-            const response = await axios.get('/api/notification/all',{
+            const response = await axios.get('/api/notification/all', {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
@@ -21,6 +21,9 @@ export const fetchNotifications = createAsyncThunk(
             console.log(response);
             return response.data.allnotification;
         } catch (error) {
+            if (error.response.data.message === "Notification not found") {
+                return [];
+            }
             toast.error('Error fetching all users:', error);
             throw error;
         }
@@ -40,10 +43,12 @@ const notificationSlice = createSlice({
                 state.status = 'loading';
             })
             .addCase(fetchNotifications.fulfilled, (state, action) => {
+                console.log(action.payload)
                 state.status = 'succeeded';
                 state.notifications = action.payload;
             })
             .addCase(fetchNotifications.rejected, (state, action) => {
+                console.log(action.payload)
                 state.status = 'failed';
                 state.error = action.error.message;
             });

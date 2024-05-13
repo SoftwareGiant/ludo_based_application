@@ -104,10 +104,9 @@ const SupportMob = () => {
       <div className="bg-[#fead3a] max-w-[480px] absolute  shadow-lg border-b border-[#0f002b]  flex justify-between   items-center w-full  pt-4  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
           <SidebarMob />
-          <LudoMainLogo/>
+          <LudoMainLogo />
         </div>
         <img
-        
           onClick={() => navigate("/profile")}
           src={FrameProfile}
           className="w-[30px] h-[30px] rounded-[100px] border border-solid border-white "
@@ -126,7 +125,7 @@ const SupportMob = () => {
           </div>
         </div>
         <div className="flex gap-2">
-          <img src={startchat} className="w-[30px] h-[30px]  " />
+          {/* <img src={startchat} className="w-[30px] h-[30px]  " /> */}
           <div>
             <Popover placement="left-start">
               <PopoverHandler>
@@ -135,7 +134,10 @@ const SupportMob = () => {
                 </div>
               </PopoverHandler>
               <PopoverContent className="bg-white  z-50">
-                <ListItem onClick={()=>navigate("/feedback")} className="hover:bg-black hover:text-white">
+                <ListItem
+                  onClick={() => navigate("/feedback")}
+                  className="hover:bg-black hover:text-white"
+                >
                   <ListItemPrefix>
                     <img src={feedback} />
                   </ListItemPrefix>
@@ -264,6 +266,7 @@ const SupportMob = () => {
             >
               <Icon
                 id="Send"
+                className={`${inputText ? "text-blue-gray-900" : ""}`}
                 onClick={handleSendMessage}
                 icon="carbon:send-filled"
                 width="28"

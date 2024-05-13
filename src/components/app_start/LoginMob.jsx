@@ -55,7 +55,7 @@ const LoginMob = () => {
         intervalId = setTimeout(() => {
           setIsSuccess(false);
           navigate("/apptour");
-        }, 3000);
+        }, 400);
         return () => {
           clearInterval(intervalId);
         };

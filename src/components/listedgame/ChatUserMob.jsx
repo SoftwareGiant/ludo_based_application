@@ -20,7 +20,7 @@ import { fetchSocket } from "../../socket";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { SidebarMob } from "../MainLayout/SidebarMob";
-import { Icon } from "@iconify-icon/react/dist/iconify.mjs"; 
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
@@ -28,7 +28,7 @@ const ChatUserMob = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { socketData } = useSelector((state) => state.socketfor);
-  const { accessToken} = useSelector((state) => state.auth);
+  const { accessToken } = useSelector((state) => state.auth);
   const { decodedToken } = useJwt(accessToken);
   const userId = decodedToken?.aud;
   const { player, chatId } = useParams();
@@ -156,14 +156,20 @@ const ChatUserMob = () => {
       <div className="bg-[#fead3a] max-w-[480px] absolute  shadow-lg border-b border-[#0f002b]  flex justify-between   items-center w-full  pt-4  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
           <SidebarMob />
-          <LudoMainLogo/>
+          <LudoMainLogo />
         </div>
-        <div
-          className="bg-[#1E1E1E] px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold"
-          onClick={() => navigate("/matchstart")}
-        >
-          Start
-        </div>
+        {messageList.length <= 0 ? (
+          <div className="bg-[#1E1E1E] cursor-pointer px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold">
+            New game
+          </div>
+        ) : (
+          <div
+            className="bg-[#1E1E1E] cursor-pointer px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold"
+            onClick={() => navigate("/matchstart")}
+          >
+            Start
+          </div>
+        )}
       </div>
       <div className="z-10 flex mt-[68px]  border-b border-[#0f002b] justify-between py-2 px-4  items-center bg-[#fead3a] max-w-[480px] w-full">
         <div className="flex justify-center gap-2 items-center">
@@ -178,9 +184,8 @@ const ChatUserMob = () => {
           </div>
         </div>
         <div className="flex items-center gap-2">
-       
           <Icon
-           onClick={() => handleFav()}
+            onClick={() => handleFav()}
             icon="fluent:star-add-28-regular"
             style={{ color: "black" }}
             width="32"
@@ -196,13 +201,19 @@ const ChatUserMob = () => {
               </div>
             </PopoverHandler>
             <PopoverContent className="bg-white  z-50">
-              <ListItem onClick={() => handleFav()} className="hover:bg-black hover:text-white">
+              <ListItem
+                onClick={() => handleFav()}
+                className="hover:bg-black hover:text-white"
+              >
                 <ListItemPrefix>
                   <Icon icon="mdi:favorite-add" width="24" />
                 </ListItemPrefix>{" "}
                 Add Fav
               </ListItem>
-              <ListItem onClick={()=>navigate("/feedback")}  className="hover:bg-black hover:text-white">
+              <ListItem
+                onClick={() => navigate("/feedback")}
+                className="hover:bg-black hover:text-white"
+              >
                 <ListItemPrefix>
                   <Icon icon="material-symbols:feedback" width="22" />
                 </ListItemPrefix>
@@ -310,14 +321,19 @@ const ChatUserMob = () => {
                   type="submit"
                   className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
                 >
-                  <Icon id="Send" icon="carbon:send-filled" width="28" />
+                  <Icon
+                    className={`${message ? "text-blue-gray-900" : ""}`}
+                    id="Send"
+                    icon="carbon:send-filled"
+                    width="28"
+                  />
                 </button>
               </div>
             </form>
           </div>
         </div>
       </div>
-      {player != "player2"   && (
+      {player != "player2" && (
         <Drawer
           placement="bottom"
           open={openBottom}

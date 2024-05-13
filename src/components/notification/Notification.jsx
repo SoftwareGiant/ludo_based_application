@@ -14,7 +14,7 @@ import PageLoader from "../MainLayout/PageLoader";
 const Notification = () => {
   const navigate = useNavigate();
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
-  const [open, setOpen] = useState(false);
+
   const dispatch = useDispatch();
   const { notifications, status, error } = useSelector(
     (state) => state.notifications
@@ -28,7 +28,7 @@ const Notification = () => {
     if (notificationid.readStatus === true) return;
     try {
       const apiResponse = await axios.get(
-        `http://localhost:8003/api/notification/read/${notificationid._id}`,
+        `/api/notification/read/${notificationid._id}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -43,9 +43,26 @@ const Notification = () => {
       toast.error(err);
     }
   };
-  if (status === "loading") {
-    return <PageLoader />;
-  }
+
+  const clearAllNotifications = async (notificationid) => {
+    if (notificationid.readStatus === true) return;
+    try {
+      const apiResponse = await axios.get(`/api/notification/clearall`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+    
+      dispatch(fetchNotifications());
+    } catch (err) {
+     
+      toast.error(err);
+    }
+  };
+  // if (status === "loading") {
+  //   return <PageLoader />;
+  // }
+
   return (
     <>
       <div className="max-w-[480px] w-full min-h-screen h-full bg-[#fead3a]">
@@ -62,7 +79,7 @@ const Notification = () => {
             onClick={() => navigate("/profile")}
             src={FrameProfile}
             alt="Frame1"
-            className="mt-1 w-8 h-8 border rounded-[100px]"
+            className="mt-1 cursor-pointer w-8 h-8 border rounded-[100px]"
           />
         </div>
         {/* <div className="w-full max-w-[480px] flex justify-end">
@@ -80,26 +97,53 @@ const Notification = () => {
         />
 
         <div className="bg-[#fead3a] w-full min-h-screen overflow-hidden relative">
-          {notifications?.map((item) => (
-            <div
-              onClick={() => handlenotificationRead(item)}
-              className="cursor-pointer  bg-white flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-4"
-            >
-              <div
-                className={`${
-                  item.readStatus === true
-                    ? "text-white bg-gray-800"
-                    : "text-white bg-gray-900"
-                } flex flex-col gap-2 w-full shadow-lg rounded-lg p-3`}
-              >
-                <div className="w-full text-gray-300 text-xs">
-                  <span>{convertTimestamp(item.updatedAt)}</span>
-                </div>
-                <div className="text-sm  flex items-center  w-full">
-                  <span className="font-semibold">{item.message}</span>
-                </div>
+          {status !== "loading" && notifications?.length <= 0 && (
+            <p className="mt-6 font-semibold text-3xl w-full flex justify-center ">
+              No new notification...
+            </p>
+          )}
+          {notifications.length !== 0 && (
+            <div className="mb-10">
+              <div className="cursor-pointer   flex justify-end w-4/5 m-auto font-['Nunito-Sans'] relative mt-2">
+                <Button
+                  onClick={clearAllNotifications}
+                  className="p-1 "
+                  variant="text"
+                >
+                  Clear All
+                </Button>
               </div>
-              {/* <div className="flex  w-full p-4 justify-between items-center">
+              {notifications.length !== 0 &&
+                notifications?.map((item) => (
+                  <div
+                    key={item._id}
+                    onClick={() => handlenotificationRead(item)}
+                    className="cursor-pointer   flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-4"
+                  >
+                    <div
+                      className={`${
+                        item.readStatus === true
+                          ? " bg-gray-800"
+                          : " bg-gray-900"
+                      } flex text-white flex-col gap-2 w-full shadow-lg rounded-lg p-3`}
+                    >
+                      <div className="w-full text-gray-300 text-xs">
+                        <span>{convertTimestamp(item.updatedAt)}</span>
+                      </div>
+                      <div className="text-sm  flex items-center  w-full">
+                        <span
+                          className={`
+                    ${
+                      item.readStatus === true
+                        ? "font-medium opacity-[80%]"
+                        : "font-bold"
+                    }`}
+                        >
+                          {item.message}
+                        </span>
+                      </div>
+                    </div>
+                    {/* <div className="flex  w-full p-4 justify-between items-center">
               <div className="flex text-xl font-['Inter'] font-bold text-[#0f002b] ">
                 1.5% Off
               </div>
@@ -108,9 +152,10 @@ const Notification = () => {
                 <IoIosArrowForward className="w-6 h-6" />
               </Button>
             </div> */}
+                  </div>
+                ))}
             </div>
-          ))}
-
+          )}
           {/* <div className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-4">
             <div className="text-white bg-[#0f002b] flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
               <div className="flex justify-between w-full items-center p-3">
@@ -179,9 +224,11 @@ const Notification = () => {
             </div>
           </div> */}
 
-          <Button className="bg-black text-white  py-2 w-3/5  max-w-[480px] relative rounded-lg flex justify-center m-auto mt-20 mb-16">
-            Clear All
-          </Button>
+          {/* {notifications.length !== 0 && (
+            <Button className="bg-black text-white  py-2 w-3/5  max-w-[480px] relative rounded-lg flex justify-center m-auto mt-20 mb-16">
+              Clear All
+            </Button>
+          )} */}
         </div>
       </div>
     </>

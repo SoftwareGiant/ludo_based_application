@@ -11,6 +11,7 @@ import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { fetchUserDetail } from "../live_battle/userSlice";
 import { fetchFavoriteMessages } from "./favoriteMessagesSlice";
 import PageLoader from "../MainLayout/PageLoader";
+import { formatDate } from "../admin_and_S.admin/Functions/formateDate";
 
 const Chathistory = () => {
   const [OpenchatHistory, setOpenChatHistory] = useState(false);
@@ -41,13 +42,7 @@ const Chathistory = () => {
     setOpenChatHistory(false);
     setOpenRecent(true);
   };
-  function convertTimestampToDate(timestamp) {
-    const date = new Date(timestamp);
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const year = date.getFullYear().toString();
-    return `${day}/${month}/${year}`;
-  }
+
   const handleRecentCardCLick = (userchat) => {
     userchat?.messageDetails[0].senderId === users?._id
       ? navigate(`/matchUserChat/${userchat?.messageDetails[0].receiverId}`)
@@ -103,7 +98,7 @@ const Chathistory = () => {
                     key={userchat?._id}
                     onClick={() => handleRecentCardCLick(userchat)}
                     color="transparent"
-                    className="w-full mt-5 max-w-[22rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-3xl "
+                    className="w-[90%] mt-5 max-w-[26rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-2xl "
                   >
                     <div className="flex items-center gap-4 ">
                       <Avatar
@@ -121,9 +116,7 @@ const Chathistory = () => {
                               : userchat?.messageDetails[0].senderId.slice(-6)}
                           </Typography>
                           <div className="5 flex items-center gap-0 ">
-                            {convertTimestampToDate(
-                              userchat?.messageDetails[0].timestamp
-                            )}
+                            {formatDate(userchat?.messageDetails[0].timestamp)}
                           </div>
                         </div>
                         <div className="flex items-center justify-between">
@@ -158,13 +151,19 @@ const Chathistory = () => {
               <Icon icon="material-symbols:info-outline" width="32" />
             </div>
             <div className="flex flex-col gap-3 w-full items-center justify-center">
+           
+            {favoriteMessages?.length <= 0 && (
+            <p className="mt-6 text-white font-semibold text-3xl w-full flex justify-center ">
+              No favourite chat...
+            </p>)} 
+
               {favoriteMessages.length > 0 &&
                 favoriteMessages?.map((favuser) => (
                   <Card
                     key={favuser._id}
                     onClick={() => handleRecentCardCLick(favuser)}
                     color="transparent"
-                    className="w-full mt-5 max-w-[22rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-3xl "
+                    className="w-[90%] mt-5 max-w-[26rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-2xl "
                   >
                     <div className="flex items-center gap-4 ">
                       <Avatar
@@ -181,9 +180,7 @@ const Chathistory = () => {
                               : favuser?.messageDetails[0].senderId.slice(-6)}
                           </Typography>
                           <div className="5 flex items-center gap-0 ">
-                            {convertTimestampToDate(
-                              favuser?.messageDetails[0].timestamp
-                            )}
+                            {formatDate(favuser?.messageDetails[0].timestamp)}
                           </div>
                         </div>
                         <div className="flex items-center justify-between">
@@ -242,9 +239,9 @@ const Chathistory = () => {
                 allChatList?.map((userchat) => (
                   <Card
                     key={userchat._id}
-                    // onClick={() => handleRecentCardCLick(userchat)}
+                    onClick={() => handleRecentCardCLick(userchat)}
                     color="transparent"
-                    className="w-full mt-5 max-w-[22rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-3xl "
+                    className="w-[90%] mt-5 max-w-[26rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-xl "
                   >
                     <div className="flex items-center gap-4 ">
                       <Avatar
@@ -261,9 +258,7 @@ const Chathistory = () => {
                               : userchat?.messageDetails[0].senderId.slice(-6)}
                           </Typography>
                           <div className="5 flex items-center gap-0 ">
-                            {convertTimestampToDate(
-                              userchat?.messageDetails[0].timestamp
-                            )}
+                            {formatDate(userchat?.messageDetails[0].timestamp)}
                           </div>
                         </div>
                         <div className="flex items-center justify-between">
@@ -282,8 +277,6 @@ const Chathistory = () => {
                     </div>
                   </Card>
                 ))}
-
-             
             </div>
           </div>
         )}

@@ -65,7 +65,6 @@ const MatchUserChat = () => {
       dispatch(fetchSocket(decodedToken));
     }
   }, [decodedToken]);
-  
 
   const fn = async () => {
     const response = await axios.get(`/api/message/allmessages/${chatId}`, {
@@ -75,6 +74,7 @@ const MatchUserChat = () => {
     });
     if (response?.status == 200 && response?.data) {
       setMessageList([]);
+      console.log(response?.data);
       if (response?.data.favourite.userId.length > 0) {
         setIsfav(true);
       }
@@ -131,10 +131,26 @@ const MatchUserChat = () => {
           Authorization: `bearer ${accessToken}`,
         },
       });
+      fn();
       toast.success(response.data.message);
     } catch (error) {
-      
       toast.error("Failed to fetch message");
+    }
+  };
+  const handleRemoveFav = async () => {
+    try {
+      const response = await axios.get(
+        `/api/message/removefromfavourite/${chatId}`,
+        {
+          headers: {
+            Authorization: `bearer ${accessToken}`,
+          },
+        }
+      );
+      fn();
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error("Failed to remove fav");
     }
   };
   return (
@@ -145,12 +161,18 @@ const MatchUserChat = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-        <div
-          className="bg-[#1E1E1E] cursor-pointer px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold"
-          onClick={() => navigate("/matchstart")}
-        >
-          Start
-        </div>
+        {messageList.length <= 0 ? (
+          <div className="bg-[#1E1E1E] cursor-pointer px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold">
+            New game
+          </div>
+        ) : (
+          <div
+            className="bg-[#1E1E1E] cursor-pointer px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold"
+            onClick={() => navigate("/matchstart")}
+          >
+            Start
+          </div>
+        )}
       </div>
       <div className="z-10 flex mt-[68px]  border-b border-[#0f002b] justify-between py-2 px-4  items-center bg-[#fead3a] max-w-[480px] w-full">
         <div className="flex justify-center gap-2 items-center">
@@ -165,22 +187,17 @@ const MatchUserChat = () => {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          {isFav && messageList[0]?.senderId === users?._id ? (
+          {isFav && messageList[0]?.senderId === users?._id && (
             <Icon
-              className="cursor-pointer"
-              icon="ph:star-fill"
-              style={{ color: "black" }}
-              width="32"
-            />
-          ) : (
-            <Icon
+              onClick={handleRemoveFav}
               className="cursor-pointer"
               icon="ph:star-fill"
               style={{ color: "black" }}
               width="32"
             />
           )}
-          {!isFav && (
+
+          {isFav && (
             <Icon
               className="cursor-pointer"
               onClick={() => handleFav()}
@@ -201,14 +218,7 @@ const MatchUserChat = () => {
               </div>
             </PopoverHandler>
             <PopoverContent className="bg-white  z-50">
-              {isFav && messageList[0]?.senderId === users?._id ? (
-                <ListItem className="hover:bg-black hover:text-white">
-                  <ListItemPrefix>
-                    <Icon icon="ph:star-fill" width="24" />
-                  </ListItemPrefix>{" "}
-                  Fav chat
-                </ListItem>
-              ) : (
+              {isFav && messageList[0]?.senderId === users?._id && (
                 <ListItem className="hover:bg-black hover:text-white">
                   <ListItemPrefix>
                     <Icon icon="ph:star-fill" width="24" />
@@ -341,7 +351,12 @@ const MatchUserChat = () => {
                   type="submit"
                   className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
                 >
-                  <Icon id="Send" icon="carbon:send-filled" width="28" />
+                  <Icon
+                    id="Send"
+                    className={`${messaged ? "text-blue-gray-900" : ""}`}
+                    icon="carbon:send-filled"
+                    width="28"
+                  />
                 </button>
               </div>
             </form>
