@@ -27,8 +27,8 @@ const Chathistory = () => {
     (state) => state?.favChat?.favoriteMessages
   );
 
-  console.log(users);
-  console.log(allChatList);
+  // console.log(users);
+  // console.log(allChatList);
   console.log(favoriteMessages, "favoriteMessages");
   useEffect(() => {
     dispatch(fetchFavoriteMessages());
