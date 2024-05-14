@@ -23,7 +23,6 @@ const NewProfilePic = () => {
 
   const handleImageChange = async (event) => {
     const file = event.target.files[0];
-    console.log(file);
     if (file) {
       const reader = new FileReader();
       reader.onloadend = async () => {
@@ -38,7 +37,6 @@ const NewProfilePic = () => {
             },
           }
         );
-        console.log(response);
       };
       reader.readAsDataURL(file);
     }
