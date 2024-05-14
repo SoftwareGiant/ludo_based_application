@@ -70,6 +70,7 @@ const NewProfileMob = () => {
     // Check if the input matches the Aadhar pattern
     return aadharPattern.test(aadharNumber);
   }
+
   const handleSubmit = async () => {
     if (!validateAadhar(aadharNumber)) {
       toast.error("Please Enter Valid Aadhar number");
@@ -79,23 +80,31 @@ const NewProfileMob = () => {
       toast.error("Please upload both Aadharcard front and back images.");
       return;
     } else {
-      const obj = {
-        "aadharno.": aadharNumber,
-        image: [aadharFront, aadharBack],
-      };
-      console.log(obj);
-      // const formData = new FormData();
-      // formData.append("aadharNo", aadharNumber);
-      // formData.append("aadharFront", aadharFront);
-      // formData.append("aadharBack", aadharBack);
-      // console.log(formData);
+      // const obj = {
+      //   "aadharno.": aadharNumber,
+      //   image: [aadharFront, aadharBack],
+      // };
       try {
+        // const response = await axios.post("/api/user/addKycdetail", obj, {
+        //   headers: {
+        //     "Content-Type": "multipart/form-data",
+        //     Authorization: `bearer ${accessToken}`,
+        //   },
+        // });
+
+        const obj = new FormData();
+        obj.append("aadharNo", aadharNumber); // Append aadharNumber as a form field
+        obj.append("image", aadharFront); // Append aadharFront as a file
+        obj.append("image", aadharBack); // Append aadharBack as a file
+
         const response = await axios.post("/api/user/addKycdetail", obj, {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${accessToken}`, // Ensure the correct capitalization for "Bearer"
           },
         });
-        console.log(response.data); // Handle the response from the server as needed
+
+        console.log(response.data);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -107,7 +116,7 @@ const NewProfileMob = () => {
   const handleLogout = () => {
     dispatch(logoutAsync({ token: accessToken, refreshtoken: refreshToken }));
   };
- 
+
   if (!users)
     return (
       <div className="max-w-[480px]">
