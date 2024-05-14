@@ -168,7 +168,8 @@ const listOfFavourite = async (req, res, next) => {
   try {
     const userId = req.userId;
     const allChatList = await Message.find({
-      "favourite.userId": userId,
+      // "favourite.userId": userId,
+      "favourite": { $elemMatch: { userId: { $ne: userId } } },
       $or: [
         { "messageDetails.senderId": userId },
         { "messageDetails.receiverId": userId },
@@ -184,6 +185,39 @@ const listOfFavourite = async (req, res, next) => {
   }
 };
 
+const checkFavourite = async(req,res,next) =>{
+  try{
+  const userId = req.userId;
+    const { id: otherUserId } = req.params;
+    const allmessage = await Message.findOne({
+      "favourite.userId": otherUserId,
+      $and: [
+        {
+          $or: [
+            { "messageDetails.senderId": userId },
+            { "messageDetails.receiverId": userId },
+          ],
+        },
+        {
+          $or: [
+            { "messageDetails.senderId": otherUserId },
+            { "messageDetails.receiverId": otherUserId },
+          ],
+        },
+      ],
+    });
+    if(allmessage){
+      return res.status(200).json({message:"Favourite"})
+    }
+  }
+  catch(err){
+    return next(err)
+  }
+}
+
+
+
+
 module.exports = {
   allChat,
   allMessage,
@@ -191,4 +225,5 @@ module.exports = {
   makefavourite,
   listOfFavourite,
   removeFromFavourite,
+  checkFavourite
 };

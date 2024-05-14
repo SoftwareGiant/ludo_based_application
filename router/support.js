@@ -31,18 +31,19 @@ router.post(
       );
       if (!support) {
         throw new AppError(
-          "Server is not responding!Please try again in sometime",
+          "Server is not responding!Please try again in sometime.",
           500,
         );
       }
-      return res.status(200).json({ message: "Message sent successfully" });
+      return res.status(200).json({ support });
     } catch (err) {
-      return next(
-        new AppError(
-          "Server is not responding!Please try again in sometime",
-          500,
-        ),
-      );
+      // return next(
+      //   new AppError(
+      //     "Server is not responding!Please try again in sometime",
+      //     500,
+      //   ),
+      // );
+      return next(err)
     }
   }),
 );
@@ -67,7 +68,6 @@ router.post(
         },
         {
           new: true,
-          upsert: true,
         },
       );
       if (!support) {
@@ -78,12 +78,13 @@ router.post(
       }
       return res.status(200).json({ message: "Message sent successfully" });
     } catch (err) {
-      return next(
-        new AppError(
-          "Server is not responding!Please try again in sometime",
-          500,
-        ),
-      );
+      // return next(
+      //   new AppError(
+      //     "Server is not responding!Please try again in sometime",
+      //     500,
+      //   ),
+      // );
+      return next(err)
     }
   }),
 );
@@ -91,9 +92,6 @@ router.post(
 router.get("/supportmessages", [verifyToken], async (req, res, next) => {
   const userId = req.userId;
   const ticket = await Support.findOne({createdBy:userId});
-  // const filteredMessages = tickets.messages.filter(
-  //   message => message.sender.toString() === senderId
-  // );
   return res.status(200).json({ ticket });
 });
 
@@ -102,7 +100,7 @@ router.get("/supportmessages", [verifyToken], async (req, res, next) => {
 router.get("/listofall", [verifyToken,admin], async (req, res, next) => {
   const listofall = await Support.find({});
   if (listofall.length == 0) {
-    return res.status(404).json({ message: "No user found" });
+    return res.status(404).json({ message: "No support chat found" });
   }
   return res.status(200).json({ listofall });
 });
