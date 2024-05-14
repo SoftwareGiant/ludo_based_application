@@ -16,14 +16,15 @@ export const fetchUserChat = createAsyncThunk(
     }
     try {
       const response = await axios.get(
-        'api/support/listofall',
+        'api/support/supportmessages',
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         }
       );
-      return response.data.listofall;
+      console.log(response.data.ticket);
+      return response.data.ticket.messages;
     } catch (error) {
       throw error;
     }
