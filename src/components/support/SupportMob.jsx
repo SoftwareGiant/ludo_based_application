@@ -18,68 +18,69 @@ import {
 } from "@material-tailwind/react";
 import startchat from "../../assets/profile/startchat.svg";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserChat } from "./supportUserChatSlice";
+import axios from "axios";
+import { fetchUserDetail } from "../live_battle/userSlice";
+import { getTime } from "../admin_and_S.admin/Functions/getTime";
 
-const user = [
-  {
-    text: "hi",
-    time: "09:12",
-    sender: "me",
-  },
-  {
-    text: "hello",
-    time: "09:13",
-    sender: "gaurav",
-  },
-  {
-    text: "how are you",
-    time: "09:12",
-    sender: "gaurav",
-  },
-  {
-    text: "fine",
-    time: "09:12",
-    sender: "me",
-  },
-];
 const SupportMob = () => {
-  const [messages, setMessages] = useState(user);
   const [inputText, setInputText] = useState("");
   const [image, setImage] = useState(null);
   const [selectedEmoji, setSelectedEmoji] = useState(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const inputRef = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const messagesLIst = useSelector((state) => state.supportuser.messages);
+  const { accessToken } = useSelector((state) => state.auth);
+  const users = useSelector((state) => state?.user?.user);
 
+  console.log(messagesLIst);
   useEffect(() => {
     inputRef.current.focus();
   }, []);
+  useEffect(() => {
+    dispatch(fetchUserChat());
+    dispatch(fetchUserDetail());
+  }, [dispatch]);
 
   useEffect(() => {
     const el = document.getElementById("messages");
     el.scrollTop = el.scrollHeight;
-  }, [messages]);
+  }, [messagesLIst]);
 
   const handleEmojiSelect = (emoji) => {
     setSelectedEmoji(emoji);
     setInputText((prevInputText) => prevInputText + emoji.native);
   };
-  const handleSendMessage = (e) => {
+  const handleSendMessage = async (e) => {
     e.preventDefault();
     setShowEmojiPicker(false);
     const times = new Date().toLocaleTimeString();
     console.log(times.slice(0, 4), typeof times);
     if (inputText.trim() === "" && !image) return;
-    setMessages([
-      ...messages,
-      {
-        text: inputText,
-        image,
-        sender: "me",
-        time: new Date().toLocaleTimeString().slice(0, 4),
-      },
-    ]);
-    setInputText("");
-    setImage(null);
+    try {
+      const response = await axios.post(
+        "/api/support/addsupport",
+        {
+          message: inputText,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      console.log(response.data);
+      dispatch(fetchUserChat());
+      setInputText("");
+      setImage(null);
+      return response.data;
+    } catch (error) {
+      // You can customize the error handling here
+      throw error;
+    }
   };
 
   const handleImageChange = (event) => {
@@ -96,7 +97,7 @@ const SupportMob = () => {
     navigate("/matchstart");
   };
 
-  console.log(image);
+  // console.log(image);
 
   return (
     <div className="flex-1 pb-4 bg-[#0f002b] sm:bg-[#fead3a]  w-full max-w-[480px]  justify-between flex flex-col h-screen">
@@ -159,46 +160,48 @@ const SupportMob = () => {
         id="messages"
         className="flex z-10 h-full flex-col space-y-4 p-3 overflow-y-auto table-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
       >
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`flex  ${
-              message.sender === "me" ? "justify-end " : "justify-start"
-            } mb-2`}
-          >
+        {users &&
+          messagesLIst[0]?.messages?.map((textmsg) => (
             <div
-              className={`${
-                message.sender === "me"
-                  ? "bg-white text-black self-end pl-5 rounded-br-none"
-                  : "bg-black text-white self-start pr-5 rounded-bl-none"
-              } p-2 rounded-2xl max-w-md overflow-hidden font-semibold `}
-              style={{
-                maxWidth: "80%",
-                whiteSpace: "normal",
-                overflowWrap: "break-word",
-              }}
+              key={textmsg._id}
+              className={`flex  ${
+                textmsg?.sender === users?._id
+                  ? "justify-end "
+                  : "justify-start"
+              } mb-2`}
             >
-              <span>{message.text}</span>
-              {message.image && (
+              <div
+                className={`${
+                  textmsg?.sender === users?._id
+                    ? "bg-white text-black self-end pl-5 rounded-br-none"
+                    : "bg-black text-white self-start pr-5 rounded-bl-none"
+                } p-2 rounded-2xl max-w-md overflow-hidden font-semibold `}
+                style={{
+                  maxWidth: "80%",
+                  whiteSpace: "normal",
+                  overflowWrap: "break-word",
+                }}
+              >
+                <span>{textmsg.message}</span>
+                {/* {textmsg.image && (
                 <img
                   src={message.image}
                   alt="Shared"
                   className="mt-1"
                   style={{ maxWidth: "100%" }}
                 />
-              )}
-              <span
-                className={`text-xs block text-gray-500 mt-1 ${
-                  message.sender === "me" ? "text-end" : "text-start"
-                }`}
-              >
-                {message.time}
-              </span>
+              )} */}
+                <span
+                  className={`text-xs block text-gray-500 mt-1 ${
+                    textmsg.sender === users?._id ? "text-end" : "text-start"
+                  }`}
+                >
+                  {getTime(textmsg?.createdAt)}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
-
       <div className="border-t-2  z-10 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
         <form
           onSubmit={handleSendMessage}

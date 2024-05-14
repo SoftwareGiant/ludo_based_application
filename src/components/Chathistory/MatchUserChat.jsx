@@ -75,9 +75,12 @@ const MatchUserChat = () => {
     if (response?.status == 200 && response?.data) {
       setMessageList([]);
       console.log(response?.data);
-      if (response?.data.favourite.userId.length > 0) {
+      if (response?.data.favourite.userId.includes(chatId)) {
         setIsfav(true);
+      } else {
+        setIsfav(false);
       }
+
       setMessageList((prevMessageList) => [
         ...prevMessageList,
         ...response?.data?.messageDetails,
@@ -187,7 +190,7 @@ const MatchUserChat = () => {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          {isFav && messageList[0]?.senderId === users?._id && (
+          {isFav ? (
             <Icon
               onClick={handleRemoveFav}
               className="cursor-pointer"
@@ -195,9 +198,7 @@ const MatchUserChat = () => {
               style={{ color: "black" }}
               width="32"
             />
-          )}
-
-          {isFav && (
+          ) : (
             <Icon
               className="cursor-pointer"
               onClick={() => handleFav()}
@@ -218,15 +219,17 @@ const MatchUserChat = () => {
               </div>
             </PopoverHandler>
             <PopoverContent className="bg-white  z-50">
-              {isFav && messageList[0]?.senderId === users?._id && (
-                <ListItem className="hover:bg-black hover:text-white">
+              {isFav ? (
+                <ListItem
+                  onClick={handleRemoveFav}
+                  className="hover:bg-black hover:text-white"
+                >
                   <ListItemPrefix>
                     <Icon icon="ph:star-fill" width="24" />
                   </ListItemPrefix>{" "}
-                  Fav chat
+                  Remove Fav
                 </ListItem>
-              )}
-              {!isFav && (
+              ) : (
                 <ListItem
                   onClick={() => handleFav()}
                   className="hover:bg-black hover:text-white"

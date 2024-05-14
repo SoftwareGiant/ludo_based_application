@@ -17,67 +17,64 @@ import {
   PopoverHandler,
 } from "@material-tailwind/react";
 import startchat from "../../../../assets/profile/startchat.svg";
+import { fetchadminsupportlist } from "../AdminSlice/adminsupportlistSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getTime } from "../../Functions/getTime";
+import axios from "axios";
 
-const user = [
-  {
-    text: "hi",
-    time: "09:12",
-    sender: "me",
-  },
-  {
-    text: "hello",
-    time: "09:13",
-    sender: "gaurav",
-  },
-  {
-    text: "how are you",
-    time: "09:12",
-    sender: "gaurav",
-  },
-  {
-    text: "fine",
-    time: "09:12",
-    sender: "me",
-  },
-];
-const CustomerChat = () => {
+const CustomerChat = ({ chatdetails, fetchuser }) => {
   const [showEmojis, setShowEmojis] = useState(false);
-  const [messages, setMessages] = useState(user);
   const [inputText, setInputText] = useState("");
   const [image, setImage] = useState(null);
   const [selectedEmoji, setSelectedEmoji] = useState(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { accessToken } = useSelector((state) => state.auth);
   const handleEmojiSelect = (emoji) => {
     setSelectedEmoji(emoji);
     setInputText((prevInputText) => prevInputText + emoji.native);
   };
-  const navigate = useNavigate();
   useEffect(() => {
-    inputRef.current.focus();
+    dispatch(fetchadminsupportlist());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (chatdetails !== null) inputRef.current.focus();
   }, []);
   useEffect(() => {
-    const el = document.getElementById("messages");
-    el.scrollTop = el.scrollHeight;
-  }, [messages]);
+    if (chatdetails !== null) {
+      const el = document.getElementById("messages");
+      el.scrollTop = el.scrollHeight;
+    }
+  }, [chatdetails?.messages]);
 
   const inputRef = useRef(null);
-  const handleSendMessage = (e) => {
+  const handleSendMessage = async (e) => {
     e.preventDefault();
+    setShowEmojiPicker(false);
     const times = new Date().toLocaleTimeString();
     console.log(times.slice(0, 4), typeof times);
-    if (inputText.trim() === "" && !image) return;
-    setMessages([
-      ...messages,
-      {
-        text: inputText,
-        image,
-        sender: "me",
-        time: new Date().toLocaleTimeString().slice(0, 4),
-      },
-    ]);
-    setInputText("");
-    setImage(null);
+    if (inputText.trim() === "" ) return;
+    const objmsg = {
+      supportId: chatdetails._id,
+      message: inputText.trim(),
+    };
+    try {
+      const response = await axios.post("/api/support/replysupport", objmsg, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      console.log(response.data);
+      fetchuser();
+      setInputText("");
+      setImage(null);
+      return response.data;
+    } catch (error) {
+      // You can customize the error handling here
+      throw error;
+    }
   };
 
   const handleImageChange = (event) => {
@@ -93,10 +90,13 @@ const CustomerChat = () => {
   const handleStart = () => {
     navigate("/matchstart");
   };
-  const addEmoji = (emoji) => {
-    // Do something with the selected emoji
-    console.log(emoji);
-  };
+  if (chatdetails === null) {
+    return (
+      <h1 className="font-semibold text-4xl h-full w-full flex justify-center items-center text-gray-800">
+        Select a user to chat...
+      </h1>
+    );
+  }
   return (
     <div className="flex-1 pb-4 bg-transparent  w-full   justify-between flex flex-col h-[92%]">
       <div className="z-10 flex border-b border-gray-400 shadow-sm justify-between py-2 px-4  items-center   w-full">
@@ -107,11 +107,13 @@ const CustomerChat = () => {
             className="w-[30px] h-[30px] rounded-[100px] border border-solid border-white "
           />
           <div className="flex flex-col text-black items-start justify-center">
-            <span className="text-[20px] leading-tight">Ludo Player</span>
+            <span className="text-[20px] leading-tight">
+              {chatdetails?.createdBy}
+            </span>
           </div>
         </div>
         <div className="flex gap-2">
-          <img src={startchat} className="w-[30px] h-[30px]  " />
+          {/* <img src={startchat} className="w-[30px] h-[30px]  " /> */}
           <div>
             <Popover placement="left-start">
               <PopoverHandler>
@@ -120,12 +122,12 @@ const CustomerChat = () => {
                 </div>
               </PopoverHandler>
               <PopoverContent className="bg-white  z-50">
-                <ListItem className="hover:bg-black hover:text-white">
+                {/* <ListItem className="hover:bg-black hover:text-white">
                   <ListItemPrefix>
                     <img src={startchat} />
                   </ListItemPrefix>{" "}
                   Add Fav
-                </ListItem>
+                </ListItem> */}
                 <ListItem
                   onClick={() => navigate("/feedback")}
                   className="hover:bg-black hover:text-white"
@@ -151,16 +153,18 @@ const CustomerChat = () => {
         id="messages"
         className="flex z-10 h-full flex-col space-y-4 p-3 overflow-y-auto table-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
       >
-        {messages.map((message, index) => (
+        {chatdetails?.messages.map((textmsg) => (
           <div
-            key={index}
+            key={textmsg._id}
             className={`flex  ${
-              message.sender === "me" ? "justify-end " : "justify-start"
+              textmsg?.sender !== chatdetails?.createdBy
+                ? "justify-end "
+                : "justify-start"
             } mb-2`}
           >
             <div
               className={`${
-                message.sender === "me"
+                textmsg?.sender !== chatdetails?.createdBy
                   ? "bg-white text-black self-end pl-5 rounded-br-none"
                   : "bg-black text-white self-start pr-5 rounded-bl-none"
               } p-2 rounded-lg max-w-md overflow-hidden font-semibold `}
@@ -170,21 +174,23 @@ const CustomerChat = () => {
                 overflowWrap: "break-word",
               }}
             >
-              <span>{message.text}</span>
-              {message.image && (
+              <span>{textmsg.message}</span>
+              {/* {textmsg.image && (
                 <img
                   src={message.image}
                   alt="Shared"
                   className="mt-1"
                   style={{ maxWidth: "100%" }}
                 />
-              )}
+              )} */}
               <span
                 className={`text-xs block text-gray-500 mt-1 ${
-                  message.sender === "me" ? "text-end" : "text-start"
+                  textmsg?.sender !== chatdetails?.createdBy
+                    ? "text-end"
+                    : "text-start"
                 }`}
               >
-                {message.time}
+                {getTime(textmsg?.createdAt)}
               </span>
             </div>
           </div>
@@ -239,6 +245,7 @@ const CustomerChat = () => {
             >
               <Icon
                 id="Send"
+                className={`${inputText ? "text-blue-gray-900" : ""}`}
                 onClick={handleSendMessage}
                 icon="carbon:send-filled"
                 width="28"

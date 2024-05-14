@@ -94,7 +94,7 @@ const NewGameMob = () => {
 
   useEffect(() => {
     if (match) {
-      const player1 = match.newGameDetail.player1;
+      const player1 = match?.newGameDetail?.player1;
       return navigate(`/chat/${player1}/player1/`);
     }
   }, [match]);

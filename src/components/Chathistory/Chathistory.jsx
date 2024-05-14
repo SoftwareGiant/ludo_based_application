@@ -27,8 +27,6 @@ const Chathistory = () => {
     (state) => state?.favChat?.favoriteMessages
   );
 
-  // console.log(users);
-  // console.log(allChatList);
   console.log(favoriteMessages, "favoriteMessages");
   useEffect(() => {
     dispatch(fetchFavoriteMessages());
@@ -92,7 +90,7 @@ const Chathistory = () => {
               <Icon icon="material-symbols:info-outline" width="32" />
             </div>
             <div className="flex flex-col gap-3 w-full items-center justify-center">
-              {allChatList?.length > 0 &&
+              {allChatList?.length > 0 ? (
                 allChatList?.map((userchat) => (
                   <Card
                     key={userchat?._id}
@@ -134,7 +132,12 @@ const Chathistory = () => {
                       </div>
                     </div>
                   </Card>
-                ))}
+                ))
+              ) : (
+                <p className="mt-6 text-white font-semibold text-3xl w-full flex justify-center ">
+                  No recent chat history...
+                </p>
+              )}
             </div>
           </div>
         ) : OpenchatHistory ? (
@@ -151,60 +154,75 @@ const Chathistory = () => {
               <Icon icon="material-symbols:info-outline" width="32" />
             </div>
             <div className="flex flex-col gap-3 w-full items-center justify-center">
-           
-            {favoriteMessages?.length <= 0 && (
-            <p className="mt-6 text-white font-semibold text-3xl w-full flex justify-center ">
-              No favourite chat...
-            </p>)} 
+              {favoriteMessages?.length <= 0 && (
+                <p className="mt-6 text-white font-semibold text-3xl w-full flex justify-center ">
+                  No favourite chat...
+                </p>
+              )}
 
               {favoriteMessages.length > 0 &&
-                favoriteMessages?.map((favuser) => (
-                  <Card
-                    key={favuser._id}
-                    onClick={() => handleRecentCardCLick(favuser)}
-                    color="transparent"
-                    className="w-[90%] mt-5 max-w-[26rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-2xl "
-                  >
-                    <div className="flex items-center gap-4 ">
-                      <Avatar
-                        size="lg"
-                        variant="circular"
-                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-                        alt="tania andrew"
-                      />
-                      <div className="flex w-full  flex-col gap-0.5">
-                        <div className="flex items-center justify-between">
-                          <Typography variant="h5">
-                            {favuser?.messageDetails[0].senderId === users?._id
+                favoriteMessages?.map((favuser) => {
+                  if (
+                    favuser?.favourite?.userId?.length > 0 &&
+                    favuser?.favourite?.userId?.some((id) => id !== users._id)
+                  ) {
+                    return (
+                      <Card
+                        key={favuser._id}
+                        onClick={() => handleRecentCardCLick(favuser)}
+                        color="transparent"
+                        className="w-[90%] mt-5 max-w-[26rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-2xl "
+                      >
+                        <div className="flex items-center gap-4 ">
+                          <Avatar
+                            size="lg"
+                            variant="circular"
+                            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+                            alt="tania andrew"
+                          />
+                          <div className="flex w-full  flex-col gap-0.5">
+                            <div className="flex items-center justify-between">
+                              <Typography variant="h5">
+                                {/* {favuser?.messageDetails[0].senderId === users?._id
                               ? favuser?.messageDetails[0].receiverId.slice(-6)
-                              : favuser?.messageDetails[0].senderId.slice(-6)}
-                          </Typography>
-                          <div className="5 flex items-center gap-0 ">
-                            {formatDate(favuser?.messageDetails[0].timestamp)}
+                              : favuser?.messageDetails[0].senderId.slice(-6)} */}
+                                {/* {favuser.favourite.userId.filter(
+                              (item) =>{return item !== users._id ?  item.slice(-6) : ""}
+                            )} */}
+                                {favuser.favourite.userId
+                                  .filter((item) => item !== users._id)
+                                  .map((item) => item.slice(-6))}
+                              </Typography>
+                              <div className="5 flex items-center gap-0 ">
+                                {formatDate(
+                                  favuser?.messageDetails[0].timestamp
+                                )}
+                              </div>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <Typography className="flex items-center gap-1">
+                                <Icon icon="mdi:tick-circle-outline" />
+                                Let’s play again
+                              </Typography>
+                              <div className="gap-1 flex">
+                                <Icon
+                                  icon="solar:star-bold"
+                                  className="cursor-pointer"
+                                  width="26"
+                                />
+                                <Icon
+                                  className="cursor-pointer"
+                                  icon="solar:pin-bold"
+                                  width="26"
+                                />
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <div className="flex items-center justify-between">
-                          <Typography className="flex items-center gap-1">
-                            <Icon icon="mdi:tick-circle-outline" />
-                            Let’s play again
-                          </Typography>
-                          <div className="gap-1 flex">
-                            <Icon
-                              icon="solar:star-bold"
-                              className="cursor-pointer"
-                              width="26"
-                            />
-                            <Icon
-                              className="cursor-pointer"
-                              icon="solar:pin-bold"
-                              width="26"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
+                      </Card>
+                    );
+                  }
+                })}
             </div>
           </div>
         ) : (
@@ -235,7 +253,8 @@ const Chathistory = () => {
               <div>
                 <div className="bg-white rounded-3xl w-32 h-1" />
               </div>
-              {allChatList?.length > 0 &&
+
+              {allChatList?.length > 0 ? (
                 allChatList?.map((userchat) => (
                   <Card
                     key={userchat._id}
@@ -276,7 +295,12 @@ const Chathistory = () => {
                       </div>
                     </div>
                   </Card>
-                ))}
+                ))
+              ) : (
+                <p className="mt-6 text-white font-semibold text-3xl w-full flex justify-center ">
+                  No chat history...
+                </p>
+              )}
             </div>
           </div>
         )}

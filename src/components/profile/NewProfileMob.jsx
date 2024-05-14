@@ -20,7 +20,6 @@ import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import PageLoader from "../MainLayout/PageLoader";
 
 const NewProfileMob = () => {
-  const [openBottom, setOpenBottom] = useState(true);
   const [aadharFront, setAadharFront] = useState(null);
   const [aadharBack, setAadharBack] = useState(null);
   const [aadharNumber, setAadharNumber] = useState("");
@@ -29,9 +28,16 @@ const NewProfileMob = () => {
   const dispatch = useDispatch();
   const [scrollPosition, setScrollPosition] = useState(0);
   const users = useSelector((state) => state.user.user);
+  // const [openBottom, setOpenBottom] = useState(
+  //   users?.userKyc?.verificationStatus===true || users?.userKyc?.aadharNo ? false : true
+  // );
+  console.log(users)
+  const [openBottom, setOpenBottom] = useState(
+    users?.userKyc?.verificationStatus === false && (users?.userKyc?.aadharNo === undefined || users?.userKyc?.aadharNo === '')
+  );
+  
   const loading = useSelector((state) => state.user.loading);
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
-
   const openDrawerBottom = () => {
     if (users?.userKyc?.verificationStatus === true) {
       return;
@@ -107,7 +113,7 @@ const NewProfileMob = () => {
   const handleLogout = () => {
     dispatch(logoutAsync({ token: accessToken, refreshtoken: refreshToken }));
   };
- 
+
   if (!users)
     return (
       <div className="max-w-[480px]">
