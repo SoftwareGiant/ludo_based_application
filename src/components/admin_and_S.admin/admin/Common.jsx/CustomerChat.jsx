@@ -55,7 +55,7 @@ const CustomerChat = ({ chatdetails, fetchuser }) => {
     setShowEmojiPicker(false);
     const times = new Date().toLocaleTimeString();
     console.log(times.slice(0, 4), typeof times);
-    if (inputText.trim() === "" ) return;
+    if (inputText.trim() === "") return;
     const objmsg = {
       supportId: chatdetails._id,
       message: inputText.trim(),
@@ -108,12 +108,11 @@ const CustomerChat = ({ chatdetails, fetchuser }) => {
           />
           <div className="flex flex-col text-black items-start justify-center">
             <span className="text-[20px] leading-tight">
-              {chatdetails?.createdBy}
+              {chatdetails?.createdBy?.slice(-6)}
             </span>
           </div>
         </div>
         <div className="flex gap-2">
-          {/* <img src={startchat} className="w-[30px] h-[30px]  " /> */}
           <div>
             <Popover placement="left-start">
               <PopoverHandler>
@@ -122,12 +121,6 @@ const CustomerChat = ({ chatdetails, fetchuser }) => {
                 </div>
               </PopoverHandler>
               <PopoverContent className="bg-white  z-50">
-                {/* <ListItem className="hover:bg-black hover:text-white">
-                  <ListItemPrefix>
-                    <img src={startchat} />
-                  </ListItemPrefix>{" "}
-                  Add Fav
-                </ListItem> */}
                 <ListItem
                   onClick={() => navigate("/feedback")}
                   className="hover:bg-black hover:text-white"

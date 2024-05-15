@@ -23,6 +23,7 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { fetchUserDetail } from "../live_battle/userSlice";
+import { getTime } from "../admin_and_S.admin/Functions/getTime";
 const MatchUserChat = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -292,14 +293,23 @@ const MatchUserChat = () => {
                         }}
                       >
                         <span>{message?.message}</span>
-                        {message.image && (
+                        {/* {message.image && (
                           <img
                             src={message.image}
                             alt="Shared"
                             className="mt-1"
                             style={{ maxWidth: "100%" }}
                           />
-                        )}
+                        )} */}
+                        <span
+                          className={`text-xs block text-gray-500 mt-1 ${
+                            message?.sender === users?._id
+                              ? "text-end"
+                              : "text-start"
+                          }`}
+                        >
+                    {   message?.timestamp &&  getTime(message?.timestamp)}
+                        </span>
                       </div>
                     </div>
                   )

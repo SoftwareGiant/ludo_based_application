@@ -11,6 +11,7 @@ import { fetchUserDetail } from "../live_battle/userSlice.js";
 import { Icon } from "@iconify-icon/react";
 import axios from "axios";
 import LudoMainLogo from "../MainLayout/LudoMainLogo.jsx";
+import { Button } from "@material-tailwind/react";
 const AddCashMob = () => {
   const [isScanner, setIsScanner] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -34,35 +35,29 @@ const AddCashMob = () => {
     console.log(file);
     if (file && inputValue) {
       try {
-        console.log(file,inputValue);
+        console.log(file, inputValue);
         const formData = {
-          "amount": inputValue,
-          "paymentPlatform": "Paytm",
-          "image": file
-        }
+          amount: inputValue,
+          paymentPlatform: "Paytm",
+          image: file,
+        };
         // console.log(formData);
-      const response = await axios.post(
-        "api/payment/deposit",
-        formData, 
-        {
+        const response = await axios.post("api/payment/deposit", formData, {
           headers: {
             Authorization: `bearer ${accessToken}`,
           },
+        });
+        alert(response.data.message);
+        if (response.status === 200) {
+          setIsButtonLoad(false);
+          setIsScanner(false);
+          setInputValue("");
         }
-      );
-      alert(response.data.message)
-      if(response.status===200){
-        setIsButtonLoad(false);
-        setIsScanner(false);
-        setInputValue("");
-      }
-      console.log(response);
-      }
-      catch (error) {
+        console.log(response);
+      } catch (error) {
         console.error(error);
       }
-    }
-    else{
+    } else {
       alert("failed to upload file");
     }
   };
@@ -76,9 +71,9 @@ const AddCashMob = () => {
       alert("please select amount");
       return;
     }
-    
+
     // Replace this with your desired action on button click
-    
+
     if (inputValue < 10 || inputValue > 10000) {
       alert("please select amount between 10 and 10,000");
       return;
@@ -101,7 +96,7 @@ const AddCashMob = () => {
       <div className="bg-[#fead3a] flex flex-row justify-between max-w-[480px] w-full h-12 items-start pt-2 px-5 ">
         <div className="flex flex-row gap-3 w-2/5 items-start">
           <SidebarMob />
-          <LudoMainLogo/>
+          <LudoMainLogo />
         </div>
         <img
           onClick={() => navigate("/")}
@@ -124,7 +119,12 @@ const AddCashMob = () => {
             Deposit Cash
           </div>
         </div>
-        <Icon className="cursor-pointer" onClick={() => navigate("/help")} icon="material-symbols:info-outline" width={24}/>
+        <Icon
+          className="cursor-pointer"
+          onClick={() => navigate("/help")}
+          icon="material-symbols:info-outline"
+          width={24}
+        />
       </div>
       <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative flex flex-col justify-between h-full">
         <div className="bg-[#fead3a] h-[86%] w-[200%] rounded-[50%]   -top-20 absolute -left-[50%]" />
@@ -145,12 +145,18 @@ const AddCashMob = () => {
                 className="outline-none hover:outline-none w-full px-2"
               />
             </div>
-            <div
-              className="bg-[0F002B] opacity-[30%] font-[Nunito-Sans]"
-              onClick={handleClick}
-            >
-              {isbtnLoad ? <ButtonLoader /> : "Add"}
-            </div>
+            {isbtnLoad ? (
+              <div className="bg-[0F002B] text-black opacity-[30%] font-[Nunito-Sans]">
+                <ButtonLoader />
+              </div>
+            ) : (
+              <button
+                className="bg-[0F002B] text-black opacity-[30%] font-[Nunito-Sans]"
+                onClick={handleClick}
+              >
+                Add
+              </button>
+            )}
           </div>
           <div className="text-white text-right">Min. ₹ 10 Max. ₹ 10,000</div>
 
@@ -178,31 +184,31 @@ const AddCashMob = () => {
             <div className="text-white flex font-[Inter] gap-4 flex-wrap ">
               <div
                 onClick={() => setInputValue(100)}
-                className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md"
+                className="cursor-pointer  p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md"
               >
                 ₹ 100
               </div>
               <div
-                onClick={() => setInputValue(200)}
-                className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md"
+                onClick={() => setInputValue(250)}
+                className="cursor-pointer p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md"
               >
                 ₹ 250
               </div>
               <div
                 onClick={() => setInputValue(500)}
-                className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md"
+                className="cursor-pointer p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md"
               >
                 ₹ 500
               </div>
               <div
                 onClick={() => setInputValue(1000)}
-                className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md"
+                className="cursor-pointer p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md"
               >
                 ₹ 1000
               </div>
               <div
                 onClick={() => setInputValue(2000)}
-                className="p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md"
+                className="cursor-pointer p-4 rounded-lg bg-[#FFFFFF] bg-opacity-20 shadow-md"
               >
                 ₹ 2000
               </div>

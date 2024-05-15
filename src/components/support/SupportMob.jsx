@@ -270,7 +270,6 @@ const SupportMob = () => {
               <Icon
                 id="Send"
                 className={`${inputText ? "text-blue-gray-900" : ""}`}
-                onClick={handleSendMessage}
                 icon="carbon:send-filled"
                 width="28"
               />

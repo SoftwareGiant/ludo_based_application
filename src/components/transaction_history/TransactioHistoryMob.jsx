@@ -50,21 +50,21 @@ const TransactioHistoryMob = () => {
             paymentHistory?.map((payment) => (
               <div
                 key={payment._id}
-                className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-4"
+                className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col  w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative my-4"
               >
-                <div className="text-white bg-[#0f002b] flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
+                <div className="text-white bg-[#0f002b] py-3 flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
                   <div className="flex justify-between w-full items-center p-3">
                     <span className=" shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)]">
                       {convertTimestamp(payment.timestamp)}
                     </span>
                   </div>
-                  <div className="text-xs shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex  px-4 items-center  w-full  py-5 pb-8 ">
+                  {/* <div className="text-xs shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex  px-4 items-center  w-full  py-5 pb-8 ">
                     <span className="font-semibold">
                       {" "}
                       You won this match, you vs{" "}
                     </span>
                     <span className="font-extrabold ml-1"> kansh23i</span>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="border-solid border-t-4  mt-1 w-full border-[#008000] "></div>
                 <div className="flex  w-full p-4 justify-between">

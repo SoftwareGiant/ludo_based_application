@@ -53,7 +53,7 @@ const GameHistoryMob = () => {
               <div className="text-white bg-[#0f002b] flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
                 <div className="flex justify-between w-full items-center p-3">
                   <span className=" shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)]">
-                    {convertTimestamp(game.matchingTimeStamp)}
+                    {convertTimestamp(game?.matchingTimeStamp)}
                   </span>
                 </div>
                 <div className="text-xs shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex  px-4 items-center  w-full  py-5 pb-8 ">
@@ -66,14 +66,14 @@ const GameHistoryMob = () => {
                         : "won"}
                     </span>
                     this match,
-                    {users?._id === game?.player1._id ? (
+                    {users?._id === game?.player1?._id ? (
                       <span className="flex gap-1">
                         <span>you vs</span>
                         <span>
                           {/* {game?.player2._id}{" "} */}
-                          {game?.player2._id.slice(
-                            game?.player2._id.length - 6,
-                            game?.player2._id.length
+                          {game?.player2?._id?.slice(
+                            game?.player2?._id?.length - 6,
+                            game?.player2?._id?.length
                           )}
                         </span>
                       </span>
@@ -83,9 +83,9 @@ const GameHistoryMob = () => {
                         <span>
                           {" "}
                           {/* {game?.player1._id} */}
-                          {game?.player1._id.slice(
-                            game?.player1._id.length - 6,
-                            game?.player1._id.length
+                          {game?.player1?._id?.slice(
+                            game?.player1?._id?.length - 6,
+                            game?.player1?._id?.length
                           )}
                         </span>
                       </span>
@@ -102,7 +102,7 @@ const GameHistoryMob = () => {
               ></div>
               <div className="flex  w-full p-4">
                 <div className="flex text-xl font-['Inter'] font-bold text-[#0f002b] flex-1">
-                  ₹ {game?.battleDetails.amount}
+                  ₹ {game?.battleDetails?.amount}
                 </div>
                 {game?.gameResultDetail?.player1?.outcome === "lose" ? (
                   <div className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex gap-2 items-center p-2 rounded-lg flex-1 max-w-[76px]">

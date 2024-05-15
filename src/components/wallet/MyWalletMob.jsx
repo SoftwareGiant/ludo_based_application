@@ -9,6 +9,7 @@ import { fetchUserDetail } from "../live_battle/userSlice";
 import { Icon } from "@iconify-icon/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import PageLoader from "../MainLayout/PageLoader";
+import { IconButton } from "@material-tailwind/react";
 const MyWalletMob = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.user);
@@ -48,7 +49,17 @@ const MyWalletMob = () => {
               <span className=" shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)]">
                 Deposit Cash
               </span>
-              <img src={Time} alt="lgihistory" id="lgihistory" />
+              <IconButton
+                onClick={() => navigate("/transactionhistory")}
+                className="p-0 m-0 bg-transparent"
+              >
+                <img
+                  className="cursor-pointer"
+                  src={Time}
+                  alt="lgihistory"
+                  id="lgihistory"
+                />
+              </IconButton>
             </div>
             <div className="text-xs font-semibold   shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex  justify-center items-center  w-full px-6 py-5 pb-8 ">
               Can be used to play Tournaments & Battles. Cannot be withdrawn to
@@ -74,7 +85,12 @@ const MyWalletMob = () => {
               <span className=" shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)]">
                 Winning Cash
               </span>
-              <img src={Time} alt="lgihistory" id="lgihistory" />
+              <IconButton
+                onClick={() => navigate("/transactionhistory")}
+                className="p-0 m-0 bg-transparent"
+              >
+                <img src={Time} alt="lgihistory" id="lgihistory" />
+              </IconButton>
             </div>
             <div className="text-xs font-semibold   shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex  justify-center items-center  w-full px-6 py-5 pb-8  ">
               Can be used to play Tournaments & Battles. Withdrawn to Paytm or
