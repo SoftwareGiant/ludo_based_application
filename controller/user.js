@@ -224,7 +224,7 @@ const addKyc = async (req, res, next) => {
 const verifyKyc = async (req, res, next) => {
   try {
     const { userId } = req.body;
-    const verify = await User.findByIdAndUpdate(userId, { $set: { "userKyc.verificationStatus": true } }, { new: true });
+    const verify = await User.findByIdAndUpdate(userId, { $set: { "userKyc.verificationStatus": "approved" } }, { new: true });
     if (verify) {
       const notification = new Notification({
         user: req.userId,

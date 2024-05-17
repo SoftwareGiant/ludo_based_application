@@ -598,3 +598,33 @@
   level: 'error',
   timestamp: 'May-17-2024 12:51:56'
 }
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-17-2024 15:25:23'
+}
+{
+  message: '401 - Unauthorized - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-17-2024 15:25:23'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-17-2024 15:25:23'
+}
+{
+  message: '401 - Unauthorized - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-17-2024 15:25:23'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-17-2024 15:33:36'
+}
+{
+  message: '401 - Unauthorized - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-17-2024 15:33:36'
+}

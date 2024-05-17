@@ -21,8 +21,8 @@ const UserSchema = new mongoose.Schema(
       aadharFront: String,
       aadharBack: String,
       verificationStatus: {
-        type: Boolean,
-        default: false,
+        type: String,
+        enum: ["pending","inprogress","approved"],
       },
     },
     referralDetails: {

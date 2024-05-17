@@ -84,7 +84,7 @@ const finduserdetails = async (req, res, next) => {
 
 const newKycVerification = async (_, res) => {
   try {
-    const users = await User.find({ "userKyc.verificationStatus": false }).sort(
+    const users = await User.find({ "userKyc.verificationStatus": "pending" }).sort(
       {
         createdAt: -1,
       },
