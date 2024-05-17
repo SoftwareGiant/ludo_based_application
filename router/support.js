@@ -105,4 +105,17 @@ router.get("/listofall", [verifyToken,admin], async (req, res, next) => {
   return res.status(200).json({ listofall });
 });
 
+// for admin uses
+
+router.post("/admin/supportmessage", [verifyToken,admin], async (req, res, next) => {
+  try{
+  const userId = req.body;
+  const ticket = await Support.findOne({createdBy:userId});
+  return res.status(200).json({ ticket });
+  }
+  catch(err){
+    return next(err);
+  }
+});
+
 module.exports = router;

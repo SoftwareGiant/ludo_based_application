@@ -152,7 +152,7 @@ catch(err){
 
 const removeSliderContent = async(req,res,next)=>{
   try{
-    const fileName = req.file.filename;
+    const {fileName} = req.nody;
     const slider = await Slider.findOne({});
     const indexToRemove= slider.bannerContent(fileName);
     slider.bannerContent.splice(indexToRemove, 1);

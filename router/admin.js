@@ -56,8 +56,7 @@ router.post(
 
 router.post(
   "/removeslider",
-  [verifyToken, admin],
-  upload.single("image"),
+  [verifyToken, admin], 
   wrapAsync(removeSliderContent)
 );
 

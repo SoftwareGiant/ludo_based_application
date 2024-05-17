@@ -168,13 +168,13 @@ const listOfFavourite = async (req, res, next) => {
   try {
     const userId = req.userId;
     const allChatList = await Message.find({
-      // "favourite.userId": userId,
-      "favourite": { $elemMatch: { userId: { $ne: userId } } },
       $or: [
         { "messageDetails.senderId": userId },
         { "messageDetails.receiverId": userId },
       ],
     });
+    const filteredChatList= allChatList.filter((e)=>e.favourite.userId.filter((id) => id!=userId));
+    console.log(filteredChatList,"filteredChatListfilteredChatList")
     if (allChatList.length > 0) {
       return res.status(200).json(allChatList);
     } else {

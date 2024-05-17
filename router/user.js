@@ -29,7 +29,7 @@ router.post("/verify", wrapAsync(verificationOfOtp));
 router.post("/login", wrapAsync(loginUser));
 
 // for admin access only
-router.get("/", [verifyToken], wrapAsync(allUser));
+router.get("/", [verifyToken,admin], wrapAsync(allUser));
 
 //currentuserr
 router.get("/currentUser", [verifyToken], wrapAsync(currentUser));
