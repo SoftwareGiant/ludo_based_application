@@ -11,6 +11,7 @@ import { convertTimestamp } from "../admin_and_S.admin/Functions/convertTimestam
 import { toast } from "react-toastify";
 import axios from "axios";
 import PageLoader from "../MainLayout/PageLoader";
+import { ProfileButton } from "../MainLayout/ProfileButton";
 const Notification = () => {
   const navigate = useNavigate();
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
@@ -52,10 +53,9 @@ const Notification = () => {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-    
+
       dispatch(fetchNotifications());
     } catch (err) {
-     
       toast.error(err);
     }
   };
@@ -75,12 +75,7 @@ const Notification = () => {
             <SidebarMob />
             <LudoMainLogo />
           </div>
-          <img
-            onClick={() => navigate("/profile")}
-            src={FrameProfile}
-            alt="Frame1"
-            className="mt-1 cursor-pointer w-8 h-8 border rounded-[100px]"
-          />
+          <ProfileButton/>
         </div>
         {/* <div className="w-full max-w-[480px] flex justify-end">
           <div className=" flex justify-end p-2 gap-1 px-4  rounded-lg">
@@ -104,7 +99,7 @@ const Notification = () => {
           )}
           {notifications.length !== 0 && (
             <div className="mb-10">
-              <div className="cursor-pointer   flex justify-end w-4/5 m-auto font-['Nunito-Sans'] relative mt-2">
+              <div className="cursor-pointer   flex justify-end w-[90%] m-auto font-['Nunito-Sans'] relative mt-2">
                 <Button
                   onClick={clearAllNotifications}
                   className="p-1 "
@@ -118,7 +113,7 @@ const Notification = () => {
                   <div
                     key={item._id}
                     onClick={() => handlenotificationRead(item)}
-                    className="cursor-pointer   flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-4"
+                    className="cursor-pointer   flex flex-col w-[90%] m-auto rounded-lg  font-['Nunito-Sans'] relative mt-4"
                   >
                     <div
                       className={`${
@@ -224,11 +219,7 @@ const Notification = () => {
             </div>
           </div> */}
 
-          {/* {notifications.length !== 0 && (
-            <Button className="bg-black text-white  py-2 w-3/5  max-w-[480px] relative rounded-lg flex justify-center m-auto mt-20 mb-16">
-              Clear All
-            </Button>
-          )} */}
+         
         </div>
       </div>
     </>

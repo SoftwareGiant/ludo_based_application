@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllBattles } from "./battleSlice";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import { ProfileButton } from "../MainLayout/ProfileButton";
 const OpenChallengeReq = () => {
 
   const navigate = useNavigate();
@@ -58,12 +59,7 @@ const OpenChallengeReq = () => {
           <SidebarMob />
           <LudoMainLogo/>
         </div>
-        <img
-         onClick={() => navigate("/profile")}
-          src={FrameProfile}
-          alt="Frame1"
-          className="w-[30px] h-[30px] mt-[9.5px] rounded-[100px] border border-solid border-white "
-        />
+        <ProfileButton/>
       </div>
 
       <div id="NewRootRoot" className="flex flex-row w-full items-start">

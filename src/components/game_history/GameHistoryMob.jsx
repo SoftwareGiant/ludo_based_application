@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "../../app.css";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,11 +8,12 @@ import { Icon } from "@iconify-icon/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { convertTimestamp } from "../admin_and_S.admin/Functions/convertTimestamp";
 import PageLoader from "../MainLayout/PageLoader";
+import { ProfileButton } from "../MainLayout/ProfileButton";
 const GameHistoryMob = () => {
   const users = useSelector((state) => state.user.user);
   const gameHistorys = useSelector((state) => state.gamehistory?.gameHistory);
   const loading = useSelector((state) => state.gamehistory?.loading);
-  console.log(users);
+  // console.log(users);
   console.log(gameHistorys);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -33,22 +33,15 @@ const GameHistoryMob = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-        <img
-          src={FrameProfile}
-          alt="Frame1"
-          className="mt-1 w-8 h-8 border rounded-[100px]"
-        />
+        <ProfileButton/>
       </div>
 
       <div className="bg-[#fead3a] w-full min-h-screen overflow-hidden relative">
-        <div className="bg-[#fead3a] h-[98%] w-[200%] rounded-[50%]    -top-20 absolute -left-[50%]" />
-
-        {gameHistorys &&
-          gameHistorys?.length !== 0 &&
+        {gameHistorys && gameHistorys?.length !== 0 ? (
           gameHistorys?.map((game) => (
             <div
               key={game._id}
-              className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-2 mb-2"
+              className=" bg-white flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-2 mb-2 shadow-md hover:shadow-xl"
             >
               <div className="text-white bg-[#0f002b] flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
                 <div className="flex justify-between w-full items-center p-3">
@@ -56,7 +49,7 @@ const GameHistoryMob = () => {
                     {convertTimestamp(game?.matchingTimeStamp)}
                   </span>
                 </div>
-                <div className="text-xs shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex  px-4 items-center  w-full  py-5 pb-8 ">
+                <div className="text-xs shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex  px-4 items-center  w-full  py-2 pb-5 ">
                   <span className="font-semibold flex gap-1">
                     {" "}
                     You
@@ -100,7 +93,7 @@ const GameHistoryMob = () => {
                     : "border-[#008000]"
                 } `}
               ></div>
-              <div className="flex  w-full p-4">
+              <div className="flex w-full px-4 py-3">
                 <div className="flex text-xl font-['Inter'] font-bold text-[#0f002b] flex-1">
                   ₹ {game?.battleDetails?.amount}
                 </div>
@@ -119,8 +112,10 @@ const GameHistoryMob = () => {
                 )}
               </div>
             </div>
-          ))}
-
+          ))
+        ) : (
+          <p className="text-white font-semibold text-3xl pt-4 flex justify-center items-center h-full">No Game History...</p>
+        )}
       </div>
     </div>
   );

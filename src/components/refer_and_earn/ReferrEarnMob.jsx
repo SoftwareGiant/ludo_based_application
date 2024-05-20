@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import { ProfileButton } from "../MainLayout/ProfileButton";
 const ReferrEarnMob = () => {
   const [referno, setReferno] = useState(753478);
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const ReferrEarnMob = () => {
       await navigator.clipboard.writeText(text);
       toast.success("Text copied to clipboard: ");
     } catch (error) {
-      alert("Error copying to clipboard");
+      toast.error("Error copying to clipboard");
     }
   };
 
@@ -36,12 +37,7 @@ const ReferrEarnMob = () => {
             <SidebarMob />
             <LudoMainLogo />
           </div>
-          <img
-            onClick={() => navigate("/profile")}
-            src={FrameProfile}
-            alt="Frame1"
-            className="w-[30px] h-[30px] mt-[9.5px] rounded-[100px] border border-solid border-white "
-          />
+          <ProfileButton/>
         </div>
 
         <div className=" w-full h-[70vh] overflow-hidden relative">

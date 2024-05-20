@@ -19,7 +19,7 @@ export const updateGameCode = createAsyncThunk(
                     Authorization: `Bearer ${accessToken}`,
                 },
             });
-            console.log(response,"responsee")
+            console.log(response, "responsee")
             if (response.status === 200) {
                 return response.data.gameDetail;
             }
@@ -27,8 +27,8 @@ export const updateGameCode = createAsyncThunk(
                 return null;
             }
         } catch (error) {
-            toast.error(error);
-            throw new Error('Failed to update game code');
+            toast.error(error.response.data.message);
+            throw new Error("Failed to update game code");
         }
     }
 );

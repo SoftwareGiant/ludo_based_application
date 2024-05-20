@@ -3,6 +3,7 @@ import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { SidebarMob } from "./SidebarMob";
 import { useNavigate } from "react-router-dom";
 import LudoMainLogo from "./LudoMainLogo";
+import { ProfileButton } from "./ProfileButton";
 const TopbarMobile = ({ isStart, handlestart }) => {
   const navigate = useNavigate();
   return (
@@ -24,12 +25,7 @@ const TopbarMobile = ({ isStart, handlestart }) => {
             Start
           </div>
         ) : (
-          <img
-            onClick={() => navigate("/profile")}
-            src={FrameProfile}
-            alt="Frame1"
-            className="w-[30px] h-[30px] mt-[9.5px] rounded-[100px] border border-solid border-white "
-          />
+          <ProfileButton/>
         )}
       </div>
     </div>

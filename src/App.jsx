@@ -62,13 +62,12 @@ import Chathistory from "./components/Chathistory/Chathistory.jsx";
 import MatchUserChat from "./components/Chathistory/MatchUserChat.jsx";
 import MyChat from "./components/Chathistory/MyChat.jsx";
 import AdminSLides from "./components/admin_and_S.admin/admin/Pages/AdminSLides.jsx";
-// import SocketProvider from "./socket";
+import ErrorBoundary from "./Errorboundary.jsx";
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        {/* <SocketProvider> */}
+    <BrowserRouter>
+      <ErrorBoundary>
         <Routes>
           <Route path="/mychat" element={<MyChat />} />
           <Route path="/adminlogin" element={<SAdminLogin />} />
@@ -152,16 +151,8 @@ function App() {
             <Route path="withdrawal" element={<SuperWithdrawal />} />
           </Route>
         </Routes>
-        {/* </SocketProvider> */}
-      </BrowserRouter>
-
-      {/* <Route
-            path="/"
-            element={
-              useMediaQuery({ minWidth: 768 }) ? <NewGame /> : <NewGameMob />
-            }
-          /> */}
-    </>
+      </ErrorBoundary>
+    </BrowserRouter>
   );
 }
 

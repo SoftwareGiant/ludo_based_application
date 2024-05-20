@@ -56,7 +56,6 @@ const MatchUserChat = () => {
       socketData.on("newMessage", (newMessage) => {
         setMessageList((prevMessageList) => [...prevMessageList, newMessage]);
       });
-
       return () => socketData.off();
     }
   }, [socketData]);
@@ -308,7 +307,7 @@ const MatchUserChat = () => {
                               : "text-start"
                           }`}
                         >
-                    {   message?.timestamp &&  getTime(message?.timestamp)}
+                          {message?.timestamp && getTime(message?.timestamp)}
                         </span>
                       </div>
                     </div>
