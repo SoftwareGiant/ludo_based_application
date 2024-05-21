@@ -306,7 +306,7 @@ export function KycVerification() {
                         <KycStatusCard
                           handleRefresh={handleRefresh}
                           updatedAt={updatedAt}
-                          status={userKyc.verificationStatus}
+                          status={userKyc?.verificationStatus}
                           uid={_id}
                         />
                       </td>

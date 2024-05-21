@@ -24,7 +24,7 @@ import { useJwt } from "react-jwt";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { fetchOpenChallenges } from "./openChallengeSlice";
 const NewGameMob = () => {
-  const { accessToken, refreshToken } = useSelector((state) => state.auth);
+  const { accessToken} = useSelector((state) => state.auth);
   const { decodedToken } = useJwt(accessToken);
   const { socketData } = useSelector((state) => state.socketfor);
   const { match } = useSelector((state) => state.match);
@@ -76,6 +76,7 @@ const NewGameMob = () => {
     dispatch(fetchUserDetail());
     dispatch(fetchOpenChallenges());
   }, [socketData]);
+  
 
   useEffect(() => {
     if (socketData) {
@@ -83,7 +84,7 @@ const NewGameMob = () => {
         return toast.success(e.message);
       });
       socketData?.on("databaseChange", (data) => {
-        console.log(data,"data in databasechanges");
+        dispatch(fetchAllBattles(socketData));
       });
       socketData?.on("updatecode", ({ gameCode, player2 }) => {
         toast.success(`code to start game ${gameCode}`);
