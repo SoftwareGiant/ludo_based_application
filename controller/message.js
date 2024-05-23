@@ -174,7 +174,6 @@ const listOfFavourite = async (req, res, next) => {
       ],
     });
     const filteredChatList= allChatList.filter((e)=>e.favourite.userId.filter((id) => id!=userId));
-    console.log(filteredChatList,"filteredChatListfilteredChatList")
     if (allChatList.length > 0) {
       return res.status(200).json(allChatList);
     } else {

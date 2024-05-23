@@ -7,7 +7,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       enum: [null, "admin", "superAdmin"],
     },
-    userName:String,
+    userName:{
+      type:String,
+      unique: true
+    },
     refreshTokenDetail: {
       token: String,
       expiresAt: Number,

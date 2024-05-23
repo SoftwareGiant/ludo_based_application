@@ -383,3 +383,498 @@
   level: 'error',
   timestamp: 'May-22-2024 22:08:47'
 }
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:31'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:31'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:32'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: '401 - Unauthorized - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:07:33'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:43:19'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:43:19'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:43:19'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:43:19'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:43:19'
+}
+{
+  message: '401 - Unauthorized - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:43:19'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-23-2024 19:43:19'
+}
+{
+  message: '401 - Unauthorized - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:43:19'
+}
+{
+  message: '404 - You are not active in any game! - /api/game/updateresult - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:51:49'
+}
+{
+  message: '404 - You are not active in any game! - /api/game/updateresult - POST',
+  level: 'error',
+  timestamp: 'May-23-2024 19:55:30'
+}
+{
+  message: "undefined - ENOENT: no such file or directory, open 'E:\\finish__it\\backend\\public\\images\\i7UjKoyn_instagram-post-6.jpg' - /api/game/updateresult - POST",
+  level: 'error',
+  timestamp: 'May-23-2024 20:09:22'
+}
+{
+  message: "undefined - ENOENT: no such file or directory, open 'E:\\finish__it\\backend\\public\\images\\i68B5uh6_portfolio_4.jpg' - /api/user/addPicture - POST",
+  level: 'error',
+  timestamp: 'May-23-2024 20:19:39'
+}
+{
+  message: "undefined - ENOENT: no such file or directory, open 'E:\\finish__it\\backend\\public\\images\\iEcfqeHW_instagram-post-6.jpg' - /api/user/addPicture - POST",
+  level: 'error',
+  timestamp: 'May-23-2024 20:20:31'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-24-2024 02:58:19'
+}
+{
+  message: '401 - Unauthorized - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-24-2024 02:58:19'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'May-24-2024 02:58:19'
+}
+{
+  message: '401 - Unauthorized - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'May-24-2024 02:58:19'
+}
