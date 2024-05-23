@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SidebarMob } from "../MainLayout/SidebarMob";
-import FrameProfile from "../../assets/profile/Frame_profile.png";
+
 import { useState } from "react";
 import "../../app.css";
 import { Icon } from "@iconify-icon/react";
@@ -10,6 +10,8 @@ import { fetchUserDetail } from "../live_battle/userSlice";
 import axios from "axios";
 import ButtonLoader from "../MainLayout/ButtonLoader.jsx";
 import LudoMainLogo from "../MainLayout/LudoMainLogo.jsx";
+import { toast } from "react-toastify";
+import { ProfileButton } from "../MainLayout/ProfileButton.jsx";
 const WithdrawMob = () => {
   const [inputValue, setInputValue] = useState("");
   const [isbtnLoad, setIsButtonLoad] = useState(false);
@@ -21,30 +23,32 @@ const WithdrawMob = () => {
     dispatch(fetchUserDetail());
   }, []);
   const handleChange = (event) => {
-    setInputValue(event.target.value);
+    const value = event.target.value;
+    if (!isNaN(value) && value <= 10000) {
+      setInputValue(value);
+    }
   };
 
   const handleClick = async () => {
-    setIsButtonLoad(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
     // Replace this with your desired action on button click
     if (inputValue === "") {
-      alert("please select amount");
+      toast.warning("please select amount");
       setIsButtonLoad(false);
       return;
     }
     if (inputValue > users?.walletDetails?.withDrawlAmount) {
-      alert(
-        "withdrawl request amount should be less or equal to wihdrawl amount"
+      toast.warning(
+        "withdrawal request amount should be less or equal to wihdrawal amount"
       );
-      setIsButtonLoad(false);
+
       return;
     }
     if (inputValue < 10 || inputValue > 2000) {
-      alert("please select amount between 10 and 2000");
-      setIsButtonLoad(false);
+      toast.warning("please select amount between 10 and 2000");
       return;
     }
+    setIsButtonLoad(true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     try {
       const response = await axios.post(
         "api/payment/withdrawl",
@@ -57,13 +61,14 @@ const WithdrawMob = () => {
           },
         }
       );
-      alert(response.data.message);
+     
       if (response.status === 200) {
+        toast.success(response.data.message);
         setInputValue("");
       }
     } catch (error) {
       console.error(error);
-      alert("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.");
     }
     setIsButtonLoad(false);
   };
@@ -79,15 +84,10 @@ const WithdrawMob = () => {
       <div className="bg-[#fead3a] flex flex-row justify-between max-w-[480px] w-full h-12 items-start pt-2 px-5 ">
         <div className="flex flex-row gap-3 w-2/5 items-start">
           <SidebarMob />
-          <LudoMainLogo/>
+          <LudoMainLogo />
         </div>
-
-        <img
-          onClick={() => navigate("/profile")}
-          src={FrameProfile}
-          alt="Frame1"
-          className="mt-1 w-8 h-8 border rounded-[100px]"
-        />
+<ProfileButton/>
+       
       </div>
       <div className="flex justify-between items-center px-4 py-2 w-full">
         <div className="flex gap-5 items-center">
@@ -116,6 +116,10 @@ const WithdrawMob = () => {
         <div className="relative m-8 flex flex-col gap-4">
           <div className="flex justify-between ">
             <span>Available Balance</span>
+            <span>₹ {users?.walletDetails?.totalAmount}</span>
+          </div>
+          <div className="flex justify-between ">
+            <span>withdrawal Balance</span>
             <span>₹ {users?.walletDetails?.withDrawlAmount}</span>
           </div>
           <div className="flex justify-between items-center rounded-md bg-white p-3">
@@ -129,15 +133,20 @@ const WithdrawMob = () => {
                 className="outline-none hover:outline-none w-full px-2"
               />
             </div>
-            <div onClick={handleClick}>
-              {isbtnLoad ? <ButtonLoader /> : "Withdraw"}
-            </div>
-          </div>
-          <div
-            onClick={() => setInputValue(501)}
-            className="text-right text-[0F002B] font-[Nunito-Sans] opacity-[83%] font-bold cursor-pointer"
-          >
-            Withdraw ₹ 501
+            {isbtnLoad ? (
+              <div className="bg-[0F002B] text-black opacity-[30%] font-[Nunito-Sans]">
+                <ButtonLoader />
+              </div>
+            ) : (
+              <button
+                className={`text-xl bg-[0F002B] text-black ${
+                  inputValue ? "" : "opacity-[70%]"
+                } font-[Nunito-Sans]`}
+                onClick={handleClick}
+              >
+                Withdraw
+              </button>
+            )}
           </div>
         </div>
         <div className="font-[Nunito-Sans] text-white relative text-center pb-32">

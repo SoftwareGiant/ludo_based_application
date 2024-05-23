@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import "../../App.css";
 import { Icon } from "@iconify-icon/react";
-import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import NewGameSLider from "./NewGameSLider";
 import { useNavigate } from "react-router-dom";
@@ -23,8 +22,9 @@ import { fetchSocket } from "../../socket";
 import { useJwt } from "react-jwt";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { fetchOpenChallenges } from "./openChallengeSlice";
+import { ProfileButton } from "../MainLayout/ProfileButton";
 const NewGameMob = () => {
-  const { accessToken} = useSelector((state) => state.auth);
+  const { accessToken } = useSelector((state) => state.auth);
   const { decodedToken } = useJwt(accessToken);
   const { socketData } = useSelector((state) => state.socketfor);
   const { match } = useSelector((state) => state.match);
@@ -76,7 +76,6 @@ const NewGameMob = () => {
     dispatch(fetchUserDetail());
     dispatch(fetchOpenChallenges());
   }, [socketData]);
-  
 
   useEffect(() => {
     if (socketData) {
@@ -96,7 +95,9 @@ const NewGameMob = () => {
   useEffect(() => {
     if (match) {
       const player1 = match?.newGameDetail?.player1;
-      return navigate(`/chat/${player1}/player1/`);
+      if (player1) {
+        return navigate(`/chat/${player1}/player1/`);
+      }
     }
   }, [match]);
 
@@ -241,17 +242,12 @@ const NewGameMob = () => {
         className="bg-[#fead3a]  h-8 overflow-hidden"
       />
       <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
-        <div className="flex flex-row gap-3 items-start mt-3">
+        <div className="flex flex-row gap-3 items-start">
           <SidebarMob />
-
           <LudoMainLogo />
         </div>
-        <img
-          onClick={() => navigate("/profile")}
-          src={FrameProfile}
-          alt="Frame1"
-          className="w-[30px] h-[30px] mt-[9.5px] rounded-[100px] border border-solid border-white "
-        />
+
+        <ProfileButton />
       </div>
 
       <div className="bg-[#0f002b] w-full  overflow-hidden relative">
@@ -442,7 +438,7 @@ const NewGameMob = () => {
         <Drawer
           placement="bottom"
           open={openMatchBottom}
-          // onClose={closeDrawerBottom}
+          onClose={closematchDrawerBottom}
           className="p-4 w-[480px] bg-[#0f002b] rounded-t-3xl"
         >
           {isRequest == true && (

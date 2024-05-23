@@ -26,6 +26,7 @@ import React, { useState } from "react";
 import "../../app.css";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import { ProfileButton } from "../MainLayout/ProfileButton";
 
 // import AddGame from "../../assets/new_game/addgame.svg";
 // import Profile from "../../assets/new_game/profile.svg";
@@ -65,12 +66,7 @@ const ListedGameMOb = () => {
             <SidebarMob />
          <LudoMainLogo/>
           </div>
-          <img
-            onClick={() => navigate("/profile")}
-            src={FrameProfile}
-            alt="Frame1"
-            className="mt-1 w-8 h-8 border rounded-[100px]"
-          />
+          <ProfileButton/>
         </div>
         <div className="flex bg-[#fead3a] justify-between items-center px-4 py-2 w-full">
           <div className="flex gap-5 items-center">

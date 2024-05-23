@@ -12,6 +12,8 @@ import { Icon } from "@iconify-icon/react";
 import axios from "axios";
 import LudoMainLogo from "../MainLayout/LudoMainLogo.jsx";
 import { Button } from "@material-tailwind/react";
+import { toast } from "react-toastify";
+import { ProfileButton } from "../MainLayout/ProfileButton.jsx";
 const AddCashMob = () => {
   const [isScanner, setIsScanner] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -47,42 +49,43 @@ const AddCashMob = () => {
             Authorization: `bearer ${accessToken}`,
           },
         });
-        alert(response.data.message);
+        toast.success(response.data.message);
         if (response.status === 200) {
           setIsButtonLoad(false);
           setIsScanner(false);
           setInputValue("");
+          navigate("/transactionhistory");
         }
-        console.log(response);
       } catch (error) {
         console.error(error);
       }
     } else {
-      alert("failed to upload file");
+      toast.error("failed to upload file");
     }
   };
 
   const handleChange = (event) => {
-    setInputValue(event.target.value);
+    const value = event.target.value;
+    if (!isNaN(value) && value <= 10000) {
+      setInputValue(value);
+    }
   };
 
   const handleClick = () => {
     if (inputValue === "") {
-      alert("please select amount");
+      toast.warning("please select amount");
       return;
     }
 
     // Replace this with your desired action on button click
 
     if (inputValue < 10 || inputValue > 10000) {
-      alert("please select amount between 10 and 10,000");
+      toast.warning("please select amount between 10 and 10,000");
       return;
     }
     setIsScanner(true);
     setIsButtonLoad(true);
     console.log("Button clicked!", inputValue);
-
-    // setInputValue("");
   };
 
   const navigate = useNavigate();
@@ -98,12 +101,7 @@ const AddCashMob = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-        <img
-          onClick={() => navigate("/")}
-          src={FrameProfile}
-          alt="Frame1"
-          className="mt-1 w-8 h-8 border rounded-[100px]"
-        />
+        <ProfileButton/>
       </div>
       <div className="flex justify-between items-center px-4 py-2 w-full">
         <div className="flex gap-5 items-center">
@@ -151,7 +149,9 @@ const AddCashMob = () => {
               </div>
             ) : (
               <button
-                className="bg-[0F002B] text-black opacity-[30%] font-[Nunito-Sans]"
+                className={`text-xl bg-[0F002B] text-black ${
+                  inputValue ? "" : "opacity-[70%]"
+                } font-[Nunito-Sans]`}
                 onClick={handleClick}
               >
                 Add

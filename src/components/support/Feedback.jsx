@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify-icon/react";
-import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { Button } from "@material-tailwind/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
-
+import { ProfileButton } from "../MainLayout/ProfileButton";
 const Feedback = () => {
   const navigate = useNavigate();
-
   return (
     <div className="max-w-[480px] bg-[#0f002b] w-full min-h-screen h-full">
       <div
@@ -18,14 +16,9 @@ const Feedback = () => {
       <div className="bg-[#fead3a] flex flex-row justify-between max-w-[480px] w-full h-12 items-start pt-2 px-5 ">
         <div className="flex flex-row gap-3 w-2/5 items-start">
           <SidebarMob />
-          <LudoMainLogo/>
+          <LudoMainLogo />
         </div>
-        <img
-         onClick={() => navigate("/profile")}
-          src={FrameProfile}
-          alt="Frame1"
-          className="mt-1 w-8 h-8 border rounded-[100px]"
-        />
+        <ProfileButton />
       </div>
       <div className="flex bg-[#fead3a] justify-between items-center px-5 py-2 w-full">
         <div className="flex gap-5 items-center">

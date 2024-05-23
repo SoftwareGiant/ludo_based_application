@@ -3,7 +3,6 @@ import { Drawer, Button } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
 import AddGame from "../../assets/new_game/addgame.svg";
 import Profile from "../../assets/new_game/profile.svg";
-import WinCash from "../../assets/new_game/wincash.svg";
 import Wallet from "../../assets/new_game/wallet.svg";
 import GameHistory from "../../assets/new_game/history.svg";
 import ReferEarn from "../../assets/new_game/refer&earn.svg";
@@ -15,7 +14,6 @@ import { Icon } from "@iconify-icon/react";
 export function SidebarMob({
   isClick1,
   isClick2,
-  isClick3,
   isClick4,
   isClick5,
   isClick6,
@@ -87,17 +85,7 @@ export function SidebarMob({
                 Profile
               </div>
             </Link>
-            {/* <Link
-              to="/wincash"
-              className={`border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  ${
-                isClick3 ? "bg-[#ffcc4d]" : "bg-white"
-              } flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg`}
-            >
-              <img src={WinCash} alt="Twemojimoneymouthface" className="w-5" />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                Win Cash
-              </div>
-            </Link> */}
+
             <Link
               to="/mywallet"
               className={`

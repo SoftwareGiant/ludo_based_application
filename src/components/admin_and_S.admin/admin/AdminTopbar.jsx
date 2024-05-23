@@ -67,9 +67,10 @@ const AdminTopbar = () => {
               <ButtonLoader />
             </MenuList>
           </Menu>
-          <div className="border-white border rounded-full w-[24px] h-[24px] overflow-hidden ">
+          <div className="border-white border rounded-full w-[27px] h-[26px] overflow-hidden ">
             <Menu>
               <MenuHandler>
+                
                 <img
                   src="https://www.stryx.com/cdn/shop/articles/man-looking-attractive.jpg?v=1666662774"
                   className="h-full w-[50px] scale-x-150 cursor-pointer"
@@ -79,10 +80,10 @@ const AdminTopbar = () => {
                 <MenuItem className="flex items-center gap-2">
                   <div className="flex items-center gap-[13px]">
                     <img
-                      src={Profile}
+                      src="https://www.stryx.com/cdn/shop/articles/man-looking-attractive.jpg?v=1666662774"
                       alt="ProfileWithImage"
                       id="ProfileWithImage"
-                      className="w-6 border"
+                      className="w-[24px] h-[24px] rounded-full  border"
                     />
                     <div className="text-xs font-medium text-[#0f002b]">
                       Profile

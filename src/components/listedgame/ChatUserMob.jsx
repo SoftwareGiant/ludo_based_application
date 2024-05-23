@@ -39,6 +39,7 @@ const ChatUserMob = () => {
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [isFav, setIsfav] = useState(false);
 
   const inputRef = useRef();
 
@@ -68,16 +69,26 @@ const ChatUserMob = () => {
       dispatch(fetchSocket(decodedToken));
     }
   }, [decodedToken]);
-
+  const handleInputChange = (event) => {
+    const value = event.target.value;
+    if (/^\d{0,6}$/.test(value)) {
+      setInputValue(value);
+    }
+  };
   const closeDrawerBottom = (event) => {
     event.preventDefault();
+    if (inputValue.length !== 6) {
+      toast.warning("Please enter a 6-digit code");
+      return;
+    }
     if (inputValue === "") {
-      toast.error("Please enter code");
+      toast.warning("Please enter code");
       return;
     }
 
     dispatch(updateGameCode(inputValue)).then((result) => {
       if (result) {
+        console.log(result)
         setOpenBottom(false);
       } else {
         toast.error("please try again after some time");
@@ -93,6 +104,11 @@ const ChatUserMob = () => {
     });
     if (response?.status == 200 && response?.data) {
       setMessageList([]);
+      if (response?.data.favourite.userId.includes(chatId)) {
+        setIsfav(true);
+      } else {
+        setIsfav(false);
+      }
       setMessageList((prevMessageList) => [
         ...prevMessageList,
         ...response?.data?.messageDetails,
@@ -150,6 +166,22 @@ const ChatUserMob = () => {
       toast.error("Failed to fetch message");
     }
   };
+  const handleRemoveFav = async () => {
+    try {
+      const response = await axios.get(
+        `/api/message/removefromfavourite/${chatId}`,
+        {
+          headers: {
+            Authorization: `bearer ${accessToken}`,
+          },
+        }
+      );
+      fn();
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error("Failed to remove fav");
+    }
+  };
   return (
     <div className="flex-1 pb-4 bg-[#0f002b] sm:bg-[#fead3a]  w-full max-w-[480px]  justify-between flex flex-col h-screen">
       <div className="bg-[#fead3a]  h-[80%] w-[200%]   rounded-[50%] sm:hidden   -top-20 fixed -left-[50%] " />
@@ -184,12 +216,23 @@ const ChatUserMob = () => {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Icon
-            onClick={() => handleFav()}
-            icon="fluent:star-add-28-regular"
-            style={{ color: "black" }}
-            width="32"
-          />
+          {isFav ? (
+            <Icon
+              onClick={handleRemoveFav}
+              className="cursor-pointer"
+              icon="ph:star-fill"
+              style={{ color: "black" }}
+              width="32"
+            />
+          ) : (
+            <Icon
+              className="cursor-pointer"
+              onClick={() => handleFav()}
+              icon="fluent:star-add-28-regular"
+              style={{ color: "black" }}
+              width="32"
+            />
+          )}
           <Popover placement="left-start">
             <PopoverHandler>
               <div className="px-3 flex cursor-pointer ">
@@ -201,15 +244,27 @@ const ChatUserMob = () => {
               </div>
             </PopoverHandler>
             <PopoverContent className="bg-white  z-50">
-              <ListItem
-                onClick={() => handleFav()}
-                className="hover:bg-black hover:text-white"
-              >
-                <ListItemPrefix>
-                  <Icon icon="mdi:favorite-add" width="24" />
-                </ListItemPrefix>{" "}
-                Add Fav
-              </ListItem>
+              {isFav ? (
+                <ListItem
+                  onClick={handleRemoveFav}
+                  className="hover:bg-black hover:text-white"
+                >
+                  <ListItemPrefix>
+                    <Icon icon="ph:star-fill" width="24" />
+                  </ListItemPrefix>{" "}
+                  Remove Fav
+                </ListItem>
+              ) : (
+                <ListItem
+                  onClick={() => handleFav()}
+                  className="hover:bg-black hover:text-white"
+                >
+                  <ListItemPrefix>
+                    <Icon icon="mdi:favorite-add" width="24" />
+                  </ListItemPrefix>{" "}
+                  Add Fav
+                </ListItem>
+              )}
               <ListItem
                 onClick={() => navigate("/feedback")}
                 className="hover:bg-black hover:text-white"
@@ -353,9 +408,9 @@ const ChatUserMob = () => {
               >
                 <input
                   value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
+                  onChange={handleInputChange}
                   type="text"
-                  placeholder="LK8634798"
+                  placeholder="086798"
                   className="p-4 rounded-md outline-none border-gray-400 border bg-[#0f002b] text-gray-400 font-bold w-[90%]"
                 />
                 <Button

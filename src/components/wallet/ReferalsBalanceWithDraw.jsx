@@ -5,6 +5,7 @@ import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { useState } from "react";
 import "../../app.css";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
+import { toast } from "react-toastify";
 
 const ReferalsBalanceWithDraw = () => {
     const [inputValue, setInputValue] = useState('');
@@ -16,15 +17,15 @@ const ReferalsBalanceWithDraw = () => {
   const handleClick = () => {
     // Replace this with your desired action on button click
     if(inputValue===""){
-        alert("please select amount")
+        toast.warning("please select amount")
     return;
     }
     if(inputValue<10 || inputValue>2000){
-        alert("please select amount between 10 and 2000")
+      toast.warning("please select amount between 10 and 2000")
         return;
     }
     console.log('Button clicked!', inputValue);
-    alert("amount added successfully")
+    toast.success("amount added successfully")
     setInputValue("")
   };
 

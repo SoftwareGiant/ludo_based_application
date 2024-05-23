@@ -10,6 +10,7 @@ import { Icon } from "@iconify-icon/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import PageLoader from "../MainLayout/PageLoader";
 import { IconButton } from "@material-tailwind/react";
+import { ProfileButton } from "../MainLayout/ProfileButton";
 const MyWalletMob = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.user);
@@ -33,12 +34,7 @@ const MyWalletMob = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-        <img
-          onClick={() => navigate("/profile")}
-          src={FrameProfile}
-          alt="Frame1"
-          className="cursor-pointer mt-1 w-8 h-8 border rounded-[100px]"
-        />
+        <ProfileButton/>
       </div>
 
       <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative">

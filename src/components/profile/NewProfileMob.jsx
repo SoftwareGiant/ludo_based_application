@@ -7,6 +7,7 @@ import { SidebarMob } from "../MainLayout/SidebarMob";
 import {
   Drawer,
   IconButton,
+  Input,
   Switch,
   Typography,
 } from "@material-tailwind/react";
@@ -35,9 +36,9 @@ const NewProfileMob = () => {
   const dispatch = useDispatch();
   const [scrollPosition, setScrollPosition] = useState(0);
   const users = useSelector((state) => state.user.user);
-  // const [openBottom, setOpenBottom] = useState(
-  //   users?.userKyc?.verificationStatus===true || users?.userKyc?.aadharNo ? false : true
-  // );
+  const [isUserNameEdit, setIsUserNameEdit] = useState(false);
+  const [userName, setUserName] = useState(users?._id?.slice(-6) || "");
+
   console.log(users);
   const [openBottom, setOpenBottom] = useState(
     users?.userKyc?.verificationStatus === false &&
@@ -97,18 +98,7 @@ const NewProfileMob = () => {
       toast.error("Please upload both Aadharcard front and back images.");
       return;
     } else {
-      // const obj = {
-      //   "aadharno.": aadharNumber,
-      //   image: [aadharFront, aadharBack],
-      // };
       try {
-        // const response = await axios.post("/api/user/addKycdetail", obj, {
-        //   headers: {
-        //     "Content-Type": "multipart/form-data",
-        //     Authorization: `bearer ${accessToken}`,
-        //   },
-        // });
-
         const obj = new FormData();
         obj.append("aadharNo", aadharNumber); // Append aadharNumber as a form field
         obj.append("image", aadharFront); // Append aadharFront as a file
@@ -141,6 +131,10 @@ const NewProfileMob = () => {
     setAadharBack(null);
     setaadharbackName("");
   };
+  const handleInputChange = (event) => {
+    setUserName(event.target.value);
+  };
+
   if (!users)
     return (
       <div className="max-w-[480px]">
@@ -156,7 +150,6 @@ const NewProfileMob = () => {
       <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
           <SidebarMob />
-
           <LudoMainLogo />
         </div>
         <div
@@ -284,11 +277,25 @@ const NewProfileMob = () => {
           <div className="bg-[#0f002b] text-white flex flex-col justify-center gap-10 w-full items-start pt-5 pb-6 px-8">
             <div className="flex  justify-between w-full items-center">
               <div className="text-xl font-bold text-white">Basic Details</div>
-              <img
-                src={Edit}
-                alt="Materialsymbolseditoutline1"
-                className="ml-20 w-5"
-              />
+              {isUserNameEdit ? (
+                <IconButton className="bg-transparent">
+                  <Icon
+                    icon="carbon:save"
+                    onClick={() => setIsUserNameEdit(!isUserNameEdit)}
+                    width={32}
+                    className="bg-transparent transition duration-300 ease-in-out transform hover:scale-110 hover:text-[#fead3a]"
+                 />
+                </IconButton>
+              ) : (
+                <IconButton className="bg-transparent">
+                  <Icon
+                    icon="mdi:pencil-outline"
+                    onClick={() => setIsUserNameEdit(!isUserNameEdit)}
+                    width={32}
+                    className="bg-transparent transition duration-300 ease-in-out transform hover:scale-110 hover:text-[#fead3a]"
+                />
+                </IconButton>
+              )}
             </div>
             <div className="flex flex-col justify-between gap-6 w-5/6 items-start ">
               <div className="flex flex-row justify-between ml-4 w-full items-start">
@@ -299,6 +306,21 @@ const NewProfileMob = () => {
                 <div className="text-sm mt-px">User Id :</div>
                 <span>{users?._id?.slice(-6)}</span>
               </div>
+              {isUserNameEdit ? (
+                <div className="flex flex-row justify-between ml-4 w-full items-start">
+                  <div className="text-sm w-[50%] mt-px">User Name :</div>
+                  <input
+                    value={userName}
+                    onChange={handleInputChange}
+                    className="flex w-[60%] bg-transparent border-2 rounded-lg border-gray-300 focus:border-[#fead3a] px-2 py-1 focus:outline-none justify-end items-end transition duration-300 ease-in-out"
+                  />
+                </div>
+              ) : (
+                <div className="flex flex-row justify-between ml-4 w-full items-start">
+                  <div className="text-sm mt-px">User Name :</div>
+                  <span>{userName}</span>
+                </div>
+              )}
             </div>
             <div className="flex flex-col justify-between gap-6 w-5/6 items-start">
               <div className="text-xl font-bold text-white">Kyc</div>
