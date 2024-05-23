@@ -37,10 +37,13 @@ const NewProfilePic = () => {
             },
           }
         );
+        if(response.status == 200 ){
+          return toast.success("Profile pic uploaded successfully");
+        }
       };
       reader.readAsDataURL(file);
     }
-    toast.success("image upload successfully");
+    
   };
 
   return (

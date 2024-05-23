@@ -38,8 +38,6 @@ const NewProfileMob = () => {
   const users = useSelector((state) => state.user.user);
   const [isUserNameEdit, setIsUserNameEdit] = useState(false);
   const [userName, setUserName] = useState(users?._id?.slice(-6) || "");
-
-  console.log(users);
   const [openBottom, setOpenBottom] = useState(
     users?.userKyc?.verificationStatus === false &&
       (users?.userKyc?.aadharNo === undefined ||
@@ -73,14 +71,11 @@ const NewProfileMob = () => {
     const file = e.target.files[0];
     setAadharFront(file);
     setaadharfrontName(file.name);
-    // setAadharFront(URL.createObjectURL(e.target.files[0]));
   };
-  console.log(aadharFront);
   const handleAadharBackUpload = (e) => {
     const file = e.target.files[0];
     setAadharBack(file);
     setaadharbackName(file.name);
-    // setAadharBack(URL.createObjectURL(e.target.files[0]));
   };
   function validateAadhar(aadharNumber) {
     // Regex pattern for Aadhar number
