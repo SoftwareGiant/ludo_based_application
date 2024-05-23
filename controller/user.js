@@ -200,7 +200,8 @@ const addKyc = async (req, res, next) => {
         $set: {
           "userKyc.aadharNo": aadharNo,
           "userKyc.aadharFront": req.files[0].filename,
-          "userKyc.aadharBack": req.files[1].filename
+          "userKyc.aadharBack": req.files[1].filename,
+          "verificationStatus": "inprogress"
         }
       },
       { new: true }
