@@ -118,4 +118,15 @@ router.post("/admin/supportmessage", [verifyToken,admin], async (req, res, next)
   }
 });
 
+router.post("/admin/changestatus",[verifyToken,admin],async(req,res,next)=>{
+  try{
+    const {status,userId} = req.body;
+    await Support.findOneAndUpdate({createdBy:userId},{status},{new:true})
+    return res.status(200).json({message:"Status changed"});
+  }
+  catch(err){
+    return next(err)
+  }
+})
+
 module.exports = router;

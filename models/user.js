@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       enum: [null, "admin", "superAdmin"],
     },
+    userName:String,
     refreshTokenDetail: {
       token: String,
       expiresAt: Number,
@@ -23,6 +24,7 @@ const UserSchema = new mongoose.Schema(
       verificationStatus: {
         type: String,
         enum: ["pending","inprogress","approved"],
+        default : "pending"   
       },
     },
     referralDetails: {

@@ -344,6 +344,18 @@ const allSlider = async(_,res,next) =>{
   }
 }
 
+const addUserName = async(req,res,next)=>{
+  try{
+    const{userName} = req.body;
+    const userId = req.userId;
+    const updateUser = await User.findByIdAndUpdate(userId,{userName},{new:true});
+    return res.status(200).json({updateUser})
+  }
+  catch(err){
+    return next(err)
+  }
+}
+
 module.exports = {
   registerUser,
   loginUser,
@@ -358,5 +370,6 @@ module.exports = {
   removefromAbandoned,
   allAbandonedUser,
   kycVerificationStatus,
-  allSlider
+  allSlider,
+  addUserName
 };

@@ -19,7 +19,8 @@ const {
   removefromAbandoned,
   allAbandonedUser,
   kycVerificationStatus,
-  allSlider
+  allSlider,
+  addUserName
 } = require("../controller/user");
 
 router.post("/register", wrapAsync(registerUser));
@@ -77,6 +78,8 @@ router.get(
 router.get("/kycstatus",[verifyToken,admin],wrapAsync(kycVerificationStatus));
 
 router.get("/allSlider",wrapAsync(allSlider));
+
+router.post("/addusername",[verifyToken],wrapAsync(addUserName))
 
 
 module.exports = router;
