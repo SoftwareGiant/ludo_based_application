@@ -71,15 +71,17 @@ const ChatUserMob = () => {
   }, [decodedToken]);
   const handleInputChange = (event) => {
     const value = event.target.value;
-    if (/^\d{0,6}$/.test(value)) {
+    if (/^\d{0,8}$/.test(value)) {
       setInputValue(value);
     }
   };
   const closeDrawerBottom = (event) => {
     event.preventDefault();
-    if (inputValue.length !== 6) {
-      toast.warning("Please enter a 6-digit code");
-      return;
+    if(inputValue[0]!=0){
+     return toast.warning("Code should be start with zero");
+    }
+    if (inputValue.length !== 8) {
+      return toast.warning("Please enter a 8-digit code");
     }
     if (inputValue === "") {
       toast.warning("Please enter code");
@@ -88,7 +90,6 @@ const ChatUserMob = () => {
 
     dispatch(updateGameCode(inputValue)).then((result) => {
       if (result) {
-        console.log(result)
         setOpenBottom(false);
       } else {
         toast.error("please try again after some time");
@@ -97,6 +98,17 @@ const ChatUserMob = () => {
   };
 
   const fn = async () => {
+
+    const response_0 = await axios.get("/api/userhistory/usergamehistory",{
+      headers: {
+        Authorization: `bearer ${accessToken}`,
+      },
+    });
+
+    if(response_0.status == 200 && response_0.data.gameDetails[0].status=="running"){
+      setOpenBottom(false);
+    }
+
     const response = await axios.get(`/api/message/allmessages/${chatId}`, {
       headers: {
         Authorization: `bearer ${accessToken}`,
@@ -161,8 +173,6 @@ const ChatUserMob = () => {
       });
       toast.success(response.data.message);
     } catch (error) {
-      // Handle the error
-      console.error("Error fetching message:", error);
       toast.error("Failed to fetch message");
     }
   };
@@ -401,7 +411,9 @@ const ChatUserMob = () => {
                 className="text-2xl flex justify-center font-bold"
               >
                 Enter Ludo King Code
+
               </Typography>
+              
               <form
                 className="flex flex-col gap-4 w-full items-center"
                 onSubmit={closeDrawerBottom}
@@ -410,7 +422,7 @@ const ChatUserMob = () => {
                   value={inputValue}
                   onChange={handleInputChange}
                   type="text"
-                  placeholder="086798"
+                  placeholder="Valid Classic Ludo King Code"
                   className="p-4 rounded-md outline-none border-gray-400 border bg-[#0f002b] text-gray-400 font-bold w-[90%]"
                 />
                 <Button

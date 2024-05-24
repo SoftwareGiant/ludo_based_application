@@ -24,7 +24,7 @@ import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { fetchOpenChallenges } from "./openChallengeSlice";
 import { ProfileButton } from "../MainLayout/ProfileButton";
 const NewGameMob = () => {
-  const { accessToken, refreshToken } = useSelector((state) => state.auth);
+  const { accessToken } = useSelector((state) => state.auth);
   const { decodedToken } = useJwt(accessToken);
   const { socketData } = useSelector((state) => state.socketfor);
   const { match } = useSelector((state) => state.match);
@@ -83,7 +83,7 @@ const NewGameMob = () => {
         return toast.success(e.message);
       });
       socketData?.on("databaseChange", (data) => {
-        console.log(data, "data in databasechanges");
+        dispatch(fetchAllBattles(socketData));
       });
       socketData?.on("updatecode", ({ gameCode, player2 }) => {
         toast.success(`code to start game ${gameCode}`);
@@ -95,7 +95,9 @@ const NewGameMob = () => {
   useEffect(() => {
     if (match) {
       const player1 = match?.newGameDetail?.player1;
-      return navigate(`/chat/${player1}/player1/`);
+      if (player1) {
+        return navigate(`/chat/${player1}/player1/`);
+      }
     }
   }, [match]);
 
@@ -473,7 +475,7 @@ console.log(battles);
         <Drawer
           placement="bottom"
           open={openMatchBottom}
-          // onClose={closeDrawerBottom}
+          onClose={closematchDrawerBottom}
           className="p-4 w-[480px] bg-[#0f002b] rounded-t-3xl"
         >
           {isRequest == true && (

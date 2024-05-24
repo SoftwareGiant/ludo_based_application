@@ -67,14 +67,11 @@ const NewProfileMob = () => {
     const file = e.target.files[0];
     setAadharFront(file);
     setaadharfrontName(file.name);
-    // setAadharFront(URL.createObjectURL(e.target.files[0]));
   };
-
   const handleAadharBackUpload = (e) => {
     const file = e.target.files[0];
     setAadharBack(file);
     setaadharbackName(file.name);
-    // setAadharBack(URL.createObjectURL(e.target.files[0]));
   };
   function validateAadhar(aadharNumber) {
     // Regex pattern for Aadhar number
