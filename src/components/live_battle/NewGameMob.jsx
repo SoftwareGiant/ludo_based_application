@@ -232,6 +232,28 @@ const NewGameMob = () => {
       setBattleAmount(value);
     }
   };
+
+  const handleDelete = async (battleid) => {
+    try {
+      const battleId = {
+        battleId: battleid,
+      };
+      const response = await axios.post("/api/game/deletebattle", battleId, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Ensure the correct capitalization for "Bearer"
+        },
+      });
+      console.log(response.data);
+      toast.success("battle deleted successfully");
+      dispatch(fetchAllBattles(socketData));
+      return response.data;
+    } catch (error) {
+      toast.error(error.message);
+      console.error("Error delete battle:", error);
+      throw error;
+    }
+  };
+console.log(battles);
   const closematchDrawerBottom = () => setOpenMatchBottom(false);
   return (
     <div className="max-w-[480px] bg-[#0f002b] w-full min-h-screen h-full">
@@ -323,8 +345,23 @@ const NewGameMob = () => {
                             className="inline-flex flex-col justify-between w-full min-h-[120px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]"
                           >
                             <div className="font-['Inter'] text-[#0f002b] w-full py-4 px-4 flex  justify-between">
+                              {users?._id === e.player1 && (
+                                <div className="absolute   -top-1  right-0">
+                                  <IconButton
+                                    onClick={() => handleDelete(e._id)}
+                                    color="red"
+                                    className="rounded-full h-[36px]  w-[36px]"
+                                  >
+                                    <Icon
+                                      icon="fluent:delete-12-regular"
+                                      width={24}
+                                    />
+                                  </IconButton>
+                                </div>
+                              )}
+
                               <div className="italic">
-                                {users?._id === e.player1 ? (
+                                {users?._id === e?.player1 ? (
                                   <span className="font-extrabold pl-1">
                                     Your battle
                                   </span>
