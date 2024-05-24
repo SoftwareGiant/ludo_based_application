@@ -28,12 +28,20 @@ const Socket = (app) =>{
           userMatched: false,
           createdByUser: true,
           battleTimeStampOnUserScreen: { $gt: currentTime },
-        });
-        socket.emit("databaseChange", filteredData);
+        }).sort({battleTimeStamp:-1});
+        if(filteredData.length>0){
+          const userBattle =  filteredData.map(e=>e.player1==userId);
+          const filteredDataForAuser  =  filteredData.map(e=>e.player1!=userId);
+          socket.emit("databaseChange", [...userBattle,...filteredDataForAuser]);
+        }
+        else{
+          socket.emit("databaseChange", []);
+        }
       } catch (error) {
         socket.emit("error", err);
       }
     });
+    
     socket.on("allNewGame",async()=>{
       const currentTime = Date.now();
       const allGameData = await Battle.find({
@@ -41,7 +49,14 @@ const Socket = (app) =>{
         createdByUser: true,
         battleTimeStampOnUserScreen: { $gt: currentTime },
       });
-      socket.emit("allNewGame", allGameData);
+      if(allGameData.length>0){
+      const userBattle =  allGameData?.filter(e=>e.player1==userId);
+      const filteredDataForAuser  =  allGameData?.filter(e=>e.player1!=userId);
+      socket.emit("allNewGame", [...userBattle,...filteredDataForAuser]);
+      }
+      else{
+        socket.emit("allNewGame", []);
+      }
     })
    
   
