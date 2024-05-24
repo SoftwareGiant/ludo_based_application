@@ -26,7 +26,7 @@ import {
 } from "../AdminSlice/withdrawlSlice";
 import AdminFooter from "../Common.jsx/AdminFooter";
 import PageLoader from "../../../MainLayout/PageLoader";
-
+import WithdrawStatusCard from "../Common.jsx/WithdrawStatusCard";
 
 function Withdraw() {
   const [isClicked, setIsClicked] = useState(false);
@@ -34,10 +34,13 @@ function Withdraw() {
   const withdrawalRequests = useSelector(selectAllWithdrawalRequests);
   const status = useSelector(selectAllWithdrawalRequestsStatus);
   console.log(withdrawalRequests);
+
   useEffect(() => {
     dispatch(fetchAllWithdrawalRequests());
   }, [dispatch]);
-
+  const RefreshWithdrawalReq = () => {
+    dispatch(fetchAllWithdrawalRequests());
+  };
   const handleClick = () => {
     setIsClicked(!isClicked);
   };
@@ -49,8 +52,7 @@ function Withdraw() {
     return `${day}/${month}/${year}`;
   };
   if (status === "loading") {
-    return <PageLoader full={true}/>
-    
+    return <PageLoader full={true} />;
   }
   return (
     <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
@@ -160,7 +162,6 @@ function Withdraw() {
                   <Menu>
                     <MenuHandler>
                       <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
-                     
                         <div className="flex justify-between items-center w-full">
                           <p> Transacion Status</p>
                           <Icon icon="oi:caret-bottom" />
@@ -210,19 +211,10 @@ function Withdraw() {
                       </div>
                     </td>
                     <td className="p-4">
-                      <div
-                        className={`rounded-xl flex justify-center items-center w-[87px] h-[19px] ${
-                          val.status === "success"
-                            ? "bg-[#00C300] text-[#FFFFFF] "
-                            : val.status === "failed"
-                            ? "bg-[#FF0000] text-[#FFFFFF] "
-                            : "bg-gray-400 text-[#FFFFFF]"
-                        }`}
-                      >
-                        <Typography className="font-[Inter] font-normal text-[10px]  ">
-                          {val.status}
-                        </Typography>
-                      </div>
+                      <WithdrawStatusCard
+                        val={val}
+                        RefreshWithdrawalReq={RefreshWithdrawalReq}
+                      />
                     </td>
                   </tr>
                 );

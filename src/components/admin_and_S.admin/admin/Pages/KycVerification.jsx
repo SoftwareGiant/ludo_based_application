@@ -27,12 +27,6 @@ import KycStatusCard from "../Common.jsx/KycStatusCard";
 import AdminFooter from "../Common.jsx/AdminFooter";
 import PageLoader from "../../../MainLayout/PageLoader";
 
-const TABLE_HEAD = [
-  "UID",
-  "Mobile Number",
-  "Initiation Date",
-  "Request Status",
-];
 export function KycVerification() {
   const [sortConfig, setSortConfig] = useState({
     key: null,
@@ -50,12 +44,7 @@ export function KycVerification() {
   useEffect(() => {
     dispatch(fetchAllUsers());
   }, [dispatch]);
-  //   const kycusers = useSelector(selectKycUsers);
-  //   const status = useSelector(selectAllKycUsersStatus);
-  //   console.log(kycusers);
-  //   useEffect(() => {
-  //     dispatch(fetchAllKyc());
-  // }, []);
+
   const handleClick = () => {
     setIsClicked(!isClicked);
   };
@@ -73,7 +62,7 @@ export function KycVerification() {
     return `${day}/${month}/${year}`;
   };
   if (status === "loading" && isRefresh === false) {
-    return <PageLoader full={true}/>
+    return <PageLoader full={true} />;
   }
 
   if (status === "failed") {
@@ -212,7 +201,7 @@ export function KycVerification() {
                   className="cursor-pointer   p-2 transition-colors  rounded-lg"
                 >
                   <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
-                    GID
+                    UID
                     <Icon
                       icon="prime:sort"
                       strokeWidth={2}
@@ -246,7 +235,6 @@ export function KycVerification() {
                     >
                       <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
                         Request Status
-                     
                         <Icon icon="icon-park-solid:down-one" />
                       </Typography>
                     </th>
@@ -266,48 +254,56 @@ export function KycVerification() {
                       <Icon icon="bi:calendar4-week" width="24" />
                       Pending
                     </MenuItem>
+                    <MenuItem
+                      onClick={() => setKycStatus("inprogress")}
+                      className="font-[Inter] text-[16px] text-[#0F002B] font-medium flex justify-start gap-3 items-center"
+                    >
+                      <Icon icon="bi:calendar4-week" width="24" />
+                      Inprogress
+                    </MenuItem>
                   </MenuList>
                 </Menu>
               </tr>
             </thead>
             <tbody>
-              {filteredUsers?.filter((item) =>
+              {filteredUsers
+                ?.filter((item) =>
                   KycStatus === "approved"
-                    ? item.userKyc.verificationStatus === true
+                    ? item.userKyc.verificationStatus === "approved"
                     : KycStatus === "pending"
-                    ? item.userKyc.verificationStatus === false
+                    ? item.userKyc.verificationStatus === "pending"
+                    : KycStatus === "inprogress"
+                    ? item.userKyc.verificationStatus === "inprogress"
                     : item
                 )
-                .map(({ _id, mobileNo, createdAt, userKyc, updatedAt }) => {
+                .map((val) => {
                   return (
-                    <tr key={_id}>
+                    <tr key={val._id}>
                       <td className="p-4">
                         <div className="flex items-center gap-3">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {_id}
+                            {val._id}
                           </Typography>
                         </div>
                       </td>
                       <td className="p-4">
                         <div className="flex flex-col">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {mobileNo}
+                            {val.mobileNo}
                           </Typography>
                         </div>
                       </td>
                       <td className="p-4">
                         <div className="w-max">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {formatDate(createdAt)}
+                            {formatDate(val.createdAt)}
                           </Typography>
                         </div>
                       </td>
                       <td className="p-4">
                         <KycStatusCard
                           handleRefresh={handleRefresh}
-                          updatedAt={updatedAt}
-                          status={userKyc.verificationStatus}
-                          uid={_id}
+                          val={val}
                         />
                       </td>
                     </tr>

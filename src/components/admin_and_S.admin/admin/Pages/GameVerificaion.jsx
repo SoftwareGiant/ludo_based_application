@@ -43,6 +43,9 @@ export function GameVerificaion() {
   useEffect(() => {
     dispatch(fetchAllGameHistory());
   }, [dispatch]);
+  const RefreshGameHistory = ()=>{
+    dispatch(fetchAllGameHistory());
+  }
   console.log(gameHistory);
   const handleOpen = () => {
     setIsClicked(true);
@@ -263,6 +266,7 @@ export function GameVerificaion() {
                     <td className="p-4">
                       <GameStatusCard
                         val={val}
+                     
                         handleRefresh={handleRefresh}
                         isRefresh={isRefresh}
                       />

@@ -24,7 +24,11 @@ export function convertTimestamp(timestamp) {
         formattedDate = `${hours} hour${hours > 1 ? 's' : ''} ago`;
     } else if (minutes > 0) {
         formattedDate = `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
-    } else {
+    }
+    else if (seconds === 0) {
+        formattedDate = "now";
+    }
+    else {
         formattedDate = `${seconds} second${seconds > 1 ? 's' : ''} ago`;
     }
 

@@ -3,11 +3,12 @@ import { Icon } from "@iconify-icon/react";
 import { useDispatch } from "react-redux";
 import { fetchAllKyc } from "../AdminSlice/AllKycSlice";
 import { toast } from "react-toastify";
-const KycStatusCard = ({ status, uid, updatedAt, handleRefresh }) => {
+import { formatDate } from "../../Functions/formateDate";
+const KycStatusCard = ({ val, handleRefresh }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const openModal = () => {
-    setIsOpen(true);
+    if (val?.userKyc?.verificationStatus !== "pending") setIsOpen(true);
   };
 
   const closeModal = () => {
@@ -19,35 +20,27 @@ const KycStatusCard = ({ status, uid, updatedAt, handleRefresh }) => {
     closeModal();
   };
   const handleVerification = () => {
-    dispatch(fetchAllKyc({ uid }));
+    dispatch(fetchAllKyc({uid:val?._id}));
     handleRefresh();
   };
-  function formatDate(dateStr) {
-    const date = new Date(dateStr);
 
-    const options = {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-      timeZone: "Asia/Kolkata", // IST timezone
-    };
-
-    return date.toLocaleString("en-IN", options);
-  }
-
+  
   return (
     <div className="flex gap-3 mb-3">
       <div
         onClick={openModal}
         className={`rounded-xl cursor-pointer flex justify-center items-center w-[87px] h-[19px]
-                         ${status ? "bg-[#00C300]" : "bg-[#FF0000]"}
+                         ${
+                           val?.userKyc?.verificationStatus === "pending"
+                             ? "bg-[#FF0000]"
+                             : val?.userKyc?.verificationStatus === "inprogress"
+                             ? "bg-yellow-900"
+                             : "bg-[#00C300]"
+                         }
                         `}
       >
         <span className="font-[Inter] font-normal text-[10px] text-[#FFFFFF] ">
-          {status ? "Approved" : "Pending"}
+          {val?.userKyc?.verificationStatus}
         </span>
       </div>
       {isOpen && (
@@ -62,12 +55,14 @@ const KycStatusCard = ({ status, uid, updatedAt, handleRefresh }) => {
                 </div>
                 <div
                   className={`text-white ${
-                    status ? "bg-[#00C300]" : "bg-[#FF0000]"
+                    val?.userKyc?.verificationStatus === "inprogress"
+                      ? "bg-yellow-900"
+                      : "bg-green-500"
                   }  px-2 p-1 rounded-md flex items-center text-[19.2px]`}
                 >
-                  {status ? "Approved" : "Pending"}
+                  {val.userKyc.verificationStatus}
                 </div>
-                <div>UID {uid}</div>
+                <div>UID {val?._id}</div>
               </div>
               <div className="flex items-center gap-2">
                 <button
@@ -87,16 +82,16 @@ const KycStatusCard = ({ status, uid, updatedAt, handleRefresh }) => {
                 />
                 <span className="flex items-center font-bold text-[30px]">
                   User{" "}
-                  {status && (
+                  {val.status && (
                     <Icon icon="bitcoin-icons:verify-outline" width="26" />
                   )}
                 </span>
-                <span className="font-normal text-[20px]">@{uid}</span>
+                <span className="font-normal text-[20px]">@{val._id}</span>
               </div>
               <div className=" p-2 flex flex-col w-[60%] min-w-max mt-12 text-center font-[Inter] font-medium text-[16px]">
-                {status && (
+                {val?.userKyc?.verificationStatus === "approved" && (
                   <div className="flex text-[#00C300] w-full mb-4 justify-between">
-                    Approved on {formatDate(updatedAt)}
+                    Approved on {formatDate(val?.updatedAt)}
                   </div>
                 )}
                 <div className="text-start font-bold text-[20px] text-[#000000]">
@@ -105,25 +100,29 @@ const KycStatusCard = ({ status, uid, updatedAt, handleRefresh }) => {
                 <div className="flex  w-full mb-4 justify-between">
                   <div className="m-2 cursor-pointer transition-colors  w-full px-3 h-[52px] flex items-center justify-center gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]  ">
                     <Icon icon="basil:document-outline" width="24" />
-                    <span>Aadhar</span>
+                    <span>Aadhar Front</span>
                   </div>
                   <div className="m-2 cursor-pointer transition-colors  w-full px-3 h-[52px] flex items-center justify-center gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]  ">
                     <Icon icon="basil:document-outline" width="24" />
-                    <span>Image</span>
+                    <span>Addhar Back</span>
                   </div>
                 </div>
                 <div className="flex w-full mb-4 justify-between">
                   <div className="m-2 cursor-pointer transition-colors  w-full px-3 h-[52px] flex items-center justify-center gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]  ">
-                    <Icon icon="basil:document-outline" width="24" />
-                    <span>Document Name</span>
+                    <Icon
+                      icon="material-symbols-light:keyboard-outline"
+                      width="24"
+                    />
+                    <span>Addhar Number :</span>
+                    <span>{val.userKyc.aadharNo}</span>
                   </div>
                 </div>
-                {!status && (
+                {!val.status && (
                   <div className="text-start font-bold text-[20px] text-[#000000]">
                     Update Status
                   </div>
                 )}
-                {!status && (
+                {!val.status && (
                   <div className="flex  w-full mb-4 justify-between">
                     <div
                       onClick={handleVerification}

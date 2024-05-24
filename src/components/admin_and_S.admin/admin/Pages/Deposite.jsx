@@ -22,6 +22,7 @@ import {
 import Refreshloader from "../../superadmin/Common/Refreshloader";
 import AdminFooter from "../Common.jsx/AdminFooter";
 import PageLoader from "../../../MainLayout/PageLoader";
+import DepositeStatusCard from "../Common.jsx/DepositeStatusCard";
 
 function Deposite() {
   const [sortConfig, setSortConfig] = useState({
@@ -34,10 +35,14 @@ function Deposite() {
   const dispatch = useDispatch();
   const depositRequests = useSelector(selectAllDepositRequests);
   const status = useSelector(selectAllDepositRequestsStatus);
+ 
 
   useEffect(() => {
     dispatch(fetchAllDepositRequests());
   }, [dispatch]);
+  const RefreshDepositeReq = ()=>{
+    dispatch(fetchAllDepositRequests());
+  }
   console.log(depositRequests);
 
   const handleOpen = () => {
@@ -90,7 +95,7 @@ function Deposite() {
   );
   const handleRefresh = async () => {
     setRefresh(true);
-    // dispatch(fetchAllUsers());
+   
     await dispatch(fetchAllDepositRequests())
       .then(() => {
         setRefresh(false);
@@ -273,19 +278,7 @@ function Deposite() {
                       </div>
                     </td>
                     <td className="p-4">
-                      <div
-                        className={`rounded-xl flex justify-center items-center w-[87px] h-[19px] ${
-                          val.status === "success"
-                            ? "bg-[#00C300] text-[#FFFFFF] "
-                            : status === "failed"
-                            ? "bg-[#FF0000] text-[#FFFFFF] "
-                            : "bg-gray-400 text-[#FFFFFF]"
-                        }`}
-                      >
-                        <Typography className="font-[Inter] font-normal text-[10px]  ">
-                          {val.status}
-                        </Typography>
-                      </div>
+                      <DepositeStatusCard RefreshDepositeReq={RefreshDepositeReq} val={val} />
                     </td>
                   </tr>
                 );

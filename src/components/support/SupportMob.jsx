@@ -94,11 +94,6 @@ const SupportMob = () => {
       reader.readAsDataURL(file);
     }
   };
-  const handleStart = () => {
-    navigate("/matchstart");
-  };
-
-  // console.log(image);
 
   return (
     <div className="flex-1 pb-4 bg-[#0f002b] sm:bg-[#fead3a]  w-full max-w-[480px]  justify-between flex flex-col h-screen">
@@ -108,7 +103,7 @@ const SupportMob = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-        <ProfileButton/>
+        <ProfileButton />
       </div>
       <div className="z-10  flex mt-[68px]  border-b border-[#0f002b] justify-between py-2 px-4  items-center bg-[#fead3a] max-w-[480px] w-full">
         <div className="flex justify-center gap-2 items-center">
@@ -117,15 +112,14 @@ const SupportMob = () => {
             className="w-[30px] h-[30px] rounded-[100px] border border-solid border-white "
           />
           <div className="flex flex-col text-black items-start justify-center">
-            <span className="text-[20px] py-1 leading-tight">
+            <span className="text-[20px] text-lg py-1 leading-tight">
               Customer Service
             </span>
           </div>
         </div>
         <div className="flex gap-2">
-          {/* <img src={startchat} className="w-[30px] h-[30px]  " /> */}
           <div>
-            <Popover placement="left-start">
+            {/* <Popover placement="left-start">
               <PopoverHandler>
                 <div className="px-3">
                   <img src={menu} className="w-[5px] h-[30px] " />
@@ -148,7 +142,7 @@ const SupportMob = () => {
                   Report
                 </ListItem>
               </PopoverContent>
-            </Popover>
+            </Popover> */}
           </div>
         </div>
       </div>
@@ -180,14 +174,7 @@ const SupportMob = () => {
                 }}
               >
                 <span>{textmsg.message}</span>
-                {/* {textmsg.image && (
-                <img
-                  src={message.image}
-                  alt="Shared"
-                  className="mt-1"
-                  style={{ maxWidth: "100%" }}
-                />
-              )} */}
+
                 <span
                   className={`text-xs block text-gray-500 mt-1 ${
                     textmsg.sender === users?._id ? "text-end" : "text-start"

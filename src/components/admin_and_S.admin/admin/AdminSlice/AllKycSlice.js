@@ -16,6 +16,7 @@ export const fetchAllKyc = createAsyncThunk(
                     Authorization: `Bearer ${accessToken}`,
                 },
             });
+            toast.success(response.data.message)
             return response.data.verify;
         } catch (error) {
             console.error('Error fetching all users:', error);

@@ -13,11 +13,7 @@ import {
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  logoutAsync,
-  selectRefreshToken,
-  selectToken,
-} from "../app_start/authSlice";
+import { logoutAsync } from "../app_start/authSlice";
 import { fetchUserDetail } from "../live_battle/userSlice";
 import { Icon } from "@iconify-icon/react";
 import { toast } from "react-toastify";
@@ -31,25 +27,22 @@ const NewProfileMob = () => {
   const [aadharfrontname, setaadharfrontName] = useState("");
   const [aadharbackname, setaadharbackName] = useState("");
   const [aadharNumber, setAadharNumber] = useState("");
-  const [kycStatus, setKycStatus] = useState("Not Uploaded");
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [scrollPosition, setScrollPosition] = useState(0);
   const users = useSelector((state) => state.user.user);
   const [isUserNameEdit, setIsUserNameEdit] = useState(false);
-  const [userName, setUserName] = useState(users?._id?.slice(-6) || "");
+  const [userName, setUserName] = useState(users?.userName || "");
 
   console.log(users);
   const [openBottom, setOpenBottom] = useState(
-    users?.userKyc?.verificationStatus === false &&
-      (users?.userKyc?.aadharNo === undefined ||
-        users?.userKyc?.aadharNo === "")
+    users?.userKyc?.verificationStatus === "pending" ? true : false
   );
 
-  const loading = useSelector((state) => state.user.loading);
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
   const openDrawerBottom = () => {
-    if (users?.userKyc?.verificationStatus === true) {
+    if (users?.userKyc?.verificationStatus === "approved") {
       return;
     } else setOpenBottom(true);
   };
@@ -57,6 +50,7 @@ const NewProfileMob = () => {
 
   useEffect(() => {
     dispatch(fetchUserDetail());
+    users?.userName && setUserName(users?.userName);
   }, []);
   useEffect(() => {
     const handleScroll = () => {
@@ -75,7 +69,7 @@ const NewProfileMob = () => {
     setaadharfrontName(file.name);
     // setAadharFront(URL.createObjectURL(e.target.files[0]));
   };
-  console.log(aadharFront);
+
   const handleAadharBackUpload = (e) => {
     const file = e.target.files[0];
     setAadharBack(file);
@@ -91,7 +85,7 @@ const NewProfileMob = () => {
 
   const handleSubmit = async () => {
     if (!validateAadhar(aadharNumber)) {
-      toast.error("Please Enter Valid Aadhar number");
+      toast.error("Please Enter a Valid Aadhar number");
       return;
     }
     if (!aadharFront || !aadharBack) {
@@ -111,15 +105,41 @@ const NewProfileMob = () => {
           },
         });
         toast.success(response.data.message);
+        dispatch(fetchUserDetail());
         console.log(response.data);
       } catch (error) {
         console.error("Error:", error);
       }
-      setKycStatus("Complete");
+
       closeDrawerBottom();
       // You can add additional logic here for submitting the images
     }
   };
+
+  const addUserName = async (username) => {
+    if (!username) {
+      toast.error("Please Enter a Valid Username");
+      return;
+    }
+    try {
+      const name = { userName: username };
+      const response = await axios.post("/api/user/addusername", name, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Ensure the correct capitalization for "Bearer"
+        },
+      });
+
+      toast.success("usename updated successfully");
+      setIsUserNameEdit((prevState) => !prevState);
+      dispatch(fetchUserDetail());
+      return response.data;
+    } catch (error) {
+      toast.error(error.message);
+      console.error("Error adding username:", error);
+      throw error;
+    }
+  };
+
   const handleLogout = () => {
     dispatch(logoutAsync({ token: accessToken, refreshtoken: refreshToken }));
   };
@@ -141,6 +161,7 @@ const NewProfileMob = () => {
         <PageLoader />{" "}
       </div>
     );
+
   return (
     <div className="max-w-[480px] w-full min-h-screen h-full">
       <div
@@ -217,10 +238,10 @@ const NewProfileMob = () => {
                     scrollPosition > 10 ? "text-xl" : ""
                   }`}
                 >
-                  Ludo Player
+                  {users.userName ? users.userName : "Ludo Player"}
                 </span>
                 <img
-                  className={`${scrollPosition > 10 ? "hidden " : ""} mt-2 w-6`}
+                  className={`${scrollPosition > 10 ? "hidden " : ""} w-6`}
                   src={Verify}
                   alt="Iconparkoutlinesuccess"
                 />
@@ -234,43 +255,6 @@ const NewProfileMob = () => {
               </div>
             </div>
           </div>
-          {/* <label className={`${scrollPosition > 10 ? "pr-10" : "hidden"}`}>
-            <input
-              type="checkbox"
-              className="hidden"
-              checked={isChecked}
-              onChange={toggleCheckbox}
-            />
-            <div
-              className={`w-[76px] rounded-full shadow-lg cursor-pointer text-white font-bold text-sm ${
-                isChecked ? "bg-green-500" : "bg-red-500"
-              }`}
-            >
-              {!isChecked ? (
-                <div className="flex  transition-all ease-in-out gap-1 items-center justify-center pr-2">
-                  <div className="bg-white  rounded-full flex items-center justify-center p-1">
-                    <Icon
-                      icon="material-symbols:error-outline"
-                      style={{ color: "green" }}
-                      width={24}
-                    />
-                  </div>
-                  <p> KYC</p>
-                </div>
-              ) : (
-                <div className="flex transition-all ease-in-out items-center justify-center gap-1 pl-2">
-                  <p> KYC</p>
-                  <div className="bg-white rounded-full flex items-center justify-center p-1">
-                    <Icon
-                      icon="charm:circle-tick"
-                      style={{ color: "green" }}
-                      width={24}
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-          </label> */}
         </div>
 
         <div className="mt-10 flex flex-col gap-3 w-full font-['Nunito_Sans'] items-start relative text-white font-bold">
@@ -281,10 +265,10 @@ const NewProfileMob = () => {
                 <IconButton className="bg-transparent">
                   <Icon
                     icon="carbon:save"
-                    onClick={() => setIsUserNameEdit(!isUserNameEdit)}
+                    onClick={() => addUserName(userName)}
                     width={32}
                     className="bg-transparent transition duration-300 ease-in-out transform hover:scale-110 hover:text-[#fead3a]"
-                 />
+                  />
                 </IconButton>
               ) : (
                 <IconButton className="bg-transparent">
@@ -293,7 +277,7 @@ const NewProfileMob = () => {
                     onClick={() => setIsUserNameEdit(!isUserNameEdit)}
                     width={32}
                     className="bg-transparent transition duration-300 ease-in-out transform hover:scale-110 hover:text-[#fead3a]"
-                />
+                  />
                 </IconButton>
               )}
             </div>
@@ -318,7 +302,9 @@ const NewProfileMob = () => {
               ) : (
                 <div className="flex flex-row justify-between ml-4 w-full items-start">
                   <div className="text-sm mt-px">User Name :</div>
-                  <span>{userName}</span>
+                  <span>
+                    {users?.userName ? users?.userName : "ludo player"}
+                  </span>
                 </div>
               )}
             </div>
@@ -330,22 +316,20 @@ const NewProfileMob = () => {
                   <input
                     type="checkbox"
                     className="hidden"
-                    checked={users?.userKyc?.verificationStatus}
+                    checked={users?.userKyc?.verificationStatus !== "approved"}
                     onChange={openDrawerBottom}
                   />
                   <div
                     className={`${
-                      users?.userKyc?.verificationStatus
-                        ? "bg-green-500"
-                        : "bg-red-500"
-                    } ${
-                      users?.userKyc?.verificationStatus === false &&
-                      users?.userKyc?.aadharNo
-                        ? "w-[80px] bg-yellow-900"
-                        : "w-[56px]"
-                    }  rounded-full shadow-lg cursor-pointer text-white font-bold text-sm `}
+                      users?.userKyc?.verificationStatus === "pending"
+                        ? "bg-[#FF0000]"
+                        : users?.userKyc?.verificationStatus === "inprogress"
+                        ? "bg-yellow-900"
+                        : "bg-green-500"
+                    }                   
+                     rounded-full shadow-lg cursor-pointer text-white font-bold text-sm `}
                   >
-                    {!users?.userKyc?.verificationStatus ? (
+                    {users?.userKyc?.verificationStatus !== "approved" ? (
                       <div className="flex  transition-all ease-in-out gap-1 items-center justify-center pr-2">
                         <div className="bg-white  rounded-full flex items-center justify-center p-1">
                           <Icon
@@ -354,17 +338,12 @@ const NewProfileMob = () => {
                             width={16}
                           />
                         </div>
-                        {users?.userKyc?.verificationStatus === false &&
-                        users?.userKyc?.aadharNo ? (
-                          <p className="text-xs"> pending</p>
-                        ) : (
-                          <p className="text-xs"> KYC</p>
-                        )}
+                        <p className="text-xs">KYC</p>
                       </div>
                     ) : (
-                      <div className="flex transition-all ease-in-out items-center justify-center gap-1 pl-2">
-                        <p className="text-xs"> KYC</p>
-                        <div className="bg-white rounded-full flex items-center justify-center p-1">
+                      <div className="flex  transition-all ease-in-out gap-1 items-center justify-center pl-2">
+                        <p className="text-xs">KYC</p>
+                        <div className="bg-white  rounded-full flex items-center justify-center p-1">
                           <Icon
                             icon="charm:circle-tick"
                             style={{ color: "green" }}
@@ -377,40 +356,11 @@ const NewProfileMob = () => {
                 </label>
               </div>
             </div>
-            {/* <div className="flex flex-col justify-between gap-6 w-5/6 items-start">
-              <div className="text-xl font-bold text-white">
-                Notification Preference
-              </div>
-              <div className="flex flex-row justify-between ml-4 w-full items-start">
-                <div className="text-sm text-white mt-px">Email :</div>
-                <Switch color="amber" className="bg-brown-800" />
-              </div>
-              <div className="flex flex-row justify-between ml-4 w-full items-start">
-                <div id="Push" className="text-sm text-white mt-px">
-                  Push :
-                </div>
-                <Switch color="amber" className="bg-brown-800" />
-              </div>
-              <div className="flex flex-row justify-between ml-4 w-full items-start">
-                <div id="Push" className="text-sm text-white mt-px">
-                  Phone No. :
-                </div>
-                <Switch color="amber" className="bg-brown-800" />
-              </div>
-            </div> */}
-
-            {/* <div className="flex flex-col justify-between gap-6 w-5/6 items-start">
-              <div className="text-xl font-bold text-white">App Preference</div>
-              <div className="flex flex-row justify-between ml-4 w-full items-start">
-                <div className="text-sm text-white mt-px">Theme :</div>
-                <Switch color="amber" className="bg-brown-800" />
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
 
-      {!users?.userKyc?.verificationStatus && (
+      {users?.userKyc?.verificationStatus !== "approved" && (
         <Drawer
           placement="bottom"
           open={openBottom}
@@ -420,19 +370,17 @@ const NewProfileMob = () => {
           <div className="p-2  max-w-sm mx-auto rounded-xl shadow-md flex flex-col items-center gap-2">
             <div
               className={`text-white  font-bold flex items-center gap-2 ${
-                users?.userKyc?.verificationStatus === false &&
-                users?.userKyc?.aadharNo
-                  ? "bg-yellow-900"
-                  : "bg-[#FF0000]"
+                users?.userKyc?.verificationStatus === "pending"
+                  ? "bg-[#FF0000]"
+                  : "bg-yellow-900"
               } pl-2 pr-0 rounded-3xl`}
             >
               <p className="text-xs">
                 {" "}
                 KYC Status:{" "}
-                {users?.userKyc?.verificationStatus === false &&
-                users?.userKyc?.aadharNo
+                {users?.userKyc?.verificationStatus === "pending"
                   ? "Pending"
-                  : kycStatus}
+                  : "inprogress"}
               </p>
               <div className="bg-white rounded-full w-5 h-5 flex justify-center items-center">
                 <Icon
@@ -441,81 +389,76 @@ const NewProfileMob = () => {
                 />
               </div>
             </div>
-            {kycStatus === "Not Uploaded" &&
-            users?.userKyc?.verificationStatus === false &&
-            users?.userKyc?.aadharNo
-              ? ""
-              : kycStatus === "Not Uploaded" && (
-                  <div className="flex flex-col gap-2 w-[60%]">
-                    <input
-                      type="text"
-                      value={aadharNumber}
-                      onChange={(e) => setAadharNumber(e.target.value)}
-                      placeholder="Enter Aadhaar Number"
-                      className="font-bold  cursor-pointer bg-white bg-opacity-[30%]  text-white py-2 px-4 rounded-lg"
-                    />
+            {users?.userKyc?.verificationStatus === "inprogress" ? (
+              ""
+            ) : (
+              <div className="flex flex-col gap-2 w-[60%]">
+                <input
+                  type="text"
+                  value={aadharNumber}
+                  onChange={(e) => setAadharNumber(e.target.value)}
+                  placeholder="Enter Aadhaar Number"
+                  className="font-bold  cursor-pointer bg-white bg-opacity-[30%]  text-white py-2 px-4 rounded-lg"
+                />
 
-                    {aadharfrontname ? (
-                      <div className="rounded-md gap-2 bg-white bg-opacity-[60%] text-white flex justify-start items-center  text-xs">
-                        <IconButton
-                          className="p-1 m-1 h-8 w-8"
-                          onClick={resetAadharfront}
-                        >
-                          <Icon icon="charm:cross" width={32} />{" "}
-                        </IconButton>
-                        {aadharfrontname.slice(0, 20)}
-                      </div>
-                    ) : (
-                      <label
-                        className={`font-bold text-center cursor-pointer bg-white ${
-                          aadharfrontname
-                            ? "bg-opacity-[60%]"
-                            : "bg-opacity-[30%]"
-                        }  hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg`}
-                      >
-                        <span>Aadhar Front</span>
-                        <input
-                          type="file"
-                          className="hidden"
-                          accept="image/*"
-                          onChange={handleAadharFrontUpload}
-                        />
-                      </label>
-                    )}
-
-                    {aadharbackname ? (
-                      <div className="rounded-md bg-white bg-opacity-[60%] text-white gap-2 flex justify-start items-center  text-xs">
-                        <IconButton
-                          className="p-1 m-1 h-8 w-8"
-                          onClick={resetAadharback}
-                        >
-                          <Icon icon="charm:cross" width={32} />{" "}
-                        </IconButton>
-                        {aadharbackname.slice(0, 20)}
-                      </div>
-                    ) : (
-                      <label className="cursor-pointer  text-center font-bold bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
-                        <span>Aadhar Back </span>
-                        <input
-                          type="file"
-                          className="hidden"
-                          accept="image/*"
-                          onChange={handleAadharBackUpload}
-                        />
-                      </label>
-                    )}
-
-                    <button
-                      className="bg-gray-50 hover:bg-gray-100 text-[#0F002B] py-2 px-4 rounded-lg"
-                      onClick={handleSubmit}
+                {aadharfrontname ? (
+                  <div className="rounded-md gap-2 bg-white bg-opacity-[60%] text-white flex justify-start items-center  text-xs">
+                    <IconButton
+                      className="p-1 m-1 h-8 w-8"
+                      onClick={resetAadharfront}
                     >
-                      Submit
-                    </button>
+                      <Icon icon="charm:cross" width={32} />{" "}
+                    </IconButton>
+                    {aadharfrontname.slice(0, 20)}
                   </div>
+                ) : (
+                  <label
+                    className={`font-bold text-center cursor-pointer bg-white ${
+                      aadharfrontname ? "bg-opacity-[60%]" : "bg-opacity-[30%]"
+                    }  hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg`}
+                  >
+                    <span>Aadhar Front</span>
+                    <input
+                      type="file"
+                      className="hidden"
+                      accept=".jpeg, .jpg, .png"
+                      onChange={handleAadharFrontUpload}
+                    />
+                  </label>
                 )}
+
+                {aadharbackname ? (
+                  <div className="rounded-md bg-white bg-opacity-[60%] text-white gap-2 flex justify-start items-center  text-xs">
+                    <IconButton
+                      className="p-1 m-1 h-8 w-8"
+                      onClick={resetAadharback}
+                    >
+                      <Icon icon="charm:cross" width={32} />{" "}
+                    </IconButton>
+                    {aadharbackname.slice(0, 20)}
+                  </div>
+                ) : (
+                  <label className="cursor-pointer  text-center font-bold bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
+                    <span>Aadhar Back </span>
+                    <input
+                      type="file"
+                      className="hidden"
+                      accept=".jpeg, .jpg, .png"
+                      onChange={handleAadharBackUpload}
+                    />
+                  </label>
+                )}
+
+                <button
+                  className="bg-gray-50 hover:bg-gray-100 text-[#0F002B] py-2 px-4 rounded-lg"
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </button>
+              </div>
+            )}
           </div>
-          {users?.userKyc?.verificationStatus === false &&
-          users?.userKyc?.aadharNo ? (
+          {users?.userKyc?.verificationStatus === "inprogress" ? (
             <Typography
               color="gray"
               className="mb-4 text-xl font-[Inter] mt-2 px-9 flex justify-center font-normal"
@@ -525,9 +468,9 @@ const NewProfileMob = () => {
           ) : (
             <Typography
               color="gray"
-              className="mb-4 text-[14px] font-[Inter] mt-2 px-9 flex justify-center font-normal"
+              className=" mb-4 text-[12px] font-[Inter] mt-2 px-9 flex justify-center font-normal "
             >
-              Make sure that you upload the correct image. This will be used in
+              *Make sure that you upload the correct image. This will be used in
               future for reference in case of any issues.
             </Typography>
           )}
