@@ -84,7 +84,8 @@ const listofAll = async (req, res, next) => {
 
 const supportMessagesForAdmin = async (req, res, next) => {
   try {
-    const userId = req.body;
+    const {userId} = req.body;
+    console.log(userId,"y8iurrfgvehjbj")
     const ticket = await Support.findOne({ createdBy: userId });
     return res.status(200).json({ ticket });
   } catch (err) {

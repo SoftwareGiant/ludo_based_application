@@ -1,0 +1,20 @@
+{
+  message: `undefined - Cast to ObjectId failed for value "{ userId: '65df02ecb883a67ae2127960' }" (type Object) at path "createdBy" for model "Support" - /api/support/admin/supportmessage - POST`,
+  level: 'error',
+  timestamp: 'May-24-2024 16:05:36'
+}
+{
+  message: `undefined - Cast to ObjectId failed for value "{ userId: '65df02ecb883a67ae2127960' }" (type Object) at path "createdBy" for model "Support" - /api/support/admin/supportmessage - POST`,
+  level: 'error',
+  timestamp: 'May-24-2024 16:05:57'
+}
+{
+  message: `undefined - Cast to ObjectId failed for value "{ userId: '65df02ecb883a67ae2127960' }" (type Object) at path "createdBy" for model "Support" - /api/support/admin/supportmessage - POST`,
+  level: 'error',
+  timestamp: 'May-24-2024 16:08:00'
+}
+{
+  message: `undefined - Cast to ObjectId failed for value "{ userId: '65df02ecb883a67ae2127960' }" (type Object) at path "createdBy" for model "Support" - /api/support/admin/supportmessage - POST`,
+  level: 'error',
+  timestamp: 'May-24-2024 16:08:31'
+}
