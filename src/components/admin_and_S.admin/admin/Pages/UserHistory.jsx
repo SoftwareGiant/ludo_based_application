@@ -20,6 +20,7 @@ import Refreshloader from "../../superadmin/Common/Refreshloader";
 import AdminFooter from "../Common.jsx/AdminFooter";
 import UserHistoryCard from "../Common.jsx/UserHistoryCard";
 import PageLoader from "../../../MainLayout/PageLoader";
+import { Link } from "react-router-dom";
 
 export function UserHistory() {
   const [sortConfig, setSortConfig] = useState({
@@ -98,7 +99,9 @@ export function UserHistory() {
     <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
         <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
-          <span className="underline">Admin Control Panel </span>
+          <Link to="/newonboard" className="underline">
+            Admin Control Panel{" "}
+          </Link>
           <span>&gt;&gt;</span>
           <span className="underline">Menu</span>
           <span>&gt;&gt;</span>
@@ -248,41 +251,44 @@ export function UserHistory() {
               </tr>
             </thead>
             <tbody>
-              {filteredUsers?.map(({ _id, mobileNo, createdAt, abanDoned }) => {
-                return (
-                  <tr key={_id}>
-                    <td className="p-4">
-                      <div className="flex items-center gap-3">
-                        <Typography className="font-[Inter] font-medium text-[16px]">
-                          {_id}
-                        </Typography>
-                      </div>
-                    </td>
-                    <td className="p-4">
-                      <div className="flex flex-col">
-                        <Typography className="font-[Inter] font-medium text-[16px]">
-                          {mobileNo}
-                        </Typography>
-                      </div>
-                    </td>
-                    <td className="p-4">
-                      <div className="w-max">
-                        <Typography className="font-[Inter] font-medium text-[16px]">
-                          {formatDate(createdAt)}
-                        </Typography>
-                      </div>
-                    </td>
-                    <td className="p-4">
-                      <UserHistoryCard
-                        status={!abanDoned ? "Active" : "Inactive"}
-                        uid={_id}
-                        updatedAt={formatDate(createdAt)}
-                        mobileNo={mobileNo}
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
+              {filteredUsers?.map(
+                ({ _id, userName, mobileNo, createdAt, abanDoned }) => {
+                  return (
+                    <tr key={_id}>
+                      <td className="p-4">
+                        <div className="flex items-center gap-3">
+                          <Typography className="font-[Inter] font-medium text-[16px]">
+                            {_id}
+                          </Typography>
+                        </div>
+                      </td>
+                      <td className="p-4">
+                        <div className="flex flex-col">
+                          <Typography className="font-[Inter] font-medium text-[16px]">
+                            {userName || mobileNo}
+                          </Typography>
+                        </div>
+                      </td>
+                      <td className="p-4">
+                        <div className="w-max">
+                          <Typography className="font-[Inter] font-medium text-[16px]">
+                            {formatDate(createdAt)}
+                          </Typography>
+                        </div>
+                      </td>
+                      <td className="p-4">
+                        <UserHistoryCard
+                          status={!abanDoned ? "Active" : "Inactive"}
+                          userName={userName}
+                          uid={_id}
+                          updatedAt={formatDate(createdAt)}
+                          mobileNo={mobileNo}
+                        />
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
             </tbody>
           </table>
         </CardBody>

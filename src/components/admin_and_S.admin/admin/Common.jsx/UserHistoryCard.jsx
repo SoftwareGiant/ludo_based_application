@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify-icon/react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import {convertTimestamp} from "../../Functions/convertTimestamp.js"
+import { convertTimestamp } from "../../Functions/convertTimestamp.js";
 import {
   Typography,
   CardBody,
@@ -14,22 +14,14 @@ import {
 import { fetchUserAllHistory } from "../AdminSlice/userAllHistorySlice";
 import { formatDate } from "../../Functions/formateDate";
 
-const TABLE_ROWS = [
-  {
-    uid: "11",
-    referid: "ABC12",
-    referedate: "02-12-2024",
-    status: "Joined",
-  },
-  {
-    uid: "21",
-    referid: "ABC13",
-    referedate: "01-01-2024",
-    status: "Joined",
-  },
- 
-];
-const UserHistoryCard = ({ status, mobileNo, uid, updatedAt, userdetail }) => {
+const UserHistoryCard = ({
+  status,
+  mobileNo,
+  uid,
+  userName,
+  updatedAt,
+  userdetail,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [table1, setTable1] = useState(false);
   const [table2, setTable2] = useState(false);
@@ -38,11 +30,8 @@ const UserHistoryCard = ({ status, mobileNo, uid, updatedAt, userdetail }) => {
   const [table5, setTable5] = useState(false);
   const dispatch = useDispatch();
 
-  const { loading, gameDetails, paymentDetails, error } = useSelector(
-    (state) => state.userAllHistory
-  );
-
-  console.log(gameDetails, paymentDetails);
+  const { loading, gameDetails, paymentDetails, supportDetails, error } =
+    useSelector((state) => state.userAllHistory);
 
   const openModal = () => {
     dispatch(fetchUserAllHistory(uid));
@@ -52,33 +41,6 @@ const UserHistoryCard = ({ status, mobileNo, uid, updatedAt, userdetail }) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-
-  // const handleReject = () => {
-  //   toast.success("rejected kyc");
-
-  //   closeModal();
-  // };
-  //   const handleVerification = () => {
-  //     dispatch(fetchAllKyc({ uid }));
-  //     handleRefresh();
-  //   };
-  // function formatDate(dateStr) {
-  //   const date = new Date(dateStr);
-
-  //   const options = {
-  //     day: "2-digit",
-  //     month: "2-digit",
-  //     year: "numeric",
-  //     hour: "2-digit",
-  //     minute: "2-digit",
-  //     hour12: false,
-  //     timeZone: "Asia/Kolkata", // IST timezone
-  //   };
-
-  //   return date.toLocaleString("en-IN", options);
-  // }
-  // if (loading) return <div>Loading...</div>;
-  // if (error) return <div>Error: {error}</div>;
   return (
     <div className="flex gap-3 mb-3">
       <div
@@ -146,7 +108,7 @@ const UserHistoryCard = ({ status, mobileNo, uid, updatedAt, userdetail }) => {
                         )}
                       </span>
                       <span className="font-normal text-sm -mt-1">
-                        @{uid.slice(-6)}
+                        @{uid?.slice(-6)}
                       </span>
                     </div>
                   </div>
@@ -190,7 +152,7 @@ const UserHistoryCard = ({ status, mobileNo, uid, updatedAt, userdetail }) => {
                               </th>
                               <th className="cursor-pointer   p-2 transition-colors  rounded-lg">
                                 <Typography className="flex  leading-none  p-2 rounded-md  font-[Inter] font-medium text-[16px]">
-                                  {uid.slice(-6)}
+                                  {userName ? userName : "Ludo player"}
                                 </Typography>
                               </th>
                             </tr>
@@ -218,56 +180,6 @@ const UserHistoryCard = ({ status, mobileNo, uid, updatedAt, userdetail }) => {
                           Game History
                         </span>
                         <div className="flex gap-2 font-[Inter] items-center  font-medium text-[16px]">
-                          {/* {table2 && (
-                            <div className=" justify-between flex items-center p-1 px-2 h-[32px] border  rounded-lg">
-                              <input
-                                placeholder="Search"
-                                className="outline-none w-32"
-                              />
-                              <Icon icon="material-symbols:search" width="24" />
-                            </div>
-                          )} */}
-                          {/* {table2 && (
-                            <Menu>
-                              <MenuHandler>
-                                <div className="p-1 w-[88px] h-[32px] cursor-pointer  flex items-center justify-between ">
-                                  <span>Sort</span>{" "}
-                                  <Icon icon="prime:sort" width="24" />
-                                </div>
-                              </MenuHandler>
-                              <MenuList>
-                                <MenuItem className="font-[Inter] text-[16px] text-[#0F002B] font-medium flex justify-start gap-3 items-center">
-                                  <Icon
-                                    icon="mdi:calendar-today-outline"
-                                    width="24"
-                                  />
-                                  Daily
-                                </MenuItem>
-                                <MenuItem className="font-[Inter] text-[16px] text-[#0F002B] font-medium flex justify-start gap-3 items-center">
-                                  <Icon icon="bi:calendar4-week" width="24" />
-                                  Weekly
-                                </MenuItem>
-                                <MenuItem className="font-[Inter] text-[16px] text-[#0F002B] font-medium flex justify-start gap-3 items-center">
-                                  <Icon icon="formkit:month" width="24" />
-                                  Monthly
-                                </MenuItem>
-                                <MenuItem className="font-[Inter] text-[16px] text-[#0F002B] font-medium flex justify-start gap-3 items-center">
-                                  <Icon
-                                    icon="fluent-mdl2:calendar-year"
-                                    width="24"
-                                  />{" "}
-                                  Yearly
-                                </MenuItem>
-                                <MenuItem className="font-[Inter] text-[16px] text-[#0F002B] font-medium flex justify-start gap-3 items-center">
-                                  <Icon
-                                    icon="fluent-mdl2:time-entry"
-                                    width="24"
-                                  />{" "}
-                                  All Time{" "}
-                                </MenuItem>
-                              </MenuList>
-                            </Menu>
-                          )} */}
                           <div className="flex justify-center items-center">
                             {table2 ? (
                               <Icon
@@ -332,11 +244,13 @@ const UserHistoryCard = ({ status, mobileNo, uid, updatedAt, userdetail }) => {
                                         </Typography>
                                       </div>
                                     </td>
-                                    
+
                                     <td className="p-4">
                                       <div className="flex flex-col">
                                         <Typography className="font-[Inter] font-medium text-[16px]">
-                                          {convertTimestamp(val?.matchingTimeStamp)}
+                                          {convertTimestamp(
+                                            val?.matchingTimeStamp
+                                          )}
                                         </Typography>
                                       </div>
                                     </td>
@@ -595,34 +509,34 @@ const UserHistoryCard = ({ status, mobileNo, uid, updatedAt, userdetail }) => {
                             </tr>
                           </thead>
                           <tbody className="h-full w-full">
-                            {TABLE_ROWS?.map((val) => {
-                              return (
-                                <tr key={val.uid}>
-                                  <td className="p-4">
-                                    <div className="flex items-center gap-3">
-                                      <Typography className="font-[Inter] font-medium text-[16px]">
-                                        {val.uid}
-                                      </Typography>
-                                    </div>
-                                  </td>
-                                  <td className="p-4">
-                                    <div className="flex flex-col">
-                                      <Typography className="font-[Inter] font-medium text-[16px]">
-                                        2 hr ago
-                                      </Typography>
-                                    </div>
-                                  </td>
+                            {supportDetails && (
+                              <tr key={supportDetails._id}>
+                                <td className="p-4">
+                                  <div className="flex items-center gap-3">
+                                    <Typography className="font-[Inter] font-medium text-[16px]">
+                                      {supportDetails._id}
+                                    </Typography>
+                                  </div>
+                                </td>
+                                <td className="p-4">
+                                  <div className="flex flex-col">
+                                    <Typography className="font-[Inter] font-medium text-[16px]">
+                                      {convertTimestamp(
+                                        supportDetails.lastUpdated
+                                      )}
+                                    </Typography>
+                                  </div>
+                                </td>
 
-                                  <td className="p-4">
-                                    <div className="flex flex-col">
-                                      <Typography className="font-[Inter] font-medium text-[16px]">
-                                        won
-                                      </Typography>
-                                    </div>
-                                  </td>
-                                </tr>
-                              );
-                            })}
+                                <td className="p-4">
+                                  <div className="flex flex-col">
+                                    <Typography className="font-[Inter] font-medium text-[16px]">
+                                      {supportDetails.status}
+                                    </Typography>
+                                  </div>
+                                </td>
+                              </tr>
+                            )}
                           </tbody>
                         </table>
                       )}

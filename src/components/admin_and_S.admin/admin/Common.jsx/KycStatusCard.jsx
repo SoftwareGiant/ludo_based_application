@@ -20,11 +20,10 @@ const KycStatusCard = ({ val, handleRefresh }) => {
     closeModal();
   };
   const handleVerification = () => {
-    dispatch(fetchAllKyc({uid:val?._id}));
+    dispatch(fetchAllKyc({ uid: val?._id }));
     handleRefresh();
   };
 
-  
   return (
     <div className="flex gap-3 mb-3">
       <div
@@ -117,12 +116,12 @@ const KycStatusCard = ({ val, handleRefresh }) => {
                     <span>{val.userKyc.aadharNo}</span>
                   </div>
                 </div>
-                {!val.status && (
+                {val?.userKyc?.verificationStatus !== "approved" && (
                   <div className="text-start font-bold text-[20px] text-[#000000]">
                     Update Status
                   </div>
                 )}
-                {!val.status && (
+                {val?.userKyc?.verificationStatus !== "approved" && (
                   <div className="flex  w-full mb-4 justify-between">
                     <div
                       onClick={handleVerification}

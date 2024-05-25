@@ -63,6 +63,7 @@ import MatchUserChat from "./components/Chathistory/MatchUserChat.jsx";
 import MyChat from "./components/Chathistory/MyChat.jsx";
 import AdminSLides from "./components/admin_and_S.admin/admin/Pages/AdminSLides.jsx";
 import ErrorBoundary from "./Errorboundary.jsx";
+import CustomerChat from "./components/admin_and_S.admin/admin/Common.jsx/CustomerChat.jsx";
 
 function App() {
   return (
@@ -136,7 +137,9 @@ function App() {
             <Route path="/adminreferral" element={<ReferaalTrack />} />
             <Route path="/adminuserhistory" element={<UserHistory />} />
             <Route path="/adminsuport" element={<AdminSupport />} />
-            <Route path="/admincustomer" element={<AdminCustomer />} />
+            <Route path="/admincustomer" element={<AdminCustomer />} >
+            <Route path=":userId" element={<CustomerChat />} />
+            </Route>
             <Route path="/adminslides" element={<AdminSLides />} />
           </Route>
 

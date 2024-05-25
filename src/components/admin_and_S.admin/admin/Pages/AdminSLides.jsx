@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify-icon/react";
 import { Button, Card, CardBody } from "@material-tailwind/react";
 
 import AdminFooter from "../Common.jsx/AdminFooter";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const AdminSLides = () => {
   const [sliderData, setSliderData] = useState([]);
-
+  const [selectFile, setSelectFile] = useState("");
+  const [filename, setFilename] = useState("");
+  const { accessToken } = useSelector((state) => state.auth);
+  const fileInputRef = useRef(null);
   useEffect(() => {
     getSlides();
   }, []);
@@ -21,33 +26,63 @@ const AdminSLides = () => {
       console.error("Error fetching slider data:", error);
     }
   };
-  const handleDelete = (id) => {
-    toast.success("image deleted successfully");
-    setImages(images.filter((image) => image.id !== id));
+  const handleDelete = async (slideName) => {
+    try {
+      const fileData = {
+        fileName: slideName,
+      };
+
+      const response = await axios.post("/api/admin/removeslider", fileData, {
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
+      });
+
+      console.log(response.data);
+      getSlides();
+    } catch (error) {
+      console.error("Error deleting slide:", error);
+      toast.error(`Failed to delete slide: ${error.message}`);
+    }
   };
 
-  const handleAdd = () => {};
+  const handleAdd = async () => {
+    if (selectFile) {
+      try {
+        const formData = new FormData();
+        formData.append("image", selectFile);
 
-  //   const handleUpload = (e) => {
-  //     const file = e.target.files[0];
-  //     if (file) {
-  //       const reader = new FileReader();
-  //       reader.onloadend = () => {
-  //         const newImage = {
-  //           id: images.length + 1,
-  //           url: reader.result,
-  //           name: file.name,
-  //         };
-  //         setImages([...images, newImage]);
-  //       };
-  //       reader.readAsDataURL(file);
-  //     }
-  //   };
+        await axios.post("/api/admin/addslider", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `bearer ${accessToken}`,
+          },
+        });
+        fileInputRef.current.value = "";
+        toast.success("Image uploaded successfully");
+        getSlides();
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        toast.error("Failed to upload image");
+      }
+    } else {
+      toast.error("Select an image to upload");
+    }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectFile(file);
+      setFilename(file.name);
+    }
+  };
+
   return (
     <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
         <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
-          <span className="underline">Admin Control Panel </span>
+          <Link to="/newonboard"  className="underline">Admin Control Panel </Link>
           <span>&gt;&gt;</span>
           <span className="underline">Menu</span>
           <span>&gt;&gt;</span>
@@ -73,8 +108,8 @@ const AdminSLides = () => {
 
           <div className="flex flex-wrap">
             {sliderData.map((image, index) => (
-              <div key={index} className="relative m-2">
-                <div className="w-52 h-28 rounded-md shadow-xl overflow-hidden relative">
+              <div key={index} className="relative m-2 ">
+                <div className="w-52 h-28 rounded-md shadow-md overflow-hidden relative border border-yellow-800">
                   <img
                     src={image}
                     className="w-full h-full object-cover"
@@ -84,7 +119,7 @@ const AdminSLides = () => {
 
                 <div className="absolute top-0 right-0 flex">
                   <button
-                    onClick={() => handleDelete(image.id)}
+                    onClick={() => handleDelete(image)}
                     className="bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center -m-1"
                   >
                     <Icon icon="charm:cross" width={24} />
@@ -93,9 +128,17 @@ const AdminSLides = () => {
               </div>
             ))}
           </div>
-          <div className="m-2">
-            <Button onClick={handleAdd} variant="outlined">
-              Add More
+          <div className="m-2 flex gap-2 items-center">
+            <input
+              className="border border-gray-900 shadow-md py-[5px] px-[5px] w-80 rounded-lg"
+              type="file"
+              accept=".jpg, .jpeg, .png"
+              onChange={handleFileChange}
+              ref={fileInputRef}
+            />
+
+            <Button onClick={handleAdd} color="black">
+              Add Slide
             </Button>
           </div>
         </CardBody>

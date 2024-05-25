@@ -246,7 +246,7 @@ const NewGameMob = () => {
         },
       });
       console.log(response.data);
-      toast.success("battle deleted successfully");
+      toast.success(response.data.message);
       dispatch(fetchAllBattles(socketData));
       return response.data;
     } catch (error) {
@@ -347,7 +347,7 @@ console.log(battles);
                             className="inline-flex flex-col justify-between w-full min-h-[120px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]"
                           >
                             <div className="font-['Inter'] text-[#0f002b] w-full py-4 px-4 flex  justify-between">
-                              {users?._id === e.player1 && (
+                              {users?._id === e?.player1 && (
                                 <div className="absolute   -top-1  right-0">
                                   <IconButton
                                     onClick={() => handleDelete(e._id)}

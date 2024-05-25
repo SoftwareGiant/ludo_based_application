@@ -5,51 +5,51 @@ import FrameProfile from "../../../../assets/profile/Frame_profile.png";
 import React, { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify-icon/react";
 import { SidebarMob } from "../../../MainLayout/SidebarMob";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
-
-import {
-  ListItem,
-  ListItemPrefix,
-  Popover,
-  PopoverContent,
-  PopoverHandler,
-} from "@material-tailwind/react";
-import startchat from "../../../../assets/profile/startchat.svg";
-import { fetchadminsupportlist } from "../AdminSlice/adminsupportlistSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getTime } from "../../Functions/getTime";
 import axios from "axios";
+import { fetchSupportMessages } from "../AdminSlice/supportMessagesSlice";
+import { toast } from "react-toastify";
 
-const CustomerChat = ({ chatdetails, fetchuser }) => {
+const CustomerChat = () => {
   const [showEmojis, setShowEmojis] = useState(false);
   const [inputText, setInputText] = useState("");
   const [image, setImage] = useState(null);
   const [selectedEmoji, setSelectedEmoji] = useState(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const ticket = useSelector((state) => state.supportMessages.ticket);
+  const status = useSelector((state) => state.supportMessages.status);
+  const error = useSelector((state) => state.supportMessages.error);
+  const [selectedValue, setSelectedValue] = useState(ticket?.status);
+  const { accessToken } = useSelector((state) => state.auth);
+
+  const { userId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { accessToken } = useSelector((state) => state.auth);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (status === "idle" && userId != 1) {
+      dispatch(fetchSupportMessages(userId));
+    }
+  }, [status, userId, dispatch]);
+
+  useEffect(() => {
+    if (ticket !== null && userId !== "1") inputRef.current.focus();
+  }, []);
+  useEffect(() => {
+    if (ticket !== null && userId !== "1") {
+      const el = document.getElementById("messages");
+      el.scrollTop = el.scrollHeight;
+    }
+  }, [ticket?.messages]);
   const handleEmojiSelect = (emoji) => {
     setSelectedEmoji(emoji);
     setInputText((prevInputText) => prevInputText + emoji.native);
   };
-  useEffect(() => {
-    dispatch(fetchadminsupportlist());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (chatdetails !== null) inputRef.current.focus();
-  }, []);
-  useEffect(() => {
-    if (chatdetails !== null) {
-      const el = document.getElementById("messages");
-      el.scrollTop = el.scrollHeight;
-    }
-  }, [chatdetails?.messages]);
-
-  const inputRef = useRef(null);
   const handleSendMessage = async (e) => {
     e.preventDefault();
     setShowEmojiPicker(false);
@@ -57,7 +57,7 @@ const CustomerChat = ({ chatdetails, fetchuser }) => {
     console.log(times.slice(0, 4), typeof times);
     if (inputText.trim() === "") return;
     const objmsg = {
-      supportId: chatdetails._id,
+      supportId: ticket._id,
       message: inputText.trim(),
     };
     try {
@@ -67,7 +67,8 @@ const CustomerChat = ({ chatdetails, fetchuser }) => {
         },
       });
       console.log(response.data);
-      fetchuser();
+
+      dispatch(fetchSupportMessages(userId));
       setInputText("");
       setImage(null);
       return response.data;
@@ -87,77 +88,85 @@ const CustomerChat = ({ chatdetails, fetchuser }) => {
       reader.readAsDataURL(file);
     }
   };
-  const handleStart = () => {
-    navigate("/matchstart");
+  const handleChange = async (event) => {
+    console.log(event);
+    const newStatus = event.target.value;
+    setSelectedValue(newStatus);
+
+    try {
+      const response = await axios.post(
+        "/api/support/admin/changestatus",
+
+        {
+          status: newStatus,
+          userId: ticket.createdBy,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      dispatch(fetchSupportMessages(userId));
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(error.message);
+      console.error("Error updating status:", error);
+    }
   };
-  if (chatdetails === null) {
+
+  if (userId === "1" || ticket === null) {
     return (
       <h1 className="font-semibold text-4xl h-full w-full flex justify-center items-center text-gray-800">
         Select a user to chat...
       </h1>
     );
   }
+
   return (
     <div className="flex-1 pb-4 bg-transparent  w-full   justify-between flex flex-col h-[92%]">
       <div className="z-10 flex border-b border-gray-400 shadow-sm justify-between py-2 px-4  items-center   w-full">
         <div className="flex justify-center gap-2 items-center">
           <img
-            onClick={() => navigate("/userprofile")}
             src={FrameProfile}
             className="w-[30px] h-[30px] rounded-[100px] border border-solid border-white "
           />
           <div className="flex flex-col text-black items-start justify-center">
             <span className="text-[20px] leading-tight">
-              {chatdetails?.createdBy?.slice(-6)}
+              {ticket?.createdBy?.slice(-6)}
             </span>
           </div>
         </div>
-        <div className="flex gap-2">
-          <div>
-            <Popover placement="left-start">
-              <PopoverHandler>
-                <div className="px-3">
-                  <img src={menu} className="w-[5px] h-[30px] " />
-                </div>
-              </PopoverHandler>
-              <PopoverContent className="bg-white  z-50">
-                <ListItem
-                  onClick={() => navigate("/feedback")}
-                  className="hover:bg-black hover:text-white"
-                >
-                  <ListItemPrefix>
-                    <img src={feedback} />
-                  </ListItemPrefix>
-                  Feedback
-                </ListItem>
-                <ListItem className="hover:bg-black hover:text-white">
-                  <ListItemPrefix>
-                    <img src={report} />
-                  </ListItemPrefix>
-                  Report
-                </ListItem>
-              </PopoverContent>
-            </Popover>
+        {ticket?.status && (
+          <div className="flex gap-2">
+            <select
+              value={selectedValue || ticket?.status}
+              onChange={handleChange}
+              className="p-1 w-40 rounded-lg bg-[#FEAD3A] "
+            >
+              <option value="open">Unresolved</option>
+              <option value="close">Resolved</option>
+            </select>
           </div>
-        </div>
+        )}
       </div>
       <div
         onClick={() => setShowEmojiPicker(false)}
         id="messages"
         className="flex z-10 h-full flex-col space-y-4 p-3 overflow-y-auto table-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
       >
-        {chatdetails?.messages.map((textmsg) => (
+        {ticket?.messages.map((textmsg) => (
           <div
             key={textmsg._id}
             className={`flex  ${
-              textmsg?.sender !== chatdetails?.createdBy
+              textmsg?.sender !== ticket?.createdBy
                 ? "justify-end "
                 : "justify-start"
             } mb-2`}
           >
             <div
               className={`${
-                textmsg?.sender !== chatdetails?.createdBy
+                textmsg?.sender !== ticket?.createdBy
                   ? "bg-white text-black self-end pl-5 rounded-br-none"
                   : "bg-black text-white self-start pr-5 rounded-bl-none"
               } p-2 rounded-lg max-w-md overflow-hidden font-semibold `}
@@ -178,7 +187,7 @@ const CustomerChat = ({ chatdetails, fetchuser }) => {
               )} */}
               <span
                 className={`text-xs block text-gray-500 mt-1 ${
-                  textmsg?.sender !== chatdetails?.createdBy
+                  textmsg?.sender !== ticket?.createdBy
                     ? "text-end"
                     : "text-start"
                 }`}

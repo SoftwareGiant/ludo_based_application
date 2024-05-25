@@ -14,7 +14,6 @@ import allWithdrawalRequestsReducer from "./components/admin_and_S.admin/admin/A
 import gameHistoryReducer from "./components/admin_and_S.admin/admin/AdminSlice/gameHistorySlice ";
 import ChatReducer from "./components/Chathistory/ChatSlice";
 import favoriteMessagesReducer from "./components/Chathistory/favoriteMessagesSlice"
-
 import AdminSuperAdminListReducer from "./components/admin_and_S.admin/superadmin/SuperAdminSlices/AdminSuperAdminListSlice";
 import withdrawalsReducer from "./components/admin_and_S.admin/superadmin/SuperAdminSlices/withdrawalsSlice";
 import userAllHistoryReducer from "./components/admin_and_S.admin/admin/AdminSlice/userAllHistorySlice";
@@ -22,6 +21,7 @@ import NotificationReducer from "./components/notification/NotificationSlice";
 import openChallengeReducer from "./components/live_battle/openChallengeSlice";
 import supportUserChatReducer from "./components/support/supportUserChatSlice";
 import adminsupportlistReducer from "./components/admin_and_S.admin/admin/AdminSlice/adminsupportlistSlice";
+import supportMessagesReducer from "./components/admin_and_S.admin/admin/AdminSlice/supportMessagesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -48,6 +48,7 @@ export const store = configureStore({
     opengame: openChallengeReducer,
     supportuser: supportUserChatReducer,
     adminsupportlist: adminsupportlistReducer,
+    supportMessages: supportMessagesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

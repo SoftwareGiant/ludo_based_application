@@ -46,11 +46,6 @@ const SupportMob = () => {
     dispatch(fetchUserDetail());
   }, [dispatch]);
 
-  useEffect(() => {
-    const el = document.getElementById("messages");
-    el.scrollTop = el.scrollHeight;
-  }, [messagesLIst]);
-
   const handleEmojiSelect = (emoji) => {
     setSelectedEmoji(emoji);
     setInputText((prevInputText) => prevInputText + emoji.native);

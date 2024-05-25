@@ -114,7 +114,7 @@ const AdminSidebar = () => {
           </div>
         </Link>
 
-        <Link to="/admincustomer">
+        <Link to="/admincustomer/1">
           <div
             className={`flex justify-start gap-4 items-center px-3 rounded-3xl m-1 cursor-pointer ${
               location.pathname === "/admincustomer" ? "bg-[#EEEEEE]" : ""

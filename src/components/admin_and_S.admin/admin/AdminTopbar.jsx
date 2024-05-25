@@ -24,7 +24,7 @@ import Kyc from "../../../assets/admin_Sadmin/admin/kyc.svg";
 import Setting from "../../../assets/admin_Sadmin/admin/settings.svg";
 import Stats from "../../../assets/admin_Sadmin/admin/stats.svg";
 import ButtonLoader from "../../MainLayout/ButtonLoader";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   logoutAsync,
@@ -44,7 +44,7 @@ const AdminTopbar = () => {
   };
   return (
     <div className="flex font-[Inter] p-2 items-center justify-between ">
-      <p onClick={()=>navigate("/newonboard")} className="cursor-pointer text-[20px]">Admin Control Panel</p>
+       <Link to="/newonboard"  className="underline">Admin Control Panel </Link>
       <div className="flex gap-2 items-center">
         <div className="bg-[#ffff] h-[40px] w-[253px] p-2 gap-3 rounded-lg flex items-center">
           <Icon icon="material-symbols:search" width="24" />

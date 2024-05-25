@@ -26,6 +26,7 @@ import Refreshloader from "../../superadmin/Common/Refreshloader";
 import KycStatusCard from "../Common.jsx/KycStatusCard";
 import AdminFooter from "../Common.jsx/AdminFooter";
 import PageLoader from "../../../MainLayout/PageLoader";
+import { Link } from "react-router-dom";
 
 export function KycVerification() {
   const [sortConfig, setSortConfig] = useState({
@@ -111,7 +112,7 @@ export function KycVerification() {
     <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
         <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
-          <span className="underline">Admin Control Panel </span>
+        <Link to="/newonboard"  className="underline">Admin Control Panel </Link>
           <span>&gt;&gt;</span>
           <span className="underline">Menu</span>
           <span>&gt;&gt;</span>

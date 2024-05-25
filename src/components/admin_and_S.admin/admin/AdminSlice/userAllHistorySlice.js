@@ -10,6 +10,7 @@ export const fetchUserAllHistory = createAsyncThunk(
         Authorization: `Bearer ${accessToken}`,
       },
     });
+    console.log(response.data)
     return response.data;
   }
 );
@@ -20,6 +21,7 @@ const userAllHistorySlice = createSlice({
     loading: false,
     gameDetails: [],
     paymentDetails: [],
+    supportDetails: "",
     error: null,
   },
   reducers: {},
@@ -32,7 +34,8 @@ const userAllHistorySlice = createSlice({
         state.loading = false;
         state.gameDetails = action.payload.gameDetails;
         state.paymentDetails = action.payload.paymentDetails;
-      return;
+        state.supportDetails = action.payload.supportHistory;
+        return;
       })
       .addCase(fetchUserAllHistory.rejected, (state, action) => {
         state.loading = false;

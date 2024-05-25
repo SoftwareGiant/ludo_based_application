@@ -21,6 +21,7 @@ import {
 } from "../AdminSlice/alluserSlice";
 import Refreshloader from "../../superadmin/Common/Refreshloader";
 import PageLoader from "../../../MainLayout/PageLoader";
+import { Link } from "react-router-dom";
 
 const TABLE_HEAD = ["UID", "Name", "Mobile Number", "Onboarding Date"];
 export function NewOnboard() {
@@ -98,7 +99,9 @@ export function NewOnboard() {
     <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
         <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
-          <span className="underline">Admin Control Panel </span>
+          <Link to="/newonboard" className="underline">
+            Admin Control Panel{" "}
+          </Link>
           <span>&gt;&gt;</span>
           <span className="underline">Menu</span>
           <span>&gt;&gt;</span>
@@ -116,7 +119,7 @@ export function NewOnboard() {
         <Icon icon="charm:cross" width="12" />
       </div>
       {status === "loading" && isRefresh === false ? (
-        <PageLoader full={true}/>
+        <PageLoader full={true} />
       ) : (
         <Card className=" w-full py-1 pb-10 px-4">
           <CardBody className=" px-0 w-full">
@@ -204,11 +207,11 @@ export function NewOnboard() {
                       >
                         {head}{" "}
                         {(index === 0 || index === 3) && (
-                           <Icon
-                           icon="prime:sort"
-                           strokeWidth={2}
-                           className="h-4 w-4"
-                         />
+                          <Icon
+                            icon="prime:sort"
+                            strokeWidth={2}
+                            className="h-4 w-4"
+                          />
                         )}
                       </Typography>
                     </th>
@@ -216,33 +219,33 @@ export function NewOnboard() {
                 </tr>
               </thead>
               <tbody className=" h-full w-full">
-                {filteredUsers?.map(({ _id, mobileNo, createdAt }) => {
+                {filteredUsers?.map((val) => {
                   return (
-                    <tr key={_id} className="text-[#000000] ">
+                    <tr key={val._id} className="text-[#000000] ">
                       <td className="p-4">
                         <div className="flex items-center gap-3">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {_id}
+                            {val._id}
                           </Typography>
                         </div>
                       </td>
                       <td className="p-4">
                         <div className="flex flex-col">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {mobileNo}
+                            {val?.userName ? val?.userName : val.mobileNo}
                           </Typography>
                         </div>
                       </td>
                       <td className="p-4">
                         <div className="w-max">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {mobileNo}
+                            {val.mobileNo}
                           </Typography>
                         </div>
                       </td>
                       <td className="p-4">
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {formatDate(createdAt)}
+                          {formatDate(val.createdAt)}
                         </Typography>
                       </td>
                     </tr>

@@ -17,7 +17,7 @@ import menu from "../../../../assets/profile/menusvg.svg";
 import FrameProfile from "../../../../assets/profile/Frame_profile.png";
 import { MdOutlineReport } from "react-icons/md";
 import { RiFeedbackFill } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AdminFooter from "../Common.jsx/AdminFooter";
 import AdminSupportChat from "../Common.jsx/AdminSupportChat";
 
@@ -134,7 +134,7 @@ function AdminSupport() {
       <div className="font-[Inter] main-body-right w-3/5 h-screen  bg-[#ffff] rounded-t-3xl overflow-y-scroll">
         <div className="bg-[#F4F4F4] rounded-t-3xl py-1 px-4 flex flex-col gap-4">
           <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
-            <span className="underline">Admin Control Panel </span>
+          <Link to="/newonboard"  className="underline">Admin Control Panel </Link>
             <span>&gt;&gt;</span>
             <span className="underline">Menu</span>
             <span>&gt;&gt;</span>

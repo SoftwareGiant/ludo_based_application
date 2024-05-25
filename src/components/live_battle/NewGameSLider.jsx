@@ -13,7 +13,6 @@ const NewGameSLider = () => {
   const getSlides = async () => {
     try {
       const response = await axios.get("/api/user/allSlider");
-      // console.log(response.data.slider.bannerContent);
       setSliderData(response.data.slider.bannerContent);
     } catch (error) {
       toast.error("Error fetching slider data:", error);
@@ -58,7 +57,7 @@ const NewGameSLider = () => {
         removeArrowOnDeviceType={["tablet", "mobile"]}
         responsive={responsive}
       >
-        {sliderData?.map((slideimg, index) => (
+        {sliderData?.slice(0,4).map((slideimg, index) => (
           <div key={index} className="p-2 ">
             <img className="rounded-xl" src={slideimg} alt="img1" />
           </div>
