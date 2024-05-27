@@ -154,7 +154,7 @@ const removeSliderContent = async(req,res,next)=>{
   try{
     const {fileName} = req.body;
     const slider = await Slider.findOne({});
-    const indexToRemove= slider.bannerContent(fileName);
+    const indexToRemove= slider.bannerContent.indexOf(fileName);
     slider.bannerContent.splice(indexToRemove, 1);
     await slider.save();
     return res.status(200).json({message:"Slider Removed Successfully"});

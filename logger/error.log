@@ -18,3 +18,8 @@
   level: 'error',
   timestamp: 'May-24-2024 16:08:31'
 }
+{
+  message: 'undefined - slider.bannerContent is not a function - /api/admin/removeslider - POST',
+  level: 'error',
+  timestamp: 'May-27-2024 11:18:47'
+}
