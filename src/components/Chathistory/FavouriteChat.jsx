@@ -5,6 +5,7 @@ import { fetchFavoriteMessages } from "./favoriteMessagesSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar, Card, Typography } from "@material-tailwind/react";
 import { formatDate } from "../admin_and_S.admin/Functions/formateDate";
+import HelpButton from "../MainLayout/HelpButton";
 
 const FavouriteChat = ({
   setOpenChatHistory,
@@ -31,11 +32,7 @@ const FavouriteChat = ({
           />
           <p>favourite</p>
         </div>
-        <Icon
-          onClick={() => navigate("/help")}
-          icon="material-symbols:info-outline"
-          width="32"
-        />
+        <HelpButton />
       </div>
       <div className="flex flex-col gap-3 w-full items-center justify-center">
         {favoriteMessages[0]?.favourite?.userId?.length <= 0 && (

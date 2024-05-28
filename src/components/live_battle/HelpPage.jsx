@@ -4,7 +4,8 @@ import FrameProfile from "../../assets/profile/Frame_profile.png";
 import LiveBattles from "../../assets/new_game/livebattle.svg";
 import { useNavigate } from "react-router-dom";
 import TopbarMobile from "../MainLayout/TopbarMobile";
-
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import { IconButton } from "@material-tailwind/react";
 
 const HelpPage = () => {
   const navigate = useNavigate();
@@ -14,21 +15,25 @@ const HelpPage = () => {
       <div className="bg-white w-full pt-20">
         <div className="flex justify-between items-center px-4 py-2 w-full">
           <div className="flex gap-5 items-center">
-            <img
+            <IconButton
+              variant="text"
+              color="blue-gray"
               onClick={() => navigate("/")}
-              src="https://file.rendit.io/n/Bh3TjQUvsgxuYLevIVW7.svg"
-              alt="HardwareKeyboardBackspace icon"
-              id="Epback"
-              className="w-6"
-            />
+            >
+              <Icon
+                icon="mingcute:arrow-left-line"
+                className="text-black"
+                width="30"
+              />
+            </IconButton>
             <div
               id="LiveBattle13"
               className="text-center text-xl font-['Inter'] text-[#0f002b]"
             >
-              Help : <span className="font-bold">Page Name</span>
+              Help : <b>Page Name</b>
             </div>
           </div>
-        </div> 
+        </div>
       </div>
 
       {/* <Drawer
@@ -78,10 +83,8 @@ const HelpPage = () => {
           </div>
         )}
       </Drawer> */}
-
-
     </div>
-  )
-}
+  );
+};
 
-export default HelpPage
+export default HelpPage;

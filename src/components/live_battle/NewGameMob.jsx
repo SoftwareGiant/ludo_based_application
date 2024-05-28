@@ -32,6 +32,7 @@ const NewGameMob = () => {
   const [battleAmount, setBattleAmount] = useState("");
   const [buttonStatus, setButtonStatus] = useState("create");
   const [openBottom, setOpenBottom] = useState(false);
+  const [deleteDrawer, setDeleteDrawer] = useState(false);
   const [openMatchBottom, setOpenMatchBottom] = useState(false);
   const [timers, setTimers] = useState({});
   const [isRequest, setIsRequest] = useState(null);
@@ -41,6 +42,7 @@ const NewGameMob = () => {
   let battles = useSelector((state) => state.battle.battles);
   const [activeToggle, setActiveToggle] = useState("live"); // 'live' or 'challenges'
   const [battleToPlay, setBattleToPlay] = useState();
+  const [deleteBattleId, setSeleteBAttleId] = useState("");
   const openChallenges = useSelector((state) => state.opengame.openChallenges);
 
   const handleToggle = (toggle) => {
@@ -57,7 +59,14 @@ const NewGameMob = () => {
     setOpenBottom(false);
   };
   const dispatch = useDispatch();
-
+  const handleDeleteOption = (battleid) => {
+    setSeleteBAttleId(battleid);
+    setDeleteDrawer(true);
+  };
+  const handleCloseDeleteBattle = () => {
+    setSeleteBAttleId("");
+    setDeleteDrawer(false);
+  };
   useEffect(() => {
     if (isRequest === false && requestTimer < 50) {
       let requestInterval = setInterval(() => {
@@ -248,6 +257,7 @@ const NewGameMob = () => {
       console.log(response.data);
       toast.success(response.data.message);
       dispatch(fetchAllBattles(socketData));
+      handleCloseDeleteBattle();
       return response.data;
     } catch (error) {
       toast.error(error.message);
@@ -255,7 +265,7 @@ const NewGameMob = () => {
       throw error;
     }
   };
-console.log(battles);
+console.log(battles,users)
   const closematchDrawerBottom = () => setOpenMatchBottom(false);
   return (
     <div className="max-w-[480px] bg-[#0f002b] w-full min-h-screen h-full">
@@ -338,19 +348,19 @@ console.log(battles);
                   }`}
                 >
                   {activeToggle === "live" && (
-                    <div className="p-2 flex flex-col  gap-4 m-auto w-full">
+                    <div className="p-2 flex flex-col  gap-5 m-auto w-full">
                       {users &&
                         battles?.length > 0 &&
                         battles?.map((e) => (
                           <div
                             key={e._id}
-                            className="inline-flex flex-col justify-between w-full min-h-[120px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]"
+                            className="inline-flex relative flex-col justify-between w-full min-h-[120px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]"
                           >
                             <div className="font-['Inter'] text-[#0f002b] w-full py-4 px-4 flex  justify-between">
                               {users?._id === e?.player1 && (
-                                <div className="absolute   -top-1  right-0">
+                                <div className="absolute   -top-4  -right-2">
                                   <IconButton
-                                    onClick={() => handleDelete(e._id)}
+                                    onClick={() => handleDeleteOption(e._id)}
                                     color="red"
                                     className="rounded-full h-[36px]  w-[36px]"
                                   >
@@ -577,6 +587,43 @@ console.log(battles);
                 Create!
               </Button>
             )}
+          </div>
+        </Drawer>
+
+        <Drawer
+          placement="bottom"
+          open={deleteDrawer}
+          onClose={handleCloseDeleteBattle}
+          className="w-[480px] p-4  bg-[#fead3a] rounded-t-3xl"
+        >
+          <div className="mb-4 flex items-center justify-start gap-2">
+            <IconButton
+              onClick={handleCloseDeleteBattle}
+              variant="text"
+              color="blue-gray"
+            >
+              <Icon icon="ep:back" className="text-white" width="24" />
+            </IconButton>
+          </div>
+
+          <Typography className="mb-10  px-4  flex text-2xl text-white justify-center font-semibold">
+            Are you sure want to delete battle ?
+          </Typography>
+          <div className="flex justify-center gap-2 px-6 w-full">
+            <Button
+              onClick={handleCloseDeleteBattle}
+              color="green"
+              className="w-full"
+            >
+              cancel
+            </Button>
+            <Button
+              onClick={() => handleDelete(deleteBattleId)}
+              color="red"
+              className="w-full"
+            >
+              delete
+            </Button>
           </div>
         </Drawer>
       </div>

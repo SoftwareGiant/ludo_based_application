@@ -2,14 +2,17 @@ import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { Avatar, Card, Typography } from "@material-tailwind/react";
 import React from "react";
 import { formatDate } from "../admin_and_S.admin/Functions/formateDate";
+import { useNavigate } from "react-router-dom";
+import HelpButton from "../MainLayout/HelpButton";
 
 const OpenRecentTab = ({
   users,
   handleRecentCardCLick,
   setOpenRecent,
   setOpenChatHistory,
-  allChatList
+  allChatList,
 }) => {
+  const navigate = useNavigate();
   return (
     <div className="relative   h-full">
       <div className="text-white py-2 px-4 flex  text-[20px] items-center justify-between">
@@ -22,13 +25,15 @@ const OpenRecentTab = ({
             icon="mingcute:arrow-left-line"
             width="32"
           />
+
           <div className="flex items-center gap-1">
             {" "}
             <p className="font-bold">chat</p>
             <p>history </p>
           </div>
         </div>
-        <Icon icon="material-symbols:info-outline" width="32" />
+
+        <HelpButton />
       </div>
       <div className="flex flex-col gap-3 w-full items-center justify-center">
         {allChatList?.length > 0 ? (
