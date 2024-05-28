@@ -20,10 +20,13 @@ const MatchProgress = () => {
   const [openBottom, setOpenBottom] = useState(false);
   const [gameStatus, setGameStatus] = useState("");
   const [screenshot, setScreenshot] = useState("");
+  const [filename, setFilename] = useState("");
   const { accessToken } = useSelector((state) => state.auth);
   const handleImageUpload = (event) => {
     const file = event.target.files[0]; // Get the first file selected by the user
+    console.log(file);
     setScreenshot(file);
+    setFilename(file.name);
     if (file) {
       toast.success("image uploaded successfully");
       setOpenBottom(false);
@@ -31,6 +34,10 @@ const MatchProgress = () => {
   };
   const openDrawerBottom = () => {
     setOpenBottom(true);
+  };
+  const resetAadharback = () => {
+    setScreenshot("");
+    setFilename("");
   };
   const handleResult = async (result) => {
     try {
@@ -109,7 +116,7 @@ const MatchProgress = () => {
           />
         </div>
 
-        <div>
+        {/* <div>
           <div className="flex flex-col  w-full gap-4 p-8">
             {isStarted ? (
               <button className="p-2 flex items-center justify-center gap-2 text-white bg-[#0F002B] rounded-md font-bold">
@@ -138,17 +145,30 @@ const MatchProgress = () => {
             </ol>
           </div>
           <hr className="bg-gray-900" />
-        </div>
-        {isStarted && (
+        </div> */}
+        {
           <div>
             <div className="flex flex-col  w-full gap-4 p-8 ">
               {isEnd ? (
-                <button
-                  onClick={openDrawerBottom}
-                  className="p-2  text-white bg-[#0F002B] rounded-md font-bold"
-                >
-                  Upload Image or Video
-                </button>
+                screenshot ? (
+                  <div className="p-1  text-white text-sm bg-[#0F002B] rounded-md font-bold">
+                    <IconButton
+                      className="p-1 m-1 h-6 w-8"
+                      onClick={resetAadharback}
+                    >
+                      <Icon icon="charm:cross" width={32} />{" "}
+                    </IconButton>
+
+                    {filename.slice(0, 20)}
+                  </div>
+                ) : (
+                  <button
+                    onClick={openDrawerBottom}
+                    className="p-2  text-white bg-[#0F002B] rounded-md font-bold"
+                  >
+                    Upload Image or Video
+                  </button>
+                )
               ) : (
                 <button
                   onClick={() => setIsEnd(true)}
@@ -165,7 +185,7 @@ const MatchProgress = () => {
             </div>
             <hr className="bg-gray-900" />
           </div>
-        )}
+        }
         {isEnd && (
           <div className="w-full p-6 flex gap-2 justify-center items-center">
             <IconButton
