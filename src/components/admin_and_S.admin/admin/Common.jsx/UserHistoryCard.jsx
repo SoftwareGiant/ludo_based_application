@@ -13,6 +13,7 @@ import {
 } from "@material-tailwind/react";
 import { fetchUserAllHistory } from "../AdminSlice/userAllHistorySlice";
 import { formatDate } from "../../Functions/formateDate";
+import { useNavigate } from "react-router-dom";
 
 const UserHistoryCard = ({
   status,
@@ -29,7 +30,7 @@ const UserHistoryCard = ({
   const [table4, setTable4] = useState(false);
   const [table5, setTable5] = useState(false);
   const dispatch = useDispatch();
-
+const navigate = useNavigate();
   const { loading, gameDetails, paymentDetails, supportDetails, error } =
     useSelector((state) => state.userAllHistory);
 
@@ -40,6 +41,9 @@ const UserHistoryCard = ({
 
   const closeModal = () => {
     setIsOpen(false);
+  };
+  const handleSupport = (battleid) => {
+    navigate(`/admincustomer/${battleid}`);
   };
   return (
     <div className="flex gap-3 mb-3">
@@ -175,7 +179,7 @@ const UserHistoryCard = ({
                       )}
                     </CardBody>
                     <CardBody className=" px-0 w-full">
-                      <div className="flex justify-between items-center">
+                      <div  onClick={() => setTable2(!table2)} className="flex cursor-pointer justify-between items-center">
                         <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
                           Game History
                         </span>
@@ -186,14 +190,14 @@ const UserHistoryCard = ({
                                 icon="teenyicons:up-solid"
                                 width="12"
                                 className="cursor-pointer"
-                                onClick={() => setTable2(false)}
+                                
                               />
                             ) : (
                               <Icon
                                 width="12"
                                 icon="teenyicons:down-solid"
                                 className="cursor-pointer"
-                                onClick={() => setTable2(true)}
+                            
                               />
                             )}
                           </div>
@@ -510,7 +514,13 @@ const UserHistoryCard = ({
                           </thead>
                           <tbody className="h-full w-full">
                             {supportDetails && (
-                              <tr key={supportDetails._id}>
+                              <tr
+                                className="cursor-pointer"
+                                onClick={() =>
+                                  handleSupport(supportDetails.createdBy)
+                                }
+                                key={supportDetails._id}
+                              >
                                 <td className="p-4">
                                   <div className="flex items-center gap-3">
                                     <Typography className="font-[Inter] font-medium text-[16px]">

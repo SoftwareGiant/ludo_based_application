@@ -4,12 +4,12 @@ import axios from 'axios';
 
 const initialState = {
     user: null,
-    loading:false
+    loading: false
 };
 
 export const fetchUserDetail = createAsyncThunk(
     'user/detail',
-    async (_,{ rejectWithValue }) => {
+    async (_, { rejectWithValue }) => {
         try {
             const accessToken = localStorage.getItem('accessToken');
             if (!accessToken) {
@@ -17,10 +17,9 @@ export const fetchUserDetail = createAsyncThunk(
             }
             const response = await axios.get('/api/user/currentuser', {
                 headers: {
-                  Authorization: `Bearer ${accessToken}`,
+                    Authorization: `Bearer ${accessToken}`,
                 },
-              });
-            
+            });
           
             if (!response.data) {
                 throw new Error('userdata fetched failed');

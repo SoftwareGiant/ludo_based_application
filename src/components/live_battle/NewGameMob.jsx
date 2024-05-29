@@ -265,7 +265,8 @@ const NewGameMob = () => {
       throw error;
     }
   };
-console.log(battles,users)
+  console.log(openChallenges);
+  console.log(battles, users);
   const closematchDrawerBottom = () => setOpenMatchBottom(false);
   return (
     <div className="max-w-[480px] bg-[#0f002b] w-full min-h-screen h-full">
@@ -431,6 +432,11 @@ console.log(battles,users)
                     <div className="mt-4 flex flex-wrap justify-start gap-5 w-full m-auto">
                       {openChallenges?.map((item, index) => (
                         <div
+                          onClick={() =>
+                            navigate(
+                              `/matchUserChat/${item.battleDetails.battleId}`
+                            )
+                          }
                           key={item._id}
                           className="shadow-[0px_0px_2px_1px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-end gap-3  w-[160px] h-[170px] items-start pt-3 pb-1 px-1 rounded-lg"
                         >

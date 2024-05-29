@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify-icon/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchAllKyc } from "../AdminSlice/AllKycSlice";
 import { toast } from "react-toastify";
 import {
@@ -11,11 +11,12 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import Refreshloader from "../../superadmin/Common/Refreshloader";
+import axios from "axios";
 const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isResolve, setIsResolve] = useState(false);
   const dispatch = useDispatch();
-
+  const { accessToken } = useSelector((state) => state.auth);
   const openModal = () => {
     setIsOpen(true);
   };
@@ -23,15 +24,7 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const handleReject = () => {
-    toast.success("rejected kyc");
 
-    closeModal();
-  };
-  //   const handleVerification = () => {
-  //     dispatch(fetchAllKyc({ uid }));
-  //     handleRefresh();
-  //   };
   async function updateResult() {
     try {
       const depositeData = {
@@ -50,10 +43,9 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
       console.log("Response:", response.data);
       toast.success(response.data.message);
       handleRefresh();
-      handleOpen(); //   return response.data;
     } catch (error) {
       toast.error(error.message);
-      handleOpen();
+
       console.error(
         "Error verifying deposit:",
         error.response ? error.response.data : error.message

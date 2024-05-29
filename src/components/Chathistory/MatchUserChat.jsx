@@ -156,6 +156,7 @@ const MatchUserChat = () => {
       toast.error("Failed to remove fav");
     }
   };
+  console.log(messageList);
   return (
     <div className="flex-1 pb-4 bg-[#0f002b] sm:bg-[#fead3a]  w-full max-w-[480px]  justify-between flex flex-col h-screen">
       <div className="bg-[#fead3a]  h-[80%] w-[200%]   rounded-[50%] sm:hidden   -top-20 fixed -left-[50%] " />

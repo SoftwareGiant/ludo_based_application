@@ -9,7 +9,7 @@ import { fetchUserDetail } from "../live_battle/userSlice";
 import { Icon } from "@iconify-icon/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import PageLoader from "../MainLayout/PageLoader";
-import { IconButton } from "@material-tailwind/react";
+import { Button, IconButton } from "@material-tailwind/react";
 import { ProfileButton } from "../MainLayout/ProfileButton";
 const MyWalletMob = () => {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const MyWalletMob = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-        <ProfileButton/>
+        <ProfileButton />
       </div>
 
       <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative">
@@ -66,13 +66,17 @@ const MyWalletMob = () => {
             <div className="flex text-xl font-['Inter'] font-bold text-[#0f002b] flex-1">
               ₹ {users?.walletDetails?.totalAmount}
             </div>
-            <div
+            <Button
               onClick={() => navigate("/deposite")}
-              className="cursor-pointer shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex items-center p-2 rounded-lg flex-1 max-w-[100px]"
+              className="cursor-pointer shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex items-center p-2 rounded-lg flex-1 max-w-[120px]"
             >
-              <Icon icon="material-symbols:add" className="text-white" />
+              <Icon
+                icon="material-symbols:add"
+                className="text-white"
+                width={22}
+              />
               <div className="text-sm font-['Inter'] text-white">add cash</div>
-            </div>
+            </Button>
           </div>
         </div>
         <div className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col w-4/5 m-auto rounded-lg mt-4 font-['Nunito-Sans'] relative">
@@ -97,13 +101,13 @@ const MyWalletMob = () => {
             <div className="flex text-xl font-['Inter'] font-bold text-[#0f002b] flex-1">
               ₹ {users?.walletDetails?.withDrawlAmount}
             </div>
-            <div
+            <Button
               onClick={() => navigate("/withdraw")}
-              className="cursor-pointer shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-wrap items-center p-2 gap-2 rounded-lg flex-1 max-w-[110px]"
+              className="cursor-pointer shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-wrap items-center p-2 gap-2 rounded-lg flex-1 max-w-[130px]"
             >
-              <Icon icon="cil:bank" className="text-white" />
+              <Icon icon="cil:bank" className="text-white" width={20} />
               <div className="text-sm font-['Inter'] text-white">Withdraw</div>
-            </div>
+            </Button>
           </div>
         </div>
       </div>
