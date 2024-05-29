@@ -9,7 +9,8 @@ const UserSchema = new mongoose.Schema(
     },
     userName:{
       type:String,
-      unique: true
+      unique: true,
+      sparse:true
     },
     refreshTokenDetail: {
       token: String,

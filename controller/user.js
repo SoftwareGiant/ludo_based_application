@@ -51,6 +51,7 @@ const registerUser = async (req, res, next) => {
       throw new AppError("Length of Mobile No should be 10 character long!", 422);
     }
     logger.error(`${err.status} - ${err.message} - ${req.originalUrl} - ${req.method}`);
+    console.log(err)
     return next(new AppError("Something went wrong!Please try again.", 500));
   }
 };
