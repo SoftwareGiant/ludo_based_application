@@ -268,6 +268,13 @@ const NewGameMob = () => {
   console.log(openChallenges);
   console.log(battles, users);
   const closematchDrawerBottom = () => setOpenMatchBottom(false);
+  const handleOpenBattleNavigate = (battleItem) => {
+    if (
+      users?._id === battleItem?.player1 ||
+      users?._id === battleItem?.player2
+    )
+      navigate(`/matchUserChat/${battleItem.battleDetails.battleId}`);
+  };
   return (
     <div className="max-w-[480px] bg-[#0f002b] w-full min-h-screen h-full">
       <div
@@ -432,13 +439,9 @@ const NewGameMob = () => {
                     <div className="mt-4 flex flex-wrap justify-start gap-5 w-full m-auto">
                       {openChallenges?.map((item, index) => (
                         <div
-                          onClick={() =>
-                            navigate(
-                              `/matchUserChat/${item.battleDetails.battleId}`
-                            )
-                          }
+                          onClick={() => handleOpenBattleNavigate(item)}
                           key={item._id}
-                          className="shadow-[0px_0px_2px_1px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-end gap-3  w-[160px] h-[170px] items-start pt-3 pb-1 px-1 rounded-lg"
+                          className="cursor-pointer shadow-[0px_0px_2px_1px_rgba(0,_0,_0,_0.25)] bg-white flex flex-col justify-end gap-3  w-[160px] h-[170px] items-start pt-3 pb-1 px-1 rounded-lg transition-all hover:shadow-[0px_0px_6px_3px_rgba(0,_0,_0,_0.25)]"
                         >
                           <div className="flex flex-col ml-3  items-start">
                             <div
@@ -619,16 +622,18 @@ const NewGameMob = () => {
             <Button
               onClick={handleCloseDeleteBattle}
               color="green"
-              className="w-full"
+              className="w-full flex justify-center items-center gap-2"
             >
-              cancel
+              <Icon icon="mdi:cancel" width={18} />
+              <p className="text-sm mt-[2px]">cancel</p>
             </Button>
             <Button
               onClick={() => handleDelete(deleteBattleId)}
               color="red"
-              className="w-full"
+              className="w-full flex justify-center items-center gap-2"
             >
-              delete
+              <Icon icon="fluent:delete-12-regular" width={20} />
+              <p className="text-sm mt-[2px]">delete</p>
             </Button>
           </div>
         </Drawer>
