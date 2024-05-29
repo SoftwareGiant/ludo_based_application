@@ -1,25 +1,10 @@
 {
-  message: `undefined - Cast to ObjectId failed for value "{ userId: '65df02ecb883a67ae2127960' }" (type Object) at path "createdBy" for model "Support" - /api/support/admin/supportmessage - POST`,
+  message: '403 - Unauthorized user! - /api/user/ - GET',
   level: 'error',
-  timestamp: 'May-24-2024 16:05:36'
+  timestamp: 'May-29-2024 09:01:21'
 }
 {
-  message: `undefined - Cast to ObjectId failed for value "{ userId: '65df02ecb883a67ae2127960' }" (type Object) at path "createdBy" for model "Support" - /api/support/admin/supportmessage - POST`,
+  message: '403 - Unauthorized user! - /api/user/ - GET',
   level: 'error',
-  timestamp: 'May-24-2024 16:05:57'
-}
-{
-  message: `undefined - Cast to ObjectId failed for value "{ userId: '65df02ecb883a67ae2127960' }" (type Object) at path "createdBy" for model "Support" - /api/support/admin/supportmessage - POST`,
-  level: 'error',
-  timestamp: 'May-24-2024 16:08:00'
-}
-{
-  message: `undefined - Cast to ObjectId failed for value "{ userId: '65df02ecb883a67ae2127960' }" (type Object) at path "createdBy" for model "Support" - /api/support/admin/supportmessage - POST`,
-  level: 'error',
-  timestamp: 'May-24-2024 16:08:31'
-}
-{
-  message: 'undefined - slider.bannerContent is not a function - /api/admin/removeslider - POST',
-  level: 'error',
-  timestamp: 'May-27-2024 11:18:47'
+  timestamp: 'May-29-2024 09:01:21'
 }

@@ -213,9 +213,9 @@ const updateResult = async (req, res, next) => {
       throw new AppError("You are not active in any game!", 404);
     }
 
-    if (gameDetail.gameactivationTimestamp > Date.now()) {
-      return res.status(500).json({ messaage: "Please first play the game!" });
-    }
+    // if (gameDetail.gameactivationTimestamp > Date.now()) {
+    //   return res.status(500).json({ messaage: "Please first play the game!" });
+    // }
 
     if (outcome === "win") {
       if (gameDetail.player1.id === userId) {
@@ -430,7 +430,8 @@ const allGameHistory = async (req, res, next) => {
 
 const openChallenge = async (req, res, next) => {
   try {
-    const allOpenChallenge = await GameDetail.find({ status: "running" });
+    const userId = req.userId;
+    const allOpenChallenge = await GameDetail.find({ status: "running", $or: [{ player1: userId }, { player2: userId }] });
     return res.status(200).json({ allOpenChallenge });
   } catch (err) {
     return next(err);

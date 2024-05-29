@@ -36,7 +36,6 @@ module.exports = {
     const token = bearerToken[1];
     JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, payload) => {
       if (err) {
-        console.log(err, "error");
         logger.error(
           `${err.status} - ${err.message} - ${req.originalUrl} - ${req.method} inside verifyToken of jwt helper`,
         );

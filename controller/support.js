@@ -75,7 +75,7 @@ const supportMessages = async (req, res, next) => {
 };
 
 const listofAll = async (req, res, next) => {
-  const listofall = await Support.find({});
+  const listofall = await Support.find({}).populate("createdBy");
   if (listofall.length == 0) {
     return res.status(404).json({ message: "No support chat found" });
   }
