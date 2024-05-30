@@ -254,18 +254,15 @@ const NewGameMob = () => {
           Authorization: `Bearer ${accessToken}`, // Ensure the correct capitalization for "Bearer"
         },
       });
-      console.log(response.data);
       toast.success(response.data.message);
       dispatch(fetchAllBattles(socketData));
       handleCloseDeleteBattle();
       return response.data;
     } catch (error) {
       toast.error(error.message);
-      console.error("Error delete battle:", error);
       throw error;
     }
   };
-console.log(battles,users)
   const closematchDrawerBottom = () => setOpenMatchBottom(false);
   return (
     <div className="max-w-[480px] bg-[#0f002b] w-full min-h-screen h-full">
