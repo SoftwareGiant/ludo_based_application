@@ -13,7 +13,7 @@ const GameHistoryMob = () => {
   const users = useSelector((state) => state.user.user);
   const gameHistorys = useSelector((state) => state.gamehistory?.gameHistory);
   const loading = useSelector((state) => state.gamehistory?.loading);
-  // console.log(users);
+
   console.log(gameHistorys);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -33,7 +33,7 @@ const GameHistoryMob = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-        <ProfileButton/>
+        <ProfileButton />
       </div>
 
       <div className="bg-[#fead3a] w-full min-h-screen overflow-hidden relative">
@@ -54,9 +54,9 @@ const GameHistoryMob = () => {
                     {" "}
                     You
                     <span>
-                      {game?.gameResultDetail?.player1?.outcome === "lose"
-                        ? "lost"
-                        : "won"}
+                      {users?._id === game?.player1?._id
+                        ? game?.gameResultDetail?.player1?.outcome
+                        : game?.gameResultDetail?.player2?.outcome}
                     </span>
                     this match,
                     {users?._id === game?.player1?._id ? (
@@ -88,7 +88,11 @@ const GameHistoryMob = () => {
               </div>
               <div
                 className={`border-solid border-t-4  mt-1 w-full  ${
-                  game?.gameResultDetail?.player1?.outcome === "lose"
+                  users?._id === game?.player1?._id
+                    ? game?.gameResultDetail?.player1?.outcome === "lose"
+                      ? "border-[#FF0000]"
+                      : "border-[#008000]"
+                    : game?.gameResultDetail?.player2?.outcome === "lose"
                     ? "border-[#FF0000]"
                     : "border-[#008000]"
                 } `}
@@ -97,24 +101,37 @@ const GameHistoryMob = () => {
                 <div className="flex text-xl font-['Inter'] font-bold text-[#0f002b] flex-1">
                   ₹ {game?.battleDetails?.amount}
                 </div>
-                {game?.gameResultDetail?.player1?.outcome === "lose" ? (
+
+                {users?._id === game?.player1?._id ? (
                   <div className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex gap-2 items-center p-2 rounded-lg flex-1 max-w-[76px]">
-                    <Icon icon="noto:crying-face" />
+                    {game?.gameResultDetail?.player1?.outcome === "lose" ? (
+                      <Icon icon="noto:crying-face" />
+                    ) : (
+                      <Icon icon="noto:trophy" />
+                    )}
                     <div className="text-sm font-['Inter'] text-white">
-                      Lost
+                      {game?.gameResultDetail?.player1?.outcome}
                     </div>
                   </div>
                 ) : (
                   <div className="shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex gap-2 items-center p-2 rounded-lg flex-1 max-w-[76px]">
-                    <Icon icon="noto:trophy" />
-                    <div className="text-sm font-['Inter'] text-white">Won</div>
+                    {game?.gameResultDetail?.player2?.outcome === "lose" ? (
+                      <Icon icon="noto:crying-face" />
+                    ) : (
+                      <Icon icon="noto:trophy" />
+                    )}
+                    <div className="text-sm font-['Inter'] text-white">
+                      {game?.gameResultDetail?.player2?.outcome}
+                    </div>
                   </div>
                 )}
               </div>
             </div>
           ))
         ) : (
-          <p className="text-white font-semibold text-3xl pt-4 flex justify-center items-center h-full">No Game History...</p>
+          <p className="text-white font-semibold text-3xl pt-4 flex justify-center items-center h-full">
+            No Game History...
+          </p>
         )}
       </div>
     </div>

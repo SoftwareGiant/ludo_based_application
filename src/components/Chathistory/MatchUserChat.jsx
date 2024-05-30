@@ -90,14 +90,10 @@ const MatchUserChat = () => {
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-
-    const times = new Date().toLocaleTimeString();
-
     setShowEmojiPicker(false);
     if (messaged.trim() === "" && !image) return;
     const response = await axios.post(
       `/api/message/sendmessage/${chatId}`,
-      //  { message,image,times },
       { message: messaged },
       {
         headers: {
@@ -106,6 +102,7 @@ const MatchUserChat = () => {
       }
     );
     if (response.status == 200) {
+      fn();
       setMessageList((prevMessageList) => [...prevMessageList, response?.data]);
     }
     setMessage("");
