@@ -101,7 +101,7 @@ const DepositeStatusCard = ({ val, RefreshDepositeReq }) => {
                 >
                   {val.status}
                 </div>
-                <div>UID {val?._id?.slice(-7)}</div>
+                <div>UID {val?.user?.slice(-7)}</div>
               </div>
               <div className="flex items-center gap-2">
                 <button

@@ -3,7 +3,6 @@ import { Icon } from "@iconify-icon/react";
 import { Link } from "react-router-dom";
 
 const AdminFooter = ({ logohide }) => {
-  console.log(logohide)
   return (
     <div className="bg-[#0F002B] p-20 px-32   flex flex-row justify-between w-full text-[#FFFFFF]">
       <div

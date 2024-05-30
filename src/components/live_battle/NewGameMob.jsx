@@ -154,20 +154,6 @@ const NewGameMob = () => {
       );
     };
   }, [battles]);
-  const battleCreationTime = (previousTimestamp) => {
-    const currentTimestamp = Date.now();
-    const timeDifference = currentTimestamp - previousTimestamp;
-    const timeDifferenceInSeconds = Math.floor(timeDifference / (1000 * 60));
-    // return timeDifferenceInSeconds;
-    if (timeDifferenceInSeconds === 0) {
-      return "Now";
-    } else if (timeDifferenceInSeconds < 60) {
-      return Math.floor(timeDifferenceInSeconds) + "min ago";
-    } else {
-      const timeDifferenceInHours = timeDifferenceInSeconds / 60;
-      return Math.floor(timeDifferenceInHours) + " hr ago";
-    }
-  };
 
   const handleCreate = async () => {
     try {
@@ -608,7 +594,7 @@ const NewGameMob = () => {
           placement="bottom"
           open={deleteDrawer}
           onClose={handleCloseDeleteBattle}
-          className="w-[480px] p-4  bg-[#fead3a] rounded-t-3xl"
+          className="w-[480px] p-4  bg-[#0f002b] rounded-t-3xl"
         >
           <div className="mb-4 flex items-center justify-start gap-2">
             <IconButton
