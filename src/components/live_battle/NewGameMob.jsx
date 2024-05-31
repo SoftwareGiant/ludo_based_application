@@ -23,6 +23,7 @@ import { useJwt } from "react-jwt";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { fetchOpenChallenges } from "./openChallengeSlice";
 import { ProfileButton } from "../MainLayout/ProfileButton";
+import { convertTimestamp } from "../admin_and_S.admin/Functions/convertTimestamp";
 const NewGameMob = () => {
   const { accessToken } = useSelector((state) => state.auth);
   const { decodedToken } = useJwt(accessToken);
@@ -153,20 +154,6 @@ const NewGameMob = () => {
       );
     };
   }, [battles]);
-  const battleCreationTime = (previousTimestamp) => {
-    const currentTimestamp = Date.now();
-    const timeDifference = currentTimestamp - previousTimestamp;
-    const timeDifferenceInSeconds = Math.floor(timeDifference / (1000 * 60));
-    // return timeDifferenceInSeconds;
-    if (timeDifferenceInSeconds === 0) {
-      return "Now";
-    } else if (timeDifferenceInSeconds < 60) {
-      return Math.floor(timeDifferenceInSeconds) + "min ago";
-    } else {
-      const timeDifferenceInHours = timeDifferenceInSeconds / 60;
-      return Math.floor(timeDifferenceInHours) + " hr ago";
-    }
-  };
 
   const handleCreate = async () => {
     try {
@@ -269,7 +256,7 @@ const NewGameMob = () => {
       users?._id === battleItem?.player1 ||
       users?._id === battleItem?.player2
     )
-      navigate(`/matchUserChat/${battleItem.battleDetails.battleId}`);
+      navigate(`/matchstart`);
   };
   return (
     <div className="max-w-[480px] bg-[#0f002b] w-full min-h-screen h-full">
@@ -392,7 +379,7 @@ const NewGameMob = () => {
                               </div>
 
                               <div className="italic font-semibold ">
-                                · {battleCreationTime(e.battleTimeStamp)}
+                                · {convertTimestamp(e.battleTimeStamp)}
                               </div>
                             </div>
                             <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full p-4 mb-0">
@@ -409,8 +396,12 @@ const NewGameMob = () => {
                               <IconButton className="rounded-full">
                                 {users?._id === e.player1 ? (
                                   <div className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
-                                    <span className="text-white">
-                                      {timers[e._id]}
+                                    <span
+                                      className={`text-white animate-pulse`}
+                                    >
+                                      {timers[e._id] <= 0
+                                        ? "wait.."
+                                        : timers[e._id]}
                                     </span>
                                   </div>
                                 ) : (
@@ -448,11 +439,11 @@ const NewGameMob = () => {
                             </div>
                             <div
                               id="StartedMinAgo2"
-                              className="text-xs font-['Inter'] font-bold text-[#0f002b]"
+                              className="w-32 truncate ... text-xs font-['Inter'] font-bold text-[#0f002b]"
                             >
                               ·<span> started </span>
                               <span>
-                                {battleCreationTime(item.matchingTimeStamp)}
+                                {convertTimestamp(item.matchingTimeStamp)}
                               </span>
                             </div>
                           </div>
@@ -599,7 +590,7 @@ const NewGameMob = () => {
           placement="bottom"
           open={deleteDrawer}
           onClose={handleCloseDeleteBattle}
-          className="w-[480px] p-4  bg-[#fead3a] rounded-t-3xl"
+          className="w-[480px] p-4  bg-[#0f002b] rounded-t-3xl"
         >
           <div className="mb-4 flex items-center justify-start gap-2">
             <IconButton

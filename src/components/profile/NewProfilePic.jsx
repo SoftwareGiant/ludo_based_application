@@ -13,37 +13,43 @@ const NewProfilePic = () => {
     "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   );
 
-  const [openBottom, setOpenBottom] = useState(true);
   const navigate = useNavigate();
   const { accessToken } = useSelector((state) => state.auth);
-  const openDrawerBottom = () => {
-    setOpenBottom(true);
-  };
-  const closeDrawerBottom = () => setOpenBottom(false);
 
   const handleImageChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = async () => {
-        setImageFile(reader.result);
-        const response = await axios.post(
-          "api/user/addPicture",
-          { image: file }, // Passed image in request body
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `bearer ${accessToken}`,
-            },
+        try {
+          setImageFile(reader.result);
+          const response = await axios.post(
+            "api/user/addPicture",
+            { image: file }, // Passed image in request body
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `bearer ${accessToken}`,
+              },
+            }
+          );
+          console.log(response);
+          if (response.status === 200) {
+            toast.success(response.data.message);
+          } else {
+            toast.error("Failed to upload the image.");
           }
-        );
-        if(response.status == 200 ){
-          return toast.success("Profile pic uploaded successfully");
+        } catch (error) {
+          console.error("Error uploading the image:", error);
+          toast.error("An error occurred while uploading the image.");
         }
+      };
+      reader.onerror = (error) => {
+        console.error("FileReader error:", error);
+        toast.error("Failed to read the file.");
       };
       reader.readAsDataURL(file);
     }
-    
   };
 
   return (

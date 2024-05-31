@@ -12,6 +12,7 @@ import {
 } from "@material-tailwind/react";
 import Refreshloader from "../../superadmin/Common/Refreshloader";
 import axios from "axios";
+import { convertTimestamp } from "../../Functions/convertTimestamp";
 const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isResolve, setIsResolve] = useState(false);
@@ -77,7 +78,7 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
                 </div>
                 <div
                   className={`text-white ${
-                    val.status === "closed" ? "bg-[#00C300]" : "bg-[#FF0000]"
+                    val.status === "closed" ? "bg-[#00C300]" : "bg-[#FEAD3A]"
                   }  px-2 p-1 rounded-md flex items-center text-[19.2px]`}
                 >
                   {val.status}
@@ -174,7 +175,9 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
             ) : (
               <div className="w-full h-[465px] flex ">
                 <div className="flex-1 p-4">
-                  <p className="w-full m-3">Game started 5min ago</p>
+                  <p className="w-full m-3">
+                    Game started {convertTimestamp(val.gameactivationTimestamp)}
+                  </p>
                   <div className="w-full flex items-center">
                     <div className="flex  flex-col  flex-1 justify-center items-center m-auto text-[#0F002B]  font-[Nunito-Sans]">
                       <img
@@ -249,7 +252,7 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
                           src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
                         />
                         <span className="flex items-center font-bold text-[30px]">
-                          {val.gameResultDetail?.player1 === "win"
+                          {val.gameResultDetail?.player1.outcome === "win"
                             ? val.player1.slice(-5)
                             : val.player2.slice(-5)}
                           {val.status && (
@@ -259,7 +262,12 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
                             />
                           )}
                         </span>
-                        <span className="font-normal text-[20px]">@player</span>
+                        <span className="font-normal text-[20px]">
+                          @{" "}
+                          {val.gameResultDetail?.player1.outcome === "win"
+                            ? "player1"
+                            : "player2"}
+                        </span>
                       </div>
                     </div>
                   ) : (

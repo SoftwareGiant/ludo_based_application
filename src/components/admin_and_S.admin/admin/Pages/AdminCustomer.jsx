@@ -308,7 +308,7 @@ function AdminCustomer() {
                       <td className="p-4">
                         <div className="flex flex-col">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {val?.userName ? val?.userName : "user"}
+                            {val?.userName ? val?.userName : "Ludo player"}
                           </Typography>
                         </div>
                       </td>
@@ -322,9 +322,9 @@ function AdminCustomer() {
                       <td className="p-4">
                         <div
                           className={`rounded-xl flex justify-center items-center w-[87px] h-[19px] ${
-                            !val?.status
-                              ? "bg-[#0F002B] text-[#FFFFFF] "
-                              : "bg-[#FEAD3A] text-[#FFFFFF] "
+                            val?.status === "open"
+                              ? "bg-[#FEAD3A] text-[#FFFFFF] "
+                              : "bg-[#0F002B] text-[#FFFFFF] "
                           }`}
                         >
                           <Typography className="font-[Inter] font-normal text-[10px]  ">
@@ -343,7 +343,6 @@ function AdminCustomer() {
       </div>
       <div className="w-2/5 relative overflow-scroll main-body-right max-h-screen">
         <Outlet />
-      
       </div>
     </div>
   );

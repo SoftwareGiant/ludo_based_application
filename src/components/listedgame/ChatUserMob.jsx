@@ -24,6 +24,7 @@ import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
+import { getTime } from "../admin_and_S.admin/Functions/getTime";
 const ChatUserMob = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -77,8 +78,8 @@ const ChatUserMob = () => {
   };
   const closeDrawerBottom = (event) => {
     event.preventDefault();
-    if(inputValue[0]!=0){
-     return toast.warning("Code should be start with zero");
+    if (inputValue[0] != 0) {
+      return toast.warning("Code should be start with zero");
     }
     if (inputValue.length !== 8) {
       return toast.warning("Please enter a 8-digit code");
@@ -98,14 +99,16 @@ const ChatUserMob = () => {
   };
 
   const fn = async () => {
-
-    const response_0 = await axios.get("/api/userhistory/usergamehistory",{
+    const response_0 = await axios.get("/api/userhistory/usergamehistory", {
       headers: {
         Authorization: `bearer ${accessToken}`,
       },
     });
 
-    if(response_0.status == 200 && response_0.data.gameDetails[0].status=="running"){
+    if (
+      response_0.status == 200 &&
+      response_0.data.gameDetails[0].status == "running"
+    ) {
       setOpenBottom(false);
     }
 
@@ -142,8 +145,10 @@ const ChatUserMob = () => {
         },
       }
     );
-    if (response.status == 200) {
+    if (response.status === 200) {
+       fn();
       setMessageList((prevMessageList) => [...prevMessageList, response?.data]);
+    
     }
     setMessage("");
     setImage(null);
@@ -325,6 +330,13 @@ const ChatUserMob = () => {
                     }}
                   >
                     <span>{message?.message}</span>
+                    <span
+                      className={`text-xs block text-gray-500 mt-1 ${
+                        message?.senderId === userId ? "text-end" : "text-start"
+                      }`}
+                    >
+                      {message?.timestamp && getTime(message?.timestamp)}
+                    </span>
                     {message.image && (
                       <img
                         src={message.image}
@@ -411,9 +423,8 @@ const ChatUserMob = () => {
                 className="text-2xl flex justify-center font-bold"
               >
                 Enter Ludo King Code
-
               </Typography>
-              
+
               <form
                 className="flex flex-col gap-4 w-full items-center"
                 onSubmit={closeDrawerBottom}

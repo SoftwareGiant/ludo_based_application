@@ -14,6 +14,7 @@ import LudoMainLogo from "../MainLayout/LudoMainLogo.jsx";
 import { Button } from "@material-tailwind/react";
 import { toast } from "react-toastify";
 import { ProfileButton } from "../MainLayout/ProfileButton.jsx";
+import HelpButton from "../MainLayout/HelpButton.jsx";
 const AddCashMob = () => {
   const [isScanner, setIsScanner] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -101,7 +102,7 @@ const AddCashMob = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-        <ProfileButton/>
+        <ProfileButton />
       </div>
       <div className="flex justify-between items-center px-4 py-2 w-full">
         <div className="flex gap-5 items-center">
@@ -117,12 +118,8 @@ const AddCashMob = () => {
             Deposit Cash
           </div>
         </div>
-        <Icon
-          className="cursor-pointer"
-          onClick={() => navigate("/help")}
-          icon="material-symbols:info-outline"
-          width={24}
-        />
+
+        <HelpButton dark={true} />
       </div>
       <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative flex flex-col justify-between h-full">
         <div className="bg-[#fead3a] h-[86%] w-[200%] rounded-[50%]   -top-20 absolute -left-[50%]" />
@@ -218,6 +215,19 @@ const AddCashMob = () => {
         <div className="font-[Nunito-Sans] text-white relative text-center pb-32">
           *Minimum Deposit Amount ₹ 10
         </div>
+        <a
+          href="https://wa.me/9315312511"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full relative flex justify-end "
+        >
+          {" "}
+          <Icon
+            icon="logos:whatsapp-icon"
+            width={36}
+            className="fixed right mx-6 cursor-pointer z-50 bottom-6 transition transform hover:scale-110 hover:bg-green-600 bg-green-500 active:scale-95 active:bg-green-600 rounded-full shadow-xl p-2"
+          />
+        </a>
       </div>
     </div>
   );

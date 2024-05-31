@@ -30,7 +30,7 @@ const UserHistoryCard = ({
   const [table4, setTable4] = useState(false);
   const [table5, setTable5] = useState(false);
   const dispatch = useDispatch();
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const { loading, gameDetails, paymentDetails, supportDetails, error } =
     useSelector((state) => state.userAllHistory);
 
@@ -103,7 +103,7 @@ const navigate = useNavigate();
                     </div>
                     <div className="flex flex-col ">
                       <span className="flex items-center font-bold text-[14.4px]">
-                        Ludo Player{" "}
+                        {userName ? userName : "Ludo player"}
                         {status === "Active" && (
                           <Icon
                             icon="bitcoin-icons:verify-outline"
@@ -179,7 +179,10 @@ const navigate = useNavigate();
                       )}
                     </CardBody>
                     <CardBody className=" px-0 w-full">
-                      <div  onClick={() => setTable2(!table2)} className="flex cursor-pointer justify-between items-center">
+                      <div
+                        onClick={() => setTable2(!table2)}
+                        className="flex cursor-pointer justify-between items-center"
+                      >
                         <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
                           Game History
                         </span>
@@ -190,14 +193,12 @@ const navigate = useNavigate();
                                 icon="teenyicons:up-solid"
                                 width="12"
                                 className="cursor-pointer"
-                                
                               />
                             ) : (
                               <Icon
                                 width="12"
                                 icon="teenyicons:down-solid"
                                 className="cursor-pointer"
-                            
                               />
                             )}
                           </div>
@@ -274,8 +275,11 @@ const navigate = useNavigate();
                     </CardBody>
 
                     <CardBody className=" px-0 w-full">
-                      <div className="flex justify-between">
-                        <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
+                      <div
+                        onClick={() => setTable4(!table4)}
+                        className="flex cursor-pointer  justify-between"
+                      >
+                        <span className="cursor-pointer font-[Inter] font-medium text-[16px] text-[#000000]">
                           Withdraw History
                         </span>
                         <div className="flex gap-2 font-[Inter] font-medium text-[16px]">
@@ -285,14 +289,12 @@ const navigate = useNavigate();
                                 width="12"
                                 icon="teenyicons:up-solid"
                                 className="cursor-pointer"
-                                onClick={() => setTable4(false)}
                               />
                             ) : (
                               <Icon
                                 width="12"
                                 icon="teenyicons:down-solid"
                                 className="cursor-pointer"
-                                onClick={() => setTable4(true)}
                               />
                             )}
                           </div>
@@ -370,7 +372,10 @@ const navigate = useNavigate();
                     </CardBody>
 
                     <CardBody className=" px-0 w-full">
-                      <div className="flex justify-between">
+                      <div
+                        onClick={() => setTable5(!table5)}
+                        className="flex cursor-pointer justify-between"
+                      >
                         <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
                           Deposite History
                         </span>
@@ -381,14 +386,12 @@ const navigate = useNavigate();
                                 width="12"
                                 icon="teenyicons:up-solid"
                                 className="cursor-pointer"
-                                onClick={() => setTable5(false)}
                               />
                             ) : (
                               <Icon
                                 width="12"
                                 icon="teenyicons:down-solid"
                                 className="cursor-pointer"
-                                onClick={() => setTable5(true)}
                               />
                             )}
                           </div>
@@ -466,7 +469,10 @@ const navigate = useNavigate();
                     </CardBody>
 
                     <CardBody className=" px-0 w-full">
-                      <div className="flex justify-between">
+                      <div
+                        onClick={() => setTable3(!table3)}
+                        className="flex cursor-pointer justify-between"
+                      >
                         <span className="font-[Inter] font-medium text-[16px] text-[#000000]">
                           Support History
                         </span>
@@ -477,14 +483,12 @@ const navigate = useNavigate();
                                 width="12"
                                 icon="teenyicons:up-solid"
                                 className="cursor-pointer"
-                                onClick={() => setTable3(false)}
                               />
                             ) : (
                               <Icon
                                 width="12"
                                 icon="teenyicons:down-solid"
                                 className="cursor-pointer"
-                                onClick={() => setTable3(true)}
                               />
                             )}
                           </div>
