@@ -142,7 +142,7 @@ const CustomerChat = () => {
             <select
               value={selectedValue || ticket?.status}
               onChange={handleChange}
-              className="p-1 w-40 rounded-lg bg-[#FEAD3A] "
+              className="p-1 w-40 rounded-lg text-black bg-white "
             >
               <option value="open">Unresolved</option>
               <option value="close">Resolved</option>

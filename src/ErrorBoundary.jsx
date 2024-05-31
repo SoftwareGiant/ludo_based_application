@@ -15,7 +15,9 @@ class ErrorBoundary extends Component {
   componentDidCatch(error, errorInfo) {
     console.error("Error caught in ErrorBoundary:", error, errorInfo);
   }
-
+  handleBackToHomepage = () => {
+    window.location.href = "/";
+  };
   render() {
     if (this.state.hasError) {
       // Fallback UI or error message
@@ -33,12 +35,12 @@ class ErrorBoundary extends Component {
                 Sorry, we can't find that page. You'll find lots to explore on
                 the home page.
               </p>
-              <Link
-                to="/"
+              <button
                 className="inline-flex text-white bg-black focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-4 animated-button"
+                onClick={this.handleBackToHomepage}
               >
                 Back to Homepage
-              </Link>
+              </button>
             </div>
           </div>
         </section>

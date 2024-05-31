@@ -237,11 +237,13 @@ const NewProfileMob = () => {
                 >
                   {users.userName ? users.userName : "Ludo Player"}
                 </span>
-                <img
-                  className={`${scrollPosition > 10 ? "hidden " : ""} w-6`}
-                  src={Verify}
-                  alt="Iconparkoutlinesuccess"
-                />
+                {users?.userKyc?.verificationStatus === "approved" && (
+                  <img
+                    className={`${scrollPosition > 10 ? "hidden " : ""} w-6`}
+                    src={Verify}
+                    alt="Iconparkoutlinesuccess"
+                  />
+                )}
               </div>
               <div
                 className={`text-center text-3xl ${

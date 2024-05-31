@@ -343,13 +343,7 @@ function AdminCustomer() {
       </div>
       <div className="w-2/5 relative overflow-scroll main-body-right max-h-screen">
         <Outlet />
-        {/* {ischat === "" ? (
-          <h1 className="font-semibold text-4xl h-full w-full flex justify-center items-center text-gray-800">
-            Select a user to chat...
-          </h1>
-        ) : (
-          <CustomerChat userId={ischat} />
-        )} */}
+      
       </div>
     </div>
   );

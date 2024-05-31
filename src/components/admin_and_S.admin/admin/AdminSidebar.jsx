@@ -22,7 +22,7 @@ const AdminSidebar = () => {
         showFullSidebar ? "w-[225px]  " : "w-[86px]  "
       } `}
     >
-      <div className="flex flex-col pt-3 h-full">
+      <div className="flex flex-col pt-3 mb-40 h-full ">
         <div
           onClick={toggleSidebar}
           className="flex cursor-pointer justify-start gap-4 h-[51px] items-center px-3  rounded-3xl m-1"
