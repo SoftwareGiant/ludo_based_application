@@ -11,17 +11,28 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { fetchOpenChallenges } from "./openChallengeSlice";
 const MatchProgress = () => {
-  const navigate = useNavigate();
   const [isStarted, setIsStarted] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
   const [openBottom, setOpenBottom] = useState(false);
   const [gameStatus, setGameStatus] = useState("");
   const [screenshot, setScreenshot] = useState("");
   const [filename, setFilename] = useState("");
+  const navigate = useNavigate();
+  const openChallenges = useSelector((state) => state.opengame.openChallenges);
   const { accessToken } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchOpenChallenges());
+  }, [dispatch]);
+  useEffect(() => {
+    if (!openChallenges || openChallenges.length <= 0) {
+      navigate("/");
+    }
+  }, [openChallenges, navigate]);
   const handleImageUpload = (event) => {
     const file = event.target.files[0]; // Get the first file selected by the user
     console.log(file);
@@ -93,13 +104,24 @@ const MatchProgress = () => {
       <div className=" flex flex-col w-full pt-20">
         <div className="flex justify-between items-center px-4 py-2 w-full">
           <div className="flex gap-5 items-center">
-            <img
-              onClick={() => navigate("/")}
-              src="https://file.rendit.io/n/Bh3TjQUvsgxuYLevIVW7.svg"
-              alt="HardwareKeyboardBackspace icon"
-              id="Epback"
-              className="w-6 cursor-pointer"
-            />
+            {isEnd ? (
+              <img
+                onClick={() => setIsEnd(false)}
+                src="https://file.rendit.io/n/Bh3TjQUvsgxuYLevIVW7.svg"
+                alt="HardwareKeyboardBackspace icon"
+                id="Epback"
+                className="w-6 cursor-pointer"
+              />
+            ) : (
+              <img
+                onClick={() => navigate("/")}
+                src="https://file.rendit.io/n/Bh3TjQUvsgxuYLevIVW7.svg"
+                alt="HardwareKeyboardBackspace icon"
+                id="Epback"
+                className="w-6 cursor-pointer"
+              />
+            )}
+
             <div
               id="LiveBattle13"
               className="text-center text-xl font-['Inter'] text-[#0f002b]"

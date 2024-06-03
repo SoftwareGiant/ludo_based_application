@@ -14,14 +14,16 @@ const KycStatusCard = ({ val, handleRefresh }) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const handleReject = () => {
-    toast.success("rejected kyc");
 
-    closeModal();
-  };
-  const handleVerification = () => {
-    dispatch(fetchAllKyc({ uid: val?._id }));
-    handleRefresh();
+  const handleVerification = (kycstatus) => {
+    dispatch(fetchAllKyc({ status: kycstatus, uid: val?._id }))
+      .then(() => {
+        handleRefresh();
+      })
+      .catch((error) => {
+        console.error("Error fetching KYC:", error);
+        // Optionally handle the error here
+      });
   };
 
   return (
@@ -124,14 +126,14 @@ const KycStatusCard = ({ val, handleRefresh }) => {
                 {val?.userKyc?.verificationStatus !== "approved" && (
                   <div className="flex  w-full mb-4 justify-between">
                     <div
-                      onClick={handleVerification}
+                      onClick={() => handleVerification("approved")}
                       className="m-2 cursor-pointer transition-colors  w-full px-3 h-[52px] flex items-center justify-center gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]  "
                     >
                       <span>Approve</span>
                       <Icon icon="mdi:approve" width="24" />
                     </div>
                     <div
-                      onClick={handleReject}
+                      onClick={() => handleVerification("pending")}
                       className="m-2 cursor-pointer transition-colors  w-full px-3 h-[52px] flex items-center justify-center gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]  "
                     >
                       <span>Reject</span>

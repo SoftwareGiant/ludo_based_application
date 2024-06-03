@@ -60,10 +60,6 @@ function AdminCustomer() {
   const { accessToken } = useSelector((state) => state.auth);
   const { userId } = useParams();
 
-  const handleEmojiSelect = (emoji) => {
-    setSelectedEmoji(emoji);
-    setInputText((prevInputText) => prevInputText + emoji.native);
-  };
   useEffect(() => {
     if (userId) {
       setSelectedUserId(userId);
@@ -84,43 +80,6 @@ function AdminCustomer() {
   }, [chatdetails?.messages]);
 
   const inputRef = useRef(null);
-  const handleSendMessage = async (e) => {
-    e.preventDefault();
-    setShowEmojiPicker(false);
-    const times = new Date().toLocaleTimeString();
-    console.log(times.slice(0, 4), typeof times);
-    if (inputText.trim() === "") return;
-    const objmsg = {
-      supportId: chatdetails._id,
-      message: inputText.trim(),
-    };
-    try {
-      const response = await axios.post("/api/support/replysupport", objmsg, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      console.log(response.data);
-      dispatch(fetchadminsupportlist());
-      setInputText("");
-      setImage(null);
-      return response.data;
-    } catch (error) {
-      toast.error(error.message);
-      throw error;
-    }
-  };
-
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImage(reader.result);
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
 
   const handleOpen = () => {
     setIsClicked(true);
@@ -303,14 +262,16 @@ function AdminCustomer() {
                       <td className="p-4">
                         <div className="flex items-center gap-3">
                           <Typography className="cursor-pointer font-[Inter] font-medium text-[16px]">
-                            {val?._id?.slice(-6)}
+                            {val?.createdBy?._id?.slice(-6)}
                           </Typography>
                         </div>
                       </td>
                       <td className="p-4">
                         <div className="flex flex-col">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {val?.userName ? val?.userName : "Ludo player"}
+                            {val?.createdBy?.userName
+                              ? val?.createdBy?.userName
+                              : "Ludo player"}
                           </Typography>
                         </div>
                       </td>

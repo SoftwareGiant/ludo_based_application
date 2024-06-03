@@ -232,7 +232,7 @@ export function NewOnboard() {
                       <td className="p-4">
                         <div className="flex flex-col">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {val?.userName ? val?.userName : val.mobileNo}
+                            {val?.userName ? val?.userName : "Ludo Player"}
                           </Typography>
                         </div>
                       </td>
