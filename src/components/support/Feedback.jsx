@@ -5,6 +5,7 @@ import { SidebarMob } from "../MainLayout/SidebarMob";
 import { Button } from "@material-tailwind/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { ProfileButton } from "../MainLayout/ProfileButton";
+import HelpButton from "../MainLayout/HelpButton";
 const Feedback = () => {
   const navigate = useNavigate();
   return (
@@ -27,6 +28,7 @@ const Feedback = () => {
             width="28"
             onClick={() => navigate("/")}
           />
+
           <div
             onClick={() => navigate("/")}
             id="LiveBattle13"
@@ -35,11 +37,8 @@ const Feedback = () => {
             <span className="font-bold"> Feed </span> back
           </div>
         </div>
-        <Icon
-          icon="material-symbols:report-outline"
-          onClick={() => navigate("/help")}
-          width="28"
-        />
+
+        <HelpButton dark={true} />
       </div>
 
       <div className=" w-full  overflow-hidden relative">

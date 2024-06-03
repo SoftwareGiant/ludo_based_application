@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from "react";
-import ProfileEditbtn from "../../assets/profile/editbutton.svg";
-import Edit from "../../assets/profile/edit.svg";
 import LogOutMob from "../../assets/profile/respon_logout.svg";
 import Verify from "../../assets/profile/verify.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";
-import {
-  Drawer,
-  IconButton,
-  Input,
-  Switch,
-  Typography,
-} from "@material-tailwind/react";
+import { Drawer, IconButton, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAsync } from "../app_start/authSlice";
@@ -214,13 +206,13 @@ const NewProfileMob = () => {
                   alt="Cover"
                 />
               </div>
-              <img
+              <Icon
+                icon="mdi:pencil-outline"
+                width={32}
                 onClick={() => navigate("/editprofile")}
-                className={`cursor-pointer  absolute  ${
+                className={`cursor-pointer bg-white p-2 shadow-lg rounded-full transition duration-300 ease-in-out transform hover:scale-110  absolute  ${
                   scrollPosition > 10 ? "hidden " : "top-0 right-[30%]"
                 }`}
-                alt="editbtn"
-                src={ProfileEditbtn}
               />
             </div>
 

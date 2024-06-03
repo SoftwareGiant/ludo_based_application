@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SidebarMob } from "../MainLayout/SidebarMob";
-
 import { useState } from "react";
 import "../../app.css";
 import { Icon } from "@iconify-icon/react";
@@ -12,6 +11,7 @@ import ButtonLoader from "../MainLayout/ButtonLoader.jsx";
 import LudoMainLogo from "../MainLayout/LudoMainLogo.jsx";
 import { toast } from "react-toastify";
 import { ProfileButton } from "../MainLayout/ProfileButton.jsx";
+import HelpButton from "../MainLayout/HelpButton.jsx";
 const WithdrawMob = () => {
   const [inputValue, setInputValue] = useState("");
   const [isbtnLoad, setIsButtonLoad] = useState(false);
@@ -61,7 +61,7 @@ const WithdrawMob = () => {
           },
         }
       );
-     
+
       if (response.status === 200) {
         toast.success(response.data.message);
         setInputValue("");
@@ -86,8 +86,7 @@ const WithdrawMob = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-<ProfileButton/>
-       
+        <ProfileButton />
       </div>
       <div className="flex justify-between items-center px-4 py-2 w-full">
         <div className="flex gap-5 items-center">
@@ -103,13 +102,7 @@ const WithdrawMob = () => {
             Withdraw Cash
           </div>
         </div>
-        <img
-          onClick={() => navigate("/help")}
-          src="https://file.rendit.io/n/ib8IMr1PTiCuwTfVAXZs.svg"
-          alt="ActionInfoOutline icon"
-          id="Icoutlineinfo"
-          className="w-6"
-        />
+        <HelpButton dark={true} />
       </div>
       <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative flex flex-col justify-between h-full">
         <div className="bg-[#fead3a] h-[86%] w-[200%] rounded-[50%]   -top-20 absolute -left-[50%]" />
