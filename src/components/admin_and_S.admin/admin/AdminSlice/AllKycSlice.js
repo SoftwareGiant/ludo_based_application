@@ -4,20 +4,27 @@ import { toast } from 'react-toastify';
 
 export const fetchAllKyc = createAsyncThunk(
     'allKyc/fetchKyc',
-    async ({ uid }) => {
+    async ({ uid, status }) => {
         const accessToken = localStorage.getItem('accessToken');
+        console.log(uid, status)
         if (!accessToken) {
             throw new Error('Access token not found');
         }
         try {
             const response = await axios.post('api/user/verifyKyc', {
-                "userId": uid
+                "userId": uid,
+                "status": status
             }, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
             });
-            toast.success(response.data.message)
+            console.log(response.data);
+            if (response?.data?.message === "KYC verified")
+                toast.success(response.data.message)
+            if (response?.data?.message === "KYC rejected")
+                toast.error(response.data.message)
+
             return response.data.verify;
         } catch (error) {
             console.error('Error fetching all users:', error);

@@ -131,7 +131,7 @@ const CustomerChat = () => {
             src={FrameProfile}
             className="w-[30px] h-[30px] rounded-[100px] border border-solid border-white "
           />
-          <div className="flex flex-col text-black items-start justify-center">
+          <div className="flex font-bold flex-col text-black items-start justify-center">
             <span className="text-[20px] leading-tight">
               {ticket?.createdBy?.slice(-6)}
             </span>

@@ -6,17 +6,7 @@ import {
   Accordion,
   AccordionHeader,
   AccordionBody,
-  Popover,
-  PopoverHandler,
-  PopoverContent,
-  ListItem,
-  ListItemPrefix,
 } from "@material-tailwind/react";
-
-import menu from "../../../../assets/profile/menusvg.svg";
-import FrameProfile from "../../../../assets/profile/Frame_profile.png";
-import { MdOutlineReport } from "react-icons/md";
-import { RiFeedbackFill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import AdminFooter from "../Common.jsx/AdminFooter";
 import AdminSupportChat from "../Common.jsx/AdminSupportChat";
@@ -57,13 +47,22 @@ function IconUpDown({ id, open }) {
 function AdminSupport() {
   const [isClicked, setIsClicked] = useState(false);
   const [open, setOpen] = useState(0);
-
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredQuestions, setFilteredQuestions] = useState(SUPPORT_QUES);
+  const navigate = useNavigate();
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+    const filtered = SUPPORT_QUES.filter((question) =>
+      question.toLowerCase().includes(query)
+    );
+    setFilteredQuestions(filtered);
+  };
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
   const handleClick = () => {
     setIsClicked(!isClicked);
   };
 
-  const navigate = useNavigate();
   const user = [
     {
       text: "hi",
@@ -134,7 +133,9 @@ function AdminSupport() {
       <div className="font-[Inter] main-body-right w-3/5 h-screen  bg-[#ffff] rounded-t-3xl overflow-y-scroll">
         <div className="bg-[#F4F4F4] rounded-t-3xl py-1 px-4 flex flex-col gap-4">
           <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
-          <Link to="/newonboard"  className="underline">Admin Control Panel </Link>
+            <Link to="/newonboard" className="underline">
+              Admin Control Panel{" "}
+            </Link>
             <span>&gt;&gt;</span>
             <span className="underline">Menu</span>
             <span>&gt;&gt;</span>
@@ -163,18 +164,28 @@ function AdminSupport() {
                   className="bg-[#F4F4F4] justify-between flex items-center p-1 px-2 h-[32px]  border rounded-lg"
                 >
                   <input
+                    onChange={handleSearch}
+                    value={searchQuery}
                     placeholder="Search"
                     className={`${
                       isClicked ? "delay-200" : "w-[54px]"
                     } transition-all duration-700 outline-none bg-[#F4F4F4] `}
                     type="text"
                   />
+                  {/* <input
+                    onChange={(e) => handleSearch(e)}
+                    placeholder="Search"
+                    className={`${
+                      isClicked ? "delay-200" : "w-[54px]"
+                    } transition-all duration-700 outline-none bg-[#F4F4F4] `}
+                    type="text"
+                  /> */}
                   <Icon icon="material-symbols:search" width="24" />
                 </div>
               </div>
             </div>
             <div>
-              {SUPPORT_QUES.map((val, index) => {
+              {filteredQuestions.map((val, index) => {
                 return (
                   <Accordion
                     key={index}
@@ -202,7 +213,7 @@ function AdminSupport() {
             </div>
           </CardBody>
         </Card>
-        <AdminFooter logohide={true}/>
+        <AdminFooter logohide={true} />
       </div>
       <div className="w-2/5 relative overflow-scroll main-body-right ">
         {/* <div className=" w-full   bg-none overflow-hidden relative">
@@ -335,7 +346,7 @@ function AdminSupport() {
             </div>
           </div>
         </div> */}
-        <AdminSupportChat/>
+        <AdminSupportChat />
       </div>
     </div>
   );

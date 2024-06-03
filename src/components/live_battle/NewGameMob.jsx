@@ -129,8 +129,8 @@ const NewGameMob = () => {
       const minutes = Math.floor(timeDifferenceInSeconds / 60); // Get the minutes
       const seconds = Math.floor(timeDifferenceInSeconds % 60); // Get the remaining seconds
 
-      if (seconds < 50 && minutes < 1) {
-        const initialTimerValue = 50 - seconds;
+      if (seconds < 100 && minutes < 1) {
+        const initialTimerValue = 100 - seconds;
         intervalIds[id] = setInterval(() => {
           setTimers((prevTimers) => {
             if (prevTimers[id] <= 0 || minutes >= 1) {

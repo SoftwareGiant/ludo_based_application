@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify-icon/react";
 import { Button, Card, CardBody } from "@material-tailwind/react";
-
 import AdminFooter from "../Common.jsx/AdminFooter";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -50,7 +49,6 @@ const AdminSLides = () => {
       try {
         const formData = new FormData();
         formData.append("image", selectFile);
-
         await axios.post("/api/admin/addslider", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -59,6 +57,8 @@ const AdminSLides = () => {
         });
         fileInputRef.current.value = "";
         toast.success("Image uploaded successfully");
+        setSelectFile("");
+        setFilename("");
         getSlides();
       } catch (error) {
         console.error("Error uploading image:", error);
@@ -106,11 +106,10 @@ const AdminSLides = () => {
               Slides Details
             </span>
           </div>
-
           <div className="flex flex-wrap">
             {sliderData.map((image, index) => (
               <div key={index} className="relative m-2 ">
-                <div className="w-52 h-28 rounded-md shadow-md overflow-hidden relative border border-yellow-800">
+                <div className="w-52 h-28 rounded-md shadow-md overflow-hidden relative border-2 border-black ">
                   <img
                     src={image}
                     className="w-full h-full object-cover"
@@ -121,7 +120,7 @@ const AdminSLides = () => {
                 <div className="absolute top-0 right-0 flex">
                   <button
                     onClick={() => handleDelete(image)}
-                    className="bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center -m-1"
+                    className="bg-red-500  text-white rounded-full p-4 w-6 h-6 flex items-center justify-center -m-2"
                   >
                     <Icon icon="charm:cross" width={24} />
                   </button>
