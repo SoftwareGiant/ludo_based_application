@@ -63,6 +63,7 @@ const findGameAndChangeResult = async (req, res, next) => {
     }
     return res.status(200).json({ gameDetail });
   } catch (err) {
+    console.log(err,"okayy")
     next(err);
   }
 };

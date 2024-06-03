@@ -225,12 +225,12 @@ const addKyc = async (req, res, next) => {
 
 const verifyKyc = async (req, res, next) => {
   try {
-    const { userId } = req.body;
-    const verify = await User.findByIdAndUpdate(userId, { $set: { "userKyc.verificationStatus": "approved" } }, { new: true });
+    const { userId,status } = req.body;
+    const verify = await User.findByIdAndUpdate(userId, { $set: { "userKyc.verificationStatus": status } }, { new: true });
     if (verify) {
       const notification = new Notification({
         user: req.userId,
-        message: "Kyc verified successfully🥳"
+        message: `Kyc ${status === "approved" ? "approved successfully" : "rejected"}`
       });
       await notification.save();
       return res.status(200).json({ message: "Kyc verified", verify });

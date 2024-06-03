@@ -17,9 +17,10 @@ const RouteHandling = (app) =>{
   app.use("/api/notification",require("../../router/notification"));
   
   app.use(async(err, req, res, next) => {
-    logger.error(
-      `${err.status} - ${err.message} - ${req.originalUrl} - ${req.method}`,
-    );
+    console.log(err,"okieee")
+    // logger.error(
+    //   `${err.status} - ${err.message} - ${req.originalUrl} - ${req.method}`,
+    // );
     // await sendMail();
     if(!err?.status){
       err.status = 404;
