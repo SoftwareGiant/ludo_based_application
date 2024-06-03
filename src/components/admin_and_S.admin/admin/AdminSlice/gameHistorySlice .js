@@ -29,7 +29,7 @@ const gameHistorySlice = createSlice({
     error: null,
   },
   reducers: {},
- extraReducers: (builder) => {
+  extraReducers: (builder) => {
     builder
       .addCase(fetchAllGameHistory.pending, (state) => {
         state.status = 'loading';

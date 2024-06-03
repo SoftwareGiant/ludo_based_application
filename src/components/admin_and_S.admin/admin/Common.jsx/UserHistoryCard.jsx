@@ -14,6 +14,8 @@ import {
 import { fetchUserAllHistory } from "../AdminSlice/userAllHistorySlice";
 import { formatDate } from "../../Functions/formateDate";
 import { useNavigate } from "react-router-dom";
+import DepositeStatusCard from "./DepositeStatusCard.jsx";
+import GameStatusCard from "./GameStatusCard.jsx";
 
 const UserHistoryCard = ({
   status,
@@ -261,9 +263,14 @@ const UserHistoryCard = ({
                                     </td>
                                     <td className="p-4">
                                       <div className="flex flex-col">
-                                        <Typography className="font-[Inter] font-medium text-[16px]">
+                                        {/* <Typography className="font-[Inter] font-medium text-[16px]">
                                           {val.status}
-                                        </Typography>
+                                        </Typography> */}
+                                        <GameStatusCard
+                                          val={val}
+                                          // handleRefresh={handleRefresh}
+                                          // isRefresh={isRefresh}
+                                        />
                                       </div>
                                     </td>
                                   </tr>
@@ -358,9 +365,7 @@ const UserHistoryCard = ({
                                     </td>
                                     <td className="p-4">
                                       <div className="flex flex-col">
-                                        <Typography className="font-[Inter] font-medium text-[16px]">
-                                          {val.status}
-                                        </Typography>
+                                        <DepositeStatusCard val={val} />
                                       </div>
                                     </td>
                                   </tr>
@@ -434,7 +439,7 @@ const UserHistoryCard = ({
                                     <td className="p-4">
                                       <div className="flex items-center gap-3">
                                         <Typography className="font-[Inter] font-medium text-[16px]">
-                                          {val._id.slice(-8)}
+                                          {val._id.slice(-6)}
                                         </Typography>
                                       </div>
                                     </td>
@@ -455,9 +460,7 @@ const UserHistoryCard = ({
 
                                     <td className="p-4">
                                       <div className="flex flex-col">
-                                        <Typography className="font-[Inter] font-medium text-[16px]">
-                                          {val.status}
-                                        </Typography>
+                                        <DepositeStatusCard val={val} />
                                       </div>
                                     </td>
                                   </tr>

@@ -46,7 +46,9 @@ function AdminCustomer() {
   const [isRefresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const adminsupportlist = useSelector((state) => state.adminsupportlist);
+  const adminsupportlist = useSelector(
+    (state) => state.adminsupportlist.messages
+  );
   const [chatdetails, setChatdetails] = useState(null);
   const [ischat, setIsChat] = useState("");
   const [showEmojis, setShowEmojis] = useState(false);
@@ -168,13 +170,13 @@ function AdminCustomer() {
   };
 
   const handleUserClick = (val) => {
-    setSelectedUserId(val?.createdBy);
+    setSelectedUserId(val?.createdBy?._id);
 
-    navigate(`/admincustomer/${val?.createdBy}`);
+    navigate(`/admincustomer/${val?.createdBy?._id}`);
     window.location.reload();
   };
 
-  // console.log(ischat);
+  console.log(adminsupportlist);
   return (
     <div className="flex w-full gap-2 h-screen">
       <div className="font-[Inter] main-body-right w-3/5 bg-[#ffff] rounded-t-3xl overflow-y-scroll h-screen">
@@ -273,7 +275,7 @@ function AdminCustomer() {
                       className="cursor-pointer   p-2 transition-colors  rounded-lg"
                       onClick={() => (index === 0 ? sortTable("_id") : "")}
                     >
-                      <Typography
+                      <div
                         variant="small"
                         color="blue-gray"
                         className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]"
@@ -285,13 +287,13 @@ function AdminCustomer() {
                             className="h-4 w-4"
                           />
                         )}
-                      </Typography>
+                      </div>
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody className="w-full">
-                {adminsupportlist?.messages?.map((val) => {
+                {adminsupportlist?.map((val) => {
                   return (
                     <tr
                       onClick={() => handleUserClick(val)}
@@ -301,7 +303,7 @@ function AdminCustomer() {
                       <td className="p-4">
                         <div className="flex items-center gap-3">
                           <Typography className="cursor-pointer font-[Inter] font-medium text-[16px]">
-                            {val?.createdBy}
+                            {val?._id?.slice(-6)}
                           </Typography>
                         </div>
                       </td>
@@ -315,7 +317,7 @@ function AdminCustomer() {
                       <td className="p-4">
                         <div className="w-max">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {val?._id.slice(-6)}
+                            {val?.createdBy?.mobileNo}
                           </Typography>
                         </div>
                       </td>

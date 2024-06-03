@@ -17,6 +17,14 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isResolve, setIsResolve] = useState(false);
   const dispatch = useDispatch();
+  const user1 =
+    typeof val?.player1 === "string"
+      ? val?.player1?.slice(-6)
+      : val?.player1?._id.slice(-6);
+  const user2 =
+    typeof val?.player2 === "string"
+      ? val?.player2?.slice(-6)
+      : val?.player2?._id.slice(-6);
   const { accessToken } = useSelector((state) => state.auth);
   const openModal = () => {
     setIsOpen(true);
@@ -42,7 +50,7 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
         }
       );
       toast.success(response.data.message);
-      handleRefresh();
+      handleRefresh && handleRefresh();
     } catch (error) {
       toast.error(error.message);
       throw error;
@@ -95,18 +103,21 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
                     <Icon icon="octicon:feed-issue-draft-16" width="24" />
                   </div>
                 ) : (
-                  <div className="w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
-                    <span>Refresh</span>{" "}
-                    {isRefresh ? (
-                      <Refreshloader />
-                    ) : (
-                      <Icon
-                        onClick={handleRefresh}
-                        icon="material-symbols:refresh"
-                        width="24"
-                      />
-                    )}
-                  </div>
+                  isRefresh &&
+                  handleRefresh && (
+                    <div className="w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
+                      <span>Refresh</span>{" "}
+                      {isRefresh ? (
+                        <Refreshloader />
+                      ) : (
+                        <Icon
+                          onClick={handleRefresh}
+                          icon="material-symbols:refresh"
+                          width="24"
+                        />
+                      )}
+                    </div>
+                  )
                 )}
 
                 <button
@@ -136,8 +147,8 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
                       </p>
                     </div>
                     <Select label="Select Winner">
-                      <Option> {val.player1.slice(-6)}</Option>
-                      <Option>{val.player2.slice(-6)}</Option>
+                      <Option> {user1}</Option>
+                      <Option>{user2}</Option>
                     </Select>
                   </div>
                   <div className="flex justify-between items-center">
@@ -148,8 +159,8 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
                       </p>
                     </div>
                     <Select label="Select Looser">
-                      <Option> {val.player1.slice(-6)}</Option>
-                      <Option>{val.player2.slice(-6)}</Option>
+                      <Option> {user1}</Option>
+                      <Option>{user2}</Option>
                     </Select>
                   </div>
                 </div>
@@ -176,7 +187,8 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
               <div className="w-full h-[465px] flex ">
                 <div className="flex-1 p-4">
                   <p className="w-full m-3">
-                    Game started {convertTimestamp(val.gameactivationTimestamp)}
+                    Game started{" "}
+                    {convertTimestamp(val?.gameactivationTimestamp)}
                   </p>
                   <div className="w-full flex items-center">
                     <div className="flex  flex-col  flex-1 justify-center items-center m-auto text-[#0F002B]  font-[Nunito-Sans]">
@@ -186,7 +198,7 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
                         src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
                       />
                       <span className="flex items-center font-bold text-[30px]">
-                        {val.player1.slice(-5)}
+                        {user1}
                         {val.status && (
                           <Icon
                             icon="bitcoin-icons:verify-outline"
@@ -206,7 +218,7 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
                         src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
                       />
                       <span className="flex items-center font-bold text-[30px]">
-                        {val.player2.slice(-5)}
+                        {user2}
                         {val.status && (
                           <Icon
                             icon="bitcoin-icons:verify-outline"
@@ -253,8 +265,8 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
                         />
                         <span className="flex items-center font-bold text-[30px]">
                           {val.gameResultDetail?.player1.outcome === "win"
-                            ? val.player1.slice(-5)
-                            : val.player2.slice(-5)}
+                            ? user1
+                            : user2}
                           {val.status && (
                             <Icon
                               icon="bitcoin-icons:verify-outline"
