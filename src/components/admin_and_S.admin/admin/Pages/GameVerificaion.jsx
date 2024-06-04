@@ -81,7 +81,7 @@ export function GameVerificaion() {
     setSortConfig({ key, direction });
   };
 
-  const sortedGame = [...gameHistory].sort((a, b) => {
+  const sortedGame = [...gameHistory]?.sort((a, b) => {
     if (sortConfig.key && sortConfig.direction) {
       if (sortConfig.direction === "ascending") {
         return a[sortConfig.key] > b[sortConfig.key] ? 1 : -1;

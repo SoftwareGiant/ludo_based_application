@@ -194,7 +194,7 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
                 <div className="flex-1 p-4">
                   <p className="w-full m-3">
                     Game started{" "}
-                    {convertTimestamp(val?.gameactivationTimestamp)}
+                    {convertTimestamp(val?.matchingTimeStamp)}
                   </p>
                   <div className="w-full flex items-center">
                     <div className="flex  flex-col  flex-1 justify-center items-center m-auto text-[#0F002B]  font-[Nunito-Sans]">

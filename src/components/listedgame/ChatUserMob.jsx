@@ -26,8 +26,6 @@ import Picker from "@emoji-mart/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { getTime } from "../admin_and_S.admin/Functions/getTime";
 const ChatUserMob = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { socketData } = useSelector((state) => state.socketfor);
   const { accessToken } = useSelector((state) => state.auth);
   const { decodedToken } = useJwt(accessToken);
@@ -41,7 +39,8 @@ const ChatUserMob = () => {
   const [messageList, setMessageList] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [isFav, setIsfav] = useState(false);
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const inputRef = useRef();
 
   useEffect(() => {
@@ -146,9 +145,8 @@ const ChatUserMob = () => {
       }
     );
     if (response.status === 200) {
-       fn();
+      fn();
       setMessageList((prevMessageList) => [...prevMessageList, response?.data]);
-    
     }
     setMessage("");
     setImage(null);
