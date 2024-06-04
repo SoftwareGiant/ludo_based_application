@@ -388,8 +388,8 @@ const NewProfileMob = () => {
                   type="text"
                   value={aadharNumber}
                   onChange={(e) => setAadharNumber(e.target.value)}
-                  placeholder="Enter Aadhaar Number"
-                  className="font-bold  cursor-pointer bg-white bg-opacity-[30%]  text-white py-2 px-4 rounded-lg"
+                  placeholder="Enter Aadhar Number"
+                  className="font-bold  cursor-pointer bg-white bg-opacity-[30%]  bg-transparent border-2 border-gray-300 focus:border-[#fead3a] focus:outline-none text-white py-2 px-4 rounded-lg"
                 />
 
                 {aadharfrontname ? (
@@ -404,11 +404,12 @@ const NewProfileMob = () => {
                   </div>
                 ) : (
                   <label
-                    className={`font-bold text-center cursor-pointer bg-white ${
+                    className={`font-bold text-center flex justify-center items-center  gap-2 cursor-pointer bg-white ${
                       aadharfrontname ? "bg-opacity-[60%]" : "bg-opacity-[30%]"
-                    }  hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg`}
+                    }  hover:bg-opacity-[50%] text-white py-2 px-4  rounded-lg`}
                   >
                     <span>Aadhar Front</span>
+                    <Icon icon="material-symbols:upload" width={24} />
                     <input
                       type="file"
                       className="hidden"
@@ -429,8 +430,9 @@ const NewProfileMob = () => {
                     {aadharbackname.slice(0, 20)}
                   </div>
                 ) : (
-                  <label className="cursor-pointer  text-center font-bold bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
+                  <label className="cursor-pointer flex justify-center items-center gap-2 text-center font-bold bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
                     <span>Aadhar Back </span>
+                    <Icon icon="material-symbols:upload" width={24} />
                     <input
                       type="file"
                       className="hidden"
@@ -441,7 +443,7 @@ const NewProfileMob = () => {
                 )}
 
                 <button
-                  className="bg-gray-50 hover:bg-gray-100 text-[#0F002B] py-2 px-4 rounded-lg"
+                  className="bg-gray-50 hover:bg-gray-100 font-semibold text-[#0F002B] py-2 px-4 rounded-lg"
                   onClick={handleSubmit}
                 >
                   Submit

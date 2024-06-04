@@ -13,6 +13,7 @@ export const fetchAllGameHistory = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
+      console.log(response.data)
       return response.data.allGame;
     } catch (error) {
       console.error('Error fetching all game history:', error);

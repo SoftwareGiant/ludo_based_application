@@ -7,44 +7,30 @@ import {
   MenuItem,
   MenuList,
 } from "@material-tailwind/react";
-import AdminLogo from "../../../assets/admin_Sadmin/admin/admin.svg";
-import UidLogo from "../../../assets/admin_Sadmin/admin/uid.svg";
-import PasswordLogo from "../../../assets/admin_Sadmin/admin/pswd.svg";
-
 // top pannel
-import BellIcon from "../../../assets/admin_Sadmin/admin/bell.svg";
-import Profile from "../../../assets/admin_Sadmin/admin/profile.png";
 import LogOut from "../../../assets/admin_Sadmin/admin/logout.svg";
-import Search from "../../../assets/admin_Sadmin/admin/search.svg";
 // left pannel
-import Deposite from "../../../assets/admin_Sadmin/admin/deposit.svg";
 import Games from "../../../assets/admin_Sadmin/admin/games.svg";
-import History from "../../../assets/admin_Sadmin/admin/history.svg";
-import Kyc from "../../../assets/admin_Sadmin/admin/kyc.svg";
 import Setting from "../../../assets/admin_Sadmin/admin/settings.svg";
 import Stats from "../../../assets/admin_Sadmin/admin/stats.svg";
 import ButtonLoader from "../../MainLayout/ButtonLoader";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  logoutAsync,
-  selectRefreshToken,
-  selectToken,
-} from "../../app_start/authSlice";
+import { logoutAsync } from "../../app_start/authSlice";
 
 const AdminTopbar = () => {
   const dispatch = useDispatch();
-  const token = useSelector(selectToken);
-  const refreshtoken = useSelector(selectRefreshToken);
-
+  const { accessToken, refreshToken } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const handleLogout = () => {
     console.log("logout");
-    dispatch(logoutAsync({ token, refreshtoken }));
+    dispatch(logoutAsync({ token: accessToken, refreshtoken: refreshToken }));
   };
   return (
     <div className="flex font-[Inter] p-2 items-center justify-between ">
-       <Link to="/newonboard"  className="underline">Admin Control Panel </Link>
+      <Link to="/newonboard" className="underline">
+        Admin Control Panel{" "}
+      </Link>
       <div className="flex gap-2 items-center">
         <div className="bg-[#ffff] h-[40px] w-[253px] p-2 gap-3 rounded-lg flex items-center">
           <Icon icon="material-symbols:search" width="24" />
@@ -70,7 +56,6 @@ const AdminTopbar = () => {
           <div className="border-white border rounded-full w-[27px] h-[26px] overflow-hidden ">
             <Menu>
               <MenuHandler>
-                
                 <img
                   src="https://www.stryx.com/cdn/shop/articles/man-looking-attractive.jpg?v=1666662774"
                   className="h-full w-[50px] scale-x-150 cursor-pointer"
@@ -129,10 +114,7 @@ const AdminTopbar = () => {
                   </div>
                 </MenuItem>
                 <MenuItem className="flex items-center gap-2">
-                  <div
-                  
-                    className="flex items-center gap-[13px]"
-                  >
+                  <div className="flex items-center gap-[13px]">
                     <img
                       src={LogOut}
                       alt="Logout"

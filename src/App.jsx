@@ -60,7 +60,6 @@ import SuperDeposite from "./components/admin_and_S.admin/superadmin/Pages/Super
 import SuperWithdrawal from "./components/admin_and_S.admin/superadmin/Pages/SuperWithdrawal.jsx";
 import Chathistory from "./components/Chathistory/Chathistory.jsx";
 import MatchUserChat from "./components/Chathistory/MatchUserChat.jsx";
-import MyChat from "./components/Chathistory/MyChat.jsx";
 import AdminSLides from "./components/admin_and_S.admin/admin/Pages/AdminSLides.jsx";
 import ErrorBoundary from "./Errorboundary.jsx";
 import CustomerChat from "./components/admin_and_S.admin/admin/Common.jsx/CustomerChat.jsx";
@@ -71,9 +70,7 @@ function App() {
     <BrowserRouter>
       <ErrorBoundary>
         <Routes>
-          <Route path="/mychat" element={<MyChat />} />
           <Route path="/adminlogin" element={<SAdminLogin />} />
-
           <Route path="/login" element={<LoginMob />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
