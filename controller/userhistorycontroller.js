@@ -10,6 +10,7 @@ const userGameHistory = async (req, res, next) => {
       .sort({ matchingTimeStamp: -1 })
       .populate("player1")
       .populate("player2");
+    
     return res.status(200).json({ gameDetails });
   } catch (e) {
     next(e);

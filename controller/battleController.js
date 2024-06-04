@@ -45,7 +45,7 @@ const editBattle = async (req, res, next) => {
 const deleteBattle = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deletedBattle = await Battle.findByIdAndDelete(id);
+    await Battle.findByIdAndDelete(id);
     return res
       .status(200)
       .json({ message: "Battle deleted Successfully", deleteBattle });

@@ -45,12 +45,12 @@ const createBattle = async (req, res, next) => {
     user.walletDetails.totalAmount -= parseInt(battleAmount);
     // agar battle nhi khela jata hai then hamlogo ko wapas back karna hoga amount
     await user.save();
-    const battleTimeOnScreen = currentTime + 50 * 60 * 1000;
+    const battleTimeOnScreen = currentTime + 2 * 60 * 1000;
     const roomId = generateRoomId();
     const newBattle = new Battle({
       amount: parseInt(battleAmount),
       battleTimeStamp: currentTime,
-      battleTimeStampOnUserScreen: battleTimeOnScreen,
+      // battleTimeStampOnUserScreen: battleTimeOnScreen,
       player1: userId,
       roomId
     });
@@ -420,7 +420,7 @@ const allGameHistory = async (req, res, next) => {
   try {
     const allGame = await GameDetail.find({});
     if (allGame.length == 0) {
-      return res.status(404).json({ messege: "No Data Found" });
+      return res.status(200).json({});
     }
     return res.status(200).json({ allGame });
   } catch (err) {

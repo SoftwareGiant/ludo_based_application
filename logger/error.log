@@ -78,3 +78,128 @@
   level: 'error',
   timestamp: 'Jun-03-2024 14:34:02'
 }
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-03-2024 23:59:18'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-03-2024 23:59:18'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:19:24'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:19:24'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:19:51'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:19:51'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:20:18'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:20:18'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:22:44'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:22:44'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:22:53'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:22:53'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:23:20'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:23:20'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:24:04'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:45:42'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:45:42'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:45:42'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 17:45:42'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'Jun-04-2024 22:11:17'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 22:11:18'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 22:11:47'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 22:11:47'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 22:11:56'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-04-2024 22:11:56'
+}
