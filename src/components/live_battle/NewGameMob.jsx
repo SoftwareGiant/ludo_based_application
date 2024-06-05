@@ -28,7 +28,7 @@ const NewGameMob = () => {
   const { accessToken } = useSelector((state) => state.auth);
   const { decodedToken } = useJwt(accessToken);
   const { socketData } = useSelector((state) => state.socketfor);
-  const { match } = useSelector((state) => state.match);
+  let { match } = useSelector((state) => state.match);
   const navigate = useNavigate();
   const [battleAmount, setBattleAmount] = useState("");
   const [buttonStatus, setButtonStatus] = useState("create");
@@ -68,6 +68,7 @@ const NewGameMob = () => {
     setSeleteBAttleId("");
     setDeleteDrawer(false);
   };
+
   useEffect(() => {
     if (isRequest === false && requestTimer < 50) {
       let requestInterval = setInterval(() => {
@@ -109,6 +110,11 @@ const NewGameMob = () => {
         return navigate(`/chat/${player1}/player1/`);
       }
     }
+
+    return () => {
+      match = null;
+    };
+
   }, [match]);
 
   useEffect(() => {
