@@ -22,17 +22,23 @@ const MatchProgress = () => {
   const [screenshot, setScreenshot] = useState("");
   const [filename, setFilename] = useState("");
   const navigate = useNavigate();
-  const openChallenges = useSelector((state) => state.opengame.openChallenges);
   const { accessToken } = useSelector((state) => state.auth);
+
+  const openChallenges = useSelector((state) => state.opengame.openChallenges);
+  const loading = useSelector((state) => state.opengame.loading);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchOpenChallenges());
   }, [dispatch]);
-  useEffect(() => {
-    if (!openChallenges || openChallenges.length <= 0) {
-      navigate("/");
-    }
-  }, [openChallenges, navigate]);
+
+  // useEffect(() => {
+  //   if (!loading && openChallenges.length === 0) {
+  //     console.log(loading,openChallenges)
+  //     navigate("/");
+  //   }
+  // }, [openChallenges, loading, navigate]);
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0]; // Get the first file selected by the user
     console.log(file);
@@ -170,9 +176,9 @@ const MatchProgress = () => {
         </div> */}
         {
           <div>
-            <div className="flex flex-col  w-full gap-4 p-8 ">
-              {isEnd ? (
-                screenshot ? (
+            {isEnd ? (
+              <div className="flex flex-col  w-full gap-4 p-8 ">
+                {screenshot ? (
                   <div className="p-1  text-white text-sm bg-[#0F002B] rounded-md font-bold">
                     <IconButton
                       className="p-1 m-1 h-6 w-8"
@@ -190,21 +196,19 @@ const MatchProgress = () => {
                   >
                     Upload Image or Video
                   </button>
-                )
-              ) : (
+                )}
+              </div>
+            ) : (
+              <div className="flex flex-col  w-full gap-4 p-8 ">
                 <button
                   onClick={() => setIsEnd(true)}
                   className="p-2 border border-blue-gray-700 rounded-md font-bold"
                 >
                   Click if Match has Ended
                 </button>
-              )}
+              </div>
+            )}
 
-              <ol>
-                <li>1. Don’t click unless the match has ended.</li>
-                <li>2. Strictly Irreversible.</li>
-              </ol>
-            </div>
             <hr className="bg-gray-900" />
           </div>
         }

@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export const fetchAllGameHistory = createAsyncThunk(
   'gameHistory/fetchAllGameHistory',
-  async () => {
+  async (_, { rejectWithValue }) => {
     const accessToken = localStorage.getItem('accessToken');
     try {
       const response = await axios.get('api/game/allgamehistory', {
@@ -13,10 +13,14 @@ export const fetchAllGameHistory = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
+      if (response.data.messege === 'No Data Found') {
+        return [];
+      }
+      console.log(response.data)
       return response.data.allGame;
     } catch (error) {
       console.error('Error fetching all game history:', error);
-      throw error;
+      return rejectWithValue(error.response ? error.response.data : error.message);
     }
   }
 );

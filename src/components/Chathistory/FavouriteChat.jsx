@@ -29,6 +29,7 @@ const FavouriteChat = ({
             onClick={() => setOpenChatHistory(false)}
             icon="mingcute:arrow-left-line"
             width="32"
+            className="cursor-pointer"
           />
           <p>favourite</p>
         </div>
@@ -85,14 +86,14 @@ const FavouriteChat = ({
                         <div className="flex gap-1">
                           <Icon
                             icon="solar:star-bold"
-                            className="cursor-pointer"
+                            className="cursor-pointer "
                             width={26}
                           />
-                          <Icon
+                          {/* <Icon
                             className="cursor-pointer"
                             icon="solar:pin-bold"
                             width={26}
-                          />
+                          /> */}
                         </div>
                       </div>
                     </div>

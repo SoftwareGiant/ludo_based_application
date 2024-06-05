@@ -24,6 +24,7 @@ const OpenRecentTab = ({
             }}
             icon="mingcute:arrow-left-line"
             width="32"
+            className="cursor-pointer"
           />
 
           <div className="flex items-center gap-1">
@@ -42,7 +43,7 @@ const OpenRecentTab = ({
               key={userchat?._id}
               onClick={() => handleRecentCardCLick(userchat)}
               color="transparent"
-              className="w-[90%] mt-5 max-w-[26rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-2xl "
+              className="w-[90%] cursor-pointer mt-5 max-w-[26rem] bg-gray-100 hover:bg-gray-200 p-3 mx-4 rounded-2xl "
             >
               <div className="flex items-center gap-4 ">
                 <Avatar
@@ -68,12 +69,12 @@ const OpenRecentTab = ({
                       <Icon icon="mdi:tick-circle-outline" />
                       Let’s play again
                     </div>
-
+                    {/* 
                     <Icon
                       className="cursor-pointer"
                       icon="solar:pin-bold"
                       width="26"
-                    />
+                    /> */}
                   </div>
                 </div>
               </div>

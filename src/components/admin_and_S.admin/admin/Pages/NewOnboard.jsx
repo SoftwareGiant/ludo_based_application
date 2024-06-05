@@ -144,7 +144,7 @@ export function NewOnboard() {
                   />
                   <Icon icon="material-symbols:search" width="24" />
                 </div>
-                <div className="w-[107px] h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
+                <div className="w-[107px] cursor-pointer h-[32px] justify-between p-1 bg-[#F4F4F4] flex items-center  border rounded-lg">
                   <span>Refresh</span>{" "}
                   {isRefresh ? (
                     <Refreshloader />

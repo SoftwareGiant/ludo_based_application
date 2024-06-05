@@ -172,7 +172,7 @@ const NewGameMob = () => {
       }
       if (battleAmount < 50 || battleAmount > 20000) {
         toast.error(
-          "Battle amount should be greater than 50 and less than 20,000"
+          "Battle amount should be equal or greater than 50 and less than 20,000"
         );
         setBattleAmount("");
         setButtonStatus("create");
@@ -296,9 +296,9 @@ const NewGameMob = () => {
               onClick={openDrawerBottom}
               className="cursor-pointer shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg"
             >
-              <div className="flex w-full pr-3">
+              <div className="flex text-lg  w-full pr-3">
                 <span>₹</span>
-                <p className="outline-none pl-2  focus:outline-none w-full">
+                <p className="outline-none font-semibold pl-2 opacity-[50%] focus:outline-none w-full">
                   Your battle amount
                 </p>
               </div>
@@ -547,7 +547,7 @@ const NewGameMob = () => {
           </div>
           <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg">
             <div className="flex w-full pr-3" onClick={openDrawerBottom}>
-              <span>₹</span>
+              <span className=" text-xl font-semibold">₹</span>
               <input
                 inputMode="numeric"
                 pattern="[0-9]*"
@@ -555,7 +555,7 @@ const NewGameMob = () => {
                 value={battleAmount}
                 onChange={handleBattleAmountChange}
                 placeholder="Your battle amount"
-                className="outline-none pl-2  focus:outline-none w-full"
+                className="outline-none pl-2 text-xl font-semibold focus:outline-none w-full"
               />
             </div>
             <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-2">

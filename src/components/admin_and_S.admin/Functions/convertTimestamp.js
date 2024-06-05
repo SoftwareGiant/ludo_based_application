@@ -1,7 +1,6 @@
 export function convertTimestamp(timestamp) {
     const currentDate = new Date(); // Current date
     const matchingDate = new Date(timestamp); // Date from matchingTimeStamp
-
     // Calculate the difference in milliseconds
     const difference = currentDate - matchingDate;
 
