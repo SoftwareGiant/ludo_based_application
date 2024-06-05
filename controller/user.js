@@ -202,7 +202,7 @@ const addKyc = async (req, res, next) => {
           "userKyc.aadharNo": aadharNo,
           "userKyc.aadharFront": req.files[0].filename,
           "userKyc.aadharBack": req.files[1].filename,
-          "verificationStatus": "inprogress"
+          "userKyc.verificationStatus": "inprogress"
         }
       },
       { new: true }

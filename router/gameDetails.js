@@ -3,7 +3,7 @@ const router = express.Router();
 const wrapAsync = require("../controlError/wrapAsync");
 const { verifyToken } = require("../helper/jwt_helper");
 const { admin } = require("../config/authentication/authJwt");
-const { createBattle, matchUser, updateResult, updateCode, cancelGame, allGameHistory, openChallenge, deleteBattle } = require("../controller/newGame");
+const { createBattle, matchUser, updateResult, updateCode, cancelGame, allGameHistory, openChallenge, deleteBattle, gameClosingTrack } = require("../controller/newGame");
 
 const { upload } = require("../helper/multer");
 
@@ -58,6 +58,12 @@ router.get(
   "/openchallenge",
   [verifyToken],
   wrapAsync((req, res, next) => openChallenge(req, res, next))
+);
+
+router.get(
+  "/gameclosingtrack",
+  [verifyToken, admin],
+  wrapAsync((req, res, next) => gameClosingTrack(req, res, next))
 );
 
 module.exports = router;

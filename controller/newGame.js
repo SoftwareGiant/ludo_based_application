@@ -40,10 +40,6 @@ const createBattle = async (req, res, next) => {
       return res.status(400).json({ message: "You are already active in other game!" });
     }
     const currentTime = Date.now();
-
-    user.walletDetails.lockedAmount += parseInt(battleAmount);
-    user.walletDetails.totalAmount -= parseInt(battleAmount);
-    // agar battle nhi khela jata hai then hamlogo ko wapas back karna hoga amount
     await user.save();
     const battleTimeOnScreen = currentTime + 2 * 60 * 1000;
     const roomId = generateRoomId();
@@ -95,6 +91,15 @@ const matchUser = async (req, res, next) => {
     const { battleAmount, id, player1 } = req.body;
     const userId = req.userId;
     const user = await User.findById(userId);
+
+    const battleDetail = await Battle.findOne({
+      $or: [{ player1: userId }, { player2: userId }]
+    });
+
+    if (battleDetail && !battleDetail?.userMatched) {
+      return res.status(400).json({ message: "You have created your own battle!Please wait for other user to join." });
+    }
+
     if (parseInt(battleAmount) > user.walletDetails.totalAmount) {
       return res.status(400).json({
         message: "You don't have sufficient amount to play this game!"
@@ -127,6 +132,13 @@ const matchUser = async (req, res, next) => {
       user.walletDetails.lockedAmount += parseInt(battleAmount);
       user.walletDetails.totalAmount -= parseInt(battleAmount);
       await user.save();
+
+      //locking the amount
+
+      const user1 = await User.findById(player1);
+      user1.walletDetails.lockedAmount += parseInt(battleAmount);
+      user1.walletDetails.totalAmount -= parseInt(battleAmount);
+      await user1.save();
 
       const battle = await Battle.findByIdAndUpdate(id, { player2: userId, userMatched: true }, { new: true });
       newGameDetail.battleDetails.roomId = battle.roomId;
@@ -174,6 +186,8 @@ const updatePayment = async (gameDetail) => {
     // gameDetail.player2.walletDetails.totalAmount -= gameDetail?.battleDetails?.amount;
     gameDetail.player2.walletDetails.losingAmount += gameDetail?.battleDetails?.amount;
   }
+  gameDetail.paymentSettlement = true; 
+  await gameDetail.save();
   await gameDetail.player1.save();
   await gameDetail.player2.save();
   await adminWallet.save();
@@ -202,7 +216,7 @@ const updateResult = async (req, res, next) => {
     const user = await User.findById(userId);
     const { outcome } = req.body;
     if (!user) {
-      throw new AppError("Something went wrong!Please try again later", 500);
+      throw new AppError("Something went wrong!Please try again later.", 500);
     }
     const gameDetail = await GameDetail.findOne({
       $or: [{ player1: userId }, { player2: userId }],
@@ -235,23 +249,39 @@ const updateResult = async (req, res, next) => {
         gameDetail.gameResultDetail.player1.outcome = "win";
       }
     }
-
     if ((gameDetail.gameResultDetail.player1.outcome == "win" && gameDetail.gameResultDetail.player2.outcome == "lose") || (gameDetail.gameResultDetail.player2.outcome == "win" && gameDetail.gameResultDetail.player1.outcome == "lose")) {
       await gameDetail.save();
       await updatePayment(gameDetail);
     }
-
-    // if (gameDetail.player1.outcome && gameDetail.player2.outcome) {
-    //   await updatePayment(gameDetail);
-    // }
     gameDetail.status = "closed";
+    gameDetail.gameClosingTimeStamp = Date.now();
     await gameDetail.save();
     if (outcome == "win") {
       return res.status(200).json({
         message: "Result updated!In sometime you will get your winning cash."
       });
     }
+    //lostt
+
+    const roomID = gameDetail.battleDetails.roomId;
+
+    global.onlineUsers[gameDetail.player1.id]?.join(roomID);
+    global.onlineUsers[gameDetail.player2.id]?.join(roomID);
+    
+    console.log(roomID,gameDetail.player1.id,gameDetail.player2.id,"balajee")
+
+    global.io?.sockets.in(roomID).emit("gameupdate", { message: "Game Result updated!" });
+
     return res.status(200).json({ message: "Result updated" });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const gameClosingTrack = async (req, res, next) => {
+  try {
+    const allGameDetails = await GameDetail.find({ gameClosingTimeStamp: { $lt: gameactivationTimestamp } });
+    return res.status(200).json({ allGameDetails });
   } catch (err) {
     return next(err);
   }
@@ -446,5 +476,6 @@ module.exports = {
   cancelGame,
   allGameHistory,
   openChallenge,
-  deleteBattle
+  deleteBattle,
+  gameClosingTrack
 };

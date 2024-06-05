@@ -26,6 +26,7 @@ const GameDetailSchema = new mongoose.Schema({
   },
   matchingTimeStamp: Number,
   gameactivationTimestamp: Number,
+  gameClosingTimeStamp:Number,
   gameResultDetail: {
     player1: {
       outcome: {
@@ -42,6 +43,10 @@ const GameDetailSchema = new mongoose.Schema({
       proofImage: String,
     },
   },
+  paymentSettlement:{
+    type:Boolean, 
+    default:false
+  }
 });
 
 module.exports = mongoose.model("GameDetails", GameDetailSchema);

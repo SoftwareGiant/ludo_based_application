@@ -127,6 +127,9 @@ const withdrawl = async (req, res, next) => {
   try {
     const { amount } = req.body;
     const user = await User.findById(req.userId);
+    if (user.userKyc.verificationStatus != "approved") {
+      return res.status(200).json({ message: `Kyc is in ${user.userKyc.verificationStatus} after approval only you can withdrawn the payment!` });
+    }
     if (user.walletDetails.totalAmount < amount) {
       return res.status(200).json({ message: "You don't have sufficient amount." });
     } else {
@@ -134,7 +137,7 @@ const withdrawl = async (req, res, next) => {
         paymentAction: "withdrawl",
         user: req.userId,
         amount,
-        status: amount>=1000?"confirmationrequired":"pending"
+        status: amount >= 1000 ? "confirmationrequired" : "pending"
       });
       await payment.save();
       return res.status(200).json({
