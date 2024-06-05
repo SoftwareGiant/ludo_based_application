@@ -44,8 +44,9 @@ const NewGameMob = () => {
   const [activeToggle, setActiveToggle] = useState("live"); // 'live' or 'challenges'
   const [battleToPlay, setBattleToPlay] = useState();
   const [deleteBattleId, setSeleteBAttleId] = useState("");
+  const [iscodeWait, setIscodewait] = useState(false);
   const openChallenges = useSelector((state) => state.opengame.openChallenges);
-
+  const dispatch = useDispatch();
   const handleToggle = (toggle) => {
     setActiveToggle(toggle);
   };
@@ -59,7 +60,7 @@ const NewGameMob = () => {
     setButtonStatus("create");
     setOpenBottom(false);
   };
-  const dispatch = useDispatch();
+
   const handleDeleteOption = (battleid) => {
     setSeleteBAttleId(battleid);
     setDeleteDrawer(true);
@@ -87,26 +88,65 @@ const NewGameMob = () => {
     dispatch(fetchOpenChallenges());
   }, [socketData]);
 
+  // useEffect(() => {
+  //   if (socketData) {
+  //     socketData?.on("match", (e) => {
+  //       return toast.success(e.message);
+  //     });
+  //     socketData?.on("databaseChange", (data) => {
+  //       dispatch(fetchAllBattles(socketData));
+  //     });
+  //     socketData?.on("updatecode", ({ gameCode, player2 }) => {
+  //       toast.success(`code to start game ${gameCode}`);
+
+  //       return navigate(`/chat/${player2}/player2`);
+
+  //     });
+  //   }
+  // }, [socketData]);
+
   useEffect(() => {
+    console.log(match);
+    const handleMatch = (e) => {
+      if (e.message === "You get matched!!") setIscodewait(true);
+      toast.success(e.message);
+    };
+
+    const handleDatabaseChange = (data) => {
+      dispatch(fetchAllBattles(socketData));
+    };
+
+    const handleUpdateCode = ({ gameCode, player2 }) => {
+      setIscodewait(false);
+      toast.success(`code to start game ${gameCode}`);
+      navigate(`/chat/${player2}/player2`);
+      // Remove the event listener after navigation
+      socketData?.off("updatecode", handleUpdateCode);
+    };
+
     if (socketData) {
-      socketData?.on("match", (e) => {
-        return toast.success(e.message);
-      });
-      socketData?.on("databaseChange", (data) => {
-        dispatch(fetchAllBattles(socketData));
-      });
-      socketData?.on("updatecode", ({ gameCode, player2 }) => {
-        toast.success(`code to start game ${gameCode}`);
-        return navigate(`/chat/${player2}/player2`);
-      });
+      socketData?.on("match", handleMatch);
+      socketData?.on("databaseChange", handleDatabaseChange);
+      socketData?.on("updatecode", handleUpdateCode);
     }
+
+    // Cleanup function to remove event listeners when the component unmounts or socketData changes
+    return () => {
+      if (socketData) {
+        socketData?.off("match", handleMatch);
+        socketData?.off("databaseChange", handleDatabaseChange);
+        socketData?.off("updatecode", handleUpdateCode);
+      }
+    };
   }, [socketData]);
 
   useEffect(() => {
+    console.log(match);
     if (match) {
       const player1 = match?.newGameDetail?.player1;
       if (player1) {
-        return navigate(`/chat/${player1}/player1/`);
+        navigate(`/chat/${player1}/player1/`);
+        window.location.reload();
       }
     }
   }, [match]);
@@ -252,8 +292,8 @@ const NewGameMob = () => {
       throw error;
     }
   };
-  console.log(openChallenges);
-  console.log(battles, users);
+  // console.log(openChallenges);
+  // console.log(battles, users);
   const closematchDrawerBottom = () => setOpenMatchBottom(false);
   const handleOpenBattleNavigate = (battleItem) => {
     if (
@@ -626,6 +666,29 @@ const NewGameMob = () => {
               <Icon icon="fluent:delete-12-regular" width={20} />
               <p className="text-sm mt-[2px]">delete</p>
             </Button>
+          </div>
+        </Drawer>
+
+        <Drawer
+          placement="bottom"
+          open={iscodeWait}
+          className="p-4  w-[480px] bg-[#fead3a] rounded-t-3xl"
+        >
+          <div className="flex flex-col p-4">
+            <div className="mb-4 flex items-center  w-full justify-center gap-2">
+              <div className="bg-white p-7 w-32 h-32 rounded-full relative flex justify-center items-center">
+                <div className="text-[#00C300] animate-pulse bold text-2xl ">
+                  wait...
+                </div>
+              </div>
+            </div>
+
+            <Typography
+              color="white"
+              className="flex justify-center animate-pulse text-black text-xl font-bold"
+            >
+              Wait for code...
+            </Typography>
           </div>
         </Drawer>
       </div>

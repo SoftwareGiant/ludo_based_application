@@ -90,6 +90,7 @@ const ChatUserMob = () => {
 
     dispatch(updateGameCode(inputValue)).then((result) => {
       if (result) {
+        setInputValue("");
         setOpenBottom(false);
       } else {
         toast.error("please try again after some time");
