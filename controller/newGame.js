@@ -267,8 +267,7 @@ const updateResult = async (req, res, next) => {
 
     global.onlineUsers[gameDetail.player1.id]?.join(roomID);
     global.onlineUsers[gameDetail.player2.id]?.join(roomID);
-    
-    console.log(roomID,gameDetail.player1.id,gameDetail.player2.id,"balajee")
+   
 
     global.io?.sockets.in(roomID).emit("gameupdate", { message: "Game Result updated!" });
 

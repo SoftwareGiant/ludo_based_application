@@ -8,11 +8,13 @@ const { sendOtp, verifyOtp } = require("../config/authentication/otpverify");
 const Notification = require("../models/notification");
 const Slider = require("../models/slider")
 const logger = require("../logger/index");
+const {referralCodeGenerator} = require("../helper/stringGenerator")
 require("dotenv").config();
 
 //just for manual registering till we are not registering with otp
 const registerUser = async (req, res, next) => {
   const { mobileNo } = req.body;
+  const {referralCode} = req.query; 
   try {
     await authSchema.validateAsync({ mobileNo });
     let user = await User.findOne({ mobileNo });
@@ -26,7 +28,8 @@ const registerUser = async (req, res, next) => {
     //need to chnage following
     const newUser = new User({
       mobileNo: mobileNo,
-      verficationDone: true
+      verficationDone: true,
+      "referralDetails.referralCode":referralCodeGenerator()
     });
 
     await newUser.save();
@@ -40,6 +43,10 @@ const registerUser = async (req, res, next) => {
     // });
 
     // return res.cookie("refreshToken", refreshToken, { httpOnly: true, sameSite: "strict" }).header("Authorization", accessToken).status(200).json({ message: "User Registered Successfully" });
+    const refferedby = await User.findOne({"referralDetails.referralCode":referralCode});
+    refferedby.referralDetails.refferedUser = [...refferedby?.referralDetails?.refferedUser,referralCode]
+    await refferedby.save();
+
     return res.status(200).json({
       message: "User Registered Successfully",
       accessToken,
@@ -50,8 +57,6 @@ const registerUser = async (req, res, next) => {
       err.status = 422;
       throw new AppError("Length of Mobile No should be 10 character long!", 422);
     }
-    logger.error(`${err.status} - ${err.message} - ${req.originalUrl} - ${req.method}`);
-    console.log(err)
     return next(new AppError("Something went wrong!Please try again.", 500));
   }
 };
@@ -358,6 +363,22 @@ const addUserName = async(req,res,next)=>{
   }
 }
 
+const allReferral = async(req,res,next)=>{
+  try{
+  const userId = req.userId;
+  const user = await User.findById(userId);
+  const alluserId = user.referralDetails.refferedUser;
+  const objectIds = alluserId.map(id => new ObjectId(id));
+  const query = { _id: { $in: objectIds } };
+  const alluser = await User.find(query);
+  return res.status(200).json({alluser});
+  }
+  catch(err){
+    return next(err)
+  }
+}
+
+
 module.exports = {
   registerUser,
   loginUser,
@@ -373,5 +394,6 @@ module.exports = {
   allAbandonedUser,
   kycVerificationStatus,
   allSlider,
-  addUserName
+  addUserName,
+  allReferral
 };
