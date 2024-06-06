@@ -43,8 +43,8 @@ const NewGameSLider = () => {
     return;
   }
   return (
-    <div className="w-full max-w-[480px] h-[130px] relative ">
-      <Carousel
+    <div className="w-full  max-w-[480px] h-[130px] relative ">
+      {/* <Carousel
         className=" w-full max-h-[90px] "
         centerMode={true}
         draggable={false}
@@ -60,6 +60,30 @@ const NewGameSLider = () => {
         {sliderData?.slice(0,4).map((slideimg, index) => (
           <div key={index} className="p-2 ">
             <img className="rounded-xl" src={slideimg} alt="img1" />
+          </div>
+        ))}
+      </Carousel> */}
+
+      <Carousel
+        className="w-full max-h-[90px]"
+        centerMode={true}
+        draggable={false}
+        showDots={true}
+        infinite={true}
+        autoPlay={true}
+        transitionDuration={500}
+        renderDotsOutside={true}
+        renderButtonGroupOutside={true}
+        removeArrowOnDeviceType={["tablet", "mobile"]}
+        responsive={responsive}
+      >
+        {sliderData?.slice(0, 4).map((slideimg, index) => (
+          <div key={index} className="p-2">
+            <img
+              className=" object-cover rounded-xl  w-full h-full"
+              src={slideimg}
+              alt={`img${index + 1}`}
+            />
           </div>
         ))}
       </Carousel>

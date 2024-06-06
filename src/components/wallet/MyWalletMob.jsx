@@ -10,16 +10,18 @@ import { Icon } from "@iconify-icon/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import PageLoader from "../MainLayout/PageLoader";
 import { Button, IconButton } from "@material-tailwind/react";
-import { ProfileButton } from "../MainLayout/ProfileButton";
+import TotoalBal, { ProfileButton } from "../MainLayout/ProfileButton";
 const MyWalletMob = () => {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.user.user);
-
-  useEffect(() => {
-    dispatch(fetchUserDetail());
-  }, []);
-  console.log(users);
+  const users = useSelector((state) => state?.user?.user);
   const navigate = useNavigate();
+  useEffect(() => {
+    if (!users) {
+      dispatch(fetchUserDetail());
+    }
+  }, [dispatch, users]);
+  console.log(users);
+
   if (users === null || users === undefined) {
     return <PageLoader />;
   }
@@ -34,11 +36,30 @@ const MyWalletMob = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-        <ProfileButton />
+        <div className="flex gap-2 items-center">
+          <TotoalBal users={users} />
+          <ProfileButton />
+        </div>
       </div>
 
       <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative">
         <div className="bg-[#fead3a] h-[98%] w-[200%] rounded-[50%]   -top-20 absolute -left-[50%]" />
+        <div className="relative w-4/5  m-auto mt-4 flex justify-between">
+          <div>
+            <p className="text-base font-medium opacity-[60%]">Total Balance</p>
+            <p className="text-xl  font-bold">
+              ₹ {users?.walletDetails?.totalAmount}
+            </p>
+          </div>
+          <Button
+            onClick={() => navigate("/transactionhistory")}
+            className="flex items-center gap-2"
+          >
+            <p className="mt-[2px]">All Transaction</p>
+            <Icon icon="fe:arrow-right" width={22} />
+          </Button>
+        </div>
+        <div className="mx-auto h-[2px] w-4/5 bg-black bg-opacity-[20%] relative mt-2" />
         <div className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-4">
           <div className="text-white bg-[#0f002b] flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
             <div className="flex justify-between w-full items-center p-3">
@@ -49,11 +70,10 @@ const MyWalletMob = () => {
                 onClick={() => navigate("/transactionhistory")}
                 className="p-0 m-0 bg-transparent"
               >
-                <img
-                  className="cursor-pointer"
-                  src={Time}
-                  alt="lgihistory"
-                  id="lgihistory"
+                <Icon
+                  icon="ic:baseline-history"
+                  style={{ color: "white" }}
+                  width={22}
                 />
               </IconButton>
             </div>
@@ -64,7 +84,7 @@ const MyWalletMob = () => {
           </div>
           <div className="flex  w-full p-4">
             <div className="flex text-xl font-['Inter'] font-bold text-[#0f002b] flex-1">
-              ₹ {users?.walletDetails?.totalAmount}
+              ₹ {users?.walletDetails?.depositAmount}
             </div>
             <Button
               onClick={() => navigate("/deposite")}

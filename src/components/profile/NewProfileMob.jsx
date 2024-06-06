@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import PageLoader from "../MainLayout/PageLoader";
+import TotoalBal from "../MainLayout/ProfileButton";
 
 const NewProfileMob = () => {
   const [aadharFront, setAadharFront] = useState(null);
@@ -162,13 +163,16 @@ const NewProfileMob = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-        <div
-          onClick={handleLogout}
-          className={`flex cursor-pointer  h-9 my-1 px-3 justify-center items-center border-solid border border-[rgba(15,_0,_43,_0.3)] bg-[rgba(15,_0,_43,_0.3)] rounded-2xl ${
-            scrollPosition > 10 ? "hidden" : "flex"
-          }`}
-        >
-          <img src={LogOutMob} alt="Frame1" className=" w-[20px] h-[20px]" />
+        <div className="flex gap-2 items-center">
+          <TotoalBal users={users} />
+          <div
+            onClick={handleLogout}
+            className={`flex cursor-pointer  h-9 my-1 px-3 justify-center items-center border-solid border border-[rgba(15,_0,_43,_0.3)] bg-[rgba(15,_0,_43,_0.3)] rounded-2xl ${
+              scrollPosition > 10 ? "hidden" : "flex"
+            }`}
+          >
+            <img src={LogOutMob} alt="Frame1" className=" w-[20px] h-[20px]" />
+          </div>
         </div>
       </div>
 
@@ -383,7 +387,7 @@ const NewProfileMob = () => {
             {users?.userKyc?.verificationStatus === "inprogress" ? (
               ""
             ) : (
-              <div className="flex flex-col gap-2 w-[60%]">
+              <div className="flex flex-col gap-2 w-full">
                 <input
                   type="text"
                   value={aadharNumber}
@@ -391,57 +395,59 @@ const NewProfileMob = () => {
                   placeholder="Enter Aadhar Number"
                   className="font-bold  cursor-pointer bg-white bg-opacity-[30%]  bg-transparent border-2 border-gray-300 focus:border-[#fead3a] focus:outline-none text-white py-2 px-4 rounded-lg"
                 />
-
-                {aadharfrontname ? (
-                  <div className="rounded-md gap-2 bg-white bg-opacity-[60%] text-white flex justify-start items-center  text-xs">
-                    <IconButton
-                      className="p-1 m-1 h-8 w-8"
-                      onClick={resetAadharfront}
+                <div className="flex w-full gap-2">
+                  {aadharfrontname ? (
+                    <div className="rounded-md flex-1 gap-2 bg-white bg-opacity-[60%] text-white flex justify-start items-center  text-xs">
+                      <IconButton
+                        className="p-1 m-1 h-8 w-8"
+                        onClick={resetAadharfront}
+                      >
+                        <Icon icon="charm:cross" width={32} />{" "}
+                      </IconButton>
+                      {aadharfrontname.slice(0, 20)}
+                    </div>
+                  ) : (
+                    <label
+                      className={`font-bold  flex-1 text-center flex justify-center items-center  gap-2 cursor-pointer bg-white ${
+                        aadharfrontname
+                          ? "bg-opacity-[60%]"
+                          : "bg-opacity-[30%]"
+                      }  hover:bg-opacity-[50%] text-white py-2 px-4  rounded-lg`}
                     >
-                      <Icon icon="charm:cross" width={32} />{" "}
-                    </IconButton>
-                    {aadharfrontname.slice(0, 20)}
-                  </div>
-                ) : (
-                  <label
-                    className={`font-bold text-center flex justify-center items-center  gap-2 cursor-pointer bg-white ${
-                      aadharfrontname ? "bg-opacity-[60%]" : "bg-opacity-[30%]"
-                    }  hover:bg-opacity-[50%] text-white py-2 px-4  rounded-lg`}
-                  >
-                    <span>Aadhar Front</span>
-                    <Icon icon="material-symbols:upload" width={24} />
-                    <input
-                      type="file"
-                      className="hidden"
-                      accept=".jpeg, .jpg, .png"
-                      onChange={handleAadharFrontUpload}
-                    />
-                  </label>
-                )}
+                      <span>Aadhar Front</span>
+                      <Icon icon="material-symbols:upload" width={24} />
+                      <input
+                        type="file"
+                        className="hidden"
+                        accept=".jpeg, .jpg, .png"
+                        onChange={handleAadharFrontUpload}
+                      />
+                    </label>
+                  )}
 
-                {aadharbackname ? (
-                  <div className="rounded-md bg-white bg-opacity-[60%] text-white gap-2 flex justify-start items-center  text-xs">
-                    <IconButton
-                      className="p-1 m-1 h-8 w-8"
-                      onClick={resetAadharback}
-                    >
-                      <Icon icon="charm:cross" width={32} />{" "}
-                    </IconButton>
-                    {aadharbackname.slice(0, 20)}
-                  </div>
-                ) : (
-                  <label className="cursor-pointer flex justify-center items-center gap-2 text-center font-bold bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
-                    <span>Aadhar Back </span>
-                    <Icon icon="material-symbols:upload" width={24} />
-                    <input
-                      type="file"
-                      className="hidden"
-                      accept=".jpeg, .jpg, .png"
-                      onChange={handleAadharBackUpload}
-                    />
-                  </label>
-                )}
-
+                  {aadharbackname ? (
+                    <div className="rounded-md  flex-1 bg-white bg-opacity-[60%] text-white gap-2 flex justify-start items-center  text-xs">
+                      <IconButton
+                        className="p-1 m-1 h-8 w-8"
+                        onClick={resetAadharback}
+                      >
+                        <Icon icon="charm:cross" width={32} />{" "}
+                      </IconButton>
+                      {aadharbackname.slice(0, 20)}
+                    </div>
+                  ) : (
+                    <label className="cursor-pointer  flex-1 flex justify-center items-center gap-2 text-center font-bold bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
+                      <span>Aadhar Back </span>
+                      <Icon icon="material-symbols:upload" width={24} />
+                      <input
+                        type="file"
+                        className="hidden"
+                        accept=".jpeg, .jpg, .png"
+                        onChange={handleAadharBackUpload}
+                      />
+                    </label>
+                  )}
+                </div>
                 <button
                   className="bg-gray-50 hover:bg-gray-100 font-semibold text-[#0F002B] py-2 px-4 rounded-lg"
                   onClick={handleSubmit}
@@ -461,10 +467,19 @@ const NewProfileMob = () => {
           ) : (
             <Typography
               color="gray"
-              className=" mb-4 text-[12px] font-[Inter] mt-2 px-9 flex justify-center font-normal "
+              className=" mb-4 flex flex-col text-[10px] font-[Inter] mt-1 px-10  justify-center font-normal "
             >
-              *Make sure that you upload the correct image. This will be used in
-              future for reference in case of any issues.
+              <p>
+                *You need to submit a document that shows that you are above 18
+                years of age and not a resident of Assam, Odisha, Sikkim,
+                Nagaland, Telangana, Andhra Pradesh, Tamil Nadu, Meghalaya and
+                Karnataka.
+              </p>
+              <p>
+                {" "}
+                *Make sure that you upload the correct image. This will be used
+                in future for reference in case of any issues.
+              </p>
             </Typography>
           )}
         </Drawer>

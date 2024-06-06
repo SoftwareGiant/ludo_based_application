@@ -2,7 +2,7 @@ import {
   MagnifyingGlassIcon,
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify-icon/react";
 import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
@@ -21,6 +21,8 @@ import Stats from "../Common.jsx/Stats";
 import RefferalCard from "../Common.jsx/RefferalCard";
 import AdminFooter from "../Common.jsx/AdminFooter";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserReferralCodes } from "../AdminSlice/refferalAdminSlice";
 
 const TABLE_ROWS = [
   {
@@ -57,15 +59,22 @@ const TABLE_ROWS = [
 
 function ReferaalTrack() {
   const [isClicked, setIsClicked] = useState(false);
-
+  const dispatch = useDispatch();
+  const referusers = useSelector((state) => state.referusers.users);
   const handleClick = () => {
     setIsClicked(!isClicked);
   };
+  useEffect(() => {
+    dispatch(fetchUserReferralCodes());
+  }, [dispatch]);
+  console.log(referusers);
   return (
     <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
         <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
-        <Link to="/newonboard"  className="underline">Admin Control Panel </Link>
+          <Link to="/newonboard" className="underline">
+            Admin Control Panel{" "}
+          </Link>
           <span>&gt;&gt;</span>
           <span className="underline">Menu</span>
           <span>&gt;&gt;</span>
@@ -170,16 +179,7 @@ function ReferaalTrack() {
                     />
                   </Typography>
                 </th>
-                <th className="cursor-pointer   p-2 transition-colors  rounded-lg">
-                  <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
-                    Reward ID
-                    <Icon
-                      icon="prime:sort"
-                      strokeWidth={2}
-                      className="h-4 w-4"
-                    />
-                  </Typography>
-                </th>
+
                 <th className="cursor-pointer   p-2 transition-colors  rounded-lg">
                   <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
                     Details
@@ -188,7 +188,38 @@ function ReferaalTrack() {
               </tr>
             </thead>
             <tbody>
-              {TABLE_ROWS.map(({ uid, mobno, referid, rewardid }, index) => {
+              {referusers.map((val, index) => {
+                return (
+                  <tr key={val?._id} className="text-[#000000]">
+                    <td className="p-4">
+                      <div className="flex items-center gap-3">
+                        <Typography className="font-[Inter] font-medium text-[16px]">
+                          {val?._id}
+                        </Typography>
+                      </div>
+                    </td>
+                    <td className="p-4">
+                      <div className="flex flex-col">
+                        <Typography className="font-[Inter] font-medium text-[16px]">
+                          {val?.mobileNo}
+                        </Typography>
+                      </div>
+                    </td>
+                    <td className="p-4">
+                      <div className="w-max">
+                        <Typography className="font-[Inter] font-medium text-[16px]">
+                          {val?.referralDetails?.referralCode}
+                        </Typography>
+                      </div>
+                    </td>
+
+                    <td className="p-4">
+                      <RefferalCard val={val} />
+                    </td>
+                  </tr>
+                );
+              })}
+              {/* {TABLE_ROWS.map(({ uid, mobno, referid, rewardid }, index) => {
                 const isLast = index === TABLE_ROWS.length - 1;
                 const classes = isLast ? "p-4" : "p-4";
                 return (
@@ -214,22 +245,18 @@ function ReferaalTrack() {
                         </Typography>
                       </div>
                     </td>
+                 
                     <td className={classes}>
-                      <div className="w-max">
-                        <Typography className="font-[Inter] font-medium text-[16px]">
-                          {rewardid}
-                        </Typography>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      {/* <div className="cursor-pointer w-[81px] rounded-lg flex items-center justify-center h-[19px] bg-[#0F002B] hover:bg-black shadow-xl font-[Inter] text-[10px] text-[#FFFFFF] ">
-                        Details
-                      </div> */}
-                      <RefferalCard  status={referid} uid={uid} updatedAt={rewardid}/>
+                 
+                      <RefferalCard
+                        status={referid}
+                        uid={uid}
+                        updatedAt={rewardid}
+                      />
                     </td>
                   </tr>
                 );
-              })}
+              })} */}
             </tbody>
           </table>
         </CardBody>

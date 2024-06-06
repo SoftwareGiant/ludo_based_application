@@ -8,17 +8,6 @@ import GameHistory from "../../assets/new_game/history.svg";
 import ReferEarn from "../../assets/new_game/refer&earn.svg";
 import Notification from "../../assets/new_game/notification.svg";
 import Support from "../../assets/new_game/support.svg";
-import LiveBattle from "../../assets/new_game/livebattle.svg";
-import DropIcon from "../../assets/new_game/dropdown.svg";
-import Copy from "../../assets/new_game/copy.svg";
-import Share from "../../assets/new_game/share.svg";
-import Fb from "../../assets/new_game/fb.svg";
-import Wp from "../../assets/new_game/wp.svg";
-import Twtr from "../../assets/new_game/twtr.svg";
-import Search from "../../assets/new_game/search.svg";
-import Filter from "../../assets/new_game/filter.svg";
-import LowToHigh from "../../assets/new_game/lowtohigh.svg";
-import HighToLow from "../../assets/new_game/hightolow.svg";
 
 const Sidebar = ({
   isClick1,

@@ -22,7 +22,10 @@ import { fetchSocket } from "../../socket";
 import { useJwt } from "react-jwt";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { fetchOpenChallenges } from "./openChallengeSlice";
-import { ProfileButton } from "../MainLayout/ProfileButton";
+import TotoalBal, {
+  LoginBtn,
+  ProfileButton,
+} from "../MainLayout/ProfileButton";
 import { convertTimestamp } from "../admin_and_S.admin/Functions/convertTimestamp";
 const NewGameMob = () => {
   const { accessToken } = useSelector((state) => state.auth);
@@ -292,8 +295,7 @@ const NewGameMob = () => {
       throw error;
     }
   };
-  // console.log(openChallenges);
-  // console.log(battles, users);
+
   const closematchDrawerBottom = () => setOpenMatchBottom(false);
   const handleOpenBattleNavigate = (battleItem) => {
     if (
@@ -302,6 +304,7 @@ const NewGameMob = () => {
     )
       navigate(`/matchstart`);
   };
+
   return (
     <div className="max-w-[480px] bg-[#0f002b] w-full min-h-screen h-full">
       <div
@@ -313,8 +316,14 @@ const NewGameMob = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-
-        <ProfileButton />
+        {!users ? (
+          <LoginBtn />
+        ) : (
+          <div className="flex gap-2 items-center">
+            <TotoalBal users={users} />
+            <ProfileButton />
+          </div>
+        )}
       </div>
 
       <div className="bg-[#0f002b] w-full  overflow-hidden relative">
@@ -322,32 +331,46 @@ const NewGameMob = () => {
         <div className="py-4">
           <NewGameSLider />
         </div>
-        <div className="relative m-6">
-          <div className="border-[2px] border-white shadow-lg bg-[#fead3a] flex flex-col p-4 gap-6 w-full  max-w-screen items-start rounded-lg pb-8">
-            <div
-              id="StartYourOwnBattle1"
-              className="text-xl font-['Inter'] text-[#0f002b]"
-            >
-              start your own <span className="font-bold">battle</span>
-            </div>
-            <div
-              onClick={openDrawerBottom}
-              className="cursor-pointer shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg"
-            >
-              <div className="flex text-lg  w-full pr-3">
-                <span>₹</span>
-                <p className="outline-none font-semibold pl-2 opacity-[50%] focus:outline-none w-full">
-                  Your battle amount
-                </p>
-              </div>
 
-              <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-2">
-                <Icon icon="arcticons:battleforwesnoth" width="24" />
+        {!users ? (
+          <div className="relative m-6 mt-0">
+            <div className="bg-[#0f002b] shadow-xl border border-gray-300  flex items-center gap-4 text-white rounded-lg p-6">
+              <p className="text-xl">Click to see Full Game Rules</p>
+              <div
+                onClick={() => navigate("/gamerule")}
+                className="flex justify-center items-center w-[32px] h-[32px] cursor-pointer"
+              >
+                <Icon icon="mingcute:arrow-right-line" width={32} />
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="relative m-6">
+            <div className="border-[2px] border-white shadow-lg bg-[#fead3a] flex flex-col p-4 gap-6 w-full  max-w-screen items-start rounded-lg pb-8">
+              <div
+                id="StartYourOwnBattle1"
+                className="text-xl font-['Inter'] text-[#0f002b]"
+              >
+                start your own <span className="font-bold">battle</span>
+              </div>
+              <div
+                onClick={openDrawerBottom}
+                className="cursor-pointer shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg"
+              >
+                <div className="flex text-lg  w-full pr-3">
+                  <span>₹</span>
+                  <p className="outline-none font-semibold pl-2 opacity-[50%] focus:outline-none w-full">
+                    Your battle amount
+                  </p>
+                </div>
 
+                <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-2">
+                  <Icon icon="arcticons:battleforwesnoth" width="24" />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="m-6 relative ">
           <div className="mb-4 shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white relative w-full  max-w-screen  flex flex-col gap-6 items-start rounded-lg p-2 pb-8">
             <div className="flex flex-col w-full">

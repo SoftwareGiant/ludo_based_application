@@ -22,7 +22,7 @@ import openChallengeReducer from "./components/live_battle/openChallengeSlice";
 import supportUserChatReducer from "./components/support/supportUserChatSlice";
 import adminsupportlistReducer from "./components/admin_and_S.admin/admin/AdminSlice/adminsupportlistSlice";
 import supportMessagesReducer from "./components/admin_and_S.admin/admin/AdminSlice/supportMessagesSlice";
-
+import referuserReducer from "./components/admin_and_S.admin/admin/AdminSlice/refferalAdminSlice"
 export const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -49,6 +49,7 @@ export const store = configureStore({
     supportuser: supportUserChatReducer,
     adminsupportlist: adminsupportlistReducer,
     supportMessages: supportMessagesReducer,
+    referusers: referuserReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

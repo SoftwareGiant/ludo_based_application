@@ -1,30 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../app.css";
-import FrameProfile from "../../assets/profile/Frame_profile.png";
-import Copy from "../../assets/new_game/copy.svg";
-import Share from "../../assets/new_game/share.svg";
-import Fb from "../../assets/new_game/fb.svg";
-import Wp from "../../assets/new_game/wp.svg";
-import Twtr from "../../assets/new_game/twtr.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
-import { ProfileButton } from "../MainLayout/ProfileButton";
+import TotoalBal, { ProfileButton } from "../MainLayout/ProfileButton";
+import { fetchUserDetail } from "../live_battle/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 const ReferrEarnMob = () => {
-  const [referno, setReferno] = useState(753478);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const copyToClipboard = async (text) => {
+  const users = useSelector((state) => state.user.user);
+  useEffect(() => {
+    dispatch(fetchUserDetail());
+  }, []);
+  const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(users?.referralDetails?.referralCode);
       toast.success("Text copied to clipboard: ");
     } catch (error) {
       toast.error("Error copying to clipboard");
     }
   };
-
+  const copyRefferal = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        `http://localhost:5173/register/refferal=${users?.referralDetails?.referralCode}`
+      );
+      toast.success("Text copied to clipboard: ");
+    } catch (error) {
+      toast.error("Error copying to clipboard");
+    }
+  };
   return (
     <>
       <div className="max-w-[480px] bg-[#0f002b] w-full min-h-screen h-full">
@@ -37,7 +45,10 @@ const ReferrEarnMob = () => {
             <SidebarMob />
             <LudoMainLogo />
           </div>
-          <ProfileButton/>
+          <div className="flex gap-2 items-center">
+            <TotoalBal users={users} />
+            <ProfileButton />
+          </div>
         </div>
 
         <div className=" w-full h-[70vh] overflow-hidden relative">
@@ -46,13 +57,13 @@ const ReferrEarnMob = () => {
           <div className="relative pt-6 w-full flex flex-col gap-4 justify-center items-center m-auto">
             <div className="shadow-md bg-white inline-flex  gap-[10px]  h-10 items-center   justify-center px-4 rounded-[10px] ">
               <div
-                onClick={() => copyToClipboard(referno)}
+                onClick={() => copyToClipboard()}
                 className="bg-white flex  w-8 h-8 items-center justify-center p-[6px] cursor-pointer"
               >
-               <Icon icon="solar:copy-outline" width={32} />
+                <Icon icon="solar:copy-outline" width={32} />
               </div>
               <div className="font-['Inter'] font-bold text-[#0f002b] flex-1 text-base">
-                753478
+                {users?.referralDetails?.referralCode}
               </div>
             </div>
             <div className="text-justify font-['Inter'] font-bold text-[#0f002b] w-3/5">
@@ -73,7 +84,7 @@ const ReferrEarnMob = () => {
                 <Icon width={32} icon="ri:twitter-x-fill" />
               </div>
               <div
-                onClick={() => copyToClipboard(referno)}
+                onClick={() => copyRefferal()}
                 className="flex w-[42.24px] h-[42.24px] justify-center items-center p-[7.92px] cursor-pointer"
               >
                 <Icon icon="solar:copy-outline" width={32} />

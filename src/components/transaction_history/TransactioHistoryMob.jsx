@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../../app.css";
-import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserPaymentHistory } from "./userHistorySlice";
@@ -8,20 +7,25 @@ import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { useNavigate } from "react-router-dom";
 import PageLoader from "../MainLayout/PageLoader";
 import { convertTimestamp } from "../admin_and_S.admin/Functions/convertTimestamp";
-import { ProfileButton } from "../MainLayout/ProfileButton";
+import TotoalBal, { ProfileButton } from "../MainLayout/ProfileButton";
+import { fetchUserDetail } from "../live_battle/userSlice";
 
 const TransactioHistoryMob = () => {
   const dispatch = useDispatch();
   const paymentHistory = useSelector(
     (state) => state?.userhistory?.paymentHistory
   );
-  const navigate = useNavigate();
+  const users = useSelector((state) => state.user.user);
+  console.log(users);
   const loading = useSelector((state) => state?.userhistory?.loading);
   const error = useSelector((state) => state?.userhistory?.error);
   console.log(paymentHistory, loading, error);
   useEffect(() => {
     dispatch(fetchUserPaymentHistory());
   }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchUserDetail());
+  }, []);
 
   if (loading) return <PageLoader />;
   return (
@@ -36,7 +40,10 @@ const TransactioHistoryMob = () => {
             <SidebarMob />
             <LudoMainLogo />
           </div>
-          <ProfileButton />
+          <div className="flex gap-2 items-center">
+            <TotoalBal users={users} />
+            <ProfileButton />
+          </div>
         </div>
 
         <div className="bg-[#fead3a] w-full min-h-screen overflow-hidden relative">
