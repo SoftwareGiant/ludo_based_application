@@ -9,6 +9,7 @@ const Notification = require("../models/notification");
 const Slider = require("../models/slider")
 const logger = require("../logger/index");
 const {referralCodeGenerator} = require("../helper/stringGenerator")
+const mongoose = require('mongoose');
 require("dotenv").config();
 
 //just for manual registering till we are not registering with otp
@@ -44,7 +45,7 @@ const registerUser = async (req, res, next) => {
 
     // return res.cookie("refreshToken", refreshToken, { httpOnly: true, sameSite: "strict" }).header("Authorization", accessToken).status(200).json({ message: "User Registered Successfully" });
     const refferedby = await User.findOne({"referralDetails.referralCode":referralCode});
-    refferedby.referralDetails.refferedUser = [...refferedby?.referralDetails?.refferedUser,referralCode]
+    refferedby.referralDetails.refferedUser = [...refferedby?.referralDetails?.refferedUser,refferedby.id]
     await refferedby.save();
 
     return res.status(200).json({
@@ -57,6 +58,7 @@ const registerUser = async (req, res, next) => {
       err.status = 422;
       throw new AppError("Length of Mobile No should be 10 character long!", 422);
     }
+    console.log(err);
     return next(new AppError("Something went wrong!Please try again.", 500));
   }
 };
@@ -368,8 +370,8 @@ const allReferral = async(req,res,next)=>{
   const userId = req.userId;
   const user = await User.findById(userId);
   const alluserId = user.referralDetails.refferedUser;
-  const objectIds = alluserId.map(id => new ObjectId(id));
-  const query = {_id: { $in: objectIds }};
+  
+  const query = {_id: { $in: alluserId }};
   const alluser = await User.find(query);
   return res.status(200).json({alluser});
   }
@@ -380,8 +382,7 @@ const allReferral = async(req,res,next)=>{
 
 const alluserReferallCode = async(req,res,next)=>{
 try{
-  const projection = { _id: 1, mobileNo: 1, referralDetails: 1 };
-  const users = await User.find({}).project(projection);
+  const users = await User.find({}, { _id: 1, mobileNo: 1, referralDetails: 1 });
   return res.status(200).json({users});
 }
 catch(err){
