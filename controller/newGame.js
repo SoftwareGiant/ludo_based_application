@@ -166,14 +166,24 @@ const updatePayment = async (gameDetail) => {
     gameDetail.player1.walletDetails.totalAmount += gameDetail?.battleDetails?.amount * 1.95;
     gameDetail.player1.walletDetails.winningAmount += gameDetail?.battleDetails?.amount * 0.95;
     gameDetail.player1.walletDetails.lockedAmount -= gameDetail?.battleDetails?.amount;
-    adminWallet.totalAmount += gameDetail.battleDetails.amount * 0.05;
+    adminWallet.totalAmount += gameDetail.battleDetails.amount * 0.04;
+    const player1 = gameDetail.player1;
+    const user = await User.findOne({"referralDetails.refferedUser":player1});
+    user.walletDetails.referralAmount = user.walletDetails.referralAmount+ gameDetail.battleDetails.amount * 0.01;
+    user.walletDetails.totalAmount = user.walletDetails.totalAmount+ gameDetail.battleDetails.amount * 0.01;
+    await user.save();
     // store extra 0.05 amount in admin wallet.
   }
   if (gameDetail.gameResultDetail.player2.outcome == "win") {
     gameDetail.player2.walletDetails.totalAmount += gameDetail?.battleDetails?.amount * 1.95;
     gameDetail.player2.walletDetails.winningAmount += gameDetail?.battleDetails?.amount * 0.95;
     gameDetail.player2.walletDetails.lockedAmount -= gameDetail?.battleDetails?.amount;
-    adminWallet.totalAmount += gameDetail.battleDetails.amount * 0.05;
+    adminWallet.totalAmount += gameDetail.battleDetails.amount * 0.04;
+    const player2 = gameDetail.player2;
+    const user = await User.findOne({"referralDetails.refferedUser":player2});
+    user.walletDetails.referralAmount = user.walletDetails.referralAmount+ gameDetail.battleDetails.amount * 0.01;
+    user.walletDetails.totalAmount = user.walletDetails.totalAmount+ gameDetail.battleDetails.amount * 0.01;
+    await user.save();
     // store extra 0.05 amount in admin wallet.
   }
   if (gameDetail.gameResultDetail.player1.outcome == "lose") {
@@ -261,7 +271,6 @@ const updateResult = async (req, res, next) => {
         message: "Result updated!In sometime you will get your winning cash."
       });
     }
-    //lostt
 
     const roomID = gameDetail.battleDetails.roomId;
 

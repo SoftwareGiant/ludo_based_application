@@ -369,13 +369,24 @@ const allReferral = async(req,res,next)=>{
   const user = await User.findById(userId);
   const alluserId = user.referralDetails.refferedUser;
   const objectIds = alluserId.map(id => new ObjectId(id));
-  const query = { _id: { $in: objectIds } };
+  const query = {_id: { $in: objectIds }};
   const alluser = await User.find(query);
   return res.status(200).json({alluser});
   }
   catch(err){
     return next(err)
   }
+}
+
+const alluserReferallCode = async(req,res,next)=>{
+try{
+  const projection = { _id: 1, mobileNo: 1, referralDetails: 1 };
+  const users = await User.find({}).project(projection);
+  return res.status(200).json({users});
+}
+catch(err){
+  return next(err)
+}
 }
 
 
@@ -395,5 +406,6 @@ module.exports = {
   kycVerificationStatus,
   allSlider,
   addUserName,
-  allReferral
+  allReferral,
+  alluserReferallCode
 };

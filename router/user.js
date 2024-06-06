@@ -21,7 +21,8 @@ const {
   kycVerificationStatus,
   allSlider,
   addUserName,
-  allReferral
+  allReferral,
+  alluserReferallCode
 } = require("../controller/user");
 
 router.post("/register", wrapAsync(registerUser));
@@ -82,7 +83,9 @@ router.get("/allSlider",wrapAsync(allSlider));
 
 router.post("/addusername",[verifyToken],wrapAsync(addUserName));
 
-router.get("/allreferral",[verifyToken],wrapAsync(allReferral))
+router.get("/allreferral",[verifyToken],wrapAsync(allReferral));
+
+router.get("/alluserReferallCode",[verifyToken],wrapAsync(alluserReferallCode));
 
 
 module.exports = router;
