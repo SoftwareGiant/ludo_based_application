@@ -26,7 +26,7 @@ const ReferrEarnMob = () => {
   const copyRefferal = async () => {
     try {
       await navigator.clipboard.writeText(
-        `http://localhost:5173/register/refferal=${users?.referralDetails?.referralCode}`
+        `http://139.84.169.91:5173/register/refferal=${users?.referralDetails?.referralCode}`
       );
       toast.success("Text copied to clipboard: ");
     } catch (error) {

@@ -22,7 +22,7 @@ import React, { useEffect, useContext } from "react";
 
 import io from "socket.io-client";
 
-const socketServerUrl = "http://localhost:8003";
+const socketServerUrl = "http://139.84.169.91:8003/";
 
 let socket;
 // Create a function to initialize the socket connection with user ID
