@@ -60,8 +60,14 @@ const ChatUserMob = () => {
       socketData?.on("updatecode", ({ gameCode }) => {
         return toast.success(`code to start game ${gameCode}`);
       });
-      return () => socketData.off();
     }
+
+    return () => {
+      if (socketData) {
+        socketData.off();
+      }
+    }
+
   }, [socketData]);
 
   useEffect(() => {

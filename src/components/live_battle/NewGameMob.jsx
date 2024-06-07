@@ -44,7 +44,7 @@ const NewGameMob = () => {
   const [activeToggle, setActiveToggle] = useState("live"); // 'live' or 'challenges'
   const [battleToPlay, setBattleToPlay] = useState();
   const [deleteBattleId, setSeleteBAttleId] = useState("");
-  const openChallenges = useSelector((state) => state.opengame.openChallenges);
+  let openChallenges = useSelector((state) => state.opengame.openChallenges);
 
   const handleToggle = (toggle) => {
     setActiveToggle(toggle);
@@ -100,7 +100,15 @@ const NewGameMob = () => {
         toast.success(`code to start game ${gameCode}`);
         return navigate(`/chat/${player2}/player2`);
       });
+      socketData?.on("gameupdate",({message})=>{
+        toast.success(message);
+      })
     }
+  return () => {
+    if (socketData) {
+      socketData.off();
+    }
+  }
   }, [socketData]);
 
   useEffect(() => {
@@ -110,10 +118,6 @@ const NewGameMob = () => {
         return navigate(`/chat/${player1}/player1/`);
       }
     }
-
-    return () => {
-      match = null;
-    };
 
   }, [match]);
 
