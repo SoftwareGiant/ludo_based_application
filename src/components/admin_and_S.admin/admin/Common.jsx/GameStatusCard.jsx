@@ -49,16 +49,10 @@ const GameStatusCard = ({ val, handleRefresh, isRefresh }) => {
           },
         }
       );
-      console.log("Response:", response.data);
       toast.success(response.data.message);
       handleRefresh && handleRefresh();
     } catch (error) {
       toast.error(error.message);
-
-      console.error(
-        "Error verifying deposit:",
-        error.response ? error.response.data : error.message
-      );
       throw error;
     }
   }

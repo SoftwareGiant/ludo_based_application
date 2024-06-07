@@ -34,9 +34,7 @@ const OpenChallengeReq = () => {
     const timeDifferenceInSeconds = timeDifference / (1000 * 60);
     return timeDifferenceInSeconds;
   };
-  const battledetail =
-    battles && battles?.filter((data) => data._id === userId)[0];
-  console.log(battledetail);
+  const battledetail =battles && battles?.filter((data) => data._id === userId)[0];
   // useEffct(()=>{
   //   if(battledetail===undefined){
   //     navigate("/");

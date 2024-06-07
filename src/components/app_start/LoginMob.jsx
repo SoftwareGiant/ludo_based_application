@@ -47,7 +47,7 @@ const LoginMob = () => {
   }, []);
   const handlePhoneSubmit = async (values) => {
     let intervalId;
-    console.log(values.number);
+   
     dispatch(loginAsync(values.number))
       .unwrap()
       .then(() => {
@@ -62,7 +62,7 @@ const LoginMob = () => {
       })
       .catch((error) => {
         toast.error(error.message);
-        // console.error("Login error:", error);
+     
       });
     // setIsOtp(true);
   };
@@ -73,10 +73,9 @@ const LoginMob = () => {
     setIsLoadButton(true);
     // let intervalId;
     try {
-      await dispatch(loginAsync(number));
+      dispatch(loginAsync(number));
       setIsLoadButton(false);
     } catch (error) {
-      console.log("login failed", error);
     }
     // seIsSuccess(true);
     // intervalId = setTimeout(() => {

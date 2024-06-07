@@ -31,7 +31,7 @@ const NewGameMob = () => {
   const { accessToken } = useSelector((state) => state.auth);
   const { decodedToken } = useJwt(accessToken);
   const { socketData } = useSelector((state) => state.socketfor);
-  const { match } = useSelector((state) => state.match);
+  let { match } = useSelector((state) => state.match);
   const navigate = useNavigate();
   const [battleAmount, setBattleAmount] = useState("");
   const [buttonStatus, setButtonStatus] = useState("create");
@@ -72,6 +72,7 @@ const NewGameMob = () => {
     setSeleteBAttleId("");
     setDeleteDrawer(false);
   };
+
   useEffect(() => {
     if (isRequest === false && requestTimer < 50) {
       let requestInterval = setInterval(() => {
@@ -152,6 +153,7 @@ const NewGameMob = () => {
         window.location.reload();
       }
     }
+
   }, [match]);
 
   useEffect(() => {
@@ -284,18 +286,15 @@ const NewGameMob = () => {
           Authorization: `Bearer ${accessToken}`, // Ensure the correct capitalization for "Bearer"
         },
       });
-      console.log(response.data);
       toast.success(response.data.message);
       dispatch(fetchAllBattles(socketData));
       handleCloseDeleteBattle();
       return response.data;
     } catch (error) {
       toast.error(error.message);
-      console.error("Error delete battle:", error);
       throw error;
     }
   };
-
   const closematchDrawerBottom = () => setOpenMatchBottom(false);
   const handleOpenBattleNavigate = (battleItem) => {
     if (
