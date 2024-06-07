@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsergameHistory } from "./gamehistorySlice";
@@ -8,19 +7,18 @@ import { Icon } from "@iconify-icon/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { convertTimestamp } from "../admin_and_S.admin/Functions/convertTimestamp";
 import PageLoader from "../MainLayout/PageLoader";
-import { ProfileButton } from "../MainLayout/ProfileButton";
+import TotoalBal, { ProfileButton } from "../MainLayout/ProfileButton";
 const GameHistoryMob = () => {
   const users = useSelector((state) => state.user.user);
   const gameHistorys = useSelector((state) => state.gamehistory?.gameHistory);
   const loading = useSelector((state) => state.gamehistory?.loading);
 
-  console.log(gameHistorys);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUserDetail());
     dispatch(fetchUsergameHistory());
-  }, []);
-
+  }, [dispatch]);
+  console.log(gameHistorys);
   if (users === null || loading === true) return <PageLoader />;
   return (
     <div className="max-w-[480px] w-full min-h-screen h-full">
@@ -33,7 +31,10 @@ const GameHistoryMob = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-        <ProfileButton />
+        <div className="flex gap-2 items-center">
+          <TotoalBal users={users} />
+          <ProfileButton />
+        </div>
       </div>
 
       <div className="bg-[#fead3a] w-full min-h-screen overflow-hidden relative">

@@ -22,7 +22,10 @@ import { fetchSocket } from "../../socket";
 import { useJwt } from "react-jwt";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { fetchOpenChallenges } from "./openChallengeSlice";
-import { ProfileButton } from "../MainLayout/ProfileButton";
+import TotoalBal, {
+  LoginBtn,
+  ProfileButton,
+} from "../MainLayout/ProfileButton";
 import { convertTimestamp } from "../admin_and_S.admin/Functions/convertTimestamp";
 const NewGameMob = () => {
   const { accessToken } = useSelector((state) => state.auth);
@@ -44,8 +47,9 @@ const NewGameMob = () => {
   const [activeToggle, setActiveToggle] = useState("live"); // 'live' or 'challenges'
   const [battleToPlay, setBattleToPlay] = useState();
   const [deleteBattleId, setSeleteBAttleId] = useState("");
-  let openChallenges = useSelector((state) => state.opengame.openChallenges);
-
+  const [iscodeWait, setIscodewait] = useState(false);
+  const openChallenges = useSelector((state) => state.opengame.openChallenges);
+  const dispatch = useDispatch();
   const handleToggle = (toggle) => {
     setActiveToggle(toggle);
   };
@@ -59,7 +63,7 @@ const NewGameMob = () => {
     setButtonStatus("create");
     setOpenBottom(false);
   };
-  const dispatch = useDispatch();
+
   const handleDeleteOption = (battleid) => {
     setSeleteBAttleId(battleid);
     setDeleteDrawer(true);
@@ -88,34 +92,65 @@ const NewGameMob = () => {
     dispatch(fetchOpenChallenges());
   }, [socketData]);
 
+  // useEffect(() => {
+  //   if (socketData) {
+  //     socketData?.on("match", (e) => {
+  //       return toast.success(e.message);
+  //     });
+  //     socketData?.on("databaseChange", (data) => {
+  //       dispatch(fetchAllBattles(socketData));
+  //     });
+  //     socketData?.on("updatecode", ({ gameCode, player2 }) => {
+  //       toast.success(`code to start game ${gameCode}`);
+
+  //       return navigate(`/chat/${player2}/player2`);
+
+  //     });
+  //   }
+  // }, [socketData]);
+
   useEffect(() => {
+    console.log(match);
+    const handleMatch = (e) => {
+      if (e.message === "You get matched!!") setIscodewait(true);
+      toast.success(e.message);
+    };
+
+    const handleDatabaseChange = (data) => {
+      dispatch(fetchAllBattles(socketData));
+    };
+
+    const handleUpdateCode = ({ gameCode, player2 }) => {
+      setIscodewait(false);
+      toast.success(`code to start game ${gameCode}`);
+      navigate(`/chat/${player2}/player2`);
+      // Remove the event listener after navigation
+      socketData?.off("updatecode", handleUpdateCode);
+    };
+
     if (socketData) {
-      socketData?.on("match", (e) => {
-        return toast.success(e.message);
-      });
-      socketData?.on("databaseChange", (data) => {
-        dispatch(fetchAllBattles(socketData));
-      });
-      socketData?.on("updatecode", ({ gameCode, player2 }) => {
-        toast.success(`code to start game ${gameCode}`);
-        return navigate(`/chat/${player2}/player2`);
-      });
-      socketData?.on("gameupdate",({message})=>{
-        toast.success(message);
-      })
+      socketData?.on("match", handleMatch);
+      socketData?.on("databaseChange", handleDatabaseChange);
+      socketData?.on("updatecode", handleUpdateCode);
     }
-  return () => {
-    if (socketData) {
-      socketData.off();
-    }
-  }
+
+    // Cleanup function to remove event listeners when the component unmounts or socketData changes
+    return () => {
+      if (socketData) {
+        socketData?.off("match", handleMatch);
+        socketData?.off("databaseChange", handleDatabaseChange);
+        socketData?.off("updatecode", handleUpdateCode);
+      }
+    };
   }, [socketData]);
 
   useEffect(() => {
+    console.log(match);
     if (match) {
       const player1 = match?.newGameDetail?.player1;
       if (player1) {
-        return navigate(`/chat/${player1}/player1/`);
+        navigate(`/chat/${player1}/player1/`);
+        window.location.reload();
       }
     }
 
@@ -268,6 +303,7 @@ const NewGameMob = () => {
     )
       navigate(`/matchstart`);
   };
+
   return (
     <div className="max-w-[480px] bg-[#0f002b] w-full min-h-screen h-full">
       <div
@@ -279,8 +315,14 @@ const NewGameMob = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-
-        <ProfileButton />
+        {!users ? (
+          <LoginBtn />
+        ) : (
+          <div className="flex gap-2 items-center">
+            <TotoalBal users={users} />
+            <ProfileButton />
+          </div>
+        )}
       </div>
 
       <div className="bg-[#0f002b] w-full  overflow-hidden relative">
@@ -288,32 +330,46 @@ const NewGameMob = () => {
         <div className="py-4">
           <NewGameSLider />
         </div>
-        <div className="relative m-6">
-          <div className="border-[2px] border-white shadow-lg bg-[#fead3a] flex flex-col p-4 gap-6 w-full  max-w-screen items-start rounded-lg pb-8">
-            <div
-              id="StartYourOwnBattle1"
-              className="text-xl font-['Inter'] text-[#0f002b]"
-            >
-              start your own <span className="font-bold">battle</span>
-            </div>
-            <div
-              onClick={openDrawerBottom}
-              className="cursor-pointer shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg"
-            >
-              <div className="flex text-lg  w-full pr-3">
-                <span>₹</span>
-                <p className="outline-none font-semibold pl-2 opacity-[50%] focus:outline-none w-full">
-                  Your battle amount
-                </p>
-              </div>
 
-              <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-2">
-                <Icon icon="arcticons:battleforwesnoth" width="24" />
+        {!users ? (
+          <div className="relative m-6 mt-0">
+            <div className="bg-[#0f002b] shadow-xl border border-gray-300  flex items-center gap-4 text-white rounded-lg p-6">
+              <p className="text-xl">Click to see Full Game Rules</p>
+              <div
+                onClick={() => navigate("/gamerule")}
+                className="flex justify-center items-center w-[32px] h-[32px] cursor-pointer"
+              >
+                <Icon icon="mingcute:arrow-right-line" width={32} />
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="relative m-6">
+            <div className="border-[2px] border-white shadow-lg bg-[#fead3a] flex flex-col p-4 gap-6 w-full  max-w-screen items-start rounded-lg pb-8">
+              <div
+                id="StartYourOwnBattle1"
+                className="text-xl font-['Inter'] text-[#0f002b]"
+              >
+                start your own <span className="font-bold">battle</span>
+              </div>
+              <div
+                onClick={openDrawerBottom}
+                className="cursor-pointer shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg"
+              >
+                <div className="flex text-lg  w-full pr-3">
+                  <span>₹</span>
+                  <p className="outline-none font-semibold pl-2 opacity-[50%] focus:outline-none w-full">
+                    Your battle amount
+                  </p>
+                </div>
 
+                <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-2">
+                  <Icon icon="arcticons:battleforwesnoth" width="24" />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="m-6 relative ">
           <div className="mb-4 shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white relative w-full  max-w-screen  flex flex-col gap-6 items-start rounded-lg p-2 pb-8">
             <div className="flex flex-col w-full">
@@ -632,6 +688,29 @@ const NewGameMob = () => {
               <Icon icon="fluent:delete-12-regular" width={20} />
               <p className="text-sm mt-[2px]">delete</p>
             </Button>
+          </div>
+        </Drawer>
+
+        <Drawer
+          placement="bottom"
+          open={iscodeWait}
+          className="p-4  w-[480px] bg-[#fead3a] rounded-t-3xl"
+        >
+          <div className="flex flex-col p-4">
+            <div className="mb-4 flex items-center  w-full justify-center gap-2">
+              <div className="bg-white p-7 w-32 h-32 rounded-full relative flex justify-center items-center">
+                <div className="text-[#00C300] animate-pulse bold text-2xl ">
+                  wait...
+                </div>
+              </div>
+            </div>
+
+            <Typography
+              color="white"
+              className="flex justify-center animate-pulse text-black text-xl font-bold"
+            >
+              Wait for code...
+            </Typography>
           </div>
         </Drawer>
       </div>

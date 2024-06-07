@@ -11,69 +11,8 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 
-const TABLE_ROWS = [
-  {
-    uid: "1",
-    referid: "ABC12",
-    referedate: "02-12-2024",
-    status: "Joined",
-  },
-  {
-    uid: "2",
-    referid: "ABC13",
-    referedate: "01-01-2024",
-    status: "Joined",
-  },
-  {
-    uid: "1",
-    referid: "ABC12",
-    referedate: "02-12-2024",
-    status: "Joined",
-  },
-  {
-    uid: "2",
-    referid: "ABC13",
-    referedate: "01-01-2024",
-    status: "Joined",
-  },
-  {
-    uid: "1",
-    referid: "ABC12",
-    referedate: "02-12-2024",
-    status: "Joined",
-  },
-  {
-    uid: "2",
-    referid: "ABC13",
-    referedate: "01-01-2024",
-    status: "Joined",
-  },
-  {
-    uid: "1",
-    referid: "ABC12",
-    referedate: "02-12-2024",
-    status: "Joined",
-  },
-  {
-    uid: "2",
-    referid: "ABC13",
-    referedate: "01-01-2024",
-    status: "Joined",
-  },
-  {
-    uid: "1",
-    referid: "ABC12",
-    referedate: "02-12-2024",
-    status: "Joined",
-  },
-  {
-    uid: "2",
-    referid: "ABC13",
-    referedate: "01-01-2024",
-    status: "Joined",
-  },
-];
-const RefferalCard = ({ status, uid, updatedAt }) => {
+
+const RefferalCard = ({ val }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const openModal = () => {
@@ -83,30 +22,8 @@ const RefferalCard = ({ status, uid, updatedAt }) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const handleReject = () => {
-    toast.success("rejected kyc");
+ 
 
-    closeModal();
-  };
-  //   const handleVerification = () => {
-  //     dispatch(fetchAllKyc({ uid }));
-  //     handleRefresh();
-  //   };
-  function formatDate(dateStr) {
-    const date = new Date(dateStr);
-
-    const options = {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-      timeZone: "Asia/Kolkata", // IST timezone
-    };
-
-    return date.toLocaleString("en-IN", options);
-  }
 
   return (
     <div className="flex gap-3 mb-3">
@@ -130,7 +47,7 @@ const RefferalCard = ({ status, uid, updatedAt }) => {
                   <span>Referral Details</span>{" "}
                 </div>
 
-                <div>UID {uid}</div>
+                <div>UID {val._id}</div>
               </div>
               <div className="flex items-center gap-2">
                 <button
@@ -152,12 +69,12 @@ const RefferalCard = ({ status, uid, updatedAt }) => {
                   <div className="flex flex-col ">
                     <span className="flex items-center font-bold text-[14.4px]">
                       Ludo Player{" "}
-                      {status && (
+                      {val._id && (
                         <Icon icon="bitcoin-icons:verify-outline" width="26" />
                       )}
                     </span>
                     <span className="font-normal text-[9.6px] -mt-1">
-                      @{uid}
+                      @{val.Id}
                     </span>
                   </div>
                 </div>
@@ -255,48 +172,52 @@ const RefferalCard = ({ status, uid, updatedAt }) => {
                         </tr>
                       </thead>
                       <tbody className="h-full w-full">
-                        {TABLE_ROWS?.map((val) => {
-                          return (
-                            <tr key={val.uid}>
-                              <td className="p-4">
-                                <div className="flex items-center gap-3">
-                                  <Typography className="font-[Inter] font-medium text-[16px]">
-                                    {val.uid}
-                                  </Typography>
-                                </div>
-                              </td>
-                              <td className="p-4">
-                                <div className="flex flex-col">
-                                  <Typography className="font-[Inter] font-medium text-[16px]">
-                                    {val.referid}
-                                  </Typography>
-                                </div>
-                              </td>
-                              <td className="p-4">
-                                <div className="w-max">
-                                  <Typography className="font-[Inter] font-medium text-[16px]">
-                                    {val.referedate}
-                                  </Typography>
-                                </div>
-                              </td>
-                              <td className="p-4">
-                                <div
-                                  className={`rounded-xl flex justify-center items-center w-[87px] h-[19px] ${
-                                    val.status === "joined"
-                                      ? "bg-[#00C300] text-[#FFFFFF] "
-                                      : status === "failed"
-                                      ? "bg-[#FF0000] text-[#FFFFFF] "
-                                      : "bg-gray-400 text-[#FFFFFF]"
-                                  }`}
-                                >
-                                  <Typography className="font-[Inter] font-normal text-[10px]  ">
-                                    {val.status}
-                                  </Typography>
-                                </div>
-                              </td>
-                            </tr>
-                          );
-                        })}
+                        {val?.referralDetails?.refferedUser?.map(
+                          (refereduser, index) => {
+                            return (
+                              <tr key={refereduser?._id}>
+                                <td className="p-4">
+                                  <div className="flex items-center gap-3">
+                                    <Typography className="font-[Inter] font-medium text-[16px]">
+                                      {index + 1}
+                                    </Typography>
+                                  </div>
+                                </td>
+                                <td className="p-4">
+                                  <div className="flex flex-col">
+                                    <Typography className="font-[Inter] font-medium text-[16px]">
+                                      {refereduser}
+                                    </Typography>
+                                  </div>
+                                </td>
+                                <td className="p-4">
+                                  <div className="w-max">
+                                    <Typography className="font-[Inter] font-medium text-[16px]">
+                                      {refereduser?._id}
+                                    </Typography>
+                                  </div>
+                                </td>
+                                <td className="p-4">
+                                  {refereduser?.status && (
+                                    <div
+                                      className={`rounded-xl flex justify-center items-center w-[87px] h-[19px] ${
+                                        val.status === "joined"
+                                          ? "bg-[#00C300] text-[#FFFFFF] "
+                                          : status === "failed"
+                                          ? "bg-[#FF0000] text-[#FFFFFF] "
+                                          : "bg-gray-400 text-[#FFFFFF]"
+                                      }`}
+                                    >
+                                      <Typography className="font-[Inter] font-normal text-[10px]  ">
+                                        {refereduser?.status}
+                                      </Typography>
+                                    </div>
+                                  )}
+                                </td>
+                              </tr>
+                            );
+                          }
+                        )}
                       </tbody>
                     </table>
                   </CardBody>

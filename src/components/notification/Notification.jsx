@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "../../app.css";
 import { useNavigate } from "react-router-dom";
 import { SidebarMob } from "../MainLayout/SidebarMob";
-import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { Button } from "@material-tailwind/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,16 +10,22 @@ import { convertTimestamp } from "../admin_and_S.admin/Functions/convertTimestam
 import { toast } from "react-toastify";
 import axios from "axios";
 import PageLoader from "../MainLayout/PageLoader";
-import { ProfileButton } from "../MainLayout/ProfileButton";
+import TotoalBal, { ProfileButton } from "../MainLayout/ProfileButton";
+import { fetchUserDetail } from "../live_battle/userSlice";
 const Notification = () => {
   const navigate = useNavigate();
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
+  const users = useSelector((state) => state.user.user);
+
   const { notifications, status, error } = useSelector(
     (state) => state.notifications
   );
 
+  useEffect(() => {
+    dispatch(fetchUserDetail());
+  }, []);
   useEffect(() => {
     dispatch(fetchNotifications());
   }, [dispatch]);
@@ -59,9 +64,6 @@ const Notification = () => {
       toast.error(err);
     }
   };
-  // if (status === "loading") {
-  //   return <PageLoader />;
-  // }
 
   return (
     <>
@@ -75,16 +77,12 @@ const Notification = () => {
             <SidebarMob />
             <LudoMainLogo />
           </div>
-          <ProfileButton/>
-        </div>
-        {/* <div className="w-full max-w-[480px] flex justify-end">
-          <div className=" flex justify-end p-2 gap-1 px-4  rounded-lg">
-            <img src={Mail} alt="Fluentmailreadregular" className="w-4" />
-            <div className="text-xs font-['Inter'] font-semibold text-[#0f002b]">
-              mark all as read
-            </div>
+          <div className="flex gap-2 items-center">
+            <TotoalBal users={users} />
+            <ProfileButton />
           </div>
-        </div> */}
+        </div>
+       
 
         <div
           id="Line"
@@ -218,8 +216,6 @@ const Notification = () => {
               </Button>
             </div>
           </div> */}
-
-         
         </div>
       </div>
     </>

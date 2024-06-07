@@ -12,7 +12,7 @@ import PageLoader from "../MainLayout/PageLoader";
 import { formatDate } from "../admin_and_S.admin/Functions/formateDate";
 import FavouriteChat from "./FavouriteChat";
 import OpenRecentTab from "./OpenRecentTab";
-import { ProfileButton } from "../MainLayout/ProfileButton";
+import TotoalBal, { ProfileButton } from "../MainLayout/ProfileButton";
 
 const Chathistory = () => {
   const [OpenchatHistory, setOpenChatHistory] = useState(false);
@@ -55,7 +55,10 @@ const Chathistory = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-        <ProfileButton />
+        <div className="flex gap-2 items-center">
+          <TotoalBal users={users} />
+          <ProfileButton />
+        </div>
       </div>
 
       {OpenRecent ? (

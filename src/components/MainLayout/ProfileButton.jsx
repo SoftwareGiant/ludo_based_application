@@ -1,5 +1,18 @@
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
+export const LoginBtn = () => {
+  const navigate = useNavigate();
+  return (
+    <div
+      onClick={() => navigate("/login")}
+      className="bg-black cursor-pointer hover:shadow-md flex items-center gap-2 rounded-2xl px-4 py-1 text-white"
+    >
+      Login
+    </div>
+  );
+};
 
 export const ProfileButton = () => {
   const navigate = useNavigate();
@@ -18,3 +31,17 @@ export const ProfileButton = () => {
     </div>
   );
 };
+
+const TotoalBal = ({ users }) => {
+  const navigate = useNavigate();
+  return (
+    <div
+      onClick={() => navigate("/mywallet")}
+      className="bg-black cursor-pointer hover:shadow-md flex items-center gap-2 rounded-2xl px-3 py-1 text-white"
+    >
+      <Icon icon="ph:wallet-light" width={24} />
+      <p>₹ {users?.walletDetails?.totalAmount}</p>{" "}
+    </div>
+  );
+};
+export default TotoalBal;

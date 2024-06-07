@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Drawer, Button } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
 import AddGame from "../../assets/new_game/addgame.svg";
@@ -11,6 +11,8 @@ import Support from "../../assets/new_game/support.svg";
 import BackBlack from "../../assets/profile/back_black.svg";
 import { IoMenu } from "react-icons/io5";
 import { Icon } from "@iconify-icon/react";
+import { fetchUserDetail } from "../live_battle/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 export function SidebarMob({
   isClick1,
   isClick2,
@@ -22,9 +24,16 @@ export function SidebarMob({
   isClick9,
 }) {
   const [open, setOpen] = React.useState(false);
+  const users = useSelector((state) => state.user.user);
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!users) {
+      dispatch(fetchUserDetail());
+    }
+  }, [dispatch, users]);
   return (
     <React.Fragment>
       <Button className="bg-[#fead3a]  shadow-none p-0 hover:shadow-none">
@@ -52,157 +61,178 @@ export function SidebarMob({
             className="text-black w-6"
           />
         </Button>
-        <div className="flex flex-col justify-between w-full h-[90%]">
-          <div className="flex flex-col justify-center  mx-auto gap-2 w-3/5 items-center">
-            <Link
-              to="/"
-              className={`border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]   ${
-                isClick1 ? "bg-[#ffcc4d]" : "bg-white"
-              } flex flex-row gap-2 w-full h-8 items-center  px-3 border rounded-lg`}
-            >
-              <img
-                src={AddGame}
-                alt="ContentAdd icon"
-                id="Materialsymbolsadd"
-                className="w-5"
-              />
-              <div className="text-xs font-['Nunito_Sans'] font-bold text-[#0f002b]">
-                New game
-              </div>
-            </Link>
-            <Link
-              to="/profile"
-              className={`border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] ${
-                isClick2 ? "bg-[#ffcc4d]" : "bg-white"
-              } flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg`}
-            >
-              <img
-                src={Profile}
-                alt="SocialPersonOutline icon"
-                className="w-5"
-              />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                Profile
-              </div>
-            </Link>
 
-            <Link
-              to="/mywallet"
-              className={`
+        <div className="flex flex-col justify-between w-full h-[90%]">
+          {users ? (
+            <div className="flex flex-col justify-center  mx-auto gap-2 w-3/5 items-center">
+              <Link
+                to="/"
+                className={`border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]   ${
+                  isClick1 ? "bg-[#ffcc4d]" : "bg-white"
+                } flex flex-row gap-2 w-full h-8 items-center  px-3 border rounded-lg`}
+              >
+                <img
+                  src={AddGame}
+                  alt="ContentAdd icon"
+                  id="Materialsymbolsadd"
+                  className="w-5"
+                />
+                <div className="text-xs font-['Nunito_Sans'] font-bold text-[#0f002b]">
+                  New game
+                </div>
+              </Link>
+              <Link
+                to="/profile"
+                className={`border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] ${
+                  isClick2 ? "bg-[#ffcc4d]" : "bg-white"
+                } flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg`}
+              >
+                <img
+                  src={Profile}
+                  alt="SocialPersonOutline icon"
+                  className="w-5"
+                />
+                <div className="text-xs font-['Nunito_Sans'] font-bold">
+                  Profile
+                </div>
+              </Link>
+
+              <Link
+                to="/mywallet"
+                className={`
          
           border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg
           ${isClick4 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
-            >
-              <img
-                src={Wallet}
-                alt="Phwalletlight"
-                id="Phwalletlight"
-                className="w-5"
-              />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                My Wallet
-              </div>
-            </Link>
-            <Link
-              to="/gamehistory"
-              className={`
+              >
+                <img
+                  src={Wallet}
+                  alt="Phwalletlight"
+                  id="Phwalletlight"
+                  className="w-5"
+                />
+                <div className="text-xs font-['Nunito_Sans'] font-bold">
+                  My Wallet
+                </div>
+              </Link>
+              <Link
+                to="/gamehistory"
+                className={`
        
           border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg
           ${isClick5 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
-            >
-              <img
-                src={GameHistory}
-                alt="ActionHistory icon"
-                id="lgihistory"
-                className="w-5"
-              />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                Game History
-              </div>
-            </Link>
-            <Link
-              to="/transactionhistory"
-              className={`
+              >
+                <img
+                  src={GameHistory}
+                  alt="ActionHistory icon"
+                  id="lgihistory"
+                  className="w-5"
+                />
+                <div className="text-xs font-['Nunito_Sans'] font-bold">
+                  Game History
+                </div>
+              </Link>
+              <Link
+                to="/transactionhistory"
+                className={`
         
           border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg
           ${isClick6 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
-            >
-              <img
-                src={Profile}
-                alt="SocialPersonOutline icon"
-                className="w-5"
-              />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                Transaction History
-              </div>
-            </Link>
-            <Link
-              to="/refer&earn"
-              className={`
+              >
+                <img
+                  src={Profile}
+                  alt="SocialPersonOutline icon"
+                  className="w-5"
+                />
+                <div className="text-xs font-['Nunito_Sans'] font-bold">
+                  Transaction History
+                </div>
+              </Link>
+              <Link
+                to="/refer&earn"
+                className={`
           
           border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg
           ${isClick7 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
-            >
-              <img
-                src={ReferEarn}
-                alt="Gameiconsreceivemoney"
-                className="w-5"
-              />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                Refer and Earn
-              </div>
-            </Link>
-            <Link
-              to="/notification"
-              className={`
+              >
+                <img
+                  src={ReferEarn}
+                  alt="Gameiconsreceivemoney"
+                  className="w-5"
+                />
+                <div className="text-xs font-['Nunito_Sans'] font-bold">
+                  Refer and Earn
+                </div>
+              </Link>
+              <Link
+                to="/notification"
+                className={`
         
           border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg
           ${isClick8 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
-            >
-              <img
-                src={Notification}
-                alt="Iconamoonnotificationlight"
-                className="w-5"
-              />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                Notification
-              </div>
-            </Link>
-            <Link
-              to="/support"
-              className={`
+              >
+                <img
+                  src={Notification}
+                  alt="Iconamoonnotificationlight"
+                  className="w-5"
+                />
+                <div className="text-xs font-['Nunito_Sans'] font-bold">
+                  Notification
+                </div>
+              </Link>
+              <Link
+                to="/support"
+                className={`
        
           border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg
           ${isClick9 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
-            >
-              <img
-                src={Support}
-                alt="Materialsymbolssupportagent"
-                className="w-5"
-              />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                Support
-              </div>
-            </Link>
-            <Link
-              to="/chathistory"
-              className={`    
+              >
+                <img
+                  src={Support}
+                  alt="Materialsymbolssupportagent"
+                  className="w-5"
+                />
+                <div className="text-xs font-['Nunito_Sans'] font-bold">
+                  Support
+                </div>
+              </Link>
+              <Link
+                to="/chathistory"
+                className={`    
           border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg
           ${isClick9 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
-            >
-              <Icon icon="tdesign:chat-bubble-history" />
-              <div className="text-xs font-['Nunito_Sans'] font-bold">
-                Chat History
-              </div>
-            </Link>
-          </div>
+              >
+                <Icon icon="tdesign:chat-bubble-history" />
+                <div className="text-xs font-['Nunito_Sans'] font-bold">
+                  Chat History
+                </div>
+              </Link>
+            </div>
+          ) : (
+            <div className="flex flex-col w-full">
+              <Button
+                onClick={() => navigate("/login")}
+                className="text-white rounded-2xl w-[70%] m-auto mt-6 flex items-center gap-2 justify-center"
+              >
+                <Icon icon="mdi:user" width={26} />
+                <p className="text-base "> Login or Signup</p>
+              </Button>
+              <Button
+                onClick={() => navigate("/")}
+                className="text-black bg-white rounded-2xl w-[70%] m-auto mt-6 flex items-center gap-2 justify-center"
+              >
+                <Icon icon="ic:baseline-plus" width={26} />
+
+                <p className="text-base ">New game</p>
+              </Button>
+            </div>
+          )}
           <div className="flex mb-2 flex-col gap-2 w-full max-w-[480px] px-6 font-['Oooh_Baby'] justify-center items-center pt-4">
             {" "}
             <div className="flex flex-col justify-center items-center">

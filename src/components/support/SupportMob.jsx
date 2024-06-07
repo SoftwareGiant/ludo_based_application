@@ -23,7 +23,7 @@ import { fetchUserChat } from "./supportUserChatSlice";
 import axios from "axios";
 import { fetchUserDetail } from "../live_battle/userSlice";
 import { getTime } from "../admin_and_S.admin/Functions/getTime";
-import { ProfileButton } from "../MainLayout/ProfileButton";
+import TotoalBal, { ProfileButton } from "../MainLayout/ProfileButton";
 
 const SupportMob = () => {
   const [inputText, setInputText] = useState("");
@@ -98,7 +98,10 @@ const SupportMob = () => {
           <SidebarMob />
           <LudoMainLogo />
         </div>
-        <ProfileButton />
+        <div className="flex gap-2 items-center">
+            <TotoalBal users={users} />
+            <ProfileButton />
+          </div>
       </div>
       <div className="z-10  flex mt-[68px]  border-b border-[#0f002b] justify-between py-2 px-4  items-center bg-[#fead3a] max-w-[480px] w-full">
         <div className="flex justify-center gap-2 items-center">
