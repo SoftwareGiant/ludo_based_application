@@ -10,7 +10,7 @@ import axios from "axios";
 import ButtonLoader from "../MainLayout/ButtonLoader.jsx";
 import LudoMainLogo from "../MainLayout/LudoMainLogo.jsx";
 import { toast } from "react-toastify";
-import { ProfileButton } from "../MainLayout/ProfileButton.jsx";
+import TotoalBal, { ProfileButton } from "../MainLayout/ProfileButton.jsx";
 import HelpButton from "../MainLayout/HelpButton.jsx";
 const WithdrawMob = () => {
   const [inputValue, setInputValue] = useState("");
@@ -83,10 +83,13 @@ const WithdrawMob = () => {
       />
       <div className="bg-[#fead3a] flex flex-row justify-between max-w-[480px] w-full h-12 items-start pt-2 px-5 ">
         <div className="flex flex-row gap-3 w-2/5 items-start">
-          <SidebarMob />
+          <SidebarMob users={users} />
           <LudoMainLogo />
         </div>
-        <ProfileButton />
+        <div className="flex gap-2 items-center ">
+          <TotoalBal users={users} />
+          <ProfileButton />
+        </div>
       </div>
       <div className="flex justify-between items-center px-4 py-2 w-full">
         <div className="flex gap-5 items-center">

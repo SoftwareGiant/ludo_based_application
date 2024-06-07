@@ -313,7 +313,7 @@ const NewGameMob = () => {
       />
       <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start">
-          <SidebarMob />
+          <SidebarMob users={users} />
           <LudoMainLogo />
         </div>
         {!users ? (
@@ -419,8 +419,9 @@ const NewGameMob = () => {
                                 <div className="absolute   -top-4  -right-2">
                                   <IconButton
                                     onClick={() => handleDeleteOption(e._id)}
-                                    color="red"
-                                    className="rounded-full h-[36px]  w-[36px]"
+                                    // color="black"
+
+                                    className="rounded-full bg-[#0f002b] h-[36px]  w-[36px]"
                                   >
                                     <Icon
                                       icon="fluent:delete-12-regular"
@@ -659,7 +660,8 @@ const NewGameMob = () => {
           onClose={handleCloseDeleteBattle}
           className="w-[480px] p-4  bg-[#0f002b] rounded-t-3xl"
         >
-          <div className="mb-4 flex items-center justify-start gap-2">
+          <div className="w-[50%] h-[2px] bg-white rounded-full m-auto -mt-1" />
+          {/* <div className="mb-4 flex items-center justify-start gap-2">
             <IconButton
               onClick={handleCloseDeleteBattle}
               variant="text"
@@ -667,15 +669,17 @@ const NewGameMob = () => {
             >
               <Icon icon="ep:back" className="text-white" width="24" />
             </IconButton>
-          </div>
+          </div> */}
 
-          <Typography className="mb-10  px-4  flex text-2xl text-white justify-center font-semibold">
-            Are you sure want to delete battle ?
+          <Typography className="mb-10 mt-8  px-4  flex  gap-2 text-2xl text-white justify-center font-semibold">
+            Delete this battle{" "}
+            <span className="font-extralight"> (permanently)</span> !
           </Typography>
-          <div className="flex justify-center gap-2 px-6 w-full">
+          <div className="flex justify-center gap-2 px-8 w-[80%] m-auto">
             <Button
               onClick={handleCloseDeleteBattle}
-              color="green"
+              color="white"
+              variant="outlined"
               className="w-full flex justify-center items-center gap-2"
             >
               <Icon icon="mdi:cancel" width={18} />
@@ -683,13 +687,16 @@ const NewGameMob = () => {
             </Button>
             <Button
               onClick={() => handleDelete(deleteBattleId)}
-              color="red"
+              color="white"
               className="w-full flex justify-center items-center gap-2"
             >
               <Icon icon="fluent:delete-12-regular" width={20} />
               <p className="text-sm mt-[2px]">delete</p>
             </Button>
           </div>
+          <p className="text-gray-400 px-6 pt-5 text-center">
+            *Deleting a match cannot be undone.
+          </p>
         </Drawer>
 
         <Drawer

@@ -95,7 +95,7 @@ const SupportMob = () => {
       <div className="bg-[#fead3a]  h-[80%] w-[200%]   rounded-[50%] sm:hidden   -top-20 fixed -left-[50%] " />
       <div className="bg-[#fead3a] max-w-[480px] absolute  shadow-lg border-b border-[#0f002b]  flex justify-between   items-center w-full  pt-4  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
-          <SidebarMob />
+        <SidebarMob users={users} />
           <LudoMainLogo />
         </div>
         <div className="flex gap-2 items-center">

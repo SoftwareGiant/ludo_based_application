@@ -13,9 +13,8 @@ import {
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { fetchOpenChallenges } from "./openChallengeSlice";
+import { fetchUserDetail } from "./userSlice";
 const MatchProgress = () => {
-  const [isStarted, setIsStarted] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
   const [openBottom, setOpenBottom] = useState(false);
   const [gameStatus, setGameStatus] = useState("");
@@ -23,21 +22,11 @@ const MatchProgress = () => {
   const [filename, setFilename] = useState("");
   const navigate = useNavigate();
   const { accessToken } = useSelector((state) => state.auth);
-
-  const openChallenges = useSelector((state) => state.opengame.openChallenges);
-  const loading = useSelector((state) => state.opengame.loading);
-
-  const dispatch = useDispatch();
+  const users = useSelector((state) => state.user.user);
   useEffect(() => {
-    dispatch(fetchOpenChallenges());
-  }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (!loading && openChallenges.length === 0) {
-  //     console.log(loading,openChallenges)
-  //     navigate("/");
-  //   }
-  // }, [openChallenges, loading, navigate]);
+    dispatch(fetchUserDetail());
+  }, []);
+  const dispatch = useDispatch();
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0]; // Get the first file selected by the user
@@ -106,7 +95,7 @@ const MatchProgress = () => {
   const closeDrawerBottom = () => setOpenBottom(false);
   return (
     <div className="h-screen w-full max-w-[480px] bg-white">
-      <TopbarMobile />
+      <TopbarMobile users={users} />
       <div className=" flex flex-col w-full pt-20">
         <div className="flex justify-between items-center px-4 py-2 w-full">
           <div className="flex gap-5 items-center">
@@ -144,36 +133,6 @@ const MatchProgress = () => {
           />
         </div>
 
-        {/* <div>
-          <div className="flex flex-col  w-full gap-4 p-8">
-            {isStarted ? (
-              <button className="p-2 flex items-center justify-center gap-2 text-white bg-[#0F002B] rounded-md font-bold">
-                <span> Match in Progress </span>
-
-                <Icon icon="material-symbols:lock" width="21" />
-              </button>
-            ) : (
-              <button
-                onClick={() => setIsStarted(true)}
-                className="p-2 border border-blue-gray-700 rounded-md font-bold"
-              >
-                Click if Match has Started
-              </button>
-            )}
-            <ol>
-              <li>1. Don’t click unless the match has started.</li>
-
-              <li>2. Once clicked it is irreversible.</li>
-
-              <li>
-                3. In case any one of the player clicked it by incident then
-                they can revert their decision within 10seconds. After that the
-                match will be considered to be started.
-              </li>
-            </ol>
-          </div>
-          <hr className="bg-gray-900" />
-        </div> */}
         {
           <div>
             {isEnd ? (
@@ -213,15 +172,15 @@ const MatchProgress = () => {
           </div>
         }
         {isEnd && (
-          <div className="w-full p-6 flex gap-2 justify-center items-center">
+          <div className=" p-6 px-8 flex gap-2 justify-center items-center">
             <IconButton
               onClick={() => setIsEnd(false)}
+              variant="outlined"
               className={`${
                 gameStatus === "won" || gameStatus === "loss" ? "hidden" : ""
               } w-full `}
-              variant="text"
             >
-              <Icon icon="gridicons:cross" width="26" />
+              <Icon icon="gridicons:cross" width="26" className="mt-1" />
             </IconButton>
             <Button
               onClick={() => handleResult("loss")}

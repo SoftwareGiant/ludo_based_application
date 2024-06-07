@@ -52,7 +52,7 @@ const Chathistory = () => {
       />
       <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
-          <SidebarMob />
+          <SidebarMob users={users}/>
           <LudoMainLogo />
         </div>
         <div className="flex gap-2 items-center">

@@ -28,7 +28,7 @@ const GameHistoryMob = () => {
       />
       <div className="bg-[#fead3a] flex flex-row justify-between max-w-[480px] w-full h-12 items-start pt-2 px-5 ">
         <div className="flex flex-row gap-3 w-2/5 items-start">
-          <SidebarMob />
+        <SidebarMob users={users} />
           <LudoMainLogo />
         </div>
         <div className="flex gap-2 items-center">
@@ -65,10 +65,8 @@ const GameHistoryMob = () => {
                         <span>you vs</span>
                         <span>
                           {/* {game?.player2._id}{" "} */}
-                          {game?.player2?._id?.slice(
-                            game?.player2?._id?.length - 6,
-                            game?.player2?._id?.length
-                          )}
+                          {game?.player2?.userName ||
+                            game?.player2?._id?.slice(-6)}
                         </span>
                       </span>
                     ) : (
@@ -77,10 +75,8 @@ const GameHistoryMob = () => {
                         <span>
                           {" "}
                           {/* {game?.player1._id} */}
-                          {game?.player1?._id?.slice(
-                            game?.player1?._id?.length - 6,
-                            game?.player1?._id?.length
-                          )}
+                          {game?.player1?.userName ||
+                            game?.player1?._id?.slice(-6)}
                         </span>
                       </span>
                     )}

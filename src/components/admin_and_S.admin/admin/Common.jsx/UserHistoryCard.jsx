@@ -263,9 +263,6 @@ const UserHistoryCard = ({
                                     </td>
                                     <td className="p-4">
                                       <div className="flex flex-col">
-                                        {/* <Typography className="font-[Inter] font-medium text-[16px]">
-                                          {val.status}
-                                        </Typography> */}
                                         <GameStatusCard
                                           val={val}
                                           // handleRefresh={handleRefresh}

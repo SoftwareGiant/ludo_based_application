@@ -22,18 +22,19 @@ export function SidebarMob({
   isClick7,
   isClick8,
   isClick9,
+  users,
 }) {
   const [open, setOpen] = React.useState(false);
-  const users = useSelector((state) => state.user.user);
+  // const users = useSelector((state) => state.user.user);
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (!users) {
-      dispatch(fetchUserDetail());
-    }
-  }, [dispatch, users]);
+  // useEffect(() => {
+  //   if (!users) {
+  //     dispatch(fetchUserDetail());
+  //   }
+  // }, [dispatch, users]);
   return (
     <React.Fragment>
       <Button className="bg-[#fead3a]  shadow-none p-0 hover:shadow-none">

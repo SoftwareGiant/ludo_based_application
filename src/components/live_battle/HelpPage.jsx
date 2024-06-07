@@ -6,12 +6,20 @@ import { useNavigate } from "react-router-dom";
 import TopbarMobile from "../MainLayout/TopbarMobile";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { IconButton } from "@material-tailwind/react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserDetail } from "./userSlice";
 
 const HelpPage = () => {
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.user.user);
+
+  useEffect(() => {
+    dispatch(fetchUserDetail());
+  }, [dispatch]);
   const navigate = useNavigate();
   return (
     <div className="min-h-screen h-full bg-white">
-      <TopbarMobile />
+      <TopbarMobile users={users} />
       <div className="bg-white w-full pt-20">
         <div className="flex justify-between items-center px-4 py-2 w-full">
           <div className="flex gap-5 items-center">
