@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { useState } from "react";
-import "../../app.css";
+import "../../App.css";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { toast } from "react-toastify";
 

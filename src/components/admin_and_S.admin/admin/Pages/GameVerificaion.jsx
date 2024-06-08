@@ -26,7 +26,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import AdminFooter from "../Common.jsx/AdminFooter";
 import Refreshloader from "../../superadmin/Common/Refreshloader";
-import GameStatusCard from "../Common.jsx/gameStatusCard";
+import GameStatusCard from "../Common.jsx/GameStatusCard";
 import PageLoader from "../../../MainLayout/PageLoader";
 import { Link } from "react-router-dom";
 

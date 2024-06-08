@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {  useNavigate } from "react-router-dom";
-import "../../app.css";
+import "../../App.css";
 import { RxCross2 } from "react-icons/rx";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 

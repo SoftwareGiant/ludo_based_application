@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import "../../app.css";
+import "../../App.css";
 
 import AddGame from "../../assets/new_game/addgame.svg";
 import Profile from "../../assets/new_game/profile.svg";

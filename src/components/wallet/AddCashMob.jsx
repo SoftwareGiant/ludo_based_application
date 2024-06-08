@@ -5,7 +5,7 @@ import FrameProfile from "../../assets/profile/Frame_profile.png";
 import scanner from "../../assets/new_game/scanner.svg";
 import { useState } from "react";
 import ButtonLoader from "../MainLayout/ButtonLoader.jsx";
-import "../../app.css";
+import "../../App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserDetail } from "../live_battle/userSlice.js";
 import { Icon } from "@iconify-icon/react";

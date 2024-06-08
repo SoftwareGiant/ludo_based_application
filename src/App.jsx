@@ -61,7 +61,7 @@ import SuperWithdrawal from "./components/admin_and_S.admin/superadmin/Pages/Sup
 import Chathistory from "./components/Chathistory/Chathistory.jsx";
 import MatchUserChat from "./components/Chathistory/MatchUserChat.jsx";
 import AdminSLides from "./components/admin_and_S.admin/admin/Pages/AdminSLides.jsx";
-import ErrorBoundary from "./Errorboundary.jsx";
+import ErrorBoundary from "./ErrorBoundary.jsx";
 import CustomerChat from "./components/admin_and_S.admin/admin/Common.jsx/CustomerChat.jsx";
 import NotFoundpage from "./components/MainLayout/NotFoundpage.jsx";
 import GameRule from "./components/MainLayout/GameRule.jsx";
