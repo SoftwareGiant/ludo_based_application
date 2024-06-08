@@ -52,7 +52,7 @@ const Chathistory = () => {
       />
       <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
-          <SidebarMob users={users}/>
+          <SidebarMob users={users} />
           <LudoMainLogo />
         </div>
         <div className="flex gap-2 items-center">
@@ -105,7 +105,7 @@ const Chathistory = () => {
             </div>
 
             {allChatList?.length > 0 ? (
-              allChatList?.map((userchat) => (
+              allChatList?.slice(0, 2).map((userchat) => (
                 <Card
                   key={userchat._id}
                   onClick={() => handleRecentCardCLick(userchat)}

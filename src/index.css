@@ -3,31 +3,31 @@
 @tailwind utilities;
 
 @keyframes zoom-in {
-    0% {
-      transform: scale(0.1);
-    }
-    100% {
-      transform: scale(1.5);
-    }
+  0% {
+    transform: scale(0.1);
   }
-  
-  .animate-zoom-in-stick {
-    animation: zoom-in 1.3s ease-in-out forwards;
+  100% {
+    transform: scale(1.5);
   }
- 
+}
 
-  .table-auto::-webkit-scrollbar,.main-body-right::-webkit-scrollbar {
-    display: none;
-  }
-  
-  /* Hide scrollbar for IE, Edge, and Firefox */
-  .table-auto,.main-body-right {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+.animate-zoom-in-stick {
+  animation: zoom-in 1.3s ease-in-out forwards;
+}
 
+.table-auto::-webkit-scrollbar,
+.main-body-right::-webkit-scrollbar {
+  display: none;
+}
 
-  /* Add this to your CSS file */
+/* Hide scrollbar for IE, Edge, and Firefox */
+.table-auto,
+.main-body-right {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Add this to your CSS file */
 .animated-button {
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -37,3 +37,27 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
+.react-multi-carousel-dot > button {
+  background-color: white;
+  border: none;
+}
+
+.react-multi-carousel-dot--active > button {
+  background-color: black;
+}
+
+@media (min-width: 480px) {
+  .suportchat-over {
+    display: none;
+  }
+}
+@media (min-width: 480px) {
+  .suuportchatBg {
+    background-color: #fead3a;
+  }
+}
+@media (max-width: 900px) {
+  .desktop-hide {
+    display: none;
+  }
+}

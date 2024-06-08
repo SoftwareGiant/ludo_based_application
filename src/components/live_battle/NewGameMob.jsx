@@ -153,7 +153,6 @@ const NewGameMob = () => {
         window.location.reload();
       }
     }
-
   }, [match]);
 
   useEffect(() => {
@@ -326,14 +325,14 @@ const NewGameMob = () => {
       </div>
 
       <div className="bg-[#0f002b] w-full  overflow-hidden relative">
-        <div className="bg-[#fead3a] h-80 w-[650px] rounded-[50%]   -top-20 absolute -left-24" />
+        <div className="bg-[#fead3a] h-[350px] w-[650px] rounded-[50%]   -top-20 absolute -left-24" />
         <div className="py-4">
           <NewGameSLider />
         </div>
 
         {!users ? (
           <div className="relative m-6 mt-0">
-            <div className="bg-[#0f002b] shadow-xl border border-gray-300  flex items-center gap-4 text-white rounded-lg p-6">
+            <div className="bg-[#0f002b] shadow-xl  flex items-center gap-6 text-white rounded-xl p-6 px-18">
               <p className="text-xl">Click to see Full Game Rules</p>
               <div
                 onClick={() => navigate("/gamerule")}

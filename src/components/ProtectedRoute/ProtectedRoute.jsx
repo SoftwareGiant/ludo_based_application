@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { logoutAsync, selectToken } from "../app_start/authSlice";
 import { isExpired, useJwt } from "react-jwt";
+import PageLoader from "../MainLayout/PageLoader";
+import DestopAppDetails from "../MainLayout/DestopAppDetails";
 const ProtectedRoute = ({ children }) => {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
@@ -16,7 +18,12 @@ const ProtectedRoute = ({ children }) => {
   if (!accessToken || isMyTokenExpired) {
     return <Navigate to="/login" replace />;
   }
-  return <Outlet />;
+  return (
+    <div className="sm:flex">
+      <Outlet />
+      <DestopAppDetails />
+    </div>
+  );
 };
 
 export default ProtectedRoute;

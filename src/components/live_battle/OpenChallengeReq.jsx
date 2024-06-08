@@ -34,7 +34,8 @@ const OpenChallengeReq = () => {
     const timeDifferenceInSeconds = timeDifference / (1000 * 60);
     return timeDifferenceInSeconds;
   };
-  const battledetail =battles && battles?.filter((data) => data._id === userId)[0];
+  const battledetail =
+    battles && battles?.filter((data) => data._id === userId)[0];
   // useEffct(()=>{
   //   if(battledetail===undefined){
   //     navigate("/");
@@ -128,10 +129,10 @@ const OpenChallengeReq = () => {
                   </div>
                   <div className="flex flex-col gap-3 w-8 items-start">
                     <div className="font-['Inter'] font-bold text-[#0f002b]">
-                      ₹{battledetail.amount}
+                      {/* ₹{battledetail.amount} */}
                     </div>
                     <div className="font-['Inter'] font-bold text-[#0f002b]">
-                      ₹{battledetail.amount * 1.95}
+                      {/* ₹{battledetail.amount * 1.95} */}
                     </div>
                   </div>
                 </div>
@@ -141,11 +142,11 @@ const OpenChallengeReq = () => {
                       open challenge<span> </span>
                       <div>from </div>
                       <span className="font-bold">
-                        {" "}
+                        {/* {" "}
                         {battledetail.player1.slice(
                           battledetail.player1.length - 6,
                           battledetail.player1.length
-                        )}
+                        )} */}
                       </span>
                     </div>
                     <div
@@ -155,11 +156,11 @@ const OpenChallengeReq = () => {
                       ·{" "}
                       <span>
                         {" "}
-                        {Math.floor(battleCreationTime(battledetail)) === 0
+                        {/* {Math.floor(battleCreationTime(battledetail)) === 0
                           ? "Now"
                           : `${Math.floor(
                               battleCreationTime(battledetail)
-                            )} Minutes ago`}
+                            )} Minutes ago`} */}
                       </span>
                     </div>
                   </div>

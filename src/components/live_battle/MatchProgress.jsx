@@ -206,10 +206,11 @@ const MatchProgress = () => {
           onClose={closeDrawerBottom}
           className="p-4 w-[480px] bg-[#0f002b] rounded-t-3xl"
         >
+          <div className="bg-white w-[50%] h-[2px] -mt-2 mb-2 rounded-full m-auto" />
           <div className="flex w-full justify-center items-end gap-4 pt-10">
             <label
               htmlFor="image-upload"
-              className="flex justify-center items-center flex-col"
+              className="flex justify-center cursor-pointer items-center flex-col"
             >
               <div className="p-4 w-16 h-16 flex justify-center items-center bg-white rounded-full ">
                 <img src={image} />
@@ -225,7 +226,7 @@ const MatchProgress = () => {
             />
             <label
               htmlFor="video-upload"
-              className="flex justify-center items-center flex-col"
+              className="flex justify-center cursor-pointer items-center flex-col"
             >
               <div className="p-4 w-16 h-16 flex justify-center items-center bg-white rounded-full ">
                 <img src={video} />
@@ -243,9 +244,9 @@ const MatchProgress = () => {
 
           <Typography
             color="white"
-            className="flex justify-center text-gray-400 pt-6"
+            className="flex justify-center text-sm text-gray-400 pt-6 px-10"
           >
-            Make sure that you upload the correct image or video. This will be
+            *Make sure that you upload the correct image or video. This will be
             used in future for reference in case of any issues.
           </Typography>
         </Drawer>
