@@ -14,7 +14,7 @@ import {
 } from "@material-tailwind/react";
 import Stats from "../../admin/Common.jsx/Stats";
 import PendingwithdrawalCard from "./PendingwithdrawalCard";
-import { formatDate } from "../../Functions/FormateDate";
+import { formatDate } from "../../Functions/formateDate";
 const TABLE_HEAD = [
   "Name",
   "Mobile Number",

@@ -16,7 +16,7 @@ import Stats from "../../admin/Common.jsx/Stats";
 import UpdateAdminCard from "./UpdateAdminCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAdminSadmin } from "../SuperAdminSlices/AdminSuperAdminListSlice";
-import { formatDate } from "../../Functions/FormateDate";
+import { formatDate } from "../../Functions/formateDate";
 // import PendingwithdrawalCard from "./PendingwithdrawalCard";
 const TABLE_HEAD = [
   "Name",
