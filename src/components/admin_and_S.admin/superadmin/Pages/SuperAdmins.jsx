@@ -14,7 +14,7 @@ import AdminFooter from "../../admin/Common.jsx/AdminFooter";
 import EditAdmins from "../Admins/EditAdmins";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAdminSadmin } from "../SuperAdminSlices/AdminSuperAdminListSlice";
-import { formatDate } from "../../Functions/FormateDate";
+import { formatDate } from "../../Functions/formateDate";
 
 const TABLE_HEAD = ["Name", "Number", "Position", "Status", "Onboarding Date"];
 

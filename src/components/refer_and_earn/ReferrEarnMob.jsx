@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../app.css";
+import "../../App.css";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

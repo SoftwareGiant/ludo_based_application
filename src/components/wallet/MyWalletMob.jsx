@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../app.css";
+import "../../App.css";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import Time from "../../assets/wallet/time.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";

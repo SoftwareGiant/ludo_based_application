@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { useState } from "react";
-import "../../app.css";
+import "../../App.css";
 import { Icon } from "@iconify-icon/react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserDetail } from "../live_battle/userSlice";
