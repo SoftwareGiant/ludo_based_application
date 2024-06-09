@@ -20,6 +20,12 @@ const addSupport = async (req, res, next) => {
         new: true
       }
     );
+    if(support){
+      if(support.status == "closed"){
+        support.status = "open"
+        await support.save()
+      }
+    }
     if (!support) {
       throw new AppError("Server is not responding!Please try again in sometime.", 500);
     }
@@ -53,6 +59,8 @@ const replySupport = async (req, res, next) => {
         new: true
       }
     );
+
+
     if (!support) {
       throw new AppError("Server is not responding!Please try again in sometime", 500);
     }

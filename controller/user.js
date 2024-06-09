@@ -45,9 +45,10 @@ const registerUser = async (req, res, next) => {
 
     // return res.cookie("refreshToken", refreshToken, { httpOnly: true, sameSite: "strict" }).header("Authorization", accessToken).status(200).json({ message: "User Registered Successfully" });
     const refferedby = await User.findOne({"referralDetails.referralCode":referralCode});
+    if(refferedby){
     refferedby.referralDetails.refferedUser = [...refferedby?.referralDetails?.refferedUser,refferedby.id]
     await refferedby.save();
-
+    }
     return res.status(200).json({
       message: "User Registered Successfully",
       accessToken,

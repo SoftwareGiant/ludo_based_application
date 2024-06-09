@@ -93,7 +93,7 @@ const depositVerification = async (req, res, next) => {
   try {
     const payment = await Payment.findOne({ utrNo });
     if (payment) {
-      return res.status(200).json({ message: "This payment Detail has been already found" });
+      return res.status(200).json({ message: " payment Detail was already found" });
     }
     const paymentOfUser = await Payment.findOne({
       user: userId,

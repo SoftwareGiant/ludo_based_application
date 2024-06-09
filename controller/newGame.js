@@ -21,7 +21,7 @@ const createBattle = async (req, res, next) => {
     }
     const userId = req.userId;
     const user = await User.findById(userId);
-    if (parseInt(battleAmount) > user.walletDetails.totalAmount) {
+    if (parseInt(battleAmount) > user?.walletDetails?.totalAmount) {
       return res.status(400).json({ message: "You don't have sufficient amount!" });
     }
 
@@ -169,9 +169,11 @@ const updatePayment = async (gameDetail) => {
     adminWallet.totalAmount += gameDetail.battleDetails.amount * 0.04;
     const player1 = gameDetail.player1;
     const user = await User.findOne({"referralDetails.refferedUser":player1});
+    if(user){
     user.walletDetails.referralAmount = user.walletDetails.referralAmount+ gameDetail.battleDetails.amount * 0.01;
     user.walletDetails.totalAmount = user.walletDetails.totalAmount+ gameDetail.battleDetails.amount * 0.01;
     await user.save();
+    }
     // store extra 0.05 amount in admin wallet.
   }
   if (gameDetail.gameResultDetail.player2.outcome == "win") {
@@ -181,9 +183,11 @@ const updatePayment = async (gameDetail) => {
     adminWallet.totalAmount += gameDetail.battleDetails.amount * 0.04;
     const player2 = gameDetail.player2;
     const user = await User.findOne({"referralDetails.refferedUser":player2});
+    if(user){
     user.walletDetails.referralAmount = user.walletDetails.referralAmount+ gameDetail.battleDetails.amount * 0.01;
     user.walletDetails.totalAmount = user.walletDetails.totalAmount+ gameDetail.battleDetails.amount * 0.01;
     await user.save();
+    }
     // store extra 0.05 amount in admin wallet.
   }
   if (gameDetail.gameResultDetail.player1.outcome == "lose") {
