@@ -85,7 +85,7 @@ router.post("/addusername",[verifyToken],wrapAsync(addUserName));
 
 router.get("/allreferral",[verifyToken],wrapAsync(allReferral));
 
-router.get("/alluserReferallCode",[verifyToken],wrapAsync(alluserReferallCode));
+router.get("/alluserReferallCode",[verifyToken,admin],wrapAsync(alluserReferallCode));
 
 
 module.exports = router;

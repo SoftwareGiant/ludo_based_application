@@ -124,7 +124,7 @@ const matchUser = async (req, res, next) => {
         player1,
         player2: userId,
         matchingTimeStamp,
-        gameactivationTimestamp: matchingTimeStamp + 30 * 60 * 1000,
+        gameactivationTimestamp: matchingTimeStamp + 1 * 60 * 1000,
         status: "matched"
       });
 
@@ -168,11 +168,11 @@ const updatePayment = async (gameDetail) => {
     gameDetail.player1.walletDetails.lockedAmount -= gameDetail?.battleDetails?.amount;
     adminWallet.totalAmount += gameDetail.battleDetails.amount * 0.04;
     const player1 = gameDetail.player1;
-    const user = await User.findOne({"referralDetails.refferedUser":player1});
-    if(user){
-    user.walletDetails.referralAmount = user.walletDetails.referralAmount+ gameDetail.battleDetails.amount * 0.01;
-    user.walletDetails.totalAmount = user.walletDetails.totalAmount+ gameDetail.battleDetails.amount * 0.01;
-    await user.save();
+    const user = await User.findOne({ "referralDetails.refferedUser": player1 });
+    if (user) {
+      user.walletDetails.referralAmount = user.walletDetails.referralAmount + gameDetail.battleDetails.amount * 0.01;
+      user.walletDetails.totalAmount = user.walletDetails.totalAmount + gameDetail.battleDetails.amount * 0.01;
+      await user.save();
     }
     // store extra 0.05 amount in admin wallet.
   }
@@ -182,11 +182,11 @@ const updatePayment = async (gameDetail) => {
     gameDetail.player2.walletDetails.lockedAmount -= gameDetail?.battleDetails?.amount;
     adminWallet.totalAmount += gameDetail.battleDetails.amount * 0.04;
     const player2 = gameDetail.player2;
-    const user = await User.findOne({"referralDetails.refferedUser":player2});
-    if(user){
-    user.walletDetails.referralAmount = user.walletDetails.referralAmount+ gameDetail.battleDetails.amount * 0.01;
-    user.walletDetails.totalAmount = user.walletDetails.totalAmount+ gameDetail.battleDetails.amount * 0.01;
-    await user.save();
+    const user = await User.findOne({ "referralDetails.refferedUser": player2 });
+    if (user) {
+      user.walletDetails.referralAmount = user.walletDetails.referralAmount + gameDetail.battleDetails.amount * 0.01;
+      user.walletDetails.totalAmount = user.walletDetails.totalAmount + gameDetail.battleDetails.amount * 0.01;
+      await user.save();
     }
     // store extra 0.05 amount in admin wallet.
   }
@@ -200,7 +200,7 @@ const updatePayment = async (gameDetail) => {
     // gameDetail.player2.walletDetails.totalAmount -= gameDetail?.battleDetails?.amount;
     gameDetail.player2.walletDetails.losingAmount += gameDetail?.battleDetails?.amount;
   }
-  gameDetail.paymentSettlement = true; 
+  gameDetail.paymentSettlement = true;
   await gameDetail.save();
   await gameDetail.player1.save();
   await gameDetail.player2.save();
@@ -208,17 +208,22 @@ const updatePayment = async (gameDetail) => {
 };
 
 // gameactivationTimestamp
-cron.schedule("*/5 * * * *", async () => {
+cron.schedule("*/1 * * * *", async () => {
   const gameDetail = await GameDetail.find({
     gameactivationTimestamp: {
       $lt: Date.now()
     }
   });
   for (i = 0; i < gameDetail.length; i++) {
-    if (
-      (gameDetail[i].status == "closed" && gameDetail[i].gameResultDetail.player1.outcome == "win" && gameDetail[i].gameResultDetail.player2.outcome == null) ||
-      (gameDetail[i].gameResultDetail.player2.outcome == "win" && gameDetail[i].gameResultDetail.player1.outcome == null)
-    ) {
+    if (gameDetail[i].status == "closed" && gameDetail[i].gameResultDetail.player1.outcome == "win" && gameDetail[i].gameResultDetail.player2.outcome == null) {
+      gameDetail[i].gameResultDetail.player2.outcome = "lose";
+      await gameDetail[i].save();
+      console.log(gameDetail[i], "okayyyyy inside if okayyy");
+      await updatePayment(gameDetail[i]);
+    } else if (gameDetail[i].gameResultDetail.player2.outcome == "win" && gameDetail[i].gameResultDetail.player1.outcome == null) {
+      gameDetail[i].gameResultDetail.player1.outcome = "lose";
+      await gameDetail[i].save();
+      console.log(gameDetail[i], "okayyyyy inside else if");
       await updatePayment(gameDetail[i]);
     }
   }
@@ -280,7 +285,6 @@ const updateResult = async (req, res, next) => {
 
     global.onlineUsers[gameDetail.player1.id]?.join(roomID);
     global.onlineUsers[gameDetail.player2.id]?.join(roomID);
-   
 
     global.io?.sockets.in(roomID).emit("gameupdate", { message: "Game Result updated!" });
 
