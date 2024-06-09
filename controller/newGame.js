@@ -164,7 +164,7 @@ const updatePayment = async (gameDetail) => {
   const adminWallet = await AdminWallet.findOneAndUpdate({}, {}, { upsert: true, new: true });
   if (gameDetail.gameResultDetail.player1.outcome == "win") {
     gameDetail.player1.walletDetails.totalAmount += gameDetail?.battleDetails?.amount * 1.95;
-    gameDetail.player1.walletDetails.winningAmount += gameDetail?.battleDetails?.amount * 0.95;
+    gameDetail.player1.walletDetails.winingAmount += gameDetail?.battleDetails?.amount * 0.95;
     gameDetail.player1.walletDetails.lockedAmount -= gameDetail?.battleDetails?.amount;
     adminWallet.totalAmount += gameDetail.battleDetails.amount * 0.04;
     const player1 = gameDetail.player1;
@@ -178,7 +178,7 @@ const updatePayment = async (gameDetail) => {
   }
   if (gameDetail.gameResultDetail.player2.outcome == "win") {
     gameDetail.player2.walletDetails.totalAmount += gameDetail?.battleDetails?.amount * 1.95;
-    gameDetail.player2.walletDetails.winningAmount += gameDetail?.battleDetails?.amount * 0.95;
+    gameDetail.player2.walletDetails.winingAmount += gameDetail?.battleDetails?.amount * 0.95;
     gameDetail.player2.walletDetails.lockedAmount -= gameDetail?.battleDetails?.amount;
     adminWallet.totalAmount += gameDetail.battleDetails.amount * 0.04;
     const player2 = gameDetail.player2;
@@ -208,22 +208,20 @@ const updatePayment = async (gameDetail) => {
 };
 
 // gameactivationTimestamp
-cron.schedule("*/1 * * * *", async () => {
+cron.schedule("*/5 * * * *", async () => {
   const gameDetail = await GameDetail.find({
     gameactivationTimestamp: {
       $lt: Date.now()
     }
-  });
+  }).populate("player1 player2");
   for (i = 0; i < gameDetail.length; i++) {
     if (gameDetail[i].status == "closed" && gameDetail[i].gameResultDetail.player1.outcome == "win" && gameDetail[i].gameResultDetail.player2.outcome == null) {
       gameDetail[i].gameResultDetail.player2.outcome = "lose";
       await gameDetail[i].save();
-      console.log(gameDetail[i], "okayyyyy inside if okayyy");
       await updatePayment(gameDetail[i]);
     } else if (gameDetail[i].gameResultDetail.player2.outcome == "win" && gameDetail[i].gameResultDetail.player1.outcome == null) {
       gameDetail[i].gameResultDetail.player1.outcome = "lose";
       await gameDetail[i].save();
-      console.log(gameDetail[i], "okayyyyy inside else if");
       await updatePayment(gameDetail[i]);
     }
   }
