@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { logoutAsync, selectToken } from "../app_start/authSlice";
 import { isExpired } from "react-jwt";
-import DestopAppDetails from "../MainLayout/DestopAppDetails";
-const ProtectedRoute = ({ children }) => {
+import DestopAppDetails from "./DestopAppDetails";
+
+const DestopSetup = ({ children }) => {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
@@ -15,9 +16,9 @@ const ProtectedRoute = ({ children }) => {
       dispatch(logoutAsync({ token: accessToken, refreshtoken: refreshToken }));
     }
   }, [dispatch, isMyTokenExpired, accessToken, refreshToken]);
-  if (!accessToken || isMyTokenExpired) {
-    return <Navigate to="/login" replace />;
-  }
+  // if (!accessToken || isMyTokenExpired) {
+  //   return <Navigate to="/" replace />;
+  // }
   return (
     <div className="sm:flex">
       <Outlet />
@@ -26,4 +27,4 @@ const ProtectedRoute = ({ children }) => {
   );
 };
 
-export default ProtectedRoute;
+export default DestopSetup;

@@ -82,12 +82,14 @@ const KycStatusCard = ({ val, handleRefresh }) => {
                   src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
                 />
                 <span className="flex items-center font-bold text-[30px]">
-                  User{" "}
+                  Ludo Player
                   {val.status && (
                     <Icon icon="bitcoin-icons:verify-outline" width="26" />
                   )}
                 </span>
-                <span className="font-normal text-[20px]">@{val._id}</span>
+                <span className="font-normal text-[20px]">
+                  @ {val?.userName}
+                </span>
               </div>
               <div className=" p-2 flex flex-col w-[60%] min-w-max mt-12 text-center font-[Inter] font-medium text-[16px]">
                 {val?.userKyc?.verificationStatus === "approved" && (

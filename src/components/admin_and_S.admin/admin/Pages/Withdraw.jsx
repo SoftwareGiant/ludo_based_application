@@ -59,7 +59,9 @@ function Withdraw() {
     <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
         <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
-        <Link to="/newonboard"  className="underline">Admin Control Panel </Link>
+          <Link to="/newonboard" className="underline">
+            Admin Control Panel{" "}
+          </Link>
           <span>&gt;&gt;</span>
           <span className="underline">Menu</span>
           <span>&gt;&gt;</span>
@@ -71,9 +73,9 @@ function Withdraw() {
         </h3>
       </div>
       <div className="flex px-3 py-2 items-center justify-between bg-[#EEEEEE]">
-        <p className="text-[#000000] font-medium text-xs">
+        <span className="text-[#000000] font-medium text-xs">
           Detail : Full detail of all withdraw transaction performed.
-        </p>
+        </span>
         <Icon icon="charm:cross" width="12" />
       </div>
       <Card className="overflow-scroll table-auto h-full w-full py-1 px-4">
@@ -104,7 +106,7 @@ function Withdraw() {
               <Menu>
                 <MenuHandler>
                   <div className="p-1 w-[88px] h-[32px] bg-[#F4F4F4] flex items-center justify-between border rounded-lg">
-                    <span>Sort</span> <Icon icon="prime:sort" width="24" />
+                    Sort <Icon icon="prime:sort" width="24" />
                   </div>
                 </MenuHandler>
                 <MenuList>
@@ -164,7 +166,7 @@ function Withdraw() {
                     <MenuHandler>
                       <Typography className="flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 text-[#000000] font-[Inter] font-medium text-[16px]">
                         <div className="flex justify-between items-center w-full">
-                          <p> Transacion Status</p>
+                          Transacion Status
                           <Icon icon="oi:caret-bottom" />
                         </div>
                       </Typography>
@@ -192,23 +194,23 @@ function Withdraw() {
                   <tr key={val._id}>
                     <td className="p-4">
                       <div className="flex items-center gap-3">
-                        <Typography className="font-[Inter] font-medium text-[16px]">
+                        <p className="font-[Inter] font-medium text-[16px]">
                           {val._id}
-                        </Typography>
+                        </p>
                       </div>
                     </td>
                     <td className="p-4">
                       <div className="flex flex-col">
-                        <Typography className="font-[Inter] font-medium text-[16px]">
+                        <p className="font-[Inter] font-medium text-[16px]">
                           {val.amount}
-                        </Typography>
+                        </p>
                       </div>
                     </td>
                     <td className="p-4">
                       <div className="w-max">
-                        <Typography className="font-[Inter] font-medium text-[16px]">
+                        <p className="font-[Inter] font-medium text-[16px]">
                           {formatDate(val.timestamp)}
-                        </Typography>
+                        </p>
                       </div>
                     </td>
                     <td className="p-4">

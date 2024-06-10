@@ -11,7 +11,6 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 
-
 const RefferalCard = ({ val }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
@@ -22,8 +21,6 @@ const RefferalCard = ({ val }) => {
   const closeModal = () => {
     setIsOpen(false);
   };
- 
-
 
   return (
     <div className="flex gap-3 mb-3">
@@ -68,13 +65,13 @@ const RefferalCard = ({ val }) => {
                   />
                   <div className="flex flex-col ">
                     <span className="flex items-center font-bold text-[14.4px]">
-                      Ludo Player{" "}
-                      {val._id && (
+                      Ludoplayer{" "}
+                      {/* {val._id && (
                         <Icon icon="bitcoin-icons:verify-outline" width="26" />
-                      )}
+                      )} */}
                     </span>
-                    <span className="font-normal text-[9.6px] -mt-1">
-                      @{val.Id}
+                    <span className="font-normal text-[14px] -mt-1">
+                      @{val._id.slice(-6) || "user"}
                     </span>
                   </div>
                 </div>
@@ -175,7 +172,7 @@ const RefferalCard = ({ val }) => {
                         {val?.referralDetails?.refferedUser?.map(
                           (refereduser, index) => {
                             return (
-                              <tr key={refereduser?._id}>
+                              <tr key={index}>
                                 <td className="p-4">
                                   <div className="flex items-center gap-3">
                                     <Typography className="font-[Inter] font-medium text-[16px]">
@@ -186,19 +183,19 @@ const RefferalCard = ({ val }) => {
                                 <td className="p-4">
                                   <div className="flex flex-col">
                                     <Typography className="font-[Inter] font-medium text-[16px]">
-                                      {refereduser}
+                                      {refereduser?.slice(-6) || "user"}
                                     </Typography>
                                   </div>
                                 </td>
                                 <td className="p-4">
                                   <div className="w-max">
                                     <Typography className="font-[Inter] font-medium text-[16px]">
-                                      {refereduser?._id}
+                                      {refereduser?._id || "Null"}
                                     </Typography>
                                   </div>
                                 </td>
                                 <td className="p-4">
-                                  {refereduser?.status && (
+                                  {
                                     <div
                                       className={`rounded-xl flex justify-center items-center w-[87px] h-[19px] ${
                                         val.status === "joined"
@@ -209,10 +206,10 @@ const RefferalCard = ({ val }) => {
                                       }`}
                                     >
                                       <Typography className="font-[Inter] font-normal text-[10px]  ">
-                                        {refereduser?.status}
+                                        {refereduser?.status || "pending"}
                                       </Typography>
                                     </div>
-                                  )}
+                                  }
                                 </td>
                               </tr>
                             );

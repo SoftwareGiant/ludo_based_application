@@ -73,8 +73,8 @@ const Notification = () => {
           className="bg-[#fead3a]  h-8 overflow-hidden"
         />
         <div className="bg-[#fead3a]  flex flex-row justify-between max-w-[480px] w-full h-12 items-start pt-2 px-5 ">
-          <div className="flex flex-row gap-3 w-2/5 items-start">
-            <SidebarMob />
+          <div className="flex flex-row gap-3  items-start">
+            <SidebarMob users={users} />
             <LudoMainLogo />
           </div>
           <div className="flex gap-2 items-center">
@@ -82,7 +82,6 @@ const Notification = () => {
             <ProfileButton />
           </div>
         </div>
-       
 
         <div
           id="Line"

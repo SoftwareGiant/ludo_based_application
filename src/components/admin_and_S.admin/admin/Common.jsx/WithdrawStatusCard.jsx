@@ -104,7 +104,7 @@ const WithdrawStatusCard = ({ val, RefreshWithdrawalReq }) => {
                 >
                   {val.status}
                 </div>
-                <div>UID {val?._id?.slice(-7)}</div>
+                <div>UID {val?._id}</div>
               </div>
               <div className="flex items-center gap-2">
                 <button
@@ -126,7 +126,7 @@ const WithdrawStatusCard = ({ val, RefreshWithdrawalReq }) => {
                       src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
                     />
 
-                    <span className="font-normal text-[20px]">@{val?._id?.slice(-6)}</span>
+                    <span className="font-normal text-[20px]">@ludoplayer</span>
                   </div>
 
                   <div className="flex flex-col  justify-center items-center m-auto text-[#0F002B]  font-[Nunito-Sans]">
@@ -139,11 +139,9 @@ const WithdrawStatusCard = ({ val, RefreshWithdrawalReq }) => {
                       {val.amount}
                     </div>
                     <div className="m-2 cursor-pointer transition-colors  w-full px-3 h-[52px] flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]  ">
-                      <p>
-                        {" "}
+                      <div>
                         <b>Time </b> (initiated)
-                      </p>
-
+                      </div>
                       {formatDate(val.timestamp)}
                     </div>
                     <div className="m-2 cursor-pointer transition-colors  w-full px-3 h-[52px] flex items-center justify-between gap-2  leading-none border p-2 rounded-md hover:bg-blue-gray-50 font-[Inter] font-medium text-[16px]  ">

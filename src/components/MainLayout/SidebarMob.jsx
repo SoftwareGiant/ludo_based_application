@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Drawer, Button } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
 import AddGame from "../../assets/new_game/addgame.svg";
 import Profile from "../../assets/new_game/profile.svg";
-import Wallet from "../../assets/new_game/wallet.svg";
 import GameHistory from "../../assets/new_game/history.svg";
 import ReferEarn from "../../assets/new_game/refer&earn.svg";
 import Notification from "../../assets/new_game/notification.svg";
@@ -11,8 +10,8 @@ import Support from "../../assets/new_game/support.svg";
 import BackBlack from "../../assets/profile/back_black.svg";
 import { IoMenu } from "react-icons/io5";
 import { Icon } from "@iconify-icon/react";
-import { fetchUserDetail } from "../live_battle/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+
 export function SidebarMob({
   isClick1,
   isClick2,
@@ -22,18 +21,14 @@ export function SidebarMob({
   isClick7,
   isClick8,
   isClick9,
+  users,
 }) {
   const [open, setOpen] = React.useState(false);
-  const users = useSelector((state) => state.user.user);
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (!users) {
-      dispatch(fetchUserDetail());
-    }
-  }, [dispatch, users]);
+
   return (
     <React.Fragment>
       <Button className="bg-[#fead3a]  shadow-none p-0 hover:shadow-none">
@@ -101,18 +96,18 @@ export function SidebarMob({
                 to="/mywallet"
                 className={`
          
-          border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-start pt-2 px-3 border rounded-lg
+          border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex  gap-2 w-full h-8 items-center justify-between pt-2 px-3 border rounded-lg
           ${isClick4 ? "bg-[#ffcc4d]" : "bg-white"}
           `}
               >
-                <img
-                  src={Wallet}
-                  alt="Phwalletlight"
-                  id="Phwalletlight"
-                  className="w-5"
-                />
-                <div className="text-xs font-['Nunito_Sans'] font-bold">
-                  My Wallet
+                <div className="flex items-center gap-2">
+                  <Icon icon="ph:wallet-light" width={20} />
+                  <p className="text-xs -mt-1 font-['Nunito_Sans'] font-bold">
+                    My Wallet
+                  </p>
+                </div>
+                <div className="bg-black cursor-pointer hover:shadow-md flex items-center gap-2 -mt-2 rounded-2xl px-2  text-white">
+                  <p>₹{users?.walletDetails?.totalAmount}</p>{" "}
                 </div>
               </Link>
               <Link
@@ -224,7 +219,7 @@ export function SidebarMob({
                 <p className="text-base "> Login or Signup</p>
               </Button>
               <Button
-                onClick={() => navigate("/")}
+                onClick={() => window.location.reload()}
                 className="text-black bg-white rounded-2xl w-[70%] m-auto mt-6 flex items-center gap-2 justify-center"
               >
                 <Icon icon="ic:baseline-plus" width={26} />

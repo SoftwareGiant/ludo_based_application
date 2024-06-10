@@ -47,7 +47,7 @@ const LoginMob = () => {
   }, []);
   const handlePhoneSubmit = async (values) => {
     let intervalId;
-   
+
     dispatch(loginAsync(values.number))
       .unwrap()
       .then(() => {
@@ -62,7 +62,6 @@ const LoginMob = () => {
       })
       .catch((error) => {
         toast.error(error.message);
-     
       });
     // setIsOtp(true);
   };
@@ -75,8 +74,7 @@ const LoginMob = () => {
     try {
       dispatch(loginAsync(number));
       setIsLoadButton(false);
-    } catch (error) {
-    }
+    } catch (error) {}
     // seIsSuccess(true);
     // intervalId = setTimeout(() => {
     //   navigate("/apptour");
@@ -88,7 +86,7 @@ const LoginMob = () => {
   console.log(isSuccess);
 
   return (
-    <div className="h-full min-h-screen">
+    <div className="h-full min-h-screen w-full max-w-[480px]">
       <div
         id="NotificationspaceRoot"
         className="bg-[#fead3a]  h-8 overflow-hidden max-w-[480px] w-full "
