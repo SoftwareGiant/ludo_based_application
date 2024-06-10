@@ -28,7 +28,7 @@ const GameHistoryMob = () => {
       />
       <div className="bg-[#fead3a] flex flex-row justify-between max-w-[480px] w-full h-12 items-start pt-2 px-5 ">
         <div className="flex flex-row gap-3 items-start">
-        <SidebarMob users={users} />
+          <SidebarMob users={users} />
           <LudoMainLogo />
         </div>
         <div className="flex gap-2 items-center">
@@ -47,7 +47,7 @@ const GameHistoryMob = () => {
               <div className="text-white bg-[#0f002b] flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
                 <div className="flex justify-between w-full items-center p-3">
                   <span className=" shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)]">
-                    {convertTimestamp(game?.matchingTimeStamp)}
+                    {convertTimestamp(game?.gameactivationTimestamp)}
                   </span>
                 </div>
                 <div className="text-xs shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex  px-4 items-center  w-full  py-2 pb-5 ">

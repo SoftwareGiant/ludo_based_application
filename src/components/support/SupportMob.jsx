@@ -42,6 +42,10 @@ const SupportMob = () => {
     inputRef.current.focus();
   }, []);
   useEffect(() => {
+    const el = document.getElementById("messages");
+    el.scrollTop = el.scrollHeight;
+  }, [messagesLIst]);
+  useEffect(() => {
     dispatch(fetchUserChat());
     dispatch(fetchUserDetail());
   }, [dispatch]);

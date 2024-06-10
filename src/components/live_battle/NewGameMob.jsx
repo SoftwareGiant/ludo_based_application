@@ -305,11 +305,7 @@ const NewGameMob = () => {
 
   return (
     <div className="max-w-[480px] bg-[#0f002b] w-full min-h-screen h-full">
-      <div
-        id="NotificationspaceRoot"
-        className="bg-[#fead3a]  h-8 overflow-hidden"
-      />
-      <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
+      <div className="bg-[#fead3a] fixed  flex justify-between items-center max-w-[480px] top-5 z-50   w-full  h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start">
           <SidebarMob users={users} />
           <LudoMainLogo />
@@ -326,13 +322,13 @@ const NewGameMob = () => {
 
       <div className="bg-[#0f002b] w-full  overflow-hidden relative">
         <div className="bg-[#fead3a] h-[350px] w-[650px] rounded-[50%]   -top-20 absolute -left-24" />
-        <div className="py-4">
+        <div className="py-8 mt-12 ">
           <NewGameSLider />
         </div>
 
         {!users ? (
           <div className="relative m-6 mt-0">
-            <div className="bg-[#0f002b] shadow-xl  flex items-center gap-6 text-white rounded-xl p-6 px-18">
+            <div className="bg-[#0f002b] shadow-xl hover:shadow-2xl  border border-gray-700 hover:border-gray-600 transition-all  flex items-center gap-6 text-white rounded-xl p-6 px-18">
               <p className="text-xl">Click to see Full Game Rules</p>
               <div
                 onClick={() => navigate("/gamerule")}
@@ -700,7 +696,7 @@ const NewGameMob = () => {
         <Drawer
           placement="bottom"
           open={iscodeWait}
-          className="p-4  w-[480px] bg-[#fead3a] rounded-t-3xl"
+          className="p-4 z-[2000px]  w-[480px] bg-[#fead3a] rounded-t-3xl"
         >
           <div className="flex flex-col p-4">
             <div className="mb-4 flex items-center  w-full justify-center gap-2">

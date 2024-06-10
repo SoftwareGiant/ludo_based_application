@@ -43,7 +43,7 @@ const NewGameSLider = () => {
     return;
   }
   return (
-    <div className="w-full max-w-[480px] h-[140px] relative">
+    <div className="w-full max-w-[480px] z-10 h-[140px] relative">
       <Carousel
         className="w-full"
         centerMode={true}

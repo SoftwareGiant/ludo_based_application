@@ -22,7 +22,7 @@ const DestopAppDetails = () => {
         </b>
       </div>
 
-      <div className="flex rounded-2xl items-center  bg-[#FFFFFF] bg-opacity-20 absolute bottom-10 left-6 text-white border gap-3 w-[280px] p-4 py-2 shadow-md border-white">
+      <div className="hidden lg:flex rounded-2xl items-center  bg-[#FFFFFF] bg-opacity-20 absolute bottom-10 left-6 text-white border gap-3 w-[280px] p-4 py-2 shadow-md border-white">
         <img src={ludoimagedestop} />
 
         <div>
@@ -37,6 +37,16 @@ const DestopAppDetails = () => {
           <Icon icon="devicon:chrome" />
           <p>chrome mobile</p>
         </div>
+      </div>
+      <div className="absolute   top-[21%] right-[24%] flex flex-col items-center">
+        <div className="flex rounded-2xl items-center  bg-[#FEAD3A]   top-[25%] h-[70px] right-[20%]  text-black  gap-3 w-[200px] p-4 py-2 shadow-md ">
+          <Icon icon="clarity:users-solid" width={36} />
+          <div className="flex flex-col">
+            <span className="font-semibold">Live Players</span>
+            <b>547,980</b>
+          </div>
+        </div>
+        <div className=" bottom-10 w-0 h-0 border-l-[20px] border-r-[20px] border-t-[30px] border-l-transparent border-r-transparent border-t-[#FEAD3A]"></div>
       </div>
     </div>
   );
