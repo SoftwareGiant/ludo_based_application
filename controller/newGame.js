@@ -201,6 +201,7 @@ const updatePayment = async (gameDetail) => {
     gameDetail.player2.walletDetails.losingAmount += gameDetail?.battleDetails?.amount;
   }
   gameDetail.paymentSettlement = true;
+  gameDetail.status = "closed";
   await gameDetail.save();
   await gameDetail.player1.save();
   await gameDetail.player2.save();
@@ -215,7 +216,7 @@ cron.schedule("*/5 * * * *", async () => {
     }
   }).populate("player1 player2");
   for (i = 0; i < gameDetail.length; i++) {
-    if (gameDetail[i].status == "closed" && gameDetail[i].gameResultDetail.player1.outcome == "win" && gameDetail[i].gameResultDetail.player2.outcome == null) {
+    if (gameDetail[i].status == "running" && gameDetail[i].gameResultDetail.player1.outcome == "win" && gameDetail[i].gameResultDetail.player2.outcome == null) {
       gameDetail[i].gameResultDetail.player2.outcome = "lose";
       await gameDetail[i].save();
       await updatePayment(gameDetail[i]);
@@ -248,6 +249,10 @@ const updateResult = async (req, res, next) => {
     //   return res.status(500).json({ messaage: "Please first play the game!" });
     // }
 
+    if (outcome === "win" && (gameDetail.gameResultDetail.player1.outcome === "win" || gameDetail.gameResultDetail.player2.outcome === "win")) {
+      return res.status(200).json({ message: "Opponent Player is already updated it as win! " });
+    }
+
     if (outcome === "win") {
       if (gameDetail.player1.id === userId) {
         gameDetail.gameResultDetail.player1.outcome = outcome;
@@ -270,7 +275,7 @@ const updateResult = async (req, res, next) => {
       await gameDetail.save();
       await updatePayment(gameDetail);
     }
-    gameDetail.status = "closed";
+
     gameDetail.gameClosingTimeStamp = Date.now();
     await gameDetail.save();
     if (outcome == "win") {
