@@ -72,7 +72,7 @@ const ReferrEarnMob = () => {
         await navigator.share({
           title: "Join me on this awesome platform!",
           text: "Sign up using my referral link and get great benefits!",
-          url: `http://localhost:5173/register?refferal=${users?.referralDetails?.referralCode}`,
+          url: `http://139.84.169.91:5173/register?refferal=${users?.referralDetails?.referralCode}`,
         });
       } catch (error) {
         toast.error("Error sharing content: " + error.message);
