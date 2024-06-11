@@ -25,6 +25,8 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { getTime } from "../admin_and_S.admin/Functions/getTime";
+import { fetchUserDetail } from "../live_battle/userSlice";
+import TotoalBal from "../MainLayout/ProfileButton";
 const ChatUserMob = () => {
   const { socketData } = useSelector((state) => state.socketfor);
   const { accessToken } = useSelector((state) => state.auth);
@@ -42,7 +44,11 @@ const ChatUserMob = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const inputRef = useRef();
+  const users = useSelector((state) => state.user.user);
 
+  useEffect(() => {
+    dispatch(fetchUserDetail());
+  }, [dispatch]);
   useEffect(() => {
     const el = document.getElementById("messages");
     el.scrollTop = el.scrollHeight;
@@ -66,8 +72,7 @@ const ChatUserMob = () => {
       if (socketData) {
         socketData.off();
       }
-    }
-
+    };
   }, [socketData]);
 
   useEffect(() => {
@@ -181,6 +186,7 @@ const ChatUserMob = () => {
           Authorization: `bearer ${accessToken}`,
         },
       });
+      fn();
       toast.success(response.data.message);
     } catch (error) {
       toast.error("Failed to fetch message");
@@ -202,12 +208,13 @@ const ChatUserMob = () => {
       toast.error("Failed to remove fav");
     }
   };
+  console.log(messageList);
   return (
-    <div className="flex-1 pb-4 bg-[#0f002b] sm:bg-[#fead3a]  w-full max-w-[480px]  justify-between flex flex-col h-screen">
-      <div className="bg-[#fead3a]  h-[80%] w-[200%]   rounded-[50%] sm:hidden   -top-20 fixed -left-[50%] " />
-      <div className="bg-[#fead3a] max-w-[480px] absolute  shadow-lg border-b border-[#0f002b]  flex justify-between   items-center w-full  pt-4  px-4">
+    <div className="flex-1 pb-4 bg-[#0f002b] suuportchatBg w-full max-w-[480px]  justify-between flex flex-col h-screen">
+      <div className="bg-[#fead3a]  h-[80%] w-[200%]   rounded-[50%]   -top-20 fixed -left-[50%] chat-bg-hide" />
+      <div className="bg-[#fead3a] max-w-[480px] absolute  shadow-lg border-b border-[#0f002b]  flex justify-between  z-20  items-center w-full  pt-4  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
-          <SidebarMob />
+          <SidebarMob users={users} />
           <LudoMainLogo />
         </div>
         {messageList.length <= 0 ? (
@@ -215,23 +222,33 @@ const ChatUserMob = () => {
             New game
           </div>
         ) : (
-          <div
-            className="bg-[#1E1E1E] cursor-pointer px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold"
-            onClick={() => navigate("/matchstart")}
-          >
-            Start
+          <div className="flex gap-2 items-center">
+            <TotoalBal users={users} />
+
+            <div
+              className="bg-[#1E1E1E] cursor-pointer px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold"
+              onClick={() => navigate("/matchstart")}
+            >
+              Start
+            </div>
           </div>
         )}
       </div>
-      <div className="z-10 flex mt-[68px]  border-b border-[#0f002b] justify-between py-2 px-4  items-center bg-[#fead3a] max-w-[480px] w-full">
+      <div className="z-10 flex mt-[68px]  border-b border-[#0f002b] justify-between py-2 px-4  items-center bg-[#fead3a] max-w-[480px] sm:w-[480px]   w-full">
         <div className="flex justify-center gap-2 items-center">
           <img
             onClick={() => navigate("/userprofile")}
             src={FrameProfile}
             className="w-[30px] h-[30px] rounded-[100px] border border-solid border-white "
           />
-          <div className="flex flex-col text-black items-start justify-center">
-            <span className="text-[20px] leading-tight">Player</span>
+          <div className="flex  flex-col text-black items-start justify-center">
+            <span className="text-[20px] leading-tight">
+              {messageList
+                ? messageList[0]?.senderId === userId
+                  ? messageList[0]?.receiverId.slice(-6)
+                  : messageList[0]?.senderId.slice(-6)
+                : "Player"}
+            </span>
             <span className="text-[14px] leading-tight">online</span>
           </div>
         </div>

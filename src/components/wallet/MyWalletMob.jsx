@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../App.css";
-import FrameProfile from "../../assets/profile/Frame_profile.png";
-import Time from "../../assets/wallet/time.svg";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserDetail } from "../live_battle/userSlice";
@@ -31,9 +29,9 @@ const MyWalletMob = () => {
         id="NotificationspaceRoot"
         className="bg-[#fead3a]  h-8 overflow-hidden"
       />
-      <div className="bg-[#fead3a] flex flex-row justify-between max-w-[480px] w-full h-12 items-start pt-2 px-5 ">
-        <div className="flex flex-row gap-3 w-2/5 items-start">
-          <SidebarMob />
+      <div className="bg-[#fead3a] flex flex-row justify-between max-w-[480px] w-full h-12 items-start pt-2 px-4 ">
+        <div className="flex flex-row gap-3 items-start">
+          <SidebarMob users={users} />
           <LudoMainLogo />
         </div>
         <div className="flex gap-2 items-center">
@@ -46,17 +44,17 @@ const MyWalletMob = () => {
         <div className="bg-[#fead3a] h-[98%] w-[200%] rounded-[50%]   -top-20 absolute -left-[50%]" />
         <div className="relative w-4/5  m-auto mt-4 flex justify-between">
           <div>
-            <p className="text-base font-medium opacity-[60%]">Total Balance</p>
-            <p className="text-xl  font-bold">
+            <p className="text-sm font-medium opacity-[70%]">Total Balance</p>
+            <p className="text-lg  font-bold">
               ₹ {users?.walletDetails?.totalAmount}
             </p>
           </div>
           <Button
             onClick={() => navigate("/transactionhistory")}
-            className="flex items-center gap-2"
+            className="flex h-10 w-[170px] px-2  justify-center items-center gap-2"
           >
             <p className="mt-[2px]">All Transaction</p>
-            <Icon icon="fe:arrow-right" width={22} />
+            <Icon icon="fe:arrow-right" width={16} />
           </Button>
         </div>
         <div className="mx-auto h-[2px] w-4/5 bg-black bg-opacity-[20%] relative mt-2" />
@@ -77,12 +75,12 @@ const MyWalletMob = () => {
                 />
               </IconButton>
             </div>
-            <div className="text-xs font-semibold   shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex  justify-center items-center  w-full px-6 py-5 pb-8 ">
+            <div className="text-xs font-semibold   shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex  justify-center items-center  w-full px-6  pb-8 ">
               Can be used to play Tournaments & Battles. Cannot be withdrawn to
               Paytm or Bank.
             </div>
           </div>
-          <div className="flex  w-full p-4">
+          <div className="flex  w-full p-4 py-3">
             <div className="flex text-xl font-['Inter'] font-bold text-[#0f002b] flex-1">
               ₹ {users?.walletDetails?.depositAmount}
             </div>
@@ -109,15 +107,19 @@ const MyWalletMob = () => {
                 onClick={() => navigate("/transactionhistory")}
                 className="p-0 m-0 bg-transparent"
               >
-                <img src={Time} alt="lgihistory" id="lgihistory" />
+                <Icon
+                  icon="ic:baseline-history"
+                  style={{ color: "white" }}
+                  width={22}
+                />
               </IconButton>
             </div>
-            <div className="text-xs font-semibold   shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex  justify-center items-center  w-full px-6 py-5 pb-8  ">
+            <div className="text-xs font-semibold   shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex  justify-center items-center  w-full px-6  pb-8  ">
               Can be used to play Tournaments & Battles. Withdrawn to Paytm or
               Bank.
             </div>
           </div>
-          <div className="flex  w-full p-4">
+          <div className="flex  w-full p-3">
             <div className="flex text-xl font-['Inter'] font-bold text-[#0f002b] flex-1">
               ₹ {users?.walletDetails?.withDrawlAmount}
             </div>

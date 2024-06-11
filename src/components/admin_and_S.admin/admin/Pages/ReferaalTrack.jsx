@@ -24,39 +24,6 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserReferralCodes } from "../AdminSlice/refferalAdminSlice";
 
-const TABLE_ROWS = [
-  {
-    uid: "1234",
-    mobno: "7610981931",
-    referid: "ABC12",
-    rewardid: "GAURAV12",
-  },
-  {
-    uid: "2345",
-    mobno: "7610981932",
-    referid: "DEF34",
-    rewardid: "GAURAV34",
-  },
-  {
-    uid: "3456",
-    mobno: "7610981933",
-    referid: "GHI56",
-    rewardid: "GAURAV56",
-  },
-  {
-    uid: "4567",
-    mobno: "7610981934",
-    referid: "JKL78",
-    rewardid: "GAURAV78",
-  },
-  {
-    uid: "5678",
-    mobno: "7610981935",
-    referid: "MNO90",
-    rewardid: "GAURAV90",
-  },
-];
-
 function ReferaalTrack() {
   const [isClicked, setIsClicked] = useState(false);
   const dispatch = useDispatch();
@@ -188,7 +155,7 @@ function ReferaalTrack() {
               </tr>
             </thead>
             <tbody>
-              {referusers.map((val, index) => {
+              {referusers.map((val) => {
                 return (
                   <tr key={val?._id} className="text-[#000000]">
                     <td className="p-4">
@@ -208,7 +175,8 @@ function ReferaalTrack() {
                     <td className="p-4">
                       <div className="w-max">
                         <Typography className="font-[Inter] font-medium text-[16px]">
-                          {val?.referralDetails?.referralCode}
+                          {val?.referralDetails?.referralCode ||
+                            "Refferal code"}
                         </Typography>
                       </div>
                     </td>
@@ -219,44 +187,6 @@ function ReferaalTrack() {
                   </tr>
                 );
               })}
-              {/* {TABLE_ROWS.map(({ uid, mobno, referid, rewardid }, index) => {
-                const isLast = index === TABLE_ROWS.length - 1;
-                const classes = isLast ? "p-4" : "p-4";
-                return (
-                  <tr key={index} className="text-[#000000]">
-                    <td className={classes}>
-                      <div className="flex items-center gap-3">
-                        <Typography className="font-[Inter] font-medium text-[16px]">
-                          {uid}
-                        </Typography>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <div className="flex flex-col">
-                        <Typography className="font-[Inter] font-medium text-[16px]">
-                          {mobno}
-                        </Typography>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <div className="w-max">
-                        <Typography className="font-[Inter] font-medium text-[16px]">
-                          {referid}
-                        </Typography>
-                      </div>
-                    </td>
-                 
-                    <td className={classes}>
-                 
-                      <RefferalCard
-                        status={referid}
-                        uid={uid}
-                        updatedAt={rewardid}
-                      />
-                    </td>
-                  </tr>
-                );
-              })} */}
             </tbody>
           </table>
         </CardBody>

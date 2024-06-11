@@ -10,7 +10,7 @@ import axios from "axios";
 import ButtonLoader from "../MainLayout/ButtonLoader.jsx";
 import LudoMainLogo from "../MainLayout/LudoMainLogo.jsx";
 import { toast } from "react-toastify";
-import { ProfileButton } from "../MainLayout/ProfileButton.jsx";
+import TotoalBal, { ProfileButton } from "../MainLayout/ProfileButton.jsx";
 import HelpButton from "../MainLayout/HelpButton.jsx";
 const WithdrawMob = () => {
   const [inputValue, setInputValue] = useState("");
@@ -82,13 +82,16 @@ const WithdrawMob = () => {
         className="bg-[#fead3a]  h-8 overflow-hidden"
       />
       <div className="bg-[#fead3a] flex flex-row justify-between max-w-[480px] w-full h-12 items-start pt-2 px-5 ">
-        <div className="flex flex-row gap-3 w-2/5 items-start">
-          <SidebarMob />
+        <div className="flex flex-row gap-3  items-start">
+          <SidebarMob users={users} />
           <LudoMainLogo />
         </div>
-        <ProfileButton />
+        <div className="flex gap-2 items-center ">
+          <TotoalBal users={users} />
+          <ProfileButton />
+        </div>
       </div>
-      <div className="flex justify-between items-center px-4 py-2 w-full">
+      <div className="flex  cursor-pointer justify-between items-center px-4 py-2 w-full">
         <div className="flex gap-5 items-center">
           <Icon
             icon="ep:back"
@@ -106,15 +109,20 @@ const WithdrawMob = () => {
       </div>
       <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative flex flex-col justify-between h-full">
         <div className="bg-[#fead3a] h-[86%] w-[200%] rounded-[50%]   -top-20 absolute -left-[50%]" />
-        <div className="relative m-8 flex flex-col gap-4">
-          <div className="flex justify-between ">
+        <div className="relative m-8 opacity-[80%] flex flex-col gap-4">
+          {/* <div className="flex justify-between ">
             <span>Available Balance</span>
             <span>₹ {users?.walletDetails?.totalAmount}</span>
-          </div>
+          </div> */}
           <div className="flex justify-between ">
             <span>withdrawal Balance</span>
             <span>₹ {users?.walletDetails?.withDrawlAmount}</span>
           </div>
+          <div className="flex justify-between ">
+            <span>Refferal Balance</span>
+            <span>₹ {users?.walletDetails?.referralAmount}</span>
+          </div>
+
           <div className="flex justify-between items-center rounded-md bg-white p-3">
             <div className="flex w-full">
               <span>₹</span>

@@ -65,19 +65,24 @@ import ErrorBoundary from "./ErrorBoundary.jsx";
 import CustomerChat from "./components/admin_and_S.admin/admin/Common.jsx/CustomerChat.jsx";
 import NotFoundpage from "./components/MainLayout/NotFoundpage.jsx";
 import GameRule from "./components/MainLayout/GameRule.jsx";
+import DestopSetup from "./components/MainLayout/DestopSetup.jsx";
+import Register from "./components/app_start/Register.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       <ErrorBoundary>
         <Routes>
-          <Route path="/adminlogin" element={<SAdminLogin />} />
-          <Route path="/login" element={<LoginMob />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/content" element={<Content />} />
-          <Route path="/gamerule" element={<GameRule />} />
-          <Route path="/" element={<NewGameMob />} />
+          <Route path="/" element={<DestopSetup />}>
+            <Route path="/adminlogin" element={<SAdminLogin />} />
+            <Route path="/login" element={<LoginMob />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/content" element={<Content />} />
+            <Route path="/gamerule" element={<GameRule />} />
+            <Route path="/" element={<NewGameMob />} />
+          </Route>
           <Route path="/" element={<ProtectedRoute />}>
             <Route path="/apptour" element={<AppTour />} />
             {/* new game page routes */}
@@ -88,7 +93,7 @@ function App() {
               path="/requestchallange/:userId"
               element={<OpenChallengeReq />}
             />
-            {/* <Route path="/chat" element={<ChatUserMob />} /> */}
+            
             <Route path="/chat/:chatId/:player" element={<ChatUserMob />} />
             <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/userprofile2" element={<UserProfile2 />} />

@@ -1,11 +1,9 @@
 import React from "react";
-import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { SidebarMob } from "./SidebarMob";
-import { useNavigate } from "react-router-dom";
 import LudoMainLogo from "./LudoMainLogo";
-import { ProfileButton } from "./ProfileButton";
-const TopbarMobile = ({ isStart, handlestart }) => {
-  const navigate = useNavigate();
+import TotoalBal, { LoginBtn, ProfileButton } from "./ProfileButton";
+const TopbarMobile = ({ isStart, handlestart, users }) => {
+ 
   return (
     <div className="fixed bg-[#fead3a] max-w-[480px] top-0 w-full shadow-lg z-50">
       <div
@@ -14,8 +12,8 @@ const TopbarMobile = ({ isStart, handlestart }) => {
       />
       <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
-          <SidebarMob />
-          <LudoMainLogo/>
+        <SidebarMob users={users} />
+          <LudoMainLogo />
         </div>
         {isStart ? (
           <div
@@ -24,8 +22,13 @@ const TopbarMobile = ({ isStart, handlestart }) => {
           >
             Start
           </div>
+        ) : !users ? (
+          <LoginBtn />
         ) : (
-          <ProfileButton/>
+          <div className="flex gap-2 items-center">
+            <TotoalBal users={users} />
+            <ProfileButton />
+          </div>
         )}
       </div>
     </div>

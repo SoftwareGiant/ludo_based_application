@@ -14,7 +14,7 @@ const OpenRecentTab = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <div className="relative   h-full">
+    <div className="relative   bg-black">
       <div className="text-white py-2 px-4 flex  text-[20px] items-center justify-between">
         <div className="gap-2 flex items-center">
           <Icon

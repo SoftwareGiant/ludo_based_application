@@ -9,6 +9,27 @@ const initialState = {
   user: null,
 };
 
+export const registerAsync = createAsyncThunk(
+  'auth/register',
+  async (mobileNo, { rejectWithValue }) => {
+    try {
+      const response = await axios.post("/api/user/register", { mobileNo: mobileNo });
+      const data = response.data;
+      if (!data || !data.accessToken) {
+        throw new Error('register failed');
+      }
+      const { accessToken, refreshToken } = data;
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+      return data;
+    }
+    catch (error) {
+      console.log(error);
+      toast.error(error)
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 export const loginAsync = createAsyncThunk(
   'auth/login',
@@ -46,7 +67,7 @@ export const logoutAsync = createAsyncThunk(
   'auth/logout',
   async ({ token, refreshtoken }) => {
     console.log("logout")
- 
+
     try {
       const response = await axios.post(
         '/api/user/logout',

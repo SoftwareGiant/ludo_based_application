@@ -13,7 +13,7 @@ import axios from "axios";
 import LudoMainLogo from "../MainLayout/LudoMainLogo.jsx";
 import { Button } from "@material-tailwind/react";
 import { toast } from "react-toastify";
-import { ProfileButton } from "../MainLayout/ProfileButton.jsx";
+import TotoalBal, { ProfileButton } from "../MainLayout/ProfileButton.jsx";
 import HelpButton from "../MainLayout/HelpButton.jsx";
 const AddCashMob = () => {
   const [isScanner, setIsScanner] = useState(false);
@@ -98,14 +98,17 @@ const AddCashMob = () => {
         className="bg-[#fead3a]  h-8 overflow-hidden"
       />
       <div className="bg-[#fead3a] flex flex-row justify-between max-w-[480px] w-full h-12 items-start pt-2 px-5 ">
-        <div className="flex flex-row gap-3 w-2/5 items-start">
-          <SidebarMob />
+        <div className="flex flex-row gap-3  items-start">
+          <SidebarMob users={users} />
           <LudoMainLogo />
         </div>
-        <ProfileButton />
+        <div className="flex gap-2 items-center ">
+          <TotoalBal users={users} />
+          <ProfileButton />
+        </div>
       </div>
       <div className="flex justify-between items-center px-4 py-2 w-full">
-        <div className="flex gap-5 items-center">
+        <div className="flex gap-5 cursor-pointer items-center">
           <Icon
             icon="ep:back"
             width="24"
@@ -125,9 +128,15 @@ const AddCashMob = () => {
         <div className="bg-[#fead3a] h-[86%] w-[200%] rounded-[50%]   -top-20 absolute -left-[50%]" />
 
         <div className="relative m-8 flex flex-col gap-4">
-          <div className="flex justify-between ">
-            <span>Available Balance</span>
-            <span>₹ {users?.walletDetails?.totalAmount}</span>
+          <div className="flex flex-col gap-3 opacity-[80%]">
+            <div className="flex justify-between ">
+              <span>Available Balance</span>
+              <span>₹ {users?.walletDetails?.totalAmount}</span>
+            </div>
+            <div className="flex justify-between ">
+              <span>Deposite Balance</span>
+              <span>₹ {users?.walletDetails?.depositAmount}</span>
+            </div>
           </div>
           <div className="flex justify-between items-center rounded-md bg-white p-3">
             <div className="flex w-full">

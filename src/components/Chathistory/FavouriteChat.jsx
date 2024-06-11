@@ -22,7 +22,7 @@ const FavouriteChat = ({
   }, [dispatch]);
   console.log(favoriteMessages);
   return (
-    <div className="relative   h-full">
+    <div className="relative  bg-black">
       <div className="text-white py-2 px-4 flex font-bold text-[20px] items-center justify-between">
         <div className="gap-2 flex items-center">
           <Icon
@@ -102,6 +102,8 @@ const FavouriteChat = ({
               );
             }
           })}
+
+       
       </div>
     </div>
   );

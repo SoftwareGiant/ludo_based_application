@@ -110,7 +110,6 @@ const NewGameMob = () => {
   // }, [socketData]);
 
   useEffect(() => {
-    console.log(match);
     const handleMatch = (e) => {
       if (e.message === "You get matched!!") setIscodewait(true);
       toast.success(e.message);
@@ -153,7 +152,6 @@ const NewGameMob = () => {
         window.location.reload();
       }
     }
-
   }, [match]);
 
   useEffect(() => {
@@ -306,13 +304,9 @@ const NewGameMob = () => {
 
   return (
     <div className="max-w-[480px] bg-[#0f002b] w-full min-h-screen h-full">
-      <div
-        id="NotificationspaceRoot"
-        className="bg-[#fead3a]  h-8 overflow-hidden"
-      />
-      <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
+      <div className="bg-[#fead3a] fixed  flex justify-between items-center max-w-[480px] top-0 z-50   w-full  pt-7 pb-1  px-4">
         <div className="flex flex-row gap-3 items-start">
-          <SidebarMob />
+          <SidebarMob users={users} />
           <LudoMainLogo />
         </div>
         {!users ? (
@@ -326,14 +320,14 @@ const NewGameMob = () => {
       </div>
 
       <div className="bg-[#0f002b] w-full  overflow-hidden relative">
-        <div className="bg-[#fead3a] h-80 w-[650px] rounded-[50%]   -top-20 absolute -left-24" />
-        <div className="py-4">
+        <div className="bg-[#fead3a] h-[350px] w-[650px] rounded-[50%]   -top-20 absolute -left-24" />
+        <div className="py-8 mt-12 ">
           <NewGameSLider />
         </div>
 
         {!users ? (
           <div className="relative m-6 mt-0">
-            <div className="bg-[#0f002b] shadow-xl border border-gray-300  flex items-center gap-4 text-white rounded-lg p-6">
+            <div className="bg-[#0f002b] shadow-xl hover:shadow-2xl  border border-gray-700 hover:border-gray-600 transition-all  flex items-center gap-6 text-white rounded-xl p-6 px-18">
               <p className="text-xl">Click to see Full Game Rules</p>
               <div
                 onClick={() => navigate("/gamerule")}
@@ -418,8 +412,9 @@ const NewGameMob = () => {
                                 <div className="absolute   -top-4  -right-2">
                                   <IconButton
                                     onClick={() => handleDeleteOption(e._id)}
-                                    color="red"
-                                    className="rounded-full h-[36px]  w-[36px]"
+                                    // color="black"
+
+                                    className="rounded-full bg-[#0f002b] h-[36px]  w-[36px]"
                                   >
                                     <Icon
                                       icon="fluent:delete-12-regular"
@@ -488,6 +483,7 @@ const NewGameMob = () => {
                         ))}
                     </div>
                   )}
+
                   {activeToggle === "challenges" && (
                     <div className="mt-4 flex flex-wrap justify-start gap-5 w-full m-auto">
                       {openChallenges?.map((item, index) => (
@@ -658,7 +654,8 @@ const NewGameMob = () => {
           onClose={handleCloseDeleteBattle}
           className="w-[480px] p-4  bg-[#0f002b] rounded-t-3xl"
         >
-          <div className="mb-4 flex items-center justify-start gap-2">
+          <div className="w-[50%] h-[2px] bg-white rounded-full m-auto -mt-1" />
+          {/* <div className="mb-4 flex items-center justify-start gap-2">
             <IconButton
               onClick={handleCloseDeleteBattle}
               variant="text"
@@ -666,15 +663,17 @@ const NewGameMob = () => {
             >
               <Icon icon="ep:back" className="text-white" width="24" />
             </IconButton>
-          </div>
+          </div> */}
 
-          <Typography className="mb-10  px-4  flex text-2xl text-white justify-center font-semibold">
-            Are you sure want to delete battle ?
+          <Typography className="mb-10 mt-8  px-4  flex  gap-2 text-2xl text-white justify-center font-semibold">
+            Delete this battle{" "}
+            <span className="font-extralight"> (permanently)</span> !
           </Typography>
-          <div className="flex justify-center gap-2 px-6 w-full">
+          <div className="flex justify-center gap-2 px-8 w-[80%] m-auto">
             <Button
               onClick={handleCloseDeleteBattle}
-              color="green"
+              color="white"
+              variant="outlined"
               className="w-full flex justify-center items-center gap-2"
             >
               <Icon icon="mdi:cancel" width={18} />
@@ -682,19 +681,22 @@ const NewGameMob = () => {
             </Button>
             <Button
               onClick={() => handleDelete(deleteBattleId)}
-              color="red"
+              color="white"
               className="w-full flex justify-center items-center gap-2"
             >
               <Icon icon="fluent:delete-12-regular" width={20} />
               <p className="text-sm mt-[2px]">delete</p>
             </Button>
           </div>
+          <p className="text-gray-400 px-6 pt-5 text-center">
+            *Deleting a match cannot be undone.
+          </p>
         </Drawer>
 
         <Drawer
           placement="bottom"
           open={iscodeWait}
-          className="p-4  w-[480px] bg-[#fead3a] rounded-t-3xl"
+          className="p-4 z-[2000px]  w-[480px] bg-[#fead3a] rounded-t-3xl"
         >
           <div className="flex flex-col p-4">
             <div className="mb-4 flex items-center  w-full justify-center gap-2">

@@ -2,18 +2,13 @@ import React, { useEffect, useState } from "react";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import FrameProfile from "../../assets/profile/Frame_profile.png";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  Button,
-  Drawer,
-  Typography,
-} from "@material-tailwind/react";
+import { Button, Drawer, Typography } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllBattles } from "./battleSlice";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { ProfileButton } from "../MainLayout/ProfileButton";
 const OpenChallengeReq = () => {
-
   const navigate = useNavigate();
   const { userId } = useParams();
   const dispatch = useDispatch();
@@ -39,7 +34,8 @@ const OpenChallengeReq = () => {
     const timeDifferenceInSeconds = timeDifference / (1000 * 60);
     return timeDifferenceInSeconds;
   };
-  const battledetail =battles && battles?.filter((data) => data._id === userId)[0];
+  const battledetail =
+    battles && battles?.filter((data) => data._id === userId)[0];
   // useEffct(()=>{
   //   if(battledetail===undefined){
   //     navigate("/");
@@ -56,9 +52,9 @@ const OpenChallengeReq = () => {
       <div className="bg-[#fead3a]  flex justify-between  w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
           <SidebarMob />
-          <LudoMainLogo/>
+          <LudoMainLogo />
         </div>
-        <ProfileButton/>
+        <ProfileButton />
       </div>
 
       <div id="NewRootRoot" className="flex flex-row w-full items-start">
@@ -88,7 +84,12 @@ const OpenChallengeReq = () => {
                   id="Radixiconscross"
                   className="w-6"
                 />
- <Icon className="cursor-pointer" onClick={() => navigate("/help")} icon="material-symbols:info-outline" width={24}/>
+                <Icon
+                  className="cursor-pointer"
+                  onClick={() => navigate("/help")}
+                  icon="material-symbols:info-outline"
+                  width={24}
+                />
               </div>
             </div>
             <div className="flex flex-row ml-8 gap-6 w-2/3 items-start">
@@ -128,10 +129,10 @@ const OpenChallengeReq = () => {
                   </div>
                   <div className="flex flex-col gap-3 w-8 items-start">
                     <div className="font-['Inter'] font-bold text-[#0f002b]">
-                      ₹{battledetail.amount}
+                      {/* ₹{battledetail.amount} */}
                     </div>
                     <div className="font-['Inter'] font-bold text-[#0f002b]">
-                      ₹{battledetail.amount * 1.95}
+                      {/* ₹{battledetail.amount * 1.95} */}
                     </div>
                   </div>
                 </div>
@@ -141,11 +142,11 @@ const OpenChallengeReq = () => {
                       open challenge<span> </span>
                       <div>from </div>
                       <span className="font-bold">
-                        {" "}
+                        {/* {" "}
                         {battledetail.player1.slice(
                           battledetail.player1.length - 6,
                           battledetail.player1.length
-                        )}
+                        )} */}
                       </span>
                     </div>
                     <div
@@ -155,11 +156,11 @@ const OpenChallengeReq = () => {
                       ·{" "}
                       <span>
                         {" "}
-                        {Math.floor(battleCreationTime(battledetail)) === 0
+                        {/* {Math.floor(battleCreationTime(battledetail)) === 0
                           ? "Now"
                           : `${Math.floor(
                               battleCreationTime(battledetail)
-                            )} Minutes ago`}
+                            )} Minutes ago`} */}
                       </span>
                     </div>
                   </div>
