@@ -9,14 +9,18 @@ const ProtectedRoute = ({ children }) => {
   const token = useSelector(selectToken);
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
   const isMyTokenExpired = isExpired(token);
-  console.log(token);
+  console.log(token, accessToken, refreshToken);
   useEffect(() => {
     if (isMyTokenExpired) {
       dispatch(logoutAsync({ token: accessToken, refreshtoken: refreshToken }));
     }
   }, [dispatch, isMyTokenExpired, accessToken, refreshToken]);
-  if (!accessToken || isMyTokenExpired) {
-    return <Navigate to="/login" replace />;
+  if (
+    !localStorage.getItem("accessToken") &&
+    !accessToken &&
+    isMyTokenExpired
+  ) {
+    return <Navigate to="/" replace />;
   }
   return (
     <div className="sm:flex h-screen">

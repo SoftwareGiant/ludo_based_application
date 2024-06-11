@@ -156,8 +156,8 @@ const MatchUserChat = () => {
   console.log(messageList);
   return (
     <div className="flex-1 pb-4 bg-[#0f002b]  suuportchatBg w-full max-w-[480px]  justify-between flex flex-col h-screen">
-      <div className="bg-[#fead3a]  h-[80%] w-[200%]   rounded-[50%] sm:hidden   -top-20 fixed -left-[50%] " />
-      <div className="bg-[#fead3a] max-w-[480px] absolute  shadow-lg border-b border-[#0f002b]  flex justify-between   items-center w-full  pt-4  px-4">
+      <div className="bg-[#fead3a]  h-[80%] w-[200%]   rounded-[50%]  chat-bg-hide  -top-20 fixed -left-[50%] " />
+      <div className="bg-[#fead3a] max-w-[480px] absolute z-20   shadow-lg border-b border-[#0f002b]  flex justify-between   items-center w-full  pt-4  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
           <SidebarMob users={users} />
           <LudoMainLogo />
@@ -175,15 +175,22 @@ const MatchUserChat = () => {
           </div>
         )} */}
       </div>
-      <div className="z-10 flex mt-[68px]  border-b border-[#0f002b] justify-between py-2 px-4  items-center bg-[#fead3a]  max-w-[480px] sm:w-[480px]  w-full">
+      <div className="z-10 flex mt-[68px]  border-b border-[#0f002b] justify-between py-2 px-4  items-center bg-[#fead3a]  max-w-[480px]  w-full">
         <div className="flex justify-center gap-2 items-center">
           <img
             onClick={() => navigate("/userprofile")}
             src={FrameProfile}
             className="w-[30px] h-[30px] rounded-[100px] border border-solid border-white "
           />
-          <div className="flex flex-col text-black items-start justify-center">
-            <span className="text-[20px] leading-tight">Player</span>
+          <div className="flex flex-col  text-black items-start justify-center">
+            <span className="text-[20px] leading-tight">
+              {" "}
+              {messageList
+                ? messageList[0]?.senderId === userId
+                  ? messageList[0]?.receiverId.slice(-6)
+                  : messageList[0]?.senderId.slice(-6)
+                : "Player"}
+            </span>
             <span className="text-[14px] leading-tight">online</span>
           </div>
         </div>
