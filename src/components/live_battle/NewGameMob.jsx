@@ -305,7 +305,7 @@ const NewGameMob = () => {
 
   return (
     <div className="max-w-[480px] bg-[#0f002b] w-full min-h-screen h-full">
-      <div className="bg-[#fead3a] fixed  flex justify-between items-center max-w-[480px] top-5 z-50   w-full  h-[51px]  px-4">
+      <div className="bg-[#fead3a] fixed  flex justify-between items-center max-w-[480px] top-0 z-50   w-full  pt-7 pb-1  px-4">
         <div className="flex flex-row gap-3 items-start">
           <SidebarMob users={users} />
           <LudoMainLogo />
@@ -484,6 +484,7 @@ const NewGameMob = () => {
                         ))}
                     </div>
                   )}
+
                   {activeToggle === "challenges" && (
                     <div className="mt-4 flex flex-wrap justify-start gap-5 w-full m-auto">
                       {openChallenges?.map((item, index) => (

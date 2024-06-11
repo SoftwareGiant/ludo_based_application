@@ -110,14 +110,19 @@ const WithdrawMob = () => {
       <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative flex flex-col justify-between h-full">
         <div className="bg-[#fead3a] h-[86%] w-[200%] rounded-[50%]   -top-20 absolute -left-[50%]" />
         <div className="relative m-8 opacity-[80%] flex flex-col gap-4">
-          <div className="flex justify-between ">
+          {/* <div className="flex justify-between ">
             <span>Available Balance</span>
             <span>₹ {users?.walletDetails?.totalAmount}</span>
-          </div>
+          </div> */}
           <div className="flex justify-between ">
             <span>withdrawal Balance</span>
             <span>₹ {users?.walletDetails?.withDrawlAmount}</span>
           </div>
+          <div className="flex justify-between ">
+            <span>Refferal Balance</span>
+            <span>₹ {users?.walletDetails?.referralAmount}</span>
+          </div>
+
           <div className="flex justify-between items-center rounded-md bg-white p-3">
             <div className="flex w-full">
               <span>₹</span>

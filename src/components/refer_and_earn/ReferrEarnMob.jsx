@@ -151,17 +151,17 @@ const ReferrEarnMob = () => {
                   </tbody>
                 </table>
                 <div className="flex justify-center items-center w-full">
-                  <Button className="flex  text-sm  items-center gap-2">
+                  <Button onClick={()=>navigate("/withdraw")} className="flex  text-sm  items-center gap-2">
                     <Icon
                       icon="mdi:bank-outline"
-                      width={22}
+                      width={20}
                       style={{ color: "white" }}
                     />
-                    Withdraw
+                    Redeem
                   </Button>
                 </div>
               </div>
-              <div className="shadow-md bg-white inline-flex mt-10  gap-[10px]  h-12 items-center   justify-center px-4 rounded-[10px] ">
+              <div className="shadow-md bg-white inline-flex mt-4  gap-[10px]  h-12 items-center   justify-center px-4 rounded-[10px] ">
                 <div
                   onClick={() => copyToClipboard()}
                   className="flex w-[42.24px] h-[42.24px] justify-center items-center p-[7.92px] 

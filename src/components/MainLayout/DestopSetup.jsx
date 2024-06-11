@@ -20,9 +20,13 @@ const DestopSetup = ({ children }) => {
   //   return <Navigate to="/" replace />;
   // }
   return (
-    <div className="sm:flex">
-      <Outlet />
-      <DestopAppDetails />
+    <div className="sm:flex  h-screen ">
+      <div className="max-h-screen max-w-[480px] w-full sm:min-w-[480px]  overflow-scroll">
+        <Outlet />
+      </div>
+      <div className="max-h-screen  overflow-scroll">
+        <DestopAppDetails />
+      </div>
     </div>
   );
 };

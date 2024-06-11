@@ -35,7 +35,7 @@ const ReferralList = ({ setIslist, users, handleRecentCardCLick }) => {
         </div>
         <HelpButton />
       </div>
-      <div className="flex mb-4 flex-col h-full overflow-scroll gap-3 w-full items-center ">
+      <div className="flex mb-4 flex-col h-full overflow-scroll  gap-3 w-full items-center ">
         {(!allReferrals || allReferrals?.length === 0) && (
           <p className="mt-6 text-white font-semibold text-3xl w-full flex justify-center">
             No Reffered user...

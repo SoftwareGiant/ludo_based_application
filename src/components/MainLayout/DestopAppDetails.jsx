@@ -22,12 +22,12 @@ const DestopAppDetails = () => {
         </b>
       </div>
 
-      <div className="hidden lg:flex rounded-2xl items-center  bg-[#FFFFFF] bg-opacity-20 absolute bottom-10 left-6 text-white border gap-3 w-[280px] p-4 py-2 shadow-md border-white">
+      <div className="hidden lg:flex rounded-2xl items-center  bg-[#FFFFFF] bg-opacity-20 absolute bottom-10 left-6 text-white border gap-3 w-[260px] p-3 py-2 shadow-md border-white">
         <img src={ludoimagedestop} />
 
         <div>
           <span className="text-[#FEAD3A] font-semibold">ludoplayer234</span>
-          won ₹433 in <u>auto classic</u>
+         <p> won ₹433 in <u>auto classic</u></p>
         </div>
       </div>
       <div className="flex flex-col rounded-2xl absolute bottom-10 right-16 text-white  gap-3 w-[350px] p-4 py-3 shadow-md border-white">
@@ -46,7 +46,7 @@ const DestopAppDetails = () => {
             <b>547,980</b>
           </div>
         </div>
-        <div className=" bottom-10 w-0 h-0 border-l-[20px] border-r-[20px] border-t-[30px] border-l-transparent border-r-transparent border-t-[#FEAD3A]"></div>
+        <div className=" bottom-10 w-0 h-0 border-l-[14px] border-r-[14px] border-t-[20px] border-l-transparent border-r-transparent border-t-[#FEAD3A]"></div>
       </div>
     </div>
   );
