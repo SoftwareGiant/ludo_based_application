@@ -110,7 +110,6 @@ const NewGameMob = () => {
   // }, [socketData]);
 
   useEffect(() => {
-    console.log(match);
     const handleMatch = (e) => {
       if (e.message === "You get matched!!") setIscodewait(true);
       toast.success(e.message);

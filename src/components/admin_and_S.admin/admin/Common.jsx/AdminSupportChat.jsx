@@ -4,7 +4,7 @@ import menu from "../../../../assets/profile/menusvg.svg";
 import FrameProfile from "../../../../assets/profile/Frame_profile.png";
 import React, { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify-icon/react";
-import { SidebarMob } from "../../../MainLayout/SidebarMob";
+// import { SidebarMob } from "../../../MainLayout/SidebarMob";
 import { useNavigate } from "react-router-dom";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";

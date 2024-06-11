@@ -15,7 +15,7 @@ import EditPendingWithdrawal from "../Notification/EditPendingWithdrawal";
 import EditDeposite from "../Notification/EditDeposite";
 import { fetchWithdrawals } from "../SuperAdminSlices/withdrawalsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { formatDate } from "../../Functions/FormateDate";
+import { formatDate } from "../../Functions/formateDate";
 
 const TABLE_ROWS = [
   {

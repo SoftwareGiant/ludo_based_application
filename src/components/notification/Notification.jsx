@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "../../app.css";
+import "../../App.css";
 import { useNavigate } from "react-router-dom";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { Button } from "@material-tailwind/react";

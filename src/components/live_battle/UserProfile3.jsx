@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../app.css";
+import "../../App.css";
 import ProfileEditbtn from "../../assets/profile/editbutton.svg";
 import HamBurger from "../../assets/profile/hamburger.svg";
 import Edit from "../../assets/profile/edit.svg";

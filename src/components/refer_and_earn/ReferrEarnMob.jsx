@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../app.css";
+import "../../App.css";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import { toast } from "react-toastify";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
