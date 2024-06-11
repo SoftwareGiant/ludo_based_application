@@ -106,9 +106,12 @@ const matchUser = async (req, res, next) => {
       });
     }
     const gameDetail = await GameDetail.findOne({
-      $or: [{ player1: userId }, { player2: userId }],
-      $or: [{ status: "running" }, { status: "matched" }]
+      $and: [
+        { $or: [{ player1: userId }, { player2: userId }] },
+        { $or: [{ status: "running" }, { status: "matched" }] }
+      ]
     });
+   
     if (!user) {
       throw new AppError("Something went wrong!Please try again later", 500);
     } else if (gameDetail && (gameDetail?.gameactivationTimestamp > Date.now() || gameDetail?.status != "matched")) {

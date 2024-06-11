@@ -9,7 +9,6 @@ const Notification = require("../models/notification");
 const Slider = require("../models/slider")
 const logger = require("../logger/index");
 const {referralCodeGenerator} = require("../helper/stringGenerator")
-const mongoose = require('mongoose');
 require("dotenv").config();
 
 //just for manual registering till we are not registering with otp
@@ -59,7 +58,7 @@ const registerUser = async (req, res, next) => {
       err.status = 422;
       throw new AppError("Length of Mobile No should be 10 character long!", 422);
     }
-    console.log(err);
+   
     return next(new AppError("Something went wrong!Please try again.", 500));
   }
 };
@@ -270,7 +269,7 @@ const currentUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.userId);
     if (!user) {
-      return next(new AppError(error["500"], 500));
+      return next(new AppError("User not found", 404));
     }
     return res.status(200).json({ user });
   } catch (err) {
