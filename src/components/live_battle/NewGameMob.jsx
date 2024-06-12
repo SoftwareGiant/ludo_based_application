@@ -320,7 +320,7 @@ const NewGameMob = () => {
       </div>
 
       <div className="bg-[#0f002b] w-full  overflow-hidden relative">
-        <div className="bg-[#fead3a] h-[350px] w-[650px] rounded-[50%]   -top-20 absolute -left-24" />
+        <div className="bg-[#fead3a] h-[350px]  w-[200%] rounded-[50%]   -top-20 absolute -left-[50%] " />
         <div className="py-8 mt-12 ">
           <NewGameSLider />
         </div>
@@ -439,7 +439,7 @@ const NewGameMob = () => {
                                 )}
                               </div>
 
-                              <div className="italic font-semibold ">
+                              <div className="italic  font-semibold ">
                                 · {convertTimestamp(e.battleTimeStamp)}
                               </div>
                             </div>
@@ -665,16 +665,15 @@ const NewGameMob = () => {
             </IconButton>
           </div> */}
 
-          <Typography className="mb-10 mt-8  px-4  flex  gap-2 text-2xl text-white justify-center font-semibold">
-            Delete this battle{" "}
-            <span className="font-extralight"> (permanently)</span> !
+          <Typography className="mb-10 mt-8  px-4  text-center flex  gap-2 text-2xl text-white justify-center font-semibold">
+            Delete this battle (permanently) !
           </Typography>
           <div className="flex justify-center gap-2 px-8 w-[80%] m-auto">
             <Button
               onClick={handleCloseDeleteBattle}
               color="white"
               variant="outlined"
-              className="w-full flex justify-center items-center gap-2"
+              className="w-full min-w-[120px] flex justify-center items-center gap-2"
             >
               <Icon icon="mdi:cancel" width={18} />
               <p className="text-sm mt-[2px]">cancel</p>
@@ -682,7 +681,7 @@ const NewGameMob = () => {
             <Button
               onClick={() => handleDelete(deleteBattleId)}
               color="white"
-              className="w-full flex justify-center items-center gap-2"
+              className="w-full min-w-[120px] flex justify-center items-center gap-2"
             >
               <Icon icon="fluent:delete-12-regular" width={20} />
               <p className="text-sm mt-[2px]">delete</p>

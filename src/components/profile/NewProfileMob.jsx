@@ -131,6 +131,7 @@ const NewProfileMob = () => {
   };
 
   const handleLogout = () => {
+   
     dispatch(logoutAsync({ token: accessToken, refreshtoken: refreshToken }));
   };
   const resetAadharfront = () => {
@@ -253,7 +254,7 @@ const NewProfileMob = () => {
         </div>
 
         <div className="mt-10 flex flex-col gap-3 w-full font-['Nunito_Sans'] items-start relative text-white font-bold">
-          <div className="bg-[#0f002b] text-white flex flex-col justify-center gap-10 w-full items-start pt-5 pb-6 px-8">
+          <div className="bg-[#0f002b] text-white flex flex-col justify-center gap-6 w-full items-start pt-5 pb-6 px-8">
             <div className="flex  justify-between w-full items-center">
               <div className="text-xl font-bold text-white">Basic Details</div>
               {isUserNameEdit ? (
@@ -276,7 +277,7 @@ const NewProfileMob = () => {
                 </IconButton>
               )}
             </div>
-            <div className="flex flex-col justify-between gap-6 w-5/6 items-start ">
+            <div className="flex flex-col justify-between gap-5 w-5/6 items-start ">
               <div className="flex flex-row justify-between ml-4 w-full items-start">
                 <div className="text-sm  mt-px">Phone no. :</div>
                 <span>{users?.mobileNo}</span>
