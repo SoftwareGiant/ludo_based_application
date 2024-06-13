@@ -398,6 +398,16 @@ const NewGameMob = () => {
                       : "-translate-y-2"
                   }`}
                 >
+                  <div className="flex justify-end ">
+                    <div
+                      onClick={() => navigate("/gamerule")}
+                      className="flex   text-gray-700 mb-4 font-semibold  gap-1 mr-2 cursor-pointer items-center"
+                    >
+                      <i>Rules</i>
+
+                      <Icon width={24} icon="carbon:rule-test" />
+                    </div>
+                  </div>
                   {activeToggle === "live" && (
                     <div className="p-2 flex flex-col  gap-5 m-auto w-full">
                       {users &&

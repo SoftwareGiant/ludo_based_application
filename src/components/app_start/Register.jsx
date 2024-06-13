@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import MyButton from "../MainLayout/MyButton";
 import ButtonLoader from "../MainLayout/ButtonLoader";
 import { useDispatch, useSelector } from "react-redux";
-import {  registerAsync, selectToken } from "./authSlice";
+import { registerAsync, selectToken } from "./authSlice";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import {
@@ -39,11 +39,11 @@ const Register = () => {
   const token = useSelector(selectToken);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-//   useEffect(() => {
-//     if (token) {
-//       navigate("/");
-//     }
-//   }, []);
+  //   useEffect(() => {
+  //     if (token) {
+  //       navigate("/");
+  //     }
+  //   }, []);
   const handlePhoneSubmit = async (values) => {
     let intervalId;
     dispatch(registerAsync(values.number))
@@ -222,7 +222,7 @@ const Register = () => {
                             <Form className="flex flex-col gap-2">
                               {/* Your country code and input field */}
 
-                              <div className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] items-center mx-auto bg-white flex flex-row gap-4 justify-center pt-3 px-4 rounded-lg w-full h-[56px] py-[10px]">
+                              <div className="border-2  border-gray-300 text-lg rounded-lg items-center mx-auto bg-white focus:outline-none  transition duration-300 ease-in-out flex flex-row gap-4 justify-center pt-3 px-4  w-full h-[56px] py-[10px]">
                                 <Menu>
                                   <MenuHandler>
                                     <div className="flex flex-row gap-2 w-16 items-start">
@@ -257,10 +257,17 @@ const Register = () => {
                                   </MenuList>
                                 </Menu>
                                 <Field
+                                  inputMode="numeric"
+                                  pattern="[0-9]*"
                                   type="text"
                                   name="number"
-                                  className="p-2 font-bold text-lg rounded-md w-full focus:outline-none appearance-none"
+                                  className="p-2 font-bold   w-full focus:outline-none appearance-none"
                                   placeholder="Enter Phone Number"
+                                  onInput={(e) => {
+                                    e.target.value = e.target.value
+                                      .replace(/\D/g, "")
+                                      .slice(0, 10); // Remove non-numeric characters and limit to 10 digits
+                                  }}
                                 />
                               </div>
 
@@ -277,12 +284,14 @@ const Register = () => {
                               >
                                 Sign up
                               </button>
-                              <Link
-                                className="text-[#fead3a] text-end"
-                                to="/login"
-                              >
-                                Already Registered ? <b>Login</b>
-                              </Link>
+                              <div className="flex justify-end">
+                                <Link
+                                  className="text-[#fead3a] text-end"
+                                  to="/login"
+                                >
+                                  Already Registered ? <b>Login</b>
+                                </Link>
+                              </div>
                             </Form>
                           )}
                         </Formik>
