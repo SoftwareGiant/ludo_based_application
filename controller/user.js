@@ -172,12 +172,18 @@ const logout = async (req, res, next) => {
   try {
     const { refreshToken } = req.body;
     if (!refreshToken) return next(new AppError(error["401"], 401));
-    const userId = await verifyRefreshToken(refreshToken);
-    if (!userId) {
+    
+    // const userId = await verifyRefreshToken(refreshToken);
+    // if (!userId || !req.userId) {
+    //   return next(new AppError(error["500"], 500));
+    // }
+
+    if (!req.userId) {
       return next(new AppError(error["500"], 500));
     }
+
     const user = await User.findByIdAndUpdate(
-      userId,
+    req.userId,
       {
         $set: {
           "refreshTokenDetail.token": null,

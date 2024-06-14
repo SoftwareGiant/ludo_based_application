@@ -1,1500 +1,225 @@
 {
-  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-07-2024 10:43:24'
+  timestamp: 'Jun-14-2024 23:38:04'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:38:04'
+}
+{
+  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:38:04'
+}
+{
+  message: 'undefined - jwt expired - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:38:04'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:38:04'
+}
+{
+  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:38:04'
+}
+{
+  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:38:04'
+}
+{
+  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:38:04'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-07-2024 10:43:24'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-07-2024 10:45:08'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-07-2024 10:45:08'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-07-2024 10:46:03'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-07-2024 10:46:03'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-07-2024 10:46:11'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-07-2024 10:46:12'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-07-2024 10:46:19'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-07-2024 10:46:19'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:06'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:06'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:06'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:06'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:06'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:06'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:06'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:06'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:10'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:10'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:10'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:10'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:10'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:10'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:12'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:12'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:12'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:12'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:12'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:12'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:13'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:13'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:13'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:13'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:13'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:13'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:15'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:15'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:15'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:15'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:15'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:15'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:19'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:19'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:19'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:19'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:19'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:19'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:19'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:15:19'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:16:28'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 00:16:28'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:20'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:20'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:20'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:20'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:20'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:20'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:20'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:20'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:23'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:23'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:23'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:23'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:23'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:23'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:25'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:25'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:25'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:25'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:25'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:25'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:47'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 12:16:47'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 16:42:59'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 16:42:59'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 16:43:01'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 16:43:01'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 16:43:11'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 16:43:11'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 16:43:20'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 16:43:20'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 16:43:39'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-09-2024 16:43:39'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:23:54'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:23:54'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:23:54'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:23:54'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:23:54'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:23:55'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:23:55'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:23:55'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:23:58'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:23:58'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:23:58'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:23:58'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:23:58'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:23:58'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:01'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:01'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:01'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:01'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:01'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:01'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:02'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:02'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:02'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:02'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:02'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:02'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:02'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:02'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:02'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:02'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:02'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:03'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:03'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:03'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:03'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:03'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:03'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:03'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:03'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:03'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:03'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:03'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:04'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:04'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:04'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:04'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:04'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:04'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:04'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:04'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:05'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:05'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:05'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:05'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:05'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:05'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:06'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:06'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:06'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:06'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:06'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:06'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:08'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:08'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:08'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:08'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:08'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:08'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:49'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:49'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:49'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:49'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:49'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:24:49'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:04'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:04'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:11'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:11'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:38'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:38'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:38'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:38'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:38'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:38'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:38'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:38'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:42'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:43'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:43'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:43'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:43'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:43'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:44'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:44'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:44'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:44'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:44'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:44'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:45'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:45'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:45'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:45'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:45'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:45'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:48'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:48'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:48'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:48'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:48'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:48'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:49'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:49'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:49'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:49'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:49'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:49'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:50'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:50'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:50'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:50'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:50'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:50'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:51'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:51'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:51'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:51'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:51'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:51'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:53'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:53'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:53'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:53'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:53'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:53'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:54'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:54'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:54'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:54'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:54'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:54'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:57'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:57'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:57'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:57'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:57'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:25:57'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:26:35'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:26:35'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:26:35'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:26:35'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:26:35'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:26:35'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:27:03'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:27:03'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:27:03'
-}
-{
-  message: 'undefined - jwt expired - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:27:03'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:27:03'
-}
-{
-  message: 'undefined - jwt expired - /api/user/currentuser - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-10-2024 23:27:03'
+  timestamp: 'Jun-14-2024 23:38:04'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-10-2024 23:33:08'
+  timestamp: 'Jun-14-2024 23:38:57'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-10-2024 23:33:08'
+  timestamp: 'Jun-14-2024 23:38:57'
+}
+{
+  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:38:57'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-10-2024 23:33:08'
+  timestamp: 'Jun-14-2024 23:38:57'
+}
+{
+  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:38:57'
 }
 {
   message: '401 - Unauthorized credential - /api/user/logout - POST',
   level: 'error',
-  timestamp: 'Jun-10-2024 23:51:48'
+  timestamp: 'Jun-14-2024 23:39:04'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-10-2024 23:51:48'
+  timestamp: 'Jun-14-2024 23:39:04'
+}
+{
+  message: '401 - Unauthorized credential - /api/user/logout - POST',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:39:14'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-10-2024 23:51:48'
+  timestamp: 'Jun-14-2024 23:39:14'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-10-2024 23:51:48'
+  timestamp: 'Jun-14-2024 23:39:15'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-11-2024 14:02:52'
+  timestamp: 'Jun-14-2024 23:39:16'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-11-2024 14:02:52'
+  timestamp: 'Jun-14-2024 23:39:16'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-11-2024 14:02:52'
+  timestamp: 'Jun-14-2024 23:39:17'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-11-2024 14:05:47'
+  timestamp: 'Jun-14-2024 23:39:17'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-11-2024 14:05:47'
+  timestamp: 'Jun-14-2024 23:39:17'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-11-2024 14:05:47'
+  timestamp: 'Jun-14-2024 23:39:18'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-11-2024 14:07:16'
+  timestamp: 'Jun-14-2024 23:39:18'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-11-2024 14:07:16'
+  timestamp: 'Jun-14-2024 23:39:41'
 }
 {
   message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-11-2024 14:07:16'
+  timestamp: 'Jun-14-2024 23:39:41'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:39:44'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:39:44'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:40:26'
 }
 {
   message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-11-2024 22:26:50'
+  timestamp: 'Jun-14-2024 23:40:53'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:40:53'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:40:53'
 }
 {
   message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-11-2024 22:26:50'
+  timestamp: 'Jun-14-2024 23:40:53'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:51:34'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:51:34'
 }
 {
   message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-11-2024 22:26:51'
+  timestamp: 'Jun-14-2024 23:51:34'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:51:34'
 }
 {
   message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-11-2024 22:26:51'
+  timestamp: 'Jun-14-2024 23:51:34'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:51:38'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:51:38'
+}
+{
+  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
+  level: 'error',
+  timestamp: 'Jun-14-2024 23:51:38'
 }
 {
   message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-11-2024 22:26:55'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:26:55'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:26:55'
+  timestamp: 'Jun-14-2024 23:51:38'
 }
 {
   message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
   level: 'error',
-  timestamp: 'Jun-11-2024 22:26:55'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:29:19'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:29:19'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:29:21'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:29:21'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:29:25'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:29:25'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:29:25'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:29:25'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:32:58'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:32:58'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:33:00'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:33:00'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:33:50'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:33:50'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:34:00'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:34:00'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:34:04'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:34:04'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:34:13'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:34:13'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:34:24'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:34:24'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:34:28'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:34:30'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:35:00'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:35:01'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:35:01'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:35:02'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:35:02'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:35:33'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:35:34'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:35:34'
-}
-{
-  message: 'undefined - jwt malformed - /api/user/logout - POST inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:35:34'
-}
-{
-  message: 'undefined - jwt malformed - /api/game/openchallenge - GET inside verifyToken of jwt helper',
-  level: 'error',
-  timestamp: 'Jun-11-2024 22:35:34'
+  timestamp: 'Jun-14-2024 23:51:38'
 }
