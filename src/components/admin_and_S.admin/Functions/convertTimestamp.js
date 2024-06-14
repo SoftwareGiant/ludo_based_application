@@ -27,6 +27,9 @@ export function convertTimestamp(timestamp) {
     else if (seconds === 0) {
         formattedDate = "now";
     }
+    else if(seconds < 0){
+        formattedDate = "now"
+    }
     else {
         formattedDate = `${seconds} second${seconds > 1 ? 's' : ''} ago`;
     }

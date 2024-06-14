@@ -18,7 +18,6 @@ export const fetchNotifications = createAsyncThunk(
                     Authorization: `Bearer ${accessToken}`,
                 },
             });
-            console.log(response,"inside notification");
             return response.data.allnotification;
         } catch (error) {
             if (error.response.data.message === "Notification not found") {
