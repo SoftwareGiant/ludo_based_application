@@ -49,7 +49,7 @@ const GameHistoryMob = () => {
                 <div className="text-white bg-[#0f002b] flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
                   <div className="flex justify-between w-full items-center p-3">
                     <span className=" shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)]">
-                      {convertTimestamp(game?.gameactivationTimestamp)}
+                      {convertTimestamp(game?.gameClosingTimeStamp)}
                     </span>
                   </div>
                   <div className="text-xs shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] flex  px-4 items-center  w-full  py-2 pb-5 ">
@@ -66,7 +66,6 @@ const GameHistoryMob = () => {
                         <span className="flex gap-1">
                           <span>you vs</span>
                           <span>
-                            {/* {game?.player2._id}{" "} */}
                             {game?.player2?.userName ||
                               game?.player2?._id?.slice(-6)}
                           </span>
@@ -76,7 +75,6 @@ const GameHistoryMob = () => {
                           <span> you vs </span>
                           <span>
                             {" "}
-                            {/* {game?.player1._id} */}
                             {game?.player1?.userName ||
                               game?.player1?._id?.slice(-6)}
                           </span>
@@ -128,7 +126,7 @@ const GameHistoryMob = () => {
               </div>
             ))
         ) : (
-          <p className="text-white font-semibold text-3xl pt-4 flex justify-center items-center h-full">
+          <p className="text-white font-semibold text-2xl pt-4 flex justify-center items-center h-full">
             No Game History...
           </p>
         )}

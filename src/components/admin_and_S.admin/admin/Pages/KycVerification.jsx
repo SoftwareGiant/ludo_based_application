@@ -112,7 +112,9 @@ export function KycVerification() {
     <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
         <div className="flex  mt-1  gap-2 text-[#008CF2] font-[Inter] font-medium text-[12px]">
-        <Link to="/newonboard"  className="underline">Admin Control Panel </Link>
+          <Link to="/newonboard" className="underline">
+            Admin Control Panel{" "}
+          </Link>
           <span>&gt;&gt;</span>
           <span className="underline">Menu</span>
           <span>&gt;&gt;</span>
@@ -297,7 +299,7 @@ export function KycVerification() {
                       <td className="p-4">
                         <div className="w-max">
                           <Typography className="font-[Inter] font-medium text-[16px]">
-                            {formatDate(val.createdAt)}
+                            {formatDate(val.updatedAt)}
                           </Typography>
                         </div>
                       </td>
@@ -312,6 +314,10 @@ export function KycVerification() {
                 })}
             </tbody>
           </table>
+
+
+
+          
         </CardBody>
       </Card>
       <AdminFooter />

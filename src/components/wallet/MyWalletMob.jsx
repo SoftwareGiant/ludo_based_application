@@ -51,13 +51,13 @@ const MyWalletMob = () => {
           </div>
           <Button
             onClick={() => navigate("/transactionhistory")}
-            className="flex h-10 w-[170px] px-2  justify-center items-center gap-2"
+            className="flex rounded-2xl h-9 w-[160px] px-2  justify-center items-center gap-2"
           >
             <p className="mt-[2px]">All Transaction</p>
             <Icon icon="fe:arrow-right" width={16} />
           </Button>
         </div>
-        <div className="mx-auto h-[2px] w-4/5 bg-black bg-opacity-[20%] relative mt-2" />
+        <div className="mx-auto h-[1px] w-4/5 bg-black bg-opacity-[30%] relative mt-2" />
         <div className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-4">
           <div className="text-white bg-[#0f002b] flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
             <div className="flex justify-between w-full items-center p-3">
@@ -93,7 +93,9 @@ const MyWalletMob = () => {
                 className="text-white"
                 width={22}
               />
-              <div className="text-sm font-['Inter'] text-white">add cash</div>
+              <div className="text-sm font-['Inter'] mt-[1px] text-white">
+                add cash
+              </div>
             </Button>
           </div>
         </div>

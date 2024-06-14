@@ -399,14 +399,16 @@ const NewGameMob = () => {
                   }`}
                 >
                   <div className="flex justify-end ">
-                    <div
+                    <Button
+                      variant="text"
+                      color="blue-gray"
                       onClick={() => navigate("/gamerule")}
-                      className="flex   text-gray-700 mb-4 font-semibold  gap-1 mr-2 cursor-pointer items-center"
+                      className="flex gap-1 flex-row p-1 px-2 mb-3 items-center"
                     >
                       <i>Rules</i>
 
                       <Icon width={24} icon="carbon:rule-test" />
-                    </div>
+                    </Button>
                   </div>
                   {activeToggle === "live" && (
                     <div className="p-2 flex flex-col  gap-5 m-auto w-full">
@@ -556,6 +558,7 @@ const NewGameMob = () => {
           onClose={closematchDrawerBottom}
           className="p-4 w-[480px] bg-[#0f002b] rounded-t-3xl"
         >
+          <div className="w-[50%] h-[2px] bg-white rounded-full m-auto -mt-1" />
           {isRequest == true && (
             <div className="flex flex-col p-4">
               <div className="mb-4 flex items-center  w-full justify-center gap-2">
@@ -575,16 +578,22 @@ const NewGameMob = () => {
           )}
           {isRequest == false && (
             <div>
+              <Typography className="mb-10 mt-8  px-4  text-center flex  gap-2 text-2xl text-white justify-center font-semibold">
+                Are you want to match the battle !
+              </Typography>
               <div className="flex justify-center gap-6 mt-10 w-full">
                 <Button
                   onClick={closematchDrawerBottom}
-                  className="bg-[#0f002b] text-white text-lg font-extrabold  border border-gray-600  rounded-md"
+                  color="white"
+                  variant="outlined"
+                  className="bg-[#0f002b] min-w-[120px] text-lg font-extrabold   rounded-md"
                 >
                   Cancel
                 </Button>
                 <Button
+                  color="white"
                   onClick={creategame}
-                  className="bg-white text-[#0f002b] text-lg font-extrabold border border-white "
+                  className=" text-[#0f002b] min-w-[120px]  text-lg font-extrabold border border-white "
                 >
                   Start
                 </Button>
@@ -665,15 +674,6 @@ const NewGameMob = () => {
           className="w-[480px] p-4  bg-[#0f002b] rounded-t-3xl"
         >
           <div className="w-[50%] h-[2px] bg-white rounded-full m-auto -mt-1" />
-          {/* <div className="mb-4 flex items-center justify-start gap-2">
-            <IconButton
-              onClick={handleCloseDeleteBattle}
-              variant="text"
-              color="blue-gray"
-            >
-              <Icon icon="ep:back" className="text-white" width="24" />
-            </IconButton>
-          </div> */}
 
           <Typography className="mb-10 mt-8  px-4  text-center flex  gap-2 text-2xl text-white justify-center font-semibold">
             Delete this battle (permanently) !
@@ -691,7 +691,7 @@ const NewGameMob = () => {
             <Button
               onClick={() => handleDelete(deleteBattleId)}
               color="white"
-              className="w-full min-w-[120px] flex justify-center items-center gap-2"
+              className="w-full min-w-[120px]  flex justify-center items-center gap-2"
             >
               <Icon icon="fluent:delete-12-regular" width={20} />
               <p className="text-sm mt-[2px]">delete</p>

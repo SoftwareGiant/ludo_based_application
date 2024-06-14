@@ -79,7 +79,7 @@ const NewProfileMob = () => {
       return;
     }
     if (!aadharFront || !aadharBack) {
-      toast.error("Please upload both Aadharcard front and back images.");
+      toast.error("Please upload both Aadhar front and back images.");
       return;
     } else {
       try {
@@ -131,7 +131,6 @@ const NewProfileMob = () => {
   };
 
   const handleLogout = () => {
-   
     dispatch(logoutAsync({ token: accessToken, refreshtoken: refreshToken }));
   };
   const resetAadharfront = () => {
@@ -161,7 +160,7 @@ const NewProfileMob = () => {
       />
       <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
-        <SidebarMob users={users} />
+          <SidebarMob users={users} />
           <LudoMainLogo />
         </div>
         <div className="flex gap-2 items-center">
@@ -215,7 +214,7 @@ const NewProfileMob = () => {
                 icon="mdi:pencil-outline"
                 width={32}
                 onClick={() => navigate("/editprofile")}
-                className={`cursor-pointer bg-white p-2 shadow-lg rounded-full transition duration-300 ease-in-out transform hover:scale-110  absolute  ${
+                className={`cursor-pointer text-[#0f002b] bg-white p-2 shadow-lg rounded-full transition duration-300 ease-in-out transform hover:scale-110  absolute  ${
                   scrollPosition > 10 ? "hidden " : "top-0 right-[30%]"
                 }`}
               />
@@ -466,20 +465,17 @@ const NewProfileMob = () => {
               Your Kyc will be verify soon...{" "}
             </Typography>
           ) : (
-            <Typography
-              color="gray"
-              className=" mb-4 flex flex-col text-[10px] font-[Inter] mt-1 px-10  justify-center font-normal "
-            >
+            <Typography className=" mb-4 text-gray-400 flex flex-col text-[10px] font-[Inter] mt-1 px-10  justify-center font-normal ">
               <p>
-                *You need to submit a document that shows that you are above 18
-                years of age and not a resident of Assam, Odisha, Sikkim,
-                Nagaland, Telangana, Andhra Pradesh, Tamil Nadu, Meghalaya and
-                Karnataka.
+                {" "}
+                *Submit a document proving you are over 18 and not a resident of
+                Assam, Odisha, Sikkim, Nagaland, Telangana, Andhra Pradesh,
+                Tamil Nadu, Meghalaya, or Karnataka.
               </p>
               <p>
                 {" "}
-                *Make sure that you upload the correct image. This will be used
-                in future for reference in case of any issues.
+                Ensure you upload the correct image as it will be used for
+                future reference in case of any issues.
               </p>
             </Typography>
           )}

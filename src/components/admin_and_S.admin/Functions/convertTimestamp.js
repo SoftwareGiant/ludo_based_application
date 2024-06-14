@@ -14,21 +14,21 @@ export function convertTimestamp(timestamp) {
 
     let formattedDate;
     if (years > 0) {
-        formattedDate = `${years} year${years > 1 ? 's' : ''} ago`;
+        formattedDate = `${years} yr ago`;
     } else if (months > 0) {
-        formattedDate = `${months} month${months > 1 ? 's' : ''} ago`;
+        formattedDate = `${months} mon ago`;
     } else if (days > 0) {
         formattedDate = `${days} day${days > 1 ? 's' : ''} ago`;
     } else if (hours > 0) {
-        formattedDate = `${hours} hour${hours > 1 ? 's' : ''} ago`;
+        formattedDate = `${hours} hr ago`;
     } else if (minutes > 0) {
-        formattedDate = `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+        formattedDate = `${minutes} min ago`;
     }
     else if (seconds === 0) {
         formattedDate = "now";
     }
     else {
-        formattedDate = `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+        formattedDate = `${seconds} sec ago`;
     }
 
     return formattedDate;
