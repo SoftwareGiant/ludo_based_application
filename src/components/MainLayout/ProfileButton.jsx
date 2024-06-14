@@ -37,7 +37,7 @@ const TotoalBal = ({ users }) => {
   return (
     <div
       onClick={() => navigate("/mywallet")}
-      className="bg-black cursor-pointer hover:shadow-md flex items-center gap-2 rounded-2xl px-3 py-1 text-white"
+      className="bg-[#0f002b] border-[1px] border-gray-400 cursor-pointer hover:shadow-md flex items-center gap-2 rounded-2xl px-3 py-1 text-white"
     >
       <Icon icon="ph:wallet-light" width={24} />
       <p>₹ {users?.walletDetails?.totalAmount}</p>{" "}

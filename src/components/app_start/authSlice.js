@@ -65,19 +65,25 @@ export const loginAsync = createAsyncThunk(
 
 export const logoutAsync = createAsyncThunk(
   'auth/logout',
-  async ({ token, refreshtoken }) => {
-    console.log("logout")
+  async (_, thunkAPI) => {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
 
+    if (!refreshToken || !accessToken) {
+
+      return thunkAPI.rejectWithValue('Token not found');
+    }
     try {
       const response = await axios.post(
         '/api/user/logout',
-        { refreshToken: refreshtoken },
+        { refreshToken: refreshToken },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       );
+
       console.log(response)
       if (!response.statusText) {
         throw new Error('Logout failed');
@@ -86,11 +92,14 @@ export const logoutAsync = createAsyncThunk(
       localStorage.removeItem('refreshToken');
     }
     catch (error) {
+      console.log(error)
       if (error.response.status === 400 || error.response.data.message === "Unauthorized credential") {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
       }
       toast.error(error);
+      return thunkAPI.rejectWithValue(error.message || 'An error occurred during logout');
+
     }
   }
 );

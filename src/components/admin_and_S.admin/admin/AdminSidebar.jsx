@@ -80,6 +80,16 @@ const AdminSidebar = () => {
             {showFullSidebar && <span>Withdraw</span>}
           </div>
         </Link>
+        <Link to="/adminpayment">
+          <div
+            className={`flex justify-start gap-4 items-center px-3 rounded-3xl m-1 cursor-pointer ${
+              location.pathname === "/adminpayment" ? "bg-[#EEEEEE]" : ""
+            } hover:bg-[#EEEEEE] h-[51px]`}
+          >
+            <Icon icon="fluent:payment-24-regular" width="24" />
+            {showFullSidebar && <span>Payment</span>}
+          </div>
+        </Link>
 
         <Link to="/adminreferral">
           <div
