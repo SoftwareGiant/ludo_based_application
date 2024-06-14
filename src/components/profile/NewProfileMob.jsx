@@ -79,7 +79,7 @@ const NewProfileMob = () => {
       return;
     }
     if (!aadharFront || !aadharBack) {
-      toast.error("Please upload both Aadharcard front and back images.");
+      toast.error("Please upload both Aadhar front and back images.");
       return;
     } else {
       try {
@@ -160,7 +160,7 @@ const NewProfileMob = () => {
       />
       <div className="bg-[#fead3a]  flex justify-between items-center w-full   h-[51px]  px-4">
         <div className="flex flex-row gap-3 items-start mt-3">
-        <SidebarMob users={users} />
+          <SidebarMob users={users} />
           <LudoMainLogo />
         </div>
         <div className="flex gap-2 items-center">
@@ -214,7 +214,7 @@ const NewProfileMob = () => {
                 icon="mdi:pencil-outline"
                 width={32}
                 onClick={() => navigate("/editprofile")}
-                className={`cursor-pointer bg-white p-2 shadow-lg rounded-full transition duration-300 ease-in-out transform hover:scale-110  absolute  ${
+                className={`cursor-pointer text-[#0f002b] bg-white p-2 shadow-lg rounded-full transition duration-300 ease-in-out transform hover:scale-110  absolute  ${
                   scrollPosition > 10 ? "hidden " : "top-0 right-[30%]"
                 }`}
               />
@@ -253,7 +253,7 @@ const NewProfileMob = () => {
         </div>
 
         <div className="mt-10 flex flex-col gap-3 w-full font-['Nunito_Sans'] items-start relative text-white font-bold">
-          <div className="bg-[#0f002b] text-white flex flex-col justify-center gap-10 w-full items-start pt-5 pb-6 px-8">
+          <div className="bg-[#0f002b] text-white flex flex-col justify-center gap-6 w-full items-start pt-5 pb-6 px-8">
             <div className="flex  justify-between w-full items-center">
               <div className="text-xl font-bold text-white">Basic Details</div>
               {isUserNameEdit ? (
@@ -276,7 +276,7 @@ const NewProfileMob = () => {
                 </IconButton>
               )}
             </div>
-            <div className="flex flex-col justify-between gap-6 w-5/6 items-start ">
+            <div className="flex flex-col justify-between gap-5 w-5/6 items-start ">
               <div className="flex flex-row justify-between ml-4 w-full items-start">
                 <div className="text-sm  mt-px">Phone no. :</div>
                 <span>{users?.mobileNo}</span>
@@ -465,20 +465,17 @@ const NewProfileMob = () => {
               Your Kyc will be verify soon...{" "}
             </Typography>
           ) : (
-            <Typography
-              color="gray"
-              className=" mb-4 flex flex-col text-[10px] font-[Inter] mt-1 px-10  justify-center font-normal "
-            >
+            <Typography className=" mb-4 text-gray-400 flex flex-col text-[10px] font-[Inter] mt-1 px-10  justify-center font-normal ">
               <p>
-                *You need to submit a document that shows that you are above 18
-                years of age and not a resident of Assam, Odisha, Sikkim,
-                Nagaland, Telangana, Andhra Pradesh, Tamil Nadu, Meghalaya and
-                Karnataka.
+                {" "}
+                *Submit a document proving you are over 18 and not a resident of
+                Assam, Odisha, Sikkim, Nagaland, Telangana, Andhra Pradesh,
+                Tamil Nadu, Meghalaya, or Karnataka.
               </p>
               <p>
                 {" "}
-                *Make sure that you upload the correct image. This will be used
-                in future for reference in case of any issues.
+                Ensure you upload the correct image as it will be used for
+                future reference in case of any issues.
               </p>
             </Typography>
           )}

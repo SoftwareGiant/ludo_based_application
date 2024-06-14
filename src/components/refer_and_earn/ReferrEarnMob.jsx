@@ -130,28 +130,35 @@ const ReferrEarnMob = () => {
                 <HelpButton dark={true} />
               </div>
             </div>
-            <div className="relative pt-6 w-full flex flex-col gap-4 justify-center items-center m-auto">
+            <div className="relative pt-2 w-full flex flex-col gap-4 justify-center items-center m-auto">
               <div className="w-full  px-16">
                 <table className="w-full mb-4">
                   <thead>
                     <tr className="text-left">
-                      <th className="p-2 font-normal">Wallet</th>
-                      <th className="p-2">Referral Wallet</th>
+                      <th className="px-2 py-1 font-normal">Wallet</th>
+                      <th className="px-2 py-1">Referral Wallet</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr className="text-left">
-                      <td className="p-2">Current earning</td>
-                      <td className="p-2 font-semibold">₹ 70</td>
+                      <td className="px-2 py-1">Current earning</td>
+                      <td className="px-2 py-1 font-semibold">
+                        ₹ {users?.walletDetails?.referralAmount}
+                      </td>
                     </tr>
                     <tr className="text-left">
-                      <td className="p-2">Total earning</td>
-                      <td className="p-2 font-semibold">₹ 100</td>
+                      <td className="px-2 py-1">Total earning</td>
+                      <td className="px-2 py-1 font-semibold">
+                        ₹ {users?.walletDetails?.referralAmount}
+                      </td>
                     </tr>
                   </tbody>
                 </table>
                 <div className="flex justify-center items-center w-full">
-                  <Button onClick={()=>navigate("/withdraw")} className="flex  text-sm  items-center gap-2">
+                  <Button
+                    onClick={() => navigate("/withdraw")}
+                    className="flex bg-[#0f002b] rounded-xl  text-sm  items-center gap-2"
+                  >
                     <Icon
                       icon="mdi:bank-outline"
                       width={20}

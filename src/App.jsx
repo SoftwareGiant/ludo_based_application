@@ -67,6 +67,7 @@ import NotFoundpage from "./components/MainLayout/NotFoundpage.jsx";
 import GameRule from "./components/MainLayout/GameRule.jsx";
 import DestopSetup from "./components/MainLayout/DestopSetup.jsx";
 import Register from "./components/app_start/Register.jsx";
+import Payment from "./components/admin_and_S.admin/admin/Pages/payment.jsx";
 
 function App() {
   return (
@@ -93,7 +94,7 @@ function App() {
               path="/requestchallange/:userId"
               element={<OpenChallengeReq />}
             />
-            
+
             <Route path="/chat/:chatId/:player" element={<ChatUserMob />} />
             <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/userprofile2" element={<UserProfile2 />} />
@@ -140,9 +141,12 @@ function App() {
             <Route path="/admingamehistory" element={<GameVerificaion />} />
             <Route path="/admindeposite" element={<Deposite />} />
             <Route path="/adminwithdraw" element={<Withdraw />} />
+
+            <Route path="/adminpayment" element={<Payment />} />
             <Route path="/adminreferral" element={<ReferaalTrack />} />
             <Route path="/adminuserhistory" element={<UserHistory />} />
             <Route path="/adminsuport" element={<AdminSupport />} />
+
             <Route path="/admincustomer" element={<AdminCustomer />}>
               <Route path=":userId" element={<CustomerChat />} />
             </Route>

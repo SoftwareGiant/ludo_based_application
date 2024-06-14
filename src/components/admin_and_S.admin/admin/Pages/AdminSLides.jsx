@@ -11,6 +11,7 @@ const AdminSLides = () => {
   const [sliderData, setSliderData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
   const [filename, setFilename] = useState("");
+  const [scannerPreview, setScannerPreview] = useState("");
   const { accessToken } = useSelector((state) => state.auth);
   const fileInputRef = useRef(null);
   useEffect(() => {
@@ -59,6 +60,7 @@ const AdminSLides = () => {
         toast.success("Image uploaded successfully");
         setSelectFile("");
         setFilename("");
+        setScannerPreview("");
         getSlides();
       } catch (error) {
         console.error("Error uploading image:", error);
@@ -71,12 +73,18 @@ const AdminSLides = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    setScannerPreview(URL.createObjectURL(file));
     if (file) {
       setSelectFile(file);
       setFilename(file.name);
     }
   };
-
+  const handlePreview = () => {
+    fileInputRef.current.value = "";
+    setSelectFile("");
+    setFilename("");
+    setScannerPreview("");
+  };
   return (
     <div className="font-[Inter] w-full main-body-right overflow-y-scroll h-screen bg-[#ffff] rounded-tl-3xl">
       <div className="bg-[#F4F4F4] rounded-tl-3xl py-1 px-4 flex flex-col gap-4">
@@ -128,16 +136,44 @@ const AdminSLides = () => {
               </div>
             ))}
           </div>
-          <div className="m-2 flex gap-2 items-center">
-            <input
-              className="border border-gray-900 shadow-md py-[5px] px-[5px] w-80 rounded-lg"
-              type="file"
-              accept=".jpg, .jpeg, .png"
-              onChange={handleFileChange}
-              ref={fileInputRef}
-            />
+          <div className="m-2 flex gap-2 ">
+            <div>
+              <input
+                className="border border-gray-900 shadow-md py-[5px] px-[5px] w-80 rounded-lg"
+                type="file"
+                accept=".jpg, .jpeg, .png"
+                onChange={handleFileChange}
+                ref={fileInputRef}
+                
+              />
+              {scannerPreview && (
+                <div className="my-3 ">
+                  <p className="text-gray-700 ml-2 text-sm font-bold mb-2">
+                    Slide Preview:
+                  </p>
+                  <div className="relative m-2 w-52">
+                    <div className="w-52 rounded-md shadow-md overflow-hidden relative border-2 border-black ">
+                      <img
+                        src={scannerPreview}
+                        alt="UPI Scanner Preview"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
 
-            <Button onClick={handleAdd} color="black">
+                    <div className="absolute top-0 right-0 flex">
+                      <button
+                        onClick={() => handlePreview()}
+                        className="bg-red-500  text-white rounded-full p-4 w-6 h-6 flex items-center justify-center -m-2"
+                      >
+                        <Icon icon="charm:cross" width={24} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <Button onClick={handleAdd} className="h-10" color="black">
               Add Slide
             </Button>
           </div>
