@@ -4,10 +4,7 @@ import { Icon } from "@iconify-icon/react";
 import BackgroundImg from "../../assets/background.jpg";
 import CountryIcon from "../../assets/country.svg";
 import DropIcon from "../../assets/dropicon.svg";
-import LudoIcon from "../../assets/ludo-indian-monument-touch.svg";
-import SignUpSucess from "./SignUpSucess";
 import { Link, useNavigate } from "react-router-dom";
-import MyButton from "../MainLayout/MyButton";
 import ButtonLoader from "../MainLayout/ButtonLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAsync, selectToken } from "./authSlice";
@@ -37,11 +34,12 @@ const LoginMob = () => {
   const token = useSelector(selectToken);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  console.log(token)
   useEffect(() => {
     if (token) {
       navigate("/");
     }
-  }, []);
+  }, [token]);
   const handlePhoneSubmit = async (values) => {
     let intervalId;
     dispatch(loginAsync(values.number))
@@ -60,7 +58,7 @@ const LoginMob = () => {
         toast.error(error.message);
       });
   };
-  console.log(isSuccess);
+
 
   return (
     <div className="h-full min-h-screen w-full max-w-[480px]">
@@ -164,7 +162,6 @@ const LoginMob = () => {
                                   .slice(0, 10); // Remove non-numeric characters and limit to 10 digits
                               }}
                             />
-                           
                           </div>
 
                           <ErrorMessage

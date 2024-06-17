@@ -74,8 +74,9 @@ function App() {
     <BrowserRouter>
       <ErrorBoundary>
         <Routes>
+        <Route path="/adminlogin" element={<SAdminLogin />} />
           <Route path="/" element={<DestopSetup />}>
-            <Route path="/adminlogin" element={<SAdminLogin />} />
+           
             <Route path="/login" element={<LoginMob />} />
             <Route path="/register" element={<Register />} />
             <Route path="/terms" element={<Terms />} />

@@ -84,7 +84,7 @@ const TransactioHistoryMob = () => {
               </div>
             ))
           ) : (
-            <p className="text-white font-semibold text-3xl pt-4 flex justify-center items-center h-full">
+            <p className="text-white font-semibold text-2xl pt-4 flex justify-center items-center h-full">
               No Transaction History...
             </p>
           )}

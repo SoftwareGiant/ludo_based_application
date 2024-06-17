@@ -14,7 +14,7 @@ const OpenRecentTab = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <div className="relative   bg-black">
+    <div className="relative bg-[#0f002b]">
       <div className="text-white py-2 px-4 flex  text-[20px] items-center justify-between">
         <div className="gap-2 flex items-center">
           <Icon
@@ -81,7 +81,7 @@ const OpenRecentTab = ({
             </Card>
           ))
         ) : (
-          <p className="mt-6 text-white font-semibold text-3xl w-full flex justify-center ">
+          <p className="mt-6 text-white font-semibold text-2xl w-full flex justify-center ">
             No recent chat history...
           </p>
         )}

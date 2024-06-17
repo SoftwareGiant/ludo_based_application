@@ -4,11 +4,8 @@ import { Icon } from "@iconify-icon/react";
 import BackgroundImg from "../../assets/background.jpg";
 import CountryIcon from "../../assets/country.svg";
 import DropIcon from "../../assets/dropicon.svg";
-import LudoIcon from "../../assets/ludo-indian-monument-touch.svg";
-import SignUpSucess from "./SignUpSucess";
 import { Link, useNavigate } from "react-router-dom";
 import MyButton from "../MainLayout/MyButton";
-import ButtonLoader from "../MainLayout/ButtonLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { registerAsync, selectToken } from "./authSlice";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -73,15 +70,7 @@ const Register = () => {
       dispatch(registerAsync(number));
       setIsLoadButton(false);
     } catch (error) {}
-    // seIsSuccess(true);
-    // intervalId = setTimeout(() => {
-    //   navigate("/apptour");
-    // }, 3000);
-    // () => {
-    //   clearInterval(intervalId);
-    // };
   };
-  console.log(isSuccess);
 
   return (
     <div className="h-full min-h-screen w-full max-w-[480px]">
@@ -181,38 +170,6 @@ const Register = () => {
                       </>
                     ) : (
                       <>
-                        {/* <div
-                          id="EnterPhoneNumber1"
-                          className="shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] items-center mx-auto bg-white flex flex-row gap-4 justify-center pt-3 px-4 rounded-lg w-full h-[56px] py-[10px]"
-                        >
-                          <div className="flex flex-row gap-2 w-16 items-start">
-                            <img
-                              src={CountryIcon}
-                              alt="Twemojiflagindia"
-                              id="Twemojiflagindia"
-                              className="w-8"
-                            />
-                            <img
-                              src={DropIcon}
-                              alt="Gridiconsdropdown"
-                              id="Gridiconsdropdown"
-                              className="mt-1 w-5"
-                            />
-                          </div>
-                          <input
-                            type="text"
-                            value={number}
-                            onChange={(e) => setNumber(e.target.value)}
-                            className="p-2 font-bold text-lg rounded-md w-full focus:outline-none appearance-none"
-                            placeholder="Enter Phone Number"
-                          />
-                        </div>
-                        <button
-                          onClick={handlePhoneSubmit}
-                          className="text-center items-center text-xl mx-auto font-['Inter'] h-[56px] w-full px-[16px] text-[20px] font-bold  gap-[10px]   shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row justify-center pt-4 rounded-lg bg-[#0f002b] text-white p-4"
-                        >
-                          Continue
-                        </button> */}
                         <Formik
                           initialValues={initialValues}
                           validationSchema={validationSchema}

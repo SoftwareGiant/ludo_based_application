@@ -340,11 +340,22 @@ const NewGameMob = () => {
         ) : (
           <div className="relative m-6">
             <div className="border-[2px] border-white shadow-lg bg-[#fead3a] flex flex-col p-4 gap-6 w-full  max-w-screen items-start rounded-lg pb-8">
-              <div
-                id="StartYourOwnBattle1"
-                className="text-xl font-['Inter'] text-[#0f002b]"
-              >
-                start your own <span className="font-bold">battle</span>
+              <div className="flex text-[#0f002b] justify-between w-full">
+                <div
+                  id="StartYourOwnBattle1"
+                  className="text-xl font-['Inter']"
+                >
+                  start your own <span className="font-bold">battle</span>
+                </div>
+                <Button
+                  variant="text"
+                  onClick={() => navigate("/gamerule")}
+                  className="flex gap-1 flex-row p-1 px-2 mb-3 items-center"
+                >
+                  <i>Rules</i>
+
+                  <Icon width={24} icon="carbon:rule-test" />
+                </Button>
               </div>
               <div
                 onClick={openDrawerBottom}
@@ -369,20 +380,20 @@ const NewGameMob = () => {
             <div className="flex flex-col w-full">
               <div className="flex w-full space-x-0.5 bg-white">
                 <button
-                  className={`flex-1 py-2 px-4 rounded-lg text-black font-semibold focus:outline-none transition-all duration-300 ${
+                  className={`flex-1 py-2 px-4 rounded-lg text-[#0f002b] font-semibold focus:outline-none transition-all duration-300 ${
                     activeToggle === "live"
                       ? "bg-[#fead3a] text-white"
-                      : "bg-white text-black"
+                      : "bg-white text-[#0f002b]"
                   }`}
                   onClick={() => handleToggle("live")}
                 >
                   Live <b>battle</b>
                 </button>
                 <button
-                  className={`flex-1 py-2 px-4 rounded-lg text-black font-semibold focus:outline-none transition-all duration-300 ${
+                  className={`flex-1 py-2 px-4 rounded-lg text-[#0f002b] font-semibold focus:outline-none transition-all duration-300 ${
                     activeToggle === "challenges"
                       ? "bg-[#fead3a] text-white"
-                      : "bg-white text-black"
+                      : "bg-white text-[#0f002b]"
                   }`}
                   onClick={() => handleToggle("challenges")}
                 >
@@ -398,18 +409,6 @@ const NewGameMob = () => {
                       : "-translate-y-2"
                   }`}
                 >
-                  <div className="flex justify-end ">
-                    <Button
-                      variant="text"
-                      color="blue-gray"
-                      onClick={() => navigate("/gamerule")}
-                      className="flex gap-1 flex-row p-1 px-2 mb-3 items-center"
-                    >
-                      <i>Rules</i>
-
-                      <Icon width={24} icon="carbon:rule-test" />
-                    </Button>
-                  </div>
                   {activeToggle === "live" && (
                     <div className="p-2 flex flex-col  gap-5 m-auto w-full">
                       {users &&
@@ -424,8 +423,6 @@ const NewGameMob = () => {
                                 <div className="absolute   -top-4  -right-2">
                                   <IconButton
                                     onClick={() => handleDeleteOption(e._id)}
-                                    // color="black"
-
                                     className="rounded-full bg-[#0f002b] h-[36px]  w-[36px]"
                                   >
                                     <Icon
@@ -718,7 +715,7 @@ const NewGameMob = () => {
 
             <Typography
               color="white"
-              className="flex justify-center animate-pulse text-black text-xl font-bold"
+              className="flex justify-center animate-pulse text-[#0f002b]  text-xl font-bold"
             >
               Wait for code...
             </Typography>

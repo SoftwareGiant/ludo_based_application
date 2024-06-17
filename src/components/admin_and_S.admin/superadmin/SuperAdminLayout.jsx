@@ -3,20 +3,39 @@ import { Navigate, Outlet } from "react-router-dom";
 import SuperAdminTopbar from "./SuperAdminTopbar";
 import SuperAdminSidebar from "./SuperAdminSidebar";
 import { selectToken } from "../../app_start/authSlice";
-import { useSelector } from "react-redux";
+import { isExpired } from "react-jwt";
+import { useDispatch, useSelector } from "react-redux";
+import useOnlineStatus from "../Functions/useOnlineStatus";
 
-const SuperAdminLayout = ({children}) => {
+const SuperAdminLayout = ({ children }) => {
+  const isOnline = useOnlineStatus();
+  const dispatch = useDispatch();
   const token = useSelector(selectToken);
-
-  if (!token) {
+  const { accessToken, refreshToken } = useSelector((state) => state.auth);
+  const isMyTokenExpired = isExpired(token);
+  console.log(token, accessToken, refreshToken);
+  useEffect(() => {
+    if (accessToken && refreshToken && isMyTokenExpired) {
+      console.log("expire yes");
+      dispatch(logoutAsync({ token: accessToken, refreshtoken: refreshToken }));
+    }
+  }, [dispatch, isMyTokenExpired, accessToken, refreshToken]);
+  useEffect(() => {
+    if (!isOnline) {
+      console.log(isOnline);
+      toast.warning("No Internet Connection");
+    }
+  }, [isOnline]);
+  if (!localStorage.getItem("accessToken") || !accessToken) {
     return <Navigate to="/adminlogin" replace />;
   }
+
   return (
     <div className="bg-[#E6E6E6] box-border h-screen w-full">
-      <SuperAdminTopbar/>
+      <SuperAdminTopbar />
       <div className="flex gap-2 h-[91.6%] overflow-hidden">
         <SuperAdminSidebar />
-        <Outlet/>
+        <Outlet />
       </div>
     </div>
   );

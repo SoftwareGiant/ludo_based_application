@@ -13,7 +13,15 @@ import axios from "axios";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import PageLoader from "../MainLayout/PageLoader";
 import TotoalBal from "../MainLayout/ProfileButton";
-
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+const validationSchema = Yup.object({
+  aadharNumber: Yup.string()
+    .matches(/^\d{12}$/, "*Aadhar number must be exactly 12 digits")
+    .required("*Aadhar number is required"),
+  aadharFront: Yup.mixed().required("*required"),
+  aadharBack: Yup.mixed().required("*required"),
+});
 const NewProfileMob = () => {
   const [aadharFront, setAadharFront] = useState(null);
   const [aadharBack, setAadharBack] = useState(null);
@@ -55,55 +63,35 @@ const NewProfileMob = () => {
     };
   }, []);
 
-  // for aadhar front and back photo
-  const handleAadharFrontUpload = (e) => {
-    const file = e.target.files[0];
-    setAadharFront(file);
-    setaadharfrontName(file.name);
-  };
-  const handleAadharBackUpload = (e) => {
-    const file = e.target.files[0];
-    setAadharBack(file);
-    setaadharbackName(file.name);
-  };
-  function validateAadhar(aadharNumber) {
-    // Regex pattern for Aadhar number
-    const aadharPattern = /^\d{12}$/;
-    // Check if the input matches the Aadhar pattern
-    return aadharPattern.test(aadharNumber);
-  }
-
-  const handleSubmit = async () => {
-    if (!validateAadhar(aadharNumber)) {
-      toast.error("Please Enter a Valid Aadhar number");
-      return;
-    }
-    if (!aadharFront || !aadharBack) {
+  const handleSubmit = async (values, { setSubmitting }) => {
+    if (!values.aadharFront || !values.aadharBack) {
       toast.error("Please upload both Aadhar front and back images.");
+      setSubmitting(false);
       return;
-    } else {
-      try {
-        const obj = new FormData();
-        obj.append("aadharNo", aadharNumber); // Append aadharNumber as a form field
-        obj.append("image", aadharFront); // Append aadharFront as a file
-        obj.append("image", aadharBack); // Append aadharBack as a file
-
-        const response = await axios.post("/api/user/addKycdetail", obj, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${accessToken}`, // Ensure the correct capitalization for "Bearer"
-          },
-        });
-        toast.success(response.data.message);
-        dispatch(fetchUserDetail());
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-
-      closeDrawerBottom();
-      // You can add additional logic here for submitting the images
     }
+
+    const formData = new FormData();
+    formData.append("aadharNo", values.aadharNumber); // Append aadharNumber as a form field
+    formData.append("image", values.aadharFront); // Append aadharFront as a file
+    formData.append("image", values.aadharBack); // Append aadharBack as a file
+
+    try {
+      const response = await axios.post("/api/user/addKycdetail", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${accessToken}`, // Ensure the correct capitalization for "Bearer"
+        },
+      });
+      toast.success(response.data.message);
+      dispatch(fetchUserDetail());
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred while submitting the form.");
+    }
+
+    setSubmitting(false);
+    closeDrawerBottom();
   };
 
   const addUserName = async (username) => {
@@ -133,14 +121,7 @@ const NewProfileMob = () => {
   const handleLogout = () => {
     dispatch(logoutAsync({ token: accessToken, refreshtoken: refreshToken }));
   };
-  const resetAadharfront = () => {
-    setAadharFront(null);
-    setaadharfrontName("");
-  };
-  const resetAadharback = () => {
-    setAadharBack(null);
-    setaadharbackName("");
-  };
+
   const handleInputChange = (event) => {
     setUserName(event.target.value);
   };
@@ -360,7 +341,8 @@ const NewProfileMob = () => {
           placement="bottom"
           open={openBottom}
           onClose={closeDrawerBottom}
-          className="w-[480px] p-4  bg-[#0F002B] rounded-t-3xl"
+          size={350}
+          className="w-[480px] p-4   bg-[#0F002B] rounded-t-3xl"
         >
           <div className="p-2  max-w-sm mx-auto rounded-xl shadow-md flex flex-col items-center gap-2">
             <div
@@ -387,74 +369,114 @@ const NewProfileMob = () => {
             {users?.userKyc?.verificationStatus === "inprogress" ? (
               ""
             ) : (
-              <div className="flex flex-col gap-2 w-full">
-                <input
-                  type="text"
-                  value={aadharNumber}
-                  onChange={(e) => setAadharNumber(e.target.value)}
-                  placeholder="Enter Aadhar Number"
-                  className="font-bold  cursor-pointer bg-white bg-opacity-[30%]  bg-transparent border-2 border-gray-300 focus:border-[#fead3a] focus:outline-none text-white py-2 px-4 rounded-lg"
-                />
-                <div className="flex w-full gap-2">
-                  {aadharfrontname ? (
-                    <div className="rounded-md flex-1 gap-2 bg-white bg-opacity-[60%] text-white flex justify-start items-center  text-xs">
-                      <IconButton
-                        className="p-1 m-1 h-8 w-8"
-                        onClick={resetAadharfront}
-                      >
-                        <Icon icon="charm:cross" width={32} />{" "}
-                      </IconButton>
-                      {aadharfrontname.slice(0, 20)}
-                    </div>
-                  ) : (
-                    <label
-                      className={`font-bold  flex-1 text-center flex justify-center items-center  gap-2 cursor-pointer bg-white ${
-                        aadharfrontname
-                          ? "bg-opacity-[60%]"
-                          : "bg-opacity-[30%]"
-                      }  hover:bg-opacity-[50%] text-white py-2 px-4  rounded-lg`}
-                    >
-                      <span>Aadhar Front</span>
-                      <Icon icon="material-symbols:upload" width={24} />
-                      <input
-                        type="file"
-                        className="hidden"
-                        accept=".jpeg, .jpg, .png"
-                        onChange={handleAadharFrontUpload}
+              <Formik
+                initialValues={{
+                  aadharNumber: "",
+                  aadharFront: null,
+                  aadharBack: null,
+                }}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+              >
+                {({ setFieldValue, isSubmitting, values }) => (
+                  <Form className="flex flex-col gap-2 w-full">
+                    <div className="flex flex-col">
+                      <Field
+                        name="aadharNumber"
+                        type="text"
+                        placeholder="Enter Aadhar Number"
+                        className="font-bold cursor-pointer bg-white bg-opacity-[30%] bg-transparent border-2 border-gray-300 focus:border-[#fead3a] focus:outline-none text-white py-2 px-4 rounded-lg"
                       />
-                    </label>
-                  )}
+                      <ErrorMessage
+                        name="aadharNumber"
+                        component="div"
+                        className="text-red-500 text-sm"
+                      />
+                    </div>
 
-                  {aadharbackname ? (
-                    <div className="rounded-md  flex-1 bg-white bg-opacity-[60%] text-white gap-2 flex justify-start items-center  text-xs">
-                      <IconButton
-                        className="p-1 m-1 h-8 w-8"
-                        onClick={resetAadharback}
-                      >
-                        <Icon icon="charm:cross" width={32} />{" "}
-                      </IconButton>
-                      {aadharbackname.slice(0, 20)}
+                    <div className="flex w-full gap-2">
+                      <div className="flex flex-1  flex-col">
+                        {values.aadharFront ? (
+                          <div className="rounded-md flex-1 gap-2 bg-white bg-opacity-[60%] text-white flex justify-start items-center text-xs">
+                            <IconButton
+                              className="p-1 m-1 h-8 w-8"
+                              onClick={() => setFieldValue("aadharFront", null)}
+                            >
+                              <Icon icon="charm:cross" width={32} />
+                            </IconButton>
+                            {values.aadharFront.name.slice(0, 20)}
+                          </div>
+                        ) : (
+                          <label className="font-bold flex-1 text-center flex justify-center items-center gap-2 cursor-pointer bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
+                            <span>Aadhar Front</span>
+                            <Icon icon="material-symbols:upload" width={24} />
+                            <input
+                              name="aadharFront"
+                              type="file"
+                              className="hidden"
+                              accept=".jpeg, .jpg, .png"
+                              onChange={(event) => {
+                                setFieldValue(
+                                  "aadharFront",
+                                  event.currentTarget.files[0]
+                                );
+                              }}
+                            />
+                          </label>
+                        )}
+                        <ErrorMessage
+                          name="aadharFront"
+                          component="div"
+                          className="text-red-500  text-sm"
+                        />
+                      </div>
+                      <div className="flex flex-1 flex-col">
+                        {values.aadharBack ? (
+                          <div className="rounded-md flex-1 gap-2 bg-white bg-opacity-[60%] text-white flex justify-start items-center text-xs">
+                            <IconButton
+                              className="p-1 m-1 h-8 w-8"
+                              onClick={() => setFieldValue("aadharBack", null)}
+                            >
+                              <Icon icon="charm:cross" width={32} />
+                            </IconButton>
+                            {values.aadharBack.name.slice(0, 20)}
+                          </div>
+                        ) : (
+                          <label className="cursor-pointer flex-1 flex justify-center items-center gap-2 text-center font-bold bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
+                            <span>Aadhar Back</span>
+                            <Icon icon="material-symbols:upload" width={24} />
+                            <input
+                              name="aadharBack"
+                              type="file"
+                              className="hidden"
+                              accept=".jpeg, .jpg, .png"
+                              onChange={(event) => {
+                                setFieldValue(
+                                  "aadharBack",
+                                  event.currentTarget.files[0]
+                                );
+                              }}
+                            />
+                          </label>
+                        )}
+                        <ErrorMessage
+                          name="aadharBack"
+                          component="div"
+                          className="text-red-500  text-sm"
+                        />
+                      </div>
                     </div>
-                  ) : (
-                    <label className="cursor-pointer  flex-1 flex justify-center items-center gap-2 text-center font-bold bg-white bg-opacity-[30%] hover:bg-opacity-[50%] text-white py-2 px-4 rounded-lg">
-                      <span>Aadhar Back </span>
-                      <Icon icon="material-symbols:upload" width={24} />
-                      <input
-                        type="file"
-                        className="hidden"
-                        accept=".jpeg, .jpg, .png"
-                        onChange={handleAadharBackUpload}
-                      />
-                    </label>
-                  )}
-                </div>
-                <button
-                  className="bg-gray-50 hover:bg-gray-100 font-semibold text-[#0F002B] py-2 px-4 rounded-lg"
-                  onClick={handleSubmit}
-                >
-                  Submit
-                </button>
-              </div>
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="bg-gray-50 hover:bg-gray-100 font-semibold text-[#0F002B] py-2 px-4 rounded-lg"
+                    >
+                      {isSubmitting ? "Submitting..." : "Submit"}
+                    </button>
+                  </Form>
+                )}
+              </Formik>
             )}
           </div>
           {users?.userKyc?.verificationStatus === "inprogress" ? (
@@ -465,7 +487,7 @@ const NewProfileMob = () => {
               Your Kyc will be verify soon...{" "}
             </Typography>
           ) : (
-            <Typography className=" mb-4 text-gray-400 flex flex-col text-[10px] font-[Inter] mt-1 px-10  justify-center font-normal ">
+            <Typography className=" mb-4 text-gray-300 px-3 flex flex-col text-[10px] font-[Inter] mt-1  max-w-sm mx-auto  justify-center font-normal ">
               <p>
                 {" "}
                 *Submit a document proving you are over 18 and not a resident of

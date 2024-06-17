@@ -1,15 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AdminSidebar from "./AdminSidebar";
 import AdminTopbar from "./AdminTopbar";
 import { Navigate, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { isExpired } from "react-jwt";
+import { useDispatch, useSelector } from "react-redux";
 import { selectToken } from "../../app_start/authSlice";
-
+import useOnlineStatus from "../Functions/useOnlineStatus";
+import { toast } from "react-toastify";
 const AdminLayout = ({ children }) => {
+  const isOnline = useOnlineStatus();
+  const dispatch = useDispatch();
   const token = useSelector(selectToken);
-  if (!token) {
+  const { accessToken, refreshToken } = useSelector((state) => state.auth);
+  const isMyTokenExpired = isExpired(token);
+  console.log(token, accessToken, refreshToken);
+  useEffect(() => {
+    if (accessToken && refreshToken && isMyTokenExpired) {
+      console.log("expire yes");
+      dispatch(logoutAsync({ token: accessToken, refreshtoken: refreshToken }));
+    }
+  }, [dispatch, isMyTokenExpired, accessToken, refreshToken]);
+  useEffect(() => {
+    if (!isOnline) {
+      console.log(isOnline);
+      toast.warning("No Internet Connection");
+    }
+  }, [isOnline]);
+  if (!localStorage.getItem("accessToken") || !accessToken) {
     return <Navigate to="/adminlogin" replace />;
   }
+
   return (
     <div className="bg-[#E6E6E6] box-border h-screen w-full">
       <AdminTopbar />

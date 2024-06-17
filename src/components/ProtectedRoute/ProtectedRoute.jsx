@@ -4,22 +4,27 @@ import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { logoutAsync, selectToken } from "../app_start/authSlice";
 import { isExpired } from "react-jwt";
 import DestopAppDetails from "../MainLayout/DestopAppDetails";
+import useOnlineStatus from "../admin_and_S.admin/Functions/useOnlineStatus";
 const ProtectedRoute = ({ children }) => {
+  const isOnline = useOnlineStatus();
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
   const isMyTokenExpired = isExpired(token);
   console.log(token, accessToken, refreshToken);
   useEffect(() => {
-    if (isMyTokenExpired) {
+    if (accessToken && refreshToken && isMyTokenExpired) {
+      console.log("expire yes");
       dispatch(logoutAsync({ token: accessToken, refreshtoken: refreshToken }));
     }
   }, [dispatch, isMyTokenExpired, accessToken, refreshToken]);
-  if (
-    !localStorage.getItem("accessToken") &&
-    !accessToken &&
-    isMyTokenExpired
-  ) {
+  useEffect(() => {
+    if (!isOnline) {
+      console.log(isOnline);
+      toast.warning("No Internet Connection");
+    }
+  }, [isOnline]);
+  if (!localStorage.getItem("accessToken") || !accessToken) {
     return <Navigate to="/" replace />;
   }
   return (

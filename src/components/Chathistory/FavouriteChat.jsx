@@ -22,7 +22,7 @@ const FavouriteChat = ({
   }, [dispatch]);
   console.log(favoriteMessages);
   return (
-    <div className="relative  bg-black">
+    <div className="relative  bg-[#0f002b]">
       <div className="text-white py-2 px-4 flex font-bold text-[20px] items-center justify-between">
         <div className="gap-2 flex items-center">
           <Icon
@@ -41,7 +41,7 @@ const FavouriteChat = ({
           !favoriteMessages.some((favuser) =>
             favuser.favourite?.userId?.some((id) => id !== users._id)
           )) && (
-          <p className="mt-6 text-white font-semibold text-3xl w-full flex justify-center">
+          <p className="mt-6 text-white font-semibold text-2xl w-full flex justify-center">
             No favourite chat...
           </p>
         )}

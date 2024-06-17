@@ -45,7 +45,7 @@ const MyWalletMob = () => {
         <div className="relative w-4/5  m-auto mt-4 flex justify-between">
           <div>
             <p className="text-sm font-medium opacity-[70%]">Total Balance</p>
-            <p className="text-lg  font-bold">
+            <p className="text-lg  font-bold -mt-1">
               ₹ {users?.walletDetails?.totalAmount}
             </p>
           </div>
@@ -57,7 +57,7 @@ const MyWalletMob = () => {
             <Icon icon="fe:arrow-right" width={16} />
           </Button>
         </div>
-        <div className="mx-auto h-[1px] w-4/5 bg-black bg-opacity-[30%] relative mt-2" />
+        <div className="mx-auto h-[1px] w-4/5 bg-[#0f002b] bg-opacity-[30%] relative mt-2" />
         <div className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-4">
           <div className="text-white bg-[#0f002b] flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
             <div className="flex justify-between w-full items-center p-3">
@@ -130,7 +130,9 @@ const MyWalletMob = () => {
               className="cursor-pointer shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b] flex flex-wrap items-center p-2 gap-2 rounded-lg flex-1 max-w-[130px]"
             >
               <Icon icon="cil:bank" className="text-white" width={20} />
-              <div className="text-sm font-['Inter'] text-white">Withdraw</div>
+              <div className="text-sm font-['Inter'] mt-[1px] text-white">
+                Withdraw
+              </div>
             </Button>
           </div>
         </div>

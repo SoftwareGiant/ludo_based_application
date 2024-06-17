@@ -27,7 +27,7 @@ export function SidebarMob({
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  console.log(users);
 
   return (
     <React.Fragment>
@@ -208,6 +208,20 @@ export function SidebarMob({
                   Chat History
                 </div>
               </Link>
+              {users.role === "admin" && (
+                <Link
+                  to="/newonboard"
+                  className={`    
+          border-solid border-[rgba(15,_0,_43,_0.3)] shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]  flex flex-row gap-2 w-full h-8 items-center px-3 border rounded-lg
+          ${isClick9 ? "bg-[#ffcc4d]" : "bg-white"}
+          `}
+                >
+                  <Icon icon="ri:admin-fill" />
+                  <div className="text-xs font-['Nunito_Sans'] font-bold">
+                    Admin Dashboard
+                  </div>
+                </Link>
+              )}
             </div>
           ) : (
             <div className="flex flex-col w-full">

@@ -15,7 +15,7 @@ const NewGameSLider = () => {
       const response = await axios.get("/api/user/allSlider");
       setSliderData(response.data.slider.bannerContent);
     } catch (error) {
-      toast.error("Error fetching slider data:", error);
+      console.log("No interner connection", error);
     }
   };
 

@@ -98,7 +98,7 @@ const Chathistory = () => {
               OpenchatHistory
                 ? "translate-y-[100%] transition-transform delay-200"
                 : ""
-            } fixed bottom-0 py-10 rounded-t-3xl bg-black w-full justify-start items-center gap-3 pt-4 max-w-[480px]`}
+            } fixed bottom-0 py-10 rounded-t-3xl bg-[#0f002b] w-full justify-start items-center gap-3 pt-4 max-w-[480px]`}
           >
             <div>
               <div className="bg-white rounded-3xl w-32 h-1" />
