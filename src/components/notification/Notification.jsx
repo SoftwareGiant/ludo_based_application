@@ -33,7 +33,7 @@ const Notification = () => {
   const handlenotificationRead = async (notificationid) => {
     if (notificationid.readStatus === true) return;
     try {
-      const apiResponse = await axios.get(
+     await axios.get(
         `/api/notification/read/${notificationid._id}`,
         {
           headers: {
@@ -53,7 +53,7 @@ const Notification = () => {
   const clearAllNotifications = async (notificationid) => {
     if (notificationid.readStatus === true) return;
     try {
-      const apiResponse = await axios.get(`/api/notification/clearall`, {
+     await axios.get(`/api/notification/clearall`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
