@@ -13,7 +13,8 @@ const NewGameSLider = () => {
   const getSlides = async () => {
     try {
       const response = await axios.get("/api/user/allSlider");
-      setSliderData(response.data.slider.bannerContent);
+      console.log(response);
+      setSliderData(response?.data?.slider?.bannerContent);
     } catch (error) {
       console.log("No interner connection", error);
     }

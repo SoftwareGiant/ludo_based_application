@@ -14,12 +14,16 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { fetchUserDetail } from "./userSlice";
+import ButtonLoader from "../MainLayout/ButtonLoader";
 const MatchProgress = () => {
   const [isEnd, setIsEnd] = useState(false);
   const [openBottom, setOpenBottom] = useState(false);
   const [gameStatus, setGameStatus] = useState("");
   const [screenshot, setScreenshot] = useState("");
   const [filename, setFilename] = useState("");
+  const [isLoadLoss, setIsLoadLoss] = useState(false);
+  const [isLoadWon, setIsLoadWon] = useState(false);
+
   const navigate = useNavigate();
   const { accessToken } = useSelector((state) => state.auth);
   const users = useSelector((state) => state.user.user);
@@ -51,6 +55,7 @@ const MatchProgress = () => {
         return;
       }
       if (result === "loss") {
+        setIsLoadLoss(true);
         const obj = { outcome: "lose" };
         const response = await axios.post("api/game/updateresult", obj, {
           headers: {
@@ -61,6 +66,7 @@ const MatchProgress = () => {
         const data = response.data;
         if (response.status === 200) {
           toast.success(data.message);
+          setIsLoadLoss(false);
           setGameStatus(result);
         } else {
           toast.error(data?.message);
@@ -72,6 +78,7 @@ const MatchProgress = () => {
         }
         const obj = { outcome: "win", image: screenshot };
         console.log(obj);
+        setIsLoadWon(true);
         const response = await axios.post("api/game/updateresult", obj, {
           headers: {
             Authorization: `bearer ${accessToken}`,
@@ -80,6 +87,7 @@ const MatchProgress = () => {
         });
         const data = response.data;
         if (response.status === 200) {
+          setIsLoadWon(false);
           toast.success(data.message);
           setGameStatus(result);
         } else {
@@ -184,19 +192,19 @@ const MatchProgress = () => {
             </IconButton>
             <Button
               onClick={() => handleResult("loss")}
-              // onClick={() => setGameStatus("won")}
-              className={`${gameStatus === "won" ? "hidden" : ""} w-full`}
+              disabled={isLoadLoss}
+              className={`${gameStatus === "won" ? "hidden" : ""} w-full h-10 flex justify-center items-center`}
               color="red"
             >
-              Lost
+              {!isLoadLoss ? "Lost" : <ButtonLoader />}
             </Button>
             <Button
               onClick={() => handleResult("won")}
-              // onClick={() => setGameStatus("lost")}
+              disabled={isLoadWon}
               color="green"
-              className={`${gameStatus === "loss" ? "hidden" : ""} w-full`}
+              className={`${gameStatus === "loss" ? "hidden" : ""} w-full h-10 flex justify-center items-center`}
             >
-              won
+              {!isLoadWon ? "won" : <ButtonLoader />}
             </Button>
           </div>
         )}

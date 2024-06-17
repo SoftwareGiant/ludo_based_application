@@ -148,6 +148,7 @@ const SupportMob = () => {
           </div>
         </div>
       </div>
+      
       <div
         onClick={() => setShowEmojiPicker(false)}
         id="messages"

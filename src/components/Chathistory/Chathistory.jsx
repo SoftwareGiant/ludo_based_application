@@ -44,6 +44,7 @@ const Chathistory = () => {
   if (loading) {
     return <PageLoader />;
   }
+  console.log(allChatList)
   return (
     <div className="max-w-[480px]  bg-[#0F002B] w-full min-h-screen h-full">
       <div
@@ -122,9 +123,9 @@ const Chathistory = () => {
                     <div className="flex w-full  flex-col gap-0.5">
                       <div className="flex items-center justify-between">
                         <Typography variant="h5" color="blue-gray">
-                          {userchat?.messageDetails[0].senderId._id === users?._id
-                            ? userchat?.messageDetails[0].receiverId.userName || userchat?.messageDetails[0].receiverId._id.slice(-6)
-                            : userchat?.messageDetails[0].senderId.userName || userchat?.messageDetails[0].senderId._id.slice(-6)}
+                          {userchat?.messageDetails[0]?.senderId?._id === users?._id
+                            ? userchat?.messageDetails[0]?.receiverId?.userName || userchat?.messageDetails[0]?.receiverId._id?.slice(-6)
+                            : userchat?.messageDetails[0]?.senderId?.userName || userchat?.messageDetails[0]?.senderId._id?.slice(-6)}
                         </Typography>
                         <div className="5 flex items-center gap-0 ">
                           {formatDate(userchat?.messageDetails[0].timestamp)}

@@ -234,7 +234,7 @@ const ChatUserMob = () => {
           </div>
         )}
       </div>
-      <div className="z-10 flex mt-[68px]  border-b border-[#0f002b] justify-between py-2 px-4  items-center bg-[#fead3a] max-w-[480px] sm:w-[480px]   w-full">
+      <div className="z-10 flex mt-[68px] border-b border-[#0f002b] justify-between py-2   px-4  items-center bg-[#fead3a] max-w-[480px]  w-full">
         <div className="flex justify-center gap-2 items-center">
           <img
             onClick={() => navigate("/userprofile")}
@@ -322,8 +322,7 @@ const ChatUserMob = () => {
         </div>
       </div>
 
-      <div className="w-full  overflow-hidden h-full ">
-        <div className="flex flex-col h-full relative  ">
+      
           <div
             onClick={() => setShowEmojiPicker(false)}
             id="messages"
@@ -430,8 +429,7 @@ const ChatUserMob = () => {
               </div>
             </form>
           </div>
-        </div>
-      </div>
+     
       {player != "player2" && (
         <Drawer
           placement="bottom"
