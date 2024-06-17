@@ -67,7 +67,7 @@ import NotFoundpage from "./components/MainLayout/NotFoundpage.jsx";
 import GameRule from "./components/MainLayout/GameRule.jsx";
 import DestopSetup from "./components/MainLayout/DestopSetup.jsx";
 import Register from "./components/app_start/Register.jsx";
-import Payment from "./components/admin_and_S.admin/admin/Pages/payment.jsx";
+import Payment from "./components/admin_and_S.admin/admin/Pages/Payment.jsx";
 
 function App() {
   return (

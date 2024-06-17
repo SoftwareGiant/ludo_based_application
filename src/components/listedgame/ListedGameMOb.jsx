@@ -23,7 +23,7 @@ import Info from "../../assets/wallet/info.svg";
 import Sidebar from "../MainLayout/Sidebar";
 import { SidebarMob } from "../MainLayout/SidebarMob";
 import React, { useState } from "react";
-import "../../app.css";
+import "../../App.css";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { ProfileButton } from "../MainLayout/ProfileButton";
