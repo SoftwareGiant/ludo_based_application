@@ -468,9 +468,9 @@ const cancelGame = async (req, res, next) => {
   }
 };
 
-const allGameHistory = async (req, res, next) => {
+const allGameHistory = async (_, res, next) => {
   try {
-    const allGame = await GameDetail.find({});
+    const allGame = await GameDetail.find({}).sort({ matchingTimeStamp: -1 });
     if (allGame.length == 0) {
       return res.status(200).json({});
     }
