@@ -241,8 +241,8 @@ const updateResult = async (req, res, next) => {
     }
     const gameDetail = await GameDetail.findOne({
       $or: [{ player1: userId }, { player2: userId }],
-      status: "running"
-    }).populate("player1 player2");
+      // status: "running"
+    }).populate("player1 player2").sort({ matchingTimeStamp: -1 });
 
     if (!gameDetail) {
       throw new AppError("You are not active in any game!", 404);
@@ -257,6 +257,11 @@ const updateResult = async (req, res, next) => {
     }
 
     if (outcome === "win") {
+      if((gameDetail.gameResultDetail.player2.outcome == "lose"|| gameDetail.gameResultDetail.player1.outcome == "lose" )){
+        return res.status(200).json({
+          message: "Your result has already pdated as win! As opponent player accepted lose."
+        });
+      }   
       if (gameDetail.player1.id === userId) {
         gameDetail.gameResultDetail.player1.outcome = outcome;
         gameDetail.gameResultDetail.player1.proofImage = req.file.filename;
@@ -265,6 +270,11 @@ const updateResult = async (req, res, next) => {
         gameDetail.gameResultDetail.player2.proofImage = req.file.filename;
       }
     } else {
+      if((gameDetail.gameResultDetail.player2.outcome == "lose"|| gameDetail.gameResultDetail.player1.outcome == "lose" )){
+        return res.status(200).json({
+          message: "Your result is updated as win! As opponent player accepted lose."
+        });
+      }
       //agar khud se loose man leta hai to payment update kar doo okayyy.
       if (gameDetail.player1.id === userId) {
         gameDetail.gameResultDetail.player1.outcome = outcome;
@@ -286,6 +296,7 @@ const updateResult = async (req, res, next) => {
         message: "Result updated!In sometime you will get your winning cash."
       });
     }
+   
 
     const roomID = gameDetail.battleDetails.roomId;
 
