@@ -26,7 +26,7 @@ const Privacy = () => {
         <div className="bg-white flex flex-col gap-2 text-[#0F002B] font-[Nunito-Sans] w-full min-h-screen overflow-hidden relative p-4 pb-20">
           <b>Privacy Policy</b>
           <p>
-            Ludo King™ is committed to protecting your privacy. This Privacy
+            Ludo Maharaj™ is committed to protecting your privacy. This Privacy
             Policy explains how we collect, use, and disclose information about
             you when you use our mobile application (the "App") or website (the
             "Site").
@@ -63,7 +63,7 @@ const Privacy = () => {
             <li> - Respond to your inquiries and requests.</li>
             <li>
               - Send you administrative messages and other information about
-              Ludo King™.{" "}
+              Ludo Maharaj™.{" "}
             </li>
             <li> - Personalize your experience on our App or Site.</li>
             <li>- Analyze usage of our App or Site.</li>
@@ -93,7 +93,7 @@ const Privacy = () => {
             <li>
               If we believe your actions are inconsistent with our user
               agreements or policies, or to protect the rights, property and
-              safety of Ludo King™ or others.
+              safety of Ludo Maharaj™ or others.
             </li>
           </ul>
           <b> Security</b>

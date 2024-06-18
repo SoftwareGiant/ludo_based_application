@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from "react";
-import "../../App.css";
 import { Icon } from "@iconify-icon/react";
+import {
+    Menu, MenuHandler, MenuItem,
+    MenuList
+} from "@material-tailwind/react";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import * as Yup from "yup";
+import "../../App.css";
 import BackgroundImg from "../../assets/background.jpg";
 import CountryIcon from "../../assets/country.svg";
 import DropIcon from "../../assets/dropicon.svg";
-import { Link, useNavigate } from "react-router-dom";
 import ButtonLoader from "../MainLayout/ButtonLoader";
-import { useDispatch, useSelector } from "react-redux";
 import { loginAsync, selectToken } from "./authSlice";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import {
-  Menu,
-  MenuItem,
-  MenuList,
-  MenuHandler,
-} from "@material-tailwind/react";
-import { toast } from "react-toastify";
 
 const validationSchema = Yup.object().shape({
   number: Yup.string()
@@ -90,7 +88,7 @@ const LoginMob = () => {
                     <span>Ludo</span> <span>King </span>
                   </h3>
                   <h5 className="font-oooh text-4xl font-bold text-center ">
-                    Punch Line
+                    Play and Earn
                   </h5>
                 </div>
                 <>

@@ -1,16 +1,15 @@
+import { Icon } from "@iconify-icon/react";
+import { Button, Drawer } from "@material-tailwind/react";
 import React from "react";
-import { Drawer, Button } from "@material-tailwind/react";
+import { IoMenu } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import AddGame from "../../assets/new_game/addgame.svg";
-import Profile from "../../assets/new_game/profile.svg";
 import GameHistory from "../../assets/new_game/history.svg";
-import ReferEarn from "../../assets/new_game/refer&earn.svg";
 import Notification from "../../assets/new_game/notification.svg";
+import Profile from "../../assets/new_game/profile.svg";
+import ReferEarn from "../../assets/new_game/refer&earn.svg";
 import Support from "../../assets/new_game/support.svg";
 import BackBlack from "../../assets/profile/back_black.svg";
-import { IoMenu } from "react-icons/io5";
-import { Icon } from "@iconify-icon/react";
-import { useDispatch, useSelector } from "react-redux";
 
 export function SidebarMob({
   isClick1,
@@ -247,9 +246,9 @@ export function SidebarMob({
             <div className="flex flex-col justify-center items-center">
               <div className="text-2xl font-['Nunito_Sans'] font-bold text-[#0f002b]">
                 {" "}
-                LUDO KING{" "}
+                Ludo Maharaj{" "}
               </div>{" "}
-              <div className=" text-xl text-[#0f002b] -mt-2"> punch line</div>
+              <div className=" text-xl text-[#0f002b] -mt-2"> Play and Earn</div>
             </div>
             <div className="flex justify-between font-['Inter'] items-start w-full ">
               {" "}

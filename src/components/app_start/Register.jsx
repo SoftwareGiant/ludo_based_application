@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from "react";
-import "../../App.css";
 import { Icon } from "@iconify-icon/react";
+import {
+    Menu, MenuHandler, MenuItem,
+    MenuList
+} from "@material-tailwind/react";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import * as Yup from "yup";
+import "../../App.css";
 import BackgroundImg from "../../assets/background.jpg";
 import CountryIcon from "../../assets/country.svg";
 import DropIcon from "../../assets/dropicon.svg";
-import { Link, useNavigate } from "react-router-dom";
 import MyButton from "../MainLayout/MyButton";
-import { useDispatch, useSelector } from "react-redux";
 import { registerAsync, selectToken } from "./authSlice";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import {
-  Menu,
-  MenuItem,
-  MenuList,
-  MenuHandler,
-} from "@material-tailwind/react";
-import { toast } from "react-toastify";
 
 const validationSchema = Yup.object().shape({
   number: Yup.string()
@@ -99,10 +97,10 @@ const Register = () => {
               <div className="max-w-[480px] w-full h-full">
                 <div className="justify-center items-center  bg-gradient  flex flex-col   -mt-[6.95rem]">
                   <h3 className="text-center text-5xl font-['Nunito_Sans'] uppercase font-extrabold p-3 flex flex-wrap justify-center text-[#0f002b]">
-                    <span>Ludo</span> <span>King </span>
+                    <span>Ludo</span> <span>Maharaj </span>
                   </h3>
                   <h5 className="font-oooh text-4xl font-bold text-center ">
-                    Punch Line
+                    Play and Earn
                   </h5>
                 </div>
                 <>

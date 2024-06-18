@@ -1,5 +1,5 @@
-import React from "react";
 import { Icon } from "@iconify-icon/react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const AdminFooter = ({ logohide }) => {
@@ -11,9 +11,9 @@ const AdminFooter = ({ logohide }) => {
         }`}
       >
         <span className="font-[Nunito-Sans] font-extrabold text-[36px]">
-          LUDO KING
+          Ludo Maharaj
         </span>
-        <span className=" font-oooh font-normal text-[24px]">punch line</span>
+        <span className=" font-oooh font-normal text-[24px]">Play and Earn</span>
       </div>
       <div className="flex flex-col gap-3 font-[Nunito-Sans] text-[16px]">
         <div className="font-bold">Navigate</div>

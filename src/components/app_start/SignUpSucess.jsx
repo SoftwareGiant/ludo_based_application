@@ -7,10 +7,10 @@ const SignUpSucess = () => {
         <div className="flex flex-col ml-3 gap-20  items-start">
           <div className="relative flex flex-row justify-center w-full items-start">
             <div className="text-center text-6xl font-['Nunito_Sans'] font-bold text-white absolute top-0 left-0 h-20 w-[337px]">
-              LUDO KING
+              Ludo Maharaj
             </div>
             <div className="text-center text-4xl text-white relative mt-16">
-              punch line
+              Play and Earn
             </div>
           </div>
           <div className="flex flex-col ml-20 gap-6 w-1/2 font-['Inter'] items-start">

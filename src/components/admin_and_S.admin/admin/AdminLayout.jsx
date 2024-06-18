@@ -14,7 +14,6 @@ const AdminLayout = ({ children }) => {
   const token = useSelector(selectToken);
   const { accessToken, refreshToken } = useSelector((state) => state.auth);
   const isMyTokenExpired = isExpired(token);
-  console.log(token, accessToken, refreshToken);
   useEffect(() => {
     if (accessToken && refreshToken && isMyTokenExpired) {
       console.log("expire yes");
@@ -27,9 +26,9 @@ const AdminLayout = ({ children }) => {
       toast.warning("No Internet Connection");
     }
   }, [isOnline]);
-  if (isOnline) {
-    return <NoInternetPage />;
-  }
+  // if (isOnline) {
+  //   return <NoInternetPage />;
+  // }
   if (!localStorage.getItem("accessToken") || !accessToken) {
     return <Navigate to="/adminlogin" replace />;
   }

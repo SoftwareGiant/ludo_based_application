@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AddGame from "../../assets/new_game/addgame.svg";
-import Profile from "../../assets/new_game/profile.svg";
-import WinCash from "../../assets/new_game/wincash.svg";
-import Wallet from "../../assets/new_game/wallet.svg";
 import GameHistory from "../../assets/new_game/history.svg";
-import ReferEarn from "../../assets/new_game/refer&earn.svg";
 import Notification from "../../assets/new_game/notification.svg";
+import Profile from "../../assets/new_game/profile.svg";
+import ReferEarn from "../../assets/new_game/refer&earn.svg";
 import Support from "../../assets/new_game/support.svg";
+import Wallet from "../../assets/new_game/wallet.svg";
+import WinCash from "../../assets/new_game/wincash.svg";
 
 const Sidebar = ({
   isClick1,
@@ -28,11 +28,11 @@ const Sidebar = ({
             <div className="bg-[linear-gradient(180deg,_rgba(255,_255,_255,_0)_0%,#ffffff_100%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat mt-40 w-full h-10" />
           </div>
           <div className="text-center text-3xl font-['Nunito_Sans'] font-bold text-[#0e002b] relative mt-48">
-            LUDO KING
+            Ludo Maharaj
           </div>
         </div>
         <div className="text-center text-xl font-['Oooh_Baby'] mx-auto">
-          punch line
+          Play and Earn
         </div>
       </div>
       <div className="flex flex-col justify-center mx-auto gap-2 w-4/5 items-center">

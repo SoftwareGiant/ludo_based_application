@@ -42,7 +42,7 @@ const GameRule = () => {
         <div className="max-w-3xl font-[Nunito-Sans] mx-auto p-6 pt-0">
           <h2 className="text-xl font-bold mb-3">Rule 1 - Rule 12</h2>
           <p className="mb-4">
-            Ludo King™ is committed to protecting your privacy. This Privacy
+            Ludo Maharaj™ is committed to protecting your privacy. This Privacy
             Policy explains how we collect, use, and disclose information about
             you when you use our mobile application (the "App") or website (the
             "Site").
@@ -127,7 +127,7 @@ const GameRule = () => {
             <li>
               If we believe your actions are inconsistent with our user
               agreements or policies, or to protect the rights, property and
-              safety of Ludo King™ or others.
+              safety of Ludo Maharaj™ or others.
             </li>
           </ul>
 

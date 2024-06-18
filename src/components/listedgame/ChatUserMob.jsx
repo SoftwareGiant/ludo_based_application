@@ -453,7 +453,7 @@ const ChatUserMob = () => {
                   value={inputValue}
                   onChange={handleInputChange}
                   type="text"
-                  placeholder="Valid Classic Ludo King Code"
+                  placeholder="Valid Classic Ludo Maharaj Code"
                   className="p-4 rounded-md outline-none border-gray-400 border bg-[#0f002b] text-gray-400 font-bold w-[90%]"
                 />
                 <Button
