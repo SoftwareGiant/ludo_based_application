@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const LudoMainLogo = () => {
+const LudoMainLogo = ({light}) => {
     const navigate= useNavigate();
   return (
-    <div onClick={()=>navigate("/")} className="cursor-pointer flex flex-col text-[#0f002b] ">
+    <div onClick={()=>navigate("/")} className={`cursor-pointer flex flex-col ${light ? "text-white" : "text-[#0f002b]"}  `}>
       <div className="  text-base font-['Nunito_Sans'] font-extrabold ">
         LUDO KING
       </div>

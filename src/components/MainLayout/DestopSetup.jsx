@@ -6,6 +6,7 @@ import { isExpired } from "react-jwt";
 import DestopAppDetails from "./DestopAppDetails";
 import { toast } from "react-toastify";
 import useOnlineStatus from "../admin_and_S.admin/Functions/useOnlineStatus";
+import NoInternetPage from "./NoInternetPage";
 
 const DestopSetup = ({ children }) => {
   const isOnline = useOnlineStatus();
@@ -27,6 +28,10 @@ const DestopSetup = ({ children }) => {
       toast.warning("No Internet Connection");
     }
   }, [isOnline]);
+  if (!isOnline) {
+    return <NoInternetPage />;
+  }
+
   return (
     <div className="sm:flex  h-screen ">
       <div className="max-h-screen max-w-[480px] w-full sm:min-w-[480px]  overflow-scroll">

@@ -5,6 +5,8 @@ import { logoutAsync, selectToken } from "../app_start/authSlice";
 import { isExpired } from "react-jwt";
 import DestopAppDetails from "../MainLayout/DestopAppDetails";
 import useOnlineStatus from "../admin_and_S.admin/Functions/useOnlineStatus";
+import NoInternetPage from "../MainLayout/NoInternetPage";
+import { toast } from "react-toastify";
 const ProtectedRoute = ({ children }) => {
   const isOnline = useOnlineStatus();
   const dispatch = useDispatch();
@@ -24,6 +26,9 @@ const ProtectedRoute = ({ children }) => {
       toast.warning("No Internet Connection");
     }
   }, [isOnline]);
+  if (!isOnline) {
+    return <NoInternetPage />;
+  }
   if (!localStorage.getItem("accessToken") || !accessToken) {
     return <Navigate to="/" replace />;
   }

@@ -39,7 +39,7 @@ export function SidebarMob({
       </Button>
 
       <Drawer
-        className="bg-[#fead3a]  min-h-screen overflow-scroll"
+        className="bg-[#fead3a]  min-h-screen h-[40%] overflow-scroll"
         size={490}
         open={open}
         onClose={closeDrawer}
@@ -57,7 +57,7 @@ export function SidebarMob({
           />
         </Button>
 
-        <div className="flex flex-col justify-between w-full h-[90%]">
+        <div className="flex flex-col justify-between w-full ">
           {users ? (
             <div className="flex flex-col justify-center  mx-auto gap-2 w-3/5 items-center">
               <Link
@@ -242,7 +242,7 @@ export function SidebarMob({
               </Button>
             </div>
           )}
-          <div className="flex mb-2 flex-col gap-2 w-full max-w-[480px] px-6 font-['Oooh_Baby'] justify-center items-center pt-4">
+          <div className="flex mb-2 absolute bottom-0 flex-col gap-2 w-full max-w-[480px] px-6 font-['Oooh_Baby'] justify-center items-center pt-4">
             {" "}
             <div className="flex flex-col justify-center items-center">
               <div className="text-2xl font-['Nunito_Sans'] font-bold text-[#0f002b]">

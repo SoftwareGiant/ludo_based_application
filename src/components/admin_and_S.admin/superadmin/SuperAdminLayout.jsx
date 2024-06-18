@@ -6,6 +6,7 @@ import { selectToken } from "../../app_start/authSlice";
 import { isExpired } from "react-jwt";
 import { useDispatch, useSelector } from "react-redux";
 import useOnlineStatus from "../Functions/useOnlineStatus";
+import NoInternetPage from "../../MainLayout/NoInternetPage";
 
 const SuperAdminLayout = ({ children }) => {
   const isOnline = useOnlineStatus();
@@ -26,6 +27,9 @@ const SuperAdminLayout = ({ children }) => {
       toast.warning("No Internet Connection");
     }
   }, [isOnline]);
+  if (!isOnline) {
+    return <NoInternetPage />;
+  }
   if (!localStorage.getItem("accessToken") || !accessToken) {
     return <Navigate to="/adminlogin" replace />;
   }

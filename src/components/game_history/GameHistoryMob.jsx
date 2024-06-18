@@ -47,7 +47,8 @@ const GameHistoryMob = () => {
                 className=" bg-white flex flex-col w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative mt-2 mb-2 shadow-md hover:shadow-xl"
               >
                 <div className="text-white bg-[#0f002b] flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
-                  <div className="flex justify-between w-full items-center p-3">
+                  <div className="flex justify-start gap-1 w-full items-center p-3">
+                  <Icon icon="mingcute:time-line" />
                     <span className=" shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)]">
                       {convertTimestamp(game?.gameClosingTimeStamp)}
                     </span>

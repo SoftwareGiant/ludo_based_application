@@ -55,14 +55,14 @@ export const loginAsync = createAsyncThunk(
 
 export const logoutAsync = createAsyncThunk(
   'auth/logout',
-  async (_, thunkAPI) => {
+  async (_, rejectWithValue) => {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
     if (!refreshToken || !accessToken) {
-
-      return thunkAPI.rejectWithValue('Token not found');
+      return rejectWithValue('Token not found');
     }
+
     try {
       const response = await axios.post(
         '/api/user/logout',
@@ -88,7 +88,7 @@ export const logoutAsync = createAsyncThunk(
         localStorage.removeItem('refreshToken');
       }
       toast.error(error);
-      return thunkAPI.rejectWithValue(error.message || 'An error occurred during logout');
+      return rejectWithValue(error || 'An error occurred during logout');
 
     }
   }
@@ -100,6 +100,15 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(registerAsync.fulfilled, (state, action) => {
+        const { accessToken, refreshToken } = action.payload;
+        state.accessToken = accessToken;
+        state.refreshToken = refreshToken;
+      })
+      .addCase(registerAsync.rejected, (state) => {
+        state.accessToken = null;
+        state.refreshToken = null;
+      })
       .addCase(loginAsync.fulfilled, (state, action) => {
         const { accessToken, refreshToken } = action.payload;
         state.accessToken = accessToken;

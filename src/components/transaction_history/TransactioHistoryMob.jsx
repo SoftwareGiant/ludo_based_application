@@ -9,6 +9,7 @@ import PageLoader from "../MainLayout/PageLoader";
 import { convertTimestamp } from "../admin_and_S.admin/Functions/convertTimestamp";
 import TotoalBal, { ProfileButton } from "../MainLayout/ProfileButton";
 import { fetchUserDetail } from "../live_battle/userSlice";
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 
 const TransactioHistoryMob = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const TransactioHistoryMob = () => {
         />
         <div className="bg-[#fead3a] flex flex-row justify-between max-w-[480px] w-full h-12 items-start pt-2 px-5 ">
           <div className="flex flex-row gap-3  items-start">
-          <SidebarMob users={users} />
+            <SidebarMob users={users} />
             <LudoMainLogo />
           </div>
           <div className="flex gap-2 items-center">
@@ -54,7 +55,8 @@ const TransactioHistoryMob = () => {
                 className="shadow-[0px_0px_4px_0px_rgba(255,_255,_255,_0.25)] bg-white flex flex-col  w-4/5 m-auto rounded-lg  font-['Nunito-Sans'] relative my-4"
               >
                 <div className="text-white bg-[#0f002b] py-3 flex flex-col gap-2 w-full rounded-tl-lg rounded-tr-lg">
-                  <div className="flex justify-between w-full items-center p-3">
+                  <div className="flex justify-start gap-1 w-full items-center p-3">
+                    <Icon icon="mingcute:time-line" />
                     <span className=" shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)]">
                       {convertTimestamp(payment.timestamp)}
                     </span>

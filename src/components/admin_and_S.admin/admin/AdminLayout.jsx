@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectToken } from "../../app_start/authSlice";
 import useOnlineStatus from "../Functions/useOnlineStatus";
 import { toast } from "react-toastify";
+import NoInternetPage from "../../MainLayout/NoInternetPage";
 const AdminLayout = ({ children }) => {
   const isOnline = useOnlineStatus();
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ const AdminLayout = ({ children }) => {
       toast.warning("No Internet Connection");
     }
   }, [isOnline]);
+  if (isOnline) {
+    return <NoInternetPage />;
+  }
   if (!localStorage.getItem("accessToken") || !accessToken) {
     return <Navigate to="/adminlogin" replace />;
   }

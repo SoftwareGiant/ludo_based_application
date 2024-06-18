@@ -115,7 +115,7 @@ const AdminSLides = () => {
             </span>
           </div>
           <div className="flex flex-wrap">
-            {/* {sliderData.map((image, index) => (
+            {sliderData?.map((image, index) => (
               <div key={index} className="relative m-2 ">
                 <div className="w-52 h-28 rounded-md shadow-md overflow-hidden relative border-2 border-black ">
                   <img
@@ -134,7 +134,7 @@ const AdminSLides = () => {
                   </button>
                 </div>
               </div>
-            ))} */}
+            ))}
           </div>
           <div className="m-2 flex gap-2 ">
             <div>

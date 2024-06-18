@@ -22,7 +22,7 @@ console.log(accessToken)
   const closeModal = () => {
     setIsOpen(false);
   };
-  const url = `http://139.84.169.91:8003/api/superadmin/approvewithdrawl/${id}`;
+  const url = `http://localhost:8003/api/superadmin/approvewithdrawl/${id}`;
 
   const ApproveWithdrawal = () => {
     axios

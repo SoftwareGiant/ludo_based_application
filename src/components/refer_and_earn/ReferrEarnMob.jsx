@@ -31,7 +31,7 @@ const ReferrEarnMob = () => {
   const copyRefferal = async () => {
     try {
       await navigator.clipboard.writeText(
-        `http://139.84.169.91:5173/register/refferal=${users?.referralDetails?.referralCode}`
+        `http://localhost:5173/register/refferal=${users?.referralDetails?.referralCode}`
       );
       toast.success("Text copied to clipboard: ");
     } catch (error) {
@@ -44,7 +44,6 @@ const ReferrEarnMob = () => {
     let url = "";
     switch (platform) {
       case "facebook":
-        // Replace with the appropriate Facebook share URL construction
         url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
           shareUrl
         )}`;
@@ -72,7 +71,7 @@ const ReferrEarnMob = () => {
         await navigator.share({
           title: "Join me on this awesome platform!",
           text: "Sign up using my referral link and get great benefits!",
-          url: `http://139.84.169.91:5173/register?refferal=${users?.referralDetails?.referralCode}`,
+          url: `http://localhost:5173/register?refferal=${users?.referralDetails?.referralCode}`,
         });
       } catch (error) {
         toast.error("Error sharing content: " + error.message);
@@ -181,7 +180,7 @@ const ReferrEarnMob = () => {
                   {users?.referralDetails?.referralCode || "Refer code"}
                 </div>
               </div>
-              <div className="text-justify font-['Inter'] font-bold text-white w-[70%]">
+              <div className="text-justify font-['Inter'] font-bold text-white w-[80%]">
                 This is your referral link. Refer your friends and earn 1%
                 commission on their winning amount.
               </div>

@@ -23,19 +23,12 @@ const validationSchema = Yup.object({
   aadharBack: Yup.mixed().required("*required"),
 });
 const NewProfileMob = () => {
-  const [aadharFront, setAadharFront] = useState(null);
-  const [aadharBack, setAadharBack] = useState(null);
-  const [aadharfrontname, setaadharfrontName] = useState("");
-  const [aadharbackname, setaadharbackName] = useState("");
-  const [aadharNumber, setAadharNumber] = useState("");
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [scrollPosition, setScrollPosition] = useState(0);
   const users = useSelector((state) => state.user.user);
   const [isUserNameEdit, setIsUserNameEdit] = useState(false);
   const [userName, setUserName] = useState(users?.userName || "");
-
   console.log(users);
   const [openBottom, setOpenBottom] = useState(
     users?.userKyc?.verificationStatus === "pending" ? true : false
@@ -395,9 +388,9 @@ const NewProfileMob = () => {
                     </div>
 
                     <div className="flex w-full gap-2">
-                      <div className="flex flex-1  flex-col">
+                      <div className="flex flex-1 flex-col">
                         {values.aadharFront ? (
-                          <div className="rounded-md flex-1 gap-2 bg-white bg-opacity-[60%] text-white flex justify-start items-center text-xs">
+                          <div className="rounded-md flex-1 gap-2 bg-white bg-opacity-[60%] text-white flex justify-start items-center  text-xs">
                             <IconButton
                               className="p-1 m-1 h-8 w-8"
                               onClick={() => setFieldValue("aadharFront", null)}
@@ -430,7 +423,7 @@ const NewProfileMob = () => {
                           className="text-red-500  text-sm"
                         />
                       </div>
-                      <div className="flex flex-1 flex-col">
+                      <div className="flex flex-1  flex-col">
                         {values.aadharBack ? (
                           <div className="rounded-md flex-1 gap-2 bg-white bg-opacity-[60%] text-white flex justify-start items-center text-xs">
                             <IconButton
