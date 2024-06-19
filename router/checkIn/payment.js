@@ -14,26 +14,23 @@ router.get("/initiatepay", async (req, res) => {
         mid: "bbQIzF29591902062446",
         websiteName: "WEBSTAGING",
         orderId: orderId,
-        // callbackUrl: "http://localhost:8001/",
+        // callbackUrl: "http://139.84.169.91:8001/",
         // callbackUrl: "https://merchant.com/callback",
         txnAmount: {
           value: "1.00",
-          currency: "INR",
+          currency: "INR"
         },
         userInfo: {
-          custId: "CUST_001",
-        },
-      },
+          custId: "CUST_001"
+        }
+      }
     };
 
     try {
-      const checksum = await PaytmChecksum.generateSignature(
-        JSON.stringify(paytmParams.body),
-        "PWnRzFfgokrWpZLN",
-      );
+      const checksum = await PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), "PWnRzFfgokrWpZLN");
 
       paytmParams.head = {
-        signature: checksum,
+        signature: checksum
       };
 
       const post_data = JSON.stringify(paytmParams);
@@ -46,8 +43,8 @@ router.get("/initiatepay", async (req, res) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Content-Length": post_data.length,
-        },
+          "Content-Length": post_data.length
+        }
       };
 
       const response = await new Promise((resolve, reject) => {

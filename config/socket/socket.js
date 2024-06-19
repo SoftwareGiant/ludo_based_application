@@ -6,7 +6,7 @@ const Socket = (app) => {
   const httpServer = createServer(app);
   global.io = new Server(httpServer, {
     cors: {
-      origin: "http://localhost:5173",
+      origin: "http://139.84.169.91:5173",
       methods: ["GET", "POST"]
     }
   });
