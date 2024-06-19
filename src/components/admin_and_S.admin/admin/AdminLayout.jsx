@@ -27,7 +27,7 @@ const AdminLayout = ({ children }) => {
       toast.warning("No Internet Connection");
     }
   }, [isOnline]);
-  if (isOnline) {
+  if (!isOnline) {
     return <NoInternetPage />;
   }
   if (!localStorage.getItem("accessToken") || !accessToken) {
