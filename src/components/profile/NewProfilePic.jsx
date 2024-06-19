@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { fetchUserDetail } from "../live_battle/userSlice";
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 const NewProfilePic = () => {
   const [imageFile, setImageFile] = useState(
     "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -73,12 +74,11 @@ const NewProfilePic = () => {
       <div className="bg-[#fead3a]  w-full overflow-hidden relative">
         <div className="flex bg-[#fead3a] justify-between items-center px-4 py-2 w-full">
           <div className="flex gap-5 items-center">
-            <img
+            <Icon
               onClick={() => navigate("/profile")}
-              src="https://file.rendit.io/n/Bh3TjQUvsgxuYLevIVW7.svg"
-              alt="HardwareKeyboardBackspace icon"
-              id="Epback"
-              className="cursor-pointer w-6"
+              icon="mingcute:arrow-left-line"
+              width="32"
+              className="cursor-pointer"
             />
           </div>
         </div>
@@ -95,7 +95,7 @@ const NewProfilePic = () => {
           </span>
         </div>
 
-        <div className="flex fixed bottom-0 py-10 rounded-t-3xl bg-black w-full justify-center items-center gap-10 pt-10 max-w-[480px]  ">
+        <div className="flex fixed bottom-0 py-10 rounded-t-3xl  bg-[#0f002b] w-full justify-center items-center gap-10 pt-10 max-w-[480px]  ">
           <div>
             <label
               htmlFor="image-upload"

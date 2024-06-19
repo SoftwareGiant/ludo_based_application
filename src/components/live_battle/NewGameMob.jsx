@@ -345,7 +345,7 @@ const NewGameMob = () => {
                   id="StartYourOwnBattle1"
                   className="text-xl font-['Inter']"
                 >
-                  start your own <span className="font-bold">battle</span>
+                  Start your own <span className="font-bold">battle</span>
                 </div>
                 <Button
                   variant="text"
@@ -440,7 +440,7 @@ const NewGameMob = () => {
                                   </span>
                                 ) : (
                                   <div>
-                                    open challenge from
+                                    Open challenge from
                                     <span className="font-extrabold pl-1">
                                       {e.player1.slice(-6)}
                                     </span>
@@ -605,7 +605,8 @@ const NewGameMob = () => {
           onClose={closeDrawerBottom}
           className="w-[480px] p-4  bg-[#fead3a] rounded-t-3xl"
         >
-          <div className="mb-4 flex items-center justify-start gap-2">
+          <div className="w-[50%] h-[2px] bg-[#0f002b] rounded-full m-auto -mt-1" />
+          <div className="my-3 flex items-center justify-start gap-2">
             <IconButton
               variant="text"
               color="blue-gray"
@@ -635,7 +636,7 @@ const NewGameMob = () => {
             </div>
           </div>
 
-          <Typography className="mb-4 mt-12 pr-4 flex justify-center font-normal">
+          <Typography className="mb-4 mt-8 pr-4 flex justify-center font-normal">
             You are creating a new open battle
           </Typography>
           <div className="flex justify-center w-full">

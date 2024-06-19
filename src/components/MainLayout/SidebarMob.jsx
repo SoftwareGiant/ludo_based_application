@@ -106,7 +106,7 @@ export function SidebarMob({
                     My Wallet
                   </p>
                 </div>
-                <div className="bg-black cursor-pointer hover:shadow-md flex items-center gap-2 -mt-2 rounded-2xl px-2  text-white">
+                <div className="bg-[#0f002b] cursor-pointer hover:shadow-md flex items-center gap-2 -mt-2 rounded-2xl px-2  text-white">
                   <p>₹{users?.walletDetails?.totalAmount}</p>{" "}
                 </div>
               </Link>

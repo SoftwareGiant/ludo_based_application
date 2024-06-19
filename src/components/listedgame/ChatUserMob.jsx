@@ -218,7 +218,7 @@ const ChatUserMob = () => {
           <LudoMainLogo />
         </div>
         {messageList.length <= 0 ? (
-          <div className="bg-[#1E1E1E] cursor-pointer px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold">
+          <div className="bg-[#0F002B]  cursor-pointer px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold">
             New game
           </div>
         ) : (
@@ -226,7 +226,7 @@ const ChatUserMob = () => {
             <TotoalBal users={users} />
 
             <div
-              className="bg-[#1E1E1E] cursor-pointer px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold"
+              className="bg-[#0f002b] cursor-pointer px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold"
               onClick={() => navigate("/matchstart")}
             >
               Start
@@ -258,7 +258,7 @@ const ChatUserMob = () => {
               onClick={handleRemoveFav}
               className="cursor-pointer"
               icon="ph:star-fill"
-              style={{ color: "black" }}
+              style={{ color: "#0F002B" }}
               width="32"
             />
           ) : (
@@ -266,7 +266,7 @@ const ChatUserMob = () => {
               className="cursor-pointer"
               onClick={() => handleFav()}
               icon="fluent:star-add-28-regular"
-              style={{ color: "black" }}
+              style={{ color: "#0F002B" }}
               width="32"
             />
           )}
@@ -322,114 +322,107 @@ const ChatUserMob = () => {
         </div>
       </div>
 
-      
-          <div
-            onClick={() => setShowEmojiPicker(false)}
-            id="messages"
-            className="flex z-10 h-full flex-col space-y-4 p-3 overflow-y-auto table-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
-          >
-            {messageList.length > 0 &&
-              messageList?.map((message, index) => (
-                <div
-                  key={index}
-                  className={`flex  ${
-                    message.senderId == userId
-                      ? "justify-end "
-                      : "justify-start"
-                  } mb-2`}
-                >
-                  <div
-                    className={`${
-                      message.senderId == userId
-                        ? "bg-white text-black self-end pl-5 rounded-br-none"
-                        : "bg-black text-white self-start pr-5 rounded-bl-none "
-                    } p-2 rounded-xl max-w-md overflow-hidden font-semibold `}
-                    style={{
-                      maxWidth: "80%",
-                      whiteSpace: "normal",
-                      overflowWrap: "break-word",
-                    }}
-                  >
-                    <span>{message?.message}</span>
-                    <span
-                      className={`text-xs block text-gray-500 mt-1 ${
-                        message?.senderId === userId ? "text-end" : "text-start"
-                      }`}
-                    >
-                      {message?.timestamp && getTime(message?.timestamp)}
-                    </span>
-                    {message.image && (
-                      <img
-                        src={message.image}
-                        alt="Shared"
-                        className="mt-1"
-                        style={{ maxWidth: "100%" }}
-                      />
-                    )}
-                  </div>
-                </div>
-              ))}
-          </div>
-          <div className="border-t-2  z-10 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
-            <form
-              onSubmit={handleSendMessage}
-              className="relative items-center flex bg-gray-200 rounded-xl px-2"
+      <div
+        onClick={() => setShowEmojiPicker(false)}
+        id="messages"
+        className="flex z-10 h-full flex-col space-y-4 p-3 overflow-y-auto table-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
+      >
+        {messageList.length > 0 &&
+          messageList?.map((message, index) => (
+            <div
+              key={index}
+              className={`flex  ${
+                message.senderId == userId ? "justify-end " : "justify-start"
+              } mb-2`}
             >
-              {showEmojiPicker && (
-                <div className="absolute bottom-16 left-2">
-                  <Picker
-                    autoFocus
-                    data={data}
-                    onEmojiSelect={handleEmojiSelect}
-                  />
-                </div>
-              )}
               <div
-                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-                className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+                className={`${
+                  message.senderId == userId
+                    ? "bg-white text-black self-end pl-5 rounded-br-none"
+                    : "bg-black text-white self-start pr-5 rounded-bl-none "
+                } p-2 rounded-xl max-w-md overflow-hidden font-semibold `}
+                style={{
+                  maxWidth: "80%",
+                  whiteSpace: "normal",
+                  overflowWrap: "break-word",
+                }}
               >
-                <Icon icon="mingcute:emoji-line" width="32" />
-              </div>
-              <input
-                onClick={() => setShowEmojiPicker(false)}
-                ref={inputRef}
-                type="text"
-                placeholder="Type a message..."
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className="rounded-full w-full pr-20 py-3 pl-1 bg-gray-200 focus:outline-none"
-              />
-              <div className="absolute inset-y-0 right-0 flex items-center">
-                <div>
-                  <label
-                    htmlFor="upload-image"
-                    className="cursor-pointer flex items-center justify-center w-10"
-                  >
-                    <Icon id="Attachment" icon="tdesign:attach" width="28" />
-                  </label>
-                  <input
-                    id="upload-image"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    className="hidden"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+                <span>{message?.message}</span>
+                <span
+                  className={`text-xs block text-gray-500 mt-1 ${
+                    message?.senderId === userId ? "text-end" : "text-start"
+                  }`}
                 >
-                  <Icon
-                    className={`${message ? "text-blue-gray-900" : ""}`}
-                    id="Send"
-                    icon="carbon:send-filled"
-                    width="28"
+                  {message?.timestamp && getTime(message?.timestamp)}
+                </span>
+                {message.image && (
+                  <img
+                    src={message.image}
+                    alt="Shared"
+                    className="mt-1"
+                    style={{ maxWidth: "100%" }}
                   />
-                </button>
+                )}
               </div>
-            </form>
+            </div>
+          ))}
+      </div>
+      <div className="border-t-2  z-10 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
+        <form
+          onSubmit={handleSendMessage}
+          className="relative items-center flex bg-gray-200 rounded-xl px-2"
+        >
+          {showEmojiPicker && (
+            <div className="absolute bottom-16 left-2">
+              <Picker autoFocus data={data} onEmojiSelect={handleEmojiSelect} />
+            </div>
+          )}
+          <div
+            onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+            className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+          >
+            <Icon icon="mingcute:emoji-line" width="32" />
           </div>
-     
+          <input
+            onClick={() => setShowEmojiPicker(false)}
+            ref={inputRef}
+            type="text"
+            placeholder="Type a message..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="rounded-full w-full pr-20 py-3 pl-1 bg-gray-200 focus:outline-none"
+          />
+          <div className="absolute inset-y-0 right-0 flex items-center">
+            <div>
+              <label
+                htmlFor="upload-image"
+                className="cursor-pointer flex items-center justify-center w-10"
+              >
+                <Icon id="Attachment" icon="tdesign:attach" width="28" />
+              </label>
+              <input
+                id="upload-image"
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="hidden"
+              />
+            </div>
+            <button
+              type="submit"
+              className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+            >
+              <Icon
+                className={`${message ? "text-blue-gray-900" : ""}`}
+                id="Send"
+                icon="carbon:send-filled"
+                width="28"
+              />
+            </button>
+          </div>
+        </form>
+      </div>
+
       {player != "player2" && (
         <Drawer
           placement="bottom"
