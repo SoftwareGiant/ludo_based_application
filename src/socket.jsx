@@ -7,7 +7,7 @@
 
 //   const [socket, setSocket] = useState(null);
 //   useEffect(() => {
-//       const socket = io("http://localhost:8003");
+//       const socket = io("http://139.84.169.91:8003");
 //       setSocket(socket);
 //       return () => socket.close();
 //   }, []);
@@ -17,8 +17,7 @@
 
 // export default SocketProvider;
 
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import React, { useEffect, useContext } from "react";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import io from "socket.io-client";
 

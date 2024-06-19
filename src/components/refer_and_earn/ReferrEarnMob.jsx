@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import "../../App.css";
-import { SidebarMob } from "../MainLayout/SidebarMob";
-import { toast } from "react-toastify";
-import LudoMainLogo from "../MainLayout/LudoMainLogo";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
-import TotoalBal, { ProfileButton } from "../MainLayout/ProfileButton";
-import { fetchUserDetail } from "../live_battle/userSlice";
-import { useDispatch, useSelector } from "react-redux";
 import { Button, IconButton } from "@material-tailwind/react";
-import ReferralList from "./ReferralList";
-import HelpButton from "../MainLayout/HelpButton";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "../../App.css";
+import { fetchUserDetail } from "../live_battle/userSlice";
+import HelpButton from "../MainLayout/HelpButton";
+import LudoMainLogo from "../MainLayout/LudoMainLogo";
+import TotoalBal, { ProfileButton } from "../MainLayout/ProfileButton";
+import { SidebarMob } from "../MainLayout/SidebarMob";
+import ReferralList from "./ReferralList";
 
 const ReferrEarnMob = () => {
   const [isLIst, setIslist] = useState(false);

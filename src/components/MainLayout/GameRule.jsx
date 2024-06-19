@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import TopbarMobile from "../MainLayout/TopbarMobile";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { IconButton } from "@material-tailwind/react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { fetchUserDetail } from "../live_battle/userSlice";
+import TopbarMobile from "../MainLayout/TopbarMobile";
 
 const GameRule = () => {
   const navigate = useNavigate();
@@ -111,10 +111,10 @@ const GameRule = () => {
               want us to share your personal information with these companies,
               please contact us at{" "}
               <a
-                href="mailto:support@ludoking.com"
+                href="mailto:support@ludomaharaj.com"
                 className="text-blue-500 underline"
               >
-                support@ludoking.com
+                support@ludomaharaj.com
               </a>
               .
             </li>
@@ -162,10 +162,10 @@ const GameRule = () => {
             If you have any questions about this Privacy Policy, please contact
             us at{" "}
             <a
-              href="mailto:support@ludoking.com"
+              href="mailto:support@ludomaharaj.com"
               className="text-blue-500 underline"
             >
-              support@ludoking.com
+              support@ludomaharaj.com
             </a>
             .
           </p>

@@ -1,6 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { RxCross2 } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
 import LudoMainLogo from "../MainLayout/LudoMainLogo";
 
 const Privacy = () => {
@@ -81,7 +81,7 @@ const Privacy = () => {
               - With third parties for their own marketing purposes. If you do
               not want us to share your personal information with these
               companies, please contact us at
-              [support@ludoking.com](mailto:support@ludoking.com).{" "}
+              [support@ludomaharaj.com](mailto:support@ludomaharaj.com).{" "}
             </li>
             <li>
               {" "}
@@ -122,7 +122,7 @@ const Privacy = () => {
           <b> Contact Us</b>
           <p>
             If you have any questions about this Privacy Policy, please contact
-            us at [support@ludoking.com](mailto:support@ludoking.com).
+            us at [support@ludomaharaj.com](mailto:support@ludomaharaj.com).
           </p>
         </div>
       </div>

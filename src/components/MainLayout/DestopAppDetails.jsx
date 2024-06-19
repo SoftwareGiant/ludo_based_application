@@ -1,8 +1,8 @@
 import React from "react";
 // import desktopExtra from "../assets/new_game/desktopExtra.png";
-import ludoimagedestop from "../../assets/new_game/ludoimagedestop.png";
-import desktopExtra from "../../assets/new_game/desktopExtra.png";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import desktopExtra from "../../assets/new_game/desktopExtra.png";
+import ludoimagedestop from "../../assets/new_game/ludoimagedestop.png";
 
 const DestopAppDetails = () => {
   return (
@@ -31,7 +31,7 @@ const DestopAppDetails = () => {
         </div>
       </div>
       <div className="flex flex-col rounded-2xl absolute bottom-10 right-16 text-white  gap-3 w-[350px] p-4 py-3 shadow-md border-white">
-        <span> For best experience, open ludoking.in on</span>
+        <span> For best experience, open ludomaharaj.com on</span>
         <div className="flex gap-3 items-center">
           {" "}
           <Icon icon="devicon:chrome" />

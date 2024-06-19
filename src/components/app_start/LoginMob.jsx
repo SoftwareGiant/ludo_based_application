@@ -84,8 +84,8 @@ const LoginMob = () => {
             <div className="h-full flex flex-col justify-between">
               <div className="max-w-[480px] w-full h-full">
                 <div className="justify-center items-center  bg-gradient  flex flex-col   -mt-[6.95rem]">
-                  <h3 className="text-center text-5xl font-['Nunito_Sans'] uppercase font-extrabold p-3 flex flex-wrap justify-center text-[#0f002b]">
-                    <span>Ludo</span> <span>King </span>
+                  <h3 className="text-center text-5xl font-['Nunito_Sans'] font-extrabold p-3 flex flex-wrap justify-center text-[#0f002b]">
+                    <span>Ludo</span> <span>Maharaj </span>
                   </h3>
                   <h5 className="font-oooh text-4xl font-bold text-center ">
                     Play and Earn
