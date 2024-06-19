@@ -2,33 +2,33 @@ const express = require("express");
 const session = require("express-session");
 const path = require("path");
 const cors = require("cors");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 const rateLimit = require("express-rate-limit");
 module.exports.expressMiddleware = (app) => {
-  app.use((req,res,next)=>{
+  app.use((req, res, next) => {
     next();
-  })
+  });
   app.use(
     session({
       secret: "Storing all the phoneNo of user",
       resave: false,
-      saveUninitialized: true,
-    }),
+      saveUninitialized: true
+    })
   );
   app.use(
     cors({
       origin: ["http://localhost:5173"],
       methods: ["GET", "POST"],
-      credentials: true,
-    }),
+      credentials: true
+    })
   );
   app.use(express.json({ limit: "50mb" }));
   app.use(express.static(path.join(__dirname, "public")));
   app.use(
     session({
-      secret: "Ludo King Based Game",
-      cookie: { maxAge: 60000 * 30 },
-    }),
+      secret: "Ludo Maharaj Based Game",
+      cookie: { maxAge: 60000 * 30 }
+    })
   );
   app.use(express.urlencoded({ extended: false }));
   app.use(express.static(__dirname + "/public"));
@@ -46,7 +46,7 @@ module.exports.expressMiddleware = (app) => {
       next();
     }
   });
-  
+
   // const limiter = rateLimit({
   //   windowMs: 24 * 60 * 60 * 1000,
   //   max: 1000,
@@ -54,6 +54,6 @@ module.exports.expressMiddleware = (app) => {
   //   standardHeaders: true,
   //   legacyHeaders: false,
   // });
-  
+
   // app.use(limiter);
 };

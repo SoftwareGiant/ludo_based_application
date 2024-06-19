@@ -45,7 +45,7 @@ const Socket = (app) => {
       // const currentTime = Date.now();
       // { battleTimeStampOnUserScreen: { $gt: currentTime }}
       const allGameData = await Battle.find({
-        $and: [{ userMatched: false }, { createdByUser: true } ]
+        $and: [{ userMatched: false }, { createdByUser: true }]
       }).sort({ battleTimeStamp: -1 });
       if (allGameData.length > 0) {
         const userBattle = allGameData?.filter((e) => e.player1 == userId);

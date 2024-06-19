@@ -367,7 +367,10 @@ const addUserName = async(req,res,next)=>{
     return res.status(200).json({updateUser})
   }
   catch(err){
-    return next(err)
+    if(err.name == "MongoServerError"){
+      console.log("Hellooo okayy")
+      return next(new AppError("Username already taken!",404));
+    }
   }
 }
 
