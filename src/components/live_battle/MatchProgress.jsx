@@ -146,9 +146,9 @@ const MatchProgress = () => {
             {isEnd ? (
               <div className="flex flex-col  w-full gap-4 p-8 ">
                 {screenshot ? (
-                  <div className="p-1  text-white text-sm bg-[#0F002B] rounded-md font-bold">
+                  <div className="p-1  text-white text-sm bg-[#0f002b] rounded-md font-bold">
                     <IconButton
-                      className="p-1 m-1 h-6 w-8"
+                      className="p-1 m-1 h-8  w-8"
                       onClick={resetAadharback}
                     >
                       <Icon icon="charm:cross" width={32} />{" "}
@@ -159,7 +159,7 @@ const MatchProgress = () => {
                 ) : (
                   <button
                     onClick={openDrawerBottom}
-                    className="p-2  text-white bg-[#0F002B] rounded-md font-bold"
+                    className="p-2  text-white bg-[#0f002b] rounded-md font-bold"
                   >
                     Upload Image or Video
                   </button>
@@ -193,7 +193,9 @@ const MatchProgress = () => {
             <Button
               onClick={() => handleResult("loss")}
               disabled={isLoadLoss}
-              className={`${gameStatus === "won" ? "hidden" : ""} w-full h-10 flex justify-center items-center`}
+              className={`flex ${
+                gameStatus === "won" ? "hidden" : ""
+              } w-full h-10  justify-center items-center`}
               color="red"
             >
               {!isLoadLoss ? "Lost" : <ButtonLoader />}
@@ -202,7 +204,9 @@ const MatchProgress = () => {
               onClick={() => handleResult("won")}
               disabled={isLoadWon}
               color="green"
-              className={`${gameStatus === "loss" ? "hidden" : ""} w-full h-10 flex justify-center items-center`}
+              className={`${
+                gameStatus === "loss" ? "hidden" : ""
+              } w-full h-10 flex justify-center items-center`}
             >
               {!isLoadWon ? "won" : <ButtonLoader />}
             </Button>
@@ -252,7 +256,7 @@ const MatchProgress = () => {
 
           <Typography
             color="white"
-            className="flex justify-center text-sm text-gray-400 pt-6 px-10"
+            className="flex justify-center text-sm text-gray-400 pt-6 px-5"
           >
             *Make sure that you upload the correct image or video. This will be
             used in future for reference in case of any issues.

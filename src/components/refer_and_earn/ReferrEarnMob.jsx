@@ -158,11 +158,7 @@ const ReferrEarnMob = () => {
                     onClick={() => navigate("/withdraw")}
                     className="flex bg-[#0f002b] rounded-xl  text-sm  items-center gap-2"
                   >
-                    <Icon
-                      icon="mdi:bank-outline"
-                      width={20}
-                      style={{ color: "white" }}
-                    />
+                    <Icon icon="cil:bank" className="text-white" width={20} />
                     Redeem
                   </Button>
                 </div>

@@ -243,12 +243,10 @@ const CustomerChat = () => {
             <button
               type="submit"
               className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
-              onClick={handleSendMessage}
             >
               <Icon
                 id="Send"
                 className={`${inputText ? "text-blue-gray-900" : ""}`}
-                onClick={handleSendMessage}
                 icon="carbon:send-filled"
                 width="28"
               />

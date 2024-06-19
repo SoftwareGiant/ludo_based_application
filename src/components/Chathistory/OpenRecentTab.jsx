@@ -12,6 +12,7 @@ const OpenRecentTab = ({
   setOpenChatHistory,
   allChatList,
 }) => {
+  console.log(allChatList);
   const navigate = useNavigate();
   return (
     <div className="relative bg-[#0f002b]">
@@ -47,7 +48,7 @@ const OpenRecentTab = ({
             >
               <div className="flex items-center gap-4 ">
                 <Avatar
-                  onClick={() => navigate("/matchUserChat")}
+               
                   size="lg"
                   variant="circular"
                   src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
@@ -56,9 +57,11 @@ const OpenRecentTab = ({
                 <div className="flex w-full  flex-col gap-0.5">
                   <div className="flex items-center justify-between">
                     <Typography variant="h5" color="blue-gray">
-                      {userchat?.messageDetails[0].senderId === users?._id
-                        ? userchat?.messageDetails[0].receiverId.slice(-6)
-                        : userchat?.messageDetails[0].senderId.slice(-6)}
+                      {userchat?.messageDetails[0]?.senderId._id === users?._id
+                        ? userchat?.messageDetails[0].receiverId.userName ||
+                          userchat?.messageDetails[0].receiverId?._id.slice(-6)
+                        : userchat?.messageDetails[0].senderId.userName ||
+                          userchat?.messageDetails[0].senderId?._id.slice(-6)}
                     </Typography>
                     <div className="5 flex items-center gap-0 ">
                       {formatDate(userchat?.messageDetails[0].timestamp)}

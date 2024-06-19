@@ -105,7 +105,7 @@ export function SidebarMob({
                     My Wallet
                   </p>
                 </div>
-                <div className="bg-black cursor-pointer hover:shadow-md flex items-center gap-2 -mt-2 rounded-2xl px-2  text-white">
+                <div className="bg-[#0f002b] cursor-pointer hover:shadow-md flex items-center gap-2 -mt-2 rounded-2xl px-2  text-white">
                   <p>₹{users?.walletDetails?.totalAmount}</p>{" "}
                 </div>
               </Link>
@@ -226,7 +226,7 @@ export function SidebarMob({
             <div className="flex flex-col w-full">
               <Button
                 onClick={() => navigate("/login")}
-                className="text-white rounded-2xl w-[70%] m-auto mt-6 flex items-center gap-2 justify-center"
+                className="text-white rounded-2xl bg-[#0f002b] w-[70%] m-auto mt-6 flex items-center gap-2 justify-center"
               >
                 <Icon icon="mdi:user" width={26} />
                 <p className="text-base "> Login or Signup</p>
@@ -241,7 +241,7 @@ export function SidebarMob({
               </Button>
             </div>
           )}
-          <div className="flex mb-2 absolute bottom-0 flex-col gap-2 w-full max-w-[480px] px-6 font-['Oooh_Baby'] justify-center items-center pt-4">
+          <div className="flex mb-2 text-[#0f002b] absolute bottom-0 flex-col gap-2 w-full max-w-[480px] px-6 font-['Oooh_Baby'] justify-center items-center pt-4">
             {" "}
             <div className="flex flex-col justify-center items-center">
               <div className="text-2xl font-['Nunito_Sans'] font-bold text-[#0f002b]">

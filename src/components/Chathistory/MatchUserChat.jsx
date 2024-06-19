@@ -162,18 +162,6 @@ const MatchUserChat = () => {
           <SidebarMob users={users} />
           <LudoMainLogo />
         </div>
-        {/* {messageList.length <= 0 ? (
-          <div className="bg-[#1E1E1E] cursor-pointer px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold">
-            New game
-          </div>
-        ) : (
-          <div
-            className="bg-[#1E1E1E] cursor-pointer px-4 flex justify-center items-center h-8 rounded-2xl text-white font-bold"
-            onClick={() => navigate("/matchstart")}
-          >
-            Start
-          </div>
-        )} */}
       </div>
       <div className="z-10 flex mt-[68px]  border-b border-[#0f002b] justify-between py-2 px-4  items-center bg-[#fead3a]  max-w-[480px]  w-full">
         <div className="flex justify-center gap-2 items-center">
@@ -200,7 +188,7 @@ const MatchUserChat = () => {
               onClick={handleRemoveFav}
               className="cursor-pointer"
               icon="ph:star-fill"
-              style={{ color: "black" }}
+              style={{ color: "#0f002b" }}
               width="32"
             />
           ) : (
@@ -208,7 +196,7 @@ const MatchUserChat = () => {
               className="cursor-pointer"
               onClick={() => handleFav()}
               icon="fluent:star-add-28-regular"
-              style={{ color: "black" }}
+              style={{ color: "#0f002b" }}
               width="32"
             />
           )}

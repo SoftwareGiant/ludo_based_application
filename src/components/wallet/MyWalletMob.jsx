@@ -51,7 +51,7 @@ const MyWalletMob = () => {
           </div>
           <Button
             onClick={() => navigate("/transactionhistory")}
-            className="flex rounded-2xl h-9 w-[160px] px-2  justify-center items-center gap-2"
+            className="flex rounded-xl h-8 w-[160px] bg-[#0f002b]   px-2  justify-center items-center gap-2"
           >
             <p className="mt-[2px]">All Transaction</p>
             <Icon icon="fe:arrow-right" width={16} />
@@ -123,7 +123,7 @@ const MyWalletMob = () => {
           </div>
           <div className="flex  w-full p-3">
             <div className="flex text-xl font-['Inter'] font-bold text-[#0f002b] flex-1">
-              ₹ {users?.walletDetails?.withDrawlAmount}
+              ₹ {users?.walletDetails?.winingAmount}
             </div>
             <Button
               onClick={() => navigate("/withdraw")}

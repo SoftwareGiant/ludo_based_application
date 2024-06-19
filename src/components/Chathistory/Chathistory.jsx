@@ -38,8 +38,8 @@ const Chathistory = () => {
 
   const handleRecentCardCLick = (userchat) => {
     userchat?.messageDetails[0].senderId === users?._id
-      ? navigate(`/matchUserChat/${userchat?.messageDetails[0].receiverId}`)
-      : navigate(`/matchUserChat/${userchat?.messageDetails[0].senderId}`);
+      ? navigate(`/matchUserChat/${userchat?.messageDetails[0].receiverId._id}`)
+      : navigate(`/matchUserChat/${userchat?.messageDetails[0].senderId._id}`);
   };
   if (loading) {
     return <PageLoader />;
