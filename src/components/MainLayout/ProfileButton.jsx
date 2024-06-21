@@ -20,7 +20,7 @@ export const ProfileButton = () => {
     <div
       onClick={() => navigate("/profile")}
       className={
-        "w-[32px] h-[32px] cursor-pointer border-[2px] border-white relative mt-1 rounded-full overflow-hidden"
+        "w-[32px] h-[32px] cursor-pointer border-[2px] border-white relative rounded-full overflow-hidden"
       }
     >
       <img
@@ -37,10 +37,10 @@ const TotoalBal = ({ users }) => {
   return (
     <div
       onClick={() => navigate("/mywallet")}
-      className="bg-[#0f002b] border-[1px] border-gray-400 cursor-pointer hover:shadow-md flex items-center gap-2 rounded-2xl px-3 py-1 text-white"
+      className="bg-[#0f002b] border-[1px] border-gray-400 cursor-pointer hover:shadow-md flex items-center gap-1 rounded-2xl px-[10px] py-[5px] text-white"
     >
-      <Icon icon="ph:wallet-light" width={24} />
-      <p>₹ {users?.walletDetails?.totalAmount}</p>{" "}
+      <Icon icon="ph:wallet-light" width={16} />
+      <p className="text-xs">₹ {users?.walletDetails?.totalAmount}</p>{" "}
     </div>
   );
 };

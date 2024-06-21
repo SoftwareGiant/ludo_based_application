@@ -10,7 +10,6 @@ import Support from "../../assets/new_game/support.svg";
 import BackBlack from "../../assets/profile/back_black.svg";
 import { IoMenu } from "react-icons/io5";
 import { Icon } from "@iconify-icon/react";
-import { useDispatch, useSelector } from "react-redux";
 
 export function SidebarMob({
   isClick1,
@@ -27,8 +26,6 @@ export function SidebarMob({
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
   const navigate = useNavigate();
-  console.log(users);
-
   return (
     <React.Fragment>
       <Button className="bg-[#fead3a]  shadow-none p-0 hover:shadow-none">

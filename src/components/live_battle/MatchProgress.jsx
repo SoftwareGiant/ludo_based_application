@@ -204,9 +204,9 @@ const MatchProgress = () => {
               onClick={() => handleResult("won")}
               disabled={isLoadWon}
               color="green"
-              className={`${
+              className={`flex ${
                 gameStatus === "loss" ? "hidden" : ""
-              } w-full h-10 flex justify-center items-center`}
+              } w-full h-10  justify-center items-center`}
             >
               {!isLoadWon ? "won" : <ButtonLoader />}
             </Button>
