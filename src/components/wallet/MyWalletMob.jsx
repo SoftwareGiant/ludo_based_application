@@ -51,7 +51,7 @@ const MyWalletMob = () => {
           </div>
           <Button
             onClick={() => navigate("/transactionhistory")}
-            className="flex rounded-xl h-8 w-[160px] bg-[#0f002b]   px-2  justify-center items-center gap-2"
+            className="flex rounded-xl h-8 w-[155px] bg-[#0f002b]   px-2  justify-center items-center gap-2"
           >
             <p className="mt-[2px]">All Transaction</p>
             <Icon icon="fe:arrow-right" width={16} />

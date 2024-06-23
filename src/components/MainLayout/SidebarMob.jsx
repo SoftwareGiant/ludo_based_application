@@ -10,6 +10,8 @@ import Profile from "../../assets/new_game/profile.svg";
 import ReferEarn from "../../assets/new_game/refer&earn.svg";
 import Support from "../../assets/new_game/support.svg";
 import BackBlack from "../../assets/profile/back_black.svg";
+import { IoMenu } from "react-icons/io5";
+import { Icon } from "@iconify-icon/react";
 
 export function SidebarMob({
   isClick1,
@@ -26,8 +28,6 @@ export function SidebarMob({
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
   const navigate = useNavigate();
-  console.log(users);
-
   return (
     <React.Fragment>
       <Button className="bg-[#fead3a]  shadow-none p-0 hover:shadow-none">

@@ -80,8 +80,8 @@ const AddCashMob = () => {
 
     // Replace this with your desired action on button click
 
-    if (inputValue < 10 || inputValue > 10000) {
-      toast.warning("please select amount between 10 and 10,000");
+    if (inputValue < 50 || inputValue > 10000) {
+      toast.warning("please select amount between 50 and 10,000");
       return;
     }
     setIsScanner(true);
@@ -125,7 +125,7 @@ const AddCashMob = () => {
         <HelpButton dark={true} />
       </div>
       <div className="bg-[#0f002b] w-full min-h-screen overflow-hidden relative flex flex-col justify-between h-full">
-        <div className="bg-[#fead3a] h-[86%] w-[200%] rounded-[50%]   -top-20 absolute -left-[50%]" />
+        <div className="bg-[#fead3a] h-[75%] w-[200%] rounded-[50%]   -top-20 absolute -left-[50%]" />
 
         <div className="relative m-8 flex flex-col gap-4">
           <div className="flex flex-col gap-3 opacity-[80%]">
@@ -164,7 +164,7 @@ const AddCashMob = () => {
               </button>
             )}
           </div>
-          <div className="text-white text-right">Min. ₹ 10 Max. ₹ 10,000</div>
+          <div className="text-white text-right">Min. ₹ 50 Max. ₹ 10,000</div>
 
           {isScanner ? (
             <div className="flex justify-center flex-col items-center">
@@ -179,7 +179,7 @@ const AddCashMob = () => {
                   onChange={handleFileChange}
                 />
                 <button
-                  className="bg-[#0F002B]  text-white font-bold py-2 px-10 rounded-lg"
+                  className="bg-[#0F002B] border border-gray-50  text-white font-bold py-2 px-10 rounded-lg"
                   onClick={handleFileUpload}
                 >
                   Upload Image
@@ -222,7 +222,7 @@ const AddCashMob = () => {
           )}
         </div>
         <div className="font-[Nunito-Sans] text-white relative text-center pb-32">
-          *Minimum Deposit Amount ₹ 10
+          *Minimum Deposit Amount ₹ 50
         </div>
         <a
           href="https://wa.me/9315312511"

@@ -321,12 +321,12 @@ const NewGameMob = () => {
 
       <div className="bg-[#0f002b] w-full  overflow-hidden relative">
         <div className="bg-[#fead3a] h-[350px]  w-[200%] rounded-[50%]   -top-20 absolute -left-[50%] " />
-        <div className="py-8 mt-12 ">
+        <div className="pt-8 mt-12 ">
           <NewGameSLider />
         </div>
 
         {!users ? (
-          <div className="relative m-6 mt-0">
+          <div className="relative mx-6 mt-1">
             <div className="bg-[#0f002b] shadow-xl hover:shadow-2xl  border border-gray-700 hover:border-gray-600 transition-all  flex items-center gap-6 text-white rounded-xl p-6 px-18">
               <p className="text-xl">Click to see Full Game Rules</p>
               <div
@@ -338,12 +338,12 @@ const NewGameMob = () => {
             </div>
           </div>
         ) : (
-          <div className="relative m-6">
-            <div className="border-[2px] border-white shadow-lg bg-[#fead3a] flex flex-col p-4 gap-6 w-full  max-w-screen items-start rounded-lg pb-8">
+          <div className="relative mt-1 mx-6">
+            <div className="border-[2px] border-white shadow-lg bg-[#fead3a] flex flex-col p-3 pt-2  w-full  max-w-screen items-start rounded-lg pb-1">
               <div className="flex text-[#0f002b] justify-between w-full">
                 <div
                   id="StartYourOwnBattle1"
-                  className="text-xl font-['Inter']"
+                  className="text-lg font-['Inter']"
                 >
                   Start your own <span className="font-bold">battle</span>
                 </div>
@@ -354,28 +354,28 @@ const NewGameMob = () => {
                 >
                   <i>Rules</i>
 
-                  <Icon width={24} icon="carbon:rule-test" />
+                  <Icon width={22} icon="carbon:rule-test" />
                 </Button>
               </div>
               <div
                 onClick={openDrawerBottom}
-                className="cursor-pointer shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 rounded-lg"
+                className="cursor-pointer shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white flex justify-between  w-full items-center px-4 py-2 mb-2 rounded-lg"
               >
-                <div className="flex text-lg  w-full pr-3">
+                <div className="flex text-base  w-full pr-3">
                   <span>₹</span>
                   <p className="outline-none font-semibold pl-2 opacity-[50%] focus:outline-none w-full">
                     Your battle amount
                   </p>
                 </div>
 
-                <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-2">
-                  <Icon icon="arcticons:battleforwesnoth" width="24" />
+                <div className="shadow-[0px_0px_2px_0px_rgba(0,_0,_0,_0.4)] bg-[#fead3a] flex rounded-full p-[5px]">
+                  <Icon icon="arcticons:battleforwesnoth" width="20" />
                 </div>
               </div>
             </div>
           </div>
         )}
-        <div className="m-6 relative ">
+        <div className="mx-6 my-3 relative ">
           <div className="mb-4 shadow-[0px_0px_4px_0px_rgba(0,_0,_0,_0.25)] bg-white relative w-full  max-w-screen  flex flex-col gap-6 items-start rounded-lg p-2 pb-8">
             <div className="flex flex-col w-full">
               <div className="flex w-full space-x-0.5 bg-white">
@@ -390,7 +390,7 @@ const NewGameMob = () => {
                   Live <b>battle</b>
                 </button>
                 <button
-                  className={`flex-1 py-2 px-4 rounded-lg text-[#0f002b] font-semibold focus:outline-none transition-all duration-300 ${
+                  className={`flex-1 truncate py-2 px-4 rounded-lg text-[#0f002b] font-semibold focus:outline-none transition-all duration-300 ${
                     activeToggle === "challenges"
                       ? "bg-[#fead3a] text-white"
                       : "bg-white text-[#0f002b]"
@@ -401,7 +401,7 @@ const NewGameMob = () => {
                 </button>
               </div>
 
-              <div className="mt-4">
+              <div className="mt-1">
                 <ul
                   className={` transition-transform duration-300 ease-in-out ${
                     activeToggle === "live"
@@ -410,24 +410,24 @@ const NewGameMob = () => {
                   }`}
                 >
                   {activeToggle === "live" && (
-                    <div className="p-2 flex flex-col  gap-5 m-auto w-full">
+                    <div className="p-2 flex flex-col  gap-4 m-auto w-full">
                       {users &&
                         battles?.length > 0 &&
                         battles?.map((e) => (
                           <div
                             key={e._id}
-                            className="inline-flex relative flex-col justify-between w-full min-h-[120px] items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]"
+                            className="inline-flex relative flex-col justify-between w-full items-center border rounded-[10px] shadow-[0px_0px_40px_6px_rgba(0,_0,_0,_0.25)] bg-white border-solid border-[rgba(15,_0,_43,_0.2)]"
                           >
-                            <div className="font-['Inter'] text-[#0f002b] w-full py-4 px-4 flex  justify-between">
+                            <div className="font-['Inter'] text-[#0f002b] w-full py-2 px-3 flex  justify-between">
                               {users?._id === e?.player1 && (
-                                <div className="absolute   -top-4  -right-2">
+                                <div className="absolute   -top-3  -right-3">
                                   <IconButton
                                     onClick={() => handleDeleteOption(e._id)}
-                                    className="rounded-full bg-[#0f002b] h-[36px]  w-[36px]"
+                                    className="rounded-full bg-[#0f002b] h-[32px]  w-[32px]"
                                   >
                                     <Icon
                                       icon="fluent:delete-12-regular"
-                                      width={24}
+                                      width={22}
                                     />
                                   </IconButton>
                                 </div>
@@ -452,8 +452,8 @@ const NewGameMob = () => {
                                 · {convertTimestamp(e.battleTimeStamp)}
                               </div>
                             </div>
-                            <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex  gap-16  items-center justify-between w-full p-4 mb-0">
-                              <div className="flex flex-col w-1/2 text-4 font-['Inter'] text-white font-extrabold">
+                            <div className="bg-[#fca837] shadow-[inset_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)] rounded-br-md rounded-bl-md  flex    items-center justify-between w-full px-4 py-3 mb-0">
+                              <div className="flex text-sm flex-col w-1/2 font-['Inter'] text-white font-extrabold">
                                 <div className="flex justify-between ">
                                   <span>Entry fee</span>
                                   <span>₹{e.amount}</span>
@@ -467,7 +467,7 @@ const NewGameMob = () => {
                                 {users?._id === e.player1 ? (
                                   <div className=" flex w-[42px] h-[42px] items-center justify-center p-[6.67px] rounded-[19.421px] shadow-[0px_2px_2px_0px_rgba(0,_0,_0,_0.25)] bg-[#0f002b]">
                                     <span
-                                      className={`text-white animate-pulse`}
+                                      className={`text-white text-xs animate-pulse`}
                                     >
                                       {timers[e._id] <= 0
                                         ? "wait.."
