@@ -10,7 +10,6 @@ import Profile from "../../assets/new_game/profile.svg";
 import ReferEarn from "../../assets/new_game/refer&earn.svg";
 import Support from "../../assets/new_game/support.svg";
 import BackBlack from "../../assets/profile/back_black.svg";
-import { Icon } from "@iconify-icon/react";
 
 export function SidebarMob({
   isClick1,
